@@ -26,6 +26,7 @@ ENV PYTHON_PACKAGES \
   boto3 \
   docker-py \
   pyOpenSSL \
+  pre-commit \
   commitizen
 
 # If installing ansible@testing

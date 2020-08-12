@@ -15,10 +15,11 @@ fi
 
 if [ -f "$HOME/.ssh/id_rsa" -a -f "$HOME/.ssh/id_rsa.pub" -a -f "$HOME/.vlab_vault_pass" ]; then
     docker run --rm -it \
-      -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa \
-      -v $HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
+      -v $HOME/.gitconfig:/root/.gitconfig:ro \
+      -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa:ro \
+      -v $HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub:ro \
       -v $(pwd):/data \
-      -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
+      -v $HOME/.vlab_vault_pass:/ansible_vault_pass:ro \
       vlab:${VERSION} "$@"
 else
     echo "You have no SSH keys in your home directory: $HOME"
