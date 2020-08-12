@@ -25,7 +25,8 @@ ENV PYTHON_PACKAGES \
   python3-keyczar \
   boto3 \
   docker-py \
-  pyOpenSSL
+  pyOpenSSL \
+  commitizen
 
 # If installing ansible@testing
 #RUN \

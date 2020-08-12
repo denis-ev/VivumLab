@@ -89,20 +89,20 @@ Task::check_for_precommit () {
   pcver=$(pre-commit --version)
   reqpy="3.6.1"
   reqpc="2.6.0"
-  
+
   if [[ "$OSTYPE" == "darwin"* ]]; then
     pyver=$(python3 --version)
   else
     pyver=$(python --version)
   fi
-    
+
   if [ "$(printf '%s\n' "$reqpy" "$pyver" | sort -V | head -n1)" = "$reqpy" ]; then
    if [ "$(printf '%s\n' "$reqpc" "$pcver" | sort -V | head -n1)" = "$reqpc" ]; then
-     [ ! -f .git/pre-commit ] || pre-commit install
+     [ ! -f .git/pre-commit ] || pre-commit install && pre-commit install --install-hooks
    else
      echo "/bin/sh\ncurl https://pre-commit.com/install-local.py | python -" > INSTALL_PRECOMMIT.sh
      sudo chmod +x INSTALL_PRECOMMIT.sh
-     echo "Contributions via git, require pre-commit. Use Install_Pre-Commit.sh, to begin"
+     echo "Contributions via git, require pre-commit. Use INSTALL_PRECOMMIT.sh, to begin"
      echo "after your deployment has finished, of course"
      sleep 3
    fi
