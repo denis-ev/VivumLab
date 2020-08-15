@@ -1,0 +1,36 @@
+---
+version: "3.5"
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+{% if calibre.enable %}
+  calibre:
+    external:
+      name: calibre_calibre
+{% endif %}
+
+services:
+  readarr:
+    image: hotio/readarr:{{ readarr.version }}
+    restart: unless-stopped
+    container_name: readarr
+    environment:
+      - PUID={{ uid_output.stdout }}
+      - PGID={{ gid_output.stdout }}
+      - TZ={{ common_timezone }}
+      - UMASK=002
+    volumes:
+      - "{{ volumes_root }}/readarr/config:/config"
+      - "{{ storage_dir }}/Books:/media/Books"
+      - "{{ storage_dir }}/Downloads/completed:/downloads"
+    networks:
+      - traefik_network
+{% if calibre.enable %}
+      - calibre
+{% endif %}
+    labels:
+      - "traefik.http.services.readarr.loadbalancer.server.scheme=http"
+      - "traefik.http.services.readarr.loadbalancer.server.port=8787"
+{% include './labels.j2' %}

@@ -1,0 +1,26 @@
+---
+- name: Make readarr directory.
+  file:
+    path: "{{ volumes_root }}/readarr"
+    state: directory
+
+- name: Copy readarr docker-compose.yml file into place.
+  template:
+    src: docker-compose.readarr.yml.j2
+    dest: "{{ volumes_root }}/readarr/docker-compose.yml"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+
+- name: Configure readarr systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/readarr.service
+
+- name: Start readarr
+  systemd:
+    name: readarr
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes
