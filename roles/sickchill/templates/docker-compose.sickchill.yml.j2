@@ -19,7 +19,7 @@ services:
     volumes:
       - "{{ volumes_root }}/sickchill/data:/data"
       - "{{ storage_dir }}/Downloads:/downloads"
-      - "{{ storage_dir }}/Video/TV:/tv"
+      - "{{ storage_dir }}/TV:/tv"
     labels:
       - "traefik.http.services.sickchill.loadbalancer.server.scheme=http"
       - "traefik.http.services.sickchill.loadbalancer.server.port=80"

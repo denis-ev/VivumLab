@@ -26,8 +26,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - "{{ storage_dir }}/Downloads:/data"
       - "{{ storage_dir }}/Downloads/watch:/data/watch"
-      - "{{ storage_dir }}/Video/Movies:/movies"
-      - "{{ storage_dir }}/Video/TV:/tv"
+      - "{{ storage_dir }}/Movies:/movies"
+      - "{{ storage_dir }}/TV:/tv"
     environment:
       - OPENVPN_PROVIDER={{ openvpn_provider }}
       - OPENVPN_USERNAME={{ openvpn_username }}

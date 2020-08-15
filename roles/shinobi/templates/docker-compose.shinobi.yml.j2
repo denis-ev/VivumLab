@@ -20,7 +20,7 @@ services:
       - "{{ volumes_root }}/shinobi/streams:/dev/shm/streams"
       - "{{ volumes_root }}/shinobi/config:/config"
       - "{{ volumes_root }}/shinobi/db:/var/lib/mysql"
-      - "{{ storage_dir }}/Video/CCTV:/opt/shinobi/videos"
+      - "{{ storage_dir }}/CCTV:/opt/shinobi/videos"
     environment:
       - ADMIN_USER={{ default_username }}
       - ADMIN_PASSWORD="{{ default_password }}"

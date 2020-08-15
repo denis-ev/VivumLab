@@ -17,8 +17,8 @@ services:
     volumes:
       - "{{ volumes_root }}/plex:/config"
       - "{{ storage_dir }}/Music:/data/Music"
-      - "{{ storage_dir }}/Video/Movies:/data/Movies"
-      - "{{ storage_dir }}/Video/TV:/data/TV"
+      - "{{ storage_dir }}/Movies:/data/Movies"
+      - "{{ storage_dir }}/TV:/data/TV"
       - "{{ storage_dir }}/temp/transcode:/transcode"
     environment:
       - TZ={{ common_timezone }}

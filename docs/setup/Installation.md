@@ -173,7 +173,7 @@ Different VivumLab services operate on libraries of media (Airsonic, Plex, and P
 
 NAS shares are mounted on the VivumLab host under `{{ storage_dir }}`, which defaults to `/mnt/nas`. By default, NAS is disabled, and the services that can use it will instead use local folders under `{{ storage_dir }}`.
 
-For example, [Emby](../software/emby.md) will map `{{ storage_dir }}/Video/TV` and `{{ storage_dir }}/Video/Movies` into its container, and [Paperless](../software/paperless.md) will mount `{{ storage_dir }}/Documents`. Check the `docker-compose` files for each service to see what directories are used.
+For example, [Emby](../software/emby.md) will map `{{ storage_dir }}/TV` and `{{ storage_dir }}/Movies` into its container, and [Paperless](../software/paperless.md) will mount `{{ storage_dir }}/Documents`. Check the `docker-compose` files for each service to see what directories are used.
 
 To configure your NAS, edit the `# NAS Config` section of `settings/config.yml`.
 

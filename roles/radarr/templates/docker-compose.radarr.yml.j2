@@ -20,7 +20,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ volumes_root }}/radarr/config:/config"
-      - "{{ storage_dir }}/Video/Movies:/movies"
+      - "{{ storage_dir }}/Movies:/movies"
       - "{{ storage_dir }}/Downloads/complete/movies:/downloads"
     labels:
       - "traefik.http.services.radarr.loadbalancer.server.scheme=http"

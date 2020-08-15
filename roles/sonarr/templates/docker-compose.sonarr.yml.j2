@@ -20,7 +20,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ volumes_root }}/sonarr/config:/config"
-      - "{{ storage_dir }}/Video/TV:/tv"
+      - "{{ storage_dir }}/TV:/tv"
       - "{{ storage_dir }}/Downloads/complete/tv:/downloads"
     labels:
       - "traefik.http.services.sonarr.loadbalancer.server.scheme=http"

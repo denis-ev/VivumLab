@@ -16,8 +16,8 @@ services:
     volumes:
       - "{{ volumes_root }}/emby:/config"
       - "{{ storage_dir }}/Music:/mnt/media/Music"
-      - "{{ storage_dir }}/Video/Movies:/mnt/media/Movies"
-      - "{{ storage_dir }}/Video/TV:/mnt/media/TV"
+      - "{{ storage_dir }}/Movies:/mnt/media/Movies"
+      - "{{ storage_dir }}/TV:/mnt/media/TV"
       - "{{ storage_dir }}/temp/transcode:/config/transcoding-temp"
     labels:
       - "traefik.http.services.emby.loadbalancer.server.scheme=http"
