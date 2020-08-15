@@ -61,6 +61,7 @@ nav:
     - E-books:
       - Calibre: software/calibre.md
       - Lazylibrarian: software/lazylibrarian.md
+      - Readarr: software/readarr.md
     - Email:
       - Mailu: software/mailu.md
     - Federated Identity/Authentication:

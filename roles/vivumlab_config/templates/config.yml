@@ -916,6 +916,13 @@ radarr:
   domain: {{ radarr.domain | default(False) }}
   subdomain: {{ radarr.subdomain | default("radarr") }}
   version: {{ radarr.version | default("latest") }}
+readarr:
+  enable: {{ readarr.enable | default(enable_readarr, None) | default(False) }}
+  https_only: {{ readarr.https_only | default(False) }}
+  auth: {{ readarr.auth | default(False) }}
+  domain: {{ readarr.domain | default(False) }}
+  subdomain: {{ readarr.subdomain | default("readarr")}}
+  version: {{ readarr.version | default("unstable") }}
 restic:
   enable: {{ restic.enable | default(False) }}
   https_only: {{ restic.https_only | default(False) }}

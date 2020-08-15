@@ -91,6 +91,7 @@ services:
   privatebin:
   qbittorrent:
   radarr:
+  readarr:
   restic:
   rsshub:
   sabnzbd:
@@ -215,6 +216,7 @@ portainer:
 privatebin:
 qbittorrent:
 radarr:
+readarr:
 restic:
 sabnzbd:
 samba:
