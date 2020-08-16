@@ -11,14 +11,15 @@ services:
   nextcloud-db:
     image: postgres:{{ nextcloud.db_version }}
     restart: unless-stopped
+    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     volumes:
       - "{{ volumes_root }}/nextcloud/postgres:/var/lib/postgresql/data"
+      - "/etc/passwd:/etc/passwd:ro"
     networks:
       - nextcloud
     restart: unless-stopped
     environment:
       - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
-      - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
 
   nextcloud-redis:
@@ -58,7 +59,7 @@ services:
       - TZ={{ common_timezone }}
       - REDIS_HOST=nextcloud-redis
       - NEXTCLOUD_ADMIN_USER={{ default_username }}
-      - NEXTCLOUD_ADMIN_PASSWORD="{{ default_password }}"
+      - "NEXTCLOUD_ADMIN_PASSWORD={{ default_password }}"
       - NEXTCLOUD_TRUSTED_DOMAINS={{ service_domain }}
       - NEXTCLOUD_UPDATE=1 # triggers the automated install on first run.
       # SMTP settings
