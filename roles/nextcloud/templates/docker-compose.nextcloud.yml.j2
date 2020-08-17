@@ -41,11 +41,11 @@ services:
       # listen on any port (https://github.com/nextcloud/docker/issues/359)
       # Used / needed for apache to l
     volumes:
-      - "{{ volumes_root }}/nextcloud/webroot:/var/www/html"
       - "{{ volumes_root }}/nextcloud/config:/var/www/html/config"
-      - "{{ storage_dir }}/Documents/NextCloud:/data"
-      - "{{ volumes_root }}/nextcloud/apps:/var/www/html/custom_apps"
+      - "{{ volumes_root }}/nextcloud/custom_apps:/var/www/html/custom_apps"
       - "{{ volumes_root }}/nextcloud/themes:/var/www/html/themes"
+      - "{{ storage_dir }}/Documents/NextCloud/data:/var/www/html/data"
+      - "{{ storage_dir }}/Documents/NextCloud/webroot:/var/www/html"
       - "{{ storage_dir }}:/mnt/vivumlab"
     environment:
       - POSTGRES_HOST=nextcloud-db
