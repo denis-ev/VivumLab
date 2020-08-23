@@ -19,11 +19,20 @@
     msg: "Your kernel version {{ ansible_kernel }} Does not meet the minimum requirements for Authelia. Please see https://github.com/pimlie/ubuntu-mainline-kernel.sh for a kernel upgrade script"
   when: "{{ kernel_version is not version(kernel_options[kernel_major_minor], '>=', true) }}"
 
-
 - name: Make authelia directory.
   file:
     path: "{{ volumes_root }}/authelia"
     state: directory
+
+- name: Create necessary folders, with appropriate permissions.
+  file:
+    path: "{{ volumes_root }}/authelia/{{ item }}"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  with_items:
+    - "redis"
+  become: yes
 
 - name: Copy authelia docker-compose.yml file into place.
   template:

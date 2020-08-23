@@ -25,12 +25,15 @@ services:
 {% include './labels.j2' %}
     volumes:
       - "{{ volumes_root }}/authelia/authelia_config.yml:/config/configuration.yml:ro"
+      - "{{ volumes_root }}/authelia/config:/config"
       - "{{ volumes_root }}/authelia/userdb.yml:/etc/authelia/userdb.yml"
 
   redis:
     networks:
       - authelia
     image: redis:{{ authelia.redis_version }}
+    volumes:
+      - "{{ volumes_root }}/authelia/redis:/data"
 
   postgres:
     networks:
