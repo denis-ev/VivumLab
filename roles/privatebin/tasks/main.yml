@@ -4,20 +4,18 @@
     path: "{{ volumes_root }}/privatebin"
     state: directory
 
-- name: Make privatebin data directory with correct permissions.
+- name: Create necessary folders, with appropriate permissions.
   file:
-    path: "{{ volumes_root }}/privatebin/data"
+    path: "{{ volumes_root }}/privatebin/{{ item }}"
     state: directory
     owner: "65534"
     group: "82"
-  become: yes
-
-- name: Make privatebin conf directory with correct permissions.
-  file:
-    path: "{{ volumes_root }}/privatebin/cfg"
-    state: directory
-    owner: "65534"
-    group: "82"
+  with_items:
+    - "cfg"
+    - "data"
+    - "nginx_tmp"
+    - "tmp"
+    - "run"
   become: yes
 
 - name: Copy privatebin conf.php file into place if it doesn't exist.

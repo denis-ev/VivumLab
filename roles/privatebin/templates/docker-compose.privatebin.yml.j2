@@ -17,6 +17,9 @@ services:
     volumes:
       - "{{ volumes_root }}/privatebin/data:/srv/data"
       - "{{ volumes_root }}/privatebin/cfg:/srv/cfg"
+      - "{{ volumes_root }}/privatebin/nginx_tmp:/var/lib/nginx/tmp"
+      - "{{ volumes_root }}/privatebin/tmp:/tmp"
+      - "{{ volumes_root }}/privatebin/run:/run"
     labels:
       - "traefik.http.services.privatebin.loadbalancer.server.scheme=http"
       - "traefik.http.services.privatebin.loadbalancer.server.port=8080"
