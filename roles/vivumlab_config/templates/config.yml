@@ -1112,6 +1112,7 @@ wallabag:
   redis_version: {{ wallabag.redis_version | default("alpine") }}
 watchtower:
   enable: {{ watchtower.enable |  default(False) }}
+  domain: False #Needed for ansible
   notification: {{ watchtower.notification | default (False) }}
 {% raw %}
   gotify_token: "{{ vault.watchtower.gotify_token | default (False) }}"
