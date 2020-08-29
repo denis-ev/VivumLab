@@ -10,6 +10,7 @@
     - "{{ volumes_root }}/zammad/postgresql-data"
     - "{{ volumes_root }}/zammad/elasticsearch-data"
     - "{{ volumes_root }}/zammad/zammad-backup"
+  become: yes
 
 - name: Copy zammad docker-compose.yml file into place.
   template:

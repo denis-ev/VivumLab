@@ -74,6 +74,8 @@ services:
     restart: unless-stopped
     volumes:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
+    environment:
+      - "NGINX_SERVER_SCHEME=https"
     networks:
       - traefik_network
       - zammad
