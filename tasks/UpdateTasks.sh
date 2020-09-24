@@ -4,6 +4,7 @@
 Task::update() {
   : @desc "Updates all services on the VivumLab Server"
   : @param config_dir="settings"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
   Task::build
@@ -11,8 +12,12 @@ Task::update() {
   Task::config
 
   highlight "Updating VivumLab Services using $_config_dir"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory -t deploy playbook.vivumlab.yml
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.restart.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory -t deploy playbook.vivumlab.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.restart.yml
   highlight "Update Complete"
 }
 
@@ -23,6 +28,7 @@ Task::update_one(){
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
 
@@ -47,6 +53,10 @@ Task::update_one(){
   Task::git_sync
   Task::config
 
-  Task::run_docker ansible-playbook --extra-vars='{"services":["'${_service}'"]}' --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory -t deploy playbook.vivumlab.yml
-  Task::run_docker ansible-playbook --extra-vars='{"services":["'${_service}'"]}' --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.restart.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars='{"services":["'${_service}'"]}' --extra-vars="@$_config_dir/config.yml" \
+  --extra-vars="@$_config_dir/vault.yml" -i inventory -t deploy playbook.vivumlab.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars='{"services":["'${_service}'"]}' --extra-vars="@$_config_dir/config.yml" \
+  --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.restart.yml
 }
