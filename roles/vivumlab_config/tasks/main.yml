@@ -19,3 +19,9 @@
   template:
     src: "inventory.j2"
     dest: "{{ playbook_dir }}/inventory"
+
+- name: Copy ansible_bash.vars file into place
+  template:
+    src: "ansible_bash.vars"
+    dest: "{{ playbook_dir }}/tasks/ansible_bash.vars"
+    owner: "{{ ansible_user_id }}"
