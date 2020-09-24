@@ -130,24 +130,7 @@ Task::uninstall(){
   : @param build true "Forces to build the image locally"
 
   Task::logo
-
-  if [[ ${_force-true} == true ]] ; then
-    if [[ ${_build-true} == true ]] ; then
-      Task::build force=true build=true
-    else
-      Task::build force=true
-    fi
-  else
-    if [[ ${_build-true} == true ]] ; then
-      if [[ ${_force-true} == true ]] ; then
-        Task::build build=true force=true
-      else
-        Task::build build=true
-      fi
-    else
-      Task::build
-    fi
-  fi
+  Task::build $(build_check) $(force_check)
 
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory -t deploy playbook.remove.yml

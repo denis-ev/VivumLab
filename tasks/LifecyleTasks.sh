@@ -11,25 +11,7 @@ Task::deploy(){
 
 
   Task::logo
-  if [[ ${_force-false} == true ]] ; then
-    if [[ ${_build-true} == true ]] ; then
-      Task::build force=true build=true
-    else
-      Task::build force=true
-    fi
-  else
-    if [[ ${_build-true} == true ]] ; then
-      if [[ ${_force-false} == true ]] ; then
-        Task::build build=true force=true
-      else
-        Task::build build=true
-      fi
-    else
-      Task::build
-    fi
-  fi
-  Task::git_sync
-  Task::config
+  Task::build $(build_check) $(force_check)
 
   highlight "Deploying VivumLab"
   if [[ ${_debug-false} == true ]] ; then
@@ -44,9 +26,11 @@ Task::deploy(){
 Task::restart(){
   : @desc "Restart all enabled services"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
@@ -68,9 +52,11 @@ Task::restart_one(){
 Task::stop(){
   : @desc "Restart all enabled services"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
@@ -84,9 +70,11 @@ Task::stop_one(){
   : @desc "Restarts the specified service"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
@@ -98,9 +86,11 @@ Task::remove_one(){
   : @desc "Removes the specified service on the VivumLab server"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
@@ -114,9 +104,11 @@ Task::reset_one(){
   : @desc "Resets the specified service' files on the VivumLab server"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
