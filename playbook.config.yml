@@ -3,42 +3,50 @@
   connection: local
   vars_prompt:
     - name: vlab_ip
-      prompt: "What is the IP of your server that you can SSH to? (Press return if none.)"
+      prompt: "What is the IP of your server that VivumLab should SSH to? (REQUIRED)"
       private: no
       when: vlab_ip is not defined
 
     - name: vlab_ssh_user
-      prompt: "What is the user you can SSH to your Vivumlab server with? (Press return if none.)"
+      prompt: "Which user should VivumLab use to SSH to your server? (REQUIRED)"
       private: no
       when: vlab_ssh_user is not defined
+      default: root
+
+    - name: vlab_port
+      prompt: "Using a different SSH port? Enter it here (Press return for default)"
+      private: no
+      when: vlab_port is not defined
+      default: 22
 
     - name: ansible_become_password
-      prompt: "What is the password the SSH user needs for sudo access? (Press return if none.)"
+      prompt: "Which password does the SSH user need for sudo access? (REQUIRED)"
       unsafe: yes
       private: yes
       when: ansible_become_password is not defined
 
     - name: default_username
-      prompt: "What is the default username you would like created as an admin on the various VivumLab services? (Press return if none.)"
+      prompt: "Choose the default 'admin' username for your deployed VivumLab services? (Press return for default)"
       private: no
       when: default_username is not defined
+      default: admin
 
     - name: default_password
-      prompt: "What is the default password you would like for this account? (Press return if none.)"
+      prompt: "Choose the default 'admin' password for your deployed VivumLab services? (Press return if none)"
       unsafe: yes
       private: yes
       when: default_password is not defined
 
     - name: domain
-      prompt: "What is the domain you have pointed at your Vivumlab server with ports 80 and 443? (Press return if none.)"
+      prompt: "Which domain should your Vivumlab services to be served on? (Press return if none)"
       private: no
       when: domain is not defined
 
     - name: admin_email
-      prompt: "What is a current valid email address for the admin? (Required for HTTPS via LetsEncrypt) (Press return if none.)"
+      prompt: "Provide a current/ valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"
       private: no
       when: admin_email is not defined
-
+      
   roles:
     - vivumlab_config
 ...
