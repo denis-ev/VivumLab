@@ -1,0 +1,110 @@
+---
+- name: Enable EPEL Repo in CentOS
+  yum:
+    name: epel-release
+
+- name: Install base packages for ViciLab
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - ca-certificates
+    - cifs-utils
+    - curl
+    - fail2ban
+    - git
+    - htop
+    - iftop
+    - iotop
+    - mosh
+    - nfs-utils
+    - screen
+    - sudo
+    - vim-enhanced
+    - wget
+    - whois
+    - yum-utils
+    - zsh
+    - python3
+    - python3-pip
+  tags:
+    - dependencies
+  become: yes
+
+- name: Install Passlib, Virtualenv, OpenSSL, SetupTools, Wheel
+  pip:
+    name: "{{item}}"
+    executable: pip3
+  loop:
+    - setuptools
+    - wheel
+    - passlib
+    - virtualenv
+    - pyopenssl
+  become: yes
+
+- name: Timezone - configure /etc/timezone
+  copy:
+    content: "{{ common_timezone | regex_replace('$', '\n') }}"
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+  register: common_timezone_config
+
+- name: Timezone - set localtime to UTC
+  file: src=/usr/share/zoneinfo/Etc/UTC dest=/etc/localtime
+  when: common_timezone_config.changed
+
+- name: Remove older docker.io based packages
+  yum:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-engine
+      - docker-latest
+      - docker-logrotate
+      - docker-latest-logrotate
+    state: absent
+  become: yes
+
+- name: Add the Docker-ce Repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  become: yes
+
+- name: Install Containerd.io
+  yum:
+    name: https://download.docker.com/linux/centos/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/stable/Packages/containerd.io-1.3.7-3.1.el{{ ansible_distribution_major_version }}.x86_64.rpm
+
+- name: Install Docker
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+  tags:
+    - dependencies
+  become: yes
+
+- name: Install Docker-compose
+  pip:
+    name: docker-compose
+    executable: pip3
+  become: yes
+
+- name: Start Docker service
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: docker
+  become: yes
+
+- name: Adding user to Docker group
+  user:
+    name: "{{ vlab_ssh_user }}"
+    groups: docker
+    append: true
+  become: yes
