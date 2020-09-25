@@ -19,6 +19,7 @@ jobs:
       name: "Pre-commit run"
 
 before_script:
+  - apt install -f python3
   - pip3 install pre-commit
 
 cache:
