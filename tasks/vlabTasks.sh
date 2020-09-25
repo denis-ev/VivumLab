@@ -151,21 +151,6 @@ Task::restore() {
   -i inventory restore.yml  || colorize light_red "error: restore"
 }
 
-# Opens a shell in the VivumLab deploy container
-Task::shell() {
-  : @desc "Opens a shell in the VivumLab deploy container"
-
-  Task::run_docker /bin/bash
-}
-
-# Allows you to switch between various branches and tags of VLAB
-Task::track(){
-  : @desc "Switches you to the specified branch or tag. use branch=<branchname>"
-  : @param branch! "Required! Branch or tag name to track"
-
-  git checkout $_branch || colorize light_red "error: track: $_branch"
-}
-
 Task::run_docker() {
   docker run --rm -it \
   -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa \

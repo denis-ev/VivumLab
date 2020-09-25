@@ -36,6 +36,20 @@ function force_check() {
   fi
 }
 
+function countdown() {
+  if [[ ${_t} == '' ]]; then
+    echo 'now'
+  elif [[ ${_t} == 0 ]]; then
+    echo 'now'
+  elif [[ ${_t} == '-1' ]]; then
+    echo 'now'
+  elif [[ ${_t} == 'now' ]]; then
+    echo 'now'
+  else
+    echo $_t
+  fi
+}
+
 # Ansible -> Bash Variables
 
 function vlab_ip (){
