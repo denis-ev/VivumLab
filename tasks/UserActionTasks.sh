@@ -27,7 +27,7 @@ Task::docker_shell() {
 
 # Reboots the server. Has the option for a timer (in minutes)
 Task::reboot(){
-  : @desc "Reboots the ViciLab deploy server"
+  : @desc "Reboots the VivumLab deploy server"
   : @param t "Time (minutes) until server reboots"
 
   ssh -t $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
