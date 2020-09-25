@@ -18,6 +18,9 @@ jobs:
       script: pre-commit run --from-ref origin/HEAD --to-ref HEAD
       name: "Pre-commit run"
 
+before_script:
+  - pip install pre-commit
+
 cache:
   directories:
     - $HOME/.cache/pre-commit
