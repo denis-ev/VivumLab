@@ -2,7 +2,7 @@
 
 # Main deployment task - used to deploy VLAB
 Task::deploy(){
-  : @desc "Main deployment task - used to deploy VLAB"
+  : @desc "Main deployment task - deploys VivumLab"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
@@ -14,16 +14,9 @@ Task::deploy(){
   Task::build $(build_check) $(force_check)
 
   highlight "Deploying VivumLab"
-  if [[ ${_debug-false} == true ]] ; then
-    Task::run_docker ansible-playbook $(debug_check) \
-    --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-    -i inventory playbook.vivumlab.yml
-  else
-    Task::run_docker ansible-playbook $(debug_check) \
-    --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-    -i inventory playbook.vivumlab.yml
-
-  fi
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.vivumlab.yml || colorize light_red "error: deploy"
 }
 
 # Restart All Enabled services
@@ -39,28 +32,29 @@ Task::restart(){
   Task::git_sync
   Task::config
 
-  highlight "Stopping all services"
+  highlight "Restarting all services"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.restart.yml
-  highlight "Services restarting"
+  -i inventory playbook.restart.yml || colorize light_red "error: restart"
+  highlight "Services restarted"
 }
 
 # Restart the selected service
 Task::restart_one(){
   : @desc "Restarts the specified service"
-  : @param service "Service Name"
+  : @param service! "Service Name"
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize light_red "error: restart_one"
+  highlight "Restarted ${_service}"
 }
 
 # Stop All Enabled services
 Task::stop(){
-  : @desc "Restart all enabled services"
+  : @desc "Stops all enabled services"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
@@ -74,14 +68,14 @@ Task::stop(){
   highlight "Stopping all services"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.stop.yml
-  highlight "Services restarting"
+  -i inventory playbook.stop.yml || colorize light_red "error: stop"
+  highlight "Services stopped"
 }
 
 # Stop the selected service
 Task::stop_one(){
-  : @desc "Restarts the specified service"
-  : @param service "Service Name"
+  : @desc "Stops the specified service"
+  : @param service! "Service Name"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
@@ -94,13 +88,14 @@ Task::stop_one(){
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml  || colorize light_red "error: stop_one"
+  highlight "Stopped ${_service}"
 }
 
 # Removes One Service
 Task::remove_one(){
-  : @desc "Removes the specified service on the VivumLab server"
-  : @param service "Service Name"
+  : @desc "Removes the specified service from the VivumLab server"
+  : @param service! "Service Name"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
@@ -114,14 +109,13 @@ Task::remove_one(){
   highlight "Removing data for ${_service}"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
-  highlight "Removal Complete"
-}
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize light_red "error: remove_one"
+  highlight "Removed $"{_service}"
 
 # Resets a services' data files
 Task::reset_one(){
-  : @desc "Resets the specified service' files on the VivumLab server"
-  : @param service "Service Name"
+  : @desc "Resets the specified services' files from the VivumLab server"
+  : @param service! "Service Name"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
@@ -135,13 +129,13 @@ Task::reset_one(){
   highlight "Resetting ${_service}"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
-	Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml || colorize light_red "error: reset_one: stop"
+  Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
-	highlight "Redeploying ${_service}"
-	Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml  || colorize light_red "error: reset_one: remove"
+  highlight "Redeploying ${_service}"
+  Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml
-	highlight "Done resetting ${_service}"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml || colorize light_red "error: reset_one: deploy"
+  highlight "Reset ${_service}"
 }

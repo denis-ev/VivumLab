@@ -26,22 +26,25 @@ Task::check_for_settings(){
     mkdir -p settings/passwords
     [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
-    if ! [[ -d settings ]]; then
-        colorize red "Seems to be your first time running this."
+    if [[ ! -d settings ]]; then
         colorize light_red "Creating settings directory"
         mkdir -p settings
     fi
-    if  ! [[ -d settings/passwords ]]; then
+    if  [[ ! -d settings/passwords ]]; then
         colorize light_red "Creating passwords directory"
         mkdir -p settings/passwords
     fi
-    if ! [[ -f settings/config.yml ]]; then
+    if [[ ! -f settings/config.yml ]]; then
         colorize light_red "Creating an empty config file"
         echo "blank_on_purpose: True" > settings/config.yml
     fi
-    if ! [[ -f settings/vault.yml ]]; then
+    if [[ ! -f settings/vault.yml ]]; then
         colorize light_red "Creating an empty Vault"
         echo "blank_on_purpose: True" > settings/vault.yml
+    fi
+    if [[ ! -f tasks/ansible_bash.vars ]]; then
+      colorize light_red "Creating ansible_bash.vars file"
+      echo "blank_on_purpose: True" > tasks/ansible_bash.vars
     fi
 }
 

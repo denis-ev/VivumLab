@@ -18,7 +18,7 @@ Task::terraform(){
   # Generate Terraform files
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.terraform.yml
+  -i inventory playbook.terraform.yml || colorize light_red "error: terraform: deploy"
 
   # Run terraform
   # If we send multiple commands to the docker container (/bin/bash -c), we can "cd" into the "settings" directory
@@ -39,6 +39,7 @@ Task::terraform_destroy(){
   : @param config_dir="settings"
 
   highlight "Destroying cloud servers"
-  Task::run_docker /bin/bash -c "cd $_config_dir; terraform destroy"
+  Task::run_docker /bin/bash -c "cd $_config_dir; terraform destroy" \
+  || "error: terraform_destroy"
   highlight "Cloud Servers destroyed"
 }

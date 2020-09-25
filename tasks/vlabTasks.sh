@@ -103,7 +103,7 @@ Task::encrypt(){
   highlight "Encrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault encrypt settings/vault.yml
+  Task::run_docker ansible-vault encrypt settings/vault.yml  || colorize light_red "error: encrypt"
   sudo chmod 640 settings/vault.yml
   sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault encrypted!"
@@ -116,7 +116,7 @@ Task::decrypt(){
   highlight "Decrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault decrypt settings/vault.yml || true
+  Task::run_docker ansible-vault decrypt settings/vault.yml || colorize light_red "error: decrypt"
   sudo chmod 640 settings/vault.yml
   sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault decrypted!"
@@ -136,7 +136,7 @@ Task::uninstall(){
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory -t deploy playbook.remove.yml
+  -i inventory -t deploy playbook.remove.yml || colorize light_red "error: uninstall"
   highlight "Uninstall Complete"
 }
 
@@ -148,7 +148,7 @@ Task::restore() {
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory restore.yml
+  -i inventory restore.yml  || colorize light_red "error: restore"
 }
 
 # Opens a shell in the VivumLab deploy container
@@ -163,7 +163,7 @@ Task::track(){
   : @desc "Switches you to the specified branch or tag. use branch=<branchname>"
   : @param branch! "Required! Branch or tag name to track"
 
-  git checkout $_branch
+  git checkout $_branch || colorize light_red "error: track: $_branch"
 }
 
 Task::run_docker() {
