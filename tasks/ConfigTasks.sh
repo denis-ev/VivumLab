@@ -19,11 +19,9 @@ Task::config(){
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.config.yml
+  -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt settings/vault.yml || true
-  highlight "Configuration Complete"
-
+  Task::run_docker ansible-vault encrypt settings/vault.yml || colorize light_red "error: config: encrypt"
 }
 
 #Show the Configuration settings for a given service
@@ -37,7 +35,7 @@ Task::show_config(){
 
 # Resets the local settings
 Task::config_reset() {
-  : @desc "Resets the Configuration"
+  : @desc "Resets VivumLab configs"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
 
@@ -45,7 +43,7 @@ Task::config_reset() {
   Task::build $(build_check) $(force_check)
 
   highlight "Reset Local Settings"
-  echo "First we'll make a backup of your current settings in case you actually need them \n"
+  echo "Backing up your current settings, you may need them \n"
   mv settings settings.bak
   mkdir settings
   Task::config
