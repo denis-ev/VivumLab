@@ -19,6 +19,7 @@ jobs:
 
 before_script:
   - pip3 install pre-commit
+  - npm install --save-dev @commitlint/travis-cli
 
 cache:
   directories:
