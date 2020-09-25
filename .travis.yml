@@ -15,7 +15,7 @@ jobs:
       script:
         - commitlint-travis
     - stage: pre-commit
-      script: pre-commit run --from-ref origin/HEAD --to-ref HEAD
+      script: pre-commit run --all-files
       name: "Pre-commit run"
 
 before_script:
