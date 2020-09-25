@@ -2,28 +2,28 @@
 - name: Install base packages for ViciLab
   apt:
     pkg:
-    - apt-transport-https
-    - ca-certificates
-    - cifs-utils
-    - curl
-    - fail2ban
-    - gnupg-agent
-    - git
-    - htop
-    - iftop
-    - iotop
-    - mosh
-    - nfs-common
-    - screen
-    - software-properties-common
-    - sudo
-    - unattended-upgrades
-    - vim
-    - wget
-    - whois
-    - zsh
-    - python3
-    - python3-pip
+      - apt-transport-https
+      - ca-certificates
+      - cifs-utils
+      - curl
+      - fail2ban
+      - gnupg-agent
+      - git
+      - htop
+      - iftop
+      - iotop
+      - mosh
+      - nfs-common
+      - screen
+      - software-properties-common
+      - sudo
+      - unattended-upgrades
+      - vim
+      - wget
+      - whois
+      - zsh
+      - python3
+      - python3-pip
   tags:
     - dependencies
   become: yes

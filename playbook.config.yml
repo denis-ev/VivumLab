@@ -46,7 +46,7 @@
       prompt: "Provide a current/ valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"
       private: no
       when: admin_email is not defined
-      
+
   roles:
     - vivumlab_config
 ...

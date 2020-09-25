@@ -2,8 +2,22 @@
 language: node_js
 node_js:
   - node
-branches:
-  only:
-    - master
-script:
-  - commitlint-travis
+
+stages:
+  - pre-commit
+  - master
+
+jobs:
+  include:
+    - stage: master
+      name: "Master commitlint"
+      if: branch = master
+      script:
+        - commitlint-travis
+    - stage: pre-commit
+      script: pre-commit run --from-ref origin/HEAD --to-ref HEAD
+      name: "Pre-commit run"
+
+cache:
+  directories:
+    - $HOME/.cache/pre-commit

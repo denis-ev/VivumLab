@@ -8,25 +8,25 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - ca-certificates
-    - cifs-utils
-    - curl
-    - fail2ban
-    - git
-    - htop
-    - iftop
-    - iotop
-    - mosh
-    - nfs-utils
-    - screen
-    - sudo
-    - vim-enhanced
-    - wget
-    - whois
-    - yum-utils
-    - zsh
-    - python3
-    - python3-pip
+      - ca-certificates
+      - cifs-utils
+      - curl
+      - fail2ban
+      - git
+      - htop
+      - iftop
+      - iotop
+      - mosh
+      - nfs-utils
+      - screen
+      - sudo
+      - vim-enhanced
+      - wget
+      - whois
+      - yum-utils
+      - zsh
+      - python3
+      - python3-pip
   tags:
     - dependencies
   become: yes
