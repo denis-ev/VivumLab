@@ -128,12 +128,15 @@ Task::uninstall(){
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
   Task::build $(build_check) $(force_check)
 
   highlight "Uninstall VivumLab Completely"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory -t deploy playbook.remove.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory -t deploy playbook.remove.yml
   highlight "Uninstall Complete"
 }
 
@@ -141,8 +144,11 @@ Task::uninstall(){
 Task::restore() {
   : @desc "Restore a server from backups. Assuming backups were running"
   : @param config_dir="settings"
+  : @param debug true "Debugs ansible-playbook commands"
 
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory restore.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory restore.yml
 }
 
 # Opens a shell in the VivumLab deploy container

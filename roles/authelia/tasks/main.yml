@@ -32,6 +32,7 @@
     group: "{{ gid_output.stdout }}"
   with_items:
     - "redis"
+    - "config"
   become: yes
 
 - name: Copy authelia docker-compose.yml file into place.
@@ -56,7 +57,7 @@
 - name: Copy authelia_config.yml file into place.
   template:
     src: authelia_config.yml.j2
-    dest: "{{ volumes_root }}/authelia/authelia_config.yml"
+    dest: "{{ volumes_root }}/authelia/config/configuration.yml"
   vars:
     domain_parts: "{{ domain.split('.') }}"
 

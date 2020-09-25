@@ -1,6 +1,26 @@
 # travis.yml
-language: node_js
-node_js:
-  - node
-script:
-  - commitlint-travis
+language: python
+python: 3.8
+
+stages:
+  - pre-commit
+  - master
+
+jobs:
+  include:
+    - stage: master
+      name: "Master commitlint"
+      if: branch = master
+      script:
+        - commitlint-travis
+    - stage: pre-commit
+      script: pre-commit run --all-files
+      name: "Pre-commit run"
+
+before_script:
+  - pip3 install pre-commit
+  - npm install --save-dev @commitlint/travis-cli
+
+cache:
+  directories:
+    - $HOME/.cache/pre-commit
