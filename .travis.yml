@@ -1,7 +1,6 @@
 # travis.yml
-language: node_js
-node_js:
-  - node
+language: python
+python: 3.8
 
 stages:
   - pre-commit
@@ -19,7 +18,6 @@ jobs:
       name: "Pre-commit run"
 
 before_script:
-  - sudo apt install -f python3
   - pip3 install pre-commit
 
 cache:
