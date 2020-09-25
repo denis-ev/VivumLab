@@ -152,4 +152,3 @@
     state: started
   when: homeassistant.use_supervisord
   become: yes
-

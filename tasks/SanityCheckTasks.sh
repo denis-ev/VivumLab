@@ -11,6 +11,7 @@ Task::sanity_check(){
   #Task::check_ssh_with_keys
   Task::check_for_git
   Task::check_for_precommit
+  Task::check_for_hostdockerdaemon
 
   colorize green "Sanity checks passed"
 }
@@ -117,3 +118,16 @@ Task::check_for_precommit () {
 }
 
 # It would be nice to verify passwordless ssh to the server works.
+
+Task::check_for_hostdockerdaemon() {
+    if ! docker info >/dev/null 2>&1 ; then
+        echo "Docker Check: Failed. Starting Docker"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open -g -a Docker.app || exit
+        elif [[ `systemctl` =~ -\.mount ]]; then
+            sudo systemctl start docker
+        elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
+            sudo service docker start
+        fi
+    fi
+}

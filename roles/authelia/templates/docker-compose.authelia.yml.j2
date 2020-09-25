@@ -24,7 +24,6 @@ services:
       - "traefik.http.services.authelia.loadbalancer.server.port=9091"
 {% include './labels.j2' %}
     volumes:
-      - "{{ volumes_root }}/authelia/authelia_config.yml:/config/configuration.yml:ro"
       - "{{ volumes_root }}/authelia/config:/config"
       - "{{ volumes_root }}/authelia/userdb.yml:/etc/authelia/userdb.yml"
 

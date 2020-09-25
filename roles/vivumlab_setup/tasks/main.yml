@@ -1,5 +1,7 @@
 ---
-- include_tasks: install.yml
-- include_tasks: docker.yml
+- include_tasks: deb_setup_docker.yml
+  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
+- include_tasks: centinstall.yml
+  when: ansible_facts['distribution'] == "CentOS"
 # - include_tasks: iptables.yml
 - include_tasks: fail2ban.yml

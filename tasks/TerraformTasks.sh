@@ -6,33 +6,19 @@ Task::terraform(){
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-
-  if [[ ${_force-true} == true ]] ; then
-    if [[ ${_build-true} == true ]] ; then
-      Task::build force=true build=true
-    else
-      Task::build force=true
-    fi
-  else
-    if [[ ${_build-true} == true ]] ; then
-      if [[ ${_force-true} == true ]] ; then
-        Task::build build=true force=true
-      else
-        Task::build build=true
-      fi
-    else
-      Task::build
-    fi
-  fi
+  Task::build $(build_check) $(force_check)
 
   Task::git_sync
   Task::config
 
   highlight "Deploying cloud server"
   # Generate Terraform files
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.terraform.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.terraform.yml
 
   # Run terraform
   # If we send multiple commands to the docker container (/bin/bash -c), we can "cd" into the "settings" directory

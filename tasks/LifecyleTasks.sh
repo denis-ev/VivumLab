@@ -7,35 +7,21 @@ Task::deploy(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param cache false "Forces the build to use --no-cache --force-rm"
-  : @param debug true "Adds -vvvv to ansible-playbook run"
+  : @param debug true "Debugs ansible-playbook commands"
 
 
   Task::logo
-  if [[ ${_force-false} == true ]] ; then
-    if [[ ${_build-true} == true ]] ; then
-      Task::build force=true build=true
-    else
-      Task::build force=true
-    fi
-  else
-    if [[ ${_build-true} == true ]] ; then
-      if [[ ${_force-false} == true ]] ; then
-        Task::build build=true force=true
-      else
-        Task::build build=true
-      fi
-    else
-      Task::build
-    fi
-  fi
-  Task::git_sync
-  Task::config
+  Task::build $(build_check) $(force_check)
 
   highlight "Deploying VivumLab"
   if [[ ${_debug-false} == true ]] ; then
-    Task::run_docker ansible-playbook -vvvv --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.vivumlab.yml
+    Task::run_docker ansible-playbook $(debug_check) \
+    --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+    -i inventory playbook.vivumlab.yml
   else
-    Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.vivumlab.yml
+    Task::run_docker ansible-playbook $(debug_check) \
+    --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+    -i inventory playbook.vivumlab.yml
 
   fi
 }
@@ -44,14 +30,19 @@ Task::deploy(){
 Task::restart(){
   : @desc "Restart all enabled services"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
   highlight "Stopping all services"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.restart.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.restart.yml
   highlight "Services restarting"
 }
 
@@ -60,22 +51,30 @@ Task::restart_one(){
   : @desc "Restarts the specified service"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param debug true "Debugs ansible-playbook commands"
 
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml
 }
 
 # Stop All Enabled services
 Task::stop(){
   : @desc "Restart all enabled services"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
   highlight "Stopping all services"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.stop.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.stop.yml
   highlight "Services restarting"
 }
 
@@ -84,13 +83,18 @@ Task::stop_one(){
   : @desc "Restarts the specified service"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
 }
 
 # Removes One Service
@@ -98,14 +102,19 @@ Task::remove_one(){
   : @desc "Removes the specified service on the VivumLab server"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
   highlight "Removing data for ${_service}"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
   highlight "Removal Complete"
 }
 
@@ -114,16 +123,25 @@ Task::reset_one(){
   : @desc "Resets the specified service' files on the VivumLab server"
   : @param service "Service Name"
   : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
   Task::git_sync
   Task::config
 
   highlight "Resetting ${_service}"
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
-	Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml
+	Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml
 	highlight "Redeploying ${_service}"
-	Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml
+	Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml
 	highlight "Done resetting ${_service}"
 }

@@ -8,32 +8,18 @@ Task::config(){
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
 
   Task::logo
-
-  if [[ ${_force-true} == true ]] ; then
-    if [[ ${_build-true} == true ]] ; then
-      Task::build force=true build=true
-    else
-      Task::build force=true
-    fi
-  else
-    if [[ ${_build-true} == true ]] ; then
-      if [[ ${_force-true} == true ]] ; then
-        Task::build build=true force=true
-      else
-        Task::build build=true
-      fi
-    else
-      Task::build
-    fi
-  fi
+  Task::build $(build_check) $(force_check)
 
   highlight "Creating or Updating config file"
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
-  Task::run_docker ansible-playbook --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" -i inventory playbook.config.yml
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.config.yml
   highlight "Encrypting Secrets in the Vault"
   Task::run_docker ansible-vault encrypt settings/vault.yml || true
   highlight "Configuration Complete"
@@ -52,8 +38,11 @@ Task::show_config(){
 # Resets the local settings
 Task::config_reset() {
   : @desc "Resets the Configuration"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+
   Task::logo
-  Task::build
+  Task::build $(build_check) $(force_check)
 
   highlight "Reset Local Settings"
   echo "First we'll make a backup of your current settings in case you actually need them \n"
