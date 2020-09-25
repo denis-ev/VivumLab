@@ -15,11 +15,12 @@ jobs:
       script:
         - commitlint-travis
     - stage: pre-commit
+      language: python
+      python: 3.8
       script: pre-commit run --all-files
       name: "Pre-commit run"
 
 before_script:
-  - sudo apt install -f python3
   - pip3 install pre-commit
 
 cache:
