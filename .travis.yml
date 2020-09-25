@@ -19,7 +19,7 @@ jobs:
       name: "Pre-commit run"
 
 before_script:
-  - pip install pre-commit
+  - pip3 install pre-commit
 
 cache:
   directories:
