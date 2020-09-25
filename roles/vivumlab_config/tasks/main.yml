@@ -25,4 +25,3 @@
     src: "ansible_bash.vars"
     dest: "{{ playbook_dir }}/tasks/ansible_bash.vars"
     owner: "{{ ansible_user_id }}"
-    
