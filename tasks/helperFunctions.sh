@@ -39,8 +39,8 @@ function force_check() {
 # Ansible -> Bash Variables
 
 function vlab_ip (){
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ VLAB_IP == '' ]]; then
     VLAB_IP='localhost'
     echo $VLAB_IP
@@ -54,8 +54,8 @@ fi
 }
 
 function vlab_port () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ VLAB_PORT == '' ]]; then
     VLAB_PORT'22'
     echo $VLAB_PORT
@@ -69,8 +69,8 @@ fi
 }
 
 function vlab_ssh_user () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ VLAB_SSH_USER == '' ]]; then
     VLAB_PORT='root'
     echo $VLAB_SSH_USER
@@ -84,23 +84,23 @@ fi
 }
 
 function admin_email () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ ADMIN_EMAIL == '' ]]; then
-    ADMIN_EMAIL='admin_placeholderemail@vivumlab.xyz'
+    ADMIN_EMAIL='admin_email@vivumlab.com'
     echo $ADMIN_EMAIL
   else
     echo $ADMIN_EMAIL
   fi
   else
-  ADMIN_EMAIL='admin_placeholderemail@vivumlab.xyz'
+  ADMIN_EMAIL='admin_email@vivumlab.com'
   echo $ADMIN_EMAIL
 fi
 }
 
 function default_username () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ DEFAULT_USERNAME == '' ]]; then
     DEFAULT_USERNAME='admin'
     echo $DEFAULT_USERNAME
@@ -114,8 +114,8 @@ fi
 }
 
 function arm_check () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ ARM == '' ]]; then
     ARM='False'
     echo $ARM
