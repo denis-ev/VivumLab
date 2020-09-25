@@ -42,9 +42,9 @@ Task::check_for_settings(){
         colorize light_red "Creating an empty Vault"
         echo "blank_on_purpose: True" > settings/vault.yml
     fi
-    if [[ ! -f tasks/Vars ]]; then
-      colorize light_red "error: settings_exist: Vars file missing. Creating.."
-      echo "blank_on_purpose: True" > tasks/Vars
+    if [[ ! -f tasks/ansible_bash.vars ]]; then
+      colorize light_red "Creating ansible_bash.vars file"
+      echo "blank_on_purpose: True" > tasks/ansible_bash.vars
     fi
 }
 
