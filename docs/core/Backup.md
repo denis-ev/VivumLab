@@ -51,4 +51,4 @@ Alternatively you can work directly with the Restic backups through its own 'doc
 Accessing the restic shell, enables you to run commands like `restic snapshots` to list all your snapshots.
 To restore (for example) just your NextCloud data, you can run `docker exec restic_restic_1 restic restore latest --include /data/nextcloud --target /data/nextcloud`.
 
-VivumLab strongly suggests that you read the [Restic](https://restic.readthedocs.io/en/latest/) doocumentation, prior to backing up any files, especially important and irreplacable files.
+VivumLab strongly suggests that you read the [Restic](https://restic.readthedocs.io/en/latest/) documentation, prior to backing up any files, especially important and irreplacable files.
