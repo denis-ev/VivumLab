@@ -28,6 +28,6 @@ SSH to port 2222 and you will be accessing the home server directly.
 
 ## sshuttle
 
-You can also use [sshuttle](https://codeberg.com/sshuttle/sshuttle) to access your server via a VPN. Install sshuttle on your client then run **`sshuttle -r USER@CLOUD_SERVER_DOMAIN 0/0`**
+You can also use [sshuttle](https://github.com/sshuttle/sshuttle) to access your server via a VPN. Install sshuttle on your client then run **`sshuttle -r USER@CLOUD_SERVER_DOMAIN 0/0`**
 
 You can now ssh directly to 10.0.0.1 or visit http://10.0.0.1:8181 with a browser to access the Traefik dashboard for example.
