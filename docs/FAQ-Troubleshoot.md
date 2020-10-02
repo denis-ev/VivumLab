@@ -34,7 +34,7 @@ We just want to start by saying open source is very important, a free (as in fre
     * If not you have [DNS issues](/core/installation/#dns-settings). You probably don't have a wildcard set up.
     * If you're still having issues with your domain, contact your domain registrar (whom you purchased your domain from); there is a good chance that they have their own documentation regarding this.
 * Does the IP you expect actually lead to port 80 on your server?
-    * You may need to set up port forwarding on your router, unblock some ports on your modem, or contact your ISP to see if they are being blocked. If these aren't an option for you, try the [bastion host](/setup/bastion) set up.
+    * You may need to set up port forwarding on your router, unblock some ports on your modem, or contact your ISP to see if they are being blocked. If these aren't an option for you, try the [bastion host](/core/bastion) set up.
 * Does the domain you're trying to access match what is listed in the Traefik dashboard?
     * If you don't see your domain under the 'HTTP' section in Traefik, then you have something configured wrong.
 * Are your services running?
