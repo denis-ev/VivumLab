@@ -75,9 +75,9 @@ Doing the above will require some prior knowledge; you'll need a working underst
 !!!NOTE: The following instructions are provided as a guideline, and is by no means, definitive, Follow the link, do some research.
 
 ### Contribution: Forking VivumLab
-1. Create your own fork by clicking the "Fork" button at https://github.com/denis-ev/VivumLab: ![Fork button location](fork.png)
+1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](fork.png)
 
-2. In your fork, goto Settings/Repository -> "Mirroring repositories" and setup mirroring of denis-ev/VivumLab
+2. In your fork, goto Settings/Repository -> "Mirroring repositories" and setup mirroring of Vivumlab/VivumLab
 ![Screen Shot of Mirror setup](mirror.png)
 
     Mirror direction = Pull
