@@ -3,7 +3,7 @@
 Thank you for attempting to reach us. Our small development team is passionate about this project, and we hope that you will be too.
 
 ## Code Issues/ Suggestions/ Requests
-We look forward to hearing from you; and to those of you that want to contribute to ViciLab, we are always happy to review and discuss any contributions.
+We look forward to hearing from you; and to those of you that want to contribute to VivumLab, we are always happy to review and discuss any contributions.
 
 In regards to contributions, code or otherwise, the [VivumLab GitHub page](https://github.com/Vivumlab/VivumLab) is the best place to open an issue (or a suggestion). The [VivumLab Zulip Chat](https://vivumlab.zulipchat.com/) is also available for discussion; however opening an issue on GithHub will help the project stay on track.
 
