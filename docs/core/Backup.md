@@ -14,7 +14,7 @@ Alternatively, you could pay Amazon and use their S3 service.
 
 Backing up to your own infrastructure does not protect your data, especially in the case of server failure or data corruption. However it is still possible to use your own S3 bucket; this may be useful due to Restic's snapshotting. So while this won't give you an offsite backup, it will still provide timed snapshots to access old versions of files.
 
-View your logs for the Minio service (vivumlab_minio_1) and copy the `AccessKey` and `SecretKey` out of the logs.
+View your logs for the Minio service (eg. vivumlab_minio_1) and copy the `AccessKey` and `SecretKey` out of the logs.
 Run **`vlab decrypt`** to decrypt the vault, and put the keys into under the `s3_access_key` and `s3_secret_key` variables in the decrypted`settings/vault.yml` file.
 Now login to your Minio with the same access and secret key values and create a bucket called `restic-backups`.
 Finally run **`vlab update`** to copy your new settings up to your VivumLab server.
@@ -46,9 +46,9 @@ To restore your most recent backup, simply run **`vlab restore`**; then proceed 
 
 This should result in a fully working VivumLab setup with the backed up data.
 
-Alternatively you can work directly with the Restic backups through its Docker shell.
+Alternatively you can work directly with the Restic backups through its own 'docker shell' (see below).
 
 Accessing the restic shell, enables you to run commands like `restic snapshots` to list all your snapshots.
-To restore just your NextCloud data for example, you can run `docker exec restic_restic_1 restic restore latest --include /data/nextcloud --target /data/nextcloud`.
+To restore (for example) just your NextCloud data, you can run `docker exec restic_restic_1 restic restore latest --include /data/nextcloud --target /data/nextcloud`.
 
-The Restic documentation can be found [here](https://restic.readthedocs.io/en/latest/)
+VivumLab strongly suggests that you read the [Restic](https://restic.readthedocs.io/en/latest/) doocumentation, prior to backing up any files, especially important and irreplacable files.

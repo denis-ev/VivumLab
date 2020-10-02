@@ -9,16 +9,17 @@ Navigate it quickly by using the Table of Contents or the search bar; searching 
 We assume you know or understand the basics of:
     - your server operating system
     - your client operating system
-    - Accessing via SSH
+    - Access via SSH
     - Pointing your domain ('A' record) to the required IP address
+
 ## FAQs
 
 ### Does VivumLab cost anything?
 
 No, and as long as it remains open source, it never will. If you paid money for this service, get your money back.
 
-### Why fork VivumLab?
-VivumLab is a great project but while we are very similar, we differ in some core values and (general) project direction. VivumLab is an alternative to VivumLab, not a replacement; We would like to suggest that you test both projects and see which one suits you; everyone is different and deserves the freedom to choose.
+### Why did we fork HomeLabOS?
+HomeLabOS is a great project, and while we are very similar, we differ in some core values and (general) project direction. VivumLab is an alternative to HomeLabOS, not a replacement; We would like to suggest that you test both projects and see which one suits you; everyone is different and deserves the freedom to choose. If you decide to stick with VivumLab, then Welcome to the community; lets do some amazing things together.
 
 ### VivumLab and Open Source
 We just want to start by saying open source is very important, a free (as in freedom) internet, is something worth protecting. That being said, you may have noticed that some of the services we provide are open source, and some are not; while VivumLab advocates for and prefers open source projects, we undestand that sometimes a closed source project is required or desired by the user. The least we can do is keep VivumLab open source and free for further generations to come.
@@ -28,12 +29,12 @@ We just want to start by saying open source is very important, a free (as in fre
 ### I have pointed my domain at my IP but accessing the domain returns nothing
 
 * If you [ping](https://duckduckgo.com/?q=how+to+ping+a+domain+from+my+OS) your domain, do you get the [IP](https://duckduckgo.com/?q=whats+my+ip) you expect?
-    * If not you have [DNS issues](Installation.md#dns-settings). Get those resolved before moving on.
+    * If not you have [DNS issues](/docs/setup/installation/#dns-settings). Get those resolved before moving on.
 * If you ping your subdomain, do you get the IP you expect?
-    * If not you have [DNS issues](Installation.md#dns-settings). You probably don't have a wildcard set up.
+    * If not you have [DNS issues](/docs/setup/installation/#dns-settings). You probably don't have a wildcard set up.
     * If you're still having issues with your domain, contact your domain registrar (whom you purchased your domain from); there is a good chance that they have their own documentation regarding this.
 * Does the IP you expect actually lead to port 80 on your server?
-    * You may need to set up port forwarding on your router, unblock some ports on your modem, or contact your ISP to see if they are being blocked. If these aren't an option for you, try the [bastion host](Bastion.md) set up.
+    * You may need to set up port forwarding on your router, unblock some ports on your modem, or contact your ISP to see if they are being blocked. If these aren't an option for you, try the [bastion host](/setup/bastion) set up.
 * Does the domain you're trying to access match what is listed in the Traefik dashboard?
     * If you don't see your domain under the 'HTTP' section in Traefik, then you have something configured wrong.
 * Are your services running?
@@ -43,19 +44,19 @@ We just want to start by saying open source is very important, a free (as in fre
     * Check http://{{ vivumlab_ip }}:8181/
 
 If you have followed these instructions and you are STILL having issues, ask in [chat](https://vivumlab.zulipchat.com/) or open an issue on [Github](https://github.com/denis-ev/VivumLab/issues).
-    !!! Note: The dcumentation for VivumLab represent hours of work by the developers. Do not be offended if you ask a question, and are redirected back to the documentation. It is entirely for your own benefit; no one elses'.
+    !!! Note: The documentation for VivumLab represents hours of work by the developers. Do not be offended if you ask a question, and are redirected back to the documentation. It is entirely for your own benefit; no one elses'.
 
 ### I get a 404
 
-If you're up and running, but accessing the server returns a 404, load [http://YOURSERVERIP:8181/]. This is the Traefik dashboard.
+If you're up and running, but accessing the server returns a 404, check the Traefik [dashboard](http://{{ vivumlab_ip }}:8181/).
 
-Each service under the `Http` page has a section. The hostname inside `Host()` in the rule column is the hostname that Traefik is listening to for that particular service. You need to be able to [ping](https://duckduckgo.com/?q=how+to+ping+a+domain+from+my+OS) that hostname from your computer, and you should get back the IP address of your server. Once that is the case, accessing the hostname in a browser should load the respective service.
+Each service under the `Http` page has a section. The hostname inside `Host()` in the rule column is the hostname that Traefik is listening to for that particular service. You need to be able to [ping](https://duckduckgo.com/?q=how+to+ping+a+domain+from+my+OS) that hostname from your computer, and you should get back the IP address of your server. Once that is the case, accessing the domain name in a browser should load the respective service.
 
-Traefik serves based on domain names, not IP addresses. It has to know what service you want to return. You need to be able to access your.domain or servicename.domain in order for Traefik to serve the correct service.
+Traefik serves based on domain names, not IP addresses. It has to know what service you want to return. You need to be able to access the domain name in order for Traefik to serve the correct service.
 
 ### No Traefik Dashboard
 
-If you can't even access the dashboard at {{ vivumlab_ip }}:8181, check the status of the VivumLab service to give you some insight into what the issue is.
+If you can't even access the dashboard at http://{{ vivumlab_ip }}:8181, check the status of the VivumLab service to give you some insight into what the issue is.
 e.g: **`systemctl status vivumlab`**
 
 or: **`docker ps | grep traefik`** and get an output like:
@@ -67,7 +68,7 @@ or: **`docker ps | grep traefik`** and get an output like:
 If you don't see the services listed in the Traefik dash, or if Traefik returns a page that just says `Bad Gateway`, that usually means DNS and everything is correct, but the service itself is having problems. SSH into the server and run **`systemctl status SERVICE_NAME`**
 e.g: **`systemctl status jellyfin`**
 
-This should show you any Docker logsm relevant to that service. In the case of a service running multiple containers, you may want more detail from a specific container.
+This should show you any Docker logs relevant to that service. In the case of a service running multiple containers, you may want more detail from a specific container.
 Find the container name with **`docker ps | grep SERVICENAME`** then access the logs with **`docker logs -f --tail 500 CONTAINERNAME`**.
 E.g: **`docker logs -f --tail 500 jellyfin_jellyfin_1`**
 
@@ -84,7 +85,7 @@ You can tail the logs of the traefik container (as mentioned previously) to see 
 
 * Make sure you are running the latest docker and docker compose on both your client and server. The versions installed via your Operating Systems' package manager may be outdated.
 
-!!! Note: Docker not installed or running an outdated version? [here](https://docs.docker.com/get-docker/) is some information to help you get started.
+!!! Note: [here](https://docs.docker.com/get-docker/) is some information to help you get started.
 
 * Check VivumLab status on the server and make sure it is loaded and active.
 e.g: **`systemctl status vivumlab`**
@@ -104,12 +105,15 @@ Check your `config/vault.yml` file. If it's encrypted just run `vlab decrypt`, a
 ### Is it OK to manually edit my `settings/` files?
 
 Yes, but note that isn't specifically necessary to edit the `config/` files directly, or worry about where the config values are.
-Use of **`vlab set`** and **`vlab get`** and it will access the variable correctly regardless of what config file it lives in.
+Use of **`vlab get`** will access the variable correctly regardless of which config file it lives in.
+- eg. **`vlab get jellyfin.domain`**
+Use of **`vlab set`** will set the variable correctly,regardless of which config file
+- eg. **`vlab set jellyfin.domain=magicfinger.com`**
 
 ### I get `exec user process caused 'exec format error'`
 
 You may be trying to run AMD code on ARM infrastructure.
-Make sure you have set `arm` to True. e.g: **`vlab get arm=True`**
+Make sure you have set `arm` to True. e.g: **`vlab get arm`**
 
 You can set it with **`vlab set arm=True`**,
 or you can edit your config file. e.g:
@@ -127,8 +131,8 @@ E.g: **`systemctl status jellyfin`**
 ### I get `Unit servicename.service could not be found.`
 
 The service was not deployed.
-Enable the affected service. eg. **`vlab set jellyfin enable=True`**
-Alternatively, edit your `settings/` files, and set `enable` is set to true for the respective service. e.g:
+Enable the desired service. eg. **`vlab set jellyfin enable=True`**
+Alternatively, edit your `settings/` files, and set `enable` to true for the respective service. e.g:
 ```
 jellyfin:
   enable: True
@@ -136,7 +140,7 @@ jellyfin:
 
 ### If I don't have a domain, what do I enter for the domain field?
 
-Make something up.. for example `myvivumlab.local` will work just fine, but there are some small changes that you will need to make.
+You can use ViciLab fully inside your network, without an external domain. Simply make up a domain that ends in `.local` and enter that as your domain in `host_vars/myserver`, for example `myvivumlab.local` will work just fine, but there are some small changes that you will need to make.
 
 VivumLab will generate a file called `vivumlab_hosts`on the server, located in the VivumLab root folder; You can use the entries in this file to add to your computer's hosts override file (`/etc/hosts` on *nix based OS'), or to map on your router or DNS server as DNS overrides.
 

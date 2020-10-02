@@ -95,12 +95,9 @@ Consequence:
 ### Disclaimer
 VivumLab reserves the right, at its discretion, to change, modify, add, or remove portions of these Terms at any time by posting the amended terms. Please check these Terms periodically for changes. Your continued use of the site or Services after the posting of changes constitutes your binding acceptance of such changes.
 
-Community Leaders will publicly acknowledge their agreement to these terms.
+All VivumLab Community Leaders declare acknowledgement and agreement to these terms.
 
-### Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.0, available [here](https://www.contributor-covenant.org/version/2/0/code_of_conduct.html)
+#### Attribution/ Reference
 
-Community Impact Guidelines were inspired by Mozilla’s code of conduct enforcement ladder.
-
-For answers to common questions about this code of conduct, see the [FAQ](https://www.contributor-covenant.org/faq). Original Document Translations are available [here](https://www.contributor-covenant.org/translations).
+Please see [Legal/ Licensing/ Acknowledgement](Legal.md)

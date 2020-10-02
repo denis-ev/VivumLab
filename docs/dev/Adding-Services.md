@@ -1,16 +1,23 @@
 # Before you begin
 
-Before you begin, please familiarize yourself with the [contributing](contributing.md) document.
+Before you begin, please familiarize yourself with the [Contribution Guidelines](Contribution-Guidelines.md).
 
-# Using the addPkg.rb script to Add services to VivumLab
+# Using the add_package Task to add services to VivumLab
 
 ## What does the script do?
 
-addPkg.rb scripts the creation of new service files. You'll need three pieces of information:
+The add_package script, the creation of new service files. 
 
-- Package Name in Title case - This is used whenever we need a Title for the package.
-- The URL for the package - Used in documentation files to link to package source.
-- A one-line description of the package - Used in documention, etc.
+## Before you run the task
+
+You'll need three pieces of information:
+
+- Package Name in Title case: This is used whenever we need a Title for the package.
+  - eg. *Jellyfin*, not *jellyfin* or *JELLYFIN*
+- The URL for the package: Used in documentation files to link to package website or source.
+  - eg. https://jellyfin.org/ or https://github.com/jellyfin/jellyfin
+- A one-line description of the package: Used in documention, etc.
+  - eg. *The Free Software Media System*, or *An open source media system, forked from Emby*
 
 When you have entered those three pieces of information, The script then does the following for you:
 
@@ -28,12 +35,13 @@ When you have entered those three pieces of information, The script then does th
 ## Running the script
 
 From the root project directory run:
-`./add_package.sh` and answer the 3 questions.
-Once the script has run, you must edit the `roles/PACKAGENAME/templates/docker-compose.PACKAGENAME.yml.j2 file`
+`vlab add_package` and answer the 3 questions.
+Once the script has run, you must edit the `roles/PACKAGENAME/templates/docker-compose.PACKAGENAME.yml.j2` file.
+  - eg. *roles/jellyfin/templates/docker-compose.jellyfin.yml.j2*
 
 _Please review all other files, before pushing your changes to gitlab._
 
-# How to Manually Add Services to VivumLab
+# How to Manually Add Services to ViciLab
 
 ## Create Role Folder
 
@@ -75,6 +83,7 @@ service should be added in alphabetical order under the `# Services List` sectio
 
 After a new service has been deployed, run `systemctl status SERVICE_NAME` to see
 how it's doing.
+  - eg. systemctl status jellyfin
 
 If it's not running with an error like `(code=exited, status=1/FAILURE)`
 

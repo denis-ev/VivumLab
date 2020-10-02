@@ -2,11 +2,11 @@
 
 VivumLab can utilise [Terraform](https://duckduckgo.com/?q=terraform) to spin up cloud servers for you using other infrastructure (eg. Digital Ocean) if you don't have any physical hardware for your own use.
 
-Obviously whichever provider you choose will have certain requirements and their own pricing scheme.
+Obviously whichever provider you choose will have certain requirements and their own pricing scheme; be aware of this.
 
-!!! Note: This is not an option to get free hosting from commercial providers, this just helps you deploy to their services.
+!!! Note: VivumLab is not an option to get free hosting from commercial providers, VivumLab just helps you deploy to their services.
 
-!!! Note: Providing troubleshooting with any providers, commercial or not, is beyond the scope of VivumLab. Please contact the provider for any issues regarding their services.
+!!! Note: Providing troubleshooting for any providers, commercial or not, is beyond the scope of VivumLab. Please contact the provider for any issues regarding their services.
 
 ## Digital Ocean
 
@@ -21,10 +21,11 @@ do_access_token:<your_token_here>
 If you are already a Digital Ocean user, you may receive an error about a pre-existing SSH key.
 (422 SSH Key is already in use on your account).
 To correct this:
-1. Run **`ssh-keygen -l -E md5 -f ~/.ssh/id_rsa.pub`** on your server, and note the commands output
+1. Run **`ssh-keygen -l -E md5 -f <location of ssh keys>`** on your server, and note the commands output.
 2. Login to Digital Ocean and go to the Security page
 3. Locate the key that matches the output from the aforementioned command
 4. Delete the SSH key
+NOTE: default location of ssh keys is: `$HOME/.ssh/id_rsa.pub`
 
 Terraform will re-add it when you run **`vlab terraform`** and will be able to manage it correctly.
 

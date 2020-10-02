@@ -1,22 +1,32 @@
 # VivumLab
 
-Welcome to VivumLab! Your very own offline-first open-source data-center!
+### Welcome to VivumLab!
+Blogs, Media, Data Sharing, Password Management, even Social Networks.. It's easy to deploy. 
+*Get back to living, with VivumLab.*
 
-VivumLab is a collection of various separate services. You can find more information about each in the menu on the left.
+VvumLab allows you to deploy a collection of various separate services, from any client computer to your own remote server.
+You can find more information about VivumLab in the menu on the left. Search is also available to you.
 
-## [Installation](setup/Installation.md)
+#### Installation
+a.k.a The first place you should visit. Installation instructions live [here](core/Installation.md)
 
-## [Getting Started](setup/Getting-Started.md)
+#### Next Steps
+What to do next? It wouldn't hurt to learn a bit more. Check [this](core/Next-Step.md) out
 
-<!-- ## [Understanding Storage](setup/Storage.md) -->
+#### Commands
+VivumLab has a few commands to make deploying your server, easy. You can find them [here](core/Commands.md)
+
+#### Understanding Storage
+Storage is a big deal with any server. Check out how it's handled with VivumLab [here](core/Storage.md)
 
 ## Getting Help
 
 If you are having problems you can:
 
 - [File an issue on Github](https://github.com/denis-ev/VivumLab/issues).
+- [Talk to us on VivumLab Zulip Chat](https://vivumlab.zulipchat.com/)
+- [Follow VivumLab on Mastodon](https://fosstodon.org/@vivumlab)
 - [Ask a question on VivumLab Reddit](https://www.reddit.com/r/VivumLab/)
-- [Ask a question VivumLab Zulip Chat](https://vivumlab.zulipchat.com/)
 
 ## Available Software
 
@@ -81,6 +91,7 @@ If you are having problems you can:
 ### E-Books
 
 - [Calibre](software/calibre.md) - Calibre and Calibre Web - Complete ebook library management.
+- [Readarr](software/readarr.md) - is a ebook collection manager for Usenet and BitTorrent users.
 
 ### Email
 
