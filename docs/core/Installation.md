@@ -101,25 +101,9 @@ Fore more information, look [here](Bastion.md)
 
 S3 is Amazon's Simple Storage Service which VivumLab can optionally use to back up to. You can use Amazon's service, or one of many other S3 compatible providers. You can also back up to another VivumLab instance if that other instance is running Minio, a self-hosted S3 service.
 
-#### But isn't piping bash to curl insecure?
-
-Not really. If you're using https (as VivumLab does), then you can be sure you're getting the file you expect.
-
-This is also the recommended installation method of:
-
-* [Rust](https://www.rust-lang.org/tools/install)
-* [homebrew](https://brew.sh/)
-* [RVM](https://rvm.io/rvm/install).
-* [Docker](https://get.docker.com/)
-* [DockSTARTer](https://dockstarter.com/)
-
-It's pretty standard practice at this point.
-
-If you still don't trust it, you can set VivumLab up manually; see below.
-
 ### Manual Set-up
 
-* Download the [master](https://github.com/denis-ev/VivumLab/archive/master.zip) version to your client computer and extract the folder. From inside the folder run **`./vlab install_cli`** now you can run any **`vlab`** command directly. Otherwise just append **`./`** to all further **`vlab`** commands.
+* Download the [master](https://github.com/Vivumlab/VivumLab/archive/master.zip) version to your client computer and extract the folder. From inside the folder run **`./vlab install_cli`** now you can run any **`vlab`** command directly. Otherwise just append **`./`** to all further **`vlab`** commands.
 
 !!! Note
     If you are using VivumLab to provision a [bastion](Bastion.md) server, run: **`vlab terraform`**
