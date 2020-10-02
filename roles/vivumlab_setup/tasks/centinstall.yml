@@ -3,7 +3,7 @@
   yum:
     name: epel-release
 
-- name: Install base packages for ViciLab
+- name: Install base packages for Vivumlab
   yum:
     name: "{{ packages }}"
   vars:

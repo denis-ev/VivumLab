@@ -15,7 +15,7 @@ Select the `Custom` button undernear `Torznab` and enter `Jackett` for the name,
 ### Download client: Transmission
 
 The Download Client will be [Transmission](/software/transmission.md), you should make sure that you have it installed and configured to follow these instructions.
-Then, in Sonarr, go to the `Download Client` tab, toggle the `Advanced Settings` toggle in the top right to `Shown`, then click the Plus button, select `Transmission`. 
+Then, in Sonarr, go to the `Download Client` tab, toggle the `Advanced Settings` toggle in the top right to `Shown`, then click the Plus button, select `Transmission`.
 In the form that popped up, enter `transmission` for host, `9091` for port, and your transmission username and password in their respective fields. Indicate the following value for the `Directory` field:
 
 * `/data/complete/tv`

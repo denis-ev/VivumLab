@@ -140,7 +140,7 @@ jellyfin:
 
 ### If I don't have a domain, what do I enter for the domain field?
 
-You can use ViciLab fully inside your network, without an external domain. Simply make up a domain that ends in `.local` and enter that as your domain in `host_vars/myserver`, for example `myvivumlab.local` will work just fine, but there are some small changes that you will need to make.
+You can use Vivumlab fully inside your network, without an external domain. Simply make up a domain that ends in `.local` and enter that as your domain in `host_vars/myserver`, for example `myvivumlab.local` will work just fine, but there are some small changes that you will need to make.
 
 VivumLab will generate a file called `vivumlab_hosts`on the server, located in the VivumLab root folder; You can use the entries in this file to add to your computer's hosts override file (`/etc/hosts` on *nix based OS'), or to map on your router or DNS server as DNS overrides.
 

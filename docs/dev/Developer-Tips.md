@@ -28,7 +28,7 @@ true` is included.
 ```
 # MIGRATION v0.5
 - name: Migrate old folders if needed
-  shell: mv /var/lab/vicilab/gitea {{ volumes_root }}/gitea
+  shell: mv /var/lab/vivumlab/gitea {{ volumes_root }}/gitea
   ignore_errors: true
 
 # END MIGRATION

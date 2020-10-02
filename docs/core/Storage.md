@@ -62,7 +62,7 @@ At some point, you may need to change where your `storage_dir` points, either be
 
 Different VivumLab services operate on libraries of media (Airsonic, Plex, and Piwigo as examples). Since these libraries can be large, it makes sense to keep them on another machine with lots of storage.
 
-NAS shares are mounted on the ViciLab host under `{{ storage_dir }}`, which defaults to `/mnt/nas`. By default, NAS is disabled, and the services that can use it will instead use local folders under `{{ storage_dir }}`.
+NAS shares are mounted on the Vivumlab host under `{{ storage_dir }}`, which defaults to `/mnt/nas`. By default, NAS is disabled, and the services that can use it will instead use local folders under `{{ storage_dir }}`.
 For example, Emby will map `{{ storage_dir }}/Video/TV` and `{{ storage_dir }}/Video/Movies` into its container, and Paperless will mount `{{ storage_dir }}/Documents`. Check the `docker-compose` files for each service to see what directories are used.
 
 VivumLab has a NAS section in the `settings/config.yml` file. This allows you to specify the connection details and credentials to access your NAS. These details are used _in conjunction with the `storage_dir` variable_ to create and maintain `/etc/fstab` entries.
@@ -101,7 +101,7 @@ run **`vlab deploy`** when complete, to enable the updated NAS configuration.
     nas_enable: True
     nas_host: 192.168.1.12
     nas_mount_type: smb
-    nas_share_path: vicilab
+    nas_share_path: vivumlab
     nas_user: user
     nas_pass: 12345
     nas_workgroup: WORKGROUP

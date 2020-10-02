@@ -6,7 +6,7 @@ Before you begin, please familiarize yourself with the [Contribution Guidelines]
 
 ## What does the script do?
 
-The add_package script, the creation of new service files. 
+The add_package script, the creation of new service files.
 
 ## Before you run the task
 
@@ -41,7 +41,7 @@ Once the script has run, you must edit the `roles/PACKAGENAME/templates/docker-c
 
 _Please review all other files, before pushing your changes to gitlab._
 
-# How to Manually Add Services to ViciLab
+# How to Manually Add Services to Vivumlab
 
 ## Create Role Folder
 

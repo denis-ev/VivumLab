@@ -1,4 +1,4 @@
-# Vicilab Commands
+# Vivumlab Commands
 **`vlab -t`** will list all available commands.
 **`vlab -h COMMAND`** will show help info for the specified command, eg. **`vlab -h config`**
 
@@ -29,12 +29,12 @@ Shows the configuration settings for the specified service
 Set a configuration variable
     examples:
     (enabling Jellyfin): **`vlab set jellyfin.enable=true`**
-    (setup ViciLab for an Arm Arcitecture) **`vlab set arm=true`**
+    (setup Vivumlab for an Arm Arcitecture) **`vlab set arm=true`**
     (change the default_password): **`vlab set vault.default_password=S0m3C00lP@s$word`**
     (changing the CloudFlare API email) **`vlab set vault.traefik.additional_env_vars.CF_API_EMAIL=your@email.com`**
 
 #### deploy
-deploys ViciLab, useful when a server refresh is needed
+deploys Vivumlab, useful when a server refresh is needed
     example: **`vlab deploy`**
 
 #### restart
@@ -54,7 +54,7 @@ Destroys servers created by terraform
     example: **`vlab terraform_destroy`**
 
 #### update
-Updates all services on the ViciLab Server
+Updates all services on the Vivumlab Server
     example: **`vlab update`**
 
 #### build
@@ -74,7 +74,7 @@ Decrypts the vault
     example: **`vlab decrypt`**
 
 #### uninstall
-Uninstalls ViciLab
+Uninstalls Vivumlab
     example: **`vlab uninstall`**
 
 #### restore
@@ -113,7 +113,7 @@ Restarts the specified service
     example (restarting Jellyfin): **`vlab restart_one service=jellyfin`**
 
 #### update_one
-Updates the specified service on the ViciLab server
+Updates the specified service on the Vivumlab server
     example (updating jellyfin): **`vlab update_one service=jellyfin`**
 
 #### stop_one
@@ -121,11 +121,11 @@ Restarts the specified service
     example (stopping Jellyfin): **`vlab stop_one service=jellyfin`**
 
 #### remove_one
-Removes the specified service on the ViciLab server
+Removes the specified service on the Vivumlab server
     example (removing Jellyfin): **`vlab remove_one service=jellyfin`**
 
 #### reset_one
-Resets the specified service' files on the ViciLab server
+Resets the specified service' files on the Vivumlab server
     example (resetting Jellyfin): **`vlab reset_one service=jellyfin`**
 
 #### service_edit

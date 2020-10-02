@@ -1,5 +1,5 @@
 ---
-- name: Install base packages for ViciLab
+- name: Install base packages for Vivumlab
   apt:
     pkg:
       - apt-transport-https

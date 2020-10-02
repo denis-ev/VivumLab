@@ -20,9 +20,9 @@ If you can't find what you are looking for there; large databases, media collect
 
 VivumLab will use Traefik's built in LetsEncrypt integration to automatically generate SSL certificates for your various services.
 
-If initially some of the certificates don't appear valid, you have likely run into [LetsEncrypt rate limits](https://letsencrypt.org/docs/rate-limits/). 
+If initially some of the certificates don't appear valid, you have likely run into [LetsEncrypt rate limits](https://letsencrypt.org/docs/rate-limits/).
 
-This is LetsEncrypts way of keeping LetsEncrypt usage fair, and as such does not have a fix. Limits will reset in a week. [see here](https://letsencrypt.org/docs/rate-limits/#a-id-overrides-a-overrides) 
+This is LetsEncrypts way of keeping LetsEncrypt usage fair, and as such does not have a fix. Limits will reset in a week. [see here](https://letsencrypt.org/docs/rate-limits/#a-id-overrides-a-overrides)
 
 ## SMTP
 
