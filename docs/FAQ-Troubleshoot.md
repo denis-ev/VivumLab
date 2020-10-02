@@ -29,9 +29,9 @@ We just want to start by saying open source is very important, a free (as in fre
 ### I have pointed my domain at my IP but accessing the domain returns nothing
 
 * If you [ping](https://duckduckgo.com/?q=how+to+ping+a+domain+from+my+OS) your domain, do you get the [IP](https://duckduckgo.com/?q=whats+my+ip) you expect?
-    * If not you have [DNS issues](/docs/setup/installation/#dns-settings). Get those resolved before moving on.
+    * If not you have [DNS issues](/core/installation/#dns-settings). Get those resolved before moving on.
 * If you ping your subdomain, do you get the IP you expect?
-    * If not you have [DNS issues](/docs/setup/installation/#dns-settings). You probably don't have a wildcard set up.
+    * If not you have [DNS issues](/core/installation/#dns-settings). You probably don't have a wildcard set up.
     * If you're still having issues with your domain, contact your domain registrar (whom you purchased your domain from); there is a good chance that they have their own documentation regarding this.
 * Does the IP you expect actually lead to port 80 on your server?
     * You may need to set up port forwarding on your router, unblock some ports on your modem, or contact your ISP to see if they are being blocked. If these aren't an option for you, try the [bastion host](/setup/bastion) set up.
