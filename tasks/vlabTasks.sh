@@ -153,8 +153,8 @@ Task::restore() {
 
 Task::run_docker() {
   docker run --rm -it \
-  -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa \
-  -v $HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
+  -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
+  -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
   vlab:${VERSION_DOCKER} "$@"

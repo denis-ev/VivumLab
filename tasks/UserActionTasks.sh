@@ -14,7 +14,7 @@ Task::track(){
 Task::shell() {
   : @desc "Opens a shell in the VivumLab deploy server"
 
-  ssh $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
+  ssh -i "$HOME/.ssh/$(pwless_sshkey)" $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
   || colorize light_red "error: shell"
 }
 
@@ -30,7 +30,7 @@ Task::reboot(){
   : @desc "Reboots the VivumLab deploy server"
   : @param t "Time (minutes) until server reboots"
 
-  ssh -t $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
+  ssh -t -i "$HOME/.ssh/$(pwless_sshkey)" $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
   "sudo shutdown -r +"$(countdown)|| colorize light_red "error: reboot"
 }
 
@@ -39,6 +39,6 @@ Task::shutdown(){
   : @desc "Shuts down the VivumLab deploy server"
   : @param t "Sets a countdown (minutes) until server shuts down"
 
-  ssh -t $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
+  ssh -t -i "$HOME/.ssh/$(pwless_sshkey)" $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
   "sudo shutdown -h +"$(countdown) || colorize light_red "error: shutdown"
 }

@@ -7,23 +7,29 @@
       private: no
       when: vlab_ip is not defined
 
-    - name: vlab_ssh_user
-      prompt: "Which user should VivumLab use to SSH to your server? (REQUIRED)"
-      private: no
-      when: vlab_ssh_user is not defined
-      default: root
-
     - name: vlab_port
       prompt: "Using a different SSH port? Enter it here (Press return for default)"
       private: no
       when: vlab_port is not defined
       default: 22
 
+    - name: vlab_ssh_user
+      prompt: "Which user should VivumLab use to SSH to your server? (REQUIRED)"
+      private: no
+      when: vlab_ssh_user is not defined
+      default: root
+
     - name: ansible_become_password
       prompt: "Which password does the SSH user need for sudo access? (REQUIRED)"
       unsafe: yes
       private: yes
       when: ansible_become_password is not defined
+
+    - name: passwordless_sshkey
+      prompt: "Enter the name of your personalised passwordless ssh keys? (Press return for default)"
+      private: no
+      when: passwordless_sshkey is not defined
+      default: 'id_rsa'
 
     - name: default_username
       prompt: "Choose the default 'admin' username for your deployed VivumLab services? (Press return for default)"
@@ -38,12 +44,12 @@
       when: default_password is not defined
 
     - name: domain
-      prompt: "Which domain should your Vivumlab services to be served on? (Press return if none)"
+      prompt: "Which domain should your Vivumlab services be served on? (Press return if none)"
       private: no
       when: domain is not defined
 
     - name: admin_email
-      prompt: "Provide a current/ valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"
+      prompt: "Provide a current/valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"
       private: no
       when: admin_email is not defined
 

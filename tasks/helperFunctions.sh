@@ -141,3 +141,18 @@ if [[ -f tasks/ansible_bash.vars ]]; then
   echo $ARM
 fi
 }
+
+function pwless_sshkey () {
+if [[ -f tasks/Vars ]]; then
+  source tasks/Vars
+  if [[ PASSWORDLESS_SSHKEY == '' ]]; then
+    PASSWORDLESS_SSHKEY='id_rsa'
+    echo $PASSWORDLESS_SSHKEY
+  else
+    echo $PASSWORDLESS_SSHKEY
+  fi
+  else
+  PASSWORDLESS_SSHKEY='id_rsa'
+  echo $PASSWORDLESS_SSHKEY
+fi
+}

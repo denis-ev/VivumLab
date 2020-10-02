@@ -14,6 +14,9 @@ vlab_port: {{ vlab_port | default('22') }}
 # User name used to connect via ssh. Must have passwordless sudo.
 vlab_ssh_user: {{ vlab_ssh_user }}
 
+# Name of SSH Key. Defaults to 'id_rsa'
+passwordless_sshkey: {{ passwordless_sshkey | default('id_rsa') }}
+
 # Timezone of the server
 common_timezone: {{ common_timezone | default('Etc/UTC') }}
 
