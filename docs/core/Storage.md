@@ -19,7 +19,7 @@ There are 3 kinds of storage related to Docker and Docker compose. And by extens
 
 ## Understanding Collection Auto-Volumes
 
-VivumLab provides a number of services designed to act on, or share, collections of data. For instance, Airsonic is designed to provide you a web interface to your music collection. But Airsonic isn't alone. Jellyfin, Plex and Funkwhale all provide that same access to your music collection. To enable these services to share access to a common collection of media (or documents, etc.) VivumLab creates, and maintains a series of collection folders that are auto-mapped by docker when the service is brought online. ViciLab uses the following Collection Auto-volumes
+VivumLab provides a number of services designed to act on, or share, collections of data. For instance, Airsonic is designed to provide you a web interface to your music collection. But Airsonic isn't alone. Jellyfin, Plex and Funkwhale all provide that same access to your music collection. To enable these services to share access to a common collection of media (or documents, etc.) VivumLab creates, and maintains a series of collection folders that are auto-mapped by docker when the service is brought online. VivumLab uses the following Collection Auto-volumes
 
 - Backups
 - Books
