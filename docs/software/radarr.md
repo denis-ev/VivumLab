@@ -1,4 +1,4 @@
-# Radarr / Sonarr
+# Radarr
 
 [Radarr](https://radarr.video/) (Automated movie downloading
 
