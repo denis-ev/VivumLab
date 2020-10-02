@@ -9,6 +9,9 @@ stages:
 jobs:
   include:
     - stage: master
+      language: node_js
+      node_js:
+        - node
       name: "Master commitlint"
       if: branch = master
       script:
@@ -16,10 +19,8 @@ jobs:
     - stage: pre-commit
       script: pre-commit run --all-files
       name: "Pre-commit run"
-
-before_script:
-  - pip3 install pre-commit
-  - npm install --save-dev @commitlint/travis-cli
+      before_script:
+        - pip3 install pre-commit
 
 cache:
   directories:
