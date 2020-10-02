@@ -42,7 +42,7 @@ Your settings/config.yml file contains a variable named `storage_dir` that defau
 
 If you're not using a NAS, because you've got an external hard drive attached, or an internal raid array you've already mounted that's fine. Just set the `storage_dir` config variable to the directory where you have mounted your storage.
 
-Whenever you enable a service, ViciLab verifies that the storage_dir contains directories that match the collection auto-volumes mentioned above.
+Whenever you enable a service, VivumLab verifies that the storage_dir contains directories that match the collection auto-volumes mentioned above.
 
 Setting up and mounting storage is a complex and potentially destructive task. As such, it is outside the scope of VivumLab to do this; this is the intention of the developers.
 !!! Please research, and be careful.
