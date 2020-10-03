@@ -1,27 +1,33 @@
 # travis.yml
-language: python
-python: 3.8
+language: ruby
+os: linux
+dist: xenial
+
 
 stages:
   - pre-commit
-  - master
+  - name: master
+    if: branch = master
   - deploy docs
 
 jobs:
   include:
-    - stage: master
-      name: "Master commitlint"
-      if: branch = master
-      install:
-        - npm install --save-dev @commitlint/cli @commitlint/config-conventional @commitlint/travis-cli
-      script:
-        - commitlint-travis
-    - stage: pre-commit
+    - language: python
+      python: 3.8
+      stage: pre-commit
       script: pre-commit run --all-files
       name: "Pre-commit run"
       install:
         - pip3 install pre-commit
-    - stage: deploy docs
+    - language: node_js
+      node_js: node
+      stage: master
+      name: "Master commitlint"
+      script:
+        - commitlint-travis
+    - language: python
+      python: 3.8
+      stage: deploy docs
       install:
         - pip3 install mkdocs
         - pip3 install mkdocs-material
@@ -30,6 +36,7 @@ jobs:
       name: "Deploy MKDocs to GH-Pages"
       deploy:
         fqdn: docs.vivumlab.com
+        strategy: git
         provider: pages
         skip_cleanup: true
         github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
