@@ -9,6 +9,8 @@ stages:
   - name: master
     if: branch = master
   - deploy docs
+  - name: release
+    if: branch = test
 
 jobs:
   include:
@@ -43,10 +45,8 @@ jobs:
         local_dir: site
         on:
           branch: master
-    - language: go
-      go:
-        - 1.6
-        - 1.7
+    - language: node_js
+      node_js: node
       stage: release
       deploy:
         provider: script
