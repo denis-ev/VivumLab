@@ -23,6 +23,7 @@ jobs:
     - stage: deploy docs
       install:
         - pip3 install mkdocs
+        - pip3 install mkdocs-material
         - pip3 install mkdocs-git-revision-date-localized-plugin
       script: mkdocs build --verbose --clean --strict
       name: "Deploy MKDocs to GH-Pages"
@@ -30,6 +31,7 @@ jobs:
         fqdn: docs.vivumlab.com
         provider: pages
         skip_cleanup: true
+        cleanup: true
         github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
         local_dir: site
         on:
