@@ -15,7 +15,7 @@ jobs:
       script:
         - commitlint-travis
       install:
-        npm install --save-dev @commitlint/travis-cli
+        - npm install --save-dev @commitlint/travis-cli
     - stage: pre-commit
       script: pre-commit run --all-files
       name: "Pre-commit run"
