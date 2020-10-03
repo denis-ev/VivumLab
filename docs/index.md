@@ -116,10 +116,10 @@ If you are having problems you can:
 - [Mylar](software/mylar.md) - An automated Comic Book manager
 - [Ombi](software/ombi.md) - Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves!
 - [qBittorrent](software/qbittorrent.md) - Open-source alternative to µTorrent
-- [Radarr](software/radarr-sonarr.md) - Automated movie downloading
+- [Radarr](software/radarr.md) - Automated movie downloading
 - [Samba](software/samba.md) - Export your VivumLab storage_dirs as file shares to other computers on your local network
 - [SickChill](software/sickchill.md) - SickChill is an automatic Video Library Manager for TV Shows.
-- [Sonarr](software/radarr-sonarr.md) - Automated TV downloading
+- [Sonarr](software/sonarr.md) - Automated TV downloading
 - [Syncthing](software/syncthing.md) - File syncing software
 - [Transmission](software/transmission.md) - BitTorrent client
 - [WebDAV](software/webdavserver.md) - Apache based WebDAV server
@@ -151,7 +151,6 @@ If you are having problems you can:
 - [AdGuard Home](software/adguardhome.md) - Network wide software for blocking ads and tracking
 - [Barcode Buddy](software/barcodebuddy.md) - Barcode system for [Grocy](software/grocy.md)
 - [Chowdown](software/chowdown.md) Simple recipes in Markdown format
-- [Cockpit](software/cockpit.md) - Cockpit Admin interface for configuring and troubleshooting a system
 - [CodiMD](software/codimd.md) The best platform to write and share markdown
 - [Darksky](software/darksky.md) - Local weather reported via [darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb)
 - [Dasher](software/dasher.md) - Amazon Dash button support

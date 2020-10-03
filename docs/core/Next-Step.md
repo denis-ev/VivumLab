@@ -8,7 +8,7 @@ If you want to add an extra layer of authentication to a service, all you have t
 
 This is useful, if the service doesn't provide authentication, eg. SUI. and you would like it to be protected.
 
-By default `Traefik` handles authentication, if the `<service>.auth` is set to true. More specialised and full featured options are available, check out your options [here](index.md).
+By default `Traefik` handles authentication, if the `<service>.auth` is set to true. More specialised and full featured options are available, check out your options [here](../index.md).
 
 ## File locations
 
