@@ -1,6 +1,6 @@
 # ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo.png)
 
-![Docker](https://github.com/Vivumlab/VivumLab/workflows/Docker/badge.svg?branch=master)
+[![Build Status](https://travis-ci.org/Vivumlab/VivumLab.svg?branch=master)](https://travis-ci.org/Vivumlab/VivumLab)
 
 Your very own offline-first open-source data-center! Includes over 50 services!
 
