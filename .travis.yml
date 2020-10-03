@@ -10,7 +10,7 @@ stages:
     if: branch = master
   - deploy docs
   - name: release
-    if: branch = test
+    if: branch = master
 
 jobs:
   include:
