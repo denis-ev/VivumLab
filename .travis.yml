@@ -46,15 +46,15 @@ jobs:
         on:
           branch: master
     - language: python
-      # sudo: required
-      # services:
-      #   - docker
+      sudo: required
+      services:
+        - docker
       stage: release
       before_install:
         - nvm install 12
       # Advanced: optionally overwrite your default `script` step to skip the tests
-      # script:
-      #   - docker build . -t vlab
+      script:
+        - docker build . -t vlab
       deploy:
         provider: script
         skip_cleanup: true
