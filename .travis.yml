@@ -13,13 +13,27 @@ jobs:
       if: branch = master
       script:
         - commitlint-travis
+      before_script:
+        npm install --save-dev @commitlint/travis-cli
     - stage: pre-commit
       script: pre-commit run --all-files
       name: "Pre-commit run"
-
-before_script:
-  - pip3 install pre-commit
-  - npm install --save-dev @commitlint/travis-cli
+      before_script:
+        - pip3 install pre-commit
+    - stage: deploy docs
+      install:
+        - pip3 install mkdocs
+        - pip3 install mkdocs-git-revision-date-localized-plugin
+      script: mkdocs build --verbose --clean --strict
+      name: "Deploy MKDocs to GH-Pages"
+      deploy:
+        fqdn: docs.vivumlab.com
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+        local_dir: site
+        on:
+          branch: master
 
 cache:
   directories:
