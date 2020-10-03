@@ -5,6 +5,7 @@ python: 3.8
 stages:
   - pre-commit
   - master
+  - deploy docs
 
 jobs:
   include:
@@ -13,12 +14,12 @@ jobs:
       if: branch = master
       script:
         - commitlint-travis
-      before_script:
+      install:
         npm install --save-dev @commitlint/travis-cli
     - stage: pre-commit
       script: pre-commit run --all-files
       name: "Pre-commit run"
-      before_script:
+      install:
         - pip3 install pre-commit
     - stage: deploy docs
       install:
