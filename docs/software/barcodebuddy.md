@@ -4,7 +4,7 @@
 
 The docker image comes from [f0rc3/barcodebuddy-docker](https://hub.docker.com/r/f0rc3/barcodebuddy-docker) and should support arm devices.
 If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

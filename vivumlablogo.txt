@@ -11,4 +11,4 @@
 [38;5;208m                        https://vivumlab.com [0m
 
 [38;5;184m               with the help of many great contributors [0m
-[38;5;208m            https://github.com/denis-ev/VivumLab/network/members [0m
+[38;5;208m            https://github.com/Vivumlab/VivumLab/network/members [0m

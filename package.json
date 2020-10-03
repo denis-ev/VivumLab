@@ -1,7 +1,7 @@
 {
   "name": "vivumlab",
   "version": "0.0.1",
-  "description": "![Docker](https://github.com/denis-ev/VivumLab/workflows/Docker/badge.svg?branch=master)",
+  "description": "![Docker](https://github.com/Vivumlab/VivumLab/workflows/Docker/badge.svg?branch=master)",
   "main": "commitlint.config.js",
   "directories": {
     "doc": "docs"
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/denis-ev/VivumLab.git"
+    "url": "git+https://github.com/Vivumlab/VivumLab.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/denis-ev/VivumLab/issues"
+    "url": "https://github.com/Vivumlab/VivumLab/issues"
   },
-  "homepage": "https://github.com/denis-ev/VivumLab#readme",
+  "homepage": "https://github.com/Vivumlab/VivumLab#readme",
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^9.1.1",

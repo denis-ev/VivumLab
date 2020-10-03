@@ -20,7 +20,7 @@ docker run authelia/authelia:latest authelia hash-password 'YOUR NEW PASSWORD' |
 
 The docker image comes from [authelia/authelia:latest](https://hub.docker.com/r/authelia/authelia) and should support arm devices.
 If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Prerequisites
 

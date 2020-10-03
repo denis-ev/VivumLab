@@ -4,7 +4,7 @@
 
 The docker image comes from [drone/drone:1.0](https://hub.docker.com/r/drone/drone) and should support arm devices.
 If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 
@@ -26,6 +26,6 @@ It is also available via Tor at [http://{{ drone.subdomain + "." + tor_domain }}
 Use the official [Drone Documentation](https://docs.drone.io/) to Setup your Environment, if not using Gitea.
 
 Example:
-To build and push your own VivumLab Image migrate and sync the [official Repo](https://github.com/denis-ev/VivumLab/) with Gitea.
+To build and push your own VivumLab Image migrate and sync the [official Repo](https://github.com/Vivumlab/VivumLab/) with Gitea.
 Then activate it in Drone and create three secrets (repo, docker_username, docker_password).
 Your own VivumLab Image will be build and published to Docker on the next commit.

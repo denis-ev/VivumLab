@@ -1,9 +1,9 @@
 ---
 site_name: VivumLab
 site_url: https://docs.vivumlab.com/
-repo_name: denis-ev/VivumLab
-repo_url: https://github.com/denis-ev/VivumLab
-edit_uri: "/denis-ev/VivumLab/blob/master/docs"
+repo_name: Vivumlab/VivumLab
+repo_url: https://github.com/Vivumlab/VivumLab
+edit_uri: "/Vivumlab/VivumLab/blob/master/docs"
 plugins:
   - search # necessary for search to work
   - git-revision-date-localized

@@ -3,7 +3,7 @@
 [Gitea](https://gitea.io/en-US/) is a Git hosting platform.
 
 The docker image comes from [gitea/gitea:1.8.3](https://hub.docker.com/r/gitea/gitea)
-and currently does not support arm devices **BUT MAY IN THE FUTURE**. [Please see issue 478](https://gitlab.com/denis-ev/VivumLab/-/issues/478)
+and currently does not support arm devices **BUT MAY IN THE FUTURE**. [Please see issue 478](https://gitlab.com/Vivumlab/VivumLab/-/issues/478)
 and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
 
 ## Access

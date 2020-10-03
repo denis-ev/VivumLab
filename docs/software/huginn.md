@@ -3,7 +3,7 @@
 [Huginn](https://github.com/huginn/huginn) Create agents that monitor and act on your behalf. Your agents are standing by!
 
 The docker image comes from [huginn/huginn-single-process](https://hub.docker.com/r/huginn/huginn-single-process) and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement, [please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+If you are aware of a suitable substitution or replacement, [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
 
 ## Access

@@ -5,7 +5,7 @@
 The docker image comes from [quay.io/codimd/server:latest](https://quay.io/repository/codimd/server?tag=latest&tab=tags)
 and currently does not support arm devices.
 If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=codimd&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+ [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
 
 ## Access

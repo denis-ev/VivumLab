@@ -5,7 +5,7 @@
 The docker image comes from [johnktims/folding-at-home](https://hub.docker.com/r/johnktims/folding-at-home)
 and currently does not support arm devices.
 If you are aware of a suitable substitution or replacement ([good place to start](https://foldforcovid.io/#get-started)),
- [please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+ [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
 
 ## Install

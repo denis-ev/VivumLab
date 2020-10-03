@@ -43,7 +43,7 @@ We just want to start by saying open source is very important, a free (as in fre
 * Are your services listed in the Traefik dashboard?
     * Check http://{{ vivumlab_ip }}:8181/
 
-If you have followed these instructions and you are STILL having issues, ask in [chat](https://vivumlab.zulipchat.com/) or open an issue on [Github](https://github.com/denis-ev/VivumLab/issues).
+If you have followed these instructions and you are STILL having issues, ask in [chat](https://vivumlab.zulipchat.com/) or open an issue on [Github](https://github.com/Vivumlab/VivumLab/issues).
     !!! Note: The documentation for VivumLab represents hours of work by the developers. Do not be offended if you ask a question, and are redirected back to the documentation. It is entirely for your own benefit; no one elses'.
 
 ### I get a 404

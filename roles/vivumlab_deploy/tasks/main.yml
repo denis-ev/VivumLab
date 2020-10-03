@@ -248,4 +248,4 @@
   when: enable_tor
 
 - debug:
-    msg: "Problems? File an issue at https://github.com/denis-ev/VivumLab/issues"
+    msg: "Problems? File an issue at https://github.com/Vivumlab/VivumLab/issues"

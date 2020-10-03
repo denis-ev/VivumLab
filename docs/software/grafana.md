@@ -4,7 +4,7 @@
 
 The docker image comes from [grafana/grafana](https://hub.docker.com/r/grafana/grafana) and should support arm devices.
 If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 You can use it to visualize the Weather data imported by [influxdb_darksky](software/influxdb_darksky),
 power, activity, and other data from [Home Assistant](software/homeassistant), and general server

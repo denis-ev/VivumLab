@@ -4,7 +4,7 @@
 
 The docker image comes from [linuxserver/beets](https://hub.docker.com/r/linuxserver/beets/tags) and should support arm devices.
 If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

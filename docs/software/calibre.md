@@ -7,7 +7,7 @@
 The docker image comes from [lmorel3/calibre-alpine](https://hub.docker.com/r/lmorel3/calibre-alpine/tags)
 and currently does not support arm devices.
 If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=calibre&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/denis-ev/VivumLab/-/issues/478)
+ [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
 
 ## Access
