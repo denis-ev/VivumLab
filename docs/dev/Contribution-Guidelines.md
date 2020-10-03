@@ -159,4 +159,4 @@ By contributing, you agree that your contributions will be licensed under its MI
 
 #### Attribution/ Reference
 
-Please see [Legal/ Licensing/ Acknowledgement](Legal.md)
+Please see [Legal/ Licensing/ Acknowledgement](../Legal.md)

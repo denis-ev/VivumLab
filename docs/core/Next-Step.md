@@ -8,13 +8,13 @@ If you want to add an extra layer of authentication to a service, all you have t
 
 This is useful, if the service doesn't provide authentication, eg. SUI. and you would like it to be protected.
 
-By default `Traefik` handles authentication, if the `<service>.auth` is set to true. More specialised and full featured options are available, check out your options [here](software/INDEX.md).
+By default `Traefik` handles authentication, if the `<service>.auth` is set to true. More specialised and full featured options are available, check out your options [here](index.md).
 
 ## File locations
 
 VivumLab sets up `{{ volumes_root }}` on your server, which maps to `/var/vivumlab` by default. All data used to set up your services, can be found here.
 
-If you can't find what you are looking for there; large databases, media collections (audio and video) are typically stored in the "{{ storage_dir }}", which defaults to `/mnt/nas`. Using NAS storage? see [NAS](storage.md) for more information.
+If you can't find what you are looking for there; large databases, media collections (audio and video) are typically stored in the "{{ storage_dir }}", which defaults to `/mnt/nas`. Using NAS storage? see [NAS](Storage.md) for more information.
 
 ## HTTPS via LetsEncrypt
 

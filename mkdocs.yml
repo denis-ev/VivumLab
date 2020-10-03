@@ -23,18 +23,18 @@ theme:
     - instant
 nav:
   - Home: index.md
-  - Introduction: setup/Home.md
-  - Installation: setup/Installation.md
-  - Getting Started: setup/Getting-Started.md
-  - Troubleshooting / FAQ: setup/FAQ-Troubleshoot.md
+  - Introduction: About-VivumLab.md
+  - Installation: core/Installation.md
+  - Getting Started: core/Next-Step.md
+  - Troubleshooting / FAQ: FAQ-Troubleshoot.md
   - Setup:
-      - Backups: setup/Backup.md
-      - Bastion Server: setup/Bastion.md
+      - Backups: core/Backup.md
+      - Bastion Server: core/Bastion.md
       #- Email: setup/Email.md
       #- Storage: setup/Storage.md
       #- Traefik: setup/Traefik.md
-      - Terraform: setup/Terraform.md
-      - Tor Onion Services: setup/Tor.md
+      - Terraform: core/Terraform.md
+      - Tor Onion Services: core/Tor.md
       #- VPN Setup: setup/Vpn.md
   - Included Software:
     - Analytics:
@@ -67,7 +67,7 @@ nav:
     - Federated Identity/Authentication:
       - Authelia: software/authelia.md
       - Keycloak: software/keycloak.md
-      - OpenLDAP: software/ppenldap.md
+      - OpenLDAP: software/openldap.md
     - Feed Readers:
       - FreshRSS: software/freshrss.md
       - Miniflux: software/miniflux.md
@@ -78,8 +78,9 @@ nav:
       - Minio: software/minio.md
       - Mylar: software/mylar.md
       - Ombi: software/ombi.md
-      - Qbitorrent: software/qbitorrent.md
-      - Radarr / Sonarr: software/radarr-sonarr.md
+      - Qbittorrent: software/qbittorrent.md
+      - Radarr: software/radarr.md
+      - Sonarr: software/sonarr.md
       - Samba: software/samba.md
       - SickChill: software/sickchill.md
       - Synchthing: software/syncthing.md
@@ -106,7 +107,6 @@ nav:
       - AdGuard Home: software/adguardhome.md
       - BarcodeBuddy: software/barcodebuddy.md
       - Chowdown: software/chowdown.md
-      - Cockpit: software/cockpit.md
       - CodiMD: software/codimd.md
       - Darksky: software/darksky.md
       - Dasher: software/dasher.md
@@ -131,7 +131,7 @@ nav:
       - Sabnzbd: software/sabnzbd.md
       - Searx: software/searx.md
       - Shinobi: software/shinobi.md
-      - Simply-Shorten: software/simply_shorten.md
+      - Simply-Shorten: software/simply-shorten.md
       - Ubooquity: software/ubooquity.md
       - UnifiController: software/unificontroller.md
       - Watchtower: software/watchtower.md
@@ -187,7 +187,7 @@ nav:
       - Bookstack: software/bookstack.md
       - Tiddlywiki: software/tiddlywiki.md
   - Development:
-      - Adding Services: development/adding_services.md
-      - Contributing: development/contributing.md
-      - Migrations: development/migrations.md
-      - Vagrant: development/vagrant.md
+      - Adding Services: dev/Adding-Services.md
+      - Contributing: dev/Contribution-Guidelines.md
+      - Dev Tips: dev/Developer-Tips.md
+      - Vagrant: dev/vagrant.md

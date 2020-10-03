@@ -4,7 +4,7 @@ Minio is an S3 storage utility.
 
 ## Configuration
 
-Refer to the [Backup Guide](../setup/backups.md) for configuration details.
+Refer to the [Backup Guide](../core/Backup.md) for configuration details.
 
 ## Access
 
