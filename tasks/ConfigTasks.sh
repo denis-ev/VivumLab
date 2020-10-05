@@ -17,7 +17,7 @@ Task::config(){
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
-  Task::run_docker ansible-playbook $(debug_check) \
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"

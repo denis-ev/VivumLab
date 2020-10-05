@@ -44,7 +44,7 @@ Task::check_for_settings(){
     fi
     if [[ ! -f tasks/ansible_bash.vars ]]; then
       colorize light_red "Creating ansible_bash.vars file"
-      echo "blank_on_purpose: True" > tasks/ansible_bash.vars
+      echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
     fi
 }
 

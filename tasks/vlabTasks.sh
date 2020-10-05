@@ -134,7 +134,7 @@ Task::uninstall(){
   Task::build $(build_check) $(force_check)
 
   highlight "Uninstall VivumLab Completely"
-  Task::run_docker ansible-playbook $(debug_check) \
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory -t deploy playbook.remove.yml || colorize light_red "error: uninstall"
   highlight "Uninstall Complete"
@@ -146,7 +146,7 @@ Task::restore() {
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
 
-  Task::run_docker ansible-playbook $(debug_check) \
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory restore.yml  || colorize light_red "error: restore"
 }

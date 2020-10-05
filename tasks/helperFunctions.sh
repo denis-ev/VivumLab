@@ -50,6 +50,10 @@ function countdown() {
   fi
 }
 
+function sshkey_path () {
+  echo "--private-key=~/.ssh/$(pwless_sshkey)"
+}
+
 # Ansible -> Bash Variables
 
 function vlab_ip (){
