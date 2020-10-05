@@ -110,9 +110,9 @@ Task::remove_one(){
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize light_red "error: remove_one"
-  highlight "Removed $"{_service}"
+  highlight "Removed ${_service}"
 
-# Resets a services' data files
+# Resets a services data files
 Task::reset_one(){
   : @desc "Resets the specified service files from the VivumLab server"
   : @param service! "Service Name"
