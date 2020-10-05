@@ -235,6 +235,7 @@
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
+  failed_when: false
   ignore_errors: yes
   vars:
     query: "not {{ service_item + '.enable' }}"
