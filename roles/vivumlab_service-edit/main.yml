@@ -6,7 +6,7 @@
     daemon-reload: no
     state: stopped
 
-- name: Create docker-compose.override.yml 
+- name: Create docker-compose.override.yml
   copy:
     src: "{{ volumes_root }}/{{ service_item }}/docker-compose.yml"
     dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
