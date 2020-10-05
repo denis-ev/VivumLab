@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: no
+  tags: serviceedit
+  vars_prompt:
+    - name: confirm_serviceedit
+      prompt: "Did you really want to make changes to this service? (true/false)"
+      private: "False"
+
+  roles:
+    - vivumlab_service-edit

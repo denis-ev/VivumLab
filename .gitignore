@@ -1,20 +1,34 @@
+# General Files
 *.retry
 *.lock
 .vagrant/
-kibitzr.yml
-kibitzr-creds.yml
 inventory
 fetch/
-settings/
 /site
-/.vscode
 .DS_Store
 pkg/
-INSTALL_PRECOMMIT.sh
-# ignore swp files
+
+# swp files
 *.swp
 idea/
 bootstrap_install/server_credentials
 
+# User Specific
+settings/
+tasks/ansible_bash.vars
+
+# IDE specific
+/.vscode
+
+# Commit specific
+INSTALL_PRECOMMIT.sh
+
 # Node
 node_modules/
+
+# kibitzr service
+kibitzr.yml
+kibitzr-creds.yml
+
+# Service-edit Task
+docker-compose.override.yml

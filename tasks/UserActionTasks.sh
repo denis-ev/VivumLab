@@ -42,3 +42,15 @@ Task::shutdown(){
   ssh -t -i "$HOME/.ssh/$(pwless_sshkey)" $(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port) \
   "sudo shutdown -h +"$(countdown) || colorize light_red "error: shutdown"
 }
+
+# Allows the user to make edits to a service without changing the base docker-compose file
+Task::service_edit() {
+  : @desc "Allows user to edit a specific deployed service with a docker-compose.override.yml"
+  : @param service "Service Name"
+  : @param config_dir="settings"
+  : @param debug true "Debugs ansible-playbook commands"
+
+  Task::run_docker ansible-playbook $(debug_check) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.service-edit.yml || colorize light_red "error: service_edit"
+}
