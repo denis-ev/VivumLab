@@ -111,6 +111,7 @@ Task::remove_one(){
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize light_red "error: remove_one"
   highlight "Removed ${_service}"
+}
 
 # Resets a services data files
 Task::reset_one(){
