@@ -12,6 +12,7 @@
     dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
     remote_src: yes
     mode: preserve
+    force: no
 
 - name: Start specified service
   systemd:
