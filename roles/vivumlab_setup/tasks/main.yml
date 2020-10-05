@@ -1,5 +1,5 @@
 ---
-- include_tasks: deb_setup_docker.yml
+- include_tasks: debinstall.yml
   when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
 - include_tasks: centinstall.yml
   when: ansible_facts['distribution'] == "CentOS"
