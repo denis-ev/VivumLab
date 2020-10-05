@@ -13,9 +13,7 @@ services:
     networks:
       - traefik_network
     environment:
-      # OPTIONAL: http basic auth
-      # - HTTP_BASIC_AUTH_NAME={{ default_username }}
-      # - HTTP_BASIC_AUTH_PASS="{{ default_password }}"
+      - TZ=Etc/UTC
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=vivumlab_traefik"
