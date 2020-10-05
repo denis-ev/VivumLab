@@ -5,6 +5,7 @@
     state: directory
 
 - name: Install necessities and nice-to-haves
+  become: yes
   apt:
     name:
       - apache2-utils
