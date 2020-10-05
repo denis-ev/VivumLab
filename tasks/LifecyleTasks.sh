@@ -114,7 +114,7 @@ Task::remove_one(){
 
 # Resets a services' data files
 Task::reset_one(){
-  : @desc "Resets the specified services' files from the VivumLab server"
+  : @desc "Resets the specified service files from the VivumLab server"
   : @param service! "Service Name"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
