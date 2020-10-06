@@ -10,15 +10,15 @@ stages:
     if: branch = master
   - deploy docs
   - name: release
-    if: branch = master
+    if: branch = master AND type = push AND fork = false
 
 jobs:
   include:
     - language: python
       python: 3.8
       stage: pre-commit
-      script: pre-commit run --all-files
       name: "Pre-commit run"
+      script: pre-commit run --all-files
       install:
         - pip3 install pre-commit
     - language: node_js
@@ -30,12 +30,12 @@ jobs:
     - language: python
       python: 3.8
       stage: deploy docs
+      name: "Deploy MKDocs to GH-Pages"
       install:
         - pip3 install mkdocs
         - pip3 install mkdocs-material
         - pip3 install mkdocs-git-revision-date-localized-plugin
       script: mkdocs build --verbose --clean --strict
-      name: "Deploy MKDocs to GH-Pages"
       deploy:
         fqdn: docs.vivumlab.com
         strategy: git
@@ -50,23 +50,15 @@ jobs:
       services:
         - docker
       stage: release
+      name: "Release"
       before_install:
         - nvm install 12
         - npm install
       # Advanced: optionally overwrite your default `script` step to skip the tests
       script:
-        - docker build . -t vivumlab/vivumlab
-      deploy:
-        provider: script
-        skip_cleanup: true
-        before_script:
-          - git config credential.helper "store --file=.git/credentials"
-          - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-        script:
-          # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
-          - npx semantic-release
-        on:
-          branch: master
+        - echo "Release"
+        - docker build -t vivumlab/vivumlab .
+        - npm run semantic-release
 
 cache:
   directories:
