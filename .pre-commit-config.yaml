@@ -25,3 +25,5 @@ repos:
       - id: commitizen
         stages:
           - commit-msg
+
+exclude: 'vivumlablogo.txt'
