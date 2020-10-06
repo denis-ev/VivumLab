@@ -66,7 +66,10 @@ jobs:
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
           - npx cz changelog
-          - git push --follow-tags origin master
+          - git push --follow-tags origin $TRAVIS_BRANCH
+        on:
+          tags: true
+          all_branches: true
     - language: python
       sudo: required
       services:
@@ -87,7 +90,7 @@ jobs:
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
           - npx cz bump
-          - git push --follow-tags origin master
+          - git push --follow-tags origin $TRAVIS_BRANCH
         on:
           branch: master
 
