@@ -22,7 +22,8 @@
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
-      ["@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/release-notes-generator",
         {
           "preset": "conventionalcommits",
           "parserOpts": {
@@ -40,7 +41,8 @@
           }
         }
       ],
-      ["semantic-release-plugin-update-version-in-files",
+      [
+        "semantic-release-plugin-update-version-in-files",
         {
           "files": [
             "VERSION",
@@ -50,12 +52,14 @@
         }
       ],
       "@semantic-release/changelog",
-      ["@semantic-release/npm",
+      [
+        "@semantic-release/npm",
         {
           "npmPublish": false
         }
       ],
-      ["@semantic-release/git",
+      [
+        "@semantic-release/git",
         {
           "assets": [
             "package.json",
@@ -64,6 +68,18 @@
             "VERSION"
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "docker build -t vivumlab/vivumlab ."
+        }
+      ],
+      [
+        "semantic-release-docker",
+        {
+          "name": "vivumlab/vivumlab"
         }
       ],
       "@semantic-release/github",
@@ -94,5 +110,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "@semantic-release/exec": "^5.0.0"
   }
 }
