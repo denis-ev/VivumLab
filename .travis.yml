@@ -54,6 +54,7 @@ jobs:
       name: "CZ create changelog"
       before_install:
         - nvm install 12
+        - npm install -g commitizen
       # Advanced: optionally overwrite your default `script` step to skip the tests
       script:
         - echo "create changelog"
@@ -65,18 +66,16 @@ jobs:
           - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
-          - npx cz changelog
+          - cz changelog
           - git push --follow-tags origin $TRAVIS_BRANCH
         on:
-          all_branches: true
+          branch: dev
     - language: python
-      sudo: required
-      services:
-        - docker
       stage: release
       name: "CZ bump Version"
       before_install:
         - nvm install 12
+        - npm install -g commitizen
       # Advanced: optionally overwrite your default `script` step to skip the tests
       script:
         - echo "bump version"
@@ -88,7 +87,7 @@ jobs:
           - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
-          - npx cz bump
+          - cz bump
           - git push --follow-tags origin $TRAVIS_BRANCH
         on:
           branch: master
