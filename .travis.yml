@@ -9,6 +9,7 @@ stages:
   - name: master
     if: branch = master
   - deploy docs
+  - create changelog
   - name: release
     if: branch = master
 
@@ -49,21 +50,43 @@ jobs:
       sudo: required
       services:
         - docker
-      stage: release
+      stage: create changelog
+      name: "CZ create changelog"
       before_install:
         - nvm install 12
       # Advanced: optionally overwrite your default `script` step to skip the tests
       script:
-        - docker build . -t vlab
+        - echo "create changelog"
       deploy:
         provider: script
         skip_cleanup: true
         before_script:
           - git config credential.helper "store --file=.git/credentials"
-          - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+          - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
-          - npx standard-version
+          - npx cz changelog
+          - git push --follow-tags origin master
+    - language: python
+      sudo: required
+      services:
+        - docker
+      stage: release
+      name: "CZ bump Version"
+      before_install:
+        - nvm install 12
+      # Advanced: optionally overwrite your default `script` step to skip the tests
+      script:
+        - echo "bump version"
+      deploy:
+        provider: script
+        skip_cleanup: true
+        before_script:
+          - git config credential.helper "store --file=.git/credentials"
+          - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+        script:
+          # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
+          - npx cz bump
           - git push --follow-tags origin master
         on:
           branch: master
