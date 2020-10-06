@@ -580,7 +580,7 @@ jellyfin:
   auth: {{ jellyfin.auth | default(False) }}
   domain: {{ jellyfin.domain | default(False) }}
   subdomain: {{ jellyfin.subdomain | default("jellyfin") }}
-  version: {{ jellyfin.version | default ("latest") }}
+  version: {{ jellyfin.version | default ("10.6.4") }}
 jenkins:
   enable: {{ jenkins.enable | default(False) }}
   https_only: {{ jenkins.https_only | default(False) }}

@@ -8,18 +8,12 @@
   file:
     path: "{{ volumes_root }}/bookstack/uploads"
     state: directory
-    # This sets the directory to www-data/www-data ownership inside the container
-    owner: '33'
-    group: '33'
     mode: '0755'
 
 - name: Make storage uploads directory.
   file:
     path: "{{ volumes_root }}/bookstack/storage-uploads"
     state: directory
-    # This sets the directory to www-data/www-data ownership inside the container
-    owner: '33'
-    group: '33'
     mode: '0755'
 
 - name: Copy bookstack docker-compose.yml file into place.
