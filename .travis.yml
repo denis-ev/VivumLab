@@ -41,7 +41,7 @@ jobs:
         strategy: git
         provider: pages
         skip_cleanup: true
-        github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+        github_token: $GH_TOKEN # Set in travis-ci.org dashboard
         local_dir: site
         on:
           branch: master
@@ -61,7 +61,7 @@ jobs:
         skip_cleanup: true
         before_script:
           - git config credential.helper "store --file=.git/credentials"
-          - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+          - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
           - npx semantic-release
