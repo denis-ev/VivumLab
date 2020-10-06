@@ -95,7 +95,7 @@ NOTE: If you wanted to access outside the container, use the shell command
 Switches you to the specified branch or tag.
     examples
     (branch): **`vlab track branch=master`**
-    (tag): **`vlab track tag=0.0.1`**
+    (tag): **`vlab track tag=0.0.2`**
 
 #### check_version
 Checks the current version
