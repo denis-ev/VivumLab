@@ -13,7 +13,7 @@ services:
     networks:
       - traefik_network
     environment:
-      - TZ=Etc/UTC
+      - TZ={{ common_timezone }}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=vivumlab_traefik"
