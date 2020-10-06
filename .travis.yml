@@ -68,6 +68,8 @@ jobs:
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
           - cz changelog
+          - git add .
+          - git commit --message "chore(changelog): travis build $TRAVIS_BUILD_NUMBER"
           - git push --follow-tags origin $TRAVIS_BRANCH
         on:
           branch: dev
