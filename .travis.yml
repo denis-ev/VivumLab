@@ -60,7 +60,7 @@ jobs:
         skip_cleanup: true
         before_script:
           - git config credential.helper "store --file=.git/credentials"
-          - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+          - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
         script:
           # Use nvm to install and use the Node LTS version (nvm is installed on all Travis images)
           - npx standard-version
