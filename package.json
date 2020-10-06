@@ -1,31 +1,46 @@
 {
   "name": "vivumlab",
-  "version": "0.0.1",
-  "description": "![Docker](https://github.com/Vivumlab/VivumLab/workflows/Docker/badge.svg?branch=master)",
-  "main": "commitlint.config.js",
+  "version": "0.0.2",
+  "description": "VivumLab",
   "directories": {
     "doc": "docs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/travis-cli": "^11.0.0",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "semantic-release": "^17.1.2",
+    "semantic-release-docker": "^2.2.0"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/git",
+      "semantic-release-docker"
+    ],
+    "publish": [
+      {
+        "path": "semantic-release-docker",
+        "name": "vivumlab/vivumlab"
+      }
+    ]
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vivumlab/VivumLab.git"
+    "url": "git+https://github.com/VivumLab/VivumLab.git"
   },
-  "author": "",
+  "author": "VivumLab",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vivumlab/VivumLab/issues"
+    "url": "https://github.com/VivumLab/VivumLab/issues"
   },
-  "homepage": "https://github.com/Vivumlab/VivumLab#readme",
-  "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.1",
-    "@commitlint/travis-cli": "^9.1.1",
-    "commitizen": "^4.1.2",
-    "cz-conventional-changelog": "^3.2.0"
-  },
+  "homepage": "https://github.com/VivumLab/VivumLab#readme",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
