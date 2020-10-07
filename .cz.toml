@@ -1,6 +1,6 @@
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.0-development"
+version = "0.1.0"
 version_files = [
     "VERSION"
 ]
