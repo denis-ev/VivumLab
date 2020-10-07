@@ -757,7 +757,7 @@ nextcloud:
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("apache") }}
-  db_version: {{ nextcloud.db_version | default("alpine") }}
+  db_version: {{ nextcloud.db_version | default("12-alpine") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
 nodered:
   enable: {{ nodered.enable | default(False) }}
