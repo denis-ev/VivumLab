@@ -73,7 +73,8 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "docker build -t vivumlab/vivumlab ."
+          "prepareCmd": "docker build -t vivumlab/vivumlab .",
+          "successCmd": "git fetch -a -p -P --all && git rebase origin/dev master"
         }
       ],
       [
