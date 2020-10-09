@@ -147,8 +147,8 @@ fi
 }
 
 function pwless_sshkey () {
-if [[ -f tasks/Vars ]]; then
-  source tasks/Vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
   if [[ PASSWORDLESS_SSHKEY == '' ]]; then
     PASSWORDLESS_SSHKEY='id_rsa'
     echo $PASSWORDLESS_SSHKEY

@@ -82,7 +82,7 @@ Task::check_ssh_keys() {
     echo "You have no SSH keys in your home directory: $HOME"
     echo "Please generate a set of keys using the command:"
     echo "   ssh-keygen -t rsa"
-    echo "or copy your id_rsa and id_rsa.pub keys to $HOME/.ssh/"
+    echo "or copy your $PASSWORDLESS_SSHKEY and $PASSWORDLESS_SSHKEY.pub keys to $HOME/.ssh/"
     echo "Then retry the operation"
     read -p "Press ctrl-c and fix your ssh keys"
     exit 1
