@@ -78,7 +78,7 @@ Task::check_vault_pass(){
 }
 
 Task::check_ssh_keys() {
-  if ! [ -f "$HOME/.ssh/id_rsa" -a -f "$HOME/.ssh/id_rsa.pub" -a -f "$HOME/.vlab_vault_pass" ]; then
+  if ! [ -f "$HOME/.ssh/$(pwless_sshkey)" -a -f "$HOME/.ssh/$(pwless_sshkey).pub" ]; then
     echo "You have no SSH keys in your home directory: $HOME"
     echo "Please generate a set of keys using the command:"
     echo "   ssh-keygen -t rsa"
