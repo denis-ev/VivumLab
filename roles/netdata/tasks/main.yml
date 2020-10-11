@@ -1,9 +1,4 @@
 ---
-- name: Make netdata directory.
-  file:
-    path: "{{ volumes_root }}/netdata"
-    state: directory
-
 - name: Make netdata sub directory
   file:
     path: "{{ volumes_root }}/netdata/{{item}}"
