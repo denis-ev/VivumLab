@@ -63,7 +63,7 @@ Builds the Docker Image used to deploy
 
 #### git_sync
 Manually forces a settings sync via git
-    example: **``**
+    example: **`vlab git_sync`** **UNDER CONSTRUCTION**
 
 #### encrypt
 Encrypts the vault
@@ -79,7 +79,7 @@ Uninstalls Vivumlab
 
 #### restore
 Restore a server from backups. Assuming backups were running
-    example: **``**
+    example: **`vlab restore`** **UNDER CONSTRUCTION**
 
 #### shell
 Opens a shell on the remote server
@@ -90,6 +90,11 @@ Opens a shell in the VivumLab deploy container
     example: **`vlab docker_shell`**
 NOTE: You will not be able to exit out of the docker container.
 NOTE: If you wanted to access outside the container, use the shell command
+
+#### create_sshkey
+Creates an SSH Key, based on the name provided by the user when `vlab config` was run.
+    example **`vlab create_sshkey`**
+NOTE: Will ask for a password. Will still work, even if you do not provide one.
 
 #### track
 Switches you to the specified branch or tag.
