@@ -10,14 +10,14 @@ Task::config(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
 
-  Task::logo
+  Task::logo_local
   Task::build $(build_check) $(force_check)
 
   highlight "Creating or Updating config file"
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
-  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"
@@ -39,7 +39,7 @@ Task::config_reset() {
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
 
-  Task::logo
+  Task::logo_local
   Task::build $(build_check) $(force_check)
 
   highlight "Reset Local Settings"

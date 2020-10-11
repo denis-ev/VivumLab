@@ -54,3 +54,23 @@ Task::service_edit() {
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.service-edit.yml || colorize light_red "error: service_edit"
 }
+
+Task::create_sshkey() {
+  : @desc "Allows user to create an ssh key"
+
+  Task::logo_local
+
+  echo "REMINDER: Having a passphrase is an optional extra layer of security for your SSH keys."
+  read -sp "If you would like a passphrase for the SSH keys, please enter one now (press return for no passphrase): " KEY_PASS
+  echo ""
+
+  if [[ -z ${KEY_PASS+} ]]; then
+    KEY_PASS=""
+  fi
+
+  echo "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
+  ssh-keygen -q -N "$KEY_PASS" -C "VivumLab@$(domain_check)" -f "$HOME/.ssh/$(pwless_sshkey)"|| colorize light_red "error: create_sshkey"
+
+  echo "Copying keys over to the machine, located at $(vlab_ip)"
+  ssh-copy-id -i "$HOME/.ssh/$(pwless_sshkey).pub" "$(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port)" || colorize light_red "error: create_sshkey: copying keys"
+}

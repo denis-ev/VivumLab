@@ -47,6 +47,7 @@
       prompt: "Which domain should your Vivumlab services be served on? (Press return if none)"
       private: no
       when: domain is not defined
+      default: localhost
 
     - name: admin_email
       prompt: "Provide a current/valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"

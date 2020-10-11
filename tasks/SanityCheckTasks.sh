@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
 
 # Checks to make sure the current environment is setup correctly
-Task::sanity_check(){
+Task::sanity_check_local(){
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then exit 0; fi
   already_ran[${FUNCNAME[0]}]=1
 
   Task::check_for_settings
   Task::check_vault_pass
-  Task::check_ssh_keys
-  #Task::check_ssh_with_keys
   Task::check_for_git
   Task::check_for_precommit
   Task::check_for_hostdockerdaemon
 
-  colorize green "Sanity checks passed"
+  colorize green "Core sanity checks passed"
+}
+
+Task::sanity_check_remote(){
+  if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then exit 0; fi
+  already_ran[${FUNCNAME[0]}]=1
+
+  Task::check_ssh_keys
+  #Task::check_ssh_with_keys
+
+  colorize green "Remote sanity checks passed"
 }
 
 Task::create_vault_pass() {
@@ -23,6 +31,7 @@ Task::create_vault_pass() {
 # Ensures there is a place to put all the required settings..
 Task::check_for_settings(){
   : @desc "Verifies User Settings exist. Creates it if it's not present"
+
     mkdir -p settings/passwords
     [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
@@ -70,7 +79,7 @@ Task::check_vault_pass(){
   already_ran[${FUNCNAME[0]}]=1
 
   if [ ! -f "$HOME/.vlab_vault_pass" ]; then
-    echo "Oops, I cannot find your vault password in $HOME/.vlab_vault_pass"
+    echo "Oops, your vault password in $HOME, may not exist"
     echo "This is unusual, but could be caused by the user being changed during setup."
     colorize red "FIX: Create the file in the right place.  Then file a bug report."
     exit 1
@@ -78,14 +87,30 @@ Task::check_vault_pass(){
 }
 
 Task::check_ssh_keys() {
+  : @desc "Checks for SSH keys, creates/updates as necessary."
+  : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
+
   if ! [ -f "$HOME/.ssh/$(pwless_sshkey)" -a -f "$HOME/.ssh/$(pwless_sshkey).pub" ]; then
-    echo "You have no SSH keys in your home directory: $HOME"
-    echo "Please generate a set of keys using the command:"
-    echo "   ssh-keygen -t rsa"
-    echo "or copy your $(pwless_sshkey) and $(pwless_sshkey).pub keys to $HOME/.ssh/"
-    echo "Then retry the operation"
-    read -p "Press ctrl-c and fix your ssh keys"
-    exit 1
+    echo "The directory: $HOME/.ssh, does not have any keys called $(pwless_sshkey)"
+    read -p 'Have you already created a set of keys for VivumLab? [yes/no]: ' ssh_confirm
+    case $ssh_confirm in
+        [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
+            echo "OK, lets refresh VivumLab"
+            echo "running 'vlab config' for you.."
+            sleep 3
+            Task::config
+        ;;
+        [Nn][Oo]|[Ff][Aa][Ll][Ss][Ee])
+            Task::create_sshkey
+        ;;
+        *)
+            echo "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
+            echo "REMINDER: 'vlab create_sshkey' can help you create some keys"
+        ;;
+    esac
   fi
 }
 

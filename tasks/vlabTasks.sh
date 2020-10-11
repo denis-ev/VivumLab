@@ -3,17 +3,26 @@
 # Contains VLAB specific tasks related to on-this-host tasks.
 
 # Prints the Logo
-Task::logo() {
-    : @desc "Prints the Logo"
+Task::logo_local() {
+    : @desc "Prints the Logo, makes local sanity checks"
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
   already_ran[${FUNCNAME[0]}]=1
   cat vivumlablogo.txt
   Task::check_version
+  echo""
+
   printf "MOTD:\n\n" && cat MOTD || printf "Could not get MOTD"
   printf "\n\n"
 
-  Task::sanity_check
+  Task::sanity_check_local
+}
+
+Task::logo() {
+  : @desc "Prints the Logo, makes local and remote sanity checks"
+
+  Task::logo_local
+  Task::sanity_check_remote
 }
 
 Task::generate_ansible_pass(){

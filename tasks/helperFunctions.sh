@@ -131,6 +131,21 @@ if [[ -f tasks/ansible_bash.vars ]]; then
 fi
 }
 
+function domain_check () {
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
+  if [[ DOMAIN == '' ]]; then
+    DOMAIN='localhost'
+    echo $ARM
+  else
+    echo $ARM
+  fi
+  else
+  DOMAIN='localhost'
+  echo $ARM
+fi
+}
+
 function arm_check () {
 if [[ -f tasks/ansible_bash.vars ]]; then
   source tasks/ansible_bash.vars
