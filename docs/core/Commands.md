@@ -110,6 +110,10 @@ Checks the current version
 Links the vlab cli into /usr/local/bin so you can call vlab without the ./
     example: **`./vlab install_cli`**
 
+#### find_help
+Tells the user where to find help/ contact the VivumLab Community
+    example: **`vlab find_help`**
+
 ## Service Commands
 These are specific to the service declared in the command. These commands should not affect any other service; unless the running of the service depends on another, eg. Authelia.
 
