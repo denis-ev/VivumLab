@@ -140,4 +140,3 @@ Resets the specified service' files on the Vivumlab server
 #### service_edit
 Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
     example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
-NOTE: Availability TBA
