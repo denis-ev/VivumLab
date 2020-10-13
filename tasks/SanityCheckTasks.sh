@@ -79,10 +79,19 @@ Task::check_vault_pass(){
   already_ran[${FUNCNAME[0]}]=1
 
   if [ ! -f "$HOME/.vlab_vault_pass" ]; then
-    echo "Oops, your vault password in $HOME, may not exist"
+    echo "Oops, your vault password in $HOME, doesn't appear to exist"
     echo "This is unusual, but could be caused by the user being changed during setup."
-    colorize red "FIX: Create the file in the right place.  Then file a bug report."
-    exit 1
+    colorize yellow "VivumLab can create a new '.vlab_vault_pass' file for you."
+    colorize yellow "Or did you want to exit, and try to sort this out, yourself"
+    read -p "Let VivumLab create a new '.vlab_vault_pass' file for you? [yes/no]" decision_missingvaultpass
+        case decision_missingvaultpass in
+          [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
+            Task::generate_ansible_pass
+           ;;
+           *)
+            Task::find_help
+           ;;
+        esac
   fi
 }
 
