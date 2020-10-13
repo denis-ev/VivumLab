@@ -2,8 +2,8 @@
 
 [MassiveDecks](https://github.com/Lattyware/massivedecks/blob/master/README.md) Massive Decks is a comedy party game based on Cards against Humanity. Play with friends! It works great with a bunch of people in the same room on phones, or on voice chat online.
 
-![tested](https://img.shields.io/badge/{{ if massivedecks.tested_text == "no" }}not_tested{{ else }}{{ massivedecks.tested_text }}{{ endif }}-None_Arm-{{ if massivedecks.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if massivedecks.tested_text_arm == "no" }}not_tested{{ else }}{{ massivedecks.tested_text_arm }}{{ endif }}-Arm-{{ if massivedecks.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if massivedecks. }}not_tested{{ else }}{{ massivedecks.tested }}{{ endif }}-None_Arm-{{ if massivedecks. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if massivedecks. }}not_tested{{ else }}{{ massivedecks.tested_arm }}{{ endif }}-Arm-{{ if massivedecks. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

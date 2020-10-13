@@ -2,8 +2,8 @@
 
 [Huginn](https://github.com/huginn/huginn) Create agents that monitor and act on your behalf. Your agents are standing by!
 
-![tested](https://img.shields.io/badge/{{ if huginn.tested_text == "no" }}not_tested{{ else }}{{ huginn.tested_text }}{{ endif }}-None_Arm-{{ if huginn.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if huginn.tested_text_arm == "no" }}not_tested{{ else }}{{ huginn.tested_text_arm }}{{ endif }}-Arm-{{ if huginn.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if huginn. }}not_tested{{ else }}{{ huginn.tested }}{{ endif }}-None_Arm-{{ if huginn. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if huginn. }}not_tested{{ else }}{{ huginn.tested_arm }}{{ endif }}-Arm-{{ if huginn. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

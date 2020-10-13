@@ -2,8 +2,8 @@
 
 [Guacamole](https://guacamole.apache.org) is a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH.
 
-![tested](https://img.shields.io/badge/{{ if guacamole.tested_text == "no" }}not_tested{{ else }}{{ guacamole.tested_text }}{{ endif }}-None_Arm-{{ if guacamole.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if guacamole.tested_text_arm == "no" }}not_tested{{ else }}{{ guacamole.tested_text_arm }}{{ endif }}-Arm-{{ if guacamole.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if guacamole. }}not_tested{{ else }}{{ guacamole.tested }}{{ endif }}-None_Arm-{{ if guacamole. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if guacamole. }}not_tested{{ else }}{{ guacamole.tested_arm }}{{ endif }}-Arm-{{ if guacamole. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

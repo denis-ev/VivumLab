@@ -2,8 +2,8 @@
 
 [Keycloak](https://www.keycloak.org/) Open Source Identity and Access Management
 
-![tested](https://img.shields.io/badge/{{ if keycloak.tested_text == "no" }}not_tested{{ else }}{{ keycloak.tested_text }}{{ endif }}-None_Arm-{{ if keycloak.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if keycloak.tested_text_arm == "no" }}not_tested{{ else }}{{ keycloak.tested_text_arm }}{{ endif }}-Arm-{{ if keycloak.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if keycloak. }}not_tested{{ else }}{{ keycloak.tested }}{{ endif }}-None_Arm-{{ if keycloak. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if keycloak. }}not_tested{{ else }}{{ keycloak.tested_arm }}{{ endif }}-Arm-{{ if keycloak. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

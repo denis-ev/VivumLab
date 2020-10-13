@@ -2,8 +2,8 @@
 
 [Mailu](https://mailu.io/1.7/general.html) is a simple yet full-featured mail server as a set of Docker images.
 
-![tested](https://img.shields.io/badge/{{ if mailu.tested_text == "no" }}not_tested{{ else }}{{ mailu.tested_text }}{{ endif }}-None_Arm-{{ if mailu.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if mailu.tested_text_arm == "no" }}not_tested{{ else }}{{ mailu.tested_text_arm }}{{ endif }}-Arm-{{ if mailu.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if mailu. }}not_tested{{ else }}{{ mailu.tested }}{{ endif }}-None_Arm-{{ if mailu. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if mailu. }}not_tested{{ else }}{{ mailu.tested_arm }}{{ endif }}-Arm-{{ if mailu. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

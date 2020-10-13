@@ -2,8 +2,8 @@
 
 [darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb) pulls in weather data for your location every 2 minutes from [Darksky](http://darksky.net/) and saves it to your [InfluxDB](software/influxdb) instance.
 
-![tested](https://img.shields.io/badge/{{ if dark_sky.tested_text == "no" }}not_tested{{ else }}{{ dark_sky.tested_text }}{{ endif }}-None_Arm-{{ if dark_sky.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if dark_sky.tested_text_arm == "no" }}not_tested{{ else }}{{ dark_sky.tested_text_arm }}{{ endif }}-Arm-{{ if dark_sky.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if dark_sky. }}not_tested{{ else }}{{ dark_sky.tested }}{{ endif }}-None_Arm-{{ if dark_sky. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if dark_sky. }}not_tested{{ else }}{{ dark_sky.tested_arm }}{{ endif }}-Arm-{{ if dark_sky. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

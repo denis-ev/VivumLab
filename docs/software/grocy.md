@@ -2,8 +2,8 @@
 
 [Grocy](https://grocy.info) ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home
 
-![tested](https://img.shields.io/badge/{{ if grocy.tested_text == "no" }}not_tested{{ else }}{{ grocy.tested_text }}{{ endif }}-None_Arm-{{ if grocy.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if grocy.tested_text_arm == "no" }}not_tested{{ else }}{{ grocy.tested_text_arm }}{{ endif }}-Arm-{{ if grocy.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if grocy. }}not_tested{{ else }}{{ grocy.tested }}{{ endif }}-None_Arm-{{ if grocy. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if grocy. }}not_tested{{ else }}{{ grocy.tested_arm }}{{ endif }}-Arm-{{ if grocy. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

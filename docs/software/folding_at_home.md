@@ -2,8 +2,8 @@
 
 [Folding@home](https://hub.docker.com/r/johnktims/folding-at-home) Folding@home software allows you to share your unused computer power with scientists researching diseases.
 
-![tested](https://img.shields.io/badge/{{ if folding_at_home.tested_text == "no" }}not_tested{{ else }}{{ folding_at_home.tested_text }}{{ endif }}-None_Arm-{{ if folding_at_home.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if folding_at_home.tested_text_arm == "no" }}not_tested{{ else }}{{ folding_at_home.tested_text_arm }}{{ endif }}-Arm-{{ if folding_at_home.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if folding_at_home. }}not_tested{{ else }}{{ folding_at_home.tested }}{{ endif }}-None_Arm-{{ if folding_at_home. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if folding_at_home. }}not_tested{{ else }}{{ folding_at_home.tested_arm }}{{ endif }}-Arm-{{ if folding_at_home. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

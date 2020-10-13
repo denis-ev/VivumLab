@@ -2,8 +2,8 @@
 
 [Grafana](https://grafana.com/) is a Time Series Database graphing application.
 
-![tested](https://img.shields.io/badge/{{ if grafana.tested_text == "no" }}not_tested{{ else }}{{ grafana.tested_text }}{{ endif }}-None_Arm-{{ if grafana.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if grafana.tested_text_arm == "no" }}not_tested{{ else }}{{ grafana.tested_text_arm }}{{ endif }}-Arm-{{ if grafana.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if grafana. }}not_tested{{ else }}{{ grafana.tested }}{{ endif }}-None_Arm-{{ if grafana. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if grafana. }}not_tested{{ else }}{{ grafana.tested_arm }}{{ endif }}-Arm-{{ if grafana. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

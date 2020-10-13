@@ -2,8 +2,8 @@
 
 [HomeBridge](https://homebridge.io/) HomeKit support for the impatient
 
-![tested](https://img.shields.io/badge/{{ if homebridge.tested_text == "no" }}not_tested{{ else }}{{ homebridge.tested_text }}{{ endif }}-None_Arm-{{ if homebridge.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if homebridge.tested_text_arm == "no" }}not_tested{{ else }}{{ homebridge.tested_text_arm }}{{ endif }}-Arm-{{ if homebridge.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if homebridge. }}not_tested{{ else }}{{ homebridge.tested }}{{ endif }}-None_Arm-{{ if homebridge. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if homebridge. }}not_tested{{ else }}{{ homebridge.tested_arm }}{{ endif }}-Arm-{{ if homebridge. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

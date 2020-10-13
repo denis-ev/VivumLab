@@ -2,8 +2,8 @@
 
 [Gitlab](https://docs.gitlab.com/) "the single application for the entire DevOps lifecycle".
 
-![tested](https://img.shields.io/badge/{{ if gitlab.tested_text == "no" }}not_tested{{ else }}{{ gitlab.tested_text }}{{ endif }}-None_Arm-{{ if gitlab.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if gitlab.tested_text_arm == "no" }}not_tested{{ else }}{{ gitlab.tested_text_arm }}{{ endif }}-Arm-{{ if gitlab.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if gitlab. }}not_tested{{ else }}{{ gitlab.tested }}{{ endif }}-None_Arm-{{ if gitlab. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if gitlab. }}not_tested{{ else }}{{ gitlab.tested_arm }}{{ endif }}-Arm-{{ if gitlab. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

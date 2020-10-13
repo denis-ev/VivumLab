@@ -2,8 +2,8 @@
 
 [Digikam](https://www.digikam.org/) Professional Photo Management with the Power of Open Source
 
-![tested](https://img.shields.io/badge/{{ if digikam.tested_text == "no" }}not_tested{{ else }}{{ digikam.tested_text }}{{ endif }}-None_Arm-{{ if digikam.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if digikam.tested_text_arm == "no" }}not_tested{{ else }}{{ digikam.tested_text_arm }}{{ endif }}-Arm-{{ if digikam.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if digikam. }}not_tested{{ else }}{{ digikam.tested }}{{ endif }}-None_Arm-{{ if digikam. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if digikam. }}not_tested{{ else }}{{ digikam.tested_arm }}{{ endif }}-Arm-{{ if digikam. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

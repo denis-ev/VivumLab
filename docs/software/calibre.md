@@ -4,8 +4,8 @@
 
 [Calibre Web](https://github.com/janeczku/calibre-web) Web app for accessing ebook library
 
-![tested](https://img.shields.io/badge/{{ if calibre.tested_text == "no" }}not_tested{{ else }}{{ calibre.tested_text }}{{ endif }}-None_Arm-{{ if calibre.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if calibre.tested_text_arm == "no" }}not_tested{{ else }}{{ calibre.tested_text_arm }}{{ endif }}-Arm-{{ if calibre.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if calibre.tested }}not_tested{{ else }}{{ calibre.tested }}{{ endif }}-None_Arm-{{ if calibre.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if calibre.tested_arm }}not_tested{{ else }}{{ calibre.tested_arm }}{{ endif }}-Arm-{{ if calibre.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

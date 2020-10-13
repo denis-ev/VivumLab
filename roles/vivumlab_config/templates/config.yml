@@ -155,9 +155,9 @@ docs:
   auth: {{ docs.auth | default(False) }}
   domain: {{ docs.domain | default(False) }}
   subdomain: {{ docs.subdomain | default("docs") }}
-  version: {{ docs.version | default("1.1.2") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config" or "maintained by Vivumlab"
+  version: {{ .version | default("1.1.2") }}
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary" or "maintained by Vivumlab"
 apache2:
   enable: {{ apache2.enable | default(False) }}
   https_only: {{ apache2.https_only | default(False) }}
@@ -165,8 +165,8 @@ apache2:
   domain: {{ apache2.domain | default(False) }}
   subdomain: {{ apache2.subdomain | default("apache2") }}
   version: {{ apache2.version | default("2.4") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 apple_health_influx:
   enable: {{ apple_health_influx.enable | default(False) }}
   https_only: {{ apple_health_influx.https_only | default(False) }}
@@ -174,8 +174,8 @@ apple_health_influx:
   domain: {{ apple_health_influx.domain | default(False) }}
   subdomain: {{ apple_health_influx.subdomain | default("apple_health_influx") }}
   version: {{apple_health_influx.version | default("cron") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 adguardhome:
   enable: {{ adguardhome.enable | default(False) }}
   https_only: {{ adguardhome.https_only | default(False) }}
@@ -183,8 +183,8 @@ adguardhome:
   domain: {{ adguardhome.domain | default(False) }}
   subdomain: {{ adguardhome.subdomain | default("adguardhome")}}
   version: {{ adguardhome.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 airsonic:
   enable: {{ airsonic.enable | default(False) }}
   https_only: {{ airsonic.https_only | default(False) }}
@@ -192,8 +192,8 @@ airsonic:
   domain: {{ airsonic.domain | default(False) }}
   subdomain: {{ airsonic.subdomain | default("airsonic") }}
   version: {{ airsonic.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 authelia:
   enable: {{ authelia.enable | default(False) }}
   https_only: {{ authelia.https_only | default(False) }}
@@ -204,8 +204,8 @@ authelia:
   version: {{ authelia.version | default("latest") }}
   redis_version: {{ authelia.redis_version | default("5.0.5-alpine") }}
   db_version: {{ authelia.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   redirect_url:  {{ authelia.redirect_url | default("https://organizr." + domain) }}
   # Determines how verbose the logs are
   log_level: {{ authelia.log_level | default('debug') }}
@@ -246,8 +246,8 @@ barcodebuddy:
   domain: {{ barcodebuddy.domain | default(False) }}
   subdomain: {{ barcodebuddy.subdomain | default("barcodebuddy") }}
   version: {{ barcodebuddy.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 beets:
   enable: {{ beets.enable | default(False) }}
   https_only: {{ beets.https_only | default(False) }}
@@ -255,8 +255,8 @@ beets:
   domain: {{ beets.domain | default(False) }}
   subdomain: {{ beets.subdomain | default("beets") }}
   version: {{ beets.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 bitwarden:
   enable: {{ bitwarden.enable | default(False) }}
   https_only: {{ bitwarden.https_only | default(False) }}
@@ -264,8 +264,8 @@ bitwarden:
   domain: {{ bitwarden.domain  | default(False) }}
   subdomain: {{ bitwarden.subdomain  | default("bitwarden") }}
   version: {{ bitwarden.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
     # Enable admin page
     # IMPORTANT: Activate HTTPS before enabling this feature, to avoid possible MITM attacks.
     # Reference: https://github.com/dani-garcia/bitwarden_rs/wiki/Enabling-admin-page
@@ -294,8 +294,8 @@ bulletnotes:
   subdomain: {{ bulletnotes.subdomain | default("bulletnotes") }}
   version: {{ bulletnotes.version | default("latest") }}
   db_version: {{ bulletnotes.db_version | default("3.2.21") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 calibre:
   enable: {{ calibre.enable | default(False) }}
   https_only: {{ calibre.https_only | default(False) }}
@@ -304,8 +304,8 @@ calibre:
   subdomain: {{ calibre.subdomain | default("calibre") }}
   version: {{ calibre.version | default("latest") }}
   server_version: {{ calibre.server_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 chowdown:
   enable: {{ chowdown.enable | default(False) }}
   https_only: {{ chowdown.https_only | default(False) }}
@@ -313,8 +313,8 @@ chowdown:
   domain: {{ chowdown.domain | default(False) }}
   subdomain: {{ chowdown.subdomain | default("chowdown") }}
   version: {{ chowdown.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 cockpit:
   enable: {{ cockpit.enable | default(False) }}
   domain: {{ cockpit.domain | default(False) }}
@@ -326,8 +326,8 @@ codeserver:
   domain: {{ codeserver.domain | default(False) }}
   subdomain: {{ codeserver.subdomain | default("codeserver") }}
   version: {{ codeserver.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 codimd:
   enable: {{ codimd.enable | default(False) }}
   https_only: {{ codimd.https_only | default(False) }}
@@ -336,8 +336,8 @@ codimd:
   subdomain: {{ codimd.subdomain | default("codimd") }}
   version: {{ codimd.version | default("latest") }}
   db_version: {{ codimd.db_version | default("9.6-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 dark_sky:
   enable: {{ dark_sky.enable | default(False) }}
   https_only: {{ dark_sky.https_only | default(False) }}
@@ -352,8 +352,8 @@ digikam:
   domain: {{ digikam.domain | default(False) }}
   subdomain: {{ digikam.subdomain | default("digikam") }}
   version: {{ digikam.version | default("stable") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 drone:
   enable: {{ drone.enable | default(False) }}
   https_only: {{ drone.https_only | default(False) }}
@@ -362,8 +362,8 @@ drone:
   subdomain: {{ drone.subdomain | default("drone") }}
   version: {{ drone.version | default("1.0") }}
   agent_version: {{ drone.agent_version | default("1.0") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 {% raw %}
   gitea_id: "{{ vault.drone.gitea_id | default(False) }}"
   gitea_secret: "{{ vault.drone.gitea_secret | default(False) }}"
@@ -371,8 +371,8 @@ drone:
 duckdns:
   enable: {{ duckdns.enable | default(False) }}
   version: {{ duckdns.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 {% raw %}
   token: "{{ vault.duckdns.token | default(False) }}"
 {% endraw %}
@@ -383,8 +383,8 @@ duplicati:
   domain: {{ duplicati.domain | default(False) }}
   subdomain: {{ duplicati.subdomain | default("duplicati") }}
   version: {{ duplicati.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 elkstack:
   enable: {{ elkstack.enable | default(False) }}
   https_only: {{ elkstack.https_only | default(False) }}
@@ -392,8 +392,8 @@ elkstack:
   domain: {{ elkstack.domain | default(False) }}
   subdomain: {{ elkstack.subdomain | default("elkstack") }}
   version: {{ elkstack.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 emby:
   enable: {{ emby.enable | default(False) }}
   https_only: {{ emby.https_only | default(False) }}
@@ -401,8 +401,8 @@ emby:
   domain: {{ emby.domain | default(False) }}
   subdomain: {{ emby.subdomain | default("emby") }}
   version: {{ emby.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 erpnext:
   enable: {{ erpnext.enable | default(False) }}
   https_only: {{ erpnext.https_only | default(False) }}
@@ -412,8 +412,8 @@ erpnext:
   version: {{ erpnext.version | default("v11") }}
   db_version: {{ erpnext.db_version | default("10.3") }}
   redis_version: {{ erpnext.redis_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 ethercalc:
   enable: {{ ethercalc.enable | default(False) }}
   https_only: {{ ethercalc.https_only | default(False) }}
@@ -422,8 +422,8 @@ ethercalc:
   subdomain: {{ ethercalc.subdomain | default("ethercalc") }}
   version: {{ ethercalc.version | default("latest") }}
   redis_version: {{ ethercalc.redis_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 factorio:
   enable: {{ factorio.enable | default(False) }}
   https_only: {{ factorio.https_only | default(False) }}
@@ -431,8 +431,8 @@ factorio:
   domain: {{ factorio.domain | default(False) }}
   subdomain: {{ factorio.subdomain | default("factorio") }}
   version: {{ factorio.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 firefly_iii:
   enable: {{ firefly_iii.enable | default(False) }}
   https_only: {{ firefly_iii.https_only | default(False) }}
@@ -441,8 +441,8 @@ firefly_iii:
   subdomain: {{ firefly_iii.subdomain | default("firefly_iii") }}
   version: {{ firefly_iii.version | default("latest") }}
   db_version: {{ firefly_iii.db_version | default("12") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 folding_at_home:
   enable: {{ folding_at_home.enable | default(False) }}
   https_only: {{ folding_at_home.https_only | default(False) }}
@@ -450,8 +450,8 @@ folding_at_home:
   domain: {{ folding_at_home.domain | default(False) }}
   subdomain: {{ folding_at_home.subdomain | default("folding_at_home") }}
   version: {{ folding_at_home.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   username: {{ folding_at_home.username | default( default_username ) }}
   # Team VivumLab - https://stats.foldingathome.org/team/266976
   team: {{ folding_at_home.team | default( "266976" ) }}
@@ -464,8 +464,8 @@ freshrss:
   domain: {{ freshrss.domain | default(False) }}
   subdomain: {{ freshrss.subdomain | default("freshrss") }}
   version: {{ freshrss.version | default("alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 funkwhale:
   enable: {{ funkwhale.enable | default(False) }}
   https_only: {{ funkwhale.https_only | default(False) }}
@@ -473,8 +473,8 @@ funkwhale:
   domain: {{ funkwhale.domain| default(False) }}
   subdomain: {{ funkwhale.subdomain | default("funkwhale") }}
   version: {{ funkwhale.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 ghost:
   enable: {{ ghost.enable | default(False) }}
   https_only: {{ ghost.https_only | default(False) }}
@@ -482,8 +482,8 @@ ghost:
   domain: {{ ghost.domain | default(False) }}
   subdomain: {{ ghost.subdomain | default("ghost") }}
   version: {{ ghost.version | default("3-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 gitea:
   enable: {{ gitea.enable | default(False) }}
   https_only: {{ gitea.https_only | default(False) }}
@@ -492,8 +492,8 @@ gitea:
   subdomain: {{ gitea.subdomain | default("gitea") }}
   version: {{ gitea.version | default("1.11") }}
   db_version: {{ gitea.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   use_mariadb: {{ gitea.use_mariadb | default(True) }}
   gitea_ssh_port: {{ gitea.gitea_ssh_port | default(222) }}
 gitlab:
@@ -505,8 +505,8 @@ gitlab:
   version: {{ gitlab.version | default("latest") }}
   runner_version: {{ gitlab.runner_version | default("alpine") }}
   db_version: {{ gitlab.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   registry_version: {{ gitlab.registry_version | default("latest") }}
   # Currently using default AWS vault entries for region/access_key/secret_key
   aws_lfs_enabled: {{ gitlab.aws_lfs_enabled | default(False) }}
@@ -530,8 +530,8 @@ gotify:
   domain: {{ gotify.domain | default(False) }}
   subdomain: {{ gotify.subdomain | default("gotify") }}
   version: {{ gotify.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 grafana:
   enable: {{ grafana.enable | default(False) }}
   https_only: {{ grafana.https_only | default(False) }}
@@ -539,8 +539,8 @@ grafana:
   domain: {{ grafana.domain | default(False) }}
   subdomain: {{ grafana.subdomain | default("grafana") }}
   version: {{ grafana.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 grocy:
   enable: {{ grocy.enable | default(False) }}
   https_only: {{ grocy.https_only | default(False) }}
@@ -548,8 +548,8 @@ grocy:
   domain: {{ grocy.domain | default(False) }}
   subdomain: {{ grocy.subdomain | default("grocy") }}
   version: {{ grocy.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 guacamole:
   enable: {{ guacamole.enable | default(False) }}
   https_only: {{ guacamole.https_only | default(False) }}
@@ -559,8 +559,8 @@ guacamole:
   version: {{ guacamole.version | default("latest") }}
   db_version: {{ guacamole.db_version | default("latest") }}
   proxy_version: {{ guacamole.proxy_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 healthchecks:
   enable: {{ healthchecks.enable | default(False) }}
   https_only: {{ healthchecks.https_only | default(False) }}
@@ -568,8 +568,8 @@ healthchecks:
   domain: {{ healthchecks.domain | default(False) }}
   subdomain: {{ healthchecks.subdomain | default("healthchecks") }}
   version: {{ healthchecks.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 heimdall:
   enable: {{ heimdall.enable | default(False) }}
   https_only: {{ heimdall.https_only | default(False) }}
@@ -577,8 +577,8 @@ heimdall:
   domain: {{ heimdall.domain| default(False) }}
   subdomain: {{ heimdall.subdomain | default("heimdall") }}
   version: {{ heimdall.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 homeassistant:
   enable: {{ homeassistant.enable | default(False) }}
   https_only: {{ homeassistant.https_only | default(False) }}
@@ -586,8 +586,8 @@ homeassistant:
   domain: {{ homeassistant.domain | default(False) }}
   subdomain: {{ homeassistant.subdomain | default("homeassistant") }}
   version: {{ homeassistant.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   use_supervisord: {{ homeassistant.use_supervisord | default(False)}}
 homebridge:
   enable: {{ homebridge.enable | default(False) }}
@@ -596,8 +596,8 @@ homebridge:
   domain: {{ homebridge.domain | default(False) }}
   subdomain: {{ homebridge.subdomain | default("homebridge") }}
   version: {{homebridge.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 homedash:
   enable: {{ homedash.enable | default(False) }}
   https_only: {{ homedash.https_only | default(False) }}
@@ -605,8 +605,8 @@ homedash:
   domain: {{ homedash.domain | default(False) }}
   subdomain: {{ homedash.subdomain | default("homedash") }}
   version: {{ homedash.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 hubzilla:
   enable: {{ hubzilla.enable | default(False) }}
   https_only: {{ hubzilla.https_only | default(False) }}
@@ -616,8 +616,8 @@ hubzilla:
   version: {{ hubzilla.version | default("4.6") }}
   db_version: {{ hubzilla.db_version | default("12.2-alpine") }}
   web_version: {{ hubzilla.web_version | default("1.17.10-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 huginn:
   enable: {{ huginn.enable | default(False) }}
   https_only: {{ huginn.https_only | default(False) }}
@@ -626,8 +626,8 @@ huginn:
   subdomain: {{ huginn.subdomain | default("huginn") }}
   version: {{ huginn.version | default("latest") }}
   db_version: {{ huginn.db_version | default("10.3") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 inventario:
   enable: {{ inventario.enable | default(False) }}
   https_only: {{ inventario.https_only | default(False) }}
@@ -636,8 +636,8 @@ inventario:
   subdomain: {{ inventario.subdomain | default("inventario") }}
   version: {{ inventario.version | default("latest") }}
   db_version: {{ inventario.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 invoiceninja:
   enable: {{ invoiceninja.enable | default(False) }}
   https_only: {{ invoiceninja.https_only | default(False) }}
@@ -645,8 +645,8 @@ invoiceninja:
   domain: {{ invoiceninja.domain | default(False) }}
   subdomain: {{ invoiceninja.subdomain | default("invoiceninja")}}
   version: {{ invoiceninja.version | default("alpine-4") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 jackett:
   enable: {{ jackett.enable | default(False) }}
   https_only: {{ jackett.https_only | default(False) }}
@@ -654,8 +654,8 @@ jackett:
   domain: {{ jackett.domain | default(False) }}
   subdomain: {{ jackett.subdomain | default("jackett") }}
   version: {{ jackett.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 jellyfin:
   enable: {{ jellyfin.enable | default(False) }}
   https_only: {{ jellyfin.https_only | default(False) }}
@@ -663,8 +663,8 @@ jellyfin:
   domain: {{ jellyfin.domain | default(False) }}
   subdomain: {{ jellyfin.subdomain | default("jellyfin") }}
   version: {{ jellyfin.version | default ("10.6.4") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 jenkins:
   enable: {{ jenkins.enable | default(False) }}
   https_only: {{ jenkins.https_only | default(False) }}
@@ -673,8 +673,8 @@ jenkins:
   subdomain: {{ jenkins.subdomain | default("jenkins")}}
   allow_docker: {{ jenkins.allow_docker | default(False)}}
   version: {{ jenkins.version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 keycloak:
   enable: {{ keycloak.enable | default(False) }}
   https_only: {{ keycloak.https_only | default(False) }}
@@ -683,8 +683,8 @@ keycloak:
   subdomain: {{ keycloak.subdomain | default("keycloak")}}
   version: {{ keycloak.version | default("latest") }}
   db_version: {{ keycloak.db_version | default("alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 kibitzr:
   enable: {{ kibitzr.enable | default(False) }}
   https_only: {{ kibitzr.https_only | default(False) }}
@@ -692,8 +692,8 @@ kibitzr:
   domain: {{ kibitzr.domain | default(False) }}
   subdomain: {{ kibitzr.subdomain | default("kibitzr") }}
   version: {{ kibitzr.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 lazylibrarian:
   enable: {{ lazylibrarian.enable | default(False) }}
   https_only: {{ lazylibrarian.https_only | default(False) }}
@@ -701,8 +701,8 @@ lazylibrarian:
   domain: {{ lazylibrarian.domain | default(False) }}
   subdomain: {{ lazylibrarian.subdomain | default("lazylibrarian") }}
   version: {{lazylibrarian.version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 lidarr:
   enable: {{ lidarr.enable | default(False) }}
   https_only: {{ lidarr.https_only | default(False) }}
@@ -710,8 +710,8 @@ lidarr:
   domain: {{ lidarr.domain | default(False) }}
   subdomain: {{ lidarr.subdomain | default("lidarr") }}
   version: {{ lidarr.version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 mailu:
   enable: {{ mailu.enable | default(False) }}
   https_only: {{ mailu.https_only | default(False) }}
@@ -720,8 +720,8 @@ mailu:
   subdomain: {{ mailu.subdomain | default("mailu") }}
   version: {{ mailu.version | default ("1.7") }}
   redis_version: {{ mailu.redis_version | default ("alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   forward_to_smtp: {{ mailu.forward_to_smtp | default(False)  }}
 mashio:
   enable: {{ mashio.enable | default(False) }}
@@ -731,8 +731,8 @@ mashio:
   subdomain: {{ mashio.subdomain | default("mashio") }}
   version: {{ mashio.version | default ("latest") }}
   db_version: {{ mashio.db_version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 massivedecks:
   enable: {{ massivedecks.enable | default(False) }}
   https_only: {{ massivedecks.https_only | default(False) }}
@@ -741,8 +741,8 @@ massivedecks:
   subdomain: {{ massivedecks.subdomain | default("massivedecks") }}
   server_version: {{ massivedecks.server_version | default ("latest") }}
   client_version: {{ massivedecks.client_version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 matomo:
   enable: {{ matomo.enable | default(False) }}
   https_only: {{ matomo.https_only | default(False) }}
@@ -751,13 +751,13 @@ matomo:
   subdomain: {{ matomo.subdomain | default("matomo") }}
   version: {{ matomo.version | default ("latest") }}
   db_version: {{ matomo.db_version | default ("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 matterbridge:
   enable: {{ matterbridge.enable | default(False) }}
   version: {{ matterbridge.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 mayan:
   enable: {{ mayan.enable | default(False) }}
   https_only: {{ mayan.https_only | default(False) }}
@@ -768,8 +768,8 @@ mayan:
   db_version: {{ mayan.db_version | default("latest") }}
   redis_version: {{ mayan.redis_version | default("latest") }}
   rabbit_version: {{ mayan.rabbit_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 minecraft:
   enable: {{ minecraft.enable | default(False) }}
   https_only: {{ minecraft.https_only | default(False) }}
@@ -778,8 +778,8 @@ minecraft:
   subdomain: {{ minecraft.subdomain | default("minecraft") }}
   version: {{ minecraft.version | default("latest") }}
   server_version: {{ minecraft.server_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   online_mode: {{ minecraft.online_mode | default(True) }}
   server_type: {{ minecraft.server_type | default("vanilla") }}
 minecraftbedrockserver:
@@ -789,8 +789,8 @@ minecraftbedrockserver:
   domain: {{ minecraftbedrockserver.domain| default(False) }}
   subdomain: {{ minecraftbedrockserver.subdomain | default("minecraftbedrockserver") }}
   version: {{ minecraftbedrockserver.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   eula: {{ minecraftbedrockserver.eula | default("TRUE") }}
   server_name: {{ minecraftbedrockserver.server_name | default("VivumLab") }} #any string
   server_port: {{ minecraftbedrockserver.server_port | default("19132") }} #any integer, 19132 is default
@@ -817,8 +817,8 @@ miniflux:
   subdomain: {{ miniflux.subdomain | default("miniflux") }}
   version: {{ miniflux.version | default("2.0.21") }}
   db_version: {{ miniflux.db_version | default("10.1") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 minio:
   enable: {{ minio.enable | default(False) }}
   https_only: {{ minio.https_only | default(False) }}
@@ -826,8 +826,8 @@ minio:
   domain: {{ minio.domain | default(False) }}
   subdomain: {{ minio.subdomain | default("minio") }}
   version: {{ minio.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 monicahq:
   enable: {{ monicahq.enable | default(False) }}
   https_only: {{ monicahq.https_only | default(False) }}
@@ -836,8 +836,8 @@ monicahq:
   subdomain: {{ monicahq.subdomain | default("monicahq") }}
   version: {{ monicahq.version | default("latest") }}
   db_version: {{ monicahq.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 mstream:
   enable: {{ mstream.enable | default(False) }}
   https_only: {{ mstream.https_only | default(False) }}
@@ -845,8 +845,8 @@ mstream:
   domain: {{ mstream.domain | default(False) }}
   subdomain: {{ mstream.subdomain | default("mstream") }}
   version: {{ mstream.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 mylar:
   enable: {{ mylar.enable | default(False) }}
   https_only: {{ mylar.https_only | default(False) }}
@@ -854,8 +854,8 @@ mylar:
   domain: {{ mylar.domain | default(False) }}
   subdomain: {{ mylar.subdomain | default("mylar") }}
   version: {{ mylar.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 n8n:
   enable: {{ n8n.enable | default(False) }}
   https_only: {{ n8n.https_only | default(False) }}
@@ -863,8 +863,8 @@ n8n:
   domain: {{ n8n.domain| default(False) }}
   subdomain: {{ n8n.subdomain | default("n8n") }}
   version: {{ n8n.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 netdata:
   enable: {{ netdata.enable | default(False) }}
   https_only: {{ netdata.https_only | default(False) }}
@@ -872,8 +872,8 @@ netdata:
   domain: {{ netdata.domain | default(False) }}
   subdomain: {{ netdata.subdomain | default("netdata") }}
   version: {{ netdata.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 nextcloud:
   enable: {{ nextcloud.enable | default(False) }}
   https_only: {{ nextcloud.https_only | default(False) }}
@@ -883,8 +883,8 @@ nextcloud:
   version: {{ nextcloud.version | default("apache") }}
   db_version: {{ nextcloud.db_version | default("12-alpine") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 nodered:
   enable: {{ nodered.enable | default(False) }}
   https_only: {{ nodered.https_only | default(False) }}
@@ -892,8 +892,8 @@ nodered:
   domain: {{ nodered.domain| default(False) }}
   subdomain: {{ nodered.subdomain | default("nodered") }}
   version: {{ nodered.version | default("latest-12-minimal") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   node_options: {{ nodered.node_options | default("") }}
   enable_projects: {{ nodered.enable_projects | default(False) }}
   safe_mode: {{ nodered.safe_mode | default(False) }}
@@ -904,8 +904,8 @@ nzbget:
   domain: {{ nzbget.domain | default(False) }}
   subdomain: {{ nzbget.subdomain | default("nzbget") }}
   version: {{ nzbget.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 octoprint:
   enable: {{ octoprint.enable | default(False) }}
   https_only: {{ octoprint.https_only | default(False) }}
@@ -914,8 +914,8 @@ octoprint:
   domain: {{ octoprint.domain | default(False) }}
   subdomain: {{ octoprint.subdomain | default("octoprint")}}
   version: {{ octoprint.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 ombi:
   enable: {{ ombi.enable | default(False) }}
   https_only: {{ ombi.https_only | default(False) }}
@@ -923,8 +923,8 @@ ombi:
   domain: {{ ombi.domain | default(False) }}
   subdomain: {{ ombi.subdomain | default("ombi") }}
   version: {{ ombi.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 openldap:
   enable: {{ openldap.enable | default(False) }}
   https_only: {{ openldap.https_only | default(False) }}
@@ -933,8 +933,8 @@ openldap:
   subdomain: {{ openldap.subdomain | default("openldap") }}
   version: {{ openldap.version | default("1.2.2") }}
   web_version: {{ openldap.web_version | default("0.7.2") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 openvpn:
   enable: {{ openvpn.enable | default(False) }}
   https_only: {{ openvpn.https_only | default(False) }}
@@ -942,8 +942,8 @@ openvpn:
   domain: {{ openvpn.domain | default(False) }}
   subdomain: {{ openvpn.subdomain | default("openvpn") }}
   version: {{ openvpn.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 organizr:
   enable: {{ organizr.enable | default(False) }}
   https_only: {{ organizr.https_only | default(False) }}
@@ -951,8 +951,8 @@ organizr:
   domain: {{ organizr.domain | default(False) }}
   subdomain: {{ organizr.subdomain | default("organizr") }}
   version: {{ organizr.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 ownphotos:
   enable: {{ ownphotos.enable | default(False) }}
   https_only: {{ ownphotos.https_only | default(False) }}
@@ -962,8 +962,8 @@ ownphotos:
   version: {{ ownphotos.version | default("dev") }}
   db_version: {{ ownphotos.db_version | default("latest") }}
   redis_version: {{ ownphotos.redis_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 paperless:
   enable: {{ paperless.enable | default(False) }}
   https_only: {{ paperless.https_only | default(False) }}
@@ -971,8 +971,8 @@ paperless:
   domain: {{ paperless.domain | default(False) }}
   subdomain: {{ paperless.subdomain | default("paperless") }}
   version: {{ paperless.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 peertube:
   enable: {{ peertube.enable | default(False) }}
   https_only: {{ peertube.https_only | default(False) }}
@@ -982,8 +982,8 @@ peertube:
   version: {{ peertube.version | default("production-buster") }}
   db_version: {{ peertube.db_version | default("10-alpine") }}
   redis_version: {{ peertube.redis_version | default("4-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 photoprism:
   enable: {{ photoprism.enable | default(False) }}
   https_only: {{ photoprism.https_only | default(False) }}
@@ -991,8 +991,8 @@ photoprism:
   domain: {{ photoprism.domain | default(False) }}
   subdomain: {{ photoprism.subdomain | default("photoprism") }}
   version: {{ photoprism.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 pihole:
   enable: {{ pihole.enable | default(False) }}
   https_only: {{ pihole.https_only | default(False) }}
@@ -1000,8 +1000,8 @@ pihole:
   domain: {{ pihole.domain | default(False) }}
   subdomain: {{ pihole.subdomain | default("pihole") }}
   version: {{ pihole.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 piwigo:
   enable: {{ piwigo.enable | default(False) }}
   https_only: {{ piwigo.https_only | default(False) }}
@@ -1010,8 +1010,8 @@ piwigo:
   subdomain: {{ piwigo.subdomain | default("piwigo") }}
   version: {{ piwigo.version | default("latest") }}
   db_version: {{ piwigo.db_version | default("10.4") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 pixelfed:
   enable: {{ pixelfed.enable | default(False) }}
   https_only: {{ pixelfed.https_only | default(False) }}
@@ -1020,8 +1020,8 @@ pixelfed:
   subdomain: {{ pixelfed.subdomain | default("pixelfed") }}
   db_version: {{ pixelfed.db_version | default("10.4") }}
   redis_version: {{ pixelfed.redis_version | default("5-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 pleroma:
   enable: {{ pleroma.enable | default(False) }}
   https_only: {{ pleroma.https_only | default(False) }}
@@ -1029,8 +1029,8 @@ pleroma:
   domain: {{ pleroma.domain | default(False) }}
   subdomain: {{ pleroma.subdomain | default("pleroma") }}
   db_version: {{ pleroma.db_version | default("9.6-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 plex:
   enable: {{ plex.enable | default(False) }}
   https_only: {{ plex.https_only | default(False) }}
@@ -1038,8 +1038,8 @@ plex:
   domain: {{ plex.domain | default(False) }}
   subdomain: {{ plex.subdomain | default("plex") }}
   version: {{ plex.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 poli:
   enable: {{ poli.enable | default(False) }}
   https_only: {{ poli.https_only | default(False) }}
@@ -1047,8 +1047,8 @@ poli:
   domain: {{ poli.domain | default(False) }}
   subdomain: {{ poli.subdomain | default("poli") }}
   version: {{ poli.version | default("0.10.1") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 portainer:
   enable: {{ portainer.enable | default(False) }}
   https_only: {{ portainer.https_only | default(False) }}
@@ -1056,8 +1056,8 @@ portainer:
   domain: {{ portainer.domain | default(False) }}
   subdomain: {{ portainer.subdomain | default("portainer") }}
   version: {{ portainer.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 privatebin:
   enable: {{ privatebin.enable | default(False) }}
   https_only: {{ privatebin.https_only | default(False) }}
@@ -1065,8 +1065,8 @@ privatebin:
   domain: {{ privatebin.domain | default(False) }}
   subdomain: {{ privatebin.subdomain | default("privatebin") }}
   version: {{ privatebin.version | default("1.3.4-alpine3.11") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 qbittorrent:
   enable: {{ qbittorrent.enable | default(False) }}
   https_only: {{ qbittorrent.https_only | default(False) }}
@@ -1076,8 +1076,8 @@ qbittorrent:
   version: {{ qbittorrent.version | default("latest") }}
   vpn_enabled: !!str '{{ qbittorrent.vpn_enabled | default(false) }}'
   lan_network: {{ qbittorrent.lan_network | default("192.168.1.0/24") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 radarr:
   enable: {{ radarr.enable | default(False) }}
   https_only: {{ radarr.https_only | default(False) }}
@@ -1085,8 +1085,8 @@ radarr:
   domain: {{ radarr.domain | default(False) }}
   subdomain: {{ radarr.subdomain | default("radarr") }}
   version: {{ radarr.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 readarr:
   enable: {{ readarr.enable | default(enable_readarr, None) | default(False) }}
   https_only: {{ readarr.https_only | default(False) }}
@@ -1094,8 +1094,8 @@ readarr:
   domain: {{ readarr.domain | default(False) }}
   subdomain: {{ readarr.subdomain | default("readarr")}}
   version: {{ readarr.version | default("unstable") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 restic:
   enable: {{ restic.enable | default(False) }}
   https_only: {{ restic.https_only | default(False) }}
@@ -1103,8 +1103,8 @@ restic:
   domain: {{ restic.domain | default(False) }}
   subdomain: {{ restic.subdomain | default("restic") }}
   version: {{ restic.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 rsshub:
   enable: {{ rsshub.enable | default(False) }}
   https_only: {{ rsshub.https_only | default(False) }}
@@ -1112,8 +1112,8 @@ rsshub:
   domain: {{ rsshub.domain | default(False) }}
   subdomain: {{ rsshub.subdomain | default("rsshub")}}
   version: {{ rsshub.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 sabnzbd:
   enable: {{ sabnzbd.enable | default(False) }}
   https_only: {{ sabnzbd.https_only | default(False) }}
@@ -1121,13 +1121,13 @@ sabnzbd:
   domain: {{ sabnzbd.domain | default(False) }}
   subdomain: {{ sabnzbd.subdomain | default("sabnzbd") }}
   version: {{ sabnzbd.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 samba:
   enable: {{ samba.enable | default(False) }}
   version: {{ samba.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 searx:
   enable: {{ searx.enable | default(False) }}
   https_only: {{ searx.https_only | default(False) }}
@@ -1135,8 +1135,8 @@ searx:
   domain: {{ searx.domain | default(False) }}
   subdomain: {{ searx.subdomain | default("searx") }}
   version: {{ searx.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 shinobi:
   enable: {{ shinobi.enable | default(False) }}
   https_only: {{ shinobi.https_only | default(False) }}
@@ -1145,8 +1145,8 @@ shinobi:
   subdomain: {{ shinobi.subdomain | default("shinobi") }}
   version: {{ shinobi.version | default("latest") }}
   db_version: {{ shinobi.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 sickchill:
   enable: {{ sickchill.enable | default(False) }}
   https_only: {{ sickchill.https_only | default(False) }}
@@ -1154,8 +1154,8 @@ sickchill:
   domain: {{ sickchill.domain | default(False) }}
   subdomain: {{ sickchill.subdomain | default("sickchill") }}
   version: {{ sickchill.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 simply_shorten:
   enable: {{ simply_shorten.enable | default(False) }}
   https_only: {{ simply_shorten.https_only | default(False) }}
@@ -1163,8 +1163,8 @@ simply_shorten:
   domain: {{ simply_shorten.domain | default(False) }}
   subdomain: {{ simply_shorten.subdomain | default("simply_shorten")}}
   version: {{ simply_shorten.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 snibox:
   enable: {{ snibox.enable | default(False) }}
   https_only: {{ snibox.https_only | default(False) }}
@@ -1174,8 +1174,8 @@ snibox:
   version: {{ snibox.version | default("latest") }}
   web_version: {{ snibox.web_version | default("1.15.9") }}
   db_version: {{ snibox.db_version | default("10.7-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 sonarr:
   enable: {{ sonarr.enable | default(False) }}
   https_only: {{ sonarr.https_only | default(False) }}
@@ -1183,8 +1183,8 @@ sonarr:
   domain: {{ sonarr.domain | default(False) }}
   subdomain: {{ sonarr.subdomain | default("sonarr") }}
   version: {{ sonarr.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 speedtest:
   enable: {{ speedtest.enable | default(False) }}
   https_only: {{ speedtest.https_only | default(False) }}
@@ -1192,8 +1192,8 @@ speedtest:
   domain: {{ speedtest.domain | default(False) }}
   subdomain: {{ speedtest.subdomain | default("speedtest") }}
   version: {{ speedtest.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
   server: {{ speedtest.server | default (11441) }}
 statping:
   enable: {{ statping.enable | default(False) }}
@@ -1202,8 +1202,8 @@ statping:
   domain: {{ statping.domain | default(False) }}
   subdomain: {{ statping.subdomain | default("statping") }}
   version: {{ statping.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 sui:
   enable: {{ sui.enable | default(True) }}
   https_only: {{ sui.https_only | default(False) }}
@@ -1211,8 +1211,8 @@ sui:
   domain: {{ sui.domain | default(False) }}
   subdomain: {{ sui.subdomain | default("sui") }}
   version: {{ sui.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 syncthing:
   enable: {{ syncthing.enable | default(False) }}
   https_only: {{ syncthing.https_only | default(False) }}
@@ -1220,8 +1220,8 @@ syncthing:
   domain: {{ syncthing.domain | default(False) }}
   subdomain: {{ syncthing.subdomain | default("syncthing") }}
   version: {{ syncthing.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 taisun:
   enable: {{ taisun.enable | default(False) }}
   https_only: {{ taisun.https_only | default(False) }}
@@ -1229,8 +1229,8 @@ taisun:
   domain: {{ taisun.domain | default(False) }}
   subdomain: {{ taisun.subdomain | default("taisun")}}
   version: {{ taisun.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 tautulli:
   enable: {{ tautulli.enable | default(False) }}
   https_only: {{ tautulli.https_only | default(False) }}
@@ -1238,8 +1238,8 @@ tautulli:
   domain: {{ tautulli.domain | default(False) }}
   subdomain: {{ tautulli.subdomain | default("tautulli") }}
   version: {{ tautulli.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 teedy:
   enable: {{ teedy.enable | default(False) }}
   https_only: {{ teedy.https_only | default(False) }}
@@ -1248,8 +1248,8 @@ teedy:
   subdomain: {{ teedy.subdomain | default("teedy")}}
   version: {{ teedy.version | default("v1.8") }}
   db_version: {{ teedy.db_version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 thelounge:
   enable: {{ thelounge.enable | default(False) }}
   https_only: {{ thelounge.https_only | default(False) }}
@@ -1257,8 +1257,8 @@ thelounge:
   domain: {{ thelounge.domain | default(False) }}
   subdomain: {{ thelounge.subdomain | default("thelounge") }}
   version: {{ thelounge.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 tick:
   enable: {{ tick.enable | default(False) }}
   https_only: {{ tick.https_only | default(False) }}
@@ -1269,8 +1269,8 @@ tick:
   influxdb_version: {{ tick.influxdb_version | default("latest") }}
   chronograf_version: {{ tick.chronograf_version | default("latest") }}
   kapacitor_version: {{ tick.kapacitor_version | default("1.3.3") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 tiddlywiki:
   enable: {{ tiddlywiki.enable | default(False) }}
   https_only: {{ tiddlywiki.https_only | default(False) }}
@@ -1278,8 +1278,8 @@ tiddlywiki:
   domain: {{ tiddlywiki.domain| default(False) }}
   subdomain: {{ tiddlywiki.subdomain | default("tiddlywiki") }}
   version: {{ tiddlywiki.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 transmission:
   enable: {{ transmission.enable | default(False) }}
   https_only: {{ transmission.https_only | default(False) }}
@@ -1287,8 +1287,8 @@ transmission:
   domain: {{ transmission.domain | default(False) }}
   subdomain: {{ transmission.subdomain | default("transmission") }}
   version: {{ transmission.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 trilium:
   enable: {{ trilium.enable | default(False) }}
   https_only: {{ trilium.https_only | default(False) }}
@@ -1296,8 +1296,8 @@ trilium:
   domain: {{ trilium.domain| default(False) }}
   subdomain: {{ trilium.subdomain | default("trilium") }}
   version: {{ trilium.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 turtl:
   enable: {{ turtl.enable | default(False) }}
   https_only: {{ turtl.https_only | default(False) }}
@@ -1311,8 +1311,8 @@ ubooquity:
   domain: {{ ubooquity.domain | default(False) }}
   subdomain: {{ ubooquity.subdomain | default("ubooquity") }}
   version: {{ ubooquity.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 unificontroller:
   enable: {{ unificontroller.enable | default(False) }}
   https_only: {{ unificontroller.https_only | default(False) }}
@@ -1320,8 +1320,8 @@ unificontroller:
   domain: {{ unificontroller.domain | default(False) }}
   subdomain: {{ unificontroller.subdomain | default("unificontroller")}}
   version: {{ unificontroller.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 wallabag:
   enable: {{ wallabag.enable | default(False) }}
   https_only: {{ wallabag.https_only | default(False) }}
@@ -1331,16 +1331,15 @@ wallabag:
   version: {{ wallabag.version | default("latest") }}
   db_version: {{ wallabag.db_version | default("10.4") }}
   redis_version: {{ wallabag.redis_version | default("alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 watchtower:
   enable: {{ watchtower.enable |  default(False) }}
   domain: False #Needed for ansible
   subdomain: False #Needed for ansible
   notification: {{ watchtower.notification | default (False) }}
   version: {{ watchtower.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: "no saved config" #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: "testing not necessary" #Recommendations "tested" or "testing not possible" or "testing not necessary"
 {% raw %}
   gotify_token: "{{ vault.watchtower.gotify_token | default (False) }}"
 {% endraw %}
@@ -1352,8 +1351,8 @@ webtrees:
   subdomain: {{ webtrees.subdomain | default("webtrees") }}
   version: {{ webtrees.version | default("latest") }}
   db_version: {{ webtrees.db_version | default("10.4") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 webdavserver:
   enable: {{ webdavserver.enable | default(False) }}
   https_only: {{ webdavserver.https_only | default(False) }}
@@ -1361,8 +1360,8 @@ webdavserver:
   domain: {{ webdavserver.domain| default(False) }}
   subdomain: {{ webdavserver.subdomain | default("webdav") }}
   version: {{ webdavserver.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 webvirtmgr:
   enable: {{ webvirtmgr.enable | default(False) }}
   https_only: {{ webvirtmgr.https_only | default(False) }}
@@ -1370,8 +1369,8 @@ webvirtmgr:
   domain: {{ webvirtmgr.domain | default(False) }}
   subdomain: {{ webvirtmgr.subdomain | default("webvirtmgr") }}
   version: {{ webvirtmgr.version | default("latest") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 wekan:
   enable: {{ wekan.enable | default(False) }}
   https_only: {{ wekan.https_only | default(False) }}
@@ -1380,8 +1379,8 @@ wekan:
   subdomain: {{ wekan.subdomain | default("wekan") }}
   version: {{ wekan.version | default("latest") }}
   db_version: {{ wekan.db_version | default("3.2.12") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 zammad:
   enable: {{ zammad.enable | default(False) }}
   https_only: {{ zammad.https_only | default(False) }}
@@ -1390,8 +1389,8 @@ zammad:
   subdomain: {{ zammad.subdomain | default("zammad") }}
   version: {{ zammad.version | default("3.4.0-17") }}
   memcached_version: {{ zammad.memcached_version | default("1.5.22-alpine") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 zulip:
   enable: {{ zulip.enable | default(False) }}
   https_only: {{ zulip.https_only | default(False) }}
@@ -1402,8 +1401,8 @@ zulip:
   db_version: {{ zulip.db_version | default("latest") }}
   redis_version: {{ zulip.redis_version | default("latest") }}
   rabbit_version: {{ zulip.rabbit_version | default("3.7.7") }}
-  tested: False {# Only to be changed with static versions set #}
-  tested_text: False #Possibilities "tested" or "testing not possible" or "no saved config"
+  tested_text: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  tested_text_arm: False #Recommendations "tested" or "testing not possible" or "testing not necessary"
 
 ### OPTIONAL ### These valuse are OPTIONAL and enable extra VivumLab functionality.
 

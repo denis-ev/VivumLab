@@ -2,8 +2,8 @@
 
 [Invoice Ninja](https://www.invoiceninja.org/) Free Open-Source Invoicing
 
-![tested](https://img.shields.io/badge/{{ if invoiceninja.tested_text == "no" }}not_tested{{ else }}{{ invoiceninja.tested_text }}{{ endif }}-None_Arm-{{ if invoiceninja.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if invoiceninja.tested_text_arm == "no" }}not_tested{{ else }}{{ invoiceninja.tested_text_arm }}{{ endif }}-Arm-{{ if invoiceninja.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if invoiceninja. }}not_tested{{ else }}{{ invoiceninja.tested }}{{ endif }}-None_Arm-{{ if invoiceninja. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if invoiceninja. }}not_tested{{ else }}{{ invoiceninja.tested_arm }}{{ endif }}-Arm-{{ if invoiceninja. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

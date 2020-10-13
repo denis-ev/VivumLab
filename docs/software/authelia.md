@@ -2,8 +2,8 @@
 
 [Authelia](https://www.Authelia.com) is an open-source full-featured authentication server.
 
-![tested](https://img.shields.io/badge/{{ if authelia.tested_text == "no" }}not_tested{{ else }}{{ authelia.tested_text }}{{ endif }}-None_Arm-{{ if authelia.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if authelia.tested_text_arm == "no" }}not_tested{{ else }}{{ authelia.tested_text_arm }}{{ endif }}-Arm-{{ if authelia.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if authelia.tested }}not_tested{{ else }}{{ authelia.tested }}{{ endif }}-None_Arm-{{ if authelia.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if authelia.tested_arm }}not_tested{{ else }}{{ authelia.tested_arm }}{{ endif }}-Arm-{{ if authelia.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

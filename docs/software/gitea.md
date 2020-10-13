@@ -2,8 +2,8 @@
 
 [Gitea](https://gitea.io/en-US/) is a Git hosting platform.
 
-![tested](https://img.shields.io/badge/{{ if gitea.tested_text == "no" }}not_tested{{ else }}{{ gitea.tested_text }}{{ endif }}-None_Arm-{{ if gitea.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if gitea.tested_text_arm == "no" }}not_tested{{ else }}{{ gitea.tested_text_arm }}{{ endif }}-Arm-{{ if gitea.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if gitea. }}not_tested{{ else }}{{ gitea.tested }}{{ endif }}-None_Arm-{{ if gitea. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if gitea. }}not_tested{{ else }}{{ gitea.tested_arm }}{{ endif }}-Arm-{{ if gitea. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

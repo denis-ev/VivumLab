@@ -3,8 +3,8 @@
 [Duplicati](https://www.duplicati.com/) Free backup software to store encrypted backups online
 For Windows, macOS and Linux.
 
-![tested](https://img.shields.io/badge/{{ if duplicati.tested_text == "no" }}not_tested{{ else }}{{ duplicati.tested_text }}{{ endif }}-None_Arm-{{ if duplicati.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if duplicati.tested_text_arm == "no" }}not_tested{{ else }}{{ duplicati.tested_text_arm }}{{ endif }}-Arm-{{ if duplicati.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if duplicati. }}not_tested{{ else }}{{ duplicati.tested }}{{ endif }}-None_Arm-{{ if duplicati. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if duplicati. }}not_tested{{ else }}{{ duplicati.tested_arm }}{{ endif }}-Arm-{{ if duplicati. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

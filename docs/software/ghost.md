@@ -2,8 +2,8 @@
 
 [Ghost](http://ghost.org/) is a fully open source, adaptable platform for building and running a modern online publication.
 
-![tested](https://img.shields.io/badge/{{ if ghost.tested_text == "no" }}not_tested{{ else }}{{ ghost.tested_text }}{{ endif }}-None_Arm-{{ if ghost.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if ghost.tested_text_arm == "no" }}not_tested{{ else }}{{ ghost.tested_text_arm }}{{ endif }}-Arm-{{ if ghost.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if ghost. }}not_tested{{ else }}{{ ghost.tested }}{{ endif }}-None_Arm-{{ if ghost. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if ghost. }}not_tested{{ else }}{{ ghost.tested_arm }}{{ endif }}-Arm-{{ if ghost. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

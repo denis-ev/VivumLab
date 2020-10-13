@@ -2,8 +2,8 @@
 
 [Jackett](https://github.com/Jackett/Jackett) provides API Support for your favorite torrent trackers.
 
-![tested](https://img.shields.io/badge/{{ if jackett.tested_text == "no" }}not_tested{{ else }}{{ jackett.tested_text }}{{ endif }}-None_Arm-{{ if jackett.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if jackett.tested_text_arm == "no" }}not_tested{{ else }}{{ jackett.tested_text_arm }}{{ endif }}-Arm-{{ if jackett.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if jackett. }}not_tested{{ else }}{{ jackett.tested }}{{ endif }}-None_Arm-{{ if jackett. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if jackett. }}not_tested{{ else }}{{ jackett.tested_arm }}{{ endif }}-Arm-{{ if jackett. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

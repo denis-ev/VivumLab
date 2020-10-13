@@ -2,8 +2,8 @@
 
 [ELK Stack](https://github.com/deviantony/docker-elk) Elastic Search, Logstash and Kibana
 
-![tested](https://img.shields.io/badge/{{ if elkstack.tested_text == "no" }}not_tested{{ else }}{{ elkstack.tested_text }}{{ endif }}-None_Arm-{{ if elkstack.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if elkstack.tested_text_arm == "no" }}not_tested{{ else }}{{ elkstack.tested_text_arm }}{{ endif }}-Arm-{{ if elkstack.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if elkstack. }}not_tested{{ else }}{{ elkstack.tested }}{{ endif }}-None_Arm-{{ if elkstack. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if elkstack. }}not_tested{{ else }}{{ elkstack.tested_arm }}{{ endif }}-Arm-{{ if elkstack. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

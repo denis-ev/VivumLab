@@ -2,8 +2,8 @@
 
 [Bookstack](https://www.bookstackapp.com/) Simple & Free Wiki Software
 
-![tested](https://img.shields.io/badge/{{ if bookstack.tested_text == "no" }}not_tested{{ else }}{{ bookstack.tested_text }}{{ endif }}-None_Arm-{{ if bookstack.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if bookstack.tested_text_arm == "no" }}not_tested{{ else }}{{ bookstack.tested_text_arm }}{{ endif }}-Arm-{{ if bookstack.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if bookstack.tested }}not_tested{{ else }}{{ bookstack.tested }}{{ endif }}-None_Arm-{{ if bookstack.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if bookstack.tested_arm }}not_tested{{ else }}{{ bookstack.tested_arm }}{{ endif }}-Arm-{{ if bookstack.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

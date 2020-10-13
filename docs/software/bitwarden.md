@@ -2,8 +2,8 @@
 
 [Bitwarden](https://bitwarden.com/) is an open source password manager. VivumLab utilizes an Open Source clone of the Bitwarden API server, [bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs). This is primarily due to performance and complexity reasons. `bitwarden_rs` requires just one Docker container, whereas the official `Bitwarden` install requires something like six different containers.
 
-![tested](https://img.shields.io/badge/{{ if bitwarden.tested_text == "no" }}not_tested{{ else }}{{ bitwarden.tested_text }}{{ endif }}-None_Arm-{{ if bitwarden.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if bitwarden.tested_text_arm == "no" }}not_tested{{ else }}{{ bitwarden.tested_text_arm }}{{ endif }}-Arm-{{ if bitwarden.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if bitwarden.tested }}not_tested{{ else }}{{ bitwarden.tested }}{{ endif }}-None_Arm-{{ if bitwarden.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if bitwarden.tested_arm }}not_tested{{ else }}{{ bitwarden.tested_arm }}{{ endif }}-Arm-{{ if bitwarden.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

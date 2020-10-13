@@ -2,8 +2,8 @@
 
 [BarcodeBuddy](https://github.com/Forceu/barcodebuddy) Barcode system for Grocy
 
-![tested](https://img.shields.io/badge/{{ if barcodebuddy.tested_text == "no" }}not_tested{{ else }}{{ barcodebuddy.tested_text }}{{ endif }}-None_Arm-{{ if barcodebuddy.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if barcodebuddy.tested_text_arm == "no" }}not_tested{{ else }}{{ barcodebuddy.tested_text_arm }}{{ endif }}-Arm-{{ if barcodebuddy.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if barcodebuddy.tested }}not_tested{{ else }}{{ barcodebuddy.tested }}{{ endif }}-None_Arm-{{ if barcodebuddy.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if barcodebuddy.tested_arm }}not_tested{{ else }}{{ barcodebuddy.tested_arm }}{{ endif }}-Arm-{{ if barcodebuddy.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

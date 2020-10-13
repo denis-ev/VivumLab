@@ -2,8 +2,8 @@
 
 [BulletNotes](https://github.com/Vivumlab/BulletNotes/) is an open source note taking app.
 
-![tested](https://img.shields.io/badge/{{ if bulletnotes.tested_text == "no" }}not_tested{{ else }}{{ bulletnotes.tested_text }}{{ endif }}-None_Arm-{{ if bulletnotes.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if bulletnotes.tested_text_arm == "no" }}not_tested{{ else }}{{ bulletnotes.tested_text_arm }}{{ endif }}-Arm-{{ if bulletnotes.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if bulletnotes.tested }}not_tested{{ else }}{{ bulletnotes.tested }}{{ endif }}-None_Arm-{{ if bulletnotes.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if bulletnotes.tested_arm }}not_tested{{ else }}{{ bulletnotes.tested_arm }}{{ endif }}-Arm-{{ if bulletnotes.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

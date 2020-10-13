@@ -2,8 +2,8 @@
 
 [Home Assistant](https://www.home-assistant.io/) can automate just about any part of your home.
 
-![tested](https://img.shields.io/badge/{{ if homeassistant.tested_text == "no" }}not_tested{{ else }}{{ homeassistant.tested_text }}{{ endif }}-None_Arm-{{ if homeassistant.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if homeassistant.tested_text_arm == "no" }}not_tested{{ else }}{{ homeassistant.tested_text_arm }}{{ endif }}-Arm-{{ if homeassistant.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if homeassistant. }}not_tested{{ else }}{{ homeassistant.tested }}{{ endif }}-None_Arm-{{ if homeassistant. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if homeassistant. }}not_tested{{ else }}{{ homeassistant.tested_arm }}{{ endif }}-Arm-{{ if homeassistant. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

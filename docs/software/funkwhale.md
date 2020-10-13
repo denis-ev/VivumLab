@@ -2,8 +2,8 @@
 
 [Funkwhale](https://Funkwhale.audio/en_US/) A social platform to enjoy and share music
 
-![tested](https://img.shields.io/badge/{{ if funkwhale.tested_text == "no" }}not_tested{{ else }}{{ funkwhale.tested_text }}{{ endif }}-None_Arm-{{ if funkwhale.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if funkwhale.tested_text_arm == "no" }}not_tested{{ else }}{{ funkwhale.tested_text_arm }}{{ endif }}-Arm-{{ if funkwhale.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if funkwhale. }}not_tested{{ else }}{{ funkwhale.tested }}{{ endif }}-None_Arm-{{ if funkwhale. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if funkwhale. }}not_tested{{ else }}{{ funkwhale.tested_arm }}{{ endif }}-Arm-{{ if funkwhale. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

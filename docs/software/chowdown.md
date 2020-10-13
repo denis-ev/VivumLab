@@ -2,8 +2,8 @@
 
 [Chowdown](https://hub.docker.com/r/gregyankovoy/chowdown)  Simple recipes in Markdown format
 
-![tested](https://img.shields.io/badge/{{ if chowdown.tested_text == "no" }}not_tested{{ else }}{{ chowdown.tested_text }}{{ endif }}-None_Arm-{{ if chowdown.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if chowdown.tested_text_arm == "no" }}not_tested{{ else }}{{ chowdown.tested_text_arm }}{{ endif }}-Arm-{{ if chowdown.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if chowdown.tested }}not_tested{{ else }}{{ chowdown.tested }}{{ endif }}-None_Arm-{{ if chowdown.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if chowdown.tested_arm }}not_tested{{ else }}{{ chowdown.tested_arm }}{{ endif }}-Arm-{{ if chowdown.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

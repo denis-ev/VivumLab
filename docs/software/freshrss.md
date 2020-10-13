@@ -2,8 +2,8 @@
 
 [FreshRSS](https://freshrss.org) is a free, self-hostable aggregator.
 
-![tested](https://img.shields.io/badge/{{ if freshrss.tested_text == "no" }}not_tested{{ else }}{{ freshrss.tested_text }}{{ endif }}-None_Arm-{{ if freshrss.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if freshrss.tested_text_arm == "no" }}not_tested{{ else }}{{ freshrss.tested_text_arm }}{{ endif }}-Arm-{{ if freshrss.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if freshrss. }}not_tested{{ else }}{{ freshrss.tested }}{{ endif }}-None_Arm-{{ if freshrss. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if freshrss. }}not_tested{{ else }}{{ freshrss.tested_arm }}{{ endif }}-Arm-{{ if freshrss. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

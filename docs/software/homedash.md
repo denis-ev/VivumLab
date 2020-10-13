@@ -2,8 +2,8 @@
 
 [Homedash](https://lamarios.github.io/Homedash2/) is a simple dashboard that allows to monitor and interact with many different services.
 
-![tested](https://img.shields.io/badge/{{ if homedash.tested_text == "no" }}not_tested{{ else }}{{ homedash.tested_text }}{{ endif }}-None_Arm-{{ if homedash.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if homedash.tested_text_arm == "no" }}not_tested{{ else }}{{ homedash.tested_text_arm }}{{ endif }}-Arm-{{ if homedash.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if homedash. }}not_tested{{ else }}{{ homedash.tested }}{{ endif }}-None_Arm-{{ if homedash. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if homedash. }}not_tested{{ else }}{{ homedash.tested_arm }}{{ endif }}-Arm-{{ if homedash. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

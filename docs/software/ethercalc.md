@@ -2,8 +2,8 @@
 
 [EtherCalc](https://ethercalc.net) EtherCalc is a web spreadsheet
 
-![tested](https://img.shields.io/badge/{{ if ethercalc.tested_text == "no" }}not_tested{{ else }}{{ ethercalc.tested_text }}{{ endif }}-None_Arm-{{ if ethercalc.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if ethercalc.tested_text_arm == "no" }}not_tested{{ else }}{{ ethercalc.tested_text_arm }}{{ endif }}-Arm-{{ if ethercalc.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if ethercalc. }}not_tested{{ else }}{{ ethercalc.tested }}{{ endif }}-None_Arm-{{ if ethercalc. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if ethercalc. }}not_tested{{ else }}{{ ethercalc.tested_arm }}{{ endif }}-Arm-{{ if ethercalc. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

@@ -2,8 +2,8 @@
 
 [Lazylibrarian](https://lazylibrarian.gitlab.io/) LazyLibrarian is a program to follow authors and grab metadata for all your digital reading needs.
 
-![tested](https://img.shields.io/badge/{{ if lazylibrarian.tested_text == "no" }}not_tested{{ else }}{{ lazylibrarian.tested_text }}{{ endif }}-None_Arm-{{ if lazylibrarian.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if lazylibrarian.tested_text_arm == "no" }}not_tested{{ else }}{{ lazylibrarian.tested_text_arm }}{{ endif }}-Arm-{{ if lazylibrarian.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if lazylibrarian. }}not_tested{{ else }}{{ lazylibrarian.tested }}{{ endif }}-None_Arm-{{ if lazylibrarian. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if lazylibrarian. }}not_tested{{ else }}{{ lazylibrarian.tested_arm }}{{ endif }}-Arm-{{ if lazylibrarian. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

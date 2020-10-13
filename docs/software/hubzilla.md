@@ -2,8 +2,8 @@
 
 [Hubzilla](https://framagit.org/hubzilla) is a powerful platform for creating interconnected websites featuring a [decentralized/nomadic identity](https://zotlabs.org/page/hubzilla/hubzilla-project).
 
-![tested](https://img.shields.io/badge/{{ if hubzilla.tested_text == "no" }}not_tested{{ else }}{{ hubzilla.tested_text }}{{ endif }}-None_Arm-{{ if hubzilla.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if hubzilla.tested_text_arm == "no" }}not_tested{{ else }}{{ hubzilla.tested_text_arm }}{{ endif }}-Arm-{{ if hubzilla.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if hubzilla. }}not_tested{{ else }}{{ hubzilla.tested }}{{ endif }}-None_Arm-{{ if hubzilla. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if hubzilla. }}not_tested{{ else }}{{ hubzilla.tested_arm }}{{ endif }}-Arm-{{ if hubzilla. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

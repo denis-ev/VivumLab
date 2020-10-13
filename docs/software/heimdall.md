@@ -2,8 +2,8 @@
 
 [Heimdall](https://heimdall.site/) Heimdall Application Dashboard is a dashboard for all your web applications.
 
-![tested](https://img.shields.io/badge/{{ if heimdall.tested_text == "no" }}not_tested{{ else }}{{ heimdall.tested_text }}{{ endif }}-None_Arm-{{ if heimdall.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if heimdall.tested_text_arm == "no" }}not_tested{{ else }}{{ heimdall.tested_text_arm }}{{ endif }}-Arm-{{ if heimdall.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if heimdall. }}not_tested{{ else }}{{ heimdall.tested }}{{ endif }}-None_Arm-{{ if heimdall. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if heimdall. }}not_tested{{ else }}{{ heimdall.tested_arm }}{{ endif }}-Arm-{{ if heimdall. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

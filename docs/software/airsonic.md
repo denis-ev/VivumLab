@@ -2,8 +2,8 @@
 
 [Airsonic](https://airsonic.github.io/) is a free, web-based media streamer, providing ubiquitous access to your music.
 
-![tested](https://img.shields.io/badge/{{ if airsonic.tested_text == "no" }}not_tested{{ else }}{{ airsonic.tested_text }}{{ endif }}-None_Arm-{{ if airsonic.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if airsonic.tested_text_arm == "no" }}not_tested{{ else }}{{ airsonic.tested_text_arm }}{{ endif }}-Arm-{{ if airsonic.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-None_Arm-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if airsonic.tested_arm }}not_tested{{ else }}{{ airsonic.tested_arm }}{{ endif }}-Arm-{{ if airsonic.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

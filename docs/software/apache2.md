@@ -2,8 +2,8 @@
 
 [Apache 2](https://httpd.apache.org/) is a free web server.
 
-![tested](https://img.shields.io/badge/{{ if apache2.tested_text == "no" }}not_tested{{ else }}{{ apache2.tested_text }}{{ endif }}-None_Arm-{{ if apache2.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if apache2.tested_text_arm == "no" }}not_tested{{ else }}{{ apache2.tested_text_arm }}{{ endif }}-Arm-{{ if apache2.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if apache2.tested }}not_tested{{ else }}{{ apache2.tested }}{{ endif }}-None_Arm-{{ if apache2.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if apache2.tested_arm }}not_tested{{ else }}{{ apache2.tested_arm }}{{ endif }}-Arm-{{ if apache2.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

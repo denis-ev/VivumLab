@@ -2,8 +2,8 @@
 
 [Factorio](https://github.com/factoriotools/factorio-docker) Factorio headless server in a Docker container
 
-![tested](https://img.shields.io/badge/{{ if factorio.tested_text == "no" }}not_tested{{ else }}{{ factorio.tested_text }}{{ endif }}-None_Arm-{{ if factorio.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if factorio.tested_text_arm == "no" }}not_tested{{ else }}{{ factorio.tested_text_arm }}{{ endif }}-Arm-{{ if factorio.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if factorio. }}not_tested{{ else }}{{ factorio.tested }}{{ endif }}-None_Arm-{{ if factorio. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if factorio. }}not_tested{{ else }}{{ factorio.tested_arm }}{{ endif }}-Arm-{{ if factorio. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 

@@ -2,8 +2,8 @@
 
 [Gotify](https://github.com/gotify/server) A simple server for sending and receiving messages in real-time per WebSocket. (Includes a sleek web-ui)
 
-![tested](https://img.shields.io/badge/{{ if gotify.tested_text == "no" }}not_tested{{ else }}{{ gotify.tested_text }}{{ endif }}-None_Arm-{{ if gotify.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if gotify.tested_text_arm == "no" }}not_tested{{ else }}{{ gotify.tested_text_arm }}{{ endif }}-Arm-{{ if gotify.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![tested](https://img.shields.io/badge/{{ if gotify. }}not_tested{{ else }}{{ gotify.tested }}{{ endif }}-None_Arm-{{ if gotify. }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if gotify. }}not_tested{{ else }}{{ gotify.tested_arm }}{{ endif }}-Arm-{{ if gotify. }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 
