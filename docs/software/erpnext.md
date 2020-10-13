@@ -13,7 +13,7 @@ Current Version of the image is {{ erpnext.version }}
 
 The docker image comes from [multiple images](https://hub.docker.com/u/frapper)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Setup
 

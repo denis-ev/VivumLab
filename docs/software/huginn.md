@@ -12,7 +12,7 @@ Current Version of the image is {{ huginn.version }}
 {% endif %}
 
 The docker image comes from [huginn/huginn-single-process](https://hub.docker.com/r/huginn/huginn-single-process) and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

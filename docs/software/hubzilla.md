@@ -13,7 +13,7 @@ Current Version of the image is {{ hubzilla.version }}
 
 The docker image comes from [voryzen/hubzilla:4.6](https://hub.docker.com/r/gonzague/homedash)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=hubzilla&type=image&architecture=arm%2Carm64%2Camd64)) and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=hubzilla&type=image&architecture=arm%2Carm64%2Camd64)) and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Setup
 

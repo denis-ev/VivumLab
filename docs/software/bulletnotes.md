@@ -13,7 +13,7 @@ Current Version of the image is {{ bulletnotes.version }}
 
 The docker image comes from [nickbusey/bulletnotes](https://hub.docker.com/r/nickbusey/bulletnotes/tags)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

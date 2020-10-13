@@ -13,7 +13,7 @@ Current Version of the image is {{ gotify.version }}
 
 The docker image comes from [gotify/server](https://hub.docker.com/r/gotify/server))
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=gotify%2Fserver&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=gotify%2Fserver&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

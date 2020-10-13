@@ -13,7 +13,7 @@ Current Version of the image is {{ codimd.version }}
 
 The docker image comes from [quay.io/codimd/server:latest](https://quay.io/repository/codimd/server?tag=latest&tab=tags)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=codimd&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=codimd&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

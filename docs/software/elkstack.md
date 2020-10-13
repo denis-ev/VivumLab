@@ -13,7 +13,7 @@ Current Version of the image is {{ elkstack.version }}
 
 The docker image comes from [sebp/elk](https://hub.docker.com/r/sebp/elk)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=elk&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=elk&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

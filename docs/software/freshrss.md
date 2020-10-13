@@ -13,7 +13,7 @@ Current Version of the image is {{ freshrss.version }}
 
 The docker image comes from [freshrss/freshrss:alpine](https://hub.docker.com/r/freshrss/freshrss)
 and currently does not support arm (using alpine) or arm 64 devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=freshrss&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=freshrss&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 

@@ -13,7 +13,7 @@ Current Version of the image is {{ factorio.version }}
 
 The docker image comes from [factoriotools/factorio](https://hub.docker.com/r/factoriotools/factorio)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement and test your idea using the [documentation](dev/Adding-Services.md).
+If you are aware of a suitable substitution or replacement and test your idea using the [documentation](../dev/Adding-Services.md).
 
 ## Access
 
