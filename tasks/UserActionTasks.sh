@@ -75,29 +75,15 @@ Task::create_sshkey() {
   ssh-copy-id -i "$HOME/.ssh/$(pwless_sshkey).pub" "$(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port)" || colorize light_red "error: create_sshkey: copying keys"
 }
 
-# Opens a shell in the VivumLab container
+# Provides the user with a terminal rendered 'contact us' doc 
 Task::find_help() {
   : @desc "Shows the user where to find help/ contact the VivumLab community"
   
   cat vivumlablogo.txt
-  echo ""
+  printf "\n\n"
+
   printf "MOTD:\n\n" && cat MOTD || printf "Could not get MOTD"
   printf "\n\n"
-  
-  echo "Thank you for trying to find help.. the VivumLab community is here for you"
-  sleep 2
-  echo " You have some options: Zulip chat, Reddit, and Github"
-  sleep 2
-  echo "Help is most readily available via VivumLab Zulip chat"
-  colorize yellow "visit https://vivumlab.zulipchat.com"
-  sleep 1
-  echo "If help isn't urgently required, or you may not be able to reply promptly:"
-  colorize yellow "try https://reddit.com/r/vivumlab"
-  sleep 1
-  echo "please note that further input may be required from you."
-  echo "In this case, VivumLab and it's community will benefit from your presence at:"
-  colorize yellow "https://github.com/VivumLab/VivumLab"
-  sleep 1
-  echo "submit or view issues at:"
-  colorize yellow "https://github.com/VivumLab/VivumLab/issues"
+
+  Task::run_docker mdv -t 729.8953 docs/Contact-us.md
 }
