@@ -3,9 +3,16 @@
 [Duplicati](https://www.duplicati.com/) Free backup software to store encrypted backups online
 For Windows, macOS and Linux.
 
+![tested](https://img.shields.io/badge/{{ if duplicati.tested_text == "no" }}not_tested{{ else }}{{ duplicati.tested_text }}{{ endif }}-None_Arm-{{ if duplicati.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if duplicati.tested_text_arm == "no" }}not_tested{{ else }}{{ duplicati.tested_text_arm }}{{ endif }}-Arm-{{ if duplicati.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ duplicati.version }}
+{% endif %}
+
 The docker image comes from [linuxserver/duplicati](https://hub.docker.com/r/linuxserver/duplicati) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

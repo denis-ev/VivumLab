@@ -2,9 +2,16 @@
 
 [Grafana](https://grafana.com/) is a Time Series Database graphing application.
 
+![tested](https://img.shields.io/badge/{{ if grafana.tested_text == "no" }}not_tested{{ else }}{{ grafana.tested_text }}{{ endif }}-None_Arm-{{ if grafana.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if grafana.tested_text_arm == "no" }}not_tested{{ else }}{{ grafana.tested_text_arm }}{{ endif }}-Arm-{{ if grafana.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ grafana.version }}
+{% endif %}
+
 The docker image comes from [grafana/grafana](https://hub.docker.com/r/grafana/grafana) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 You can use it to visualize the Weather data imported by [influxdb_darksky](software/influxdb_darksky),
 power, activity, and other data from [Home Assistant](software/homeassistant), and general server

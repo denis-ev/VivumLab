@@ -2,6 +2,15 @@
 
 [Authelia](https://www.Authelia.com) is an open-source full-featured authentication server.
 
+![tested](https://img.shields.io/badge/{{ if authelia.tested_text == "no" }}not_tested{{ else }}{{ authelia.tested_text }}{{ endif }}-None_Arm-{{ if authelia.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if authelia.tested_text_arm == "no" }}not_tested{{ else }}{{ authelia.tested_text_arm }}{{ endif }}-Arm-{{ if authelia.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ authelia.version }}
+{% endif %}
+
 ## What is this?
 
 Authelia is a multi-factor, authentication proxy. Used in conjuction with traefik (which vivumlab already uses) it secures your vivumlab services behind authentication. By default you must authenticate with username and password, and at least one other 'factor' ie:
@@ -19,12 +28,10 @@ docker run authelia/authelia:latest authelia hash-password 'YOUR NEW PASSWORD' |
 ```
 
 The docker image comes from [authelia/authelia:latest](https://hub.docker.com/r/authelia/authelia) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Prerequisites
 
-> Note: Authelia is written in GO, and there is a known GO issue with certain Linux Kernel Versions. Specifically, Ubuntu 20.04 ships with a default kernel of 5.3.0-46 (as of 4/28/2020) Using this kernel will result in a constantly-dying-and-restarting Authelia container with a note that shows Runtime: mlock of signal stack failed.... Update your kernel to 5.3.15+, 5.4.2+, or 5.5+ You *must* upgrade your docker hosts' kerenl to one of those versions for Authelia to work
+> Note: Authelia is written in GO, and there is a known GO issue with certain Linux Kernel Versions. Specifically, Ubuntu 20.04 ships with a default kernel of 5.3.0-46 (as of 4/28/2020) Using this kernel will result in a constantly-dying-and-restarting Authelia container with a note that shows Runtime: mlock of signal stack failed.... Update your kernel to 5.3.15+, 5.4.2+, or 5.5+ You *must* upgrade your docker hosts' kernel to one of those versions for Authelia to work
 
 1. Authelia requires a working SMTP server to authenticate new users and register devices.
 

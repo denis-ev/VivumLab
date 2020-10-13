@@ -2,9 +2,16 @@
 
 [Grocy](https://grocy.info) ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home
 
+![tested](https://img.shields.io/badge/{{ if grocy.tested_text == "no" }}not_tested{{ else }}{{ grocy.tested_text }}{{ endif }}-None_Arm-{{ if grocy.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if grocy.tested_text_arm == "no" }}not_tested{{ else }}{{ grocy.tested_text_arm }}{{ endif }}-Arm-{{ if grocy.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ grocy.version }}
+{% endif %}
+
 The docker image comes from [linuxserver/grocy](https://hub.docker.com/r/linuxserver/grocy) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

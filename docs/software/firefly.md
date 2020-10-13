@@ -2,9 +2,16 @@
 
 [Firefly III](https://firefly-iii.org/) is a money management app.
 
+![tested](https://img.shields.io/badge/{{ if firefly_iii.tested_text == "no" }}not_tested{{ else }}{{ firefly_iii.tested_text }}{{ endif }}-None_Arm-{{ if firefly_iii.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if firefly_iii.tested_text_arm == "no" }}not_tested{{ else }}{{ firefly_iii.tested_text_arm }}{{ endif }}-Arm-{{ if firefly_iii.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ firefly_iii.version }}
+{% endif %}
+
 The docker image comes from [jc5x/firefly-iii](https://hub.docker.com/r/jc5x/firefly-iii) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

@@ -2,18 +2,25 @@
 
 [CodiMD](https://demo.codimd.org/) The best platform to write and share markdown
 
+![tested](https://img.shields.io/badge/{{ if codimd.tested_text == "no" }}not_tested{{ else }}{{ codimd.tested_text }}{{ endif }}-None_Arm-{{ if codimd.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if codimd.tested_text_arm == "no" }}not_tested{{ else }}{{ codimd.tested_text_arm }}{{ endif }}-Arm-{{ if codimd.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ codimd.version }}
+{% endif %}
+
 The docker image comes from [quay.io/codimd/server:latest](https://quay.io/repository/codimd/server?tag=latest&tab=tags)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=codimd&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=codimd&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Access
 
-It is available at [https://codimd.{{ domain }}/](https://codimd.{{ domain }}/) or [http://codimd.{{ domain }}/](http://codimd.{{ domain }}/)
+It is available at [https://{% if codimd.domain %}{{ codimd.domain }}{% else %}{{ codimd.subdomain + "." + domain }}{% endif %}/](https://{% if codimd.domain %}{{ codimd.domain }}{% else %}{{ codimd.subdomain + "." + domain }}{% endif %}/) or [http://{% if codimd.domain %}{{ codimd.domain }}{% else %}{{ codimd.subdomain + "." + domain }}{% endif %}/](http://{% if codimd.domain %}{{ codimd.domain }}{% else %}{{ codimd.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://codimd.{{ tor_domain }}/](http://codimd.{{ tor_domain }}/)
+It is also available via Tor at [http://{{ codimd.subdomain + "." + tor_domain }}/](http://{{ codimd.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## Security enable/disable https_only and auth

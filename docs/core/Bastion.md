@@ -13,7 +13,7 @@ This is desirable for three reasons.
 
 First you need a cloud server through a provider such as AWS or Digital Ocean.
 
-You can use the [VivumLab Terraform feature](/core/terraform), or set it up manually.
+You can use the [VivumLab Terraform feature](core/terraform), or set it up manually.
 
 Set any `bastion` config values to their correct settings.
 

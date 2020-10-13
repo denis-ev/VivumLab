@@ -2,6 +2,15 @@
 
 [Jenkins](https://www.jenkins.io/) The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.
 
+![tested](https://img.shields.io/badge/{{ if jenkins.tested_text == "no" }}not_tested{{ else }}{{ jenkins.tested_text }}{{ endif }}-None_Arm-{{ if jenkins.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if jenkins.tested_text_arm == "no" }}not_tested{{ else }}{{ jenkins.tested_text_arm }}{{ endif }}-Arm-{{ if jenkins.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ jenkins.version }}
+{% endif %}
+
 ## Access
 
 It is available at [https://{% if jenkins.domain %}{{ jenkins.domain }}{% else %}{{ jenkins.subdomain + "." + domain }}{% endif %}/](https://{% if jenkins.domain %}{{ jenkins.domain }}{% else %}{{ jenkins.subdomain + "." + domain }}{% endif %}/) or [http://{% if jenkins.domain %}{{ jenkins.domain }}{% else %}{{ jenkins.subdomain + "." + domain }}{% endif %}/](http://{% if jenkins.domain %}{{ jenkins.domain }}{% else %}{{ jenkins.subdomain + "." + domain }}{% endif %}/)

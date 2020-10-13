@@ -8,7 +8,7 @@ We are currently in the development stage, focusing on the core services that wi
 
 ## What does VivumLab actually do?
 
-VivumLab deploys web services to a server. Deployment is managed by Ansible and the services are managed by Docker. To learn more, read our [Installation](/core/Installation.md) documentation.
+VivumLab deploys web services to a server. Deployment is managed by Ansible and the services are managed by Docker. To learn more, read our [Installation](core/Installation.md) documentation.
 
 ## What kind of help is VivumLab looking for?
 
@@ -34,6 +34,6 @@ Thank you for trying VivumLab!
 ### Want to know more?
 Get to know how you can contact us [here](Contact-us.md)
 
-Interested in contributing to this project? You can view our contribution guidelines [here](/dev/Contribution-Guidelines.md)
+Interested in contributing to this project? You can view our contribution guidelines [here](dev/Contribution-Guidelines.md)
 
 Or view our Code of Conduct [here](Code-of-Conduct.md)

@@ -8,13 +8,13 @@ To make Radarr work, you need to configure an Indexer and a Download Client.
 
 ### Indexer: Jackett
 
-The Download Client will be [Jackett](/software/jackett.md), you should make sure that you have it installed and configured to follow these instructions.
+The Download Client will be [Jackett](software/jackett.md), you should make sure that you have it installed and configured to follow these instructions.
 Then, in Radarr, go to `Settings` then the `Indexers` tab, and click the Plus button.
 Select the `Custom` button undernear `Torznab` and enter `Jackett` for the name, for the URL enter `http://jackett:9117/api/v2.0/indexers/all/results/torznab/` and for the API Key, enter the API key that Jackett displays on its Dashboard.
 
 ### Download client: Transmission
 
-The Download Client will be [Transmission](/software/transmission.md), you should make sure
+The Download Client will be [Transmission](software/transmission.md), you should make sure
 that you have it installed and configured to follow these instructions.
 Then, in Radarr, go to the `Download Client` tab, toggle the `Advanced Settings` toggle in the top right to `Shown`, then click the Plus button,
 select `Transmission`.

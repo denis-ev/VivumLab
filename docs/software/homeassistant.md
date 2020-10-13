@@ -2,9 +2,16 @@
 
 [Home Assistant](https://www.home-assistant.io/) can automate just about any part of your home.
 
+![tested](https://img.shields.io/badge/{{ if homeassistant.tested_text == "no" }}not_tested{{ else }}{{ homeassistant.tested_text }}{{ endif }}-None_Arm-{{ if homeassistant.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if homeassistant.tested_text_arm == "no" }}not_tested{{ else }}{{ homeassistant.tested_text_arm }}{{ endif }}-Arm-{{ if homeassistant.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ homeassistant.version }}
+{% endif %}
+
 The docker image comes from [homeassistant/home-assistant](https://hub.docker.com/r/homeassistant/home-assistant) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 

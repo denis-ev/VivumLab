@@ -2,11 +2,18 @@
 
 [Bitwarden](https://bitwarden.com/) is an open source password manager. VivumLab utilizes an Open Source clone of the Bitwarden API server, [bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs). This is primarily due to performance and complexity reasons. `bitwarden_rs` requires just one Docker container, whereas the official `Bitwarden` install requires something like six different containers.
 
+![tested](https://img.shields.io/badge/{{ if bitwarden.tested_text == "no" }}not_tested{{ else }}{{ bitwarden.tested_text }}{{ endif }}-None_Arm-{{ if bitwarden.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if bitwarden.tested_text_arm == "no" }}not_tested{{ else }}{{ bitwarden.tested_text_arm }}{{ endif }}-Arm-{{ if bitwarden.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ bitwarden.version }}
+{% endif %}
+
 The docker image comes from [bitwardenrs/server:latest](https://hub.docker.com/r/bitwardenrs/server)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=bitwarden&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=bitwarden&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Security Note
 

@@ -2,11 +2,18 @@
 
 [Digikam](https://www.digikam.org/) Professional Photo Management with the Power of Open Source
 
+![tested](https://img.shields.io/badge/{{ if digikam.tested_text == "no" }}not_tested{{ else }}{{ digikam.tested_text }}{{ endif }}-None_Arm-{{ if digikam.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if digikam.tested_text_arm == "no" }}not_tested{{ else }}{{ digikam.tested_text_arm }}{{ endif }}-Arm-{{ if digikam.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ digikam.version }}
+{% endif %}
+
 The docker image comes from [rpufky/digikam](https://hub.docker.com/r/rpufky/digikam)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=digikam&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=digikam&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Access
 

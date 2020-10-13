@@ -4,7 +4,7 @@ version: '3'
 services:
   watchtower:
     container_name: watchtower
-    image: containrrr/watchtower
+    image: containrrr/watchtower:{{ watchtower.version }}
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

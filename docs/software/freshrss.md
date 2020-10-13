@@ -2,11 +2,18 @@
 
 [FreshRSS](https://freshrss.org) is a free, self-hostable aggregator.
 
+![tested](https://img.shields.io/badge/{{ if freshrss.tested_text == "no" }}not_tested{{ else }}{{ freshrss.tested_text }}{{ endif }}-None_Arm-{{ if freshrss.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if freshrss.tested_text_arm == "no" }}not_tested{{ else }}{{ freshrss.tested_text_arm }}{{ endif }}-Arm-{{ if freshrss.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ freshrss.version }}
+{% endif %}
+
 The docker image comes from [freshrss/freshrss:alpine](https://hub.docker.com/r/freshrss/freshrss)
 and currently does not support arm (using alpine) or arm 64 devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=freshrss&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=freshrss&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Access
 

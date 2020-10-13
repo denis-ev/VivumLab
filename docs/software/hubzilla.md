@@ -2,11 +2,18 @@
 
 [Hubzilla](https://framagit.org/hubzilla) is a powerful platform for creating interconnected websites featuring a [decentralized/nomadic identity](https://zotlabs.org/page/hubzilla/hubzilla-project).
 
+![tested](https://img.shields.io/badge/{{ if hubzilla.tested_text == "no" }}not_tested{{ else }}{{ hubzilla.tested_text }}{{ endif }}-None_Arm-{{ if hubzilla.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if hubzilla.tested_text_arm == "no" }}not_tested{{ else }}{{ hubzilla.tested_text_arm }}{{ endif }}-Arm-{{ if hubzilla.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ hubzilla.version }}
+{% endif %}
+
 The docker image comes from [voryzen/hubzilla:4.6](https://hub.docker.com/r/gonzague/homedash)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=hubzilla&type=image&architecture=arm%2Carm64%2Camd64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=hubzilla&type=image&architecture=arm%2Carm64%2Camd64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Setup
 
@@ -66,10 +73,10 @@ smtp:
 
 ## Access
 
-It is available at [https://hubzilla.{{ domain }}/](https://hubzilla.{{ domain }}/) or [http://hubzilla.{{ domain }}/](http://hubzilla.{{ domain }}/)
+It is available at [https://{% if hubzilla.domain %}{{ hubzilla.domain }}{% else %}{{ hubzilla.subdomain + "." + domain }}{% endif %}/](https://{% if hubzilla.domain %}{{ hubzilla.domain }}{% else %}{{ hubzilla.subdomain + "." + domain }}{% endif %}/) or [http://{% if hubzilla.domain %}{{ hubzilla.domain }}{% else %}{{ hubzilla.subdomain + "." + domain }}{% endif %}/](http://{% if hubzilla.domain %}{{ hubzilla.domain }}{% else %}{{ hubzilla.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://hubzilla.{{ tor_domain }}/](http://hubzilla.{{ tor_domain }}/)
+It is also available via Tor at [http://{{ hubzilla.subdomain + "." + tor_domain }}/](http://{{ hubzilla.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## Security enable/disable https_only and auth

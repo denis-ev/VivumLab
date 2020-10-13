@@ -1,5 +1,16 @@
 # Matomo
 
+[Matomo](https://matomo.org) Google Analytics alternative that protects your data and your customers' privacy.
+
+![tested](https://img.shields.io/badge/{{ if matomo.tested_text == "no" }}not_tested{{ else }}{{ matomo.tested_text }}{{ endif }}-None_Arm-{{ if matomo.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if matomo.tested_text_arm == "no" }}not_tested{{ else }}{{ matomo.tested_text_arm }}{{ endif }}-Arm-{{ if matomo.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ matomo.version }}
+{% endif %}
+
 ## Setup
 
 During the setup wizard, your database connection information should all be autopopulated. Just click `Next`.

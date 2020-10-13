@@ -2,6 +2,15 @@
 
 [Lazylibrarian](https://lazylibrarian.gitlab.io/) LazyLibrarian is a program to follow authors and grab metadata for all your digital reading needs.
 
+![tested](https://img.shields.io/badge/{{ if lazylibrarian.tested_text == "no" }}not_tested{{ else }}{{ lazylibrarian.tested_text }}{{ endif }}-None_Arm-{{ if lazylibrarian.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if lazylibrarian.tested_text_arm == "no" }}not_tested{{ else }}{{ lazylibrarian.tested_text_arm }}{{ endif }}-Arm-{{ if lazylibrarian.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ lazylibrarian.version }}
+{% endif %}
+
 ## Access
 
 It is available at [https://{% if lazylibrarian.domain %}{{ lazylibrarian.domain }}{% else %}{{ lazylibrarian.subdomain + "." + domain }}{% endif %}/](https://{% if lazylibrarian.domain %}{{ lazylibrarian.domain }}{% else %}{{ lazylibrarian.subdomain + "." + domain }}{% endif %}/) or [http://{% if lazylibrarian.domain %}{{ lazylibrarian.domain }}{% else %}{{ lazylibrarian.subdomain + "." + domain }}{% endif %}/](http://{% if lazylibrarian.domain %}{{ lazylibrarian.domain }}{% else %}{{ lazylibrarian.subdomain + "." + domain }}{% endif %}/)

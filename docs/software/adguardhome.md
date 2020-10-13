@@ -2,6 +2,15 @@
 
 [AdGuard Home](https://adguard.com/en/adguard-home/overview.html) Network-wide software for blocking ads and tracking.
 
+![tested](https://img.shields.io/badge/{{ if adguardhome.tested_text == "no" }}not_tested{{ else }}{{ adguardhome.tested_text }}{{ endif }}-None_Arm-{{ if adguardhome.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if adguardhome.tested_text_arm == "no" }}not_tested{{ else }}{{ adguardhome.tested_text_arm }}{{ endif }}-Arm-{{ if adguardhome.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ adguardhome.version }}
+{% endif %}
+
 ## Access
 
 It is available at [https://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/](https://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/) or [http://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/](http://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/)

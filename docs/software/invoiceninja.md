@@ -2,6 +2,15 @@
 
 [Invoice Ninja](https://www.invoiceninja.org/) Free Open-Source Invoicing
 
+![tested](https://img.shields.io/badge/{{ if invoiceninja.tested_text == "no" }}not_tested{{ else }}{{ invoiceninja.tested_text }}{{ endif }}-None_Arm-{{ if invoiceninja.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if invoiceninja.tested_text_arm == "no" }}not_tested{{ else }}{{ invoiceninja.tested_text_arm }}{{ endif }}-Arm-{{ if invoiceninja.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ invoiceninja.version }}
+{% endif %}
+
 ## Access
 
 It is available at [https://{% if invoiceninja.domain %}{{ invoiceninja.domain }}{% else %}{{ invoiceninja.subdomain + "." + domain }}{% endif %}/](https://{% if invoiceninja.domain %}{{ invoiceninja.domain }}{% else %}{{ invoiceninja.subdomain + "." + domain }}{% endif %}/) or [http://{% if invoiceninja.domain %}{{ invoiceninja.domain }}{% else %}{{ invoiceninja.subdomain + "." + domain }}{% endif %}/](http://{% if invoiceninja.domain %}{{ invoiceninja.domain }}{% else %}{{ invoiceninja.subdomain + "." + domain }}{% endif %}/)

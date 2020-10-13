@@ -2,9 +2,17 @@
 
 [Huginn](https://github.com/huginn/huginn) Create agents that monitor and act on your behalf. Your agents are standing by!
 
+![tested](https://img.shields.io/badge/{{ if huginn.tested_text == "no" }}not_tested{{ else }}{{ huginn.tested_text }}{{ endif }}-None_Arm-{{ if huginn.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if huginn.tested_text_arm == "no" }}not_tested{{ else }}{{ huginn.tested_text_arm }}{{ endif }}-Arm-{{ if huginn.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ huginn.version }}
+{% endif %}
+
 The docker image comes from [huginn/huginn-single-process](https://hub.docker.com/r/huginn/huginn-single-process) and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement, [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Access
 

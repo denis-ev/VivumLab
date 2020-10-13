@@ -2,11 +2,18 @@
 
 [Gitlab](https://docs.gitlab.com/) "the single application for the entire DevOps lifecycle".
 
+![tested](https://img.shields.io/badge/{{ if gitlab.tested_text == "no" }}not_tested{{ else }}{{ gitlab.tested_text }}{{ endif }}-None_Arm-{{ if gitlab.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if gitlab.tested_text_arm == "no" }}not_tested{{ else }}{{ gitlab.tested_text_arm }}{{ endif }}-Arm-{{ if gitlab.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ gitlab.version }}
+{% endif %}
+
 The docker image comes from [gitlab/gitlab-ce:latest](https://hub.docker.com/r/gitlab/gitlab-ce)
 and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=%20gitlab&type=image&architecture=arm%2Carm64)),
- [please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
-and test your idea using the [documentation](https://vivumlab.com/development/adding_services/).
+If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=%20gitlab&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](dev/Adding-Services.md).
 
 ## Access
 

@@ -2,9 +2,16 @@
 
 [DuckDNS](http://duckdns.org/) is free dynamic DNS hosted on AWS. This provides a client to update the IP pointed to by DuckDNS.
 
+![tested](https://img.shields.io/badge/{{ if duckdns.tested_text == "no" }}not_tested{{ else }}{{ duckdns.tested_text }}{{ endif }}-None_Arm-{{ if duckdns.tested_text == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if duckdns.tested_text_arm == "no" }}not_tested{{ else }}{{ duckdns.tested_text_arm }}{{ endif }}-Arm-{{ if duckdns.tested_text_arm == "no" }}red{{ else }}informational{{ endif }}?style=flat)
+
+## Information
+
+{% if tested %}
+Current Version of the image is {{ duckdns.version }}
+{% endif %}
+
 The docker image comes from [linuxserver/duckdns](https://hub.docker.com/r/linuxserver/duckdns) and should support arm devices.
-If you attempt to run it on arm and encounter issues,
-[please see issue 478](https://github.com/Vivumlab/VivumLab/-/issues/478)
 
 ## Access
 
