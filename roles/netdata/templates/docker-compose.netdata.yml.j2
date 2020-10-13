@@ -19,7 +19,7 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
-      - {{ volumes_root }}/netdata/netdataconfig/netdata:/etc/netdata:ro
+      - {{ volumes_root }}/netdata/config/netdata:/etc/netdata:ro
       - netdatalib:/var/lib/netdata
       - netdatacache:/var/cache/netdata
       - /etc/passwd:/host/etc/passwd:ro

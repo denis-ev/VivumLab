@@ -4,7 +4,7 @@
     path: "{{ volumes_root }}/netdata/{{item}}"
     state: directory
   loop:
-    - "netdataconfig"
+    - "config"
 
 - name: Install necessities and nice-to-haves
   become: yes
@@ -41,7 +41,7 @@
 
 - name: Check that the netdata.conf exists
   stat:
-    path: "{{ volumes_root}}/netdata/netdataconfig/netdata/netdata.conf"
+    path: "{{ volumes_root}}/netdata/config/netdata/netdata.conf"
   register: netdataconf_result
 
 - name: Create temp container.
@@ -49,7 +49,7 @@
   when: not netdataconf_result.stat.exists
 
 - name: Copy config in the directory.
-  shell: docker cp netdata_tmp:/etc/netdata {{ volumes_root}}/netdata/netdataconfig/
+  shell: docker cp netdata_tmp:/etc/netdata {{ volumes_root}}/netdata/config/
   when: not netdataconf_result.stat.exists
   become: yes
 
