@@ -1,8 +1,10 @@
 ---
-- name: Make netdata directory.
+- name: Make netdata directories
   file:
-    path: "{{ volumes_root }}/netdata"
+    path: "{{ volumes_root }}/netdata/{{item}}"
     state: directory
+  loop:
+    - "config"
 
 - name: Install necessities and nice-to-haves
   become: yes
@@ -30,6 +32,39 @@
   template:
     src: service.j2
     dest: /etc/systemd/system/netdata.service
+
+- name: Pull netdata docker images
+  docker_compose:
+    project_src: "{{ volumes_root}}/netdata"
+    pull: true
+    state: present
+
+- name: Check that the netdata.conf exists
+  stat:
+    path: "{{ volumes_root}}/netdata/config/netdata/netdata.conf"
+  register: netdataconf_result
+
+- name: Create temp container.
+  shell: docker run -d --name netdata_tmp netdata/netdata:{{ netdata.version }}
+  when: not netdataconf_result.stat.exists
+
+- name: Copy config in the directory.
+  shell: docker cp netdata_tmp:/etc/netdata {{ volumes_root}}/netdata/config
+  when: not netdataconf_result.stat.exists
+  become: yes
+
+- name: Remove temp container.
+  shell: docker rm -f netdata_tmp
+  when: not netdataconf_result.stat.exists
+
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ volumes_root}}/netdata"
+    state: directory
+    recurse: yes
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Start netdata
   systemd:
