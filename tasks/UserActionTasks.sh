@@ -75,10 +75,10 @@ Task::create_sshkey() {
   ssh-copy-id -i "$HOME/.ssh/$(pwless_sshkey).pub" "$(vlab_ssh_user)@$(vlab_ip) -p $(vlab_port)" || colorize light_red "error: create_sshkey: copying keys"
 }
 
-# Provides the user with a terminal rendered 'contact us' doc 
+# Provides the user with a terminal rendered 'contact us' doc
 Task::find_help() {
   : @desc "Shows the user where to find help/ contact the VivumLab community"
-  
+
   cat vivumlablogo.txt
   printf "\n\n"
 
