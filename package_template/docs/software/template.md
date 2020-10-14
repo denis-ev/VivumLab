@@ -2,90 +2,178 @@
 
 [PackageTitleCase](PackageURL) PackageOneLiner
 
+![tested](https://img.shields.io/badge/{{ if PackageFileName.tested }}not_tested{{ else }}{{ PackageFileName.tested }}{{ endif }}-None_Arm-{{ if PackageFileName.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm_tested](https://img.shields.io/badge/{{ if PackageFileName.tested_arm }}not_tested{{ else }}{{ PackageFileName.tested_arm }}{{ endif }}-Arm-{{ if PackageFileName.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
+
+{% if tested %}
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Current Image Version:** {{ PackageFileName.version }}
+{% endif %}
 **Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
-## Setup
+## SETUP
 
-To enable PackageTitleCase, run the following command:
+### Enabling PackageTitleCase
 
-**`vlab enable.PackageFileName true`**
+#### Command:
 
-alternatively, you can set the appropriate service settings in `settings/config.yml` to true
+**`vlab set PackageFileName.enable True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
 
 eg.
-```
-PackageFileName:
+>PackageFileName
   enable: True
-```
 
-To finalise any changes made, please run:
+#### Finalising changes:
 
-**`vlab update_one.PackageFileName`**
+run: **`vlab update_one service=PackageFileName`**
 
-## First Run
+## FIRST RUN
 
-!!! DEVELOPERS: make sure that you include any information that the user requires to get started here. !!!
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
 
-!!! Below are some example headings (3 hashes), with some example instructions!!!
+!!! Below are some **examples** with headings, and with some **example** instructions !!!
 
-### ADMINISTRATOR SETUP
+#### ADMINISTRATOR SETUP
 
-Navigate to *https://your.service.com/admin*
+Navigate to *https://{{ PackageFileName.domain }}/admin*
 
-Create an account with your desired username, as this is the first user <SERVICE> makes this account admin.
+Create an account with your desired username; as this is the first user, PackageTitleCase makes this account the administrator.
 
-### SMTP/ MAIL
+#### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
 
 2. make some changes
 
-```
-# SMTP Settings
-```
-3. Then run **`vlab update_one <SERVICE>`** to complete the changes
+
+># SMTP Settings
+smtp:
+  host: 
+  port: 
+  user: 
+  pass: 
+  from_email: 
+  from_name: 
+  
+3. run **`vlab update_one service=PackageFileName`** to complete the changes
 
 
 ## ACCESS
 
-PackageTitleCase is available at [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/) or [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+PackageTitleCase (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+PackageTitleCase (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{ PackageFileName.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{ PackageFileName.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## SECURITY/ HTTPS_ONLY/ AUTH
+## OPTIONS
 
-To enable https_only or auth, run the appropriate command:
+### HTTPS_ONLY
+*Default: False*
+*Options: True/False*
 
-**`vlab set PackageFileName.https_only true`**  or
+#### Command:
 
-**`vlab set PackageFileName.auth true`**
+**`vlab set PackageFileName.https_only True`**
 
-then run **`vlab update_one PackageFileName`** to finalise the changes
+#### File alteration:
 
-alternatively, you can set the appropriate service settings in `settings/config.yml` to true
+set the appropriate service settings in `settings/config.yml` to true
 
 eg.
-```
-hubzilla:
-  https_only: true
-  auth: true
-```
-To enable https_only or auth, run the corresponding example of either following command:
-
-**`vlab https only`**
-**`vlab auth enable`**
-
-make either of the following changes to the `settings/config.yml` file:
-
-```
-PackageFileName:
+>PackageFileName
   https_only: True
+
+##### Finalising changes:
+
+run: **`vlab update_one service=PackageFileName`**
+
+### AUTH
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set PackageFileName.auth True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+>PackageFileName
   auth: True
-```
 
- and then run **``vlab update_one PackageFileName``** to finalize your changes.
+##### Finalising changes:
 
+run: **`vlab update_one service=PackageFileName`**
 
-More Information can be found in the [documentation](https://), additional assistance can be found in our [Zulip Chat]().
+### DOMAIN
+*Default: {{domain}}*
+*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
+
+#### Command:
+
+**`vlab set PackageFileName.domain PackageFileName.com`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+>PackageFileName
+  domain: PackageFileName.com 
+
+##### Finalising changes:
+
+run: **`vlab update_one service=PackageFileName`**
+
+### SUBDOMAIN
+*Default: PackageFileName*
+*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
+
+#### Command:
+
+**`vlab set PackageFileName.subdomain media`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+>PackageFileName
+  subdomain: media
+
+##### Finalising changes:
+
+run: **`vlab update_one service=PackageFileName`**
+
+### VERSION
+*Default: {{PackageFileName.version}}*
+*NOTE: Ensure that the version exists*
+
+#### Command:
+
+**`vlab set PackageFileName.version 2.7`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+>PackageFileName
+  version: 2.7
+
+##### Finalising changes:
+
+run: **`vlab update_one service=PackageFileName`**
+
+## Need more help?
+Further information regarding services can be found.
+General Information can be found in the [documentation](https://docs.vivumlab.com).
+Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
