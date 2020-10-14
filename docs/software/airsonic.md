@@ -52,13 +52,13 @@ Create an account with your desired username; as this is the first user, Airsoni
 
 ># SMTP Settings
 smtp:
-  host: 
-  port: 
-  user: 
-  pass: 
-  from_email: 
-  from_name: 
-  
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+
 3. run **`vlab update_one service=airsonic`** to complete the changes
 
 
@@ -127,7 +127,7 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 >airsonic
-  domain: airsonic.com 
+  domain: airsonic.com
 
 ##### Finalising changes:
 

@@ -52,13 +52,13 @@ Create an account with your desired username; as this is the first user, Package
 
 ># SMTP Settings
 smtp:
-  host: 
-  port: 
-  user: 
-  pass: 
-  from_email: 
-  from_name: 
-  
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+
 3. run **`vlab update_one service=PackageFileName`** to complete the changes
 
 
@@ -127,7 +127,7 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 >PackageFileName
-  domain: PackageFileName.com 
+  domain: PackageFileName.com
 
 ##### Finalising changes:
 
