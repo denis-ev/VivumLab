@@ -9,8 +9,8 @@ stages:
   - name: master
     if: branch = master
   - deploy docs
-  - name: release
-    if: branch = master AND type = push AND fork = false
+  # - name: release
+  #   if: branch = master AND type = push AND fork = false
 
 jobs:
   include:
@@ -45,20 +45,20 @@ jobs:
         local_dir: site
         on:
           branch: master
-    - language: python
-      sudo: required
-      services:
-        - docker
-      stage: release
-      name: "Release"
-      before_install:
-        - nvm install 12
-        - npm install
-      # Advanced: optionally overwrite your default `script` step to skip the tests
-      script:
-        - echo "Release"
-        - docker build -t vivumlab/vivumlab .
-        - npm run semantic-release
+    # - language: python
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   stage: release
+    #   name: "Release"
+    #   before_install:
+    #     - nvm install 12
+    #     - npm install
+    #   # Advanced: optionally overwrite your default `script` step to skip the tests
+    #   script:
+    #     - echo "Release"
+    #     - docker build -t vivumlab/vivumlab .
+    #     - npm run semantic-release
 
 cache:
   directories:
