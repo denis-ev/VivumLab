@@ -11,6 +11,14 @@
   apt:
     name:
       - apache2-utils
+  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
+
+- name: Install necessities and nice-to-haves (CentOS)
+  become: yes
+  yum:
+    name:
+      - httpd-tools
+  when: ansible_facts['distribution'] == "CentOS"
 
 - name: Test Setting Fact.
   shell: htpasswd -nbB {{ default_username }} "{{ default_password }}" | sed -e s/\\$/\\$\\$/g
