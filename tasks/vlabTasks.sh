@@ -189,7 +189,7 @@ Task::check_version() {
 
   if version_check $VERSION_LATEST $VERSION_CURRENT; then
     colorize red "* You should update to version $VERSION_LATEST! *"
-    colorize red " * Update at https://github.com/Vivumlab/VivumLab/-/releases *"
+    colorize red " * Update at https://github.com/Vivumlab/VivumLab/releases *"
   else
     colorize green "You are up to date!"
   fi
