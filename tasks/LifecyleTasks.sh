@@ -6,12 +6,11 @@ Task::deploy(){
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
-  : @param cache false "Forces the build to use --no-cache --force-rm"
   : @param debug true "Debugs ansible-playbook commands"
-
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Deploying VivumLab"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
@@ -26,9 +25,10 @@ Task::restart(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
   Task::git_sync
   Task::config
 
@@ -59,9 +59,10 @@ Task::stop(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
   Task::git_sync
   Task::config
 
@@ -80,9 +81,10 @@ Task::stop_one(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
   Task::git_sync
   Task::config
 
@@ -100,9 +102,10 @@ Task::remove_one(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
   Task::git_sync
   Task::config
 
@@ -121,9 +124,10 @@ Task::reset_one(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
   Task::git_sync
   Task::config
 
