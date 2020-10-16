@@ -79,7 +79,7 @@ Task::build() {
     colorize light_blue "Skipping vlab image retrieval"
   else
     if [[ ${_build-true} == true ]]; then
-      sudo docker build . $(build_cache) -t vlab:$VERSION_DOCKER
+      sudo docker build . $(build_cache) -t vivumlab/vivumlab:$VERSION_DOCKER
     else
       sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
     fi
