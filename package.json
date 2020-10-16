@@ -11,10 +11,10 @@
     "@commitlint/travis-cli": "^11.0.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.1.1",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "cz-conventional-changelog": "^3.3.0",
     "semantic-release": "^17.1.2",
     "semantic-release-docker": "^2.2.0",
     "semantic-release-plugin-update-version-in-files": "^1.1.0"
@@ -41,16 +41,6 @@
           }
         }
       ],
-      [
-        "semantic-release-plugin-update-version-in-files",
-        {
-          "files": [
-            "VERSION",
-            ".cz.toml"
-          ],
-          "placeholder": "0.0.0-development"
-        }
-      ],
       "@semantic-release/changelog",
       [
         "@semantic-release/npm",
@@ -59,21 +49,20 @@
         }
       ],
       [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "sed 's/${lastRelease.version}/${nextRelease.version}/g' && docker build -t vivumlab/vivumlab ."
+        }
+      ],
+      [
         "@semantic-release/git",
         {
           "assets": [
             "package.json",
             "CHANGELOG.md",
-            ".cz.toml",
             "VERSION"
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-        }
-      ],
-      [
-        "@semantic-release/exec",
-        {
-          "prepareCmd": "docker build -t vivumlab/vivumlab ."
         }
       ],
       [
@@ -82,8 +71,7 @@
           "name": "vivumlab/vivumlab"
         }
       ],
-      "@semantic-release/github",
-      "semantic-release-docker"
+      "@semantic-release/github"
     ]
   },
   "scripts": {
@@ -99,13 +87,5 @@
   "bugs": {
     "url": "https://github.com/VivumLab/VivumLab/issues"
   },
-  "homepage": "https://github.com/VivumLab/VivumLab#readme",
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "dependencies": {
-    "@semantic-release/exec": "^5.0.0"
-  }
+  "homepage": "https://github.com/VivumLab/VivumLab#readme"
 }
