@@ -81,7 +81,7 @@ Task::build() {
     if [[ ${_build-true} == true ]]; then
       sudo docker build . $(build_cache) -t vlab:$VERSION_DOCKER
     else
-      sudo docker pull docker.pkg.github.com/vivumlab/vivumlab/vlab:$VERSION_DOCKER
+      sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
     fi
   fi
 }
