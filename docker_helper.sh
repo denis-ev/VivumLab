@@ -1,11 +1,15 @@
 #!/bin/sh
 
-VERSION=$(cat VERSION)
+VERSION_CURRENT=$(cat VERSION)
+VERSION_LATEST=$(curl -s -m 2 https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION)
 
-if [[ ${VERSION} == 0.0.* ]] ; then
-    VERSION=${VERSION}-alpha
+function version_gt() { test "$(echo "$@" | tr " " "\n" | sort | head -n 1)" != "$1"; }
+
+if version_gt $VERSION_LATEST $VERSION_CURRENT; then
+    VERSION=$VERSION_CURRENT
+else
+    VERSION=latest
 fi
-
 
 if [ ! -f "$HOME/.vlab_vault_pass" ]; then
     echo "Oops, I cannot find your vault password in $HOME/.vlab_vault_pass"
