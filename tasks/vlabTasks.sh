@@ -174,7 +174,7 @@ Task::run_docker() {
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-  vlab:${VERSION_DOCKER} "$@"
+  vivumlab/vivumlab:${VERSION_DOCKER} "$@"
 }
 
 # Checks the current version
