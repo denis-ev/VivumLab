@@ -63,6 +63,7 @@
 
 - name: Remove temp container.
   shell: docker rm -f netdata_tmp
+  ignore_errors: yes
 
 - name: Recursively change ownership of a directory
   file:
