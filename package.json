@@ -16,8 +16,7 @@
     "@semantic-release/github": "^7.1.1",
     "@semantic-release/release-notes-generator": "^9.0.1",
     "semantic-release": "^17.1.2",
-    "semantic-release-docker": "^2.2.0",
-    "semantic-release-plugin-update-version-in-files": "^1.1.0"
+    "semantic-release-docker": "^2.2.0"
   },
   "release": {
     "plugins": [
@@ -51,7 +50,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "sed 's/${lastRelease.version}/${nextRelease.version}/g' && docker build -t vivumlab/vivumlab ."
+          "prepareCmd": "echo ${nextRelease.version} > VERSION && docker build -t vivumlab/vivumlab ."
         }
       ],
       [
