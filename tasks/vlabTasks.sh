@@ -51,7 +51,7 @@ Task::build() {
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
-  vlab_dockerimage=$(docker images -a | grep "vlab" | awk '{print $3}')
+  vlab_dockerimage=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $3}')
   if [[ $VERSION_CURRENT == $VERSION_LATEST ]] ; then
     VERSION_DOCKER=latest
   fi
