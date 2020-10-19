@@ -40,7 +40,8 @@ To make it easy for anyone to run their own services and own all their data in a
 
 ## Give Support
 
-Help to fix or extend the code, or join the official 'Contributor' team
+Help to fix or extend the code, or join the official 'Contributor' team.
+
 (Talk to the VivumLab Core team, for more information).
 
 ## [Contributing](CONTRIBUTING.md)
