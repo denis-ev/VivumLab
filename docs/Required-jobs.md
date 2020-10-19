@@ -1,4 +1,4 @@
-# Things to do
+# Required Jobs/ Tasks
 VivumLab is growing, read further to see how you can be apart of it.
 
 ## Specific Tasks
