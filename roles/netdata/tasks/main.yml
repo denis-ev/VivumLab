@@ -49,7 +49,7 @@
 
 - name: Check that the netdata.conf exists
   stat:
-    path: "{{ volumes_root}}/netdata/config/netdata/netdata.conf"
+    path: "{{ volumes_root}}/netdata/config/netdata.conf"
   register: netdataconf_result
 
 - name: Create temp container.
@@ -63,7 +63,7 @@
 
 - name: Remove temp container.
   shell: docker rm -f netdata_tmp
-  when: not netdataconf_result.stat.exists
+  ignore_errors: yes
 
 - name: Recursively change ownership of a directory
   file:
