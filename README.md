@@ -6,11 +6,15 @@ An open-source data-center, owned by you, the user.
 
 Including over 50 services; VivumLab wants to make it easy for anyone to run their own services and own all their data in an easy and secure way, with minimal reliance, or intervention from cloud or service providers.
 
-## [Documentation](https://docs.vivumlab.com/)
+## Documentation
+Available for your viewing pleasure [here](https://docs.vivumlab.com/)
 
-## [Installation](core/installation.md)
+VivumLab allows a user to deploy their own set of documentation. Further information is available in the docs
 
-### [Installation Tutorial / Demo Video COMING SOON] (null)
+## Installation
+Installation is simple; Instructions are available [here](core/installation.md)
+
+### Installation Tutorial / Demo Video COMING SOON
 
 ## Summary
 
