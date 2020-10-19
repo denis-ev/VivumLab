@@ -186,7 +186,7 @@ nav:
   - Commands: core/Commands.md
   - Development:
       - Adding Services: dev/Adding-Services.md
-      - Contributing: ../CONTRIBUTING.md
+      - Contributing: ../../CONTRIBUTING.md
       - Dev Tips: dev/Developer-Tips.md
       - Vagrant: dev/Vagrant.md
   - About:
