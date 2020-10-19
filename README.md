@@ -38,10 +38,6 @@ Deploys web services to a server. Deployment is managed by Ansible, the services
 
 ## Give Support
 
-Help to fix or extend the code, or join the official 'Contributor' team.
+Help to fix or extend the code, by [contributing](CONTRIBUTING.md). An easy and rewarding way to help others get back their data.
 
-(Talk to the VivumLab Core team, for more information).
-
-## [Contributing](CONTRIBUTING.md)
-
-An easy and rewarding way to help others get back their data. Click either [link](CONTRIBUTING.md) for more information.
+Or join the official 'Contributor' team. (Talk to the VivumLab Core team, for more information).
