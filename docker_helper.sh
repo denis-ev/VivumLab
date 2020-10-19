@@ -1,11 +1,15 @@
 #!/bin/sh
 
-VERSION=$(cat VERSION)
+VERSION_CURRENT=$(cat VERSION)
+VERSION_LATEST=$(curl -s -m 2 https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION)
 
-if [[ ${VERSION} == 0.0.* ]] ; then
-    VERSION=${VERSION}-alpha
+function version_gt() { test "$(echo "$@" | tr " " "\n" | sort | head -n 1)" != "$1"; }
+
+if version_gt $VERSION_LATEST $VERSION_CURRENT; then
+    VERSION=$VERSION_CURRENT
+else
+    VERSION=latest
 fi
-
 
 if [ ! -f "$HOME/.vlab_vault_pass" ]; then
     echo "Oops, I cannot find your vault password in $HOME/.vlab_vault_pass"
@@ -20,7 +24,7 @@ if [ -f "$HOME/.ssh/id_rsa" -a -f "$HOME/.ssh/id_rsa.pub" -a -f "$HOME/.vlab_vau
       -v $HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub:ro \
       -v $(pwd):/data \
       -v $HOME/.vlab_vault_pass:/ansible_vault_pass:ro \
-      vlab:${VERSION} "$@"
+      vivumlab/vivumlab:${VERSION} "$@"
 else
     echo "You have no SSH keys in your home directory: $HOME"
     echo "Please generate a set of keys using the command:"

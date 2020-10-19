@@ -46,37 +46,44 @@ Task::show(){
 Task::build() {
     : @desc "Builds the Docker Image used to deploy"
     : @param force true "Forces a rebuild/repull of the docker image"
-    : @param build false "Pulls the image"
-    : @param cache false "Forces the build to use --no-cache --force-rm"
+    : @param build true "Pulls the image"
+    : @param cache true "Allows the build to use the cache"
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
-  if [[ ${_force-false} == true ]] ; then
-    vlab_dockerimage=$(docker images -a | grep "vlab" | awk '{print $3}')
+  vlab_dockerimage=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $3}')
+  if [[ $VERSION_CURRENT == $VERSION_LATEST ]] ; then
+    VERSION_DOCKER=latest
+  fi
+
+  function build_cache() {
+    if [[ ${_cache-true} == true ]]; then
+      echo ''
+    else
+      echo '--no-cache --force-rm'
+    fi
+  }
+
+  if [[ ${_force-true} == true ]]; then
     if [[ -n ${vlab_dockerimage} ]]; then
       sudo docker rmi --force ${vlab_dockerimage}
     fi
   fi
 
-  if [[ ${_build-true} == false ]] ; then
-    if [[ $VERSION_CURRENT == $VERSION_LATEST ]] ; then
-      VERSION_DOCKER=latest
-    fi
-    sudo docker pull docker.pkg.github.com/Vivumlab/vivumlab/vlab:$VERSION_DOCKER
+
+
+  highlight "Getting VivumLab Docker Image"
+  if [[ ! ${vlab_dockerimage} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
+    echo "Image number: ${vlab_dockerimage}"
+    echo "is the latest vlab image"
+    colorize light_blue "Skipping vlab image retrieval"
   else
-    if [[ ${_cache-true} == false ]] ; then
-      sudo docker build . --no-cache --force-rm -t vlab:$VERSION_DOCKER
+    if [[ ${_build-true} == true ]]; then
+      sudo docker build . $(build_cache) -t vivumlab/vivumlab:$VERSION_DOCKER
     else
-      sudo docker build . -t vlab:$VERSION_DOCKER
+      sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
     fi
   fi
-
-  if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then exit 0; fi
-  already_ran[${FUNCNAME[0]}]=1
-  highlight "Preparing VivumLab Docker Image"
-  sudo docker inspect --type=image vlab:$VERSION_DOCKER > /dev/null && highlight " Docker Image Already Built" || Task::build build=true
-  already_ran[${FUNCNAME[0]}]=1
-
 }
 
 # Manually forces a settings Sync via Git
@@ -138,9 +145,10 @@ Task::uninstall(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
@@ -166,7 +174,7 @@ Task::run_docker() {
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-  vlab:${VERSION_DOCKER} "$@"
+  vivumlab/vivumlab:${VERSION_DOCKER} "$@"
 }
 
 # Checks the current version
@@ -174,17 +182,14 @@ Task::check_version() {
   : @desc "Checks the current version"
 
   VERSION_CURRENT=$(cat VERSION)
-  VERSION_LATEST=$(cat VERSION)
-  #VERSION_LATEST=$(curl -s -m 2 https://github.com/Vivumlab/VivumLab/raw/master/VERSION)
-
-  function version_gt() { test "$(echo "$@" | tr " " "\n" | sort | head -n 1)" != "$1"; }
+  VERSION_LATEST=$(curl -s -m 2 https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION)
 
   colorize yellow "You currently have version: $VERSION_CURRENT"
   colorize green "The newest Version available is: $VERSION_LATEST"
 
-  if version_gt $VERSION_LATEST $VERSION_CURRENT; then
+  if version_check $VERSION_LATEST $VERSION_CURRENT; then
     colorize red "* You should update to version $VERSION_LATEST! *"
-    colorize red " * Update at https://github.com/Vivumlab/VivumLab/-/releases *"
+    colorize red " * Update at https://github.com/Vivumlab/VivumLab/releases *"
   else
     colorize green "You are up to date!"
   fi

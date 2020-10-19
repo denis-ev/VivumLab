@@ -9,9 +9,10 @@ Task::config(){
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo_local
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Creating or Updating config file"
   mkdir -p $_config_dir/passwords
@@ -38,9 +39,10 @@ Task::config_reset() {
   : @desc "Resets VivumLab configs"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
+  : @param cache true "Allows the build to use the cache"
 
   Task::logo_local
-  Task::build $(build_check) $(force_check)
+  Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Reset Local Settings"
   echo "Backing up your current settings, you may need them \n"

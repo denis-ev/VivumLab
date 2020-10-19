@@ -8,6 +8,11 @@ function highlight() {
   colorize yellow $(printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/16))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding")
 }
 
+# Usage: version_check ${VERSION_LATEST} <whatever>
+function version_check() {
+  test "$(echo "$@" | tr " " "\n" | sort | head -n 1)" != "$1";
+}
+
 function debug_check() {
   if [[ ${_debug-true} == 'super' ]]; then
     echo '-vvvv'
@@ -31,6 +36,14 @@ function build_check() {
 function force_check() {
   if [[ ${_force-true} == true ]]; then
     echo 'force=true'
+  else
+    echo ''
+  fi
+}
+
+function cache_check() {
+    if [[ ${_cache-true} == true ]]; then
+    echo 'cache=true'
   else
     echo ''
   fi

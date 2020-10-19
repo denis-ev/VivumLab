@@ -1,3 +1,17 @@
+## [0.2.0](https://github.com/VivumLab/VivumLab/compare/v0.1.0...v0.2.0) (2020-10-18)
+
+
+### Features
+
+* **service:** :recycle: update netdata to keep config persistant ([#81](https://github.com/VivumLab/VivumLab/issues/81)) ([64ccda8](https://github.com/VivumLab/VivumLab/commit/64ccda86e6f729ddcf018b4f87497ad2282b12cf))
+* **core:** SSH keys can be created within VivumLab ([#82](https://github.com/VivumLab/VivumLab/issues/82)) ([8df383c](https://github.com/VivumLab/VivumLab/commit/8df383c75dd0c6625ce712f6d039b0e29cd0cec3))
+
+
+### Bug Fixes
+
+* **service:** adds CentOS support for Netdata ([#87](https://github.com/VivumLab/VivumLab/issues/87)) ([9ad0198](https://github.com/VivumLab/VivumLab/commit/9ad019896668dbbbd6896e305e0e832e08e3a5c0))
+* **setup:** fixes small issue with sshkeys/bash ([#79](https://github.com/VivumLab/VivumLab/issues/79)) ([63abc92](https://github.com/VivumLab/VivumLab/commit/63abc926269e95b55dd0b29f7960f6c0bade9255))
+
 ## [0.1.0](https://github.com/VivumLab/VivumLab/compare/v0.0.1...v0.1.0) (2020-10-07)
 
 
