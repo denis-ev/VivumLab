@@ -1,6 +1,6 @@
 # Before you begin
 
-Before you begin, please familiarize yourself with the [Contribution Guidelines](../CONTRIBUTING.md).
+Before you begin, please familiarize yourself with the [Contribution Guidelines](../.../CONTRIBUTING.md).
 
 # Using the add_package Task to add services to VivumLab
 
