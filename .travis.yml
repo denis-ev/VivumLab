@@ -68,7 +68,7 @@ jobs:
         - nvm install 12
         - npm install
       script:
-        - npm run semantic-release --dry-run
+        - npm run semantic-release --branches dev --dry-run
 
 cache:
   directories:
