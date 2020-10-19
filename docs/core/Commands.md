@@ -140,3 +140,23 @@ Resets the specified service' files on the Vivumlab server
 #### service_edit
 Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
     example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
+
+## Command Options
+These options are available for most commands. See below for further explanations.
+NOTE: Setting the option to false (eg. build=false) has the same effect as omitting the option entirely.
+
+#### build
+This option allows VivumLab to build the vivumlab docker image, instead of pulling the completed image from docker hub. This is useful if the user wants to make their own changes to the docker image or if the network has lost internet connectivity, temporarily.
+    example: **`vlab deploy build=true`**
+
+#### debug
+This option allows VivumLab to provide debug output for any ansible commands used. This option has multiple options, depending on verbose the user desires the output to be. There are 3 options in total: super, high, and low. Super is the most verbose, and low is the least verbose; no one option may contain all the required information when debugging, so try all necessary levels.
+    example: **`vlab deploy debug=super`**
+
+#### force
+This option forces VivumLab to delete, then repull or rebuild (if used with build=true) the vivumlab docker image; force will still work if the image does not exist previously.
+    example: **`vlab deploy force=true`**
+
+#### cache
+This option allows VivumLab to use any existing cached images/files when building the vivumlab docker image. The cache option will be ignored if the build option is not used.
+    example: **`vlab deploy build=true cache=true`**
