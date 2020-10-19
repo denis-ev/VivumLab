@@ -43,3 +43,5 @@ To make it easy for anyone to run their own services and own all their data in a
 Help to fix or extend the code, or join the official 'Contributor' team Talk to the VivumLab Core team, for more information).
 
 ## [Contributing](CONTRIBUTING.md)
+
+An easy and rewarding way to help others get back their data. Click the Contributing link for more information.
