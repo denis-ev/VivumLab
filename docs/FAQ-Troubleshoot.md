@@ -41,14 +41,14 @@ We just want to start by saying open source is very important, a free (as in fre
     * Check **`docker ps`** and **`systemctl status SERVICENAME`** on the server.
         * E.g. **`systemctl status jellyfin`**
 * Are your services listed in the Traefik dashboard?
-    * Check http://{{ vivumlab_ip }}:8181/
+    * Check http://{{ vlab_ip }}:8181/
 
 If you have followed these instructions and you are STILL having issues, ask in [chat](https://vivumlab.zulipchat.com/) or open an issue on [Github](https://github.com/Vivumlab/VivumLab/issues).
     !!! Note: The documentation for VivumLab represents hours of work by the developers. Do not be offended if you ask a question, and are redirected back to the documentation. It is entirely for your own benefit; no one elses'.
 
 ### I get a 404
 
-If you're up and running, but accessing the server returns a 404, check the Traefik [dashboard](http://{{ vivumlab_ip }}:8181/).
+If you're up and running, but accessing the server returns a 404, check the Traefik [dashboard](http://{{ vlab_ip }}:8181/).
 
 Each service under the `Http` page has a section. The hostname inside `Host()` in the rule column is the hostname that Traefik is listening to for that particular service. You need to be able to [ping](https://duckduckgo.com/?q=how+to+ping+a+domain+from+my+OS) that hostname from your computer, and you should get back the IP address of your server. Once that is the case, accessing the domain name in a browser should load the respective service.
 
@@ -56,7 +56,7 @@ Traefik serves based on domain names, not IP addresses. It has to know what serv
 
 ### No Traefik Dashboard
 
-If you can't even access the dashboard at http://{{ vivumlab_ip }}:8181, check the status of the VivumLab service to give you some insight into what the issue is.
+If you can't even access the dashboard at http://{{ vlab_ip }}:8181, check the status of the VivumLab service to give you some insight into what the issue is.
 e.g: **`systemctl status vivumlab`**
 
 or: **`docker ps | grep traefik`** and get an output like:

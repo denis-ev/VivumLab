@@ -155,7 +155,7 @@ docs:
   auth: {{ docs.auth | default(False) }}
   domain: {{ docs.domain | default(False) }}
   subdomain: {{ docs.subdomain | default("docs") }}
-  version: {{docs.version | default("latest") }}
+  version: {{ docs.version | default("1.1.2") }}
 apache2:
   enable: {{ apache2.enable | default(False) }}
   https_only: {{ apache2.https_only | default(False) }}

@@ -115,7 +115,7 @@ S3 is Amazon's Simple Storage Service which VivumLab can optionally use to back 
 
 * Once you have updated your settings simply deploy VivumLab with **`vlab deploy`**. You can run **`vlab deploy`** as many times as needed to get your settings correct.
 
-You can check http://{{ vivumlab_ip }}:8181 in a browser to see the Traefik dashboard.
+You can check http://{{ vlab_ip }}:8181 in a browser to see the Traefik dashboard.
 
 See a full list of commands on the [Commands](Commands.md) page
 

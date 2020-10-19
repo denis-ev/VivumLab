@@ -15,7 +15,7 @@ make
 
 ## Access
 
-A dashboard is available at http://{{ vivumlab_ip }}:7396
+A dashboard is available at http://{{ vlab_ip }}:7396
 
 ## Settings
 

@@ -10,6 +10,11 @@
     - /etc/docker
   ignore_errors: yes
 
+- name: Copy VERSION file
+  copy:
+    src: VERSION
+    dest: "{{ volumes_root }}/VERSION"
+
 - name: Configure docker log settings
   copy:
     src: daemon.json
