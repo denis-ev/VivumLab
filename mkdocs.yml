@@ -23,19 +23,15 @@ theme:
     - instant
 nav:
   - Home: index.md
-  - Introduction: About-VivumLab.md
   - Installation: core/Installation.md
   - Getting Started: core/Next-Step.md
   - Troubleshooting / FAQ: FAQ-Troubleshoot.md
   - Setup:
       - Backups: core/Backup.md
       - Bastion Server: core/Bastion.md
-      #- Email: setup/Email.md
-      #- Storage: setup/Storage.md
-      #- Traefik: setup/Traefik.md
+      - Storage: core/Storage.md
       - Terraform: core/Terraform.md
       - Tor Onion Services: core/Tor.md
-      #- VPN Setup: setup/Vpn.md
   - Included Software:
     - Analytics:
       - Matomo: software/matomo.md
@@ -140,6 +136,7 @@ nav:
     - Money, Budgeting and Management:
       - Firefly III: software/firefly.md
     - Monitoring:
+      - Cockpit: software/system-cockpit.md
       - ELKStack: software/elkstack.md
       - Grafana: software/grafana.md
       - HealthChecks: software/healthchecks.md
@@ -186,8 +183,15 @@ nav:
     - Wikis:
       - Bookstack: software/bookstack.md
       - Tiddlywiki: software/tiddlywiki.md
+  - Commands: core/Commands.md
   - Development:
       - Adding Services: dev/Adding-Services.md
-      - Contributing: dev/Contribution-Guidelines.md
+      - Contributing: /CONTRIBUTING.md
       - Dev Tips: dev/Developer-Tips.md
       - Vagrant: dev/Vagrant.md
+  - About:
+      - About VivumLab: About-VivumLab.md
+      - Required Jobs: Required-jobs.md
+      - Contact Us: Contact-us.md
+      - Code of Conduct: Code-of-Conduct.md
+      - Legal: Legal.md

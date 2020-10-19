@@ -1,36 +1,40 @@
-# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo.png)
+# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo125x38.png)
 
 [![Build Status](https://travis-ci.org/Vivumlab/VivumLab.svg?branch=master)](https://travis-ci.org/Vivumlab/VivumLab)
 
-Your very own offline-first open-source data-center! Includes over 50 services!
+An open-source data-center, owned by you, the user.
 
-## [Documentation](https://vivumlab.com/)
+Including over 50 services; VivumLab wants to make it easy for anyone to run their own services and own all their data in an easy and secure way, with minimal reliance, or intervention from cloud or service providers.
 
-## [Installation](https://vivumlab.com/setup/installation/)
+## Documentation
+Available for your viewing pleasure [here](https://docs.vivumlab.com/)
 
-### [Installation Tutorial / Demo Video](To Be Considered)
+VivumLab allows a user to deploy their own set of documentation. Further information is available in the docs
+
+## Installation
+Installation is simple; Instructions are available [here](core/installation.md)
+
+### Installation Tutorial / Demo Video COMING SOON
 
 ## Summary
 
 Deploys web services to a server. Deployment is managed by Ansible, the services are managed by Docker.
 
-## Goals
-
-To make it easy for anyone to run their own services and own all their data in an easy and secure way, without the need of service or cloud providers.
-
 ## Features
 
-- Manual deployment - [Installation](https://vivumlab.com/setup/installation/#manual-set-up)
-- Automated Backups
+- Manual deployment - [Installation](core/installation.md#manual-set-up)
+- Automated Backups - COMING SOON
 - Easy Restore
 - Automated Tor Onion Service access
 - Automated HTTPS via LetsEncrypt
-- [Automated Settings Sync](https://vivumlab.com/setup/installation/#syncing-settings-via-git)
+- [Automated Settings Sync](core/installation.md#syncing-settings-via-git)
 - Optional Cloud Bastion Server with WireGuard VPN
 
-### [Planned Features](https://github.com/Vivumlab/VivumLab/labels/enhancement)
+- Check out other planned features [here](https://github.com/Vivumlab/VivumLab/labels/enhancement)
 
-### [Available Software](https://vivumlab.com/#available-software)
+### Available Software
+
+You can view the complete list of available software [here](#available-software)
 
 ## Get Support
 
@@ -40,6 +44,6 @@ To make it easy for anyone to run their own services and own all their data in a
 
 ## Give Support
 
-Help to fix or extend the code. Regular contributors, will be able to join the team (at the discretion of the VivumLab Core Team).
+Help to fix or extend the code, by [contributing](CONTRIBUTING.md). An easy and rewarding way to help others get back their data.
 
-## [Contributing](https://vivumlab.com/development/contributing/)
+Or join the official 'Contributor' team. (Talk to the VivumLab Core team, for more information).

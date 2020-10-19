@@ -11,4 +11,4 @@
 - [ ] The package has been added to `roles/vivumlab_config/templates/config.yml.j2` under the `# Services List` section.
 - [ ] The package has been added to `roles/vivumlab_config/templates/config.yml.j2` as a standalone section with subsection `https_only` and `auth`, if needed.
 - [ ] This ansible template uses the password module for security.
-- [ ] This Merge Request follows the [contributing](Contribution-Guidelines.md) guidelines.
+- [ ] This Merge Request follows the [contributing](../CONTRIBUTING.md) guidelines.
