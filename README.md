@@ -1,14 +1,14 @@
-# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo.png)
+# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo125x38.png)
 
 [![Build Status](https://travis-ci.org/Vivumlab/VivumLab.svg?branch=master)](https://travis-ci.org/Vivumlab/VivumLab)
 
-Your very own offline-first open-source data-center! Includes over 50 services!
+An open-source data-center, owned by you, the user. Includes over 50 services!
 
-## [Documentation](https://vivumlab.com/)
+## [Documentation](https://docs.vivumlab.com/)
 
-## [Installation](https://vivumlab.com/setup/installation/)
+## [Installation](core/installation.md)
 
-### [Installation Tutorial / Demo Video](To Be Considered)
+### [Installation Tutorial / Demo Video COMING SOON] (null)
 
 ## Summary
 
@@ -20,17 +20,17 @@ To make it easy for anyone to run their own services and own all their data in a
 
 ## Features
 
-- Manual deployment - [Installation](https://vivumlab.com/setup/installation/#manual-set-up)
-- Automated Backups
+- Manual deployment - [Installation](core/installation.md#manual-set-up)
+- Automated Backups - COMING SOON
 - Easy Restore
 - Automated Tor Onion Service access
 - Automated HTTPS via LetsEncrypt
-- [Automated Settings Sync](https://vivumlab.com/setup/installation/#syncing-settings-via-git)
+- [Automated Settings Sync](core/installation.md#syncing-settings-via-git)
 - Optional Cloud Bastion Server with WireGuard VPN
 
 ### [Planned Features](https://github.com/Vivumlab/VivumLab/labels/enhancement)
 
-### [Available Software](https://vivumlab.com/#available-software)
+### [Available Software](#available-software)
 
 ## Get Support
 
@@ -42,4 +42,4 @@ To make it easy for anyone to run their own services and own all their data in a
 
 Help to fix or extend the code. Regular contributors, will be able to join the team (at the discretion of the VivumLab Core Team).
 
-## [Contributing](https://vivumlab.com/development/contributing/)
+## [Contributing](CONTRIBUTING.md)

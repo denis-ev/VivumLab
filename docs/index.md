@@ -2,7 +2,7 @@
 
 ### Welcome to VivumLab!
 Blogs, Media, Data Sharing, Password Management, even Social Networks.. It's easy to deploy.
-*Get back to living, with VivumLab.*
+And remember, *It's your data, It's your life. Own it, with VivumLab.*
 
 VvumLab allows you to deploy a collection of various separate services, from any client computer to your own remote server.
 You can find more information about VivumLab in the menu on the left. Search is also available to you.
