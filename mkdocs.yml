@@ -136,6 +136,7 @@ nav:
     - Money, Budgeting and Management:
       - Firefly III: software/firefly.md
     - Monitoring:
+      - Cockpit: software/system-cockpit.md
       - ELKStack: software/elkstack.md
       - Grafana: software/grafana.md
       - HealthChecks: software/healthchecks.md
