@@ -25,7 +25,8 @@ Deploys web services to a server. Deployment is managed by Ansible, the services
 - Automated HTTPS via LetsEncrypt
 - [Automated Settings Sync](core/installation.md#syncing-settings-via-git)
 - Optional Cloud Bastion Server with WireGuard VPN
-- Check out the [planned features](https://github.com/Vivumlab/VivumLab/labels/enhancement)
+
+- Check out other planned features [here](https://github.com/Vivumlab/VivumLab/labels/enhancement)
 
 ### Available Software
 
