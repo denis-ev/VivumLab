@@ -53,7 +53,7 @@ Task::build() {
 
   vlab_dockerimagver=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $2}')
   vlab_dockerimagid=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $3}')
-  
+
   if [[ ${vlab_dockerimagver} == "latest" ]]; then
     sudo docker rmi --force ${vlab_dockerimagver}
   fi
