@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Vivumlab/VivumLab.svg?branch=master)](https://travis-ci.org/Vivumlab/VivumLab)
 
-An open-source data-center, owned by you, the user. Includes over 50 services!
+An open-source data-center, owned by you, the user.
+
+Including over 50 services; VivumLab wants to make it easy for anyone to run their own services and own all their data in an easy and secure way, with minimal reliance, or intervention from cloud or service providers.
 
 ## [Documentation](https://docs.vivumlab.com/)
 
@@ -13,10 +15,6 @@ An open-source data-center, owned by you, the user. Includes over 50 services!
 ## Summary
 
 Deploys web services to a server. Deployment is managed by Ansible, the services are managed by Docker.
-
-## Goals
-
-To make it easy for anyone to run their own services and own all their data in an easy and secure way, without the need of service or cloud providers.
 
 ## Features
 
