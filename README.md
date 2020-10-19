@@ -46,4 +46,4 @@ Help to fix or extend the code, or join the official 'Contributor' team.
 
 ## [Contributing](CONTRIBUTING.md)
 
-An easy and rewarding way to help others get back their data. Click the Contributing link for more information.
+An easy and rewarding way to help others get back their data. Click either [link](CONTRIBUTING.md) for more information.
