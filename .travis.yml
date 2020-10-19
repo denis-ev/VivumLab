@@ -6,8 +6,8 @@ dist: xenial
 
 stages:
   - pre-commit
-  - name: master
-    if: branch = master
+  - name: commitlint
+    if: (branch = master OR branch = dev) AND type = push AND fork = false
   - deploy docs
   - name: release
     if: branch = master AND type = push AND fork = false
@@ -25,7 +25,7 @@ jobs:
         - pip3 install pre-commit
     - language: node_js
       node_js: node
-      stage: master
+      stage: commitlint
       name: "Master commitlint"
       script:
         - commitlint-travis
