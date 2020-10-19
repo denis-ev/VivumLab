@@ -6,7 +6,7 @@ VivumLab recognises that an open source project is only as strong as its communi
 * Reporting a Bug
 * Discussing the current state of the code
 * Submitting a fix
-* Proposing new features
+* Proposing new **features**
 * Testing (security or otherwise)
 * Design (graphic, web or otherwise)
 * Investing yourself, and becoming a recognised contributor
