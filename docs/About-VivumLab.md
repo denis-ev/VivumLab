@@ -12,7 +12,7 @@ VivumLab deploys web services to a server. Deployment is managed by Ansible and 
 
 ## What kind of help is VivumLab looking for?
 
-Make sure to check out the [Things to do](Things-to-do.md) page, or you check out our [Zulip](https://vivumlab.zulipchat.com/) chat.
+Make sure to check out the [Required Jobs](Required-jobs.md) page, or you check out our [Zulip](https://vivumlab.zulipchat.com/) chat.
 
 ## A message from VivumLab
 
