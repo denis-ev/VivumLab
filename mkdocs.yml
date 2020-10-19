@@ -30,12 +30,9 @@ nav:
   - Setup:
       - Backups: core/Backup.md
       - Bastion Server: core/Bastion.md
-      #- Email: setup/Email.md
-      #- Storage: setup/Storage.md
-      #- Traefik: setup/Traefik.md
+      - Storage: core/Storage.md
       - Terraform: core/Terraform.md
       - Tor Onion Services: core/Tor.md
-      #- VPN Setup: setup/Vpn.md
   - Included Software:
     - Analytics:
       - Matomo: software/matomo.md
@@ -188,6 +185,6 @@ nav:
       - Tiddlywiki: software/tiddlywiki.md
   - Development:
       - Adding Services: dev/Adding-Services.md
-      - Contributing: dev/Contribution-Guidelines.md
+      - Contributing: CONTRIBUTING.md
       - Dev Tips: dev/Developer-Tips.md
       - Vagrant: dev/Vagrant.md
