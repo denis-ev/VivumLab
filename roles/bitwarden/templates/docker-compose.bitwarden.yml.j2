@@ -25,7 +25,7 @@ services:
       - SMTP_PASSWORD={{ smtp.pass }}
 {% endif %}
       - ADMIN_TOKEN={{ bitwarden.token }}
-      - DOMAIN=https://bitwarden.{{ domain }}
+      - DOMAIN=https://{{ service_domain }}
       - SHOW_PASSWORD_HINT=false
       - SIGNUPS_ALLOWED={{ bitwarden.signups_allowed }}
 {% if bitwarden.signups_domains_whitelist %}
