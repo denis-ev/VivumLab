@@ -2,32 +2,195 @@
 
 [ELK Stack](https://github.com/deviantony/docker-elk) Elastic Search, Logstash and Kibana
 
-![tested](https://img.shields.io/badge/{{ if elkstack. }}not_tested{{ else }}{{ elkstack.tested }}{{ endif }}-None_Arm-{{ if elkstack. }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if elkstack. }}not_tested{{ else }}{{ elkstack.tested_arm }}{{ endif }}-Arm-{{ if elkstack. }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64_verified](https://img.shields.io/badge/{{ if elkstack.tested_amd64 }}not_tested{{ else }}{{ elkstack.tested_amd64 }}{{ endif }}-amd64-{{ if elkstack.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
+![arm64_verified](https://img.shields.io/badge/{{ if elkstack.tested_arm64 }}not_tested{{ else }}{{ elkstack.tested_arm64 }}{{ endif }}-arm64-{{ if elkstack.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
+![armv8_verified](https://img.shields.io/badge/{{ if elkstack.tested_armv8 }}not_tested{{ else }}{{ elkstack.tested_armv8 }}{{ endif }}-armv8-{{ if elkstack.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 
-{% if tested %}
-Current Version of the image is {{ elkstack.version }}
+{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Current Image Version:** {{ elkstack.version }}
 {% endif %}
+**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
-The docker image comes from [sebp/elk](https://hub.docker.com/r/sebp/elk)
-and currently does not support arm devices.
-If you are aware of a suitable substitution or replacement ([good place to start](https://hub.docker.com/search?q=elk&type=image&architecture=arm%2Carm64)) and test your idea using the [documentation](../dev/Adding-Services.md).
+## SETUP
 
-## Access
+### Enabling elkstack
 
-It is available at [https://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/](https://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/) or [http://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/](http://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/)
+#### Command:
+
+**`vlab set elkstack.enable True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
+  enable: True
+```
+
+#### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+## FIRST RUN
+
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
+
+!!! Below are some **examples** with headings, and with some **example** instructions !!!
+
+#### ADMINISTRATOR SETUP
+
+Navigate to *https://{{ elkstack.domain }}/admin*
+
+Create an account with your desired username; as this is the first user, elkstack makes this account the administrator.
+
+#### SMTP/ MAIL
+
+1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+
+2. make some changes
+
+
+##### SMTP Settings
+```
+smtp:
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+```
+
+3. run **`vlab update_one service=elkstack`** to complete the changes
+
+
+## ACCESS
+
+elkstack (HTTPS) link: [https://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/](https://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/)
+elkstack (HTTP) link: [http://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/](http://{% if elkstack.domain %}{{ elkstack.domain }}{% else %}{{ elkstack.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://{{ elkstack.subdomain + "." + tor_domain }}/](http://{{ elkstack.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ elkstack.subdomain + "." + tor_domain }}/](http://{{ elkstack.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## Security enable/disable https_only and auth
+## OPTIONS
 
-To enable https_only or auth set the service config to True
-`settings/config.yml`
+### HTTPS_ONLY
+*Default: False*
+*Options: True/False*
 
-elkstack:
+#### Command:
+
+**`vlab set elkstack.https_only True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
   https_only: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+### AUTH
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set elkstack.auth True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
   auth: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+### DOMAIN
+*Default: {{domain}}*
+*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
+
+#### Command:
+
+**`vlab set elkstack.domain elkstack.com`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
+  domain: elkstack.com
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+### SUBDOMAIN
+*Default: elkstack*
+*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
+
+#### Command:
+
+**`vlab set elkstack.subdomain media`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
+  subdomain: media
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+### VERSION
+*Default: {{elkstack.version}}*
+*NOTE: Ensure that the version exists*
+
+#### Command:
+
+**`vlab set elkstack.version 2.7`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+elkstack
+  version: 2.7
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=elkstack`**
+
+## Need more help?
+Further information regarding services can be found.
+General Information can be found in the [documentation](https://docs.vivumlab.com).
+Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

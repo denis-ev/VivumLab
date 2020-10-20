@@ -1,11 +1,14 @@
-# PackageTitleCase
+# PackageFileName
 
-[PackageTitleCase](PackageURL) PackageOneLiner
+[PackageFileName](PackageURL) PackageOneLiner
 
-![tested](https://img.shields.io/badge/{{ if PackageFileName.tested }}not_tested{{ else }}{{ PackageFileName.tested }}{{ endif }}-None_Arm-{{ if PackageFileName.tested }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if PackageFileName.tested_arm }}not_tested{{ else }}{{ PackageFileName.tested_arm }}{{ endif }}-Arm-{{ if PackageFileName.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_amd64 }}not_tested{{ else }}{{ PackageFileName.tested_amd64 }}{{ endif }}-amd64-{{ if PackageFileName.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
+![arm64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_arm64 }}not_tested{{ else }}{{ PackageFileName.tested_arm64 }}{{ endif }}-arm64-{{ if PackageFileName.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
+![armv8_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_armv8 }}not_tested{{ else }}{{ PackageFileName.tested_armv8 }}{{ endif }}-armv8-{{ if PackageFileName.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
 
-{% if tested %}
+## Information
+
+{% if tested_amd64 or tested_arm64 or tested_armv8 %}
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ PackageFileName.version }}
 {% endif %}
@@ -13,7 +16,7 @@
 
 ## SETUP
 
-### Enabling PackageTitleCase
+### Enabling PackageFileName
 
 #### Command:
 
@@ -24,8 +27,10 @@
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   enable: True
+```
 
 #### Finalising changes:
 
@@ -41,7 +46,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 Navigate to *https://{{ PackageFileName.domain }}/admin*
 
-Create an account with your desired username; as this is the first user, PackageTitleCase makes this account the administrator.
+Create an account with your desired username; as this is the first user, PackageFileName makes this account the administrator.
 
 #### SMTP/ MAIL
 
@@ -50,7 +55,8 @@ Create an account with your desired username; as this is the first user, Package
 2. make some changes
 
 
-># SMTP Settings
+##### SMTP Settings
+```
 smtp:
   host:
   port:
@@ -58,14 +64,15 @@ smtp:
   pass:
   from_email:
   from_name:
+```
 
 3. run **`vlab update_one service=PackageFileName`** to complete the changes
 
 
 ## ACCESS
 
-PackageTitleCase (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
-PackageTitleCase (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+PackageFileName (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+PackageFileName (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
 Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{ PackageFileName.subdomain + "." + tor_domain }}/)
@@ -86,8 +93,10 @@ Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   https_only: True
+```
 
 ##### Finalising changes:
 
@@ -106,8 +115,10 @@ run: **`vlab update_one service=PackageFileName`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   auth: True
+```
 
 ##### Finalising changes:
 
@@ -126,8 +137,10 @@ run: **`vlab update_one service=PackageFileName`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   domain: PackageFileName.com
+```
 
 ##### Finalising changes:
 
@@ -146,8 +159,10 @@ run: **`vlab update_one service=PackageFileName`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   subdomain: media
+```
 
 ##### Finalising changes:
 
@@ -166,8 +181,10 @@ run: **`vlab update_one service=PackageFileName`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->PackageFileName
+```
+PackageFileName
   version: 2.7
+```
 
 ##### Finalising changes:
 

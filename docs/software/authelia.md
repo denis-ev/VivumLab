@@ -2,16 +2,21 @@
 
 [Authelia](https://www.Authelia.com) is an open-source full-featured authentication server.
 
-![tested](https://img.shields.io/badge/{{ if authelia.tested }}not_tested{{ else }}{{ authelia.tested }}{{ endif }}-None_Arm-{{ if authelia.tested }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if authelia.tested_arm }}not_tested{{ else }}{{ authelia.tested_arm }}{{ endif }}-Arm-{{ if authelia.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64_verified](https://img.shields.io/badge/{{ if authelia.tested_amd64 }}not_tested{{ else }}{{ authelia.tested_amd64 }}{{ endif }}-amd64-{{ if authelia.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
+![arm64_verified](https://img.shields.io/badge/{{ if authelia.tested_arm64 }}not_tested{{ else }}{{ authelia.tested_arm64 }}{{ endif }}-arm64-{{ if authelia.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
+![armv8_verified](https://img.shields.io/badge/{{ if authelia.tested_armv8 }}not_tested{{ else }}{{ authelia.tested_armv8 }}{{ endif }}-armv8-{{ if authelia.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
 
 ## Information
 
-{% if tested %}
-Current Version of the image is {{ authelia.version }}
+{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Current Image Version:** {{ authelia.version }}
 {% endif %}
+**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
-## What is this?
+## SETUP
+
+### What is this?
 
 Authelia is a multi-factor, authentication proxy. Used in conjuction with traefik (which vivumlab already uses) it secures your vivumlab services behind authentication. By default you must authenticate with username and password, and at least one other 'factor' ie:
 
@@ -29,17 +34,17 @@ docker run authelia/authelia:latest authelia hash-password 'YOUR NEW PASSWORD' |
 
 The docker image comes from [authelia/authelia:latest](https://hub.docker.com/r/authelia/authelia) and should support arm devices.
 
-## Prerequisites
+### Prerequisites
 
 > Note: Authelia is written in GO, and there is a known GO issue with certain Linux Kernel Versions. Specifically, Ubuntu 20.04 ships with a default kernel of 5.3.0-46 (as of 4/28/2020) Using this kernel will result in a constantly-dying-and-restarting Authelia container with a note that shows Runtime: mlock of signal stack failed.... Update your kernel to 5.3.15+, 5.4.2+, or 5.5+ You *must* upgrade your docker hosts' kernel to one of those versions for Authelia to work
 
 1. Authelia requires a working SMTP server to authenticate new users and register devices.
 
-## Configuration
+### Configuration
 
 VivumLab ships with intelligent defaults for Authelia. However, there are some choices you must make. In config.yml, there is an Authelia section. The configuration options are explained below:
 
-### Authelia configuration options
+#### Authelia configuration options
 
 - log_level: defaults to debug, you can set to 'error' as well
 - use_username: Defaults to true. if true, your authellia login name is your config.yml's default username: `{{default_username}}`.
@@ -58,7 +63,7 @@ VivumLab ships with intelligent defaults for Authelia. However, there are some c
   - cookie*inactivity: How long the cookie can sit, without being refreshed (ie: user is active) before expiring. (\_Defaults to 5min*)
   - policy: This is the default policy for any un-named service. This is the policy for everything unless overriten by other service rules.
 
-## Overriding the default policy
+### Overriding the default policy
 
 `{{ volumes_root }}/Authelia/Authelia_config.yml` file is the source of truth for post-deployment configuration settings. If you wish to override the default policy, stated in config.yml, you'll need to hand edit this configuration file and restart Authelia. You probably only need to do this if there is a service that you want to excempt from two-factor authentication, or excempt from Authelia all together. About 100 lines into the config you'll find a section that looks like this:
 
@@ -85,10 +90,181 @@ Out of the box, the standard config bypasses Authelia for Authelia itself, and d
 
 > Note, Authelia does understand the concept of groups, and can limit some services to particular groups, ie: administarators. You might use this to limit say, portainer, to admins.
 
-## Access
+### Enabling authelia
 
-It is available at [https://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/](https://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/) or [http://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/](http://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/)
+#### Command:
+
+**`vlab set authelia.enable True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  enable: True
+```
+
+#### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+## FIRST RUN
+
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
+
+!!! Below are some **examples** with headings, and with some **example** instructions !!!
+
+#### ADMINISTRATOR SETUP
+
+Navigate to *https://{{ authelia.domain }}/admin*
+
+Create an account with your desired username; as this is the first user, authelia makes this account the administrator.
+
+#### SMTP/ MAIL
+
+1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+
+2. make some changes
+
+
+##### SMTP Settings
+```
+smtp:
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+```
+
+3. run **`vlab update_one service=authelia`** to complete the changes
+
+
+## ACCESS
+
+Authelia (HTTPS) link: [https://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/](https://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/)
+Authelia (HTTP) link: [http://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/](http://{% if authelia.domain %}{{ authelia.domain }}{% else %}{{ authelia.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://{{ authelia.subdomain + "." + tor_domain }}/](http://{{ authelia.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ authelia.subdomain + "." + tor_domain }}/](http://{{ authelia.subdomain + "." + tor_domain }}/)
 {% endif %}
+
+## OPTIONS
+
+### HTTPS_ONLY
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set authelia.https_only True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  https_only: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+### AUTH
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set authelia.auth True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  auth: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+### DOMAIN
+*Default: {{domain}}*
+*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
+
+#### Command:
+
+**`vlab set authelia.domain authelia.com`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  domain: authelia.com
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+### SUBDOMAIN
+*Default: authelia*
+*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
+
+#### Command:
+
+**`vlab set authelia.subdomain media`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  subdomain: media
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+### VERSION
+*Default: {{authelia.version}}*
+*NOTE: Ensure that the version exists*
+
+#### Command:
+
+**`vlab set authelia.version 2.7`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+authelia
+  version: 2.7
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=authelia`**
+
+## Need more help?
+Further information regarding services can be found.
+General Information can be found in the [documentation](https://docs.vivumlab.com).
+Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

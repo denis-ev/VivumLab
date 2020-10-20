@@ -2,8 +2,9 @@
 
 [Airsonic](https://airsonic.github.io/) is a free, web-based media streamer, providing ubiquitous access to your music.
 
-![tested](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-None_Arm-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
-![arm_tested](https://img.shields.io/badge/{{ if airsonic.tested_arm }}not_tested{{ else }}{{ airsonic.tested_arm }}{{ endif }}-Arm-{{ if airsonic.tested_arm }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-amd64-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![arm64_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-arm64-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![armv8_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-armv8-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
 
 {% if tested %}
 **Docker Image:** https://hub.docker.com/r/linuxserver/airsonic
@@ -60,7 +61,6 @@ smtp:
   from_name:
 
 3. run **`vlab update_one service=airsonic`** to complete the changes
-
 
 ## ACCESS
 
