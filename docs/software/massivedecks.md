@@ -168,12 +168,14 @@ massivedecks
 run: **`vlab update_one service=massivedecks`**
 
 ### VERSION
-*Default: {{  massivedecks.version  }}*
+*Default: {{ massivedecks.client_version }}*
+*Default: {{ massivedecks.server_version }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set massivedecks.version 2.7`**
+**`vlab set massivedecks.client_version 2.7`**
+**`vlab set massivedecks.server_version 2.7`**
 
 #### File alteration:
 
