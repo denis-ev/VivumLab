@@ -16,22 +16,30 @@
   register: tor_ssh_domain_file
   when: enable_tor
 
-- name: Copy docs into place
-  copy:
-    src: docs
-    dest: "{{ volumes_root }}/docs/src/"
+- name: Read vlab version
+  shell: cat '{{ volumes_root }}/VERSION'
+  register: current_version_file
 
-- name: Copy mkdocs.yml into place
-  copy:
-    src: mkdocs.yml
-    dest: "{{ volumes_root }}/docs/mkdocs.yml"
+- name: Clone Vivumlab repo
+  git:
+    repo: https://github.com/VivumLab/VivumLab.git
+    dest: "{{ volumes_root }}/docs/src"
+    version: master
+    force: yes
 
-- name: Copy templated files into place
+- name: Copy docs md files into place
   template:
-    src: "{{ item }}.j2"
-    dest: "{{ volumes_root }}/docs/src/{{ item }}"
-  loop:
-    - docs-nginx.conf
+    src: "{{ item.src }}"
+    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
+  with_filetree: docs/
+  when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
+
+- name: Copy docs other files into place
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
+  with_filetree: docs/
+  when: item.state == 'file' and (item.path | basename | regex_search('[^\.md]*$'))
 
 - name: Copy docs docker-compose.yml file into place.
   template:
@@ -39,6 +47,7 @@
     dest: "{{ volumes_root }}/docs/docker-compose.yml"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+    current_version: "{{ current_version_file.stdout | default ('latest') }}"
 
 - name: Configure docs systemd service.
   become: yes

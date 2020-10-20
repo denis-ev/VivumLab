@@ -11,19 +11,18 @@ networks:
 services:
   docs:
     # Mkdocs and Nginx
-    image: voryzen/mkdocs:1.1.2
+    container_name: docs
+    image: polinux/mkdocs:{{ docs.version }}
     restart: unless-stopped
     networks:
       - traefik_network
     environment:
-      - PROJECT_NAME="Vivum Docs"
-      - PLUGINS="macros, mdv, pdfexport, git-revision-date-localized, mermaid2"
-      - CRON_TIMEFRAME="10h"
-      - ENABLE_PDF_EXPORT=0
+      LIVE_RELOAD_SUPPORT: 'true'
+      ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material'
+      DOCS_DIRECTORY: '/mkdocs'
     volumes:
-      - {{ volumes_root }}/docs/mkdocs.yml:/src
-      - {{ volumes_root }}/docs/src:/src
+      - "{{ volumes_root }}/docs/src:/mkdocs:ro"
     labels:
       - "traefik.http.services.docs.loadbalancer.server.scheme=http"
-      - "traefik.http.services.docs.loadbalancer.server.port=80"
+      - "traefik.http.services.docs.loadbalancer.server.port=8000"
 {% include './labels.j2' %}

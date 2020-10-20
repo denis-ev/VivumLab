@@ -9,5 +9,5 @@ This container exposes your {{storage_dir}}/\* folders as a SMB/CIFS (Windows fi
 You can connect to it using windows, linux and mac via
 
 ```
-smb://{{default_username}}@{{vivumlab_ip}}/VivumLab
+smb://{{default_username}}@{{vlab_ip}}/VivumLab
 ```
