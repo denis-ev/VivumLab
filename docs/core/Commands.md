@@ -141,9 +141,9 @@ Options: t
     example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
 
 #### shutdown
-Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
-Options: t
-    example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
+Allows the user to shutdown the server.
+Options: none
+    example: **`vlab shutdown`**
 
 #### find_help
 Tells the user where to find help/ contact the VivumLab Community.
