@@ -6,140 +6,182 @@
 These commands will check or make changes to the core of VivumLab.
 For service specific commands, scroll down or click [here](#service-commands)
 
-#### create_base
+#### create_base **UNDER CONSTRUCTION**
 Installs necessary dependencies on the remote server.
     example: **`vlab create_base`**
 NOTE: Only run this if the server itself is not set up.
     eg. Python, Git, and other necessary programs aren't installed
-NOTE: Availability TBA
 
 #### config
-Creates or Updates the config file as necessary
+Creates or Updates the config file as necessary.
+Options: build, debug, force
     example: **`vlab config`**
 
 #### config_reset
 Resets the Configuration
+Options: build, force
     example: **`vlab config_reset`**
 
-#### show_config
-Shows the configuration settings for the specified service
-    example (jellyfin): **`vlab show_config service=jellyfin`**
-
-#### set
-Set a configuration variable
-    examples:
-    (enabling Jellyfin): **`vlab set jellyfin.enable=true`**
-    (setup Vivumlab for an Arm Arcitecture) **`vlab set arm=true`**
-    (change the default_password): **`vlab set vault.default_password=S0m3C00lP@s$word`**
-    (changing the CloudFlare API email) **`vlab set vault.traefik.additional_env_vars.CF_API_EMAIL=your@email.com`**
-
 #### deploy
-deploys Vivumlab, useful when a server refresh is needed
+deploys Vivumlab, useful when a server refresh is needed.
+Options: build, cache, debug, force
     example: **`vlab deploy`**
 
 #### restart
-Restart all enabled services
+Restart all enabled services.
+Options: build, debug, force
     example: **`vlab restart`**
 
 #### stop
 Restart all enabled services
+Options: build, debug, force
     example: **`vlab stop`**
 
 #### terraform
-Spin up a cloud server with Terraform
+Spin up a cloud server with Terraform.
+Options: build, debug, force
     example: **`vlab terraform`**
 
 #### terraform_destroy
-Destroys servers created by terraform
+Destroys servers created by terraform.
+Options: none
     example: **`vlab terraform_destroy`**
 
 #### update
-Updates all services on the Vivumlab Server
+Updates all services on the Vivumlab Server.
+Options: build, debug, force
     example: **`vlab update`**
 
 #### build
 Builds the Docker Image used to deploy
+Options: build, debug, force
     example: **`vlab build`**
 
-#### git_sync
-Manually forces a settings sync via git
-    example: **`vlab git_sync`** **UNDER CONSTRUCTION**
+#### git_sync **UNDER CONSTRUCTION**
+Manually forces a settings sync via git.
+Options: none
+    example: **`vlab git_sync`**
 
 #### encrypt
-Encrypts the vault
+Encrypts the vault.
+Options: none
     example: **`vlab encrypt`**
 
 #### decrypt
 Decrypts the vault
+Options: none
     example: **`vlab decrypt`**
 
 #### uninstall
-Uninstalls Vivumlab
+Uninstalls Vivumlab.
+Options: build, debug, force
     example: **`vlab uninstall`**
 
-#### restore
+#### restore **UNDER CONSTRUCTION**
 Restore a server from backups. Assuming backups were running
-    example: **`vlab restore`** **UNDER CONSTRUCTION**
+    example: **`vlab restore`**
 
 #### shell
-Opens a shell on the remote server
+Opens a shell on the remote server.
+Options: none
     example: **`vlab shell`**
 
 #### docker_shell
-Opens a shell in the VivumLab deploy container
+Opens a shell in the VivumLab deploy container.
+Options: none
     example: **`vlab docker_shell`**
 NOTE: You will not be able to exit out of the docker container.
 NOTE: If you wanted to access outside the container, use the shell command
 
 #### create_sshkey
 Creates an SSH Key, based on the name provided by the user when `vlab config` was run.
+Options: build, debug, force
     example **`vlab create_sshkey`**
 NOTE: Will ask for a password. Will still work, even if you do not provide one.
 
+#### show_config
+Shows the configuration settings for the specified service.
+Options: none
+    example (jellyfin): **`vlab show_config service=jellyfin`**
+
+#### set
+Set a configuration variable
+Options: none
+    examples:
+    (enabling Jellyfin): **`vlab set jellyfin.enable=true`**
+    (setup Vivumlab for an Arm Arcitecture) **`vlab set arm=true`**
+    (change the default_password): **`vlab set vault.default_password=S0m3C00lP@s$word`**
+    (changing the CloudFlare API email) **`vlab set vault.traefik.additional_env_vars.CF_API_EMAIL=your@email.com`**
+
 #### track
 Switches you to the specified branch or tag.
+Options: branch
     examples
     (branch): **`vlab track branch=master`**
-    (tag): **`vlab track tag=0.0.1`**
+    (tag): **`vlab track tag=v0.0.1`**
 
 #### check_version
-Checks the current version
+Checks the current version.
+Options: none
     example: **`vlab version`**
 
 #### install_cli
 Links the vlab cli into /usr/local/bin so you can call vlab without the ./
+Options: none
     example: **`./vlab install_cli`**
 
+#### service_edit
+Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
+Options: debug, service
+    example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
+
+#### reboot
+Allows the user to reboot the server.
+Options: none
+    example: **`vlab reboot`**
+
+#### shutdown
+Allows the user to shutdown the server.
+Options: none
+    example: **`vlab shutdown`**
+
 #### find_help
-Tells the user where to find help/ contact the VivumLab Community
+Tells the user where to find help/ contact the VivumLab Community.
+Options: none
     example: **`vlab find_help`**
 
 ## Service Commands
 These are specific to the service declared in the command. These commands should not affect any other service; unless the running of the service depends on another, eg. Authelia.
 
+#### show
+Presents the specified services documentation, in the terminal.
+Options: service
+    example (showing Jellyfin): **`vlab show service=jellyfin`**
+
 #### restart_one
 Restarts the specified service
+Options: debug, service
     example (restarting Jellyfin): **`vlab restart_one service=jellyfin`**
 
 #### update_one
-Updates the specified service on the Vivumlab server
+Updates the specified service on the Vivumlab server.
+Options: build, debug, force, service
     example (updating jellyfin): **`vlab update_one service=jellyfin`**
 
 #### stop_one
-Restarts the specified service
+Restarts the specified service.
+Options: build, debug, force, service
     example (stopping Jellyfin): **`vlab stop_one service=jellyfin`**
 
 #### remove_one
-Removes the specified service on the Vivumlab server
+Removes the specified service on the Vivumlab server.
+Options: build, debug, force, service
     example (removing Jellyfin): **`vlab remove_one service=jellyfin`**
 
 #### reset_one
-Resets the specified service' files on the Vivumlab server
+Resets the specified service' files on the Vivumlab server.
+Options: build, debug, force, service
     example (resetting Jellyfin): **`vlab reset_one service=jellyfin`**
-
-#### service_edit
-Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
-    example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
 
 ## Command Options
 These options are available for most commands. See below for further explanations.
