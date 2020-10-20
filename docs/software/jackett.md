@@ -2,25 +2,23 @@
 
 [Jackett](https://github.com/Jackett/Jackett) provides API Support for your favorite torrent trackers.
 
-![amd64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_amd64 }}not_tested{{ else }}{{ PackageFileName.tested_amd64 }}{{ endif }}-amd64-{{ if PackageFileName.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_arm64 }}not_tested{{ else }}{{ PackageFileName.tested_arm64 }}{{ endif }}-arm64-{{ if PackageFileName.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_armv8 }}not_tested{{ else }}{{ PackageFileName.tested_armv8 }}{{ endif }}-armv8-{{ if PackageFileName.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not jackett.amd64 %}untested{% else %}{{ jackett.amd64 }}{% endif %}-amd64-{% if not jackett.amd64 %}inactive{% elif jackett.amd64 == "verified" %}success{% elif jackett.amd64 == "supported" %}informational{% elif jackett.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not jackett.arm64 %}untested{% else %}{{ jackett.arm64 }}{% endif %}-arm64-{% if not jackett.arm64 %}inactive{% elif jackett.arm64 == "verified" %}success{% elif jackett.arm64 == "supported" %}informational{% elif jackett.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not jackett.armv7 %}untested{% else %}{{ jackett.armv7 }}{% endif %}-armv7-{% if not jackett.armv7 %}inactive{% elif jackett.armv7 == "verified" %}success{% elif jackett.armv7 == "supported" %}informational{% elif jackett.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
-**Current Image Version:** {{ PackageFileName.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
+**Current Image Version:** {{ jackett.version }}
 
 ## SETUP
 
-### Enabling PackageFileName
+### Enabling jackett
 
 #### Command:
 
-**`vlab set PackageFileName.enable True`**
+**`vlab set jackett.enable True`**
 
 #### File alteration:
 
@@ -28,13 +26,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+jackett
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ## FIRST RUN
 
@@ -69,16 +67,16 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=PackageFileName`** to complete the changes
+3. run **`vlab update_one service=jackett`** to complete the changes
 
 
 ## ACCESS
 
-PackageFileName (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
-PackageFileName (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+jackett (HTTPS) link: [https://{% if jackett.domain %}{{ jackett.domain }}{% else %}{{ jackett.subdomain + "." + domain }}{% endif %}/](https://{% if jackett.domain %}{{ jackett.domain }}{% else %}{{ jackett.subdomain + "." + domain }}{% endif %}/)
+jackett (HTTP) link: [http://{% if jackett.domain %}{{ jackett.domain }}{% else %}{{ jackett.subdomain + "." + domain }}{% endif %}/](http://{% if jackett.domain %}{{ jackett.domain }}{% else %}{{ jackett.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{ PackageFileName.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ jackett.subdomain + "." + tor_domain }}/](http://{{ jackett.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## OPTIONS
@@ -89,7 +87,7 @@ Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{
 
 #### Command:
 
-**`vlab set PackageFileName.https_only True`**
+**`vlab set jackett.https_only True`**
 
 #### File alteration:
 
@@ -97,13 +95,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+jackett
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ### AUTH
 *Default: False*
@@ -111,7 +109,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### Command:
 
-**`vlab set PackageFileName.auth True`**
+**`vlab set jackett.auth True`**
 
 #### File alteration:
 
@@ -119,21 +117,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+jackett
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
 
-**`vlab set PackageFileName.domain PackageFileName.com`**
+**`vlab set jackett.domain jackett.com`**
 
 #### File alteration:
 
@@ -141,21 +139,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
-  domain: PackageFileName.com
+jackett
+  domain: jackett.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ### SUBDOMAIN
-*Default: PackageFileName*
+*Default: jackett*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set PackageFileName.subdomain media`**
+**`vlab set jackett.subdomain media`**
 
 #### File alteration:
 
@@ -163,21 +161,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+jackett
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ### VERSION
-*Default: {{PackageFileName.version}}*
+*Default: {{  jackett.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set PackageFileName.version 2.7`**
+**`vlab set jackett.version 2.7`**
 
 #### File alteration:
 
@@ -185,13 +183,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+jackett
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=jackett`**
 
 ## Need more help?
 Further information regarding services can be found.

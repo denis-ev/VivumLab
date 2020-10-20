@@ -2,17 +2,15 @@
 
 [Apache 2](https://httpd.apache.org/) is a free web server.
 
-![amd64_verified](https://img.shields.io/badge/{{ if apache2.tested_amd64 }}not_tested{{ else }}{{ apache2.tested_amd64 }}{{ endif }}-amd64-{{ if apache2.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if apache2.tested_arm64 }}not_tested{{ else }}{{ apache2.tested_arm64 }}{{ endif }}-arm64-{{ if apache2.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if apache2.tested_armv8 }}not_tested{{ else }}{{ apache2.tested_armv8 }}{{ endif }}-armv8-{{ if apache2.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not apache2.amd64 %}untested{% else %}{{ apache2.amd64 }}{% endif %}-amd64-{% if not apache2.amd64 %}inactive{% elif apache2.amd64 == "verified" %}success{% elif apache2.amd64 == "supported" %}informational{% elif apache2.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not apache2.arm64 %}untested{% else %}{{ apache2.arm64 }}{% endif %}-arm64-{% if not apache2.arm64 %}inactive{% elif apache2.arm64 == "verified" %}success{% elif apache2.arm64 == "supported" %}informational{% elif apache2.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not apache2.armv7 %}untested{% else %}{{ apache2.armv7 }}{% endif %}-armv7-{% if not apache2.armv7 %}inactive{% elif apache2.armv7 == "verified" %}success{% elif apache2.armv7 == "supported" %}informational{% elif apache2.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ apache2.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### VERSION
-*Default: {{apache2.version}}*
+*Default: {{  apache2.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

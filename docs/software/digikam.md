@@ -2,17 +2,15 @@
 
 [Digikam](https://www.digikam.org/) Professional Photo Management with the Power of Open Source
 
-![amd64_verified](https://img.shields.io/badge/{{ if digikam.tested_amd64 }}not_tested{{ else }}{{ digikam.tested_amd64 }}{{ endif }}-amd64-{{ if digikam.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if digikam.tested_arm64 }}not_tested{{ else }}{{ digikam.tested_arm64 }}{{ endif }}-arm64-{{ if digikam.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if digikam.tested_armv8 }}not_tested{{ else }}{{ digikam.tested_armv8 }}{{ endif }}-armv8-{{ if digikam.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not digikam.amd64 %}untested{% else %}{{ digikam.amd64 }}{% endif %}-amd64-{% if not digikam.amd64 %}inactive{% elif digikam.amd64 == "verified" %}success{% elif digikam.amd64 == "supported" %}informational{% elif digikam.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not digikam.arm64 %}untested{% else %}{{ digikam.arm64 }}{% endif %}-arm64-{% if not digikam.arm64 %}inactive{% elif digikam.arm64 == "verified" %}success{% elif digikam.arm64 == "supported" %}informational{% elif digikam.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not digikam.armv7 %}untested{% else %}{{ digikam.armv7 }}{% endif %}-armv7-{% if not digikam.armv7 %}inactive{% elif digikam.armv7 == "verified" %}success{% elif digikam.armv7 == "supported" %}informational{% elif digikam.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ digikam.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ digikam
 run: **`vlab update_one service=digikam`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ digikam
 run: **`vlab update_one service=digikam`**
 
 ### VERSION
-*Default: {{digikam.version}}*
+*Default: {{  digikam.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

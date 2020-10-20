@@ -2,17 +2,15 @@
 
 [CodiMD](https://demo.codimd.org/) The best platform to write and share markdown
 
-![amd64_verified](https://img.shields.io/badge/{{ if codimd.tested_amd64 }}not_tested{{ else }}{{ codimd.tested_amd64 }}{{ endif }}-amd64-{{ if codimd.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if codimd.tested_arm64 }}not_tested{{ else }}{{ codimd.tested_arm64 }}{{ endif }}-arm64-{{ if codimd.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if codimd.tested_armv8 }}not_tested{{ else }}{{ codimd.tested_armv8 }}{{ endif }}-armv8-{{ if codimd.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not codimd.amd64 %}untested{% else %}{{ codimd.amd64 }}{% endif %}-amd64-{% if not codimd.amd64 %}inactive{% elif codimd.amd64 == "verified" %}success{% elif codimd.amd64 == "supported" %}informational{% elif codimd.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not codimd.arm64 %}untested{% else %}{{ codimd.arm64 }}{% endif %}-arm64-{% if not codimd.arm64 %}inactive{% elif codimd.arm64 == "verified" %}success{% elif codimd.arm64 == "supported" %}informational{% elif codimd.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not codimd.armv7 %}untested{% else %}{{ codimd.armv7 }}{% endif %}-armv7-{% if not codimd.armv7 %}inactive{% elif codimd.armv7 == "verified" %}success{% elif codimd.armv7 == "supported" %}informational{% elif codimd.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ codimd.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -123,7 +121,7 @@ codimd
 run: **`vlab update_one service=codimd`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -167,7 +165,7 @@ codimd
 run: **`vlab update_one service=codimd`**
 
 ### VERSION
-*Default: {{codimd.version}}*
+*Default: {{  codimd.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

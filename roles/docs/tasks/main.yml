@@ -24,7 +24,7 @@
   git:
     repo: https://github.com/VivumLab/VivumLab.git
     dest: "{{ volumes_root }}/docs/src"
-    version: master
+    version: "v{{ current_version_file.stdout }}"
     force: yes
 
 - name: Copy docs md files into place

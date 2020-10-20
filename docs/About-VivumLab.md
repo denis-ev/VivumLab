@@ -34,6 +34,6 @@ Thank you for trying VivumLab!
 ### Want to know more?
 Get to know how you can contact us [here](Contact-us.md)
 
-Interested in contributing to this project? You can view our contribution guidelines [here](dev/Contribution-Guidelines.md)
+Interested in contributing to this project? You can view our contribution guidelines [here](/CONTRIBUTING.md)
 
 Or view our Code of Conduct [here](Code-of-Conduct.md)

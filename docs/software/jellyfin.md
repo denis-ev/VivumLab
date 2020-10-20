@@ -2,17 +2,15 @@
 
 [Jellyfin](https://github.com/jellyfin/jellyfin) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.
 
-![amd64_verified](https://img.shields.io/badge/{{ if jellyfin.tested_amd64 }}not_tested{{ else }}{{ jellyfin.tested_amd64 }}{{ endif }}-amd64-{{ if jellyfin.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if jellyfin.tested_arm64 }}not_tested{{ else }}{{ jellyfin.tested_arm64 }}{{ endif }}-arm64-{{ if jellyfin.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if jellyfin.tested_armv8 }}not_tested{{ else }}{{ jellyfin.tested_armv8 }}{{ endif }}-armv8-{{ if jellyfin.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not jellyfin.amd64 %}untested{% else %}{{ jellyfin.amd64 }}{% endif %}-amd64-{% if not jellyfin.amd64 %}inactive{% elif jellyfin.amd64 == "verified" %}success{% elif jellyfin.amd64 == "supported" %}informational{% elif jellyfin.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not jellyfin.arm64 %}untested{% else %}{{ jellyfin.arm64 }}{% endif %}-arm64-{% if not jellyfin.arm64 %}inactive{% elif jellyfin.arm64 == "verified" %}success{% elif jellyfin.arm64 == "supported" %}informational{% elif jellyfin.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not jellyfin.armv7 %}untested{% else %}{{ jellyfin.armv7 }}{% endif %}-armv7-{% if not jellyfin.armv7 %}inactive{% elif jellyfin.armv7 == "verified" %}success{% elif jellyfin.armv7 == "supported" %}informational{% elif jellyfin.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ jellyfin.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### VERSION
-*Default: {{jellyfin.version}}*
+*Default: {{  jellyfin.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

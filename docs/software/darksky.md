@@ -2,25 +2,23 @@
 
 [darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb) pulls in weather data for your location every 2 minutes from [Darksky](http://darksky.net/) and saves it to your [InfluxDB](software/influxdb) instance.
 
-![amd64_verified](https://img.shields.io/badge/{{ if darksky_influx.tested_amd64 }}not_tested{{ else }}{{ darksky_influx.tested_amd64 }}{{ endif }}-amd64-{{ if darksky_influx.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if darksky_influx.tested_arm64 }}not_tested{{ else }}{{ darksky_influx.tested_arm64 }}{{ endif }}-arm64-{{ if darksky_influx.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if darksky_influx.tested_armv8 }}not_tested{{ else }}{{ darksky_influx.tested_armv8 }}{{ endif }}-armv8-{{ if darksky_influx.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not dark_sky.amd64 %}untested{% else %}{{ dark_sky.amd64 }}{% endif %}-amd64-{% if not dark_sky.amd64 %}inactive{% elif dark_sky.amd64 == "verified" %}success{% elif dark_sky.amd64 == "supported" %}informational{% elif dark_sky.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not dark_sky.arm64 %}untested{% else %}{{ dark_sky.arm64 }}{% endif %}-arm64-{% if not dark_sky.arm64 %}inactive{% elif dark_sky.arm64 == "verified" %}success{% elif dark_sky.arm64 == "supported" %}informational{% elif dark_sky.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not dark_sky.armv7 %}untested{% else %}{{ dark_sky.armv7 }}{% endif %}-armv7-{% if not dark_sky.armv7 %}inactive{% elif dark_sky.armv7 == "verified" %}success{% elif dark_sky.armv7 == "supported" %}informational{% elif dark_sky.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
-**Current Image Version:** {{ darksky_influx.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
+**Current Image Version:** {{ dark_sky.version }}
 
 ## SETUP
 
-### Enabling darksky_influx
+### Enabling dark_sky
 
 #### Command:
 
-**`vlab set darksky_influx.enable True`**
+**`vlab set dark_sky.enable True`**
 
 #### File alteration:
 
@@ -28,13 +26,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
+dark_sky
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ## FIRST RUN
 
@@ -54,7 +52,7 @@ There is no direct access to it, but you can create graphs via [Grafana](softwar
 
 #### Command:
 
-**`vlab set darksky_influx.https_only True`**
+**`vlab set dark_sky.https_only True`**
 
 #### File alteration:
 
@@ -62,13 +60,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
+dark_sky
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ### AUTH
 *Default: False*
@@ -76,7 +74,7 @@ run: **`vlab update_one service=darksky_influx`**
 
 #### Command:
 
-**`vlab set darksky_influx.auth True`**
+**`vlab set dark_sky.auth True`**
 
 #### File alteration:
 
@@ -84,21 +82,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
+dark_sky
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
 
-**`vlab set darksky_influx.domain darksky_influx.com`**
+**`vlab set dark_sky.domain dark_sky.com`**
 
 #### File alteration:
 
@@ -106,21 +104,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
-  domain: darksky_influx.com
+dark_sky
+  domain: dark_sky.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ### SUBDOMAIN
-*Default: darksky_influx*
+*Default: dark_sky*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set darksky_influx.subdomain media`**
+**`vlab set dark_sky.subdomain media`**
 
 #### File alteration:
 
@@ -128,21 +126,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
+dark_sky
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ### VERSION
-*Default: {{darksky_influx.version}}*
+*Default: {{  dark_sky.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set darksky_influx.version 2.7`**
+**`vlab set dark_sky.version 2.7`**
 
 #### File alteration:
 
@@ -150,13 +148,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-darksky_influx
+dark_sky
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=darksky_influx`**
+run: **`vlab update_one service=dark_sky`**
 
 ## Need more help?
 Further information regarding services can be found.

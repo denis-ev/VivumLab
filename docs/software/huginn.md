@@ -2,17 +2,15 @@
 
 [Huginn](https://github.com/huginn/huginn) Create agents that monitor and act on your behalf. Your agents are standing by!
 
-![amd64_verified](https://img.shields.io/badge/{{ if huginn.tested_amd64 }}not_tested{{ else }}{{ huginn.tested_amd64 }}{{ endif }}-amd64-{{ if huginn.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if huginn.tested_arm64 }}not_tested{{ else }}{{ huginn.tested_arm64 }}{{ endif }}-arm64-{{ if huginn.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if huginn.tested_armv8 }}not_tested{{ else }}{{ huginn.tested_armv8 }}{{ endif }}-armv8-{{ if huginn.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not huginn.amd64 %}untested{% else %}{{ huginn.amd64 }}{% endif %}-amd64-{% if not huginn.amd64 %}inactive{% elif huginn.amd64 == "verified" %}success{% elif huginn.amd64 == "supported" %}informational{% elif huginn.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not huginn.arm64 %}untested{% else %}{{ huginn.arm64 }}{% endif %}-arm64-{% if not huginn.arm64 %}inactive{% elif huginn.arm64 == "verified" %}success{% elif huginn.arm64 == "supported" %}informational{% elif huginn.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not huginn.armv7 %}untested{% else %}{{ huginn.armv7 }}{% endif %}-armv7-{% if not huginn.armv7 %}inactive{% elif huginn.armv7 == "verified" %}success{% elif huginn.armv7 == "supported" %}informational{% elif huginn.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ huginn.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### VERSION
-*Default: {{huginn.version}}*
+*Default: {{  huginn.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

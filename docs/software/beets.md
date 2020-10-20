@@ -2,17 +2,15 @@
 
 [Beets](https://beets.io) Beets is the media library management system for obsessive-compulsive music geeks.
 
-![amd64_verified](https://img.shields.io/badge/{{ if beets.tested_amd64 }}not_tested{{ else }}{{ beets.tested_amd64 }}{{ endif }}-amd64-{{ if beets.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if beets.tested_arm64 }}not_tested{{ else }}{{ beets.tested_arm64 }}{{ endif }}-arm64-{{ if beets.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if beets.tested_armv8 }}not_tested{{ else }}{{ beets.tested_armv8 }}{{ endif }}-armv8-{{ if beets.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not beets.amd64 %}untested{% else %}{{ beets.amd64 }}{% endif %}-amd64-{% if not beets.amd64 %}inactive{% elif beets.amd64 == "verified" %}success{% elif beets.amd64 == "supported" %}informational{% elif beets.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not beets.arm64 %}untested{% else %}{{ beets.arm64 }}{% endif %}-arm64-{% if not beets.arm64 %}inactive{% elif beets.arm64 == "verified" %}success{% elif beets.arm64 == "supported" %}informational{% elif beets.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not beets.armv7 %}untested{% else %}{{ beets.armv7 }}{% endif %}-armv7-{% if not beets.armv7 %}inactive{% elif beets.armv7 == "verified" %}success{% elif beets.armv7 == "supported" %}informational{% elif beets.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ beets.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ beets
 run: **`vlab update_one service=beets`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ beets
 run: **`vlab update_one service=beets`**
 
 ### VERSION
-*Default: {{beets.version}}*
+*Default: {{  beets.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

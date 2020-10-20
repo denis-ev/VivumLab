@@ -2,16 +2,14 @@
 
 [AdGuard Home](https://adguard.com/en/adguard-home/overview.html) Network-wide software for blocking ads and tracking.
 
-![amd64_verified](https://img.shields.io/badge/{{ if adguardhome.tested_amd64 }}not_tested{{ else }}{{ adguardhome.tested_amd64 }}{{ endif }}-amd64-{{ if adguardhome.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if adguardhome.tested_arm64 }}not_tested{{ else }}{{ adguardhome.tested_arm64 }}{{ endif }}-arm64-{{ if adguardhome.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if adguardhome.tested_armv8 }}not_tested{{ else }}{{ adguardhome.tested_armv8 }}{{ endif }}-armv8-{{ if adguardhome.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not adguardhome.amd64 %}untested{% else %}{{ adguardhome.amd64 }}{% endif %}-amd64-{% if not adguardhome.amd64 %}inactive{% elif adguardhome.amd64 == "verified" %}success{% elif adguardhome.amd64 == "supported" %}informational{% elif adguardhome.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not adguardhome.arm64 %}untested{% else %}{{ adguardhome.arm64 }}{% endif %}-arm64-{% if not adguardhome.arm64 %}inactive{% elif adguardhome.arm64 == "verified" %}success{% elif adguardhome.arm64 == "supported" %}informational{% elif adguardhome.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not adguardhome.armv7 %}untested{% else %}{{ adguardhome.armv7 }}{% endif %}-armv7-{% if not adguardhome.armv7 %}inactive{% elif adguardhome.armv7 == "verified" %}success{% elif adguardhome.armv7 == "supported" %}informational{% elif adguardhome.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ adguardhome.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 

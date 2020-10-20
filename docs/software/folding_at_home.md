@@ -2,25 +2,23 @@
 
 [Folding@home](https://hub.docker.com/r/johnktims/folding-at-home) Folding@home software allows you to share your unused computer power with scientists researching diseases.
 
-![amd64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_amd64 }}not_tested{{ else }}{{ PackageFileName.tested_amd64 }}{{ endif }}-amd64-{{ if PackageFileName.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_arm64 }}not_tested{{ else }}{{ PackageFileName.tested_arm64 }}{{ endif }}-arm64-{{ if PackageFileName.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_armv8 }}not_tested{{ else }}{{ PackageFileName.tested_armv8 }}{{ endif }}-armv8-{{ if PackageFileName.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not folding_at_home.amd64 %}untested{% else %}{{ folding_at_home.amd64 }}{% endif %}-amd64-{% if not folding_at_home.amd64 %}inactive{% elif folding_at_home.amd64 == "verified" %}success{% elif folding_at_home.amd64 == "supported" %}informational{% elif folding_at_home.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not folding_at_home.arm64 %}untested{% else %}{{ folding_at_home.arm64 }}{% endif %}-arm64-{% if not folding_at_home.arm64 %}inactive{% elif folding_at_home.arm64 == "verified" %}success{% elif folding_at_home.arm64 == "supported" %}informational{% elif folding_at_home.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not folding_at_home.armv7 %}untested{% else %}{{ folding_at_home.armv7 }}{% endif %}-armv7-{% if not folding_at_home.armv7 %}inactive{% elif folding_at_home.armv7 == "verified" %}success{% elif folding_at_home.armv7 == "supported" %}informational{% elif folding_at_home.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
-**Current Image Version:** {{ PackageFileName.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
+**Current Image Version:** {{ folding_at_home.version }}
 
 ## SETUP
 
-### Enabling PackageFileName
+### Enabling folding_at_home
 
 #### Command:
 
-**`vlab set PackageFileName.enable True`**
+**`vlab set folding_at_home.enable True`**
 
 #### File alteration:
 
@@ -28,13 +26,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+folding_at_home
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ## FIRST RUN
 
@@ -67,7 +65,7 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=PackageFileName`** to complete the changes
+3. run **`vlab update_one service=folding_at_home`** to complete the changes
 
 
 ## Access
@@ -82,7 +80,7 @@ A dashboard is available at http://{{ vlab_ip }}:7396
 
 #### Command:
 
-**`vlab set PackageFileName.https_only True`**
+**`vlab set folding_at_home.https_only True`**
 
 #### File alteration:
 
@@ -90,13 +88,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+folding_at_home
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ### AUTH
 *Default: False*
@@ -104,7 +102,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### Command:
 
-**`vlab set PackageFileName.auth True`**
+**`vlab set folding_at_home.auth True`**
 
 #### File alteration:
 
@@ -112,21 +110,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+folding_at_home
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
 
-**`vlab set PackageFileName.domain PackageFileName.com`**
+**`vlab set folding_at_home.domain folding_at_home.com`**
 
 #### File alteration:
 
@@ -134,21 +132,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
-  domain: PackageFileName.com
+folding_at_home
+  domain: folding_at_home.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ### SUBDOMAIN
-*Default: PackageFileName*
+*Default: folding_at_home*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set PackageFileName.subdomain media`**
+**`vlab set folding_at_home.subdomain media`**
 
 #### File alteration:
 
@@ -156,21 +154,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+folding_at_home
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ### VERSION
-*Default: {{PackageFileName.version}}*
+*Default: {{  folding_at_home.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set PackageFileName.version 2.7`**
+**`vlab set folding_at_home.version 2.7`**
 
 #### File alteration:
 
@@ -178,13 +176,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+folding_at_home
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=folding_at_home`**
 
 ## Need more help?
 Further information regarding services can be found.

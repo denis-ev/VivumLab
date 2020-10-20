@@ -2,17 +2,15 @@
 
 [Bitwarden](https://bitwarden.com/) is an open source password manager. VivumLab utilizes an Open Source clone of the Bitwarden API server, [bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs). This is primarily due to performance and complexity reasons. `bitwarden_rs` requires just one Docker container, whereas the official `Bitwarden` install requires something like six different containers.
 
-![amd64_verified](https://img.shields.io/badge/{{ if bitwarden.tested_amd64 }}not_tested{{ else }}{{ bitwarden.tested_amd64 }}{{ endif }}-amd64-{{ if bitwarden.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if bitwarden.tested_arm64 }}not_tested{{ else }}{{ bitwarden.tested_arm64 }}{{ endif }}-arm64-{{ if bitwarden.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if bitwarden.tested_armv8 }}not_tested{{ else }}{{ bitwarden.tested_armv8 }}{{ endif }}-armv8-{{ if bitwarden.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not bitwarden.amd64 %}untested{% else %}{{ bitwarden.amd64 }}{% endif %}-amd64-{% if not bitwarden.amd64 %}inactive{% elif bitwarden.amd64 == "verified" %}success{% elif bitwarden.amd64 == "supported" %}informational{% elif bitwarden.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not bitwarden.arm64 %}untested{% else %}{{ bitwarden.arm64 }}{% endif %}-arm64-{% if not bitwarden.arm64 %}inactive{% elif bitwarden.arm64 == "verified" %}success{% elif bitwarden.arm64 == "supported" %}informational{% elif bitwarden.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not bitwarden.armv7 %}untested{% else %}{{ bitwarden.armv7 }}{% endif %}-armv7-{% if not bitwarden.armv7 %}inactive{% elif bitwarden.armv7 == "verified" %}success{% elif bitwarden.armv7 == "supported" %}informational{% elif bitwarden.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ bitwarden.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -129,7 +127,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -173,7 +171,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### VERSION
-*Default: {{bitwarden.version}}*
+*Default: {{  bitwarden.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

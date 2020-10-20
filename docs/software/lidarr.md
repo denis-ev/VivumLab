@@ -2,17 +2,15 @@
 
 [Lidarr](https://lidarr.audio/) Sonarr but for Music.
 
-![amd64_verified](https://img.shields.io/badge/{{ if lidarr.tested_amd64 }}not_tested{{ else }}{{ lidarr.tested_amd64 }}{{ endif }}-amd64-{{ if lidarr.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if lidarr.tested_arm64 }}not_tested{{ else }}{{ lidarr.tested_arm64 }}{{ endif }}-arm64-{{ if lidarr.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if lidarr.tested_armv8 }}not_tested{{ else }}{{ lidarr.tested_armv8 }}{{ endif }}-armv8-{{ if lidarr.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not lidarr.amd64 %}untested{% else %}{{ lidarr.amd64 }}{% endif %}-amd64-{% if not lidarr.amd64 %}inactive{% elif lidarr.amd64 == "verified" %}success{% elif lidarr.amd64 == "supported" %}informational{% elif lidarr.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not lidarr.arm64 %}untested{% else %}{{ lidarr.arm64 }}{% endif %}-arm64-{% if not lidarr.arm64 %}inactive{% elif lidarr.arm64 == "verified" %}success{% elif lidarr.arm64 == "supported" %}informational{% elif lidarr.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not lidarr.armv7 %}untested{% else %}{{ lidarr.armv7 }}{% endif %}-armv7-{% if not lidarr.armv7 %}inactive{% elif lidarr.armv7 == "verified" %}success{% elif lidarr.armv7 == "supported" %}informational{% elif lidarr.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ lidarr.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ lidarr
 run: **`vlab update_one service=lidarr`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ lidarr
 run: **`vlab update_one service=lidarr`**
 
 ### VERSION
-*Default: {{lidarr.version}}*
+*Default: {{  lidarr.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

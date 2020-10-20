@@ -2,17 +2,15 @@
 
 [ELK Stack](https://github.com/deviantony/docker-elk) Elastic Search, Logstash and Kibana
 
-![amd64_verified](https://img.shields.io/badge/{{ if elkstack.tested_amd64 }}not_tested{{ else }}{{ elkstack.tested_amd64 }}{{ endif }}-amd64-{{ if elkstack.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if elkstack.tested_arm64 }}not_tested{{ else }}{{ elkstack.tested_arm64 }}{{ endif }}-arm64-{{ if elkstack.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if elkstack.tested_armv8 }}not_tested{{ else }}{{ elkstack.tested_armv8 }}{{ endif }}-armv8-{{ if elkstack.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not elkstack.amd64 %}untested{% else %}{{ elkstack.amd64 }}{% endif %}-amd64-{% if not elkstack.amd64 %}inactive{% elif elkstack.amd64 == "verified" %}success{% elif elkstack.amd64 == "supported" %}informational{% elif elkstack.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not elkstack.arm64 %}untested{% else %}{{ elkstack.arm64 }}{% endif %}-arm64-{% if not elkstack.arm64 %}inactive{% elif elkstack.arm64 == "verified" %}success{% elif elkstack.arm64 == "supported" %}informational{% elif elkstack.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not elkstack.armv7 %}untested{% else %}{{ elkstack.armv7 }}{% endif %}-armv7-{% if not elkstack.armv7 %}inactive{% elif elkstack.armv7 == "verified" %}success{% elif elkstack.armv7 == "supported" %}informational{% elif elkstack.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ elkstack.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ elkstack
 run: **`vlab update_one service=elkstack`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ elkstack
 run: **`vlab update_one service=elkstack`**
 
 ### VERSION
-*Default: {{elkstack.version}}*
+*Default: {{  elkstack.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

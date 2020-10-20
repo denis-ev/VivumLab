@@ -2,17 +2,15 @@
 
 [Funkwhale](https://Funkwhale.audio/en_US/) A social platform to enjoy and share music
 
-![amd64_verified](https://img.shields.io/badge/{{ if funkwhale.tested_amd64 }}not_tested{{ else }}{{ funkwhale.tested_amd64 }}{{ endif }}-amd64-{{ if funkwhale.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if funkwhale.tested_arm64 }}not_tested{{ else }}{{ funkwhale.tested_arm64 }}{{ endif }}-arm64-{{ if funkwhale.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if funkwhale.tested_armv8 }}not_tested{{ else }}{{ funkwhale.tested_armv8 }}{{ endif }}-armv8-{{ if funkwhale.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not funkwhale.amd64 %}untested{% else %}{{ funkwhale.amd64 }}{% endif %}-amd64-{% if not funkwhale.amd64 %}inactive{% elif funkwhale.amd64 == "verified" %}success{% elif funkwhale.amd64 == "supported" %}informational{% elif funkwhale.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not funkwhale.arm64 %}untested{% else %}{{ funkwhale.arm64 }}{% endif %}-arm64-{% if not funkwhale.arm64 %}inactive{% elif funkwhale.arm64 == "verified" %}success{% elif funkwhale.arm64 == "supported" %}informational{% elif funkwhale.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not funkwhale.armv7 %}untested{% else %}{{ funkwhale.armv7 }}{% endif %}-armv7-{% if not funkwhale.armv7 %}inactive{% elif funkwhale.armv7 == "verified" %}success{% elif funkwhale.armv7 == "supported" %}informational{% elif funkwhale.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ funkwhale.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -138,7 +136,7 @@ funkwhale
 run: **`vlab update_one service=funkwhale`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -182,7 +180,7 @@ funkwhale
 run: **`vlab update_one service=funkwhale`**
 
 ### VERSION
-*Default: {{funkwhale.version}}*
+*Default: {{  funkwhale.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

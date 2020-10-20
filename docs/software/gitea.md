@@ -2,17 +2,15 @@
 
 [Gitea](https://gitea.io/en-US/) is a Git hosting platform.
 
-![amd64_verified](https://img.shields.io/badge/{{ if gitea.tested_amd64 }}not_tested{{ else }}{{ gitea.tested_amd64 }}{{ endif }}-amd64-{{ if gitea.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if gitea.tested_arm64 }}not_tested{{ else }}{{ gitea.tested_arm64 }}{{ endif }}-arm64-{{ if gitea.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if gitea.tested_armv8 }}not_tested{{ else }}{{ gitea.tested_armv8 }}{{ endif }}-armv8-{{ if gitea.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not gitea.amd64 %}untested{% else %}{{ gitea.amd64 }}{% endif %}-amd64-{% if not gitea.amd64 %}inactive{% elif gitea.amd64 == "verified" %}success{% elif gitea.amd64 == "supported" %}informational{% elif gitea.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not gitea.arm64 %}untested{% else %}{{ gitea.arm64 }}{% endif %}-arm64-{% if not gitea.arm64 %}inactive{% elif gitea.arm64 == "verified" %}success{% elif gitea.arm64 == "supported" %}informational{% elif gitea.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not gitea.armv7 %}untested{% else %}{{ gitea.armv7 }}{% endif %}-armv7-{% if not gitea.armv7 %}inactive{% elif gitea.armv7 == "verified" %}success{% elif gitea.armv7 == "supported" %}informational{% elif gitea.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ gitea.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -132,7 +130,7 @@ gitea
 run: **`vlab update_one service=gitea`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -176,7 +174,7 @@ gitea
 run: **`vlab update_one service=gitea`**
 
 ### VERSION
-*Default: {{gitea.version}}*
+*Default: {{  gitea.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

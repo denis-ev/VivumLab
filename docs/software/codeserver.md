@@ -2,17 +2,15 @@
 
 [Codeserver](https://github.com/cdr/code-server) Run VS Code on a remote server.
 
-![amd64_verified](https://img.shields.io/badge/{{ if codeserver.tested_amd64 }}not_tested{{ else }}{{ codeserver.tested_amd64 }}{{ endif }}-amd64-{{ if codeserver.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if codeserver.tested_arm64 }}not_tested{{ else }}{{ codeserver.tested_arm64 }}{{ endif }}-arm64-{{ if codeserver.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if codeserver.tested_armv8 }}not_tested{{ else }}{{ codeserver.tested_armv8 }}{{ endif }}-armv8-{{ if codeserver.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not codeserver.amd64 %}untested{% else %}{{ codeserver.amd64 }}{% endif %}-amd64-{% if not codeserver.amd64 %}inactive{% elif codeserver.amd64 == "verified" %}success{% elif codeserver.amd64 == "supported" %}informational{% elif codeserver.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not codeserver.arm64 %}untested{% else %}{{ codeserver.arm64 }}{% endif %}-arm64-{% if not codeserver.arm64 %}inactive{% elif codeserver.arm64 == "verified" %}success{% elif codeserver.arm64 == "supported" %}informational{% elif codeserver.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not codeserver.armv7 %}untested{% else %}{{ codeserver.armv7 }}{% endif %}-armv7-{% if not codeserver.armv7 %}inactive{% elif codeserver.armv7 == "verified" %}success{% elif codeserver.armv7 == "supported" %}informational{% elif codeserver.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ codeserver.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### VERSION
-*Default: {{codeserver.version}}*
+*Default: {{  codeserver.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

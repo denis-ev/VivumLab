@@ -2,17 +2,15 @@
 
 [Authelia](https://www.Authelia.com) is an open-source full-featured authentication server.
 
-![amd64_verified](https://img.shields.io/badge/{{ if authelia.tested_amd64 }}not_tested{{ else }}{{ authelia.tested_amd64 }}{{ endif }}-amd64-{{ if authelia.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if authelia.tested_arm64 }}not_tested{{ else }}{{ authelia.tested_arm64 }}{{ endif }}-arm64-{{ if authelia.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if authelia.tested_armv8 }}not_tested{{ else }}{{ authelia.tested_armv8 }}{{ endif }}-armv8-{{ if authelia.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not authelia.amd64 %}untested{% else %}{{ authelia.amd64 }}{% endif %}-amd64-{% if not authelia.amd64 %}inactive{% elif authelia.amd64 == "verified" %}success{% elif authelia.amd64 == "supported" %}informational{% elif authelia.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not authelia.arm64 %}untested{% else %}{{ authelia.arm64 }}{% endif %}-arm64-{% if not authelia.arm64 %}inactive{% elif authelia.arm64 == "verified" %}success{% elif authelia.arm64 == "supported" %}informational{% elif authelia.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not authelia.armv7 %}untested{% else %}{{ authelia.armv7 }}{% endif %}-armv7-{% if not authelia.armv7 %}inactive{% elif authelia.armv7 == "verified" %}success{% elif authelia.armv7 == "supported" %}informational{% elif authelia.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ authelia.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -199,7 +197,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -243,7 +241,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### VERSION
-*Default: {{authelia.version}}*
+*Default: {{  authelia.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

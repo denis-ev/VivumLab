@@ -2,17 +2,15 @@
 
 [Homedash](https://lamarios.github.io/Homedash2/) is a simple dashboard that allows to monitor and interact with many different services.
 
-![amd64_verified](https://img.shields.io/badge/{{ if homedash.tested_amd64 }}not_tested{{ else }}{{ homedash.tested_amd64 }}{{ endif }}-amd64-{{ if homedash.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if homedash.tested_arm64 }}not_tested{{ else }}{{ homedash.tested_arm64 }}{{ endif }}-arm64-{{ if homedash.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if homedash.tested_armv8 }}not_tested{{ else }}{{ homedash.tested_armv8 }}{{ endif }}-armv8-{{ if homedash.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not homedash.amd64 %}untested{% else %}{{ homedash.amd64 }}{% endif %}-amd64-{% if not homedash.amd64 %}inactive{% elif homedash.amd64 == "verified" %}success{% elif homedash.amd64 == "supported" %}informational{% elif homedash.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not homedash.arm64 %}untested{% else %}{{ homedash.arm64 }}{% endif %}-arm64-{% if not homedash.arm64 %}inactive{% elif homedash.arm64 == "verified" %}success{% elif homedash.arm64 == "supported" %}informational{% elif homedash.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not homedash.armv7 %}untested{% else %}{{ homedash.armv7 }}{% endif %}-armv7-{% if not homedash.armv7 %}inactive{% elif homedash.armv7 == "verified" %}success{% elif homedash.armv7 == "supported" %}informational{% elif homedash.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ homedash.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### VERSION
-*Default: {{homedash.version}}*
+*Default: {{  homedash.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

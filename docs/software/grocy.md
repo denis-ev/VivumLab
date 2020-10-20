@@ -2,17 +2,15 @@
 
 [Grocy](https://grocy.info) ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home
 
-![amd64_verified](https://img.shields.io/badge/{{ if grocy.tested_amd64 }}not_tested{{ else }}{{ grocy.tested_amd64 }}{{ endif }}-amd64-{{ if grocy.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if grocy.tested_arm64 }}not_tested{{ else }}{{ grocy.tested_arm64 }}{{ endif }}-arm64-{{ if grocy.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if grocy.tested_armv8 }}not_tested{{ else }}{{ grocy.tested_armv8 }}{{ endif }}-armv8-{{ if grocy.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not grocy.amd64 %}untested{% else %}{{ grocy.amd64 }}{% endif %}-amd64-{% if not grocy.amd64 %}inactive{% elif grocy.amd64 == "verified" %}success{% elif grocy.amd64 == "supported" %}informational{% elif grocy.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not grocy.arm64 %}untested{% else %}{{ grocy.arm64 }}{% endif %}-arm64-{% if not grocy.arm64 %}inactive{% elif grocy.arm64 == "verified" %}success{% elif grocy.arm64 == "supported" %}informational{% elif grocy.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not grocy.armv7 %}untested{% else %}{{ grocy.armv7 }}{% endif %}-armv7-{% if not grocy.armv7 %}inactive{% elif grocy.armv7 == "verified" %}success{% elif grocy.armv7 == "supported" %}informational{% elif grocy.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ grocy.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -123,7 +121,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -167,7 +165,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### VERSION
-*Default: {{grocy.version}}*
+*Default: {{  grocy.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

@@ -2,17 +2,15 @@
 
 [Lazylibrarian](https://lazylibrarian.gitlab.io/) LazyLibrarian is a program to follow authors and grab metadata for all your digital reading needs.
 
-![amd64_verified](https://img.shields.io/badge/{{ if lazylibrarian.tested_amd64 }}not_tested{{ else }}{{ lazylibrarian.tested_amd64 }}{{ endif }}-amd64-{{ if lazylibrarian.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if lazylibrarian.tested_arm64 }}not_tested{{ else }}{{ lazylibrarian.tested_arm64 }}{{ endif }}-arm64-{{ if lazylibrarian.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if lazylibrarian.tested_armv8 }}not_tested{{ else }}{{ lazylibrarian.tested_armv8 }}{{ endif }}-armv8-{{ if lazylibrarian.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not lazylibrarian.amd64 %}untested{% else %}{{ lazylibrarian.amd64 }}{% endif %}-amd64-{% if not lazylibrarian.amd64 %}inactive{% elif lazylibrarian.amd64 == "verified" %}success{% elif lazylibrarian.amd64 == "supported" %}informational{% elif lazylibrarian.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not lazylibrarian.arm64 %}untested{% else %}{{ lazylibrarian.arm64 }}{% endif %}-arm64-{% if not lazylibrarian.arm64 %}inactive{% elif lazylibrarian.arm64 == "verified" %}success{% elif lazylibrarian.arm64 == "supported" %}informational{% elif lazylibrarian.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not lazylibrarian.armv7 %}untested{% else %}{{ lazylibrarian.armv7 }}{% endif %}-armv7-{% if not lazylibrarian.armv7 %}inactive{% elif lazylibrarian.armv7 == "verified" %}success{% elif lazylibrarian.armv7 == "supported" %}informational{% elif lazylibrarian.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ lazylibrarian.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### VERSION
-*Default: {{lazylibrarian.version}}*
+*Default: {{  lazylibrarian.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

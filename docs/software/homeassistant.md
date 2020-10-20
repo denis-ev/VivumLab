@@ -2,17 +2,15 @@
 
 [Home Assistant](https://www.home-assistant.io/) can automate just about any part of your home.
 
-![amd64_verified](https://img.shields.io/badge/{{ if homeassistant.tested_amd64 }}not_tested{{ else }}{{ homeassistant.tested_amd64 }}{{ endif }}-amd64-{{ if homeassistant.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if homeassistant.tested_arm64 }}not_tested{{ else }}{{ homeassistant.tested_arm64 }}{{ endif }}-arm64-{{ if homeassistant.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if homeassistant.tested_armv8 }}not_tested{{ else }}{{ homeassistant.tested_armv8 }}{{ endif }}-armv8-{{ if homeassistant.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not homeassistant.amd64 %}untested{% else %}{{ homeassistant.amd64 }}{% endif %}-amd64-{% if not homeassistant.amd64 %}inactive{% elif homeassistant.amd64 == "verified" %}success{% elif homeassistant.amd64 == "supported" %}informational{% elif homeassistant.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not homeassistant.arm64 %}untested{% else %}{{ homeassistant.arm64 }}{% endif %}-arm64-{% if not homeassistant.arm64 %}inactive{% elif homeassistant.arm64 == "verified" %}success{% elif homeassistant.arm64 == "supported" %}informational{% elif homeassistant.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not homeassistant.armv7 %}untested{% else %}{{ homeassistant.armv7 }}{% endif %}-armv7-{% if not homeassistant.armv7 %}inactive{% elif homeassistant.armv7 == "verified" %}success{% elif homeassistant.armv7 == "supported" %}informational{% elif homeassistant.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ homeassistant.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### VERSION
-*Default: {{homeassistant.version}}*
+*Default: {{  homeassistant.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

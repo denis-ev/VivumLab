@@ -2,17 +2,15 @@
 
 [Jenkins](https://www.jenkins.io/) The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.
 
-![amd64_verified](https://img.shields.io/badge/{{ if jenkins.tested_amd64 }}not_tested{{ else }}{{ jenkins.tested_amd64 }}{{ endif }}-amd64-{{ if jenkins.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if jenkins.tested_arm64 }}not_tested{{ else }}{{ jenkins.tested_arm64 }}{{ endif }}-arm64-{{ if jenkins.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if jenkins.tested_armv8 }}not_tested{{ else }}{{ jenkins.tested_armv8 }}{{ endif }}-armv8-{{ if jenkins.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not jenkins.amd64 %}untested{% else %}{{ jenkins.amd64 }}{% endif %}-amd64-{% if not jenkins.amd64 %}inactive{% elif jenkins.amd64 == "verified" %}success{% elif jenkins.amd64 == "supported" %}informational{% elif jenkins.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not jenkins.arm64 %}untested{% else %}{{ jenkins.arm64 }}{% endif %}-arm64-{% if not jenkins.arm64 %}inactive{% elif jenkins.arm64 == "verified" %}success{% elif jenkins.arm64 == "supported" %}informational{% elif jenkins.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not jenkins.armv7 %}untested{% else %}{{ jenkins.armv7 }}{% endif %}-armv7-{% if not jenkins.armv7 %}inactive{% elif jenkins.armv7 == "verified" %}success{% elif jenkins.armv7 == "supported" %}informational{% elif jenkins.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ jenkins.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ jenkins
 run: **`vlab update_one service=jenkins`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ jenkins
 run: **`vlab update_one service=jenkins`**
 
 ### VERSION
-*Default: {{jenkins.version}}*
+*Default: {{  jenkins.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

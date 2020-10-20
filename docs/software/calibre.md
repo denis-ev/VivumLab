@@ -4,17 +4,15 @@
 
 [Calibre Web](https://github.com/janeczku/calibre-web) Web app for accessing ebook library
 
-![amd64_verified](https://img.shields.io/badge/{{ if calibre.tested_amd64 }}not_tested{{ else }}{{ calibre.tested_amd64 }}{{ endif }}-amd64-{{ if calibre.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if calibre.tested_arm64 }}not_tested{{ else }}{{ calibre.tested_arm64 }}{{ endif }}-arm64-{{ if calibre.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if calibre.tested_armv8 }}not_tested{{ else }}{{ calibre.tested_armv8 }}{{ endif }}-armv8-{{ if calibre.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not calibre.amd64 %}untested{% else %}{{ calibre.amd64 }}{% endif %}-amd64-{% if not calibre.amd64 %}inactive{% elif calibre.amd64 == "verified" %}success{% elif calibre.amd64 == "supported" %}informational{% elif calibre.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not calibre.arm64 %}untested{% else %}{{ calibre.arm64 }}{% endif %}-arm64-{% if not calibre.arm64 %}inactive{% elif calibre.arm64 == "verified" %}success{% elif calibre.arm64 == "supported" %}informational{% elif calibre.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not calibre.armv7 %}untested{% else %}{{ calibre.armv7 }}{% endif %}-armv7-{% if not calibre.armv7 %}inactive{% elif calibre.armv7 == "verified" %}success{% elif calibre.armv7 == "supported" %}informational{% elif calibre.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ calibre.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -127,7 +125,7 @@ calibre
 run: **`vlab update_one service=calibre`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -171,7 +169,7 @@ calibre
 run: **`vlab update_one service=calibre`**
 
 ### VERSION
-*Default: {{calibre.version}}*
+*Default: {{  calibre.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

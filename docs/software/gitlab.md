@@ -2,17 +2,15 @@
 
 [Gitlab](https://docs.gitlab.com/) "the single application for the entire DevOps lifecycle".
 
-![amd64_verified](https://img.shields.io/badge/{{ if gitlab.tested_amd64 }}not_tested{{ else }}{{ gitlab.tested_amd64 }}{{ endif }}-amd64-{{ if gitlab.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if gitlab.tested_arm64 }}not_tested{{ else }}{{ gitlab.tested_arm64 }}{{ endif }}-arm64-{{ if gitlab.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if gitlab.tested_armv8 }}not_tested{{ else }}{{ gitlab.tested_armv8 }}{{ endif }}-armv8-{{ if gitlab.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not gitlab.amd64 %}untested{% else %}{{ gitlab.amd64 }}{% endif %}-amd64-{% if not gitlab.amd64 %}inactive{% elif gitlab.amd64 == "verified" %}success{% elif gitlab.amd64 == "supported" %}informational{% elif gitlab.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not gitlab.arm64 %}untested{% else %}{{ gitlab.arm64 }}{% endif %}-arm64-{% if not gitlab.arm64 %}inactive{% elif gitlab.arm64 == "verified" %}success{% elif gitlab.arm64 == "supported" %}informational{% elif gitlab.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not gitlab.armv7 %}untested{% else %}{{ gitlab.armv7 }}{% endif %}-armv7-{% if not gitlab.armv7 %}inactive{% elif gitlab.armv7 == "verified" %}success{% elif gitlab.armv7 == "supported" %}informational{% elif gitlab.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ gitlab.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -126,7 +124,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -170,7 +168,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### VERSION
-*Default: {{gitlab.version}}*
+*Default: {{  gitlab.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

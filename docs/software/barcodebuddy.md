@@ -6,17 +6,15 @@
 
 [BarcodeBuddy](https://github.com/Forceu/barcodebuddy) Barcode system for Grocy
 
-![amd64_verified](https://img.shields.io/badge/{{ if barcodebuddy.tested_amd64 }}not_tested{{ else }}{{ barcodebuddy.tested_amd64 }}{{ endif }}-amd64-{{ if barcodebuddy.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if barcodebuddy.tested_arm64 }}not_tested{{ else }}{{ barcodebuddy.tested_arm64 }}{{ endif }}-arm64-{{ if barcodebuddy.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if barcodebuddy.tested_armv8 }}not_tested{{ else }}{{ barcodebuddy.tested_armv8 }}{{ endif }}-armv8-{{ if barcodebuddy.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not barcodebuddy.amd64 %}untested{% else %}{{ barcodebuddy.amd64 }}{% endif %}-amd64-{% if not barcodebuddy.amd64 %}inactive{% elif barcodebuddy.amd64 == "verified" %}success{% elif barcodebuddy.amd64 == "supported" %}informational{% elif barcodebuddy.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not barcodebuddy.arm64 %}untested{% else %}{{ barcodebuddy.arm64 }}{% endif %}-arm64-{% if not barcodebuddy.arm64 %}inactive{% elif barcodebuddy.arm64 == "verified" %}success{% elif barcodebuddy.arm64 == "supported" %}informational{% elif barcodebuddy.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not barcodebuddy.armv7 %}untested{% else %}{{ barcodebuddy.armv7 }}{% endif %}-armv7-{% if not barcodebuddy.armv7 %}inactive{% elif barcodebuddy.armv7 == "verified" %}success{% elif barcodebuddy.armv7 == "supported" %}informational{% elif barcodebuddy.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ barcodebuddy.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -129,7 +127,7 @@ barcodebuddy
 run: **`vlab update_one service=barcodebuddy`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -173,7 +171,7 @@ barcodebuddy
 run: **`vlab update_one service=barcodebuddy`**
 
 ### VERSION
-*Default: {{barcodebuddy.version}}*
+*Default: {{  barcodebuddy.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

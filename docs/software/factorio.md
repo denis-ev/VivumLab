@@ -2,25 +2,23 @@
 
 [Factorio](https://github.com/factoriotools/factorio-docker) Factorio headless server in a Docker container
 
-![amd64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_amd64 }}not_tested{{ else }}{{ PackageFileName.tested_amd64 }}{{ endif }}-amd64-{{ if PackageFileName.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_arm64 }}not_tested{{ else }}{{ PackageFileName.tested_arm64 }}{{ endif }}-arm64-{{ if PackageFileName.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_armv8 }}not_tested{{ else }}{{ PackageFileName.tested_armv8 }}{{ endif }}-armv8-{{ if PackageFileName.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not factorio.amd64 %}untested{% else %}{{ factorio.amd64 }}{% endif %}-amd64-{% if not factorio.amd64 %}inactive{% elif factorio.amd64 == "verified" %}success{% elif factorio.amd64 == "supported" %}informational{% elif factorio.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not factorio.arm64 %}untested{% else %}{{ factorio.arm64 }}{% endif %}-arm64-{% if not factorio.arm64 %}inactive{% elif factorio.arm64 == "verified" %}success{% elif factorio.arm64 == "supported" %}informational{% elif factorio.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not factorio.armv7 %}untested{% else %}{{ factorio.armv7 }}{% endif %}-armv7-{% if not factorio.armv7 %}inactive{% elif factorio.armv7 == "verified" %}success{% elif factorio.armv7 == "supported" %}informational{% elif factorio.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
-**Current Image Version:** {{ PackageFileName.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
+**Current Image Version:** {{ factorio.version }}
 
 ## SETUP
 
-### Enabling PackageFileName
+### Enabling factorio
 
 #### Command:
 
-**`vlab set PackageFileName.enable True`**
+**`vlab set factorio.enable True`**
 
 #### File alteration:
 
@@ -28,13 +26,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+factorio
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ## FIRST RUN
 
@@ -44,9 +42,9 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### ADMINISTRATOR SETUP
 
-Navigate to *https://{{ PackageFileName.domain }}/admin*
+Navigate to *https://{{ factorio.domain }}/admin*
 
-Create an account with your desired username; as this is the first user, PackageFileName makes this account the administrator.
+Create an account with your desired username; as this is the first user, factorio makes this account the administrator.
 
 #### SMTP/ MAIL
 
@@ -66,7 +64,7 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=PackageFileName`** to complete the changes
+3. run **`vlab update_one service=factorio`** to complete the changes
 
 
 ## Access
@@ -81,7 +79,7 @@ It is available at {{ domain }}. No subdomain needed since it works on exposed p
 
 #### Command:
 
-**`vlab set PackageFileName.https_only True`**
+**`vlab set factorio.https_only True`**
 
 #### File alteration:
 
@@ -89,13 +87,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+factorio
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ### AUTH
 *Default: False*
@@ -103,7 +101,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### Command:
 
-**`vlab set PackageFileName.auth True`**
+**`vlab set factorio.auth True`**
 
 #### File alteration:
 
@@ -111,21 +109,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+factorio
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
 
-**`vlab set PackageFileName.domain PackageFileName.com`**
+**`vlab set factorio.domain factorio.com`**
 
 #### File alteration:
 
@@ -133,21 +131,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
-  domain: PackageFileName.com
+factorio
+  domain: factorio.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ### SUBDOMAIN
-*Default: PackageFileName*
+*Default: factorio*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set PackageFileName.subdomain media`**
+**`vlab set factorio.subdomain media`**
 
 #### File alteration:
 
@@ -155,21 +153,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+factorio
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ### VERSION
-*Default: {{PackageFileName.version}}*
+*Default: {{  factorio.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set PackageFileName.version 2.7`**
+**`vlab set factorio.version 2.7`**
 
 #### File alteration:
 
@@ -177,13 +175,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+factorio
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=factorio`**
 
 ## Need more help?
 Further information regarding services can be found.

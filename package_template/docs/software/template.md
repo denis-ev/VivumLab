@@ -2,17 +2,15 @@
 
 [PackageFileName](PackageURL) PackageOneLiner
 
-![amd64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_amd64 }}not_tested{{ else }}{{ PackageFileName.tested_amd64 }}{{ endif }}-amd64-{{ if PackageFileName.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_arm64 }}not_tested{{ else }}{{ PackageFileName.tested_arm64 }}{{ endif }}-arm64-{{ if PackageFileName.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if PackageFileName.tested_armv8 }}not_tested{{ else }}{{ PackageFileName.tested_armv8 }}{{ endif }}-armv8-{{ if PackageFileName.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not PackageFileName.amd64 %}untested{% else %}{{ PackageFileName.amd64 }}{% endif %}-amd64-{% if not PackageFileName.amd64 %}inactive{% elif PackageFileName.amd64 == "verified" %}success{% elif PackageFileName.amd64 == "supported" %}informational{% elif PackageFileName.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not PackageFileName.arm64 %}untested{% else %}{{ PackageFileName.arm64 }}{% endif %}-arm64-{% if not PackageFileName.arm64 %}inactive{% elif PackageFileName.arm64 == "verified" %}success{% elif PackageFileName.arm64 == "supported" %}informational{% elif PackageFileName.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not PackageFileName.armv7 %}untested{% else %}{{ PackageFileName.armv7 }}{% endif %}-armv7-{% if not PackageFileName.armv7 %}inactive{% elif PackageFileName.armv7 == "verified" %}success{% elif PackageFileName.armv7 == "supported" %}informational{% elif PackageFileName.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ PackageFileName.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ PackageFileName
 run: **`vlab update_one service=PackageFileName`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ PackageFileName
 run: **`vlab update_one service=PackageFileName`**
 
 ### VERSION
-*Default: {{PackageFileName.version}}*
+*Default: {{  PackageFileName.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

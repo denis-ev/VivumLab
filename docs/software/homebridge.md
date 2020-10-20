@@ -2,17 +2,15 @@
 
 [HomeBridge](https://homebridge.io/) HomeKit support for the impatient
 
-![amd64_verified](https://img.shields.io/badge/{{ if homebridge.tested_amd64 }}not_tested{{ else }}{{ homebridge.tested_amd64 }}{{ endif }}-amd64-{{ if homebridge.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if homebridge.tested_arm64 }}not_tested{{ else }}{{ homebridge.tested_arm64 }}{{ endif }}-arm64-{{ if homebridge.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if homebridge.tested_armv8 }}not_tested{{ else }}{{ homebridge.tested_armv8 }}{{ endif }}-armv8-{{ if homebridge.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not homebridge.amd64 %}untested{% else %}{{ homebridge.amd64 }}{% endif %}-amd64-{% if not homebridge.amd64 %}inactive{% elif homebridge.amd64 == "verified" %}success{% elif homebridge.amd64 == "supported" %}informational{% elif homebridge.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not homebridge.arm64 %}untested{% else %}{{ homebridge.arm64 }}{% endif %}-arm64-{% if not homebridge.arm64 %}inactive{% elif homebridge.arm64 == "verified" %}success{% elif homebridge.arm64 == "supported" %}informational{% elif homebridge.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not homebridge.armv7 %}untested{% else %}{{ homebridge.armv7 }}{% endif %}-armv7-{% if not homebridge.armv7 %}inactive{% elif homebridge.armv7 == "verified" %}success{% elif homebridge.armv7 == "supported" %}informational{% elif homebridge.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ homebridge.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ homebridge
 run: **`vlab update_one service=homebridge`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ homebridge
 run: **`vlab update_one service=homebridge`**
 
 ### VERSION
-*Default: {{homebridge.version}}*
+*Default: {{  homebridge.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

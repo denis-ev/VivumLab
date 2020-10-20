@@ -2,17 +2,15 @@
 
 [Keycloak](https://www.keycloak.org/) Open Source Identity and Access Management
 
-![amd64_verified](https://img.shields.io/badge/{{ if keycloak.tested_amd64 }}not_tested{{ else }}{{ keycloak.tested_amd64 }}{{ endif }}-amd64-{{ if keycloak.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if keycloak.tested_arm64 }}not_tested{{ else }}{{ keycloak.tested_arm64 }}{{ endif }}-arm64-{{ if keycloak.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if keycloak.tested_armv8 }}not_tested{{ else }}{{ keycloak.tested_armv8 }}{{ endif }}-armv8-{{ if keycloak.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not keycloak.amd64 %}untested{% else %}{{ keycloak.amd64 }}{% endif %}-amd64-{% if not keycloak.amd64 %}inactive{% elif keycloak.amd64 == "verified" %}success{% elif keycloak.amd64 == "supported" %}informational{% elif keycloak.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not keycloak.arm64 %}untested{% else %}{{ keycloak.arm64 }}{% endif %}-arm64-{% if not keycloak.arm64 %}inactive{% elif keycloak.arm64 == "verified" %}success{% elif keycloak.arm64 == "supported" %}informational{% elif keycloak.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not keycloak.armv7 %}untested{% else %}{{ keycloak.armv7 }}{% endif %}-armv7-{% if not keycloak.armv7 %}inactive{% elif keycloak.armv7 == "verified" %}success{% elif keycloak.armv7 == "supported" %}informational{% elif keycloak.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ keycloak.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -123,7 +121,7 @@ keycloak
 run: **`vlab update_one service=keycloak`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -167,7 +165,7 @@ keycloak
 run: **`vlab update_one service=keycloak`**
 
 ### VERSION
-*Default: {{keycloak.version}}*
+*Default: {{  keycloak.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

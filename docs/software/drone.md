@@ -2,17 +2,15 @@
 
 [Drone](https://drone.io) is a self-service continuous delivery platform
 
-![amd64_verified](https://img.shields.io/badge/{{ if drone.tested_amd64 }}not_tested{{ else }}{{ drone.tested_amd64 }}{{ endif }}-amd64-{{ if drone.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if drone.tested_arm64 }}not_tested{{ else }}{{ drone.tested_arm64 }}{{ endif }}-arm64-{{ if drone.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if drone.tested_armv8 }}not_tested{{ else }}{{ drone.tested_armv8 }}{{ endif }}-armv8-{{ if drone.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not drone.amd64 %}untested{% else %}{{ drone.amd64 }}{% endif %}-amd64-{% if not drone.amd64 %}inactive{% elif drone.amd64 == "verified" %}success{% elif drone.amd64 == "supported" %}informational{% elif drone.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not drone.arm64 %}untested{% else %}{{ drone.arm64 }}{% endif %}-arm64-{% if not drone.arm64 %}inactive{% elif drone.arm64 == "verified" %}success{% elif drone.arm64 == "supported" %}informational{% elif drone.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not drone.armv7 %}untested{% else %}{{ drone.armv7 }}{% endif %}-armv7-{% if not drone.armv7 %}inactive{% elif drone.armv7 == "verified" %}success{% elif drone.armv7 == "supported" %}informational{% elif drone.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ drone.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ drone
 run: **`vlab update_one service=drone`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ drone
 run: **`vlab update_one service=drone`**
 
 ### VERSION
-*Default: {{drone.version}}*
+*Default: {{  drone.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

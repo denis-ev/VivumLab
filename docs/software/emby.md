@@ -2,17 +2,15 @@
 
 [Emby](https://emby.media/) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.
 
-![amd64_verified](https://img.shields.io/badge/{{ if emby.tested_amd64 }}not_tested{{ else }}{{ emby.tested_amd64 }}{{ endif }}-amd64-{{ if emby.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if emby.tested_arm64 }}not_tested{{ else }}{{ emby.tested_arm64 }}{{ endif }}-arm64-{{ if emby.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if emby.tested_armv8 }}not_tested{{ else }}{{ emby.tested_armv8 }}{{ endif }}-armv8-{{ if emby.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not emby.amd64 %}untested{% else %}{{ emby.amd64 }}{% endif %}-amd64-{% if not emby.amd64 %}inactive{% elif emby.amd64 == "verified" %}success{% elif emby.amd64 == "supported" %}informational{% elif emby.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not emby.arm64 %}untested{% else %}{{ emby.arm64 }}{% endif %}-arm64-{% if not emby.arm64 %}inactive{% elif emby.arm64 == "verified" %}success{% elif emby.arm64 == "supported" %}informational{% elif emby.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not emby.armv7 %}untested{% else %}{{ emby.armv7 }}{% endif %}-armv7-{% if not emby.armv7 %}inactive{% elif emby.armv7 == "verified" %}success{% elif emby.armv7 == "supported" %}informational{% elif emby.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ emby.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### VERSION
-*Default: {{emby.version}}*
+*Default: {{  emby.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

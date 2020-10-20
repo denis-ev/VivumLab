@@ -2,17 +2,15 @@
 
 [Dasher](https://github.com/maddox/dasher) provides support for triggering things when you press one of those free Amazon Dash buttons.
 
-![amd64_verified](https://img.shields.io/badge/{{ if dasher.tested_amd64 }}not_tested{{ else }}{{ dasher.tested_amd64 }}{{ endif }}-amd64-{{ if dasher.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if dasher.tested_arm64 }}not_tested{{ else }}{{ dasher.tested_arm64 }}{{ endif }}-arm64-{{ if dasher.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if dasher.tested_armv8 }}not_tested{{ else }}{{ dasher.tested_armv8 }}{{ endif }}-armv8-{{ if dasher.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not dasher.amd64 %}untested{% else %}{{ dasher.amd64 }}{% endif %}-amd64-{% if not dasher.amd64 %}inactive{% elif dasher.amd64 == "verified" %}success{% elif dasher.amd64 == "supported" %}informational{% elif dasher.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not dasher.arm64 %}untested{% else %}{{ dasher.arm64 }}{% endif %}-arm64-{% if not dasher.arm64 %}inactive{% elif dasher.arm64 == "verified" %}success{% elif dasher.arm64 == "supported" %}informational{% elif dasher.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not dasher.armv7 %}untested{% else %}{{ dasher.armv7 }}{% endif %}-armv7-{% if not dasher.armv7 %}inactive{% elif dasher.armv7 == "verified" %}success{% elif dasher.armv7 == "supported" %}informational{% elif dasher.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ dasher.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -120,7 +118,7 @@ dasher
 run: **`vlab update_one service=dasher`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -164,7 +162,7 @@ dasher
 run: **`vlab update_one service=dasher`**
 
 ### VERSION
-*Default: {{dasher.version}}*
+*Default: {{  dasher.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

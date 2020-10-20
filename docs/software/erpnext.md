@@ -2,17 +2,14 @@
 
 [ERPNext](https://github.com/frappe/frappe_docker) Open Source ERP for Everyone.
 
-![amd64_verified](https://img.shields.io/badge/{{ if erpnext.tested_amd64 }}not_tested{{ else }}{{ erpnext.tested_amd64 }}{{ endif }}-amd64-{{ if erpnext.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if erpnext.tested_arm64 }}not_tested{{ else }}{{ erpnext.tested_arm64 }}{{ endif }}-arm64-{{ if erpnext.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if erpnext.tested_armv8 }}not_tested{{ else }}{{ erpnext.tested_armv8 }}{{ endif }}-armv8-{{ if erpnext.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not erpnext.amd64 %}untested{% else %}{{ erpnext.amd64 }}{% endif %}-amd64-{% if not erpnext.amd64 %}inactive{% elif erpnext.amd64 == "verified" %}success{% elif erpnext.amd64 == "supported" %}informational{% elif erpnext.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not erpnext.arm64 %}untested{% else %}{{ erpnext.arm64 }}{% endif %}-arm64-{% if not erpnext.arm64 %}inactive{% elif erpnext.arm64 == "verified" %}success{% elif erpnext.arm64 == "supported" %}informational{% elif erpnext.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not erpnext.armv7 %}untested{% else %}{{ erpnext.armv7 }}{% endif %}-armv7-{% if not erpnext.armv7 %}inactive{% elif erpnext.armv7 == "verified" %}success{% elif erpnext.armv7 == "supported" %}informational{% elif erpnext.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ erpnext.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -133,7 +130,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -177,7 +174,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### VERSION
-*Default: {{erpnext.version}}*
+*Default: {{  erpnext.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

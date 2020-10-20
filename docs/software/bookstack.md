@@ -2,17 +2,15 @@
 
 [Bookstack](https://www.bookstackapp.com/) Simple & Free Wiki Software
 
-![amd64_verified](https://img.shields.io/badge/{{ if bookstack.tested_amd64 }}not_tested{{ else }}{{ bookstack.tested_amd64 }}{{ endif }}-amd64-{{ if bookstack.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if bookstack.tested_arm64 }}not_tested{{ else }}{{ bookstack.tested_arm64 }}{{ endif }}-arm64-{{ if bookstack.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if bookstack.tested_armv8 }}not_tested{{ else }}{{ bookstack.tested_armv8 }}{{ endif }}-armv8-{{ if bookstack.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not bookstack.amd64 %}untested{% else %}{{ bookstack.amd64 }}{% endif %}-amd64-{% if not bookstack.amd64 %}inactive{% elif bookstack.amd64 == "verified" %}success{% elif bookstack.amd64 == "supported" %}informational{% elif bookstack.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not bookstack.arm64 %}untested{% else %}{{ bookstack.arm64 }}{% endif %}-arm64-{% if not bookstack.arm64 %}inactive{% elif bookstack.arm64 == "verified" %}success{% elif bookstack.arm64 == "supported" %}informational{% elif bookstack.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not bookstack.armv7 %}untested{% else %}{{ bookstack.armv7 }}{% endif %}-armv7-{% if not bookstack.armv7 %}inactive{% elif bookstack.armv7 == "verified" %}success{% elif bookstack.armv7 == "supported" %}informational{% elif bookstack.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ bookstack.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ bookstack
 run: **`vlab update_one service=bookstack`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ bookstack
 run: **`vlab update_one service=bookstack`**
 
 ### VERSION
-*Default: {{bookstack.version}}*
+*Default: {{  bookstack.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

@@ -2,17 +2,15 @@
 
 [Inventario](https://gitlab.com/NickBusey/inventario) is a home inventory managament system.
 
-![amd64_verified](https://img.shields.io/badge/{{ if inventario.tested_amd64 }}not_tested{{ else }}{{ inventario.tested_amd64 }}{{ endif }}-amd64-{{ if inventario.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if inventario.tested_arm64 }}not_tested{{ else }}{{ inventario.tested_arm64 }}{{ endif }}-arm64-{{ if inventario.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if inventario.tested_armv8 }}not_tested{{ else }}{{ inventario.tested_armv8 }}{{ endif }}-armv8-{{ if inventario.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not inventario.amd64 %}untested{% else %}{{ inventario.amd64 }}{% endif %}-amd64-{% if not inventario.amd64 %}inactive{% elif inventario.amd64 == "verified" %}success{% elif inventario.amd64 == "supported" %}informational{% elif inventario.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not inventario.arm64 %}untested{% else %}{{ inventario.arm64 }}{% endif %}-arm64-{% if not inventario.arm64 %}inactive{% elif inventario.arm64 == "verified" %}success{% elif inventario.arm64 == "supported" %}informational{% elif inventario.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not inventario.armv7 %}untested{% else %}{{ inventario.armv7 }}{% endif %}-armv7-{% if not inventario.armv7 %}inactive{% elif inventario.armv7 == "verified" %}success{% elif inventario.armv7 == "supported" %}informational{% elif inventario.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ inventario.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### VERSION
-*Default: {{inventario.version}}*
+*Default: {{  inventario.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

@@ -2,17 +2,15 @@
 
 [DuckDNS](http://duckdns.org/) is free dynamic DNS hosted on AWS. This provides a client to update the IP pointed to by DuckDNS.
 
-![amd64_verified](https://img.shields.io/badge/{{ if duckdns.tested_amd64 }}not_tested{{ else }}{{ duckdns.tested_amd64 }}{{ endif }}-amd64-{{ if duckdns.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if duckdns.tested_arm64 }}not_tested{{ else }}{{ duckdns.tested_arm64 }}{{ endif }}-arm64-{{ if duckdns.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if duckdns.tested_armv8 }}not_tested{{ else }}{{ duckdns.tested_armv8 }}{{ endif }}-armv8-{{ if duckdns.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not duckdns.amd64 %}untested{% else %}{{ duckdns.amd64 }}{% endif %}-amd64-{% if not duckdns.amd64 %}inactive{% elif duckdns.amd64 == "verified" %}success{% elif duckdns.amd64 == "supported" %}informational{% elif duckdns.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not duckdns.arm64 %}untested{% else %}{{ duckdns.arm64 }}{% endif %}-arm64-{% if not duckdns.arm64 %}inactive{% elif duckdns.arm64 == "verified" %}success{% elif duckdns.arm64 == "supported" %}informational{% elif duckdns.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not duckdns.armv7 %}untested{% else %}{{ duckdns.armv7 }}{% endif %}-armv7-{% if not duckdns.armv7 %}inactive{% elif duckdns.armv7 == "verified" %}success{% elif duckdns.armv7 == "supported" %}informational{% elif duckdns.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ duckdns.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -72,7 +70,7 @@ This service does not provide an interface
 ## OPTIONS
 
 ### VERSION
-*Default: {{duckdns.version}}*
+*Default: {{  duckdns.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

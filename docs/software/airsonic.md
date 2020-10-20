@@ -2,15 +2,14 @@
 
 [Airsonic](https://airsonic.github.io/) is a free, web-based media streamer, providing ubiquitous access to your music.
 
-![amd64_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-amd64-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-arm64-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if airsonic.tested }}not_tested{{ else }}{{ airsonic.tested }}{{ endif }}-armv8-{{ if airsonic.tested }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not airsonic.amd64 %}untested{% else %}{{ airsonic.amd64 }}{% endif %}-amd64-{% if not airsonic.amd64 %}inactive{% elif airsonic.amd64 == "verified" %}success{% elif airsonic.amd64 == "supported" %}informational{% elif airsonic.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not airsonic.arm64 %}untested{% else %}{{ airsonic.arm64 }}{% endif %}-arm64-{% if not airsonic.arm64 %}inactive{% elif airsonic.arm64 == "verified" %}success{% elif airsonic.arm64 == "supported" %}informational{% elif airsonic.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not airsonic.armv7 %}untested{% else %}{{ airsonic.armv7 }}{% endif %}-armv7-{% if not airsonic.armv7 %}inactive{% elif airsonic.armv7 == "verified" %}success{% elif airsonic.armv7 == "supported" %}informational{% elif airsonic.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
-{% if tested %}
+## Information
+
 **Docker Image:** https://hub.docker.com/r/linuxserver/airsonic
 **Current Image Version:** {{ airsonic.version }}
-{% endif %}
-**Supported Architectures:** amd64, arm64, armv8
 
 ## SETUP
 
@@ -114,7 +113,7 @@ eg.
 run: **`vlab update_one service=airsonic`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -154,7 +153,7 @@ eg.
 run: **`vlab update_one service=airsonic`**
 
 ### VERSION
-*Default: {{airsonic.version}}*
+*Default: {{  airsonic.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

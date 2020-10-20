@@ -2,17 +2,15 @@
 
 [Chowdown](https://hub.docker.com/r/gregyankovoy/chowdown)  Simple recipes in Markdown format
 
-![amd64_verified](https://img.shields.io/badge/{{ if chowdown.tested_amd64 }}not_tested{{ else }}{{ chowdown.tested_amd64 }}{{ endif }}-amd64-{{ if chowdown.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if chowdown.tested_arm64 }}not_tested{{ else }}{{ chowdown.tested_arm64 }}{{ endif }}-arm64-{{ if chowdown.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if chowdown.tested_armv8 }}not_tested{{ else }}{{ chowdown.tested_armv8 }}{{ endif }}-armv8-{{ if chowdown.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not chowdown.amd64 %}untested{% else %}{{ chowdown.amd64 }}{% endif %}-amd64-{% if not chowdown.amd64 %}inactive{% elif chowdown.amd64 == "verified" %}success{% elif chowdown.amd64 == "supported" %}informational{% elif chowdown.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not chowdown.arm64 %}untested{% else %}{{ chowdown.arm64 }}{% endif %}-arm64-{% if not chowdown.arm64 %}inactive{% elif chowdown.arm64 == "verified" %}success{% elif chowdown.arm64 == "supported" %}informational{% elif chowdown.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not chowdown.armv7 %}untested{% else %}{{ chowdown.armv7 }}{% endif %}-armv7-{% if not chowdown.armv7 %}inactive{% elif chowdown.armv7 == "verified" %}success{% elif chowdown.armv7 == "supported" %}informational{% elif chowdown.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ chowdown.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -121,7 +119,7 @@ chowdown
 run: **`vlab update_one service=chowdown`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -165,7 +163,7 @@ chowdown
 run: **`vlab update_one service=chowdown`**
 
 ### VERSION
-*Default: {{chowdown.version}}*
+*Default: {{  chowdown.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

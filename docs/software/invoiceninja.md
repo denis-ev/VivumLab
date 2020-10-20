@@ -2,17 +2,15 @@
 
 [Invoice Ninja](https://www.invoiceninja.org/) Free Open-Source Invoicing
 
-![amd64_verified](https://img.shields.io/badge/{{ if invoiceninja.tested_amd64 }}not_tested{{ else }}{{ invoiceninja.tested_amd64 }}{{ endif }}-amd64-{{ if invoiceninja.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if invoiceninja.tested_arm64 }}not_tested{{ else }}{{ invoiceninja.tested_arm64 }}{{ endif }}-arm64-{{ if invoiceninja.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if invoiceninja.tested_armv8 }}not_tested{{ else }}{{ invoiceninja.tested_armv8 }}{{ endif }}-armv8-{{ if invoiceninja.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not invoiceninja.amd64 %}untested{% else %}{{ invoiceninja.amd64 }}{% endif %}-amd64-{% if not invoiceninja.amd64 %}inactive{% elif invoiceninja.amd64 == "verified" %}success{% elif invoiceninja.amd64 == "supported" %}informational{% elif invoiceninja.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not invoiceninja.arm64 %}untested{% else %}{{ invoiceninja.arm64 }}{% endif %}-arm64-{% if not invoiceninja.arm64 %}inactive{% elif invoiceninja.arm64 == "verified" %}success{% elif invoiceninja.arm64 == "supported" %}informational{% elif invoiceninja.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not invoiceninja.armv7 %}untested{% else %}{{ invoiceninja.armv7 }}{% endif %}-armv7-{% if not invoiceninja.armv7 %}inactive{% elif invoiceninja.armv7 == "verified" %}success{% elif invoiceninja.armv7 == "supported" %}informational{% elif invoiceninja.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ invoiceninja.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### VERSION
-*Default: {{invoiceninja.version}}*
+*Default: {{  invoiceninja.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

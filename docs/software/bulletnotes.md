@@ -2,17 +2,15 @@
 
 [BulletNotes](https://github.com/Vivumlab/BulletNotes/) is an open source note taking app.
 
-![amd64_verified](https://img.shields.io/badge/{{ if bulletnotes.tested_amd64 }}not_tested{{ else }}{{ bulletnotes.tested_amd64 }}{{ endif }}-amd64-{{ if bulletnotes.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if bulletnotes.tested_arm64 }}not_tested{{ else }}{{ bulletnotes.tested_arm64 }}{{ endif }}-arm64-{{ if bulletnotes.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if bulletnotes.tested_armv8 }}not_tested{{ else }}{{ bulletnotes.tested_armv8 }}{{ endif }}-armv8-{{ if bulletnotes.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not bulletnotes.amd64 %}untested{% else %}{{ bulletnotes.amd64 }}{% endif %}-amd64-{% if not bulletnotes.amd64 %}inactive{% elif bulletnotes.amd64 == "verified" %}success{% elif bulletnotes.amd64 == "supported" %}informational{% elif bulletnotes.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not bulletnotes.arm64 %}untested{% else %}{{ bulletnotes.arm64 }}{% endif %}-arm64-{% if not bulletnotes.arm64 %}inactive{% elif bulletnotes.arm64 == "verified" %}success{% elif bulletnotes.arm64 == "supported" %}informational{% elif bulletnotes.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not bulletnotes.armv7 %}untested{% else %}{{ bulletnotes.armv7 }}{% endif %}-armv7-{% if not bulletnotes.armv7 %}inactive{% elif bulletnotes.armv7 == "verified" %}success{% elif bulletnotes.armv7 == "supported" %}informational{% elif bulletnotes.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ bulletnotes.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ bulletnotes
 run: **`vlab update_one service=bulletnotes`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ bulletnotes
 run: **`vlab update_one service=bulletnotes`**
 
 ### VERSION
-*Default: {{bulletnotes.version}}*
+*Default: {{  bulletnotes.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

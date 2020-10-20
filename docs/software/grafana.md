@@ -2,17 +2,15 @@
 
 [Grafana](https://grafana.com/) is a Time Series Database graphing application.
 
-![amd64_verified](https://img.shields.io/badge/{{ if grafana.tested_amd64 }}not_tested{{ else }}{{ grafana.tested_amd64 }}{{ endif }}-amd64-{{ if grafana.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if grafana.tested_arm64 }}not_tested{{ else }}{{ grafana.tested_arm64 }}{{ endif }}-arm64-{{ if grafana.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if grafana.tested_armv8 }}not_tested{{ else }}{{ grafana.tested_armv8 }}{{ endif }}-armv8-{{ if grafana.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not grafana.amd64 %}untested{% else %}{{ grafana.amd64 }}{% endif %}-amd64-{% if not grafana.amd64 %}inactive{% elif grafana.amd64 == "verified" %}success{% elif grafana.amd64 == "supported" %}informational{% elif grafana.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not grafana.arm64 %}untested{% else %}{{ grafana.arm64 }}{% endif %}-arm64-{% if not grafana.arm64 %}inactive{% elif grafana.arm64 == "verified" %}success{% elif grafana.arm64 == "supported" %}informational{% elif grafana.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not grafana.armv7 %}untested{% else %}{{ grafana.armv7 }}{% endif %}-armv7-{% if not grafana.armv7 %}inactive{% elif grafana.armv7 == "verified" %}success{% elif grafana.armv7 == "supported" %}informational{% elif grafana.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ grafana.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -132,7 +130,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -176,7 +174,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### VERSION
-*Default: {{grafana.version}}*
+*Default: {{  grafana.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

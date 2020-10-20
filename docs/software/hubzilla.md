@@ -2,17 +2,15 @@
 
 [Hubzilla](https://framagit.org/hubzilla) is a powerful platform for creating interconnected websites featuring a [decentralized/nomadic identity](https://zotlabs.org/page/hubzilla/hubzilla-project).
 
-![amd64_verified](https://img.shields.io/badge/{{ if hubzilla.tested_amd64 }}not_tested{{ else }}{{ hubzilla.tested_amd64 }}{{ endif }}-amd64-{{ if hubzilla.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if hubzilla.tested_arm64 }}not_tested{{ else }}{{ hubzilla.tested_arm64 }}{{ endif }}-arm64-{{ if hubzilla.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if hubzilla.tested_armv8 }}not_tested{{ else }}{{ hubzilla.tested_armv8 }}{{ endif }}-armv8-{{ if hubzilla.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not hubzilla.amd64 %}untested{% else %}{{ hubzilla.amd64 }}{% endif %}-amd64-{% if not hubzilla.amd64 %}inactive{% elif hubzilla.amd64 == "verified" %}success{% elif hubzilla.amd64 == "supported" %}informational{% elif hubzilla.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not hubzilla.arm64 %}untested{% else %}{{ hubzilla.arm64 }}{% endif %}-arm64-{% if not hubzilla.arm64 %}inactive{% elif hubzilla.arm64 == "verified" %}success{% elif hubzilla.arm64 == "supported" %}informational{% elif hubzilla.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not hubzilla.armv7 %}untested{% else %}{{ hubzilla.armv7 }}{% endif %}-armv7-{% if not hubzilla.armv7 %}inactive{% elif hubzilla.armv7 == "verified" %}success{% elif hubzilla.armv7 == "supported" %}informational{% elif hubzilla.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ hubzilla.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -142,7 +140,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -186,7 +184,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### VERSION
-*Default: {{hubzilla.version}}*
+*Default: {{  hubzilla.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

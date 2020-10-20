@@ -2,17 +2,15 @@
 
 [Guacamole](https://guacamole.apache.org) is a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH.
 
-![amd64_verified](https://img.shields.io/badge/{{ if guacamole.tested_amd64 }}not_tested{{ else }}{{ guacamole.tested_amd64 }}{{ endif }}-amd64-{{ if guacamole.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if guacamole.tested_arm64 }}not_tested{{ else }}{{ guacamole.tested_arm64 }}{{ endif }}-arm64-{{ if guacamole.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if guacamole.tested_armv8 }}not_tested{{ else }}{{ guacamole.tested_armv8 }}{{ endif }}-armv8-{{ if guacamole.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not guacamole.amd64 %}untested{% else %}{{ guacamole.amd64 }}{% endif %}-amd64-{% if not guacamole.amd64 %}inactive{% elif guacamole.amd64 == "verified" %}success{% elif guacamole.amd64 == "supported" %}informational{% elif guacamole.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not guacamole.arm64 %}untested{% else %}{{ guacamole.arm64 }}{% endif %}-arm64-{% if not guacamole.arm64 %}inactive{% elif guacamole.arm64 == "verified" %}success{% elif guacamole.arm64 == "supported" %}informational{% elif guacamole.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not guacamole.armv7 %}untested{% else %}{{ guacamole.armv7 }}{% endif %}-armv7-{% if not guacamole.armv7 %}inactive{% elif guacamole.armv7 == "verified" %}success{% elif guacamole.armv7 == "supported" %}informational{% elif guacamole.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ guacamole.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -123,7 +121,7 @@ guacamole
 run: **`vlab update_one service=guacamole`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -167,7 +165,7 @@ guacamole
 run: **`vlab update_one service=guacamole`**
 
 ### VERSION
-*Default: {{guacamole.version}}*
+*Default: {{  guacamole.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:

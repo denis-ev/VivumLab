@@ -2,17 +2,15 @@
 
 [Gotify](https://github.com/gotify/server) A simple server for sending and receiving messages in real-time per WebSocket. (Includes a sleek web-ui)
 
-![amd64_verified](https://img.shields.io/badge/{{ if gotify.tested_amd64 }}not_tested{{ else }}{{ gotify.tested_amd64 }}{{ endif }}-amd64-{{ if gotify.tested_amd64 }}red{{ else }}informational{{ endif }}?style=flat)
-![arm64_verified](https://img.shields.io/badge/{{ if gotify.tested_arm64 }}not_tested{{ else }}{{ gotify.tested_arm64 }}{{ endif }}-arm64-{{ if gotify.tested_arm64 }}red{{ else }}informational{{ endif }}?style=flat)
-![armv8_verified](https://img.shields.io/badge/{{ if gotify.tested_armv8 }}not_tested{{ else }}{{ gotify.tested_armv8 }}{{ endif }}-armv8-{{ if gotify.tested_armv8 }}red{{ else }}informational{{ endif }}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not gotify.amd64 %}untested{% else %}{{ gotify.amd64 }}{% endif %}-amd64-{% if not gotify.amd64 %}inactive{% elif gotify.amd64 == "verified" %}success{% elif gotify.amd64 == "supported" %}informational{% elif gotify.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not gotify.arm64 %}untested{% else %}{{ gotify.arm64 }}{% endif %}-arm64-{% if not gotify.arm64 %}inactive{% elif gotify.arm64 == "verified" %}success{% elif gotify.arm64 == "supported" %}informational{% elif gotify.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not gotify.armv7 %}untested{% else %}{{ gotify.armv7 }}{% endif %}-armv7-{% if not gotify.armv7 %}inactive{% elif gotify.armv7 == "verified" %}success{% elif gotify.armv7 == "supported" %}informational{% elif gotify.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
-{% if tested_amd64 or tested_arm64 or tested_armv8 %}
+
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
 **Current Image Version:** {{ gotify.version }}
-{% endif %}
-**Supported Architectures:** amd64  !!! DEVELOPERS: please do your research, and populate this properly !!!
 
 ## SETUP
 
@@ -125,7 +123,7 @@ gotify
 run: **`vlab update_one service=gotify`**
 
 ### DOMAIN
-*Default: {{domain}}*
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +167,7 @@ gotify
 run: **`vlab update_one service=gotify`**
 
 ### VERSION
-*Default: {{gotify.version}}*
+*Default: {{  gotify.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
