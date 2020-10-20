@@ -118,7 +118,7 @@ Switches you to the specified branch or tag.
 Options: branch
     examples
     (branch): **`vlab track branch=master`**
-    (tag): **`vlab track tag=0.0.1`**
+    (tag): **`vlab track tag=v0.0.1`**
 
 #### check_version
 Checks the current version.
@@ -136,9 +136,9 @@ Options: debug, service
     example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
 
 #### reboot
-Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
-Options: t
-    example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
+Allows the user to reboot the server.
+Options: none
+    example: **`vlab reboot`**
 
 #### shutdown
 Allows the user to shutdown the server.
