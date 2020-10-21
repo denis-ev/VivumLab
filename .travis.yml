@@ -57,7 +57,7 @@ jobs:
         - nvm install 12
         - npm install
       script:
-        - npm run semantic-release
+        - npx semantic-release
     - language: python
       sudo: required
       services:
@@ -68,7 +68,7 @@ jobs:
         - nvm install 12
         - npm install
       script:
-        - npm run semantic-release --branches dev --dry-run
+        - npx semantic-release --branches dev --dry-run
 
 cache:
   directories:
