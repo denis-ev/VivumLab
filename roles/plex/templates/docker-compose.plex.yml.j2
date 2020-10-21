@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Plex Media Server
   plex:
+    container_name: plex
     image: plexinc/pms-docker:{{ plex.version }}
     hostname: {% if plex.domain %}{{ plex.domain }}{% else %}{{ plex.subdomain + "." + domain }}{% endif %}
     networks:

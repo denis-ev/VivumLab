@@ -3,6 +3,7 @@ version: '3'
 
 services:
   minecraft:
+    container_name: minecraft
     image: itzg/minecraft-server:{{ minecraft.version }}
     volumes:
       - "{{ volumes_root }}/minecraft/data:/data"

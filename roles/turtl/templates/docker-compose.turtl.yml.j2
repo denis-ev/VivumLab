@@ -9,6 +9,7 @@ networks:
 
 services:
   turtl-server:
+    container_name: turtl
     build:
       context: ./server
     restart: unless-stopped
@@ -16,10 +17,10 @@ services:
       - traefik_network
       - turtl_internal
     depends_on:
-      postgres-db
+      db
         conditon: service_healthy
     environment:
-      TURTL_DB_HOST: postgres-db
+      TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
       TURTL_DB_DATABASE: turtl
       TURTL_DB_USER: turtl
@@ -39,6 +40,7 @@ services:
 {% include './labels.j2' %}
 
   postgres-db:
+    container_name: turtl_db
     image: postgres:11-alpine
     environment:
       POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}

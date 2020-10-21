@@ -8,7 +8,8 @@ networks:
   bookstack:
 
 services:
-  mysql:
+  db:
+    container_name: bookstack_db
     image: mysql:{{ bookstack.db_version }}
     networks:
       - bookstack
@@ -21,16 +22,17 @@ services:
     volumes:
     - "{{ volumes_root }}/bookstack/mysql-data:/var/lib/mysql"
 
-  bookstack:
+  app:
+    container_name: bookstack
     image: solidnerd/bookstack:{{ bookstack.version }}
     networks:
       - traefik_network
       - bookstack
     restart: unless-stopped
     depends_on:
-    - mysql
+    - db
     environment:
-    - DB_HOST=mysql:3306
+    - DB_HOST=db:3306
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD={{lookup('password', './settings/passwords/bookstack_db_password chars=ascii_letters')}}

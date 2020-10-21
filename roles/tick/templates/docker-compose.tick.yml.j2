@@ -10,6 +10,7 @@ networks:
 services:
   # System Statistics Logger
   telegraf:
+    container_name: telegraf
     image: telegraf:{{ tick.telegraf_version }}
     restart: unless-stopped
     networks:
@@ -24,6 +25,7 @@ services:
 
   # Time Series Data Store
   influxdb:
+    container_name: influxdb
     image: influxdb:{{ tick.influxdb_version }}
     restart: unless-stopped
     networks:
@@ -35,6 +37,7 @@ services:
 
   # Define a Chronograf service
   chronograf:
+    container_name: chronograf
     image: chronograf:{{ tick.chronograf_version }}
     networks:
       - tick
@@ -51,6 +54,7 @@ services:
 
   # Define a Kapacitor service
   kapacitor:
+    container_name: kapacitor
     image: kapacitor:{{ tick.kapacitor_version }}
     networks:
       - tick

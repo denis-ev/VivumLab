@@ -8,6 +8,7 @@ networks:
 
 services:
   codeserver:
+    container_name: codeserver
     image: codercom/code-server:{{ codeserver.version }}
     environment:
       - PASSWORD="{{ default_password }}"

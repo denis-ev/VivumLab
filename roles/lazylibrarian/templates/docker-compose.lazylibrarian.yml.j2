@@ -9,6 +9,7 @@ networks:
 
 services:
   app:
+    container_name: lazylibrarian
     image: linuxserver/lazylibrarian:{{ lazylibrarian.version }}
     restart: unless-stopped
     networks:

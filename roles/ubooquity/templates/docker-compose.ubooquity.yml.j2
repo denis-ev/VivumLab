@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: ubooquity
     image: linuxserver/ubooquity:{{ ubooquity.version }}
     restart: unless-stopped
     environment:

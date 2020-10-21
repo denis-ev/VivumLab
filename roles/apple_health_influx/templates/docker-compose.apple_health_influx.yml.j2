@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  # Apple Health Data Importer
   apple_health_influx:
+    container_name: apple_health_influx
     image: nickbusey/healthdata_influx:{{ apple_health_influx.version }}
     restart: unless-stopped
     volumes:

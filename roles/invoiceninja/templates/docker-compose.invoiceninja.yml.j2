@@ -10,7 +10,8 @@ networks:
   invoiceninja:
 
 services:
-  www:
+  web:
+    container_name: invoiceninja_web
     image: nginx
     networks:
       - traefik_network
@@ -56,6 +57,7 @@ services:
 {% endif %}
 
   indb:
+    container_name: invoiceninja_db
     image: mysql:5
     restart: unless-stopped
     networks:
@@ -69,7 +71,7 @@ services:
       - "{{ volumes_root }}/invoiceninja/mysql-data:/var/lib/mysql:rw"
 
   invoiceapp:
-    # REQUIRED
+    container_name: invoiceninja
     image: invoiceninja/invoiceninja:{{invoiceninja.version}}
     restart: unless-stopped
     depends_on:
@@ -106,6 +108,7 @@ services:
       - "{{ volumes_root }}/invoiceninja/storage:/var/www/app/storage"
 
   cron:
+    container_name: invoiceninja_cron
     image: invoiceninja/invoiceninja:{{invoiceninja.version}}
     restart: unless-stopped
     networks:

@@ -10,6 +10,7 @@ networks:
 
 services:
   app:
+    container_name: webdavserver
     image: bytemark/webdav:{{ webdavserver.version }}
     restart: unless-stopped
     volumes:

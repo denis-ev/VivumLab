@@ -8,8 +8,8 @@ networks:
   matomo:
 
 services:
- # Web Analytics
   app:
+    container_name: matomo
     image: matomo:{{ matomo.version }}
     restart: unless-stopped
     networks:
@@ -18,7 +18,7 @@ services:
     volumes:
       - "{{ volumes_root }}/matomo/data:/data"
     environment:
-      - MATOMO_DATABASE_HOST=matomo_db
+      - MATOMO_DATABASE_HOST=db
       - MATOMO_DATABASE_USERNAME=matomo
       - MATOMO_DATABASE_PASSWORD={{lookup('password', './settings/passwords/matomo_db_password chars=ascii_letters')}}
       - MATOMO_DATABASE_DBNAME=matomo
@@ -27,7 +27,8 @@ services:
       - "traefik.http.services.matomo.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  matomo_db:
+  db:
+    container_name: matomo_db
     image: mariadb:{{ matomo.db_version }}
     restart: unless-stopped
     networks:

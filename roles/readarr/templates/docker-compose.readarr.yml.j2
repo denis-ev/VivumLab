@@ -8,16 +8,17 @@ networks:
 {% if calibre.enable %}
   calibre:
     external:
-      name: calibre_calibre
+      name: calibre_net
 {% endif %}
 
 services:
   readarr:
+    container_name: readarr
     image: hotio/readarr:{{ readarr.version }}
     restart: unless-stopped
     container_name: readarr
     environment:
-      - PUID={{ uid_output.stdout }}
+      - PUID={{ uid_output.scontainer_name: tdout }}
       - PGID={{ gid_output.stdout }}
       - TZ={{ common_timezone }}
       - UMASK=002

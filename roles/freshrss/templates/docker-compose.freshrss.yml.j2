@@ -11,8 +11,8 @@ networks:
   #freshrss:
 
 services:
-  # RSS Reader
   freshrss:
+    container_name: freshrss
     image: freshrss/freshrss:{{ freshrss.version }}
     networks:
       - traefik_network
@@ -30,6 +30,7 @@ services:
 
 # see https://github.com/FreshRSS/FreshRSS/blob/master/Docker/docker-compose.yml
 #  postgresql:
+#    container_name:
 #    image: postgres:latest
 #    networks:
 #      - freshrss

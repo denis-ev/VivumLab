@@ -8,6 +8,7 @@ networks:
 
 services:
   netdata:
+    container_name: netdata
     image: netdata/netdata:{{ netdata.version }}
     hostname: {{ domain }}
     networks:

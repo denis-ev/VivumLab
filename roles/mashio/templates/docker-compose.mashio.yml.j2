@@ -8,8 +8,8 @@ networks:
   mashio:
 
 services:
-  # Home Brewery Management
   app:
+    container_name: mashio
     image: nickbusey/mashio:{{ mashio.version }}
     restart: unless-stopped
     networks:
@@ -25,7 +25,8 @@ services:
       - "traefik.http.services.mashio.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  mashio_db:
+  db:
+    container_name: mashio_db
     image: mariadb:{{ mashio.db_version }}
     restart: unless-stopped
     networks:

@@ -11,8 +11,8 @@ networks:
     external: false
 
 services:
-  # External dependencies
   redis:
+    container_name: mailu_redis
     image: redis:{{ mailu.redis_version }}
     restart: unless-stopped
     volumes:
@@ -20,8 +20,8 @@ services:
     networks:
       - mail_network
 
-  # Core services
-  front:
+  web:
+    container_name: mailu_web
     image: mailu/nginx:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -47,6 +47,7 @@ services:
 {% include './labels.j2' %}
 
   admin:
+    container_name: mailu_admin
     image: mailu/admin:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -84,6 +85,7 @@ services:
 {% endif %}
 
   imap:
+    container_name: mailu_imap
     image: mailu/dovecot:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -93,9 +95,10 @@ services:
     networks:
       - mail_network
     depends_on:
-      - front
+      - web
 
   smtp:
+    container_name: mailu_smtp
     image: mailu/postfix:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -104,9 +107,10 @@ services:
     networks:
       - mail_network
     depends_on:
-      - front
+      - web
 
   antispam:
+    container_name: mailu_antispam
     image: mailu/rspamd:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -117,10 +121,11 @@ services:
     networks:
       - mail_network
     depends_on:
-      - front
+      - web
 
   # Optional services
   antivirus:
+    container_name: mailu_antivirus
     image: mailu/clamav:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -130,6 +135,7 @@ services:
       - mail_network
 
   webdav:
+    container_name: mailu_radicale
     image: mailu/radicale:{{ mailu.version }}
     restart: unless-stopped
     env_file: .env
@@ -139,6 +145,7 @@ services:
       - mail_network
 
   certdumper:
+    container_name: mailu_certdumper
     restart: unless-stopped
     image: mailu/traefik-certdumper:{{ mailu.version }}
     environment:
@@ -150,8 +157,8 @@ services:
       # Folder, where cert.pem and key.pem will be written
       - "{{ volumes_root }}/mailu/certs:/output"
 
-  # Webmail
   webmail:
+    container_name: mailu_webmail
     image: mailu/rainloop:{{ mailu.version }}
     restart: always
     env_file: .env

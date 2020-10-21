@@ -153,7 +153,6 @@ If you are having problems you can:
 - [Chowdown](software/chowdown.md) Simple recipes in Markdown format
 - [CodiMD](software/codimd.md) The best platform to write and share markdown
 - [Darksky](software/darksky.md) - Local weather reported via [darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb)
-- [Dasher](software/dasher.md) - Amazon Dash button support
 - [DuckDNS](software/duckdns.md) is free dynamic DNS hosted on AWS. This provides a client to update the IP pointed to by DuckDNS.
 - [EtherCalc](software/ethercalc.md) - Web Spreadsheet
 - [ERPNext](software/erpnext.md) Open Source ERP for Everyone.

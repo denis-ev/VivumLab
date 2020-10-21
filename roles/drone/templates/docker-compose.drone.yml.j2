@@ -9,8 +9,8 @@ networks:
   drone:
 
 services:
-  # Drone is a self-service continuous delivery platform
   drone-server:
+    container_name: drone_server
     image: drone/drone:{{ drone.version }}
     restart: unless-stopped
     volumes:

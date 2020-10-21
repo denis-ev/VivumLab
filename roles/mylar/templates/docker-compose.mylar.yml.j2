@@ -8,6 +8,7 @@ networks:
 
 services:
   mylar:
+    container_name: mylar
     image: linuxserver/mylar:{{ mylar.version }}
     environment:
       - PUID={{ uid }}

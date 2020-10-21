@@ -9,6 +9,7 @@ networks:
 
 services:
   proxy:
+    container_name: ownphotos_proxy
     image: guysoft/ownphotos-proxy
     tty: true
     networks:
@@ -20,7 +21,8 @@ services:
       - "traefik.http.services.ownphotos.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  ownphotos-db:
+  db:
+    container_name: ownphotos_db
     image: postgres:{{ ownphotos.db_version }}
     networks:
       - ownphotos
@@ -32,6 +34,7 @@ services:
       - "{{ volumes_root }}/ownphotos/db-data:/var/lib/postgresql/data"
 
   frontend:
+    container_name: ownphotos_frontend
     image: hooram/ownphotos-frontend:{{ ownphotos.version }}
     networks:
       - ownphotos
@@ -40,6 +43,7 @@ services:
       - BACKEND_HOST={% if ownphotos.domain %}{{ ownphotos.domain }}{% else %}{{ ownphotos.subdomain + "." + domain }}{% endif %}
 
   backend:
+    container_name: ownphotos_backend
     image: hooram/ownphotos:{{ ownphotos.version }}
     networks:
       - ownphotos
@@ -58,14 +62,14 @@ services:
       - DB_NAME=ownphotos
       - DB_USER=postgres
       - DB_PASS="{{lookup('password', './settings/passwords/ownphotos_db_password chars=ascii_letters')}}"
-      - DB_HOST=ownphotos-db
+      - DB_HOST=db
       - DB_PORT=5432
-      - REDIS_HOST=ownphotos-redis
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
       - MAPBOX_API_KEY={{ mapbox_api_key }}
 
-  ownphotos-redis:
+  redis:
+    container_name: ownphotos_redis
     networks:
       - ownphotos
     image: redis:{{ ownphotos.redis_version }}
-    container_name: ownphotos-redis

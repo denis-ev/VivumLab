@@ -10,7 +10,7 @@ networks:
 
 services:
   app:
-    # REQUIRED
+    container_name: minecraft_bedrockserver
     image: itzg/minecraft-bedrock-server:{{ minecraftbedrockserver.version }}
     environment:
       - EULA={{minecraftbedrockserver.eula | upper }}

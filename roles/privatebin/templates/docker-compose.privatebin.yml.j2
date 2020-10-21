@@ -10,6 +10,7 @@ networks:
 
 services:
   privatebin:
+    container_name: privatebin
     image: privatebin/nginx-fpm-alpine:{{ privatebin.version }}
     restart: unless-stopped
     networks:

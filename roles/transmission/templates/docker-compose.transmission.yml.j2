@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Torrent Downloader https://vivumlab.com/software/transmission/
   transmission:
+    container_name: transmission
     image: haugene/transmission-openvpn:{{ transmission.version }}
     networks:
       - traefik_network

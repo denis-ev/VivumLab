@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  # VPN Access
   openvpn:
+    container_name: openvpn
     cap_add:
       - NET_ADMIN
     image: kylemanna/openvpn:{{ openvpn.version }}

@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Torrent API
   jackett:
+    container_name: jackett
     image: linuxserver/jackett:{{ jackett.version }}
     restart: unless-stopped
     volumes:

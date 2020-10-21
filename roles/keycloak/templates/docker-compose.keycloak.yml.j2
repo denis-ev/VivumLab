@@ -10,7 +10,7 @@ networks:
   keycloak:
 
 services:
-  keycloak-postgres:
+  db:
     image: postgres:{{ keycloak.db_version }}
     volumes:
       - "{{ volumes_root }}/keycloak/db-data:/var/lib/postgresql/data"
@@ -21,37 +21,38 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: {{lookup('password', './settings/passwords/keycloak_db_password chars=ascii_letters')}}
       POSTGRES_DB: keycloak
-      POSTGRES_HOST: keycloak-postgres
+      POSTGRES_HOST: db
     networks:
         - keycloak
 
   keycloak:
-      image: quay.io/keycloak/keycloak:{{ keycloak.version }}
-      restart: unless-stopped
-      environment:
-        DB_VENDOR: postgres
-        DB_ADDR: keycloak-postgres
-        DB_PORT: 5432
-        DB_DATABASE: keycloak
-        DB_USER: keycloak
-        DB_PASSWORD: {{lookup('password', './settings/passwords/keycloak_db_password chars=ascii_letters')}}
-        KEYCLOAK_USER: {{ default_username }}
-        KEYCLOAK_PASSWORD: "{{ default_password }}"
-        PROXY_ADDRESS_FORWARDING: "true"
-        KEYCLOAK_STATISTICS: all
-        KEYCLOAK_FRONTEND_URL: "https://{{ service_domain }}/auth/"
-        KEYCLOAK_LOGLEVEL: INFO # Supported log levels are ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE and WARN.
-        ROOT_LOGLEVEL: INFO # Supported log levels are ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE and WARN.
-        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
-        #JDBC_PARAMS: "connectTimeout=30000"
-        JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
-        JGROUPS_DISCOVERY_PROPERTIES: datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500
-      depends_on:
-        - keycloak-postgres
-      networks:
-        - keycloak
-        - traefik_network
-      labels:
-      - "traefik.http.services.keycloak.loadbalancer.server.scheme=http"
-      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:{{ keycloak.version }}
+    restart: unless-stopped
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: {{lookup('password', './settings/passwords/keycloak_db_password chars=ascii_letters')}}
+      KEYCLOAK_USER: {{ default_username }}
+      KEYCLOAK_PASSWORD: "{{ default_password }}"
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_STATISTICS: all
+      KEYCLOAK_FRONTEND_URL: "https://{{ service_domain }}/auth/"
+      KEYCLOAK_LOGLEVEL: INFO # Supported log levels are ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE and WARN.
+      ROOT_LOGLEVEL: INFO # Supported log levels are ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE and WARN.
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+      JGROUPS_DISCOVERY_PROPERTIES: datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500
+    depends_on:
+      - db
+    networks:
+      - keycloak
+      - traefik_network
+    labels:
+    - "traefik.http.services.keycloak.loadbalancer.server.scheme=http"
+    - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
 {% include './labels.j2' %}

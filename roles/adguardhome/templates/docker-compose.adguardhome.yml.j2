@@ -10,6 +10,7 @@ networks:
 
 services:
   adguardhome:
+    container_name: adguardhome
     restart: unless-stopped
     # REQUIRED
     image: adguard/adguardhome:{{ adguardhome.version }}

@@ -10,7 +10,8 @@ networks:
   teedy:
 
 services:
-  teedydb:
+  db:
+    container_name: teddy_db
     networks:
       - teedy
     image: postgres:{{ teedy.db_version }}
@@ -21,10 +22,11 @@ services:
       - "{{ volumes_root }}/teedy/postgres_data:/var/lib/postgresql/data"
 
   app:
+    container_name: teedy
     image: sismics/docs:{{ teedy.version }}
     restart: unless-stopped
     depends_on:
-      - teedydb
+      - db
     networks:
       - traefik_network
       - teedy
@@ -32,7 +34,7 @@ services:
       - "{{ storage_dir }}/Documents:/data"
     environment:
       - DOCS_BASE_URL={{ service_domain }}
-      - DATABASE_URL=jdbc:postgresql://teedydb:5432/docs
+      - DATABASE_URL=jdbc:postgresql://db:5432/docs
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD={{lookup('password', './settings/passwords/teedy_postgres_password')}}
     labels:

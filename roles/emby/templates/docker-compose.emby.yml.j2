@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
- # Media Server
   emby:
+    container_name: emby
     image: emby/embyserver:{{ emby.version }}
     restart: unless-stopped
     networks:

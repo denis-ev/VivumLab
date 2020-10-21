@@ -9,6 +9,7 @@ networks:
 
 services:
   gitlab:
+    container_name: gitlab
     restart: unless-stopped
     image: gitlab/gitlab-ce:{{ gitlab.version }}
     environment:
@@ -109,7 +110,7 @@ services:
       - traefik_network
       - gitlab
     depends_on:
-      - gitlab_db
+      - db
     volumes:
       - "{{ volumes_root }}/gitlab/config:/etc/gitlab"
       - "{{ volumes_root }}/gitlab/logs:/var/log/gitlab"
@@ -123,7 +124,8 @@ services:
       - "traefik.http.services.gitlab.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  gitlab-runner:
+  runner:
+    container_name: gitlab_runner
     image: gitlab/gitlab-runner:{{ gitlab.runner_version }}
     command: register -n --locked=false --url "http://gitlab/" --registration-token "{{ lookup('password', './settings/passwords/gitlab_runners_token chars=ascii_letters') }}" --clone-url http://gitlab --executor "docker" --docker-image "docker:latest" --docker-privileged --description "docker-runner" --tag-list "docker" --run-untagged="true" --locked="false" --access-level="not_protected"
     deploy:
@@ -139,13 +141,14 @@ services:
     depends_on:
       - gitlab
 
-  gitlab_db:
+  db:
+    container_name: gitea_db
     image: postgres:{{ gitlab.db_version }}
     restart: unless-stopped
     networks:
       - gitlab
     environment:
-      - POSTGRES_DB=gitlab_db
+      - POSTGRES_DB=db
       - POSTGRES_PASSWORD={{ lookup('password', './settings/passwords/gitlab_db_password chars=ascii_letters') }}
       - POSTGRES_USER=gitlab_user
       - PGDATA=/database
@@ -153,6 +156,7 @@ services:
       - "{{ volumes_root }}/gitlab/db:/database"
 
   registry:
+    container_name: gitlab_registry
     image: registry:{{ gitlab.registry_version }}
     hostname: 'registry'
     restart: unless-stopped
@@ -212,6 +216,6 @@ services:
     networks:
       - gitlab
     depends_on:
-      - gitlab-runner
+      - runner
 
 #checking

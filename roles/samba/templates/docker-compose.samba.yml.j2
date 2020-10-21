@@ -9,12 +9,12 @@ networks:
 
 services:
   samba:
+    container_name: samba
     restart: unless-stopped
     image: dperson/samba:{{ samba.version }}
     networks:
       - samba
     volumes:
-      # This is the parent folder of all VLAB storage
       - "{{ storage_dir }}:/media:z"
       - "{{ volumes_root }}/samba/config:/etc/samba"
     ports:

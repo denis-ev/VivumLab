@@ -8,6 +8,7 @@ networks:
 
 services:
   funkwhale:
+    container_name: funkwhale
     image: funkwhale/all-in-one:{{ funkwhale.version }}
     restart: unless-stopped
     networks:

@@ -11,11 +11,12 @@ networks:
 
 services:
   auth:
+    container_name: authelia_auth
     image: authelia/authelia:{{ authelia.version }}
     restart: unless-stopped
     depends_on:
       - redis
-      - postgres
+      - db
     networks:
       - traefik_network
       - authelia
@@ -28,13 +29,15 @@ services:
       - "{{ volumes_root }}/authelia/userdb.yml:/etc/authelia/userdb.yml"
 
   redis:
+    container_name: authelia_redis
     networks:
       - authelia
     image: redis:{{ authelia.redis_version }}
     volumes:
       - "{{ volumes_root }}/authelia/redis:/data"
 
-  postgres:
+  db:
+    container_name: authelia_db
     networks:
       - authelia
     image: postgres:{{ authelia.db_version }}

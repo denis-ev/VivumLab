@@ -9,6 +9,7 @@ networks:
 
 services:
   ethercalc_redis:
+    container_name: ethercalc_redis
     image: redis:{{ ethercalc.redis_version }}
     networks:
       - ethercalc
@@ -18,7 +19,7 @@ services:
     restart: unless-stopped
 
   ethercalc:
-    # REQUIRED
+    container_name: ethercalc
     image: audreyt/ethercalc:{{ ethercalc.version }}
     restart: unless-stopped
     networks:

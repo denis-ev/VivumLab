@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: rsshub
     image: diygod/rsshub:{{ rsshub.version }}
     restart: unless-stopped
     networks:
@@ -15,31 +16,6 @@ services:
     environment:
       - TZ={{ common_timezone }}
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.services.rsshub.loadbalancer.server.scheme=http"
       - "traefik.http.services.rsshub.loadbalancer.server.port=1200"
-      - "traefik.http.routers.rsshub-http.rule=Host(`{{ service_domain }}`)"
-      - "traefik.http.routers.rsshub-http.entrypoints=http"
-{% if not rsshub.https_only %}
-      - "traefik.http.routers.rsshub-http.middlewares={% if rsshub.https_only %}redirect@file, {% else %}{% if rsshub.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
-{% else %}
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.rsshub-http.middlewares=redirect-to-https"
-{% endif %}
-      - "traefik.http.routers.rsshub.rule=Host(`{{ service_domain }}`)"
-      - "traefik.http.routers.rsshub.entrypoints=https"
-      - "traefik.http.routers.rsshub.middlewares={% if rsshub.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
-      - "traefik.http.routers.rsshub.tls=true"
-{% if traefik.dns_challenge_provider %}
-      - "traefik.http.routers.rsshub.tls.certresolver=dns"
-      - "traefik.http.routers.rsshub.tls.domains[0].main={{ domain }}"
-      - "traefik.http.routers.rsshub.tls.domains[0].sans=*.{{ domain }}"
-{% else %}
-      - "traefik.http.routers.rsshub.tls.certresolver=http"
-{% endif %}
-{% if enable_tor %}
-      - "traefik.http.routers.rsshub-tor-http.rule=Host(`{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
-      - "traefik.http.routers.rsshub-tor-http.entrypoints=http"
-      - "traefik.http.routers.rsshub-tor-http.middlewares={% if rsshub.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
-{% endif %}
+{% include './labels.j2' %}

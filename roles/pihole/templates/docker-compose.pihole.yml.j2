@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Network level ad blocking
   pihole:
+    container_name: pihole
     image: pihole/pihole:{{ pihole.version }}
     restart: unless-stopped
     hostname: "{% if pihole.domain %}{{ pihole.domain }}{% else %}{{ pihole.subdomain + "." + domain }}{% endif %}"

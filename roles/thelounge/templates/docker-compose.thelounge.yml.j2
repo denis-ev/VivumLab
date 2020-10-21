@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
- # IRC Bouncer
   thelounge:
+    container_name: thelounge
     image: linuxserver/thelounge:{{ thelounge.version }}
     restart: unless-stopped
     volumes:

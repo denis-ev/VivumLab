@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  # IFTTT Replacement
   kibitzr:
+    container_name: kibitzr
     image: peterdemin/kibitzr:{{ kibitzr.version }}
     restart: unless-stopped
     volumes:

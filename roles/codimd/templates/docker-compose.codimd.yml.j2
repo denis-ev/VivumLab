@@ -8,29 +8,30 @@ networks:
   codimd:
 
 services:
-  codiMdDatabase:
+  db:
+    container_name: codimd_db
     networks:
       - codimd
     image: postgres:{{ codimd.db_version }}
     environment:
-      # MYSQL_PASSWORD={{"lookup('password', './settings/passwords/package_name_db_password chars=ascii_letters')"}}
       - POSTGRES_USER=codimd
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/codimd_postgressPass chars=ascii_letters length=32')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/codimd_dbPass chars=ascii_letters length=32')}}
       - POSTGRES_DB=codimd
     volumes:
       - "{{ volumes_root }}/codimd/postgresql/data:/var/lib/postgresql/data"
     restart: unless-stopped
 
-  codiMdApp:
+  app:
+    container_name: codimd
     image: quay.io/codimd/server:{{ codimd.version }}
     restart: unless-stopped
     depends_on:
-      - codiMdDatabase
+      - db
     networks:
       - traefik_network
       - codimd
     environment:
-      - CMD_DB_URL=postgres://codimd:{{lookup('password', './settings/passwords/codimd_postgressPass chars=ascii_letters length=32')}}@codiMdDatabase:5432/codimd
+      - CMD_DB_URL=postgres://codimd:{{lookup('password', './settings/passwords/codimd_dbPass chars=ascii_letters length=32')}}@db:5432/codimd
     labels:
       - "traefik.http.services.codimd.loadbalancer.server.scheme=http"
       - "traefik.http.services.codimd.loadbalancer.server.port=3000"

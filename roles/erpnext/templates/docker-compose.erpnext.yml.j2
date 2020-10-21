@@ -9,6 +9,7 @@ networks:
 
 services:
   redis-cache:
+    container_name: erpnext_redis_cache
     networks:
       - erpnext
     image: redis:{{ erpnext.redis_version }}
@@ -17,6 +18,7 @@ services:
       - "{{ volumes_root }}/erpnext/redis-cache-vol:/data"
 
   redis-queue:
+    container_name: erpnext_redis_queue
     networks:
       - erpnext
     image: redis:{{ erpnext.redis_version }}
@@ -25,6 +27,7 @@ services:
       - "{{ volumes_root }}/erpnext/redis-queue-vol:/data"
 
   redis-socketio:
+    container_name: erpnext_redis_socketio
     networks:
       - erpnext
     image: redis:{{ erpnext.redis_version }}
@@ -32,7 +35,8 @@ services:
     volumes:
       - "{{ volumes_root }}/erpnext/redis-socketi-vol:/data"
 
-  mariadb:
+  db:
+    container_name: erpnext_db
     networks:
       - erpnext
     image: mariadb:{{ erpnext.db_version }}
@@ -43,7 +47,8 @@ services:
       - "{{ volumes_root }}/erpnext/frappe-mariadb.cnf:/etc/mysql/conf.d/frappe.cnf"
       - "{{ volumes_root }}/erpnext/mariadb-vol:/var/lib/mysql"
 
-  erpnext-nginx:
+  web:
+    container_name: erpnext_web
     image: frappe/erpnext-nginx:{{ erpnext.version }}
     restart: on-failure
     environment:
@@ -78,6 +83,7 @@ services:
 {% include './labels.j2' %}
 
   erpnext-python:
+    container_name: erpnext_python
     image: frappe/erpnext-worker:{{ erpnext.version }}
     restart: on-failure
     networks:
@@ -94,6 +100,7 @@ services:
       - "{{ volumes_root }}/erpnext/assets-vol:/home/frappe/frappe-bench/sites/assets"
 
   frappe-socketio:
+    container_name: erpnext_frappe_socketio
     networks:
       - erpnext
     image: frappe/frappe-socketio:{{ erpnext.version }}
@@ -107,6 +114,7 @@ services:
 
 
   frappe-worker-default:
+    container_name: erpnext_frappe_workerdefault
     networks:
       - erpnext
     image: frappe/erpnext-worker:{{ erpnext.version }}
@@ -122,6 +130,7 @@ services:
       - "{{ volumes_root }}/erpnext/sites:/home/frappe/frappe-bench/sites"
 
   frappe-worker-short:
+    container_name: erpnext_frappe_workershort
     image: frappe/erpnext-worker:{{ erpnext.version }}
     networks:
       - erpnext
@@ -139,6 +148,7 @@ services:
       - "{{ volumes_root }}/erpnext/sites:/home/frappe/frappe-bench/sites"
 
   frappe-worker-long:
+    container_name: erpnext_frappe_workerlong
     image: frappe/erpnext-worker:{{ erpnext.version }}
     networks:
       - erpnext
@@ -156,6 +166,7 @@ services:
       - "{{ volumes_root }}/erpnext/sites:/home/frappe/frappe-bench/sites"
 
   frappe-schedule:
+    container_name: erpnext_frappe_schedule
     image: frappe/erpnext-worker:{{ erpnext.version }}
     networks:
       - erpnext

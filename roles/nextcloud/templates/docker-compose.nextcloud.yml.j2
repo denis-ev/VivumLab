@@ -8,7 +8,8 @@ networks:
   nextcloud:
 
 services:
-  nextcloud-db:
+  db:
+    container_name: nextcloud_db
     image: postgres:{{ nextcloud.db_version }}
     restart: unless-stopped
     user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
@@ -22,13 +23,15 @@ services:
       - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_USER=nextcloud
 
-  nextcloud-redis:
+  redis:
+    container_name: nextcloud_redis
     image: redis:{{ nextcloud.redis_version }}
     networks:
       - nextcloud
     restart: unless-stopped
 
   nextcloud:
+    container_name: nextcloud
     image: nextcloud:{{ nextcloud.version }}
     restart: unless-stopped
     networks:
@@ -48,7 +51,7 @@ services:
       - "{{ storage_dir }}/Documents/NextCloud/webroot:/var/www/html"
       - "{{ storage_dir }}:/mnt/vivumlab"
     environment:
-      - POSTGRES_HOST=nextcloud-db
+      - POSTGRES_HOST=db
       - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
@@ -57,7 +60,7 @@ services:
       - OPCACHE_MEM_SIZE=128
       - CRON_PERIOD=15m
       - TZ={{ common_timezone }}
-      - REDIS_HOST=nextcloud-redis
+      - REDIS_HOST=redis
       - NEXTCLOUD_ADMIN_USER={{ default_username }}
       - "NEXTCLOUD_ADMIN_PASSWORD={{ default_password }}"
       - NEXTCLOUD_TRUSTED_DOMAINS={{ service_domain }}
@@ -72,8 +75,8 @@ services:
       - OVERWRITEHOST={{ service_domain }}
       - OVERWRITEPROTOCOL=https
     depends_on:
-      - nextcloud-db
-      - nextcloud-redis
+      - db
+      - redis
     labels:
       - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"

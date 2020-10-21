@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # TV Downloader
   sonarr:
+    container_name: sonarr
     image: linuxserver/sonarr:{{ sonarr.version }}
     networks:
       - traefik_network

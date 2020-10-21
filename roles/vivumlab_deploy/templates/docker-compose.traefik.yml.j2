@@ -9,7 +9,7 @@ networks:
 services:
   # Load Balancer / SSL / Web Server
   traefik:
-    container_name: vivumlab
+    container_name: traefik
     security_opt:
       - no-new-privileges:true
     image: traefik:v2.2

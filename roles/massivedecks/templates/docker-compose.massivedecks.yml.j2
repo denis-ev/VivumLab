@@ -11,6 +11,7 @@ networks:
 
 services:
   server:
+    container_name: massivedecks_server
     image: massivedecks/server:{{ massivedecks.server_version}}
     environment:
         - NODE_ENV=production
@@ -20,6 +21,7 @@ services:
     restart: unless-stopped
 
   client:
+    container_name: massivedecks_client
     depends_on:
         - server
     image: massivedecks/client:{{ massivedecks.client_version}}

@@ -8,6 +8,7 @@ networks:
 
 services:
   airsonic_web:
+    container_name: airsonic
     image: linuxserver/airsonic:{{ airsonic.version }}
     restart: unless-stopped
     environment:

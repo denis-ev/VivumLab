@@ -10,7 +10,8 @@ networks:
   peertube:
 
 services:
-  pt_db:
+  db:
+    container_name: peertube_db
     image: postgres:{{ peertube.db_version }}
     networks:
       - peertube
@@ -20,7 +21,8 @@ services:
       - "{{ volumes_root }}/peertube/db:/var/lib/postgresql/data"
     restart: unless-stopped
 
-  pt_redis:
+  redis:
+    container_name: redis
     networks:
       - peertube
     image: redis:{{ peertube.redis_version }}
@@ -30,7 +32,8 @@ services:
       - .env
     restart: unless-stopped
 
-  pt_postfix:
+  postfix:
+    container_name: peertube_postfix
     networks:
       - peertube
     image: mwader/postfix-relay
@@ -38,7 +41,7 @@ services:
     env_file:
       - .env
   app:
-    # REQUIRED
+    container_name: peertube
     image: chocobozzz/peertube:{{ peertube.version }}
     restart: unless-stopped
     networks:
@@ -48,9 +51,9 @@ services:
       - "{{ volumes_root }}/peertube/data:/data"
       - "{{ volumes_root }}/peertube/config:/config"
     depends_on:
-      - pt_db
-      - pt_redis
-      - pt_postfix
+      - db
+      - redis
+      - postfix
     env_file:
       - .env
     ports:

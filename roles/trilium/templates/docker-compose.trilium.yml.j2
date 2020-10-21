@@ -10,6 +10,7 @@ networks:
 
 services:
   trilium:
+    container_name: trillium
     image: zadam/trilium:{{ trilium.version }}
     restart: unless-stopped
     volumes:

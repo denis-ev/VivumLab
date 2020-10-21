@@ -9,13 +9,15 @@ networks:
 
 services:
 
-  init-guacamole-db:
+  initdb:
+    container_name: guac_initdb
     image: guacamole/guacamole:{{ guacamole.version }}
     command: ["/bin/sh", "-c", "test -e /init/initdb.sql && echo 'init file already exists' || /opt/guacamole/bin/initdb.sh --postgres > /init/initdb.sql" ]
     volumes:
       - "{{ volumes_root }}/guacamole/dbinit:/init"
 
-  guacpostgres:
+  db:
+    container_name: guac_db
     networks:
       - guacamole
     image: postgres:{{ guacamole.db_version }}
@@ -27,15 +29,17 @@ services:
       POSTGRES_USER: guacpostgress
       POSTGRES_PASSWORD: "{{lookup('password', './settings/passwords/postgres_password chars=ascii_letters')}}"
     depends_on:
-      - init-guacamole-db
+      - initdb
 
   guacd:
+    container_name: guacd
     networks:
       - guacamole
     image: guacamole/guacd:{{ guacamole.proxy_version }}
     restart: unless-stopped
 
   guac:
+    container_name: guac
     image: guacamole/guacamole:{{ guacamole.version }}
     networks:
       - traefik_network
@@ -48,7 +52,7 @@ services:
       POSTGRES_USER: guacpostgress
       POSTGRES_PASSWORD: "{{lookup('password', './settings/passwords/postgres_password chars=ascii_letters')}}"
     depends_on:
-      - guacpostgres
+      - db
       - guacd
     labels:
       - "traefik.http.services.guacamole.loadbalancer.server.scheme=http"

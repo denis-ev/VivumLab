@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Movie Downloader
   radarr:
+    container_name: radarr
     image: linuxserver/radarr:{{ radarr.version }}
     networks:
       - traefik_network

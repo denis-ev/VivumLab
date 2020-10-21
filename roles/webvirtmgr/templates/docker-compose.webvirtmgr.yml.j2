@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Web based KVM manager
   app:
+    container_name: webvirtmgr
     image: odivlad/webvirtmgr:{{ webvirtmgr.version }}
     restart: unless-stopped
     networks:

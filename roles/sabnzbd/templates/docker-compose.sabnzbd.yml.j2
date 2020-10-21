@@ -10,7 +10,7 @@ networks:
 
 services:
   app:
-    # REQUIRED
+    container_name: sabnzbd
     image: sabnzbd/sabnzbd:{{ sabnzbd.version }}
     restart: unless-stopped
     environment:

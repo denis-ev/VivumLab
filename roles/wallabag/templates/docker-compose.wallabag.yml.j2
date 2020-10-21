@@ -8,8 +8,8 @@ networks:
   wallabag:
 
 services:
-  # Wallabag - self-hostable app for saving webpages
   wallabag:
+    container_name: wallabag
     image: wallabag/wallabag:{{ wallabag.version }}
     networks:
       - traefik_network
@@ -18,7 +18,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_root_password chars=ascii_letters')}}
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
-      - SYMFONY__ENV__DATABASE_HOST=wallabag_db
+      - SYMFONY__ENV__DATABASE_HOST=db
       - SYMFONY__ENV__DATABASE_PORT=3306
       - SYMFONY__ENV__DATABASE_NAME=wallabag
       - SYMFONY__ENV__DATABASE_USER=wallabag
@@ -35,14 +35,15 @@ services:
       - "{{ volumes_root }}/wallabag/data:/var/www/wallabag/data"
       - "{{ volumes_root }}/wallabag/images:/var/www/wallabag/web/assets/images"
     depends_on:
-      - wallabag_db
+      - db
       - redis
     labels:
       - "traefik.http.services.wallabag.loadbalancer.server.scheme=http"
       - "traefik.http.services.wallabag.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  wallabag_db:
+  db:
+    container_name: wallabag_db
     image: mariadb:{{ wallabag.db_version }}
     networks:
       - wallabag
@@ -54,6 +55,7 @@ services:
       - MYSQL_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_password chars=ascii_letters')}}
 
   redis:
+    container_name: wllabag_redis
     image: redis:{{ wallabag.redis_version }}
     networks:
       - wallabag

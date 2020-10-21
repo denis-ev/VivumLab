@@ -10,7 +10,8 @@ networks:
   huginn:
 
 services:
-  mariadb:
+  db:
+    container_name: huginn_db
     image: mariadb:{{ huginn.db_version }}
     networks:
       - huginn
@@ -25,6 +26,7 @@ services:
       - "{{ volumes_root }}/huginn/mysql-data:/var/lib/mysql"
 
   web:
+    container_name: huginn_web
     networks:
       - traefik_network
       - huginn
@@ -33,7 +35,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/huginn_mysql_root_password chars=ascii_letters')}}
       - HUGINN_DATABASE_PASSWORD={{lookup('password', './settings/passwords/huginn_mysql_root_password chars=ascii_letters')}}
-      - MYSQL_PORT_3306_TCP_ADDR=mariadb
+      - MYSQL_PORT_3306_TCP_ADDR=db
       - HUGINN_DATABASE_USERNAME=root
       - HUGINN_DATABASE_NAME=huginn
       - APP_SECRET_TOKEN={{lookup('password', './settings/passwords/huginn_appToken_password length=128')}}
@@ -42,9 +44,10 @@ services:
       - "traefik.http.services.huginn.loadbalancer.server.port=3000"
 {% include './labels.j2' %}
     depends_on:
-      - mariadb
+      - db
 
   threaded:
+    container_name: huginn_threaded
     networks:
       - huginn
     image: huginn/huginn-single-process:{{ huginn.version }}
@@ -53,10 +56,10 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/huginn_mysql_root_password chars=ascii_letters')}}
       - HUGINN_DATABASE_PASSWORD={{lookup('password', './settings/passwords/huginn_mysql_root_password chars=ascii_letters')}}
-      - MYSQL_PORT_3306_TCP_ADDR=mariadb
+      - MYSQL_PORT_3306_TCP_ADDR=db
       - HUGINN_DATABASE_USERNAME=root
       - HUGINN_DATABASE_NAME=huginn
       - APP_SECRET_TOKEN={{lookup('password', './settings/passwords/huginn_appToken_password length=128')}}
     depends_on:
-      - mariadb
+      - db
       - web

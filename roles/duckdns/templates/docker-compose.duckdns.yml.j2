@@ -3,6 +3,7 @@ version: '3'
 
 services:
   duckdns:
+    container_name: duckdns
     image: linuxserver/duckdns:{{ duckdns.version }}
     restart: unless-stopped
     environment:

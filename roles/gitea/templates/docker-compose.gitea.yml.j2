@@ -9,8 +9,8 @@ networks:
   gitea_net:
 
 services:
- # Code Hosting
   gitea:
+    container_name: gitea
     image: gitea/gitea:{{ gitea.version }}
     networks:
       - traefik_network
@@ -48,6 +48,7 @@ services:
       - db
 
   db:
+    container_name: gitea_db
     image: mariadb
     networks:
       - gitea_net

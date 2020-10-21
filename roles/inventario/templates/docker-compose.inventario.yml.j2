@@ -8,8 +8,8 @@ networks:
   inventario:
 
 services:
-  # Home Inventory Management
   app:
+    container_name: inventario
     image: nickbusey/inventario:{{ inventario.version }}
     restart: unless-stopped
     networks:
@@ -25,7 +25,8 @@ services:
       - "traefik.http.services.inventario.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  inventario_db:
+  db:
+    container_name: db
     image: mariadb:{{ inventario.db_version }}
     restart: unless-stopped
     networks:

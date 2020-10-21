@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: taisun
     image: linuxserver/taisun:{{ taisun.version }}
     restart: unless-stopped
     networks:

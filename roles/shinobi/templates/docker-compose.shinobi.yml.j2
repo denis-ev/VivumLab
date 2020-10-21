@@ -10,6 +10,7 @@ networks:
 
 services:
   shinobi_app:
+    container_name: shinobi
     image: migoller/shinobidocker:{{ shinobi.version }}
     restart: unless-stopped
     hostname: {% if shinobi.domain %}{{ shinobi.domain }}{% else %}{{ shinobi.subdomain + "." + domain }}{% endif %}
@@ -32,7 +33,7 @@ services:
       - MOTION_PORT=8080
       - MYSQL_USER=shinobi
       - MYSQL_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_password chars=ascii_letters')}}"
-      - MYSQL_HOST=shinobi_db
+      - MYSQL_HOST=db
       - MYSQL_DATABASE=shinobi
       - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_root_password chars=ascii_letters')}}"
       - MYSQL_ROOT_USER=root
@@ -41,9 +42,10 @@ services:
       - "traefik.http.services.shinobi.loadbalancer.server.port=8080"
 {% include './labels.j2' %}
     depends_on:
-      - shinobi_db
+      - db
 
-  shinobi_db:
+  db:
+    container_name: shinobi_db
     image: mariadb:{{ shinobi.db_version }}
     restart: unless-stopped
     networks:

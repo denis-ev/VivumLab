@@ -10,6 +10,7 @@ networks:
 
 services:
   tautulli:
+    container_name: tautulli
     image: linuxserver/tautulli:{{ tautulli.version }}
     restart: unless-stopped
     networks:

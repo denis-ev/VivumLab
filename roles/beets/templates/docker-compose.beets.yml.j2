@@ -8,6 +8,7 @@ networks:
 
 services:
   beets:
+    container_name: beets
     image: linuxserver/beets:{{ beets.version }}
     environment:
       - PUID={{ uid }}

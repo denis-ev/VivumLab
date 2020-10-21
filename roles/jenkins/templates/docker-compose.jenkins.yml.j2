@@ -8,6 +8,7 @@ networks:
 
 services:
   jenkins:
+    container_name: jenkins
     image: jenkinsci/blueocean:{{ jenkins.version }}
     restart: unless-stopped
     networks:

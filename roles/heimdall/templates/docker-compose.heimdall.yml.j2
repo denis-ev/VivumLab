@@ -10,6 +10,7 @@ networks:
 
 services:
   heimdall:
+    container_name: heimdall
     image: linuxserver/heimdall:{{ heimdall.version }}
     restart: unless-stopped
     environment:

@@ -8,11 +8,11 @@ networks:
 
 services:
   duplicati:
+    container_name: duplicati
     networks:
       - traefik_network
     image: linuxserver/duplicati:{{ duplicati.version }}
     restart: unless-stopped
-    container_name: duplicati
     environment:
       - PUID=1000
       - PGID=1000

@@ -8,17 +8,17 @@ networks:
   monicahq:
 
 services:
-  # Personal Relationship Database
   monicahq:
+    container_name: monicahq
     image: monicahq/monicahq:{{ monicahq.version }}
     networks:
       - traefik_network
       - monicahq
     restart: unless-stopped
     depends_on:
-      - monicahq_db
+      - db
     ports:
-      - 8176:80
+      - 8176:8176
     volumes:
       - "{{ volumes_root }}/monicahq/storage/app/public:/var/www/monica/storage/app/public"
       - "{{ volumes_root }}/monicahq/storage/logs:/var/www/monica/storage/logs"
@@ -29,10 +29,11 @@ services:
       - DB_PASSWORD="{{ lookup('password', './settings/passwords/monicahq_db_password chars=ascii_letters') }}"
     labels:
       - "traefik.http.services.monicahq.loadbalancer.server.scheme=http"
-      - "traefik.http.services.monicahq.loadbalancer.server.port=80"
+      - "traefik.http.services.monicahq.loadbalancer.server.port=8176"
 {% include './labels.j2' %}
 
-  monicahq_db:
+  db:
+    container_name: monica_db
     image: mariadb:{{ monicahq.db_version }}
     networks:
       - monicahq

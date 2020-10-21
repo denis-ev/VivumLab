@@ -8,6 +8,7 @@ networks:
 
 services:
   apache2:
+    container_name: apache2
     image: httpd:{{ apache2.version }}
     restart: unless-stopped
     networks:

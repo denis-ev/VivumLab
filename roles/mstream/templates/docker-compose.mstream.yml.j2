@@ -10,7 +10,7 @@ networks:
 
 services:
   app:
-    # REQUIRED
+    container_name: mstream
     image: linuxserver/mstream:{{ mstream.version }}
     restart: unless-stopped
     networks:

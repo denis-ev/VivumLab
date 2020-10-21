@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Usenet Downloader
   nzbget:
+    container_name: nzbget
     image: linuxserver/nzbget:{{ nzbget.version }}
     networks:
       - traefik_network

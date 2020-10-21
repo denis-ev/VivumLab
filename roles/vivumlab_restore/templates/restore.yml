@@ -3,6 +3,7 @@ version: '3'
 
 services:
   restore:
+    container_name: vivumlab_restore
     image: lobaro/restic-backup-docker
     environment:
       - RESTIC_REPOSITORY={{ s3_path }}

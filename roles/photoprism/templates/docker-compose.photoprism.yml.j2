@@ -10,7 +10,7 @@ networks:
 
 services:
   app:
-    # REQUIRED
+    container_name: photoprism
     image: photoprism/photoprism:{{ photoprism.version }}
     restart: unless-stopped
     networks:

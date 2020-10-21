@@ -9,10 +9,11 @@ networks:
 
 services:
   piwigo:
+    container_name: piwigo
     restart: unless-stopped
     domainname: localhost
     depends_on:
-      - mysqlpiwigo
+      - db
     networks:
       - traefik_network
       - piwigo
@@ -31,7 +32,8 @@ services:
       - "traefik.http.services.piwigo.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  mysqlpiwigo:
+  db:
+    container_name: piwigo_db
     restart: unless-stopped
     image: mariadb:{{ piwigo.db_version }}
     networks:

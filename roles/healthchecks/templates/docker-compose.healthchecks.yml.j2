@@ -9,6 +9,7 @@ networks:
 
 services:
   app:
+    container_name: healthchecks
     image: linuxserver/healthchecks:{{ healthchecks.version }}
     networks:
       - traefik_network

@@ -8,6 +8,7 @@ networks:
 
 services:
   homedash:
+    container_name: homedash
     image: gonzague/homedash:{{ homedash.version }}
     volumes:
       - /etc/localtime:/etc/localtime:ro

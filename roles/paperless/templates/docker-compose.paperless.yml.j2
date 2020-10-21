@@ -8,8 +8,8 @@ networks:
   paperless:
 
 services:
-  # Document Storage
   paperless:
+    container_name: paperless
     image: thepaperlessproject/paperless:{{ paperless.version }}
     restart: unless-stopped
     networks:
@@ -37,6 +37,7 @@ services:
 {% include './labels.j2' %}
 
   paperless_consumer:
+    container_name: paperless_consumer
     image: thepaperlessproject/paperless:{{ paperless.version }}
     restart: unless-stopped
     networks:

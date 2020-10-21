@@ -9,6 +9,7 @@ networks:
 
 services:
   openldap:
+    container_name: openldap
     image: osixia/openldap:{{ openldap.version }}
     restart: unless-stopped
     networks:
@@ -25,6 +26,7 @@ services:
       - LDAP_ADMIN_PASSWORD="{{ default_password }}"
 
   phpldapadmin:
+    container_name: phpldapadmin
     image: osixia/phpldapadmin:{{ openldap.web_version }}
     restart: unless-stopped
     networks:

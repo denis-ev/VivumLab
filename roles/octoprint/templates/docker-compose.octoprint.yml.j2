@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: octoprint
     image: octoprint/octoprint:{{ octoprint.version }}
     restart: unless-stopped
     networks:

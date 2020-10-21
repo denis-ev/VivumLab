@@ -11,6 +11,7 @@ networks:
 
 services:
   frontend:
+    container_name: snibox_web
     image: snibox/nginx-puma:{{ snibox.web_version }}
     networks:
       - traefik_network
@@ -26,13 +27,14 @@ services:
 {% include './labels.j2' %}
 
   backend:
+    container_name: snibox
     image: snibox/snibox:{{ snibox.version }}
     command: sh -c "rm -rf tmp/pids && ./bin/rails s -p 3000 -b '0.0.0.0'"
     environment:
       DB_NAME: "postgres"
       DB_USER: "postgres"
       #DB_PASS: "${DB_PASS}"
-      DB_HOST: "database"
+      DB_HOST: "db"
       DB_PORT: "5432"
       FORCE_SSL: "false"
       #MAILGUN_SMTP_PORT: "${MAILGUN_SMTP_PORT}"
@@ -47,11 +49,12 @@ services:
       #- '{{ volumes_root }}/snibox/static-files:/app/public'
       - static-files:/app/public
     depends_on:
-      - database
+      - db
     networks:
       - snibox
 
-  database:
+  db:
+    container_name: db
     image: postgres:{{ snibox.db_version }}
     volumes:
       #- '{{ volumes_root }}/snibox/pg-data:/var/lib/postgresql/data'

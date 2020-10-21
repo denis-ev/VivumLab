@@ -8,7 +8,8 @@ networks:
   webtrees:
 
 services:
-  webtrees_db:
+  db:
+    container_name: webtrees_db
     image: mariadb:{{ webtrees.db_version }}
     networks:
       - webtrees
@@ -20,7 +21,7 @@ services:
       - MYSQL_PASSWORD={{lookup('password', './settings/passwords/webtrees_db_password chars=ascii_letters')}}
 
   app:
-    # REQUIRED
+    container_name: webtress
     image: dtjs48jkt/webtrees:{{ webtrees.version }}
     restart: unless-stopped
     environment:
@@ -30,7 +31,7 @@ services:
       - UPDATE_ON_START=FALSE
       - DB_PASSWORD={{lookup('password', './settings/passwords/webtrees_db_password chars=ascii_letters')}}
       - DB_USER=webtrees
-      - DB_HOST=webtrees_db
+      - DB_HOST=db
       - DB_PORT=3306
       - DB_NAME=webtrees
       - WT_ADMIN={{ default_username }}
@@ -44,7 +45,7 @@ services:
       - traefik_network
       - webtrees
     depends_on:
-      - webtrees_db
+      - db
     labels:
       - "traefik.http.services.webtrees.loadbalancer.server.scheme=http"
       - "traefik.http.services.webtrees.loadbalancer.server.port=8079"

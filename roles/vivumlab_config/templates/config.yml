@@ -316,13 +316,6 @@ dark_sky:
   domain: {{ dark_sky.domain | default(False) }}
   subdomain: {{ dark_sky.subdomain | default("dark_sky") }}
   version: {{ dark_sky.version | default("latest") }}
-dasher:
-  enable: {{ dasher.enable | default(False) }}
-  https_only: {{ dasher.https_only | default(False) }}
-  auth: {{ dasher.auth | default(False) }}
-  domain: {{ dasher.domain | default(False) }}
-  subdomain: {{ dasher.subdomain | default("dasher") }}
-  version: {{ dasher.version | default("latest") }}
 digikam:
   enable: {{ digikam.enable | default(False) }}
   https_only: {{ digikam.https_only | default(False) }}

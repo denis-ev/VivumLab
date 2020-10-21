@@ -10,6 +10,7 @@ networks:
 
 services:
   sickchill:
+    container_name: sickchill
     image: sickchill/sickchill:{{ sickchill.version }}
     restart: unless-stopped
     networks:

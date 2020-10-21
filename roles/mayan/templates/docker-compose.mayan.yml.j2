@@ -19,6 +19,7 @@ volumes:
 
 services:
   broker:
+    container_name: mayan_broker
     image: healthcheck/rabbitmq:{{ mayan.rabbit_version }}
     networks:
       - mayan
@@ -32,6 +33,7 @@ services:
       - "{{ volumes_root }}/mayan/broker:/var/lib/rabbitmq"
 
   results:
+    container_name: mayan_results
     networks:
       - mayan
     image: healthcheck/redis:{{ mayan.redis_version }}
@@ -39,6 +41,7 @@ services:
       - "{{ volumes_root }}/mayan/results:/data"
 
   db:
+    container_name: mayan_db
     image: healthcheck/postgres:{{ mayan.db_version }}
     networks:
       - mayan
@@ -52,6 +55,7 @@ services:
       - "{{ volumes_root }}/mayan/db:/var/lib/postgresql/data"
 
   mayan-edms:
+    container_name: mayan
     networks:
       - traefik_network
       - mayan

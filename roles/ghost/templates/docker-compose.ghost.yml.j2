@@ -9,6 +9,7 @@ networks:
 
 services:
   ghost:
+    container_name: ghost
     image: ghost:{{ ghost.version }}
     networks:
       - traefik_network

@@ -8,6 +8,7 @@ networks:
 
 services:
   ombi:
+    container_name: ombi
     networks:
       - traefik_network
     image: hotio/ombi:{{ ombi.version }}

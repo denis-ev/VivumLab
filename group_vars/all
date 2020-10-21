@@ -16,7 +16,6 @@ services:
   codeserver:
   codimd:
   dark_sky:
-  dasher:
   digikam:
   docs:
   drone:
@@ -142,7 +141,6 @@ cockpit:
 codeserver:
 codimd:
 dark_sky:
-dasher:
 digikam:
 drone:
 duckdns:

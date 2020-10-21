@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: qbittorent
     image: markusmcnugen/qbittorrentvpn:{{ qbittorrent.version }}
     privileged: true
     volumes:

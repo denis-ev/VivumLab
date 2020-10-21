@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Home Automation
   homeassistant:
+    container_name: homeassistant
     image: homeassistant/home-assistant:{{ homeassistant.version }}
     volumes:
       - "{{ volumes_root }}/homeassistant:/config"

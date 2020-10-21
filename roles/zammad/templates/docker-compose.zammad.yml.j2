@@ -8,8 +8,8 @@ networks:
   zammad:
 
 services:
-
   zammad-backup:
+    container_name: zammad_backup
     command: ["zammad-backup"]
     depends_on:
       - zammad-railsserver
@@ -30,6 +30,7 @@ services:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
 
   zammad-elasticsearch:
+    container_name: zammad_elasticsearch
     environment:
       - discovery.type=single-node
     image: zammad/zammad-docker-compose:zammad-elasticsearch-{{ zammad.version }}
@@ -40,6 +41,7 @@ services:
       - "{{ volumes_root }}/zammad/elasticsearch-data:/usr/share/elasticsearch/data"
 
   zammad-init:
+    container_name: zammad_init
     command: ["zammad-init"]
     depends_on:
       - zammad-postgresql
@@ -57,6 +59,7 @@ services:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
 
   zammad-memcached:
+    container_name: zammad_memcached
     command: memcached -m 256M
     image: memcached:{{ zammad.memcached_version }}
     restart: unless-stopped
@@ -64,6 +67,7 @@ services:
       - zammad
 
   zammad-nginx:
+    container_name: zammad_nginx
     command: ["zammad-nginx"]
     depends_on:
       - zammad-railsserver
@@ -85,6 +89,7 @@ services:
 {% include './labels.j2' %}
 
   zammad-postgresql:
+    container_name: zammad_postgresql
     environment:
       - POSTGRES_USER=zammad
       - "POSTGRES_PASSWORD={{lookup('password', './settings/passwords/zammad_db_password')}}"
@@ -96,6 +101,7 @@ services:
       - "{{ volumes_root }}/zammad/postgresql-data:/var/lib/postgresql/data"
 
   zammad-railsserver:
+    container_name: zammad_railsserver
     command: ["zammad-railsserver"]
     depends_on:
       - zammad-memcached
@@ -112,6 +118,7 @@ services:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
 
   zammad-scheduler:
+    container_name: zammad_scheduler
     command: ["zammad-scheduler"]
     depends_on:
       - zammad-memcached
@@ -128,6 +135,7 @@ services:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
 
   zammad-websocket:
+    container_name: zammad_websocket
     command: ["zammad-websocket"]
     depends_on:
       - zammad-memcached

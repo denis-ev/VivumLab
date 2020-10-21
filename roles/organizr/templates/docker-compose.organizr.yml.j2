@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Dashboard
-  organizr:
+  organizr:container_name:
+    container_name: organizr
     image: organizrtools/organizr-v2:{{ 'armhf' if arm else 'latest' }}
     # image: organizrtools/organizr-v2:{{ organizr.version }}
     restart: unless-stopped

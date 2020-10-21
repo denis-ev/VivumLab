@@ -8,6 +8,7 @@ networks:
 
 services:
   nodered:
+    container_name: nodered
     image: nodered/node-red:{{ nodered.version }}
     restart: unless-stopped
     environment:

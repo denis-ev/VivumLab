@@ -1,5 +1,5 @@
 {
-    "url": "http://vivumlab:8080",
+    "url": "http://traefik:8080",
     "ignored": ["PROMETHEUS@INTERNAL", "NOOP@INTERNAL", "API@INTERNAL", "DASHBOARD@INTERNAL", "PING@INTERNAL"],
     "dockers": ["local-docker"]
 }

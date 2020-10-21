@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: statping
     image: statping/statping:{{ statping.version }}
     restart: unless-stopped
     networks:

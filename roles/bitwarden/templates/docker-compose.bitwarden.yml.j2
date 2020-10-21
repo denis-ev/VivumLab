@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Password Manager
   bitwarden_web:
+    container_name: bitwarden
     image: bitwardenrs/server:{{ bitwarden.version }}
     restart: unless-stopped
     networks:

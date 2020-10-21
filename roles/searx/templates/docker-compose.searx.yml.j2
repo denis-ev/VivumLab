@@ -8,6 +8,7 @@ networks:
 
 services:
   searx:
+    container_name: searx
     image: wonderfall/searx:{{ searx.version }}
     restart: unless-stopped
     networks:

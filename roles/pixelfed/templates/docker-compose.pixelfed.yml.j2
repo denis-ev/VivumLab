@@ -9,6 +9,7 @@ networks:
 
 services:
   pixelfed:
+    container_name: pixelfed
     image: ethibox/pixelfed
     restart: unless-stopped
     networks:
@@ -23,7 +24,9 @@ services:
     volumes:
       - "{{ volumes_root }}/pixelfed/storage:/var/www/storage"
 
-  worker:  # Comment this whole block if HORIZON_EMBED is true.
+# Comment this whole block if HORIZON_EMBED is true.
+  worker:
+    container_name: pixelfed_worker
     image: ethibox/pixelfed
     restart: unless-stopped
     env_file:
@@ -35,6 +38,7 @@ services:
     command: gosu www-data php artisan horizon
 
   db:
+    container_name: pixelfed_db
     image: mariadb:{{ pixelfed.db_version }}
     restart: unless-stopped
     networks:
@@ -48,6 +52,7 @@ services:
       - "{{ volumes_root }}/pixelfed/mariadb:/var/lib/mysql"
 
   redis:
+    container_name: pixelfed_redis
     image: redis:5-alpine
     restart: unless-stopped
     volumes:

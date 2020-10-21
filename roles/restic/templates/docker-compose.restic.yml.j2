@@ -2,8 +2,8 @@
 version: '3'
 
 services:
-  #Backups: https://vivumlab.com/setup/backups/
   restic:
+    container_name: restic
     image: lobaro/restic-backup-docker:{{ restic.version }}
     restart: unless-stopped
     environment:

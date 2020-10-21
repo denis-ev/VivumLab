@@ -7,18 +7,20 @@ networks:
   traefik_network:
     external:
       name: vivumlab_traefik
-  hubzilla:
+  hubzilla_frontnet:
+  hubzilla_backnet:
+
 
 services:
-  nginx:
-    # Nginx Web server
+  web:
+    container_name: hubzilla_web
     image: nginx:{{ hubzilla.web_version }}
     restart: unless-stopped
     networks:
       - traefik_network
-      - hubzilla
+      - hubzilla_frontnet
     depends_on:
-      - hubzilla
+      - app
     volumes:
       - {{ volumes_root }}/hubzilla/data:/var/www/hubzilla
       - {{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf:/etc/nginx/nginx.conf:ro
@@ -27,14 +29,14 @@ services:
       - "traefik.http.services.hubzilla.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  hubzilla:
-  # Hubzilla service
-    image: voryzen/hubzilla:{{ hubzilla.version }}
+  app:
+    container_name: hubzilla
+    image: voryzen/hubzilla-docker:{{ hubzilla.version }}
     restart: unless-stopped
     depends_on:
-      - postgres
+      - db
     environment:
-      DB_HOST: postgres
+      DB_HOST: db
       DB_PORT: 5432
       DB_TYPE: postgres
       DB_NAME: hubzilla
@@ -46,15 +48,16 @@ services:
       SMTP_PORT: {{ smtp.port }}
       SMTP_USER: {{ smtp.user }}
       SMTP_PASS: {{ smtp.pass }}
-      STANDALONE: false
+      FEDERATE: "yes"
       TIMEZONE: {{ common_timezone }}
     networks:
-      - hubzilla
+      - hubzilla_frontnet
+      - hubzilla_backnet
     volumes:
       - {{ volumes_root }}/hubzilla/data:/var/www/hubzilla
 
-  postgres:
-  # PostgreSQL
+  db:
+    container_name: hubzilla_db
     image: postgres:{{ hubzilla.db_version }}
     restart: unless-stopped
     environment:
@@ -64,4 +67,4 @@ services:
     volumes:
       - {{ volumes_root }}/hubzilla/db:/var/lib/postgresql/data/
     networks:
-    - hubzilla
+      - hubzilla_backnet

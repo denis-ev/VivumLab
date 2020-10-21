@@ -1,14 +1,16 @@
 ---
-version: '3'
+version: '3.5'
 
 networks:
   traefik_network:
     external:
       name: vivumlab_traefik
   calibre:
+    name: calibre_net
 
 services:
   calibre-alpine:
+    container_name: calibre_server
     networks:
       - calibre
     ports:
@@ -19,6 +21,7 @@ services:
     image: lmorel3/calibre-alpine:{{ calibre.server_version }}
 
   calibre-web:
+    container_name: calibre
     networks:
       - traefik_network
       - calibre

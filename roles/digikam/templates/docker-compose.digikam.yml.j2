@@ -7,7 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  digiKam:
+  digikam:
+    container_name: digikam
     image: rpufky/digikam:{{ digikam.version }}
     environment:
       - USER_ID={{ uid }}

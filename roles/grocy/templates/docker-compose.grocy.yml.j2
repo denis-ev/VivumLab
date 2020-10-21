@@ -8,6 +8,7 @@ networks:
 
 services:
   grocy:
+    container_name: grocy
     image: linuxserver/grocy:{{ grocy.version }}
     restart: unless-stopped
     environment:

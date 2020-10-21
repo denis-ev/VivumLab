@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Sync Server
   syncthing:
+    container_name: syncthing
     image: linuxserver/syncthing:{{ syncthing.version }}
     networks:
       - traefik_network

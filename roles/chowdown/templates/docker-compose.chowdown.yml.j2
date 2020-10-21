@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: chowdown
     image: gregyankovoy/chowdown:{{ chowdown.version }}
     restart: unless-stopped
     networks:

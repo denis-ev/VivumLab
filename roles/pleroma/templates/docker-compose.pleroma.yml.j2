@@ -11,6 +11,7 @@ networks:
 
 services:
   db:
+    container_name: pleroma_db
     image: postgres:{{ pleroma.db_version }}
     restart: always
     networks:
@@ -24,6 +25,7 @@ services:
       - ./postgres:/var/lib/postgresql/data
 
   web:
+    container_name: pleroma
     image: git.pleroma.social:5050/pleroma/pleroma:latest
     restart: unless-stopped
     volumes:

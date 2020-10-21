@@ -8,6 +8,7 @@ networks:
 
 services:
   unifi-controller:
+    container_name: unifi_controler
     image: linuxserver/unifi-controller:{{ unificontroller.version }}
     environment:
       - PUID=1000

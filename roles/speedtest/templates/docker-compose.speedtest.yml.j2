@@ -8,6 +8,7 @@ networks:
 
 services:
   app:
+    container_name: speedtest
     image: roest/docker-speedtest-analyser:{{ speedtest.version }}
     volumes:
       - "{{ volumes_root }}/speedtest/data:/var/www/html/data"

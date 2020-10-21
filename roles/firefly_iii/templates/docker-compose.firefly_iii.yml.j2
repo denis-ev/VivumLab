@@ -8,14 +8,14 @@ networks:
   firefly:
 
 services:
-  # Financial Tracker
-  firefly_iii_app:
+  app:
+    container_name: firefly_iii
     restart: unless-stopped
     depends_on:
-      - firefly_iii_db
+      - db
     environment:
       - DB_CONNECTION=pgsql
-      - DB_HOST=firefly_iii_db
+      - DB_HOST=db
       - DB_DATABASE=firefly_db
       - DB_USERNAME=firefly_db
       - DB_PORT=5432
@@ -25,7 +25,7 @@ services:
       # https://github.com/firefly-iii/firefly-iii/blob/master/app/Providers/AppServiceProvider.php#L42
       # This fixes issue with SSL termination at traefik, and forces HTTPS URIs everywhere
       - APP_ENV=heroku
-      - APP_URL=https://money.{{ domain }}
+      - APP_URL={% if firefly_iii.domain %}{{ firefly_iii.domain }}{% else %}{{ firefly_iii.subdomain + "." + domain }}{% endif %}
       - MAIL_DRIVER=smtp
       - MAIL_HOST={{ smtp.host }}
       - MAIL_PORT={{ smtp.port }}
@@ -34,7 +34,7 @@ services:
       - MAIL_PASSWORD={{ smtp.pass }}
       - MAIL_ENCRYPTION=tls
       - TZ={{ common_timezone }}
-      - ServerName=money.{{ domain }}
+      - ServerName={% if firefly_iii.domain %}{{ firefly_iii.domain }}{% else %}{{ firefly_iii.subdomain + "." + domain }}{% endif %}
     image: jc5x/firefly-iii:{{ firefly_iii.version }}
     networks:
       - traefik_network
@@ -47,7 +47,8 @@ services:
       - "traefik.http.services.firefly_iii.loadbalancer.server.port=80"
 {% include './labels.j2' %}
 
-  firefly_iii_db:
+  db:
+    container_name: firefly_iii_db
     image: postgres:{{ firefly-iii.db_version }}
     restart: unless-stopped
     environment:

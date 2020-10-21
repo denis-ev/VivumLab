@@ -7,8 +7,8 @@ networks:
       name: vivumlab_traefik
 
 services:
-  # Weather Data Importer
   darksky_influx:
+    container_name: darksky
     image: erwinsteffens/darksky-influxdb:{{ dark_sky.version }}
     restart: always
     networks:

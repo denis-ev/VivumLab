@@ -3,6 +3,7 @@ version: '3'
 
 services:
   watchtower:
+    container_name: watchtower
     image: containrrr/watchtower
     restart: unless-stopped
     volumes:

@@ -8,7 +8,8 @@ networks:
   zulip:
 
 services:
-  database:
+  db:
+    container_name: zulip_db
     image: zulip/zulip-postgresql:{{ zulip.db_version }}
     networks:
       - zulip
@@ -20,12 +21,14 @@ services:
       - '{{ volumes_root }}/zulip/postgresql:/var/lib/postgresql/data:rw'
 
   memcached:
+  container_name: zulip_memcached
     image: 'quay.io/sameersbn/memcached:latest'
     networks:
       - zulip
     restart: always
 
   rabbitmq:
+    container_name: zulip_rabbitmq
     image: rabbitmq:{{ zulip.rabbit_version }}
     networks:
       - zulip
@@ -38,6 +41,7 @@ services:
       - '{{ volumes_root }}/zulip/rabbitmq:/var/lib/rabbitmq:rw'
 
   redis:
+    container_name: zulip_redis
     image: quay.io/sameersbn/redis:{{ zulip.redis_version }}
     networks:
       - zulip
@@ -45,12 +49,13 @@ services:
       - '{{ volumes_root }}/zulip/redis:/var/lib/redis:rw'
 
   zulip:
+    container_name: zulip
     image: zulip/docker-zulip:{{ zulip.version }}
     networks:
       - traefik_network
       - zulip
     environment:
-      DB_HOST: 'database'
+      DB_HOST: 'db'
       DB_HOST_PORT: '5432'
       DB_USER: 'zulip'
       SSL_CERTIFICATE_GENERATION: 'self-signed'

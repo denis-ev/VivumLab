@@ -8,7 +8,7 @@ networks:
 
 services:
   folding-at-home:
-    # REQUIRED
+    container_name: folding_at_home
     image: johnktims/folding-at-home:{{ folding_at_home.version }}
     command: --web-allow=0/0:7396 --allow=0/0:7396 --user={{ folding_at_home.username}} --team={{ folding_at_home.team }}  --power={{ folding_at_home.power }}
     restart: unless-stopped

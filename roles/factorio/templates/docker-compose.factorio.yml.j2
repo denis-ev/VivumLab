@@ -6,6 +6,7 @@ networks:
 
 services:
   factorio:
+    container_name: factorio
     image: factoriotools/factorio:{{ factorio.version }}
     restart: unless-stopped
     networks:

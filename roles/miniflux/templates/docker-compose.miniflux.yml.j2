@@ -8,15 +8,15 @@ networks:
   miniflux:
 
 services:
-  # RSS Reader
   miniflux:
+    container_name: miniflux
     image: miniflux/miniflux:{{ miniflux.version }}
     networks:
       - traefik_network
       - miniflux
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgres://miniflux:%22{{lookup('password', './settings/passwords/miniflux_db_password chars=ascii_letters')}}%22@miniflux_db/miniflux?sslmode=disable
+      - DATABASE_URL=postgres://miniflux:%22{{lookup('password', './settings/passwords/miniflux_db_password chars=ascii_letters')}}%22@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
       - ADMIN_USERNAME={{ default_username }}
@@ -26,7 +26,8 @@ services:
       - "traefik.http.services.miniflux.loadbalancer.server.port=8080"
 {% include './labels.j2' %}
 
-  miniflux_db:
+  db:
+    container_name: miniflux_db
     image: postgres:{{ miniflux.db_version }}
     networks:
       - miniflux
