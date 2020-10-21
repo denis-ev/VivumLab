@@ -16,11 +16,11 @@
 
 ### What is this?
 
-Authelia is a multi-factor, authentication proxy. Used in conjuction with traefik (which vivumlab already uses) it secures your vivumlab services behind authentication. By default you must authenticate with username and password, and at least one other 'factor' ie:
+Authelia is a multi-factor, authentication proxy. Used in conjunction with traefik (which vivumlab already uses) it secures your vivumlab services behind authentication. By default you must authenticate with username and password, and at least one other 'factor' ie:
 
 - one-time password from, say, google authenticator
 - a registered security key, for instance a YubiKey or something similar
-- A Push message to your mobile device throuh the Duo service
+- A Push message to your mobile device through the Duo service
 
 When enabled, Traefik will forward most requests (more on this later) to Authelia for authentication. Once you login to Authelia, it will redirect you to the service you requested. For instance, if you navigate to firefly.yourdomain.com, traefik will auto-redirect you to auth.yourname.com for authentication. Once you authenticate, it will redirect you back to firefly.yourdomain.com.
 
