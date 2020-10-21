@@ -16,8 +16,6 @@
         exit
       ;;
       *)
-        echo "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
-        echo "REMINDER: 'vlab create_sshkey' can help you create some keys"
         exit
       ;;
   esac
