@@ -37,6 +37,7 @@ jobs:
         - pip3 install mkdocs
         - pip3 install mkdocs-material
         - pip3 install mkdocs-git-revision-date-localized-plugin
+        - bash vlab ci
       script: mkdocs build --verbose --clean --strict
       deploy:
         fqdn: docs.vivumlab.com
