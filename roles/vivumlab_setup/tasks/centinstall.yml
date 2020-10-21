@@ -95,6 +95,19 @@
     executable: pip3
   become: yes
 
+- name: Docker-compose Location Check
+  stat:
+    path: /usr/bin/docker-compose
+  register: compose_location
+
+- name: Symlink docker-compose
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    state: link
+  become: yes
+  when: compose_location.stat.exists == False
+
 - name: Start Docker service
   systemd:
     state: started
