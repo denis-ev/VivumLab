@@ -9,7 +9,7 @@
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
 **Current Image Version:** {{ homeassistant.version }}
 
 ## SETUP
@@ -189,6 +189,6 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ## Need more help?
-Further information regarding services can be found.
-General Information can be found in the [documentation](https://docs.vivumlab.com).
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://docs.vivumlab.com). \
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

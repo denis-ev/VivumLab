@@ -9,7 +9,7 @@
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
 **Current Image Version:** {{ drone.version }}
 
 ## SETUP
@@ -224,6 +224,6 @@ Then activate it in Drone and create three secrets (repo, docker_username, docke
 Your own VivumLab Image will be build and published to Docker on the next commit.
 
 ## Need more help?
-Further information regarding services can be found.
-General Information can be found in the [documentation](https://docs.vivumlab.com).
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://docs.vivumlab.com). \
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

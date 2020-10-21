@@ -8,7 +8,7 @@
 
 ## Information
 
-**Docker Image:** https://hub.docker.com/r/linuxserver/airsonic
+**Docker Image:** https://hub.docker.com/r/linuxserver/airsonic \
 **Current Image Version:** {{ airsonic.version }}
 
 ## SETUP
@@ -24,8 +24,10 @@
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   enable: True
+```
 
 #### Finalising changes:
 
@@ -50,7 +52,8 @@ Create an account with your desired username; as this is the first user, Airsoni
 2. make some changes
 
 
-># SMTP Settings
+##### SMTP Settings
+```
 smtp:
   host:
   port:
@@ -58,6 +61,7 @@ smtp:
   pass:
   from_email:
   from_name:
+```
 
 3. run **`vlab update_one service=airsonic`** to complete the changes
 
@@ -85,8 +89,10 @@ Tor link: [http://{{ airsonic.subdomain + "." + tor_domain }}/](http://{{ airson
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   https_only: True
+```
 
 ##### Finalising changes:
 
@@ -105,8 +111,10 @@ run: **`vlab update_one service=airsonic`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   auth: True
+```
 
 ##### Finalising changes:
 
@@ -125,8 +133,10 @@ run: **`vlab update_one service=airsonic`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   domain: airsonic.com
+```
 
 ##### Finalising changes:
 
@@ -145,8 +155,10 @@ run: **`vlab update_one service=airsonic`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   subdomain: media
+```
 
 ##### Finalising changes:
 
@@ -165,14 +177,16 @@ run: **`vlab update_one service=airsonic`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->airsonic
+```
+airsonic
   version: 2.7
+```
 
 ##### Finalising changes:
 
 run: **`vlab update_one service=airsonic`**
 
 ## Need more help?
-Further information regarding services can be found.
-General Information can be found in the [documentation](../index.md).
-Additional assistance can be found on our [Contact Us](../Contact-us.md) page.
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

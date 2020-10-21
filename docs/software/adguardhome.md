@@ -8,7 +8,7 @@
 
 ## Information
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
 **Current Image Version:** {{ adguardhome.version }}
 
 ## SETUP
@@ -24,8 +24,10 @@
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   enable: True
+```
 
 #### Finalising changes:
 
@@ -50,7 +52,8 @@ Create an account with your desired username; as this is the first user, adguard
 2. make some changes
 
 
-># SMTP Settings
+##### SMTP Settings
+```
 smtp:
   host:
   port:
@@ -58,6 +61,7 @@ smtp:
   pass:
   from_email:
   from_name:
+```
 
 3. run **`vlab update_one service=adguardhome`** to complete the changes
 
@@ -85,8 +89,10 @@ Tor link: [http://{{ adguardhome.subdomain + "." + tor_domain }}/](http://{{ adg
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   https_only: True
+```
 
 ##### Finalising changes:
 
@@ -105,8 +111,10 @@ run: **`vlab update_one service=adguardhome`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   auth: True
+```
 
 ##### Finalising changes:
 
@@ -125,8 +133,10 @@ run: **`vlab update_one service=adguardhome`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   domain: adguardhome.com
+```
 
 ##### Finalising changes:
 
@@ -145,8 +155,10 @@ run: **`vlab update_one service=adguardhome`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   subdomain: media
+```
 
 ##### Finalising changes:
 
@@ -165,14 +177,16 @@ run: **`vlab update_one service=adguardhome`**
 set the appropriate service settings in `settings/config.yml` to true
 
 eg.
->adguardhome
+```
+adguardhome
   version: 2.7
+```
 
 ##### Finalising changes:
 
 run: **`vlab update_one service=adguardhome`**
 
 ## Need more help?
-Further information regarding services can be found.
-General Information can be found in the [documentation](https://docs.vivumlab.com).
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://docs.vivumlab.com). \
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

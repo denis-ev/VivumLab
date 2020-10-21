@@ -2,7 +2,39 @@
 
 [Sonarr](https://sonarr.tv/) Automated TV show downloading
 
-## Configuration
+![amd64](https://img.shields.io/badge/{% if not sonarr.amd64 %}untested{% else %}{{ sonarr.amd64 }}{% endif %}-amd64-{% if not sonarr.amd64 %}inactive{% elif sonarr.amd64 == "verified" %}success{% elif sonarr.amd64 == "supported" %}informational{% elif sonarr.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not sonarr.arm64 %}untested{% else %}{{ sonarr.arm64 }}{% endif %}-arm64-{% if not sonarr.arm64 %}inactive{% elif sonarr.arm64 == "verified" %}success{% elif sonarr.arm64 == "supported" %}informational{% elif sonarr.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not sonarr.armv7 %}untested{% else %}{{ sonarr.armv7 }}{% endif %}-armv7-{% if not sonarr.armv7 %}inactive{% elif sonarr.armv7 == "verified" %}success{% elif sonarr.armv7 == "supported" %}informational{% elif sonarr.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+
+## Information
+
+
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
+**Current Image Version:** {{ sonarr.version }}
+
+## SETUP
+
+### Enabling sonarr
+
+#### Command:
+
+**`vlab set sonarr.enable True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  enable: True
+```
+
+#### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+## FIRST RUN
 
 You will need to configure an Indexer and a Download Client for Sonarr to work.
 
@@ -25,16 +57,155 @@ Click `Save` to close the modal window. Back in the `Advanced settings` screen, 
 * Local Path:  `/downloads`
 * Remote Path: `/data/complete/tv`
 
-## Usage
+### Usage
 
 We recommend that you make sure you point Sonarr to `/tv`, when you add a TV show.
 
 Now if you add some content to Sonarr, they will automatically be searched and downloaded according to your settings.
 
-## Access
+#### SMTP/ MAIL
 
-Sonarr available at [https://{% if sonarr.domain %}{{ sonarr.domain }}{% else %}{{ service_domain }}{% endif %}/
+1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+
+2. make some changes
+
+
+##### SMTP Settings
+```
+smtp:
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+```
+
+3. run **`vlab update_one service=sonarr`** to complete the changes
+
+
+## ACCESS
+
+sonarr (HTTPS) link: [https://{% if sonarr.domain %}{{ sonarr.domain }}{% else %}{{ sonarr.subdomain + "." + domain }}{% endif %}/](https://{% if sonarr.domain %}{{ sonarr.domain }}{% else %}{{ sonarr.subdomain + "." + domain }}{% endif %}/)
+sonarr (HTTP) link: [http://{% if sonarr.domain %}{{ sonarr.domain }}{% else %}{{ sonarr.subdomain + "." + domain }}{% endif %}/](http://{% if sonarr.domain %}{{ sonarr.domain }}{% else %}{{ sonarr.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-It is also available via Tor at [http://{{ sonarr.subdomain + "." + tor_domain }}/](http://{{ sonarr.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ sonarr.subdomain + "." + tor_domain }}/](http://{{ sonarr.subdomain + "." + tor_domain }}/)
 {% endif %}
+
+## OPTIONS
+
+### HTTPS_ONLY
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set sonarr.https_only True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  https_only: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+### AUTH
+*Default: False*
+*Options: True/False*
+
+#### Command:
+
+**`vlab set sonarr.auth True`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  auth: True
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+### DOMAIN
+*Default: False*
+*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
+
+#### Command:
+
+**`vlab set sonarr.domain sonarr.com`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  domain: sonarr.com
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+### SUBDOMAIN
+*Default: sonarr*
+*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
+
+#### Command:
+
+**`vlab set sonarr.subdomain media`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  subdomain: media
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+### VERSION
+*Default: {{  sonarr.version  }}*
+*NOTE: Ensure that the version exists*
+
+#### Command:
+
+**`vlab set sonarr.version 2.7`**
+
+#### File alteration:
+
+set the appropriate service settings in `settings/config.yml` to true
+
+eg.
+```
+sonarr
+  version: 2.7
+```
+
+##### Finalising changes:
+
+run: **`vlab update_one service=sonarr`**
+
+## Need more help?
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
