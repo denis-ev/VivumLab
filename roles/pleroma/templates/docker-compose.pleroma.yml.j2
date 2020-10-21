@@ -26,7 +26,7 @@ services:
 
   web:
     container_name: pleroma
-    image: git.pleroma.social:5050/pleroma/pleroma:latest
+    image: git.pleroma.social:5050/pleroma/pleroma:{{ pleroma.version }}
     restart: unless-stopped
     volumes:
       - "{{ volumes_root }}/pleroma/uploads:/uploads"

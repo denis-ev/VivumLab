@@ -32,3 +32,6 @@ kibitzr-creds.yml
 
 # Service-edit Task
 docker-compose.override.yml
+
+# CI
+settings_ci/

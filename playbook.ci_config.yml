@@ -1,0 +1,42 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars:
+    vlab_ip: 127.0.0.1
+    vlab_port: 22
+    vlab_ssh_user: root
+    ansible_become_password: "123456789"
+    passwordless_sshkey: 'id_rsa'
+    default_username: admin
+    default_password: "123456789"
+    domain: vivumlab.xyz
+    admin_email: example@vivumlab.xyz
+
+  tasks:
+    - name: Create settings_ci path if it does not exist
+      file:
+        path: settings_ci/passwords
+        state: directory
+        mode: '0755'
+
+    - name: Copy VivumLab config file into place
+      template:
+        src: "{{ playbook_dir }}/roles/vivumlab_config/templates/config.yml"
+        dest: "{{ playbook_dir }}/settings_ci/config.yml"
+
+    - name: Copy VivumLab vault file into place
+      template:
+        src: "{{ playbook_dir }}/roles/vivumlab_config/templates/vault.yml"
+        dest: "{{ playbook_dir }}/settings_ci/vault.yml"
+
+    - name: Generate Ansible inventory file
+      template:
+        src: "{{ playbook_dir }}/roles/vivumlab_config/templates/inventory.j2"
+        dest: "{{ playbook_dir }}/inventory"
+
+    - name: Copy ansible_bash.vars file into place
+      template:
+        src: "{{ playbook_dir }}/roles/vivumlab_config/templates/ansible_bash.vars"
+        dest: "{{ playbook_dir }}/tasks/ansible_bash.vars"
+...

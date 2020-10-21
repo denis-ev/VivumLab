@@ -22,7 +22,7 @@ Task::config(){
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt settings/vault.yml || colorize light_red "error: config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize light_red "error: config: encrypt"
 }
 
 #Show the Configuration settings for a given service

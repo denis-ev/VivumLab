@@ -1102,6 +1102,7 @@ pixelfed:
   auth: {{ pixelfed.auth | default(False) }}
   domain: {{ pixelfed.domain | default(False) }}
   subdomain: {{ pixelfed.subdomain | default("pixelfed") }}
+  version: {{ pixelfed.version | default("latest") }}
   db_version: {{ pixelfed.db_version | default("10.4") }}
   redis_version: {{ pixelfed.redis_version | default("5-alpine") }}
   amd64: False # False or verified or supported or unsupported
@@ -1113,6 +1114,7 @@ pleroma:
   auth: {{ pleroma.auth | default(False) }}
   domain: {{ pleroma.domain | default(False) }}
   subdomain: {{ pleroma.subdomain | default("pleroma") }}
+  version: {{ pleroma.version | default("latest") }}
   db_version: {{ pleroma.db_version | default("9.6-alpine") }}
   amd64: False # False or verified or supported or unsupported
   arm64: False # False or verified or supported or unsupported
@@ -1419,6 +1421,9 @@ turtl:
   auth: {{ turtl.auth | default(False) }}
   domain: {{ turtl.domain| default(False) }}
   subdomain: {{ turtl.subdomain | default("turtl") }}
+  amd64: False # False or verified or supported or unsupported
+  arm64: False # False or verified or supported or unsupported
+  armv7: False # False or verified or supported or unsupported
 ubooquity:
   enable: {{ ubooquity.enable | default(False) }}
   https_only: {{ ubooquity.https_only | default(False) }}
@@ -1457,7 +1462,9 @@ watchtower:
   subdomain: False #Needed for ansible
   notification: {{ watchtower.notification | default (False) }}
   version: {{ watchtower.version | default("latest") }}
-  tested_text: "testing not necessary" #Recommendations "tested" or "testing not possible" or "testing not necessary"
+  amd64: False # False or verified or supported or unsupported
+  arm64: False # False or verified or supported or unsupported
+  armv7: False # False or verified or supported or unsupported
 {% raw %}
   gotify_token: "{{ vault.watchtower.gotify_token | default (False) }}"
 {% endraw %}

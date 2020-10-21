@@ -10,7 +10,7 @@ networks:
 services:
   pixelfed:
     container_name: pixelfed
-    image: ethibox/pixelfed
+    image: ethibox/pixelfed:{{ pixelfed.version }}
     restart: unless-stopped
     networks:
       - traefik_network
