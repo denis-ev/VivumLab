@@ -2,15 +2,15 @@
 
 [cockpit](https://cockpit-project.org) Cockpit admin interface package for configuring and troubleshooting a system
 
-![amd64](https://img.shields.io/badge/{% if not cockpit.amd64 %}untested{% else %}{{ cockpit.amd64 }}{% endif %}-amd64-{% if not cockpit.amd64 %}inactive{% elif cockpit.amd64 == "verified" %}success{% elif cockpit.amd64 == "supported" %}informational{% elif cockpit.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+{# ![amd64](https://img.shields.io/badge/{% if not cockpit.amd64 %}untested{% else %}{{ cockpit.amd64 }}{% endif %}-amd64-{% if not cockpit.amd64 %}inactive{% elif cockpit.amd64 == "verified" %}success{% elif cockpit.amd64 == "supported" %}informational{% elif cockpit.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not cockpit.arm64 %}untested{% else %}{{ cockpit.arm64 }}{% endif %}-arm64-{% if not cockpit.arm64 %}inactive{% elif cockpit.arm64 == "verified" %}success{% elif cockpit.arm64 == "supported" %}informational{% elif cockpit.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not cockpit.armv7 %}untested{% else %}{{ cockpit.armv7 }}{% endif %}-armv7-{% if not cockpit.armv7 %}inactive{% elif cockpit.armv7 == "verified" %}success{% elif cockpit.armv7 == "supported" %}informational{% elif cockpit.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not cockpit.armv7 %}untested{% else %}{{ cockpit.armv7 }}{% endif %}-armv7-{% if not cockpit.armv7 %}inactive{% elif cockpit.armv7 == "verified" %}success{% elif cockpit.armv7 == "supported" %}informational{% elif cockpit.armv7 == "unsupported" %}critical{% endif %}?style=flat) #}
 
 ## Information
 
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
-**Current Image Version:** {{ cockpit.version }}
+**Current Image Version:** None
 
 ## SETUP
 
@@ -167,7 +167,7 @@ cockpit
 run: **`vlab update_one service=cockpit`**
 
 ### VERSION
-*Default: {{  cockpit.version  }}*
+*Default: None*
 *NOTE: Ensure that the version exists*
 
 #### Command:

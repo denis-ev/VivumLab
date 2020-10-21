@@ -1,6 +1,6 @@
 # Next Step
 
-Once you are all setup and ready to go you should be able to load SUI at [http://{% if sui.domain %}{{ sui.domain }}{% else %}{{ service_domain }}{% endif %}/].
+Once you are all setup and ready to go you should be able to load SUI at [https://{% if sui.domain %}{{ sui.domain }}{% else %}{{ sui.subdomain + "." + domain }}{% endif %}/].
 
 ## Securing Services
 

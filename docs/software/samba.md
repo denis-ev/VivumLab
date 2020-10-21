@@ -42,8 +42,6 @@ run: **`vlab update_one service=samba`**
 
 #### ADMINISTRATOR SETUP
 
-Navigate to *https://{{ samba.domain }}/admin*
-
 Create an account with your desired username; as this is the first user, samba makes this account the administrator.
 
 #### SMTP/ MAIL

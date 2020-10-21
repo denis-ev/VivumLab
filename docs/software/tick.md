@@ -14,7 +14,11 @@ It can also take data from [Home Assistant](software/homeassistant) and many oth
 
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
-**Current Image Version:** {{ tick.version }}
+**Current Image Version Telegraf:** {{ tick.telegraf_version }} \
+**Current Image Version Influxdb:** {{ tick.influxdb_version }} \
+**Current Image Version Chronograf:** {{ tick.chronograf_version }} \
+**Current Image Version Kapacitor:** {{ tick.kapacitor_version }}
+
 
 ## SETUP
 
@@ -171,12 +175,12 @@ tick
 run: **`vlab update_one service=tick`**
 
 ### VERSION
-*Default: {{  tick.version  }}*
+*Default: {{  tick.telegraf_version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set tick.version 2.7`**
+**`vlab set tick.telegraf_version 2.7`**
 
 #### File alteration:
 

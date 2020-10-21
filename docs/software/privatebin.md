@@ -2,23 +2,23 @@
 
 [PrivateBin](https://privatebin.info) PrivateBin is a minimalist, open source online pastebin where the server has zero knowledge of pasted data.
 
-![amd64](https://img.shields.io/badge/{% if not PackageFileName.amd64 %}untested{% else %}{{ PackageFileName.amd64 }}{% endif %}-amd64-{% if not PackageFileName.amd64 %}inactive{% elif PackageFileName.amd64 == "verified" %}success{% elif PackageFileName.amd64 == "supported" %}informational{% elif PackageFileName.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not PackageFileName.arm64 %}untested{% else %}{{ PackageFileName.arm64 }}{% endif %}-arm64-{% if not PackageFileName.arm64 %}inactive{% elif PackageFileName.arm64 == "verified" %}success{% elif PackageFileName.arm64 == "supported" %}informational{% elif PackageFileName.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not PackageFileName.armv7 %}untested{% else %}{{ PackageFileName.armv7 }}{% endif %}-armv7-{% if not PackageFileName.armv7 %}inactive{% elif PackageFileName.armv7 == "verified" %}success{% elif PackageFileName.armv7 == "supported" %}informational{% elif PackageFileName.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not privatebin.amd64 %}untested{% else %}{{ privatebin.amd64 }}{% endif %}-amd64-{% if not privatebin.amd64 %}inactive{% elif privatebin.amd64 == "verified" %}success{% elif privatebin.amd64 == "supported" %}informational{% elif privatebin.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not privatebin.arm64 %}untested{% else %}{{ privatebin.arm64 }}{% endif %}-arm64-{% if not privatebin.arm64 %}inactive{% elif privatebin.arm64 == "verified" %}success{% elif privatebin.arm64 == "supported" %}informational{% elif privatebin.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not privatebin.armv7 %}untested{% else %}{{ privatebin.armv7 }}{% endif %}-armv7-{% if not privatebin.armv7 %}inactive{% elif privatebin.armv7 == "verified" %}success{% elif privatebin.armv7 == "supported" %}informational{% elif privatebin.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
-**Current Image Version:** {{ PackageFileName.version }}
+**Current Image Version:** {{ privatebin.version }}
 
 ## SETUP
 
-### Enabling PackageFileName
+### Enabling privatebin
 
 #### Command:
 
-**`vlab set PackageFileName.enable True`**
+**`vlab set privatebin.enable True`**
 
 #### File alteration:
 
@@ -26,13 +26,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+privatebin
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ## FIRST RUN
 
@@ -62,16 +62,16 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=PackageFileName`** to complete the changes
+3. run **`vlab update_one service=privatebin`** to complete the changes
 
 
 ## ACCESS
 
-PackageFileName (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
-PackageFileName (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+privatebin (HTTPS) link: [https://{% if privatebin.domain %}{{ privatebin.domain }}{% else %}{{ privatebin.subdomain + "." + domain }}{% endif %}/](https://{% if privatebin.domain %}{{ privatebin.domain }}{% else %}{{ privatebin.subdomain + "." + domain }}{% endif %}/)
+privatebin (HTTP) link: [http://{% if privatebin.domain %}{{ privatebin.domain }}{% else %}{{ privatebin.subdomain + "." + domain }}{% endif %}/](http://{% if privatebin.domain %}{{ privatebin.domain }}{% else %}{{ privatebin.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{ PackageFileName.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ privatebin.subdomain + "." + tor_domain }}/](http://{{ privatebin.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## OPTIONS
@@ -82,7 +82,7 @@ Tor link: [http://{{ PackageFileName.subdomain + "." + tor_domain }}/](http://{{
 
 #### Command:
 
-**`vlab set PackageFileName.https_only True`**
+**`vlab set privatebin.https_only True`**
 
 #### File alteration:
 
@@ -90,13 +90,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+privatebin
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ### AUTH
 *Default: False*
@@ -104,7 +104,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### Command:
 
-**`vlab set PackageFileName.auth True`**
+**`vlab set privatebin.auth True`**
 
 #### File alteration:
 
@@ -112,13 +112,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+privatebin
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ### DOMAIN
 *Default: False*
@@ -126,7 +126,7 @@ run: **`vlab update_one service=PackageFileName`**
 
 #### Command:
 
-**`vlab set PackageFileName.domain PackageFileName.com`**
+**`vlab set privatebin.domain privatebin.com`**
 
 #### File alteration:
 
@@ -134,21 +134,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
-  domain: PackageFileName.com
+privatebin
+  domain: privatebin.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ### SUBDOMAIN
-*Default: PackageFileName*
+*Default: privatebin*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set PackageFileName.subdomain media`**
+**`vlab set privatebin.subdomain media`**
 
 #### File alteration:
 
@@ -156,21 +156,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+privatebin
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ### VERSION
-*Default: {{  PackageFileName.version  }}*
+*Default: {{  privatebin.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set PackageFileName.version 2.7`**
+**`vlab set privatebin.version 2.7`**
 
 #### File alteration:
 
@@ -178,13 +178,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-PackageFileName
+privatebin
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=PackageFileName`**
+run: **`vlab update_one service=privatebin`**
 
 ## Need more help?
 Further information regarding services can be found. \

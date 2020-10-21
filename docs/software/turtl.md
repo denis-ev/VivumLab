@@ -10,7 +10,7 @@
 
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
-**Current Image Version:** {{ turtl.version }}
+**Current Image Version:** None
 
 ## SETUP
 
@@ -159,7 +159,7 @@ turtl
 run: **`vlab update_one service=turtl`**
 
 ### VERSION
-*Default: {{  turtl.version  }}*
+*Default: None*
 *NOTE: Ensure that the version exists*
 
 #### Command:
