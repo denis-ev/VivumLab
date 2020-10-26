@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     container_name: readarr
     environment:
-      - PUID={{ uid_output.scontainer_name: tdout }}
+      - PUID={{ uid_output.stdout }}
       - PGID={{ gid_output.stdout }}
       - TZ={{ common_timezone }}
       - UMASK=002
