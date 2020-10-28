@@ -44,15 +44,15 @@
    highlight "Adding service to Config Template"
    # Create Template File for Merging
    cat package_template/config.yml > package_template/tmpfile.yml
-   
+
    # Edit the config tempfile
    search_and_replace_in_file 'package_file_name' $package_file_name package_template/tmpfile.yml
    # yq merge -i roles/vivumlab_config/templates/config.yml tmpfile
    Task::run_docker yq merge -i roles/vivumlab_config/templates/config.yml package_template/tmpfile.yml
    # Remove tmp file
    rm package_template/tmpfile.yml
-   
-    
+
+
     cat > package_template/tmp_service/${package_filename}.sh <<EOL
  #!/usr/bin/env bash
     bash vlab push_package $branch_name
@@ -66,7 +66,7 @@
 
    git checkout $1
  }
- 
+
  Task::push_package() {
 
    git checkout $branch_name
