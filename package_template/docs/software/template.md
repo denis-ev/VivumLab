@@ -1,6 +1,6 @@
-# PackageFileName
+# PackageTitleCase
 
-[PackageFileName](PackageURL) PackageOneLiner
+[PackageTitleCase](PackageURL) PackageOneLiner
 
 ![amd64](https://img.shields.io/badge/{% if not PackageFileName.amd64 %}untested{% else %}{{ PackageFileName.amd64 }}{% endif %}-amd64-{% if not PackageFileName.amd64 %}inactive{% elif PackageFileName.amd64 == "verified" %}success{% elif PackageFileName.amd64 == "supported" %}informational{% elif PackageFileName.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not PackageFileName.arm64 %}untested{% else %}{{ PackageFileName.arm64 }}{% endif %}-arm64-{% if not PackageFileName.arm64 %}inactive{% elif PackageFileName.arm64 == "verified" %}success{% elif PackageFileName.arm64 == "supported" %}informational{% elif PackageFileName.arm64 == "unsupported" %}critical{% endif %}?style=flat)
@@ -14,7 +14,7 @@
 
 ## SETUP
 
-### Enabling PackageFileName
+### Enabling PackageTitleCase
 
 #### Command:
 
@@ -96,10 +96,6 @@ PackageFileName
   https_only: True
 ```
 
-##### Finalising changes:
-
-run: **`vlab update_one service=PackageFileName`**
-
 ### AUTH
 *Default: False*
 *Options: True/False*
@@ -117,10 +113,6 @@ eg.
 PackageFileName
   auth: True
 ```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=PackageFileName`**
 
 ### DOMAIN
 *Default: False*
@@ -140,10 +132,6 @@ PackageFileName
   domain: PackageFileName.com
 ```
 
-##### Finalising changes:
-
-run: **`vlab update_one service=PackageFileName`**
-
 ### SUBDOMAIN
 *Default: PackageFileName*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
@@ -161,10 +149,6 @@ eg.
 PackageFileName
   subdomain: media
 ```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=PackageFileName`**
 
 ### VERSION
 *Default: {{  PackageFileName.version  }}*
@@ -184,7 +168,7 @@ PackageFileName
   version: 2.7
 ```
 
-##### Finalising changes:
+### Finalising changes:
 
 run: **`vlab update_one service=PackageFileName`**
 
