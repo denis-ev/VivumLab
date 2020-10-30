@@ -58,6 +58,7 @@
         {
           "assets": [
             "package.json",
+            "package-lock.json",
             "CHANGELOG.md",
             "VERSION"
           ],
