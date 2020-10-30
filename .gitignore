@@ -15,7 +15,7 @@ bootstrap_install/server_credentials
 
 # User Specific
 settings/
-tasks/ansible_bash.vars
+tasks/*ansible_bash.vars
 
 # IDE specific
 /.vscode
