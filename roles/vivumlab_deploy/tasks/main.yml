@@ -3,7 +3,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    #mode: "777"
+    # mode: "777"
   loop:
     - "{{ volumes_root }}/traefik"
     - "{{ volumes_root }}/traefik/conf.d"

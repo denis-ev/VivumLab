@@ -1,19 +1,37 @@
 ---
-- name: Add the WireGuard PPA repository
+- name: Add the WireGuard PPA repository (Debian)
   apt_repository:
-    repo: ppa:wireguard/wireguard
+    repo: deb http://deb.debian.org/debian buster-backports main
     state: present
-  register: result
-  until: result is succeeded
-  retries: 10
-  delay: 3
+    update_cache: yes
+  when: (ansible_facts['distribution'] == "Debian" and ansible_facts[distribution_major_version] == "10")
 
-- name: Install WireGuard
+- name: Add the WireGuard PPA repository (Debian)
+  apt_repository:
+    repo: deb http://deb.debian.org/debian/ unstable main
+    state: present
+    update_cache: yes
+  when: (ansible_facts['distribution'] == "Debian" and ansible_facts[distribution_major_version] !== "10" and ansible_facts[distribution_major_version] !== "11")
+
+- name: Install WireGuard (Ubuntu/ Debian)
   apt:
-    name: wireguard
+    name: "{{item}}"
     state: present
     update_cache: true
     cache_valid_time: 86400
+  loop:
+    - wireguard-dkms
+    - wireguard-tools
+  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
+
+- name: Install WireGuard (CentOS)
+  yum:
+    name: "{{item}}"
+    enablerepo: "epel"
+  loop:
+    - wireguard-dkms
+    - wireguard-tools
+  when: (ansible_facts['distribution'] == "CentOS")
 
 - name: Create WireGuard configurations directory
   file:
