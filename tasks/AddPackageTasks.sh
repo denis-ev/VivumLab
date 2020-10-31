@@ -17,7 +17,7 @@
    Task::create_git_branch $branch_name
 
    highlight "Creating role folder"
-   cp -R package_template/roles/template "roles/${package_filename}"
+   cp -R package_template/roles/template/ "roles/${package_filename}"
 
    highlight "Editing Role Tasks & Renaming docker-compose template"
    search_and_replace_in_file 'pkgtemplate' $package_filename "roles/$package_filename/tasks/main.yml"
