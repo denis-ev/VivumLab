@@ -39,16 +39,20 @@
    #Adding docs to mkdocs.yml
 
    highlight "Adding Package to the group_vars/all file"
-   Task::run_docker yq w -i group_vars/all "services.$package_filename" ''
+   Task::run_docker yq w -i group_vars/all "services.$package_filename"
+   Task::run_docker yq w -i group_vars/all "$package_filename"
 
    highlight "Adding service to Config Template"
    # Create Template File for Merging
    cat package_template/config.yml > package_template/tmpfile.yml
 
    # Edit the config tempfile
+   search_and_replace_in_file '{% raw %}' '# temporary_raw_placeholder' roles/vivumlab_config/templates/config.yml
+   search_and_replace_in_file '{% endraw %}' '# temporary_endraw_placeholder' roles/vivumlab_config/templates/config.yml
    search_and_replace_in_file 'package_filename' $package_filename package_template/tmpfile.yml
-   # yq merge -i roles/vivumlab_config/templates/config.yml tmpfile
-   Task::run_docker yq merge -i roles/vivumlab_config/templates/config.yml package_template/tmpfile.yml
+   Task::run_docker yq m -i roles/vivumlab_config/templates/config.yml package_template/tmpfile.yml
+   search_and_replace_in_file '# temporary_raw_placeholder' '{% raw %}' roles/vivumlab_config/templates/config.yml
+   search_and_replace_in_file '# temporary_endraw_placeholder' '{% endraw %}' roles/vivumlab_config/templates/config.yml
    # Remove tmp file
    rm -f package_template/tmpfile.yml
 
