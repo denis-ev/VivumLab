@@ -46,11 +46,11 @@
    cat package_template/config.yml > package_template/tmpfile.yml
 
    # Edit the config tempfile
-   search_and_replace_in_file 'package_file_name' $package_file_name package_template/tmpfile.yml
+   search_and_replace_in_file 'package_filename' $package_filename package_template/tmpfile.yml
    # yq merge -i roles/vivumlab_config/templates/config.yml tmpfile
    Task::run_docker yq merge -i roles/vivumlab_config/templates/config.yml package_template/tmpfile.yml
    # Remove tmp file
-   rm package_template/tmpfile.yml
+   rm -f package_template/tmpfile.yml
 
 
     cat > package_template/tmp_service/${package_filename}.sh <<EOL
@@ -61,7 +61,8 @@ EOL
 
  Task::create_git_branch() {
    git fetch
-   git checkout dev && git pull
+   git pull
+   #git checkout dev && git pull
    git branch $1
 
    git checkout $1
@@ -76,5 +77,5 @@ EOL
  }
 
  function search_and_replace_in_file(){
-   sed "s~$1~$2~g" $3
+   sed -i '' "s~$1~$2~g" $3
  }
