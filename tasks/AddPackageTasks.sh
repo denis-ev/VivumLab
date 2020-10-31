@@ -91,7 +91,7 @@ EOL
 
  Task::create_git_branch() {
   git fetch
-  # git checkout dev && git pull
+  git checkout dev && git pull
   git branch $1
 
   git checkout $1
