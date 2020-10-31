@@ -73,9 +73,9 @@ EOL
  }
 
  Task::push_package() {
-  git checkout $branch_name
+  git checkout $1
   git add .
-  git commit -m "feat(service): adds ${package_name}"
+  git commit -m "feat(service): adds $2"
   git push
  }
 
