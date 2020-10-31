@@ -56,7 +56,7 @@
     cat > package_template/tmp_service/${package_filename}.sh <<EOL
  #!/usr/bin/env bash
     bash vlab push_package $branch_name
-    EOL
+EOL
  }
 
  Task::create_git_branch() {
@@ -76,5 +76,5 @@
  }
 
  function search_and_replace_in_file(){
-   sed -i "s~$1~$2~g" $3
+   sed "s~$1~$2~g" $3
  }
