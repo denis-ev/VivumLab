@@ -138,19 +138,12 @@ Task::check_for_precommit () {
    if [ "$(printf '%s\n' "$reqpc" "$pcver" | sort -V | head -n1)" = "$reqpc" ]; then
      [ ! -f .git/pre-commit ] || pre-commit install && pre-commit install --install-hooks
    else
-     echo "/bin/sh\ncurl https://pre-commit.com/install-local.py | python -" > INSTALL_PRECOMMIT.sh
-     sudo chmod +x INSTALL_PRECOMMIT.sh
-     echo "Contributions via git, require pre-commit. Use INSTALL_PRECOMMIT.sh, to begin"
+     echo "Pre-commit is not installed"
+     echo "Contributions via git, require pre-commit. Run vlab dev_setup, to begin"
      echo "after your deployment has finished, of course"
      sleep 3
+     break
    fi
-  else
-     echo "/bin/sh\ncurl https://pre-commit.com/install-local.py | python -" > INSTALL_PRECOMMIT.sh
-     sudo chmod +x INSTALL_PRECOMMIT.sh
-     echo "The latest version of Python, is required to contribute via git"
-     echo "Check it out here: https://duckduckgo.com/?q=download+python"
-     echo "If you wanted to contribute, install the latest version and re-deploy"
-     sleep 3
  fi
 }
 
