@@ -8,8 +8,8 @@
 
   colorize green "This wizard will ask you a few questions and help you prototype the required changes to add a package"
   read -p "What is the name of this package in Title Case? " package_name
-  read -p "What is the website of package_name? " url
-  read -p "Describe package_name in one line: " description
+  read -p "What is the website of $package_name? " url
+  read -p "Describe $package_name in one line: " description
 
   nospaces="${package_name// /''}"
   package_filename=$( echo $nospaces | awk '{print tolower($0)}')
@@ -77,7 +77,7 @@ EOL
 
  Task::create_git_branch() {
   git fetch
-  git checkout dev && git pull
+  # git checkout dev && git pull
   git branch $1
 
   git checkout $1
