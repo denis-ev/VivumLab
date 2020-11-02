@@ -142,7 +142,6 @@ Task::check_for_precommit () {
      echo "Contributions via git, require pre-commit. Run vlab dev_setup, to begin"
      echo "after your deployment has finished, of course"
      sleep 3
-     break
    fi
  fi
 }

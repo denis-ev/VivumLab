@@ -32,7 +32,6 @@ Task::dev_setup(){
   *)
     echo "If you change your mind, run this command again"
     echo "Please Note: if you don't, any changes you try to push will fail"
-    break
     ;;
   esac
 }
