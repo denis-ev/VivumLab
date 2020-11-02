@@ -95,7 +95,7 @@ Task::clone_config() {
   read -p "What would you like to prefix the new files with? " clone_config_prefix
   printf "cloning configs"
 
-  "Task::decrypt user_config=$_user_config"
+  Task::decrypt
   cp $_config_dir/config.yml $_config_dir/${clone_config_prefix}-config.yml
   cp $_config_dir/vault.yml $_config_dir/${clone_config_prefix}-vault.yml
   cp tasks/ansible_bash.vars tasks/${clone_config_prefix}-ansible_bash.vars
