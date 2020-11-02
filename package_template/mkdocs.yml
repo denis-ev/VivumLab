@@ -1,0 +1,4 @@
+nav:
+  - Included Software: # removes the dash in the front when trying to merge it with mkdocs.yml
+      - Misc/Other:
+          - package_name: software/package_filename.md

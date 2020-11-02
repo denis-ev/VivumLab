@@ -17,6 +17,7 @@ bootstrap_install/server_credentials
 settings/
 tasks/ansible_bash.vars
 package_template/tmp_service
+package_template/tmp*.yml
 
 # IDE specific
 /.vscode
