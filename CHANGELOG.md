@@ -58,7 +58,7 @@
 ### Bug Fixes
 
 * **travis:** add python3 ([#27](https://github.com/VivumLab/VivumLab/issues/27)) ([e49eef9](https://github.com/VivumLab/VivumLab/commit/e49eef97db1eff4abc3d49a03bf6eadf05e6deea))
-* **travis:** addding pre-commit stage to travis ([#24](https://github.com/VivumLab/VivumLab/issues/24)) ([a799b24](https://github.com/VivumLab/VivumLab/commit/a799b24f72a4f21d2b36801f0a01bda12b1e4b65))
+* **travis:** adding pre-commit stage to travis ([#24](https://github.com/VivumLab/VivumLab/issues/24)) ([a799b24](https://github.com/VivumLab/VivumLab/commit/a799b24f72a4f21d2b36801f0a01bda12b1e4b65))
 * **travis:** adding commitlint ([#31](https://github.com/VivumLab/VivumLab/issues/31)) ([b71bc9d](https://github.com/VivumLab/VivumLab/commit/b71bc9d5f9434caa01ec0e90e0abd9c25931ae5c))
 * **travis:** apt needs sudo ([#28](https://github.com/VivumLab/VivumLab/issues/28)) ([938ed5c](https://github.com/VivumLab/VivumLab/commit/938ed5c088dd7a8e782f1a9b0bf88e1cd2751870))
 * **service:** authelia bug fix (new version) ([#8](https://github.com/VivumLab/VivumLab/issues/8)) ([5277acb](https://github.com/VivumLab/VivumLab/commit/5277acb5b70083578f996be123a2739097286875))
@@ -126,7 +126,7 @@
 - **travis**: add python3 (#27)
 - **travis**: change pip to pip3 (#26)
 - **travis**: travis pre-commit change to run-all (#25)
-- **travis**: addding pre-commit stage to travis (#24)
+- **travis**: adding pre-commit stage to travis (#24)
 - **lint**: lint fixes (#23)
 - **service**: authelia config bug (#21)
 - **service**: jinja2 trim_blocks (#20)

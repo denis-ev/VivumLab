@@ -124,7 +124,7 @@ Task::check_ssh_keys() {
 }
 
 Task::check_for_precommit () {
-  pcver=$(pre-commit --version)
+  pcver=$(pre-commit --version || echo "0.0.0")
   reqpy="3.6.1"
   reqpc="2.6.0"
 
