@@ -11,7 +11,7 @@ VivumLab uses [docker-transmission-openvpn](https://github.com/haugene/docker-tr
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! \
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!\
 **Current Image Version:** {{ transmission.version }}
 
 ## SETUP
