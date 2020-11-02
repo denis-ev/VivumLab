@@ -1,5 +1,5 @@
 ---
-- name: Add the WireGuard PPA repository (Debian)
+- name: Add the buster-backports repository (Debian)
   apt_repository:
     repo: deb http://deb.debian.org/debian buster-backports main
     state: present
