@@ -10,7 +10,7 @@ Task::lint(){
 Task::dev_setup(){
   echo "Welcome to VivumLab Dev setup"
   echo ""
-  read -p "Do you want to contribute to VivumLab?" contribute
+  read -p "Do you want to contribute to VivumLab (yes or no)?" contribute
   case $contribute in
   [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
     echo "Thanks for helping out!!"
