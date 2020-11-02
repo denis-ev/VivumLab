@@ -11,7 +11,7 @@ If you don't need all the extra from NextCloud/OwnCloud, this service could be w
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!\
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
 **Current Image Version:** {{ webdavserver.version }}
 
 ## SETUP

@@ -9,7 +9,7 @@ Minio is an S3 storage utility.
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!\
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
 **Current Image Version:** {{ minio.version }}
 
 ## SETUP

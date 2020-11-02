@@ -8,7 +8,7 @@
 
 ## Information
 
-**Docker Image:** https://hub.docker.com/r/linuxserver/airsonic \
+**Docker Image:** https://hub.docker.com/r/linuxserver/airsonic  
 **Current Image Version:** {{ airsonic.version }}
 
 ## SETUP

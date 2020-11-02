@@ -9,7 +9,7 @@
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!\
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
 **Current Image Version:** {{ speedtest.version }}
 
 ## SETUP

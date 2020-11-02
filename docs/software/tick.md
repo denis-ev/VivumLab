@@ -13,7 +13,7 @@ It can also take data from [Home Assistant](software/homeassistant) and many oth
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!\
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
 **Current Image Version Telegraf:** {{ tick.telegraf_version }} \
 **Current Image Version Influxdb:** {{ tick.influxdb_version }} \
 **Current Image Version Chronograf:** {{ tick.chronograf_version }} \
