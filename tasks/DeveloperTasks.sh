@@ -12,7 +12,7 @@ Task::dev_setup(){
   echo ""
   read -p "Do you want to contribute to VivumLab (yes or no)?" contribute
   case $contribute in
-  [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
+  [Yy]|[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
     echo "Thanks for helping out!!"
     echo "Firstly, please make sure you read the developers docs for VivumLab"
     echo "The docs were written to help you"
