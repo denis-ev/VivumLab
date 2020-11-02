@@ -18,6 +18,7 @@
       - iotop
       - mosh
       - nfs-utils
+      - policycoreutils-python-utils
       - screen
       - sudo
       - vim-enhanced
