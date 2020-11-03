@@ -9,6 +9,7 @@
     repo: 'https://github.com/seejohnrun/haste-server.git'
     dest: "{{ volumes_root }}/hastebin/build"
     version: master
+  ignore_errors: yes
 
 - name: Copy hastebin docker-compose.yml file into place.
   template:

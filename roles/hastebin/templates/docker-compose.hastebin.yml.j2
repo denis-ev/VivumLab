@@ -16,19 +16,23 @@ services:
       - traefik_network
       - hastebin_network
     depends_on:
-      - memcached
+      - redis
     environment:
-      - STORAGE_TYPE=memcached
-      - STORAGE_HOST=memcached
-      - STORAGE_PORT=11211
+      - STORAGE_TYPE=redis
+      - STORAGE_HOST=redis
+      - STORAGE_PORT=6379
+      - STORAGE_EXPIRE_SECONDS=2592000
+      - STORAGE_DB=2
     labels:
       - "traefik.http.services.hastebin.loadbalancer.server.scheme=http"
       - "traefik.http.services.hastebin.loadbalancer.server.port=7777"
 {% include './labels.j2' %}
 
-  memcached:
-    container_name: hastebin_memcached
-    image: memcached:{{ hastebin.memcached_version }}
+  redis:
+    container_name: hastebin_redis
+    image: redis:{{ hastebin.redis_version }}
     restart: unless-stopped
     networks:
       - hastebin_network
+    volumes:
+      - "{{ volumes_root }}/hastebin/redis:/data"

@@ -607,7 +607,7 @@ hastebin:
   domain: {{ hastebin.domain | default(False) }}
   subdomain: {{ hastebin.subdomain | default("hastebin") }}
   server_version: master
-  memcached_version: {{ hastebin.memcached_version | default("1.6.8-alpine") }}
+  redis_version: {{ hastebin.redis_version | default("5.0.5-alpine") }}
   amd64: False # False or verified or supported or unsupported
   arm64: False # False or verified or supported or unsupported
   armv7: False # False or verified or supported or unsupported
