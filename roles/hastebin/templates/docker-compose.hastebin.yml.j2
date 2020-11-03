@@ -1,0 +1,33 @@
+---
+version: '3'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  hastebin:
+
+services:
+  haste-server:
+    restart: unless-stopped
+    build: ./build/
+    networks:
+      - traefik_network
+      - hastebin_network
+    depends_on:
+      - memcached
+    environment:
+      - STORAGE_TYPE=memcached
+      - STORAGE_HOST=memcached
+      - STORAGE_PORT=11211
+    ports:
+      - "{{ hastebin.ssh_port }}:22"
+    labels:
+      - "traefik.http.services.hastebin.loadbalancer.server.scheme=http"
+      - "traefik.http.services.hastebin.loadbalancer.server.port=7777"
+{% include './labels.j2' %}
+
+  memcached:
+    image: memcached:{{ hastebin.memcached_version }}
+    networks:
+      - hastebin_network

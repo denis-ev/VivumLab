@@ -600,6 +600,17 @@ guacamole:
   amd64: False # False or verified or supported or unsupported
   arm64: False # False or verified or supported or unsupported
   armv7: False # False or verified or supported or unsupported
+hastebin:
+  enable: {{ hastebin.enable | default(False) }}
+  https_only: {{ hastebin.https_only | default(False) }}
+  auth: {{ hastebin.auth | default(False) }}
+  domain: {{ hastebin.domain | default(False) }}
+  subdomain: {{ hastebin.subdomain | default("hastebin") }}
+  server_version: "master"
+  memcached_version: {{ hastebin.memcached_version | default("1.6.8-alpine") }}
+  amd64: False # False or verified or supported or unsupported
+  arm64: False # False or verified or supported or unsupported
+  armv7: False # False or verified or supported or unsupported
 healthchecks:
   enable: {{ healthchecks.enable | default(False) }}
   https_only: {{ healthchecks.https_only | default(False) }}
