@@ -43,17 +43,17 @@ Task::check_for_settings(){
         colorize light_red "Creating passwords directory"
         mkdir -p settings/passwords
     fi
-    if [[ ! -f settings/config.yml ]]; then
+    if [[ ! -f settings/prod-config.yml ]]; then
         colorize light_red "Creating an empty config file"
-        echo "blank_on_purpose: True" > settings/config.yml
+        echo "blank_on_purpose: True" > settings/prod-config.yml
     fi
-    if [[ ! -f settings/vault.yml ]]; then
+    if [[ ! -f settings/prod-vault.yml ]]; then
         colorize light_red "Creating an empty Vault"
-        echo "blank_on_purpose: True" > settings/vault.yml
+        echo "blank_on_purpose: True" > settings/prod-vault.yml
     fi
-    if [[ ! -f tasks/ansible_bash.vars ]]; then
+    if [[ ! -f tasks/prod-ansible_bash.vars ]]; then
       colorize light_red "Creating ansible_bash.vars file"
-      echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
+      echo "PASSWORDLESS_SSHKEY=''" > tasks/prod-ansible_bash.vars
     fi
 }
 

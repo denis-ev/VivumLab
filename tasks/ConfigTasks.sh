@@ -10,7 +10,7 @@ Task::config(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config "Prefix of the user-cloned config files"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo_local
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -20,19 +20,19 @@ Task::config(){
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/$(user_config)config.yml" --extra-vars="@$_config_dir/$(user_config)vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/$(user_config)vault.yml || colorize light_red "error: config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/$_user_config-vault.yml || colorize light_red "error: config: encrypt"
 }
 
 #Show the Configuration settings for a given service
 Task::show_config(){
   : @desc "Shows the configuration settings for the specified service"
   : @param service! "The name of the service. Use: service=serviceName"
-  : @param user_config "Prefix of the user-cloned config files"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
-  Task::run_docker yq r -C "settings/$(user_config)config.yml" $_service
+  Task::run_docker yq r -C "settings/$_user_config-config.yml" $_service
 
 }
 
@@ -58,7 +58,7 @@ Task::config_reset() {
 Task::set(){
   : @desc "Set a configuration variable"
   : @param rest% "Configuration Key to set"
-  : @param user_config "Prefix of the user-cloned config files"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   "Task::decrypt user_config=$_user_config"
 
@@ -68,13 +68,13 @@ Task::set(){
   value="${_rest[$key]}"
 
   # Try to figure out where key is defined
-  FILE=settings/$(user_config)config.yml
+  FILE=settings/$_user_config-config.yml
   SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
   if [ -z ${SETTING_VALUE} ]; then
-      FILE=settings/$(user_config)vault.yml
+      FILE=settings/$_user_config-vault.yml
       SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
       if [ -z ${SETTING_VALUE} ]; then
-          echo "Key does not exist in $(user_config)config.yml nor $(user_config)vault.yml."
+          echo "Key does not exist in $_user_config-config.yml nor $_user_config-vault.yml."
           # Re-encrypt vault
           "Task::encrypt user_config=$_user_config"
           exit 1
