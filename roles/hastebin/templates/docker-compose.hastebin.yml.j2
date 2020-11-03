@@ -20,8 +20,6 @@ services:
       - STORAGE_TYPE=memcached
       - STORAGE_HOST=memcached
       - STORAGE_PORT=11211
-    ports:
-      - "{{ hastebin.ssh_port }}:22"
     labels:
       - "traefik.http.services.hastebin.loadbalancer.server.scheme=http"
       - "traefik.http.services.hastebin.loadbalancer.server.port=7777"
