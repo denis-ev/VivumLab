@@ -19,7 +19,7 @@ Task::sanity_check_remote(){
   already_ran[${FUNCNAME[0]}]=1
 
   Task::check_ssh_keys
-  #Task::check_ssh_with_keys
+  Task::check_ssh_with_keys
 
   colorize green "Remote sanity checks passed"
 }
@@ -66,11 +66,15 @@ Task::check_for_git(){
 }
 
 Task::check_ssh_with_keys(){
-  IP=$(Task::run_docker yq r "settings/config.yml" "vlab_ip" | tr -d '[:space:]')
-  USERNAME=$(Task::run_docker yq r "settings/config.yml" "vlab_ssh_user" | tr -d '[:space:]')
-  Task::run_docker ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 "$USERNAME@$IP" exit 2>&1 && echo $?
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
+
+  IP=$(Task::run_docker yq r "$_config_dir/$_user_config-config.yml" "vlab_ip" | tr -d '[:space:]')
+  USERNAME=$(Task::run_docker yq r "$_config_dir/$_user_config-config.yml" "vlab_ssh_user" | tr -d '[:space:]')
+  Task::run_docker ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 -i /root/.ssh/$(pwless_sshkey) "$USERNAME@$IP" exit 2>&1 && echo $?
   if ! [ $? -eq 0 ]; then
-    colorize red "VivumLab is unable to ssh to your server using the information in your config.yml: $USERNAME at $IP, and your $HOME/.ssh/id_rsa keypair to SSH into your server. Because the VivumLab docker container cannot ssh to your server with the specified key, VivumLab cannot deploy"
+    colorize red "VivumLab is unable to ssh to your server using the information in your $_config_dir/$_user_config-config.yml: $USERNAME at $IP, and your $HOME/.ssh/id_rsa keypair to SSH into your server. Because the VivumLab docker container cannot ssh to your server with the specified key, VivumLab cannot deploy"
+    exit 1
   fi
 }
 
