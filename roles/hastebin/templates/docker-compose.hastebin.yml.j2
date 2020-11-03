@@ -10,6 +10,7 @@ networks:
 services:
   haste-server:
     restart: unless-stopped
+    container_name: hastebin
     build: ./build/
     networks:
       - traefik_network
@@ -26,6 +27,8 @@ services:
 {% include './labels.j2' %}
 
   memcached:
+    container_name: hastebin_memcached
     image: memcached:{{ hastebin.memcached_version }}
+    restart: unless-stopped
     networks:
       - hastebin_network
