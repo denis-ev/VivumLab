@@ -30,8 +30,6 @@ Task::create_vault_pass() {
 
 # Ensures there is a place to put all the required settings..
 Task::check_for_settings(){
-  : @desc "Verifies User Settings exist. Creates it if it's not present"
-
     mkdir -p settings/passwords
     [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 

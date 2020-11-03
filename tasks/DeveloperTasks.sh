@@ -8,6 +8,8 @@ Task::lint(){
 }
 
 Task::dev_setup(){
+  : @desc "Run to install dev requirements"
+
   echo "Welcome to VivumLab Dev setup"
   echo ""
   read -p "Do you want to contribute to VivumLab (yes or no)?" contribute
