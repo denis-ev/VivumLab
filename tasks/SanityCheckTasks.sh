@@ -125,7 +125,7 @@ Task::check_ssh_keys() {
 }
 
 Task::check_for_precommit () {
-  pcver=$(pre-commit --version > /dev/null 2>&1 || echo "0.0.0")
+  pcver=$(pre-commit --version || echo "0.0.0")
   reqpy="3.6.1"
   reqpc="2.6.0"
 
@@ -137,7 +137,7 @@ Task::check_for_precommit () {
 
   if [ "$(printf '%s\n' "$reqpy" "$pyver" | sort -V | head -n1)" = "$reqpy" ]; then
    if [ "$(printf '%s\n' "$reqpc" "$pcver" | sort -V | head -n1)" = "$reqpc" ]; then
-     [ ! -f .git/pre-commit ] || pre-commit install && pre-commit install --install-hooks
+     [ ! -f .git/pre-commit ] || pre-commit install && pre-commit install --install-hooks # > /dev/null 2>&1
    else
      echo "Pre-commit is not installed"
      echo "Contributions via git, require pre-commit. Run vlab dev_setup, to begin"
