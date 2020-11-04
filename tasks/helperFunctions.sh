@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source tasks/ansible_bash.vars
+
 # Helper Functions
 
 function highlight() {
@@ -70,121 +72,73 @@ function sshkey_path () {
 # Ansible -> Bash Variables
 
 function vlab_ip (){
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ VLAB_IP == '' ]]; then
     VLAB_IP='localhost'
     echo $VLAB_IP
   else
     echo $VLAB_IP
   fi
-  else
-  VLAB_IP='localhost'
-  echo $VLAB_IP
-fi
 }
 
 function vlab_port () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ VLAB_PORT == '' ]]; then
     VLAB_PORT'22'
     echo $VLAB_PORT
   else
     echo $VLAB_PORT
   fi
-  else
-  VLAB_PORT='22'
-  echo $VLAB_PORT
-fi
 }
 
 function vlab_ssh_user () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ VLAB_SSH_USER == '' ]]; then
     VLAB_PORT='root'
     echo $VLAB_SSH_USER
   else
     echo $VLAB_SSH_USER
   fi
-  else
-  VLAB_PORT='root'
-  echo $VLAB_SSH_USER
-fi
 }
 
 function admin_email () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ ADMIN_EMAIL == '' ]]; then
     ADMIN_EMAIL='admin_email@vivumlab.com'
     echo $ADMIN_EMAIL
   else
     echo $ADMIN_EMAIL
   fi
-  else
-  ADMIN_EMAIL='admin_email@vivumlab.com'
-  echo $ADMIN_EMAIL
-fi
 }
 
 function default_username () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ DEFAULT_USERNAME == '' ]]; then
     DEFAULT_USERNAME='admin'
     echo $DEFAULT_USERNAME
   else
     echo $DEFAULT_USERNAME
   fi
-  else
-  DEFAULT_USERNAME='admin'
-  echo $DEFAULT_USERNAME
-fi
 }
 
 function domain_check () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ DOMAIN == '' ]]; then
     DOMAIN='localhost'
     echo $ARM
   else
     echo $ARM
   fi
-  else
-  DOMAIN='localhost'
-  echo $ARM
-fi
 }
 
 function arm_check () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ ARM == '' ]]; then
     ARM='False'
     echo $ARM
   else
     echo $ARM
   fi
-  else
-  ARM='False'
-  echo $ARM
-fi
 }
 
 function pwless_sshkey () {
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
   if [[ PASSWORDLESS_SSHKEY == '' ]]; then
     PASSWORDLESS_SSHKEY='id_rsa'
     echo $PASSWORDLESS_SSHKEY
   else
     echo $PASSWORDLESS_SSHKEY
   fi
-  else
-  PASSWORDLESS_SSHKEY='id_rsa'
-  echo $PASSWORDLESS_SSHKEY
-fi
 }
