@@ -98,28 +98,29 @@ Task::check_vault_pass(){
 Task::check_ssh_keys() {
   : @desc "Checks for SSH keys, creates/updates as necessary."
   : @param config_dir="settings"
-  : @param force true "Forces a rebuild/repull of the docker image"
-  : @param build true "Forces to build the image locally"
-  : @param debug true "Debugs ansible-playbook commands"
 
   if ! [ -f "$HOME/.ssh/$(pwless_sshkey)" -a -f "$HOME/.ssh/$(pwless_sshkey).pub" ]; then
     echo "The directory: $HOME/.ssh, does not have any keys called $(pwless_sshkey)"
-    read -p 'Have you already created a set of keys for VivumLab? [yes/no]: ' ssh_confirm
+    read -p 'Do the keys exist? Is the name of the keys (above) incorrect? [yes/no]: ' ssh_confirm
     case $ssh_confirm in
-        [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
-            echo "OK, lets refresh VivumLab"
-            echo "running 'vlab config' for you.."
-            sleep 3
-            Task::config
+        [Yy]|[Yy][Ee][Ss])
+          echo "OK, refreshing VivumLab. Run 'vlab config' when you are ready"
+          sed -i "/^passwordless_sshkey:/c\ " $_config_dir/config.yml
+          sed -i "/^PASSWORDLESS_SSHKEY=/c\PASSWORDLESS_SSHKEY=" tasks/ansible_bash.vars
+          exit
         ;;
-        [Nn][Oo]|[Ff][Aa][Ll][Ss][Ee])
-            Task::create_sshkey
+        [Nn]|[Nn][Oo])
+          Task::create_sshkey
+          exit
         ;;
         *)
-            echo "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
-            echo "REMINDER: 'vlab create_sshkey' can help you create some keys"
+          echo "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
+          echo "REMINDER: 'vlab create_sshkey' can help you create some keys"
+          exit
         ;;
     esac
+  else
+     echo "Using $(pwless_sshkey) and $(pwless_sshkey).pub keys"
   fi
 }
 
