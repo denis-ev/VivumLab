@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source tasks/ansible_bash.vars
+if [[ -f tasks/ansible_bash.vars ]]; then
+  source tasks/ansible_bash.vars
+fi
 
 # Helper Functions
 
