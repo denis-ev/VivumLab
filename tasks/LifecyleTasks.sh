@@ -1,3 +1,4 @@
+---
 #!/usr/bin/env bash
 
 # Main deployment task - used to deploy VLAB
