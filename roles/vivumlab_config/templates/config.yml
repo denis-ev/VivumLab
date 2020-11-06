@@ -982,7 +982,7 @@ nzbget:
 octoprint:
   enable: {{ octoprint.enable | default(False) }}
   https_only: {{ octoprint.https_only | default(False) }}
-  devices: {{ octoprint.devices | default([])}}
+  devices: !!str '{{ octoprint.devices | default([]) }}'
   auth: {{ octoprint.auth | default(False) }}
   domain: {{ octoprint.domain | default(False) }}
   subdomain: {{ octoprint.subdomain | default("octoprint")}}
