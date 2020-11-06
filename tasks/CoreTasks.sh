@@ -169,7 +169,7 @@ Task::restore() {
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
-  -i inventory restore.yml  || colorize light_red "error: restore"
+  -i inventory playbook.restore.yml  || colorize light_red "error: restore"
 }
 
 # CI - Updates the config file, and ensures the vault is encrypted.
