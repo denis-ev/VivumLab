@@ -40,7 +40,6 @@ Task::show(){
 
 # Builds the docker image used for VivumLab Deployments
 Task::build() {
-    : @desc "Builds the Docker Image used to deploy"
     : @param force true "Forces a rebuild/repull of the docker image"
     : @param build true "Pulls the image"
     : @param cache true "Allows the build to use the cache"

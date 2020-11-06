@@ -2,7 +2,7 @@
 
 # Main deployment task - used to deploy VLAB
 Task::deploy(){
-  : @desc "Main deployment task - deploys VivumLab"
+  : @desc "Deploys VivumLab, configure VivumLab first"
   : @param config_dir="settings"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
