@@ -23,12 +23,12 @@
     - name: Copy VivumLab config file into place
       template:
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/config.yml"
-        dest: "{{ playbook_dir }}/settings_ci/config.yml"
+        dest: "{{ playbook_dir }}/settings_ci/prod-config.yml"
 
     - name: Copy VivumLab vault file into place
       template:
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/vault.yml"
-        dest: "{{ playbook_dir }}/settings_ci/vault.yml"
+        dest: "{{ playbook_dir }}/settings_ci/prod-vault.yml"
 
     - name: Generate Ansible inventory file
       template:
@@ -38,5 +38,5 @@
     - name: Copy ansible_bash.vars file into place
       template:
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/ansible_bash.vars"
-        dest: "{{ playbook_dir }}/tasks/ansible_bash.vars"
+        dest: "{{ playbook_dir }}/tasks/prod-ansible_bash.vars"
 ...
