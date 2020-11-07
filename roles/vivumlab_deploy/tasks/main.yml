@@ -19,6 +19,7 @@
   copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
+  become: yes
 
 # Needs passlib
 - name: Write user to basic auth file

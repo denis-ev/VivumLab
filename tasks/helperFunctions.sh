@@ -74,7 +74,7 @@ function sshkey_path () {
 # Ansible -> Bash Variables
 
 function vlab_ip (){
-  if [[ VLAB_IP == '' ]]; then
+  if [ -z ${VLAB_IP} ]; then
     VLAB_IP='localhost'
     echo $VLAB_IP
   else
@@ -83,7 +83,7 @@ function vlab_ip (){
 }
 
 function vlab_port () {
-  if [[ VLAB_PORT == '' ]]; then
+  if [ -z ${VLAB_PORT} ]; then
     VLAB_PORT'22'
     echo $VLAB_PORT
   else
@@ -92,7 +92,7 @@ function vlab_port () {
 }
 
 function vlab_ssh_user () {
-  if [[ VLAB_SSH_USER == '' ]]; then
+  if [ -z ${VLAB_SSH_USER} ]; then
     VLAB_PORT='root'
     echo $VLAB_SSH_USER
   else
@@ -101,7 +101,7 @@ function vlab_ssh_user () {
 }
 
 function admin_email () {
-  if [[ ADMIN_EMAIL == '' ]]; then
+  if [ -z ${ADMIN_EMAIL} ]; then
     ADMIN_EMAIL='admin_email@vivumlab.com'
     echo $ADMIN_EMAIL
   else
@@ -110,7 +110,7 @@ function admin_email () {
 }
 
 function default_username () {
-  if [[ DEFAULT_USERNAME == '' ]]; then
+  if [ -z ${DEFAULT_USERNAME} ]; then
     DEFAULT_USERNAME='admin'
     echo $DEFAULT_USERNAME
   else
@@ -119,7 +119,7 @@ function default_username () {
 }
 
 function domain_check () {
-  if [[ DOMAIN == '' ]]; then
+  if [ -z ${DOMAIN} ]; then
     DOMAIN='localhost'
     echo $ARM
   else
@@ -128,7 +128,7 @@ function domain_check () {
 }
 
 function arm_check () {
-  if [[ ARM == '' ]]; then
+  if [ -z ${ARM} ]; then
     ARM='False'
     echo $ARM
   else
@@ -137,7 +137,7 @@ function arm_check () {
 }
 
 function pwless_sshkey () {
-  if [[ PASSWORDLESS_SSHKEY == '' ]]; then
+  if [ -z ${PASSWORDLESS_SSHKEY} ]; then
     PASSWORDLESS_SSHKEY='id_rsa'
     echo $PASSWORDLESS_SSHKEY
   else
