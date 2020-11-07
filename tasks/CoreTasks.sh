@@ -181,6 +181,7 @@ Task::ci(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo_local
   Task::build $(build_check) $(force_check) $(cache_check)
