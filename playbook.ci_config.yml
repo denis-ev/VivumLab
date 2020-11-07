@@ -38,5 +38,5 @@
     - name: Copy ansible_bash.vars file into place
       template:
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/ansible_bash.vars"
-        dest: "{{ playbook_dir }}/tasks/prod-ansible_bash.vars"
+        dest: "{{ playbook_dir }}/tasks/ansible_bash.vars"
 ...

@@ -98,7 +98,7 @@ Task::clone_config() {
   Task::decrypt
   cp $_config_dir/prod-config.yml $_config_dir/${clone_config_prefix}-config.yml
   cp $_config_dir/prod-vault.yml $_config_dir/${clone_config_prefix}-vault.yml
-  cp tasks/prod-ansible_bash.vars tasks/${clone_config_prefix}-ansible_bash.vars
+  cp tasks/ansible_bash.vars tasks/ansible_bash.vars
   "Task::encrypt user_config=${clone_config_prefix}"
 
 }

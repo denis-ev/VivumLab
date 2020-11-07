@@ -1,4 +1,3 @@
----
 #!/usr/bin/env bash
 
 # Restart the selected service

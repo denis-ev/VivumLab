@@ -1,6 +1,12 @@
-if ( cat vault.yml | grep -q "\$ANSIBLE_VAULT;" ); then
-  echo "[38;5;108mVault Encrypted. Safe to commit.[0m"
-else
-  echo "[38;5;208mVault not encrypted! Skipping committing to settings repository. Run 'vlab encrypt' to encrypt the vault then try again.[0m"
-  exit 1
-fi
+count=$(find *-vault.yml -maxdepth 1 -type f | wc -l)
+for i in *-vault.yml; do
+  files=$((files+1))
+  if ( cat $i | grep -q "\$ANSIBLE_VAULT;" ); then
+    if [ $files == $count ]; then
+      echo "[38;5;108mVault Encrypted. Safe to commit.[0m"
+    fi
+  else
+    echo "[38;5;208mVault $i not encrypted! Skipping committing to settings repository. Run 'vlab encrypt' to encrypt the vault then try again.[0m"
+    exit 1
+  fi
+done

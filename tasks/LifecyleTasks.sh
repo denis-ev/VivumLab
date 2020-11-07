@@ -1,4 +1,3 @@
----
 #!/usr/bin/env bash
 
 # Main deployment task - used to deploy VLAB
@@ -59,7 +58,7 @@ Task::stop(){
 
   highlight "Stopping all services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-" \
   -i inventory playbook.stop.yml || colorize light_red "error: stop"
   highlight "Services stopped"
 }
