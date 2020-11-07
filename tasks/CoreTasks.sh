@@ -197,13 +197,13 @@ Task::ci(){
       colorize light_red "Creating passwords directory"
       mkdir -p $_config_dir/passwords
   fi
-  if [[ ! -f $_config_dir/config.yml ]]; then
+  if [[ ! -f $_config_dir/$_user_config-config.yml ]]; then
       colorize light_red "Creating an empty config file"
-      echo "blank_on_purpose: True" > $_config_dir/config.yml
+      echo "blank_on_purpose: True" > $_config_dir/$_user_config-config.yml
   fi
-  if [[ ! -f $_config_dir/prod-vault.yml ]]; then
+  if [[ ! -f $_config_dir/$_user_config-vault.yml ]]; then
       colorize light_red "Creating an empty Vault"
-      echo "blank_on_purpose: True" > $_config_dir/prod-vault.yml
+      echo "blank_on_purpose: True" > $_config_dir/$_user_config-vault.yml
   fi
   if [[ ! -f tasks/ansible_bash.vars ]]; then
     colorize light_red "Creating ansible_bash.vars file"
@@ -215,16 +215,16 @@ Task::ci(){
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/prod-vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.ci_config.yml || colorize light_red "error: ci_config"
   highlight "End Creating or Updating ci config file"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/prod-vault.yml || colorize light_red "error: ci_config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/$_user_config-vault.yml || colorize light_red "error: ci_config: encrypt"
   highlight "End Encrypting Secrets in the Vault"
 
   highlight "Copying files"
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/prod-vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.ci.yml || colorize light_red "error: ci"
   highlight "End Copying files"
 }
