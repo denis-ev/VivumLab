@@ -1,4 +1,4 @@
-# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo125x38.png)
+# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo250x75.png)
 
 [![Build Status](https://travis-ci.com/VivumLab/VivumLab.svg?branch=master)](https://travis-ci.org/Vivumlab/VivumLab) [![GitHub issues](https://img.shields.io/github/issues/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/issues) [![GitHub forks](https://img.shields.io/github/forks/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/network) [![GitHub stars](https://img.shields.io/github/stars/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/stargazers) [![GitHub license](https://img.shields.io/github/license/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/blob/master/LICENSE)
 
