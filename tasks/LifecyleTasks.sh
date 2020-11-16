@@ -9,14 +9,13 @@ Task::deploy(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Deploying VivumLab"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.vivumlab.yml || colorize light_red "error: deploy"
 }
 
@@ -28,7 +27,6 @@ Task::restart(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -37,7 +35,7 @@ Task::restart(){
 
   highlight "Restarting all services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.restart.yml || colorize light_red "error: restart"
   highlight "Services restarted"
 }
@@ -50,7 +48,6 @@ Task::stop(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -59,7 +56,7 @@ Task::stop(){
 
   highlight "Stopping all services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.stop.yml || colorize light_red "error: stop"
   highlight "Services stopped"
 }

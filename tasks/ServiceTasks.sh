@@ -7,10 +7,9 @@ Task::restart_one(){
   : @param service! "Service Name"
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize light_red "error: restart_one"
   highlight "Restarted ${_service}"
 }
@@ -24,7 +23,6 @@ Task::stop_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -32,7 +30,7 @@ Task::stop_one(){
   Task::config
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml  || colorize light_red "error: stop_one"
   highlight "Stopped ${_service}"
 }
@@ -46,7 +44,6 @@ Task::remove_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -55,7 +52,7 @@ Task::remove_one(){
 
   highlight "Removing data for ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize light_red "error: remove_one"
   highlight "Removed ${_service}"
 }
@@ -69,7 +66,6 @@ Task::reset_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -78,14 +74,14 @@ Task::reset_one(){
 
   highlight "Resetting ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml || colorize light_red "error: reset_one: stop"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml  || colorize light_red "error: reset_one: remove"
   highlight "Redeploying ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml || colorize light_red "error: reset_one: deploy"
   highlight "Reset ${_service}"
 }

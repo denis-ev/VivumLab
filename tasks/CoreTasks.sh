@@ -115,28 +115,26 @@ Task::git_sync() {
 # Encrypt the vault
 Task::encrypt(){
   : @desc "Encrypts the vault"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   highlight "Encrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault encrypt settings/$_user_config-vault.yml  || colorize light_red "error: encrypt"
-  sudo chmod 640 settings/$_user_config-vault.yml
-  sudo chown $userID:$groupID settings/$_user_config-vault.yml
+  Task::run_docker ansible-vault encrypt settings/vault.yml  || colorize light_red "error: encrypt"
+  sudo chmod 640 settings/vault.yml
+  sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault encrypted!"
 }
 
 # Decrypts the vault
 Task::decrypt(){
   : @desc "Decrypts the vault"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   highlight "Decrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault decrypt settings/$_user_config-vault.yml || colorize light_red "error: decrypt"
-  sudo chmod 640 settings/$_user_config-vault.yml
-  sudo chown $userID:$groupID settings/$_user_config-vault.yml
+  Task::run_docker ansible-vault decrypt settings/vault.yml || colorize light_red "error: decrypt"
+  sudo chmod 640 settings/vault.yml
+  sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault decrypted!"
 }
 
@@ -148,14 +146,13 @@ Task::uninstall(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory -t deploy playbook.remove.yml || colorize light_red "error: uninstall"
   highlight "Uninstall Complete"
 }
@@ -165,11 +162,10 @@ Task::restore() {
   : @desc "Restore a server from backups. Assuming backups were running"
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
-  -i inventory playbook.restore.yml  || colorize light_red "error: restore"
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory restore.yml  || colorize light_red "error: restore"
 }
 
 # CI - Updates the config file, and ensures the vault is encrypted.
@@ -202,9 +198,9 @@ Task::ci(){
       colorize light_red "Creating an empty Vault"
       echo "blank_on_purpose: True" > $_config_dir/vault.yml
   fi
-  if [[ ! -f tasks/prod-ansible_bash.vars ]]; then
+  if [[ ! -f tasks/ansible_bash.vars ]]; then
     colorize light_red "Creating ansible_bash.vars file"
-    echo "PASSWORDLESS_SSHKEY=''" > tasks/prod-ansible_bash.vars
+    echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
   fi
 
   highlight "Creating or Updating ci config file"
