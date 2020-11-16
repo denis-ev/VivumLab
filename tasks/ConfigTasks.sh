@@ -56,6 +56,8 @@ Task::config_reset() {
 Task::set(){
   : @desc "Set a configuration variable"
   : @param rest% "Configuration Key to set"
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::decrypt
 
@@ -65,10 +67,10 @@ Task::set(){
   value="${_rest[$key]}"
 
   # Try to figure out where key is defined
-  FILE=settings/config.yml
+  FILE=$_config_dir/$_user_config-config.yml
   SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
   if [ -z ${SETTING_VALUE} ]; then
-      FILE=settings/vault.yml
+      FILE=$_config_dir/$_user_config-vault.yml
       SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
       if [ -z ${SETTING_VALUE} ]; then
           echo "Key does not exist in config.yml nor vault.yml."

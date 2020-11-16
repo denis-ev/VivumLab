@@ -115,26 +115,30 @@ Task::git_sync() {
 # Encrypt the vault
 Task::encrypt(){
   : @desc "Encrypts the vault"
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   highlight "Encrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault encrypt settings/vault.yml  || colorize light_red "error: encrypt"
-  sudo chmod 640 settings/vault.yml
-  sudo chown $userID:$groupID settings/vault.yml
+  Task::run_docker ansible-vault encrypt $_config_dir/$_user_config-vault.yml  || colorize light_red "error: encrypt"
+  sudo chmod 640 $_config_dir/$_user_config-vault.yml
+  sudo chown $userID:$groupID $_config_dir/$_user_config-vault.yml
   highlight "Vault encrypted!"
 }
 
 # Decrypts the vault
 Task::decrypt(){
   : @desc "Decrypts the vault"
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   highlight "Decrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault decrypt settings/vault.yml || colorize light_red "error: decrypt"
-  sudo chmod 640 settings/vault.yml
-  sudo chown $userID:$groupID settings/vault.yml
+  Task::run_docker ansible-vault decrypt $_config_dir/$_user_config-vault.yml || colorize light_red "error: decrypt"
+  sudo chmod 640 $_config_dir/$_user_config-vault.yml
+  sudo chown $userID:$groupID $_config_dir/$_user_config-vault.yml
   highlight "Vault decrypted!"
 }
 
@@ -175,6 +179,7 @@ Task::ci(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo_local
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -190,13 +195,13 @@ Task::ci(){
       colorize light_red "Creating passwords directory"
       mkdir -p $_config_dir/passwords
   fi
-  if [[ ! -f $_config_dir/config.yml ]]; then
+  if [[ ! -f $_config_dir/$_user_config-config.yml ]]; then
       colorize light_red "Creating an empty config file"
-      echo "blank_on_purpose: True" > $_config_dir/config.yml
+      echo "blank_on_purpose: True" > $_config_dir/$_user_config-config.yml
   fi
-  if [[ ! -f $_config_dir/vault.yml ]]; then
+  if [[ ! -f $_config_dir/$_user_config-vault.yml ]]; then
       colorize light_red "Creating an empty Vault"
-      echo "blank_on_purpose: True" > $_config_dir/vault.yml
+      echo "blank_on_purpose: True" > $_config_dir/$_user_config-vault.yml
   fi
   if [[ ! -f tasks/ansible_bash.vars ]]; then
     colorize light_red "Creating ansible_bash.vars file"
@@ -208,16 +213,16 @@ Task::ci(){
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.ci_config.yml || colorize light_red "error: ci_config"
   highlight "End Creating or Updating ci config file"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize light_red "error: ci_config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/$_user_config-vault.yml || colorize light_red "error: ci_config: encrypt"
   highlight "End Encrypting Secrets in the Vault"
 
   highlight "Copying files"
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.ci.yml || colorize light_red "error: ci"
   highlight "End Copying files"
 }

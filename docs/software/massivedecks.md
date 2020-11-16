@@ -49,7 +49,7 @@ Create an account with your desired username; as this is the first user, massive
 
 #### SMTP/ MAIL
 
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+1. run **`vlab decrypt`** to decrypt the `prod-vault.yml` file
 
 2. make some changes
 

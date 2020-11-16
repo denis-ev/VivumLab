@@ -46,7 +46,7 @@ Peertube generates it's own root password on first startup. VivumLab captures th
 
 #### SMTP/ MAIL
 
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+1. run **`vlab decrypt`** to decrypt the `prod-vault.yml` file
 
 2. make some changes
 

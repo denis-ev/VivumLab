@@ -55,7 +55,7 @@ run: **`vlab update_one service=gitea`**
 
 #### SMTP/ MAIL
 
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+1. run **`vlab decrypt`** to decrypt the `prod-vault.yml` file
 
 2. make some changes
 

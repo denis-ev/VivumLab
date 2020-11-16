@@ -61,7 +61,7 @@ docker exec -it funkwhale_app_1 python /app/api/manage.py import_files $LIBRARY_
 
 #### SMTP/ MAIL
 
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+1. run **`vlab decrypt`** to decrypt the `prod-vault.yml` file
 
 2. make some changes
 

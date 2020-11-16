@@ -40,7 +40,7 @@ Additional config can be set via environment variables within the docker-compose
 
 #### SMTP/ MAIL
 
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+1. run **`vlab decrypt`** to decrypt the `prod-vault.yml` file
 
 2. make some changes
 

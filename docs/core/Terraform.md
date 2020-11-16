@@ -12,8 +12,8 @@ Obviously whichever provider you choose will have certain requirements and their
 
 1. Create a Digital Ocean account and login
 2. click `API` on the left menu, and generate a new access token; name it `Terraform` and save it
-3. run `vlab decrypt`, to ensure your `settings/vault.yml` is readable
-4. Copy the token into your `settings/vault.yml` file under `do_access_token:`. E.g:
+3. run `vlab decrypt`, to ensure your `settings/prod-vault.yml` is readable
+4. Copy the token into your `settings/prod-vault.yml` file under `do_access_token:`. E.g:
 ```
 do_access_token:<your_token_here>
 ```

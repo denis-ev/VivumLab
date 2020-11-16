@@ -30,24 +30,27 @@ Task::create_vault_pass() {
 
 # Ensures there is a place to put all the required settings..
 Task::check_for_settings(){
-    mkdir -p settings/passwords
+    : @param config_dir="settings"
+    : @param user_config="prod" "Prefix of the user-cloned config files"
+
+    mkdir -p $_config_dir/passwords
     [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
-    if [[ ! -d settings ]]; then
+    if [[ ! -d $_config_dir ]]; then
         colorize light_red "Creating settings directory"
-        mkdir -p settings
+        mkdir -p $_config_dir
     fi
-    if  [[ ! -d settings/passwords ]]; then
+    if  [[ ! -d $_config_dir/passwords ]]; then
         colorize light_red "Creating passwords directory"
-        mkdir -p settings/passwords
+        mkdir -p $_config_dir/passwords
     fi
-    if [[ ! -f settings/config.yml ]]; then
+    if [[ ! -f $_config_dir/$_user_config-config.yml ]]; then
         colorize light_red "Creating an empty config file"
-        echo "blank_on_purpose: True" > settings/config.yml
+        echo "blank_on_purpose: True" > $_config_dir/$_user_config-config.yml
     fi
-    if [[ ! -f settings/vault.yml ]]; then
+    if [[ ! -f $_config_dir/$_user_config-vault.yml ]]; then
         colorize light_red "Creating an empty Vault"
-        echo "blank_on_purpose: True" > settings/vault.yml
+        echo "blank_on_purpose: True" > $_config_dir/$_user_config-vault.yml
     fi
     if [[ ! -f tasks/ansible_bash.vars ]]; then
       colorize light_red "Creating ansible_bash.vars file"
@@ -64,9 +67,12 @@ Task::check_for_git(){
 }
 
 Task::check_ssh_with_keys(){
-  IP=$(Task::run_docker yq r "settings/config.yml" "vlab_ip" | tr -d '[:space:]')
-  USERNAME=$(Task::run_docker yq r "settings/config.yml" "vlab_ssh_user" | tr -d '[:space:]')
-  Task::run_docker ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 "$USERNAME@$IP" exit 2>&1 && echo $?
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
+
+  IP=$(Task::run_docker yq r "$_config_dir/$_user_config-config.yml" "vlab_ip" | tr -d '[:space:]')
+  USERNAME=$(Task::run_docker yq r "$_config_dir/$_user_config-config.yml" "vlab_ssh_user" | tr -d '[:space:]')
+  Task::run_docker ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 -i /root/.ssh/$(pwless_sshkey) "$USERNAME@$IP" exit 2>&1
   if ! [ $? -eq 0 ]; then
     colorize red "VivumLab is unable to ssh to your server using the information in your config.yml: $USERNAME at $IP, and your $HOME/.ssh/id_rsa keypair to SSH into your server. Because the VivumLab docker container cannot ssh to your server with the specified key, VivumLab cannot deploy"
   fi

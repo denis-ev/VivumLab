@@ -86,6 +86,22 @@ Task::setup_sshkey() {
   Task::copy_sshkey
 }
 
+Task::clone_config() {
+  : @desc "Clones the VivumLab config in its current state"
+  : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
+
+  read -p "What would you like to prefix the new files with? " clone_config_prefix
+  printf "cloning configs"
+
+  Task::decrypt
+  cp $_config_dir/prod-config.yml $_config_dir/${clone_config_prefix}-config.yml
+  cp $_config_dir/prod-vault.yml $_config_dir/${clone_config_prefix}-vault.yml
+  cp tasks/ansible_bash.vars tasks/ansible_bash.vars
+  "Task::encrypt user_config=${clone_config_prefix}"
+
+}
+
 # Provides the user with a terminal rendered 'contact us' doc
 Task::find_help() {
   : @desc "Shows the user where to find help/ contact the VivumLab community"
