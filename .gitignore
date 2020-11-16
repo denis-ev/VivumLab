@@ -16,7 +16,7 @@ bootstrap_install/server_credentials
 
 # User Specific
 settings/
-tasks/*ansible_bash.vars
+tasks/ansible_bash.vars
 package_template/tmp_service
 package_template/tmp*.yml
 
