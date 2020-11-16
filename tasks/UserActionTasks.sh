@@ -30,8 +30,9 @@ Task::reboot(){
   : @desc "Reboots the VivumLab deploy server"
   : @param t "Time (minutes) until server reboots"
 
-  ssh -t -i "$HOME/.ssh/$(pwless_sshkey)" "$(vlab_ssh_user)@$(vlab_ip)" -p "$(vlab_port)" \
-  "sudo shutdown -r +"$(countdown)|| colorize light_red "error: reboot"
+  ssh -t -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey)" \
+  "$(vlab_ssh_user)@$(vlab_ip)" "sudo shutdown -r +"$(countdown) \
+  || colorize light_red "error: reboot"
 }
 
 # Shuts down the server. Has the option for a timer (in minutes)
@@ -39,8 +40,9 @@ Task::shutdown(){
   : @desc "Shuts down the VivumLab deploy server"
   : @param t "Sets a countdown (minutes) until server shuts down"
 
-  ssh -t -i "$HOME/.ssh/$(pwless_sshkey)" "$(vlab_ssh_user)@$(vlab_ip)" -p "$(vlab_port)" \
-  "sudo shutdown -h +"$(countdown) || colorize light_red "error: shutdown"
+  ssh -t -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey)" \
+  "$(vlab_ssh_user)@$(vlab_ip)" "sudo shutdown+"$(countdown) \
+  || colorize light_red "error: shutdown"
 }
 
 # Allows the user to make edits to a service without changing the base docker-compose file
@@ -76,8 +78,10 @@ Task::copy_sshkey() {
   : @desc "Allows user to copy an existing ssh key"
 
   echo "Copying keys over to the machine, located at $(vlab_ip)"
-  ssh-copy-id -i "$HOME/.ssh/$(pwless_sshkey).pub" "$(vlab_ssh_user)@$(vlab_ip)" -p "$(vlab_port)" || colorize light_red "error: create_sshkey: copying keys"
+  ssh-copy-id -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey).pub" \
+  "$(vlab_ssh_user)@$(vlab_ip)" || colorize light_red "error: create_sshkey: copying keys"
 }
+
 
 Task::setup_sshkey() {
   : @desc "Creates and copies a non-existing SSH key"
