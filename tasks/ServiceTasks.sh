@@ -7,7 +7,6 @@ Task::restart_one(){
   : @param service! "Service Name"
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
@@ -24,7 +23,6 @@ Task::stop_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -46,7 +44,6 @@ Task::remove_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -69,7 +66,6 @@ Task::reset_one(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
