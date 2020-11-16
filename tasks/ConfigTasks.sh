@@ -19,10 +19,10 @@ Task::config(){
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize light_red "error: config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/$_user_config-vault.yml || colorize light_red "error: config: encrypt"
 }
 
 #Show the Configuration settings for a given service

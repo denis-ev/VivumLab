@@ -4,6 +4,7 @@
 Task::update() {
   : @desc "Updates all services on the VivumLab Server"
   : @param config_dir="settings"
+  : @param user_config="prod" "Prefix of the user-cloned config files"
   : @param force true "Forces a rebuild/repull of the docker image"
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
@@ -16,10 +17,10 @@ Task::update() {
 
   highlight "Updating VivumLab Services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory -t deploy playbook.vivumlab.yml || colorize light_red "error: update"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.restart.yml || colorize light_red "error: update: restart"
   highlight "Services Updated"
 }
@@ -41,10 +42,10 @@ Task::update_one(){
   Task::config
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml || colorize light_red "error: update_one"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize light_red "error: update_one: restart"
   highlight "$_service Updated"
 }

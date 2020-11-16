@@ -156,7 +156,7 @@ Task::uninstall(){
 
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory -t deploy playbook.remove.yml || colorize light_red "error: uninstall"
   highlight "Uninstall Complete"
 }
@@ -168,7 +168,7 @@ Task::restore() {
   : @param debug true "Debugs ansible-playbook commands"
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory restore.yml  || colorize light_red "error: restore"
 }
 
@@ -239,7 +239,7 @@ Task::run_docker() {
 # Checks the current version
 Task::check_version() {
   VERSION_CURRENT=$(cat VERSION)
-  VERSION_LATEST=$(curl -s -m 2 https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION)
+  VERSION_LATEST=$(curl --retry 5 -s -m 2 https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION)
 
   colorize yellow "You currently have version: $VERSION_CURRENT"
   colorize green "The newest Version available is: $VERSION_LATEST"

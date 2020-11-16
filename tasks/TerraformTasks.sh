@@ -18,7 +18,7 @@ Task::terraform(){
   highlight "Deploying cloud server"
   # Generate Terraform files
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
   -i inventory playbook.terraform.yml || colorize light_red "error: terraform: deploy"
 
   # Run terraform

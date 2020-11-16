@@ -109,7 +109,7 @@ Task::check_ssh_keys() {
     case $ssh_confirm in
         [Yy]|[Yy][Ee][Ss])
           echo "OK, refreshing VivumLab. Run 'vlab config' when you are ready"
-          sed -i "/^passwordless_sshkey:/c\ " $_config_dir/config.yml
+          sed -i "/^passwordless_sshkey:/c\ " $_config_dir/$_user_config-config.yml
           sed -i "/^PASSWORDLESS_SSHKEY=/c\PASSWORDLESS_SSHKEY=" tasks/ansible_bash.vars
           exit
         ;;
