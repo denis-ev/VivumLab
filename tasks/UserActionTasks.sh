@@ -49,10 +49,9 @@ Task::service_edit() {
   : @param service "Service Name"
   : @param config_dir="settings"
   : @param debug true "Debugs ansible-playbook commands"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.service-edit.yml || colorize light_red "error: service_edit"
 }
 
@@ -85,22 +84,6 @@ Task::setup_sshkey() {
 
   Task::create_sshkey
   Task::copy_sshkey
-}
-
-Task::clone_config() {
-  : @desc "Clones the VivumLab config in its current state"
-  : @param config_dir="settings"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
-
-  read -p "What would you like to prefix the new files with? " clone_config_prefix
-  printf "cloning configs"
-
-  Task::decrypt
-  cp $_config_dir/prod-config.yml $_config_dir/${clone_config_prefix}-config.yml
-  cp $_config_dir/prod-vault.yml $_config_dir/${clone_config_prefix}-vault.yml
-  cp tasks/prod-ansible_bash.vars tasks/${clone_config_prefix}-ansible_bash.vars
-  "Task::encrypt user_config=${clone_config_prefix}"
-
 }
 
 # Provides the user with a terminal rendered 'contact us' doc

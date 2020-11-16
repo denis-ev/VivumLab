@@ -8,7 +8,6 @@ Task::terraform(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
-  : @param user_config="prod" "Prefix of the user-cloned config files"
 
   Task::logo
   Task::build $(build_check) $(force_check) $(cache_check)
@@ -19,7 +18,7 @@ Task::terraform(){
   highlight "Deploying cloud server"
   # Generate Terraform files
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
-  --extra-vars="@$_config_dir/$_user_config-config.yml" --extra-vars="@$_config_dir/$_user_config-vault.yml" \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.terraform.yml || colorize light_red "error: terraform: deploy"
 
   # Run terraform
