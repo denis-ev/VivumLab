@@ -82,6 +82,7 @@ Task::copy_sshkey() {
   "$(vlab_ssh_user)@$(vlab_ip)" || colorize light_red "error: create_sshkey: copying keys"
 }
 
+
 Task::setup_sshkey() {
   : @desc "Creates and copies a non-existing SSH key"
 
