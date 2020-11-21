@@ -18,6 +18,7 @@ Task::config(){
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
+  highlight "run docker task"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.config.yml || colorize light_red "error: config"

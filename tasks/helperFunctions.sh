@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ -f tasks/ansible_bash.vars ]]; then
-  source tasks/ansible_bash.vars
-fi
-
 # Helper Functions
 
 function highlight() {
@@ -73,7 +69,14 @@ function sshkey_path () {
 
 # Ansible -> Bash Variables
 
+function varfile_check (){
+  if [[ -f tasks/ansible_bash.vars ]]; then
+    source tasks/ansible_bash.vars
+  fi
+}
+
 function vlab_ip (){
+  varfile_check
   if [ -z ${VLAB_IP} ]; then
     VLAB_IP='localhost'
     echo $VLAB_IP
@@ -83,6 +86,7 @@ function vlab_ip (){
 }
 
 function vlab_port () {
+  varfile_check
   if [ -z ${VLAB_PORT} ]; then
     VLAB_PORT'22'
     echo $VLAB_PORT
@@ -92,6 +96,7 @@ function vlab_port () {
 }
 
 function vlab_ssh_user () {
+  varfile_check
   if [ -z ${VLAB_SSH_USER} ]; then
     VLAB_PORT='root'
     echo $VLAB_SSH_USER
@@ -101,6 +106,7 @@ function vlab_ssh_user () {
 }
 
 function admin_email () {
+  varfile_check
   if [ -z ${ADMIN_EMAIL} ]; then
     ADMIN_EMAIL='admin_email@vivumlab.com'
     echo $ADMIN_EMAIL
@@ -110,6 +116,7 @@ function admin_email () {
 }
 
 function default_username () {
+  varfile_check
   if [ -z ${DEFAULT_USERNAME} ]; then
     DEFAULT_USERNAME='admin'
     echo $DEFAULT_USERNAME
@@ -119,6 +126,7 @@ function default_username () {
 }
 
 function domain_check () {
+  varfile_check
   if [ -z ${DOMAIN} ]; then
     DOMAIN='localhost'
     echo $ARM
@@ -128,6 +136,7 @@ function domain_check () {
 }
 
 function arm_check () {
+  varfile_check
   if [ -z ${ARM} ]; then
     ARM='False'
     echo $ARM
@@ -137,6 +146,7 @@ function arm_check () {
 }
 
 function pwless_sshkey () {
+  varfile_check
   if [ -z ${PASSWORDLESS_SSHKEY} ]; then
     PASSWORDLESS_SSHKEY='id_rsa'
     echo $PASSWORDLESS_SSHKEY
