@@ -23,6 +23,8 @@
       - wget
       - whois
       - zsh
+      - python-setuptools
+      - python-passlib
       - python3-pip
   tags:
     - dependencies
@@ -33,10 +35,9 @@
     name: "{{ item }}"
     executable: pip3
   loop:
-    - passlib
+    - docker
     - virtualenv
     - pyopenssl
-    - setuptools
     - wheel
   become: yes
 
