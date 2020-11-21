@@ -23,8 +23,8 @@
       - wget
       - whois
       - zsh
-      - python-setuptools
-      - python-passlib
+      - python3-setuptools
+      - python3-passlib
       - python3-pip
   tags:
     - dependencies
