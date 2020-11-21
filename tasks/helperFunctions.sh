@@ -72,6 +72,9 @@ function sshkey_path () {
 function varfile_check (){
   if [[ -f tasks/ansible_bash.vars ]]; then
     source tasks/ansible_bash.vars
+  else
+    echo "Run 'vlab config', first"
+    exit
   fi
 }
 
