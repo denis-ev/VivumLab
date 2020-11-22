@@ -5,8 +5,7 @@ version: '3'
 # DO NOT Remove
 networks:
   traefik_network:
-    external:
-      name: vivumlab_traefik
+    name: vivumlab_traefik
 
 services:
   sui:
@@ -15,12 +14,12 @@ services:
     networks:
       - traefik_network
     volumes:
-      - "{{ volumes_root }}/sui/configs:/sui"
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "{{ volumes_root }}/sui/config:/sui"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       - "traefik.http.services.sui.loadbalancer.server.scheme=http"
       - "traefik.http.services.sui.loadbalancer.server.port=6999"
 {% include './labels.j2' %}
-      - "sui.enabled=true"
-      - "sui.name=dashboard"
+      - "sui.enabled=false"
+      - "sui.name=Vivum Dash"
       - "sui.icon=home"
