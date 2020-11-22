@@ -30,7 +30,7 @@
     - dependencies
   become: yes
 
-- name: Install Passlib, Virtualenv, OpenSSL, SetupTools, Wheel
+- name: Install Docker-py, Virtualenv, pyOpenSSL, Wheel
   pip:
     name: "{{ item }}"
     executable: pip3
