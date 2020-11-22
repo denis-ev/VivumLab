@@ -5,7 +5,7 @@
     state: directory
   with_items:
     - "sui"
-    - "sui/configs"
+    - "sui/config"
 
 - name: Copy sui docker-compose.yml file into place.
   template:
