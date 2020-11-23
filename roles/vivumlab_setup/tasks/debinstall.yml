@@ -23,6 +23,8 @@
       - wget
       - whois
       - zsh
+      - python3-virtualenv
+      - python3-openssl
       - python3-setuptools
       - python3-passlib
       - python3-pip
@@ -30,14 +32,12 @@
     - dependencies
   become: yes
 
-- name: Install Docker-py, Virtualenv, pyOpenSSL, Wheel
+- name: Install Docker-py, and Wheel
   pip:
     name: "{{ item }}"
     executable: pip3
   loop:
     - docker
-    - virtualenv
-    - pyopenssl
     - wheel
   become: yes
 
