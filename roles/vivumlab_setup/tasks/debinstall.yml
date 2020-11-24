@@ -23,10 +23,14 @@
       - wget
       - whois
       - zsh
-      - python3-virtualenv
-      - python3-openssl
-      - python3-setuptools
-      - python3-passlib
+      - python-virtualenv
+      - python-openssl
+      - python-setuptools
+      - python-passlib
+      # - python3-virtualenv
+      # - python3-openssl
+      # - python3-setuptools
+      # - python3-passlib
       - python3-pip
   tags:
     - dependencies
