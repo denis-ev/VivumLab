@@ -9,6 +9,7 @@ networks:
 
 services:
   sui:
+    container_name: SUI
     image: willfantom/sui:{{ sui.version }}
     restart: unless-stopped
     networks:
