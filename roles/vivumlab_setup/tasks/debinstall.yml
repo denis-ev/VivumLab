@@ -31,6 +31,7 @@
       # - python3-openssl
       # - python3-setuptools
       # - python3-passlib
+      - python-pip
       - python3-pip
   tags:
     - dependencies
