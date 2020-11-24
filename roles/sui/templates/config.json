@@ -3,7 +3,7 @@
   "debug": false,
 
   "appproviders": [
-    { "name": "local-docker", "type": "docker" }
+    { "name": "VivumLab", "type": "traefik" }
   ],
 
   "engines": {
