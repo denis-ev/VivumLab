@@ -38,22 +38,27 @@ entryPoints:
             sans:
               - "*.{{ domain }}"
 {% endif %}
-
+{% if healthchecks.enable %}
   smtp: # for healthchecks incoming emails
     address: :25
+{% endif %}
+{% if bastion.enable %}
   ssh:
     address: ":2222"
+{% endif %}
   #ping@internal
   ping:
     address: ":8081"
   #metrics@internal
   metrics:
     address: ":8082"
-
+    
+{% if healthchecks.enable %}
 #Health
 ping:
   entryPoint: "ping"
   manualRouting: false
+{% endif %}
 #Metrics
 metrics:
   prometheus:
