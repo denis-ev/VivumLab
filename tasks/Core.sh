@@ -70,8 +70,6 @@ Task::build() {
     fi
   fi
 
-
-
   highlight "Getting VivumLab Docker Image"
   if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
     echo "Image number: ${vlab_dockerimagid}"
@@ -84,6 +82,24 @@ Task::build() {
       sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
     fi
   fi
+}
+
+# Main deployment task - used to deploy VLAB
+Task::deploy(){
+  : @desc "Deploys VivumLab, configure VivumLab first"
+  : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
+
+  Task::logo
+  Task::build $(build_check) $(force_check) $(cache_check)
+
+  highlight "Deploying VivumLab"
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.vivumlab.yml || colorize light_red "error: deploy"
 }
 
 # Manually forces a settings Sync via Git
@@ -109,7 +125,6 @@ Task::git_sync() {
     colorize yellow "Warning! You do not have a git repo set up for your settings. Make sure to back them up using some other method. https://vivumlab.com/setup/installation/#syncing-settings-via-git "
   fi
   cd $return_dir
-
 }
 
 # Encrypt the vault
