@@ -70,14 +70,14 @@ Task::create_sshkey() {
     KEY_PASS=""
   #fi
 
-  colorize green "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
+  colorize light_green "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
   ssh-keygen -q -N "$KEY_PASS" -C "VivumLab@$(domain_check)" -f "$HOME/.ssh/$(pwless_sshkey)"|| colorize light_red "error: create_sshkey"
 }
 
 Task::copy_sshkey() {
   : @desc "Allows user to copy an existing ssh key"
 
-  colorize light_yellow "Copying keys over to the machine, located at $(vlab_ip)"
+  colorize light_green "Copying keys over to the machine, located at $(vlab_ip)"
   ssh-copy-id -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey).pub" \
   "$(vlab_ssh_user)@$(vlab_ip)" || colorize light_red "error: create_sshkey: copying keys"
 }
