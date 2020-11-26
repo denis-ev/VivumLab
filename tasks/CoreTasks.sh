@@ -119,7 +119,7 @@ Task::encrypt(){
   highlight "Encrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault encrypt settings/vault.yml  || colorize light_red "error: encrypt"
+  Task::run_docker ansible-vault encrypt settings/vault.yml  || colorize red "error: encrypt"
   sudo chmod 640 settings/vault.yml
   sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault encrypted!"
@@ -132,7 +132,7 @@ Task::decrypt(){
   highlight "Decrypting Vault"
     local userID=$(id -u)
     local groupID=$(id -g)
-  Task::run_docker ansible-vault decrypt settings/vault.yml || colorize light_red "error: decrypt"
+  Task::run_docker ansible-vault decrypt settings/vault.yml || colorize red "error: decrypt"
   sudo chmod 640 settings/vault.yml
   sudo chown $userID:$groupID settings/vault.yml
   highlight "Vault decrypted!"
@@ -153,7 +153,7 @@ Task::uninstall(){
   highlight "Uninstall VivumLab Completely"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory -t deploy playbook.remove.yml || colorize light_red "error: uninstall"
+  -i inventory -t deploy playbook.remove.yml || colorize red "error: uninstall"
   highlight "Uninstall Complete"
 }
 
@@ -165,7 +165,7 @@ Task::restore() {
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory restore.yml  || colorize light_red "error: restore"
+  -i inventory restore.yml  || colorize red "error: restore"
 }
 
 # CI - Updates the config file, and ensures the vault is encrypted.
@@ -209,16 +209,16 @@ Task::ci(){
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci_config.yml || colorize light_red "error: ci_config"
+  -i inventory playbook.ci_config.yml || colorize red "error: ci_config"
   highlight "End Creating or Updating ci config file"
   highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize light_red "error: ci_config: encrypt"
+  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize red "error: ci_config: encrypt"
   highlight "End Encrypting Secrets in the Vault"
 
   highlight "Copying files"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci.yml || colorize light_red "error: ci"
+  -i inventory playbook.ci.yml || colorize red "error: ci"
   highlight "End Copying files"
 }
 
