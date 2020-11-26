@@ -62,7 +62,7 @@ Task::create_sshkey() {
 
   Task::logo_local
 
-  #echo "REMINDER: Having a passphrase is an optional extra layer of security for your SSH keys."
+  #colorize light_yellow "REMINDER: Having a passphrase is an optional extra layer of security for your SSH keys."
   #read -sp "If you would like a passphrase for the SSH keys, please enter one now (press return for no passphrase): " KEY_PASS
   #echo ""
 
@@ -70,14 +70,14 @@ Task::create_sshkey() {
     KEY_PASS=""
   #fi
 
-  echo "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
+  colorize green "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
   ssh-keygen -q -N "$KEY_PASS" -C "VivumLab@$(domain_check)" -f "$HOME/.ssh/$(pwless_sshkey)"|| colorize light_red "error: create_sshkey"
 }
 
 Task::copy_sshkey() {
   : @desc "Allows user to copy an existing ssh key"
 
-  echo "Copying keys over to the machine, located at $(vlab_ip)"
+  colorize light_yellow "Copying keys over to the machine, located at $(vlab_ip)"
   ssh-copy-id -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey).pub" \
   "$(vlab_ssh_user)@$(vlab_ip)" || colorize light_red "error: create_sshkey: copying keys"
 }
