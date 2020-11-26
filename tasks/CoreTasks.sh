@@ -74,8 +74,8 @@ Task::build() {
 
   highlight "Getting VivumLab Docker Image"
   if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
-    echo "Image number: ${vlab_dockerimagid}"
-    echo "is the latest vlab image"
+    colorize light_yellow "Image number: ${vlab_dockerimagid}"
+    colorize light_yellow "is the latest vlab image"
     colorize light_blue "Skipping vlab image retrieval"
   else
     if [[ ${_build-true} == true ]]; then
