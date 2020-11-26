@@ -12,6 +12,7 @@ Task::sanity_check_local(){
   Task::check_for_hostdockerdaemon
 
   colorize green "Core sanity checks passed"
+  echo ""
 }
 
 Task::sanity_check_remote(){
