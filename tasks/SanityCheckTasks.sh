@@ -119,7 +119,7 @@ Task::check_ssh_keys() {
         ;;
     esac
   else
-     echo "Key: $(pwless_sshkey)"
+    colorize light_yellow "Key: $(pwless_sshkey)"
   fi
 }
 
