@@ -118,7 +118,7 @@ Task::check_ssh_keys() {
         ;;
     esac
   else
-     echo "Using $(pwless_sshkey) and $(pwless_sshkey).pub keys"
+     echo "Key: $(pwless_sshkey)"
   fi
 }
 
