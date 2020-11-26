@@ -1,6 +1,50 @@
 #!/usr/bin/env bash
 
-# Restart the selected service
+### ALL SERVICES ###
+# Restart
+Task::restart(){
+  : @desc "Restart all enabled services"
+  : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
+
+  Task::logo
+  Task::build $(build_check) $(force_check) $(cache_check)
+  Task::git_sync
+  Task::config
+
+  highlight "Restarting all services"
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.restart.yml || colorize light_red "error: restart"
+  highlight "Services restarted"
+}
+
+# Stop
+Task::stop(){
+  : @desc "Stops all enabled services"
+  : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
+
+  Task::logo
+  Task::build $(build_check) $(force_check) $(cache_check)
+  Task::git_sync
+  Task::config
+
+  highlight "Stopping all services"
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.stop.yml || colorize light_red "error: stop"
+  highlight "Services stopped"
+}
+
+### SPECIFIC SERVICE ###
+# Restart
 Task::restart_one(){
   : @desc "Restarts the specified service"
   : @param service! "Service Name"
@@ -13,7 +57,7 @@ Task::restart_one(){
   highlight "Restarted ${_service}"
 }
 
-# Stop the selected service
+# Stop
 Task::stop_one(){
   : @desc "Stops the specified service"
   : @param service! "Service Name"
@@ -34,7 +78,7 @@ Task::stop_one(){
   highlight "Stopped ${_service}"
 }
 
-# Removes One Service
+# Remove
 Task::remove_one(){
   : @desc "Removes the specified service from the VivumLab server"
   : @param service! "Service Name"
