@@ -33,7 +33,7 @@ Task::dev_setup(){
     ;;
   *)
     colorize light_yellow "If you change your mind, run this command again"
-    colourize light_red "Please Note: if you don't, any changes you try to push will fail"
+    colouize light_red "Please Note: if you don't, any changes you try to push will fail"
     ;;
   esac
 }
