@@ -45,7 +45,7 @@ Task::config_reset() {
   Task::build $(build_check) $(force_check) $(cache_check)
 
   highlight "Reset Local Settings"
-  echo "Backing up your current settings, you may need them \n"
+  colorize light_yellow "Backing up your current settings, you may need them \n"
   mv settings settings.bak
   mkdir settings
   Task::config
@@ -71,16 +71,16 @@ Task::set(){
       FILE=settings/vault.yml
       SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
       if [ -z ${SETTING_VALUE} ]; then
-          echo "Key does not exist in config.yml nor vault.yml."
+          colorize light_red "Key does not exist in config.yml nor vault.yml."
           # Re-encrypt vault
           Task::encrypt
           exit 1
       fi
   fi
 
-  colorize yellow "Found value in file: $FILE"
+  colorize light_yellow "Found value in file: $FILE"
 
-  colorize red "Old setting value: " ${SETTING_VALUE}
+  colorize light_red "Old setting value: " ${SETTING_VALUE}
   # Setting the new value
   Task::run_docker yq w -i "$FILE" "$key" "$value"
   NEW_SETTING_VALUE=$(Task::run_docker yq r "$FILE" "$key" "$value")
