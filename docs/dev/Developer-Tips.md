@@ -13,7 +13,7 @@
 `invalid` - this should only be used by the Core team
 `needs testing` - testing is required
 `priority` - fix ASAP!! all hands on deck. Confused on how to contribute? look for this label
-`question` - Use this if further information is requuired
+`question` - use this if further information is requuired
 `ready for review` - tells the Core team, that its ready for review
 `ready to merge` - tells the Core team, that its ready to be merged
 `security` - anything that helps make VivumLab more secure
