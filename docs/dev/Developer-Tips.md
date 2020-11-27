@@ -4,7 +4,7 @@
 `bug` - is for bugs. :)
 `chore` - describes necessary, though possibly annoying changes
 `cleanup` - cleaning or consolidating code
-`documentation` - improvements or additions to documentation
+`documentation` - improvements or changes to documentation
 `duplicate` - labels something as it previously exists. The core team will review these, regularly
 `enhancement` - new feature or request; not necessarily relating to a service
 `future release` - this should only be used by the Core team 
