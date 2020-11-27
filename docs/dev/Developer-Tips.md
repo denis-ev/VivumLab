@@ -1,24 +1,24 @@
 # Developer Tips
 
 ## Labels 
-`bug` is for bugs. :)
-`chore` describes necessary, though possibly annoying changes
-`cleanup` cleaning or consolidating code
-`documentation` improvements or additions to documentation
-`duplicate` labels something as it previously exists. The core team will review these, regularly
-`enhancement` new feature or request; not necessarily relating to a service
-`future release` this should only be used by the Core team 
-`good first issue` this should only be used by the Core team
-`help wanted` use this if you are working on something and you need help. Want to contribute? look for this label
-`invalid` this should only be used by the Core team
-`needs testing` testing is required
-`priority` fix ASAP!! all hands on deck. Confused on how to contribute? look for this label
-`question` USe this if further information is requuired
-`ready for review` tells the Core team, that its ready for review
-`ready to merge` tells the Core team, that its ready to be merged
-`security` nything that helps make VivumLab more secure
-`service` should only be placed on a service/ new service
-`WIP` acronym for Work in progress. Use this if you are working on something but don't need help
+`bug` - is for bugs. :)
+`chore` - describes necessary, though possibly annoying changes
+`cleanup` - cleaning or consolidating code
+`documentation` - improvements or additions to documentation
+`duplicate` - labels something as it previously exists. The core team will review these, regularly
+`enhancement` - new feature or request; not necessarily relating to a service
+`future release` - this should only be used by the Core team 
+`good first issue` - this should only be used by the Core team
+`help wanted` - use this if you are working on something and you need help. Want to contribute? look for this label
+`invalid` - this should only be used by the Core team
+`needs testing` - testing is required
+`priority` - fix ASAP!! all hands on deck. Confused on how to contribute? look for this label
+`question` - Use this if further information is requuired
+`ready for review` - tells the Core team, that its ready for review
+`ready to merge` - tells the Core team, that its ready to be merged
+`security` - anything that helps make VivumLab more secure
+`service` - should only be placed on a service/ new service
+`WIP` - acronym for Work in progress. Use this if you are working on something but don't need help
 
 ## Creating migrations
 
