@@ -11,8 +11,7 @@ Task::sanity_check_local(){
   Task::check_for_precommit
   Task::check_for_hostdockerdaemon
 
-  colorize green "Core sanity checks passed"
-  echo ""
+  colorize green $'Core sanity checks passed\n'
 }
 
 Task::sanity_check_remote(){
@@ -22,7 +21,7 @@ Task::sanity_check_remote(){
   Task::check_ssh_keys
   #Task::check_ssh_with_keys
 
-  colorize green "Remote sanity checks passed"
+  colorize green $'Remote sanity checks passed\n\n'
 }
 
 Task::create_vault_pass() {
