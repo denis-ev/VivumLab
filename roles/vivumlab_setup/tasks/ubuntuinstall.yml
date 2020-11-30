@@ -23,20 +23,21 @@
       - wget
       - whois
       - zsh
+      - python3-virtualenv
+      - python3-openssl
+      - python3-setuptools
+      - python3-passlib
       - python3-pip
   tags:
     - dependencies
   become: yes
 
-- name: Install Passlib, Virtualenv, OpenSSL, SetupTools, Wheel
+- name: Install Docker-py, and Wheel
   pip:
     name: "{{ item }}"
     executable: pip3
   loop:
-    - passlib
-    - virtualenv
-    - pyopenssl
-    - setuptools
+    - docker
     - wheel
   become: yes
 
@@ -57,7 +58,6 @@
     name: docker
     state: absent
   when:
-    - ansible_facts['distribution'] == 'Ubuntu'
     - ansible_facts['distribution_major_version'] is version('16.04', '>=')
   become: yes
 
@@ -78,14 +78,12 @@
     state: present
     validate_certs: no
   become: yes
-  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
 
 - name: Add the Docker-ce Repo
   apt_repository:
     repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
     state: present
   become: yes
-  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
 
 - name: Install Docker and containerd
   apt:
@@ -96,7 +94,6 @@
   tags:
     - dependencies
   become: yes
-  when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
 
 - name: Install Docker-compose
   pip:
