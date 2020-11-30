@@ -5,7 +5,8 @@ version: '3'
 # DO NOT Remove
 networks:
   traefik_network:
-    name: vivumlab_traefik
+    external:
+      name: vivumlab_traefik
 
 services:
   sui:
