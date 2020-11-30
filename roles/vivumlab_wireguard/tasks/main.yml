@@ -4,14 +4,14 @@
     repo: deb http://deb.debian.org/debian buster-backports main
     state: present
     update_cache: yes
-  when: (ansible_facts['distribution'] == "Debian" and ansible_facts[distribution_major_version] == "10")
+  when: (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "10")
 
 - name: Add the WireGuard PPA repository (Debian)
   apt_repository:
     repo: deb http://deb.debian.org/debian/ unstable main
     state: present
     update_cache: yes
-  when: (ansible_facts['distribution'] == "Debian") and (ansible_facts[distribution_major_version] != "10" and ansible_facts[distribution_major_version] != "11")
+  when: (ansible_facts['distribution'] == "Debian") and (ansible_facts['distribution_major_version'] != "10" and ansible_facts['distribution_major_version'] != "11")
 
 - name: Install WireGuard (Ubuntu/ Debian)
   apt:
