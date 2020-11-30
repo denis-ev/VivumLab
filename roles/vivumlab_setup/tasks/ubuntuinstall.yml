@@ -1,0 +1,116 @@
+---
+- name: Install base packages for Vivumlab
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - cifs-utils
+      - curl
+      - fail2ban
+      - gnupg-agent
+      - git
+      - htop
+      - iftop
+      - iotop
+      - lsb-release
+      - mosh
+      - nfs-common
+      - screen
+      - software-properties-common
+      - sudo
+      - unattended-upgrades
+      - vim
+      - wget
+      - whois
+      - zsh
+      - python3-virtualenv
+      - python3-openssl
+      - python3-setuptools
+      - python3-passlib
+      - python3-pip
+  tags:
+    - dependencies
+  become: yes
+
+- name: Install Docker-py, and Wheel
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+  loop:
+    - docker
+    - wheel
+  become: yes
+
+- name: Timezone - configure /etc/timezone
+  copy:
+    content: "{{ common_timezone | regex_replace('$', '\n') }}"
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+  register: common_timezone_config
+
+- name: Timezone - reconfigure tzdata
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+
+- name: Ensure Docker is not installed via Snap
+  snap:
+    name: docker
+    state: absent
+  when:
+    - ansible_facts['distribution_major_version'] is version('16.04', '>=')
+  become: yes
+
+- name: Remove older docker.io based packages
+  apt:
+    name:
+      - docker
+      - docker.io
+      - containerd
+      - runc
+      - docker-engine
+    state: absent
+  become: yes
+
+- name: Add an Apt signing key for the Docker-ce Repo
+  apt_key:
+    url: https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }}/gpg
+    state: present
+    validate_certs: no
+  become: yes
+
+- name: Add the Docker-ce Repo
+  apt_repository:
+    repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
+    state: present
+  become: yes
+
+- name: Install Docker and containerd
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+  tags:
+    - dependencies
+  become: yes
+
+- name: Install Docker-compose
+  pip:
+    name: docker-compose
+    executable: pip3
+  become: yes
+
+- name: Start Docker service
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: docker
+  become: yes
+
+- name: Adding user to Docker group
+  user:
+    name: "{{ vlab_ssh_user }}"
+    groups: docker
+    append: true
+  become: yes
