@@ -1,13 +1,13 @@
 # Developer Tips
 
-## Labels 
+## Labels
 `bug` - is for bugs. :)
 `chore` - describes necessary, though possibly annoying changes
 `cleanup` - cleaning or consolidating code
 `documentation` - improvements or changes to documentation
 `duplicate` - may be a duplicate/ may previously exist. The core team will review these, regularly
 `enhancement` - new feature or request; not necessarily relating to a service
-`future release` - this should only be used by the Core team 
+`future release` - this should only be used by the Core team
 `good first issue` - this should only be used by the Core team
 `help wanted` - use this if you are working on something and you need help. Want to contribute? look for this label
 `invalid` - this should only be used by the Core team
@@ -103,7 +103,7 @@ These exist, as to tell the user which architecture the service is supported on.
 For example, if the current image for Jellyfin supports ARMv7, but you have only tested AMD64 (and it works), then make the following changes to the config.yml file:
 ```
 jellyfin:
-  ('enable' <-> 'version' options here, as usual) 
+  ('enable' <-> 'version' options here, as usual)
   amd64: Verfied
   arm64: Unsupported
   armv7: Supported
