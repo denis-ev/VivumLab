@@ -13,13 +13,17 @@
     }
   },
   "bookmarks": {
-    "social": [
+    "Contact Us": [
+      {
+        "name": "VivumLab Zulip Chat",
+        "url": "https://vivumlab.zulipchat.com/"
+      },
       {
         "name": "VivumLab Subreddit",
         "url": "https://www.reddit.com/r/vivumlab"
       }
     ],
-    "music": [
+    "Music": [
       {
         "name": "spotify",
         "url": "https://open.spotify.com"
@@ -29,10 +33,6 @@
       {
         "name": "VivumLab Github",
         "url": "https://github.com/Vivumlab/VivumLab"
-      },
-      {
-        "name": "VivumLab Zulip Chat",
-        "url": "https://vivumlab.zulipchat.com/"
       }
     ]
   },
