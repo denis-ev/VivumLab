@@ -33,6 +33,7 @@ nav:
       - Tor Onion Services: core/Tor.md
   - Included Software:
       - Analytics:
+          - Kutt: software/kutt.md
           - Matomo: software/matomo.md
       - Automation:
           - Home Assistant: software/homeassistant.md
