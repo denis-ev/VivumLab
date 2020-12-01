@@ -22,7 +22,9 @@ services:
 {% endif %}
       - "80:80"
       - "443:443"
+{% if bastion.enable %}
       - "2222:2222"
+{% endif %}
 {% if traefik.additional_env_vars %}
     environment:
 {% for item in traefik.additional_env_vars | dict2items %}
