@@ -760,6 +760,16 @@ kibitzr:
   amd64: False
   arm64: False
   armv7: False
+kutt:
+  enable: {{ kutt.enable | default(False) }}
+  https_only: {{ kutt.https_only | default(False) }}
+  auth: {{ kutt.auth | default(False) }}
+  domain: {{ kutt.domain | default(False) }}
+  subdomain: {{ kutt.subdomain | default("kutt") }}
+  version: {{ kutt.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 lazylibrarian:
   enable: {{ lazylibrarian.enable | default(False) }}
   https_only: {{ lazylibrarian.https_only | default(False) }}

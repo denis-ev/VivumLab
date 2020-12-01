@@ -1,0 +1,26 @@
+---
+- name: Make kutt directory.
+  file:
+    path: "{{ volumes_root }}/kutt"
+    state: directory
+
+- name: Copy kutt docker-compose.yml file into place.
+  template:
+    src: docker-compose.kutt.yml.j2
+    dest: "{{ volumes_root }}/kutt/docker-compose.yml"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+
+- name: Configure kutt systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/kutt.service
+
+- name: Start kutt
+  systemd:
+    name: kutt
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

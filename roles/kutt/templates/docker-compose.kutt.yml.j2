@@ -1,0 +1,81 @@
+version: "3"
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  kutt:
+
+services:
+  kutt:
+    image: kutt/kutt
+    restart: unless-stopped
+    networks:
+      - traefik_network
+      - kutt
+    depends_on:
+      - postgres
+      - redis
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "start"]
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: kutt
+      DB_USER: user
+      DB_PASSWORD: {{ lookup('password', './settings/passwords/kutt_db_password chars=ascii_letters') }}
+      DB_SSL: false
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      PORT: 3000
+      SITE_NAME: {{ service_domain }}
+      DEFAULT_DOMAIN: {{ service_domain }}
+      LINK_LENGTH: 6
+      DISALLOW_REGISTRATION: false
+      DISALLOW_ANONYMOUS_LINKS: true
+      USER_LIMIT_PER_DAY: 50
+      NON_USER_COOLDOWN: 0
+      DEFAULT_MAX_STATS_PER_LINK: 5000
+      CUSTOM_DOMAIN_USE_HTTPS: true
+      JWT_SECRET: {{ lookup('password', './settings/passwords/kutt_jwt_secret chars=ascii_letters') }}
+      ADMIN_EMAILS: {{ admin_email }}
+      RECAPTCHA_SITE_KEY: false
+      RECAPTCHA_SECRET_KEY: false
+      # Google Cloud API to prevent from users from submitting malware URLs.
+      # Get it from https://developers.google.com/safe-browsing/v4/get-started
+      GOOGLE_SAFE_BROWSING_KEY: false
+      GOOGLE_ANALYTICS: false # Example: UA-XXXX-XX
+      GOOGLE_ANALYTICS_UNIVERSAL: false
+      MAIL_HOST: {{ vault.smtp.host }}
+      MAIL_PORT: {{ vault.smtp.port }}
+      MAIL_SECURE: {% if vault.smtp.port == 587 %}true{% endif %}
+      MAIL_USER: {{ vault.smtp.user }}
+      MAIL_FROM: {{ vault.smtp.from_email }}
+      MAIL_PASSWORD: {{ vault.smtp.pass }}
+      REPORT_EMAIL: report@{{ service_domain }}
+      CONTACT_EMAIL: support@{{ service_domain }}
+    labels:
+      - "traefik.http.services.kutt.loadbalancer.server.scheme=http"
+      - "traefik.http.services.kutt.loadbalancer.server.port=3000"
+{% include './labels.j2' %}
+
+  redis:
+    image: redis:6.0-alpine
+    restart: unless-stopped
+    networks:
+      - kutt
+    volumes:
+      - "{{ volumes_root }}/kutt/redis_data:/data"
+
+  postgres:
+    image: postgres:12-alpine
+    restart: unless-stopped
+    networks:
+      - kutt
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/kutt_db_password chars=ascii_letters') }}
+      POSTGRES_DB: kutt
+    volumes:
+      - "{{ volumes_root }}/kutt/postgres_data:/var/lib/postgresql/data"

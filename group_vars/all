@@ -51,6 +51,7 @@ services:
   jenkins:
   keycloak:
   kibitzr:
+  kutt:
   lazylibrarian:
   lidarr:
   mailu:
@@ -176,6 +177,7 @@ jellyfin:
 jenkins:
 keycloak:
 kibitzr:
+kutt:
 lazylibrarian:
 lidarr:
 mailu:
