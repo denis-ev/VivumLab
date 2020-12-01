@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Updates all services on the VivumLab server
+### ALL SERVICES ###
 Task::update() {
   : @desc "Updates all services on the VivumLab Server"
   : @param config_dir="settings"
@@ -24,7 +24,7 @@ Task::update() {
   highlight "Services Updated"
 }
 
-# Updates the specified service on the VivumLab server
+### SELECTED SERVICE ###
 Task::update_one(){
   : @desc "Updates the specified service on the VivumLab server"
   : @param service! "Service Name"
