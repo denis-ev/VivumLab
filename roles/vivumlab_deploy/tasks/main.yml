@@ -253,6 +253,3 @@
 - debug:
     msg: "You can also access your services via Tor at http://{{ tor_http_domain_file.stdout }}"
   when: enable_tor
-
-- debug:
-    msg: "Problems? File an issue at https://github.com/Vivumlab/VivumLab/issues"
