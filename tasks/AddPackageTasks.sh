@@ -6,18 +6,18 @@
  Task::add_package() {
   : @desc "Wizard to add a new Package"
 
-  echo "This is still experimental, manual changes are necessary!"
+  colorize light_red "This is still experimental, manual changes are necessary!"
   read -p 'Do you want to proceed? [yes/no]: ' proceed
   case $proceed in
       [Yy]|[Yy][Ee][Ss])
-        echo "OK, please ask if you need any help."
+        colorize green "OK, please ask if you need any help."
       ;;
       [Nn]|[Nn][Oo])
         exit
       ;;
       *)
-        echo "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
-        echo "REMINDER: 'vlab create_sshkey' can help you create some keys"
+        colorize light_yellow "VivumLab requires passwordless shh keys. Consider creatng some keys and re-running VivumLab."
+        colorize light_yellow "REMINDER: 'vlab create_sshkey' can help you create some keys"
         exit
       ;;
   esac

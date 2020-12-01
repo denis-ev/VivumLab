@@ -19,7 +19,7 @@ Task::terraform(){
   # Generate Terraform files
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.terraform.yml || colorize light_red "error: terraform: deploy"
+  -i inventory playbook.terraform.yml || colorize red "error: terraform: deploy"
 
   # Run terraform
   # If we send multiple commands to the docker container (/bin/bash -c), we can "cd" into the "settings" directory
@@ -29,7 +29,9 @@ Task::terraform(){
   # Get instance IP for next run
   TERRAFORM_IP=$(Task::run_docker /bin/bash -c "cd settings; terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address")
 
-  echo "Successfully created a server at: ${TERRAFORM_IP}\n\nPlace this IP where you want it in your settings (either 'vlab_ip' or 'bastion.server_address'), then run 'vlab deploy' to complete the setup."
+  colorize green "Successfully created a server at: ${TERRAFORM_IP}\n\n"
+  colorize light_yellow "Place this IP where you want it in your settings (either 'vlab_ip' or 'bastion.server_address'),"
+  colorize light_yellow "then run 'vlab deploy' to complete the setup."
 
   highlight "Done deploying cloud server!"
 }

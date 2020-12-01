@@ -7,7 +7,7 @@ Task::track(){
   : @desc "Switches you to the specified branch or tag. use branch=<branchname>"
   : @param branch! "Required! Branch or tag name to track"
 
-  git checkout $_branch || colorize light_red "error: track: $_branch"
+  git checkout $_branch || colorize red "error: track: $_branch"
 }
 
 # Opens a shell on the VivumLab server
@@ -15,14 +15,14 @@ Task::shell() {
   : @desc "Opens a shell in the VivumLab deploy server"
 
   ssh -i "$HOME/.ssh/$(pwless_sshkey)" "$(vlab_ssh_user)@$(vlab_ip)" -p "$(vlab_port)" \
-  || colorize light_red "error: shell"
+  || colorize red "error: shell"
 }
 
 # Opens a shell in the VivumLab container
 Task::docker_shell() {
   : @desc "Opens a shell (bash) in the deployed VivumLab docker container"
 
-  Task::run_docker /bin/bash || colorize light_red "error: docker_shell"
+  Task::run_docker /bin/bash || colorize red "error: docker_shell"
 }
 
 # Reboots the server. Has the option for a timer (in minutes)
@@ -32,7 +32,7 @@ Task::reboot(){
 
   ssh -t -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey)" \
   "$(vlab_ssh_user)@$(vlab_ip)" "sudo shutdown -r +"$(countdown) \
-  || colorize light_red "error: reboot"
+  || colorize red "error: reboot"
 }
 
 # Shuts down the server. Has the option for a timer (in minutes)
@@ -42,7 +42,7 @@ Task::shutdown(){
 
   ssh -t -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey)" \
   "$(vlab_ssh_user)@$(vlab_ip)" "sudo shutdown+"$(countdown) \
-  || colorize light_red "error: shutdown"
+  || colorize red "error: shutdown"
 }
 
 # Allows the user to make edits to a service without changing the base docker-compose file
@@ -54,7 +54,7 @@ Task::service_edit() {
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.service-edit.yml || colorize light_red "error: service_edit"
+  -i inventory playbook.service-edit.yml || colorize red "error: service_edit"
 }
 
 Task::create_sshkey() {
@@ -62,7 +62,7 @@ Task::create_sshkey() {
 
   Task::logo_local
 
-  #echo "REMINDER: Having a passphrase is an optional extra layer of security for your SSH keys."
+  #colorize light_yellow "REMINDER: Having a passphrase is an optional extra layer of security for your SSH keys."
   #read -sp "If you would like a passphrase for the SSH keys, please enter one now (press return for no passphrase): " KEY_PASS
   #echo ""
 
@@ -70,16 +70,16 @@ Task::create_sshkey() {
     KEY_PASS=""
   #fi
 
-  echo "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
-  ssh-keygen -q -N "$KEY_PASS" -C "VivumLab@$(domain_check)" -f "$HOME/.ssh/$(pwless_sshkey)"|| colorize light_red "error: create_sshkey"
+  colorize light_green "Creating $(pwless_sshkey) and $(pwless_sshkey).pub"
+  ssh-keygen -q -N "$KEY_PASS" -C "VivumLab@$(domain_check)" -f "$HOME/.ssh/$(pwless_sshkey)"|| colorize red "error: create_sshkey"
 }
 
 Task::copy_sshkey() {
   : @desc "Allows user to copy an existing ssh key"
 
-  echo "Copying keys over to the machine, located at $(vlab_ip)"
+  colorize light_green "Copying keys over to the machine, located at $(vlab_ip)"
   ssh-copy-id -p "$(vlab_port)" -i "$HOME/.ssh/$(pwless_sshkey).pub" \
-  "$(vlab_ssh_user)@$(vlab_ip)" || colorize light_red "error: create_sshkey: copying keys"
+  "$(vlab_ssh_user)@$(vlab_ip)" || colorize red "error: create_sshkey: copying keys"
 }
 
 
