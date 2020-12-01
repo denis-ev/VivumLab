@@ -38,22 +38,32 @@ entryPoints:
             sans:
               - "*.{{ domain }}"
 {% endif %}
-
-  smtp: # for healthchecks incoming emails
-    address: :25
-  ssh:
-    address: ":2222"
+# {% if healthchecks.enable %}
+#  smtp:
+#    address: :25
+# {% endif %}
+# {% if bastion.enable %}
+#  ssh:
+#    address: ":2222"
+# {% endif %}
+{% if traefik.ping %}
   #ping@internal
   ping:
     address: ":8081"
+{% endif %}
+{% if traefik.metrics %}
   #metrics@internal
   metrics:
     address: ":8082"
+{% endif %}
 
+{% if traefik.ping %}
 #Health
 ping:
   entryPoint: "ping"
   manualRouting: false
+{% endif %}
+{% if traefik.metrics %}
 #Metrics
 metrics:
   prometheus:
@@ -66,6 +76,7 @@ metrics:
       - 0.3
       - 1.2
       - 5.0
+{% endif %}
 
 providers:
   providersThrottleDuration: 2s
@@ -78,9 +89,11 @@ providers:
     directory: /conf.d
     watch: true
 
+{% if traefik.expose_internally or traefik.expose_externally %}
 api:
   dashboard: true
   insecure: true
+{% endif %}
 
 log:
   level: ERROR

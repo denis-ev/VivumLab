@@ -126,6 +126,8 @@ traefik:
   auth: "{{ vault.traefik.auth }}"
   expose_internally: "{{ vault.traefik.expose_internally }}"
   expose_externally: "{{ vault.traefik.expose_externally }}"
+  ping: "{{ vault.traefik.ping | default(False) }}"
+  metrics: "{{ vault.traefik.metrics | default(False) }}"
   # Enable sendAnonymousUsage?
   # Reference: https://docs.traefik.io/master/contributing/data-collection/
   send_anonymous_usage: "{{ vault.traefik.send_anonymous_usage }}"
