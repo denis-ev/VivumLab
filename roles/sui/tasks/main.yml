@@ -5,7 +5,7 @@
     state: directory
   with_items:
     - "sui"
-    - "sui/configs"
+    - "sui/config"
 
 - name: Copy sui docker-compose.yml file into place.
   template:
@@ -17,7 +17,7 @@
 - name: Copy sui config files into place.
   template:
     src: "{{ item }}"
-    dest: "{{ volumes_root }}/sui/configs/{{ item }}"
+    dest: "{{ volumes_root }}/sui/config/{{ item }}"
   with_items:
     - config.json
     - VivumLab.json
