@@ -1,0 +1,33 @@
+---
+- name: Make hastebin directory.
+  file:
+    path: "{{ volumes_root }}/hastebin"
+    state: directory
+
+- name: Git checkout haste-server
+  git:
+    repo: 'https://github.com/seejohnrun/haste-server.git'
+    dest: "{{ volumes_root }}/hastebin/build"
+    version: master
+  ignore_errors: yes
+
+- name: Copy hastebin docker-compose.yml file into place.
+  template:
+    src: docker-compose.hastebin.yml.j2
+    dest: "{{ volumes_root }}/hastebin/docker-compose.yml"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+
+- name: Configure hastebin systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/hastebin.service
+
+- name: Start hastebin
+  systemd:
+    name: hastebin
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

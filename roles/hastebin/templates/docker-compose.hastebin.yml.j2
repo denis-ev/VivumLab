@@ -1,0 +1,38 @@
+---
+version: '3'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  hastebin_network:
+
+services:
+  haste-server:
+    restart: unless-stopped
+    container_name: hastebin
+    build: ./build/
+    networks:
+      - traefik_network
+      - hastebin_network
+    depends_on:
+      - redis
+    environment:
+      - STORAGE_TYPE=redis
+      - STORAGE_HOST=redis
+      - STORAGE_PORT=6379
+      - STORAGE_EXPIRE_SECONDS=2592000
+      - STORAGE_DB=2
+    labels:
+      - "traefik.http.services.hastebin.loadbalancer.server.scheme=http"
+      - "traefik.http.services.hastebin.loadbalancer.server.port=7777"
+{% include './labels.j2' %}
+
+  redis:
+    container_name: hastebin_redis
+    image: redis:{{ hastebin.redis_version }}
+    restart: unless-stopped
+    networks:
+      - hastebin_network
+    volumes:
+      - "{{ volumes_root }}/hastebin/redis:/data"
