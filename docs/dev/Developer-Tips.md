@@ -1,12 +1,24 @@
 # Developer Tips
 
 ## Labels
-
-`feat` is for any new features. features changes or adds to how VivumLab itself deploys/operates.
-
-`package` is for new packages people would like added to VivumLab. These should not be marked as `enhancement`s.
-
-`bug` is for bugs. :)
+`bug` - is for bugs. :)
+`chore` - describes necessary, though possibly annoying changes
+`cleanup` - cleaning or consolidating code
+`documentation` - improvements or changes to documentation
+`duplicate` - may be a duplicate/ may previously exist. The core team will review these, regularly
+`enhancement` - new feature or request; not necessarily relating to a service
+`future release` - this should only be used by the Core team
+`good first issue` - this should only be used by the Core team
+`help wanted` - use this if you are working on something and you need help. Want to contribute? look for this label
+`invalid` - this should only be used by the Core team
+`needs testing` - testing is required
+`priority` - fix ASAP!! all hands on deck. Confused on how to contribute? look for this label
+`question` - use this if further information is requuired
+`ready for review` - tells the Core team, that its ready for review
+`ready to merge` - tells the Core team, that its ready to be merged
+`security` - anything that helps make VivumLab more secure
+`service` - should only be placed on a service/ new service
+`WIP` - acronym for Work in progress. Use this if you are working on something but don't need help
 
 ## Creating migrations
 
@@ -76,3 +88,26 @@ From the VivumLab root folder (where you run the **`vlab`** commands from), run:
 
 Run against all the files (optional)
 **`pre-commit run --all-files`**
+
+## Supporting multiple architectures
+Some, if not most, docker images will support more than the typical 64 bit architecture; this is very relevant, and very welcome in VivumLab. With the growing popularity of more compact hardware, such as the Raspberry PI, using VivumLab with this cost effective, and compact option is obvious and desirable for users.
+
+You may notice that in the config.yml file, there are three options, relating to three different architectures, for almost every service;
+example:
+```
+ amd64: False
+ arm64: False
+ armv7: False
+```
+These exist, as to tell the user which architecture the service is supported on. AMD64 may be relevant to the standard home server install of Debian or CentOS, ARM64 for older 64 bit versions of Raspberry PI (former known as Raspbian), and ARMv7 for the newer versions (possibly known as Raspberry PI OS).
+For example, if the current image for Jellyfin supports ARMv7, but you have only tested AMD64 (and it works), then make the following changes to the config.yml file:
+```
+jellyfin:
+  ('enable' <-> 'version' options here, as usual)
+  amd64: Verfied
+  arm64: Unsupported
+  armv7: Supported
+```
+If an architecture is not supported, either 'Unsupported' or 'False' can be used.
+
+As a developer, when you add a service or otherwise verify a service, make sure you edit the config.yml file, and add the relevent information, before pushing your changes to Github.
