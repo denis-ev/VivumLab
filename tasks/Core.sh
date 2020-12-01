@@ -85,6 +85,24 @@ Task::build() {
   fi
 }
 
+# Deploys VivumLab
+Task::deploy(){
+  : @desc "Deploys VivumLab, configure VivumLab first"
+  : @param config_dir="settings"
+  : @param force true "Forces a rebuild/repull of the docker image"
+  : @param build true "Forces to build the image locally"
+  : @param debug true "Debugs ansible-playbook commands"
+  : @param cache true "Allows the build to use the cache"
+
+  Task::logo
+  Task::build $(build_check) $(force_check) $(cache_check)
+
+  highlight "Deploying VivumLab"
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  -i inventory playbook.vivumlab.yml || colorize red "error: deploy"
+}
+
 # Manually forces a settings Sync via Git
 Task::git_sync() {
   : @desc "Manually forces a settings sync via git"

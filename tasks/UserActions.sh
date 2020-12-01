@@ -95,10 +95,10 @@ Task::find_help() {
   : @desc "Shows the user where to find help/ contact the VivumLab community"
 
   cat vivumlablogo.txt
-  printf "\n\n"
+  Task::check_version
 
-  printf "MOTD:\n\n" && cat MOTD || printf "Could not get MOTD"
-  printf "\n\n"
+  colorize light_yellow $'\nMOTD:' && colorize light_cyan "$(cat MOTD)" \
+  && echo $'\n\n' || colorize light_red $'Could not get MOTD\n\n'
 
   Task::run_docker mdv -t 729.8953 docs/Contact-us.md
 }
