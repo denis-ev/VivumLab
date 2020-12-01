@@ -54,7 +54,7 @@ entryPoints:
   metrics:
     address: ":8082"
 {% endif %}
-    
+
 {% if healthchecks.enable %}
 #Health
 ping:
@@ -86,7 +86,7 @@ providers:
   file:
     directory: /conf.d
     watch: true
-    
+
 {% if traefik.expose_internally or traefik.expose_externally %}
 api:
   dashboard: true
