@@ -15,7 +15,7 @@ Task::deploy(){
   highlight "Deploying VivumLab"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.vivumlab.yml || colorize light_red "error: deploy"
+  -i inventory playbook.vivumlab.yml || colorize red "error: deploy"
 }
 
 # Restart All Enabled services
@@ -35,7 +35,7 @@ Task::restart(){
   highlight "Restarting all services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.restart.yml || colorize light_red "error: restart"
+  -i inventory playbook.restart.yml || colorize red "error: restart"
   highlight "Services restarted"
 }
 
@@ -56,6 +56,6 @@ Task::stop(){
   highlight "Stopping all services"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.stop.yml || colorize light_red "error: stop"
+  -i inventory playbook.stop.yml || colorize red "error: stop"
   highlight "Services stopped"
 }

@@ -10,30 +10,30 @@ Task::lint(){
 Task::dev_setup(){
   : @desc "Run to install dev requirements"
 
-  echo "Welcome to VivumLab Dev setup"
+  colorize light_blue "Welcome to VivumLab Developer setup"
   echo ""
   read -p "Do you want to contribute to VivumLab (yes or no)?" contribute
   case $contribute in
   [Yy]|[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
-    echo "Thanks for helping out!!"
-    echo "Firstly, please make sure you read the developers docs for VivumLab"
-    echo "The docs were written to help you"
+    colorize light_green "Thanks for helping out!!"
+    colorize light_yellow "Firstly, please make sure you have read the developers docs for VivumLab"
+    colorize light_yellow "The docs were written to help you"
       sleep 2
-    echo "Before you push any changes you've made,"
-    echo "pre-commit will need to be installed on your system"
+    colorize light_yellow "Before you push any changes you've made,"
+    colorize light_yellow "pre-commit will need to be installed on your system"
       sleep 1
-    echo "Let's try this now"
+    colorize yellow "Let's try this now"
       sleep 2
-    echo "Installing pre-commit"
+    colorize light_yellow "Installing pre-commit"
       curl https://pre-commit.com/install-local.py | python -
-    echo "if this fails, ensure you have python3 installed"
-    echo "In future releases of VivumLab, VivumLab will assist in Python installation"
+    colorize light_red "if this fails, ensure you have python3 installed"
+    colorize light_red "In future releases of VivumLab, VivumLab will assist in Python installation"
     sleep 1
-    echo "Thanks again for helping. Happy developing"
+    colorize light_blue "Thanks again for helping. Happy developing"
     ;;
   *)
-    echo "If you change your mind, run this command again"
-    echo "Please Note: if you don't, any changes you try to push will fail"
+    colorize light_yellow "If you change your mind, run this command again"
+    colorize light_red "Please Note: if you don't, any changes you try to push will fail"
     ;;
   esac
 }

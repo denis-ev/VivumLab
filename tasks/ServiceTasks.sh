@@ -9,7 +9,7 @@ Task::restart_one(){
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize light_red "error: restart_one"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize red "error: restart_one"
   highlight "Restarted ${_service}"
 }
 
@@ -30,7 +30,7 @@ Task::stop_one(){
 
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml  || colorize light_red "error: stop_one"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml  || colorize red "error: stop_one"
   highlight "Stopped ${_service}"
 }
 
@@ -52,7 +52,7 @@ Task::remove_one(){
   highlight "Removing data for ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize light_red "error: remove_one"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml || colorize red "error: remove_one"
   highlight "Removed ${_service}"
 }
 
@@ -74,13 +74,13 @@ Task::reset_one(){
   highlight "Resetting ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml || colorize light_red "error: reset_one: stop"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.stop.yml || colorize red "error: reset_one: stop"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml  || colorize light_red "error: reset_one: remove"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.remove.yml  || colorize red "error: reset_one: remove"
   highlight "Redeploying ${_service}"
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml || colorize light_red "error: reset_one: deploy"
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory -t deploy playbook.vivumlab.yml || colorize red "error: reset_one: deploy"
   highlight "Reset ${_service}"
 }
