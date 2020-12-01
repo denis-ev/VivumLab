@@ -602,6 +602,17 @@ guacamole:
   amd64: False
   arm64: False
   armv7: False
+hastebin:
+  enable: {{ hastebin.enable | default(False) }}
+  https_only: {{ hastebin.https_only | default(False) }}
+  auth: {{ hastebin.auth | default(False) }}
+  domain: {{ hastebin.domain | default(False) }}
+  subdomain: {{ hastebin.subdomain | default("hastebin") }}
+  server_version: master
+  redis_version: {{ hastebin.redis_version | default("5.0.5-alpine") }}
+  amd64: False
+  arm64: False
+  armv7: False
 healthchecks:
   enable: {{ healthchecks.enable | default(False) }}
   https_only: {{ healthchecks.https_only | default(False) }}

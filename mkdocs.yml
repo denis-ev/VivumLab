@@ -170,6 +170,7 @@ nav:
           - Drone: software/drone.md
           - Gitea: software/gitea.md
           - GitLab: software/gitlab.md
+          - Hastebin: software/hastebin.md
           - Jenkins: software/jenkins.md
           - Snibox: software/snibox.md
       - Task management/To-do lists:
