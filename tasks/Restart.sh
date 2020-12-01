@@ -20,3 +20,16 @@ Task::restart(){
   -i inventory playbook.restart.yml || colorize red "error: restart"
   highlight "Services restarted"
 }
+
+# SELECTED SERVICE ###
+Task::restart_one(){
+  : @desc "Restarts the specified service"
+  : @param service! "Service Name"
+  : @param config_dir="settings"
+  : @param debug true "Debugs ansible-playbook commands"
+
+  Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
+  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
+  --extra-vars='{"services":["'${_service}'"]}' -i inventory playbook.restart.yml || colorize red "error: restart_one"
+  highlight "Restarted ${_service}"
+}
