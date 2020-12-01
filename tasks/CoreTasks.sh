@@ -8,7 +8,7 @@ Task::logo_local() {
   already_ran[${FUNCNAME[0]}]=1
   cat vivumlablogo.txt
   Task::check_version
-  
+
   colorize light_yellow $'\nMOTD:' && colorize light_cyan "$(cat MOTD)" \
   && echo $'\n\n' || colorize light_red $'Could not get MOTD\n\n'
 
