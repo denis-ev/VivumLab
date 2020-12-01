@@ -47,8 +47,10 @@ vault:
     domain: {{ vault.traefik.domain | default(False) }}
     subdomain: {{ vault.traefik.subdomain | default("traefik") }}
     auth: {{ vault.traefik.auth | default(False) }}
-    expose_internally: {{ vault.traefik.expose_internally | default(True)  }}
-    expose_externally: {{ vault.traefik.expose_externally | default(False)  }}
+    expose_internally: {{ vault.traefik.expose_internally | default(True) }}
+    expose_externally: {{ vault.traefik.expose_externally | default(False) }}
+    ping: {{ vault.traefik.ping | default(False) }}
+    metrics: {{ vault.traefik.metrics | default(False) }}
     # Enable sendAnonymousUsage?
     # Reference: https://docs.traefik.io/master/contributing/data-collection/
     send_anonymous_usage: {{ vault.traefik.send_anonymous_usage | default("false")  }}

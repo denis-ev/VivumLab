@@ -46,22 +46,24 @@ entryPoints:
 #  ssh:
 #    address: ":2222"
 # {% endif %}
-{% if traefik.expose_internally or traefik.expose_externally %}
+{% if traefik.ping %}
   #ping@internal
   ping:
     address: ":8081"
+{% endif %}
+{% if traefik.metrics %}
   #metrics@internal
   metrics:
     address: ":8082"
 {% endif %}
 
-{% if healthchecks.enable %}
+{% if traefik.ping %}
 #Health
 ping:
   entryPoint: "ping"
   manualRouting: false
 {% endif %}
-{% if traefik.expose_internally or traefik.expose_externally %}
+{% if traefik.metrics %}
 #Metrics
 metrics:
   prometheus:
