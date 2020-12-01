@@ -38,10 +38,10 @@ entryPoints:
             sans:
               - "*.{{ domain }}"
 {% endif %}
-{% if healthchecks.enable or bastion.enable %}
-  smtp:
-    address: :25
-{% endif %}
+# {% if healthchecks.enable %}
+#  smtp:
+#    address: :25
+# {% endif %}
 {% if bastion.enable %}
   ssh:
     address: ":2222"
