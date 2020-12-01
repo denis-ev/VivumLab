@@ -38,6 +38,7 @@ jobs:
         - pip3 install mkdocs-material
         - pip3 install mkdocs-git-revision-date-localized-plugin
         - curl https://pre-commit.com/install-local.py | python -
+        - cp CONTRIBUTING.md docs/dev/
         - bash vlab ci build=true
       script: mkdocs build --verbose --clean --strict
       deploy:

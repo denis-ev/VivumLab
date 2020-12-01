@@ -38,3 +38,4 @@ docker-compose.override.yml
 
 # CI
 settings_ci/
+docs/CONTRIBUTING.md
