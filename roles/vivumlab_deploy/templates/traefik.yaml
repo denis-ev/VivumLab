@@ -42,10 +42,10 @@ entryPoints:
 #  smtp:
 #    address: :25
 # {% endif %}
-{% if bastion.enable %}
-  ssh:
-    address: ":2222"
-{% endif %}
+#{% if bastion.enable %}
+#  ssh:
+#    address: ":2222"
+#{% endif %}
 {% if traefik.expose_internally or traefik.expose_externally %}
   #ping@internal
   ping:
