@@ -9,7 +9,7 @@
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** https://hub.docker.com/r/bndw/wifi-card
 **Current Image Version:** {{ wificard.version }}
 
 ## SETUP
