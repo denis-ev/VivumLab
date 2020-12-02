@@ -1,13 +1,12 @@
 ---
-- name: Make turtl directory.
+- name: Make turtl directories.
   file:
-    path: "{{ volumes_root }}/turtl"
+    path: "{{ volumes_root }}/{{ item }}"
     state: directory
-
-- name: Check out Turtl server git repo
-  git:
-    repo: https://github.com/turtl/server.git
-    dest: "{{ volumes_root }}/turtl/server"
+  with_items:
+    - "turtl"
+    - "turtl/uploads"
+    - "turtl/db"
 
 - name: Copy turtl docker-compose.yml file into place.
   template:
@@ -15,26 +14,6 @@
     dest: "{{ volumes_root }}/turtl/docker-compose.yml"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
-
-- name: Start database to create user and empty database. Turtl is not resilient for waiting by itself.
-  docker_compose:
-    project_src: "{{ volumes_root }}/turtl"
-    services:
-      - postgres-db
-    state: present
-
-- name: Build Turtl project from docker-compose
-  docker_compose:
-    project_src: "{{ volumes_root }}/turtl"
-    build: yes
-
-# - pause:
-#    seconds: 20
-
-# - name: Delete the Turtl Git checkout from the volume_root
-#  file:
-#    path: "{{ volumes_root }}/turtl/server"
-#    state: absent
 
 - name: Configure turtl systemd service.
   become: yes

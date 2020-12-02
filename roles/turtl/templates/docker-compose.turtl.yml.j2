@@ -10,14 +10,13 @@ networks:
 services:
   turtl-server:
     container_name: turtl
-    build:
-      context: ./server
+    image: voryzen/turtl-server:{{ turtl.version }}
     restart: unless-stopped
     networks:
       - traefik_network
       - turtl_internal
     depends_on:
-      db
+      db:
         conditon: service_healthy
     environment:
       TURTL_DB_HOST: db
@@ -39,7 +38,7 @@ services:
       - "traefik.http.services.turtl.loadbalancer.server.port=8181"
 {% include './labels.j2' %}
 
-  postgres-db:
+  db:
     container_name: turtl_db
     image: postgres:11-alpine
     environment:

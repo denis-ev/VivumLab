@@ -1444,6 +1444,7 @@ turtl:
   auth: {{ turtl.auth | default(False) }}
   domain: {{ turtl.domain| default(False) }}
   subdomain: {{ turtl.subdomain | default("turtl") }}
+  version: {{ turtl.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
