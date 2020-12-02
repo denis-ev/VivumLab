@@ -123,6 +123,7 @@ services:
   webtrees:
   webvirtmgr:
   wekan:
+  wificard:
   zammad:
   zulip:
 docs:
@@ -241,12 +242,13 @@ trilium:
 turtl:
 ubooquity:
 unificontroller:
-wekan:
 watchtower:
 wallabag:
 webdavserver:
 webtrees:
 webvirtmgr:
+wekan:
+wificard:
 zammad:
 zulip:
 enable_tinc: false
