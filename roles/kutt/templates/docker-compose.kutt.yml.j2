@@ -25,31 +25,32 @@ services:
       DB_NAME: kutt
       DB_USER: user
       DB_PASSWORD: {{ lookup('password', './settings/passwords/kutt_db_password chars=ascii_letters') }}
-      DB_SSL: false
+      DB_SSL:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       PORT: 3000
       SITE_NAME: {{ service_domain }}
       DEFAULT_DOMAIN: {{ service_domain }}
       LINK_LENGTH: 6
-      DISALLOW_REGISTRATION: false
-      DISALLOW_ANONYMOUS_LINKS: true
+      DISALLOW_REGISTRATION: "false"
+      DISALLOW_ANONYMOUS_LINKS: "true"
       USER_LIMIT_PER_DAY: 50
       NON_USER_COOLDOWN: 0
       DEFAULT_MAX_STATS_PER_LINK: 5000
-      CUSTOM_DOMAIN_USE_HTTPS: true
+      CUSTOM_DOMAIN_USE_HTTPS: "true"
       JWT_SECRET: {{ lookup('password', './settings/passwords/kutt_jwt_secret chars=ascii_letters') }}
       ADMIN_EMAILS: {{ admin_email }}
-      RECAPTCHA_SITE_KEY: false
-      RECAPTCHA_SECRET_KEY: false
+      RECAPTCHA_SITE_KEY:
+      RECAPTCHA_SECRET_KEY:
       # Google Cloud API to prevent from users from submitting malware URLs.
       # Get it from https://developers.google.com/safe-browsing/v4/get-started
-      GOOGLE_SAFE_BROWSING_KEY: false
-      GOOGLE_ANALYTICS: false # Example: UA-XXXX-XX
-      GOOGLE_ANALYTICS_UNIVERSAL: false
+      GOOGLE_SAFE_BROWSING_KEY:
+      GOOGLE_ANALYTICS: # Example: UA-XXXX-XX
+      GOOGLE_ANALYTICS_UNIVERSAL:
       MAIL_HOST: {{ vault.smtp.host }}
       MAIL_PORT: {{ vault.smtp.port }}
-      MAIL_SECURE: {% if vault.smtp.port == 587 %}true{% endif %}
+      MAIL_SECURE: {% if vault.smtp.port == 587 %}"true"
+{% endif %}
       MAIL_USER: {{ vault.smtp.user }}
       MAIL_FROM: {{ vault.smtp.from_email }}
       MAIL_PASSWORD: {{ vault.smtp.pass }}
