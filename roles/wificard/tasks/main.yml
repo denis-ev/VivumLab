@@ -8,7 +8,7 @@
 
 - name: Copy wificard docker-compose.yml file into place.
   template:
-    src: docker-compose.sui.yml.j2
+    src: docker-compose.wificard.yml.j2
     dest: "{{ volumes_root }}/wificard/docker-compose.yml"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
