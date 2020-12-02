@@ -1533,6 +1533,16 @@ wekan:
   amd64: False
   arm64: False
   armv7: False
+wificard:
+  enable: {{ wificard.enable | default(False) }}
+  https_only: {{ wificard.https_only | default(False) }}
+  auth: {{ wificard.auth | default(False) }}
+  domain: {{ wificard.domain | default(False) }}
+  subdomain: {{ wificard.subdomain | default("wificard") }}
+  version: {{ wificard.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 zammad:
   enable: {{ zammad.enable | default(False) }}
   https_only: {{ zammad.https_only | default(False) }}

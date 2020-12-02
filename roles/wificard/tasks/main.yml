@@ -1,0 +1,28 @@
+---
+- name: Make WiFicard directory.
+  file:
+    path: "{{ volumes_root }}/{{ item }}"
+    state: directory
+  with_items:
+    - "wificard"
+
+- name: Copy wificard docker-compose.yml file into place.
+  template:
+    src: docker-compose.sui.yml.j2
+    dest: "{{ volumes_root }}/wificard/docker-compose.yml"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+
+- name: Configure wificard systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/wificard.service
+
+- name: Start WiFiCard
+  systemd:
+    name: wificard
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes
