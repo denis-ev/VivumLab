@@ -10,7 +10,7 @@ networks:
 services:
   turtl-server:
     container_name: turtl
-    image: voryzen/turtl-server:latest
+    image: voryzen/turtl-server:{{ turtl.version }}
     restart: unless-stopped
     networks:
       - traefik_network
