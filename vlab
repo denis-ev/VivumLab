@@ -10,88 +10,33 @@ Bundler.require(:default)
 # Namespaced Task classes must be part of module Vlab and inherit from
 # SubCommandBase
 
-module Vlab
-  class SubCommandBase < Thor
-    class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-    class_option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image", :default => false
-    class_option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image", :default => false
-    class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
-    class_option :cache, :type => :boolean, :desc => "Allows the build to use the Cache", :default => true
+class Vlab < Thor
+  require './tasks/utils.rb'
+  include Utils
 
-    require './tasks/utils.rb'
-    include Utils
-    def self.banner(command, namespace = nil, subcommand = false)
-      "#{basename} #{subcommand_prefix} #{command.usage}"
-    end
+  class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
+  class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
 
-    def self.subcommand_prefix
-      self.name.gsub(%r{.*::}, '').gsub(%r{^[A-Z]}) { |match| match[0].downcase }.gsub(%r{[A-Z]}) { |match| "-#{match[0].downcase}" }
-    end
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5723c340 (new gems, and sanity checks complete.)
-
-    no_commands {
-      def invoke_subcommand(klass, task, *params)
-        fully_qualified_class_name = "::Vlab::#{klass}"
-        classConst = Object.const_get( fully_qualified_class_name )
-        classConst.new.invoke(task, params)
-      end
-    }
-<<<<<<< HEAD
+  # Next line loads all ruby files in tasks/**/*.rb
+  Dir["./tasks/**/*.rb"].each {|file| require file }
+  # If the included files are classes inheriting from Thor
+  # dynamically add them to the available tasks list.
+  # Note, we have to manually exclude *this* class.
+  ObjectSpace.each_object(Class).select { |c| c.superclass.to_s == "Thor" && c.to_s != 'Vlab'}.each do |klass|
+    desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
+    subcommand "#{klass.to_s.downcase}", Kernel.const_get("::#{klass.to_s}")
   end
 
-  class CLI < Thor
-    # Next line loads all ruby files in tasks/**/*.rb
-    Dir["./tasks/**/*.rb"].each {|file| require file }
-    # If the included files are classes inheriting from SubCommandBase
-    # dynamically add them to the available tasks list.
-    Vlab.constants.select {|c| (Vlab.const_get(c).is_a? Class) && (Vlab.const_get(c.to_s).superclass.to_s == "Vlab::SubCommandBase")}.each do |klass|
-      desc klass.to_s, "Use vlab #{klass} for more information"
-      subcommand "#{klass.to_s}", Kernel.const_get("Vlab::#{klass.to_s}")
-    end
-
-    # This method ensures that if we have an error, the resulting return code
-    # in the shell is not 0.
-    def self.exit_on_failure?
-      true
-=======
-=======
->>>>>>> 5723c340 (new gems, and sanity checks complete.)
+  desc "find_help", "Shows the user how to contact the VivumLab community"
+  def find_help
+    say TTY::Markdown.parse_file("docs/Contact-us.md")
   end
 
-  class CLI < Thor
-    # Next line loads all ruby files in tasks/**/*.rb
-    Dir["./tasks/**/*.rb"].each {|file| require file }
-    # If the included files are classes inheriting from SubCommandBase
-    # dynamically add them to the available tasks list.
-    Vlab.constants.select {|c| (Vlab.const_get(c).is_a? Class) && (Vlab.const_get(c.to_s).superclass.to_s == "Vlab::SubCommandBase")}.each do |klass|
-      desc klass.to_s, "Use vlab #{klass} for more information"
-<<<<<<< HEAD
-      subcommand "#{klass.to_s}", Kernel.const_get("App::#{klass.to_s}")
->>>>>>> 5a8a2b27 (WIP Thor based CLI)
-=======
-      subcommand "#{klass.to_s}", Kernel.const_get("Vlab::#{klass.to_s}")
-    end
-
-    # This method ensures that if we have an error, the resulting return code
-    # in the shell is not 0.
-    def self.exit_on_failure?
-      true
->>>>>>> a31cbf14 (A basic Thor CLI app)
-    end
+  # This method ensures that if we have an error, the resulting return code
+  # in the shell is not 0.
+  def self.exit_on_failure?
+    true
   end
 end
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Kick off the actual cli app.
-Vlab::CLI.start
-=======
-App::CLI.start
->>>>>>> 5a8a2b27 (WIP Thor based CLI)
-=======
-# Kick off the actual cli app.
-Vlab::CLI.start
->>>>>>> a31cbf14 (A basic Thor CLI app)
+Vlab.start
