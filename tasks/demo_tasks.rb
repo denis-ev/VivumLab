@@ -38,7 +38,11 @@ module Vlab
       output << "from: #{options[:from]}" if options[:from]
       output << "Hello #{name}"
       output = output.join("\n")
+<<<<<<< HEAD
       say options[:yell] ? output.upcase : output
+=======
+      puts options[:yell] ? output.upcase : output
+>>>>>>> a31cbf14... A basic Thor CLI app
     end
 
     # This task accepts options, one of which is required
@@ -53,7 +57,11 @@ module Vlab
       output << "from: #{options[:requiredParam]}"
       output << "Hello #{name}"
       output = output.join("\n")
+<<<<<<< HEAD
       say options[:yell] ? output.upcase : output
+=======
+      puts options[:yell] ? output.upcase : output
+>>>>>>> a31cbf14... A basic Thor CLI app
     end
 
     desc "fireShell", "Use this to fire and forget a shell command"
@@ -66,6 +74,7 @@ module Vlab
 
     desc "Demonstrate Optional PARAMs", "Demonstrates how to have optional parameters"
     def optional_demo(name, optional=nil)
+<<<<<<< HEAD
       say "name #{name}".blue # the .blue colorizes this output to be blue
       say "optional #{optional}".red # makes it red
     end
@@ -74,6 +83,10 @@ module Vlab
     option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     def enum_test()
       puts convert_debug_enum(options[:debug].to_sym)
+=======
+      puts "name #{name}".blue # the .blue colorizes this output to be blue
+      puts "optional #{optional}".red # makes it red
+>>>>>>> a31cbf14... A basic Thor CLI app
     end
   end
 end

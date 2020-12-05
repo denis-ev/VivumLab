@@ -56,18 +56,36 @@ module Vlab
   end
 
   class CLI < Thor
+    # Next line loads all ruby files in tasks/**/*.rb
     Dir["./tasks/**/*.rb"].each {|file| require file }
-    App.constants.select {|c| (App.const_get(c).is_a? Class) && (App.const_get(c.to_s).superclass.to_s == "App::SubCommandBase")}.each do |klass|
+    # If the included files are classes inheriting from SubCommandBase
+    # dynamically add them to the available tasks list.
+    Vlab.constants.select {|c| (Vlab.const_get(c).is_a? Class) && (Vlab.const_get(c.to_s).superclass.to_s == "Vlab::SubCommandBase")}.each do |klass|
       desc klass.to_s, "Use vlab #{klass} for more information"
+<<<<<<< HEAD
       subcommand "#{klass.to_s}", Kernel.const_get("App::#{klass.to_s}")
 >>>>>>> 5a8a2b27... WIP Thor based CLI
+=======
+      subcommand "#{klass.to_s}", Kernel.const_get("Vlab::#{klass.to_s}")
+    end
+
+    # This method ensures that if we have an error, the resulting return code
+    # in the shell is not 0.
+    def self.exit_on_failure?
+      true
+>>>>>>> a31cbf14... A basic Thor CLI app
     end
   end
 end
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Kick off the actual cli app.
 Vlab::CLI.start
 =======
 App::CLI.start
 >>>>>>> 5a8a2b27... WIP Thor based CLI
+=======
+# Kick off the actual cli app.
+Vlab::CLI.start
+>>>>>>> a31cbf14... A basic Thor CLI app
