@@ -27,6 +27,7 @@ module Vlab
     def self.subcommand_prefix
       self.name.gsub(%r{.*::}, '').gsub(%r{^[A-Z]}) { |match| match[0].downcase }.gsub(%r{[A-Z]}) { |match| "-#{match[0].downcase}" }
     end
+<<<<<<< HEAD
 
     no_commands {
       def invoke_subcommand(klass, task, *params)
@@ -51,9 +52,22 @@ module Vlab
     # in the shell is not 0.
     def self.exit_on_failure?
       true
+=======
+  end
+
+  class CLI < Thor
+    Dir["./tasks/**/*.rb"].each {|file| require file }
+    App.constants.select {|c| (App.const_get(c).is_a? Class) && (App.const_get(c.to_s).superclass.to_s == "App::SubCommandBase")}.each do |klass|
+      desc klass.to_s, "Use vlab #{klass} for more information"
+      subcommand "#{klass.to_s}", Kernel.const_get("App::#{klass.to_s}")
+>>>>>>> 5a8a2b27 (WIP Thor based CLI)
     end
   end
 end
 
+<<<<<<< HEAD
 # Kick off the actual cli app.
 Vlab::CLI.start
+=======
+App::CLI.start
+>>>>>>> 5a8a2b27 (WIP Thor based CLI)
