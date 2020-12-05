@@ -3,7 +3,13 @@ require 'rubygems'
 require 'bundler'
 Bundler.require(:default)
 
-module App
+# This file contains just enough code to bootstrap the CLI.
+# Bias towards putting actual tasks in namespaced files under
+# tasks/. ie: tasks/sanitychecks.rb
+# Namespaced Task classes must be part of module Vlab and inherit from
+# SubCommandBase
+
+module Vlab
   class SubCommandBase < Thor
     def self.banner(command, namespace = nil, subcommand = false)
       "#{basename} #{subcommand_prefix} #{command.usage}"
@@ -15,12 +21,22 @@ module App
   end
 
   class CLI < Thor
+    # Next line loads all ruby files in tasks/**/*.rb
     Dir["./tasks/**/*.rb"].each {|file| require file }
-    App.constants.select {|c| (App.const_get(c).is_a? Class) && (App.const_get(c.to_s).superclass.to_s == "App::SubCommandBase")}.each do |klass|
+    # If the included files are classes inheriting from SubCommandBase
+    # dynamically add them to the available tasks list.
+    Vlab.constants.select {|c| (Vlab.const_get(c).is_a? Class) && (Vlab.const_get(c.to_s).superclass.to_s == "Vlab::SubCommandBase")}.each do |klass|
       desc klass.to_s, "Use vlab #{klass} for more information"
-      subcommand "#{klass.to_s}", Kernel.const_get("App::#{klass.to_s}")
+      subcommand "#{klass.to_s}", Kernel.const_get("Vlab::#{klass.to_s}")
+    end
+
+    # This method ensures that if we have an error, the resulting return code
+    # in the shell is not 0.
+    def self.exit_on_failure?
+      true
     end
   end
 end
 
-App::CLI.start
+# Kick off the actual cli app.
+Vlab::CLI.start
