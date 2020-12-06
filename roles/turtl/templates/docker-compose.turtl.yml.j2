@@ -17,8 +17,7 @@ services:
       - traefik_network
       - turtl_internal
     depends_on:
-      db:
-        conditon: service_healthy
+      - db
     environment:
       TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
@@ -46,11 +45,6 @@ services:
       POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
       POSTGRES_USER: turtl
       POSTGRES_DB: turtl
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U turtl"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - turtl_internal
     volumes:
