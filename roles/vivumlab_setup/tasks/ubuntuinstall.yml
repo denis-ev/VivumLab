@@ -59,7 +59,9 @@
     state: absent
   when:
     - ansible_facts['distribution_major_version'] is version('16.04', '>=')
+    - "'vivumlab' in group_names"
   become: yes
+  ignore_errors: yes
 
 - name: Remove older docker.io based packages
   apt:
@@ -71,6 +73,7 @@
       - docker-engine
     state: absent
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Add an Apt signing key for the Docker-ce Repo
   apt_key:
@@ -78,12 +81,17 @@
     state: present
     validate_certs: no
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Add the Docker-ce Repo
   apt_repository:
-    repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
+    #repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
+    # The line above should works, but if you're not on Focal, will fail.
+    # The line below forces ubuntu to add the FOCAL dist repo.
+    repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} focal stable
     state: present
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Install Docker and containerd
   apt:
@@ -94,12 +102,14 @@
   tags:
     - dependencies
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Install Docker-compose
   pip:
     name: docker-compose
     executable: pip3
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Start Docker service
   systemd:
@@ -107,6 +117,7 @@
     daemon_reload: yes
     name: docker
   become: yes
+  when: "'vivumlab' in group_names"
 
 - name: Adding user to Docker group
   user:
@@ -114,3 +125,4 @@
     groups: docker
     append: true
   become: yes
+  when: "'vivumlab' in group_names"

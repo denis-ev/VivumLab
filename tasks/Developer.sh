@@ -25,7 +25,7 @@ Task::dev_setup(){
     colorize yellow "Let's try this now"
       sleep 2
     colorize light_yellow "Installing pre-commit"
-      curl https://pre-commit.com/install-local.py | python -
+      curl https://pre-commit.com/install-local.py | /usr/bin/env python3 -
     colorize light_red "if this fails, ensure you have python3 installed"
     colorize light_red "In future releases of VivumLab, VivumLab will assist in Python installation"
     sleep 1
