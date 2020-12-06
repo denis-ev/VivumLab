@@ -1444,6 +1444,7 @@ turtl:
   auth: {{ turtl.auth | default(False) }}
   domain: {{ turtl.domain| default(False) }}
   subdomain: {{ turtl.subdomain | default("turtl") }}
+  version: {{ turtl.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
@@ -1530,6 +1531,16 @@ wekan:
   subdomain: {{ wekan.subdomain | default("wekan") }}
   version: {{ wekan.version | default("latest") }}
   db_version: {{ wekan.db_version | default("3.2.12") }}
+  amd64: False
+  arm64: False
+  armv7: False
+wificard:
+  enable: {{ wificard.enable | default(False) }}
+  https_only: {{ wificard.https_only | default(False) }}
+  auth: {{ wificard.auth | default(False) }}
+  domain: {{ wificard.domain | default(False) }}
+  subdomain: {{ wificard.subdomain | default("wificard") }}
+  version: {{ wificard.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False

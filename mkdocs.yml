@@ -131,6 +131,7 @@ nav:
           - UnifiController: software/unificontroller.md
           - Watchtower: software/watchtower.md
           - WebTrees: software/webtrees.md
+          - Wificard: software/wificard.md
           - Zammad: software/zammad.md
       - Money, Budgeting and Management:
           - Firefly III: software/firefly.md
