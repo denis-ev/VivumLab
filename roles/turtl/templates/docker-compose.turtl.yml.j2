@@ -1,11 +1,13 @@
+#jinja2: trim_blocks:False
 ---
-version: '3'
+version: '2.4'
 
 networks:
   traefik_network:
     external:
       name: vivumlab_traefik
   turtl_internal:
+    name: turtl_internal
 
 services:
   turtl-server:
@@ -17,7 +19,7 @@ services:
       - turtl_internal
     depends_on:
       db:
-        conditon: service_healthy
+        condition: service_healthy
     environment:
       TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
