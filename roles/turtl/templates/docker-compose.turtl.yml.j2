@@ -17,7 +17,8 @@ services:
       - traefik_network
       - turtl_internal
     depends_on:
-      - db
+      db:
+        conditon: service_healthy
     environment:
       TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
