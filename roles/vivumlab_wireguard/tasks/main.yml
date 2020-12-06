@@ -6,13 +6,6 @@
     update_cache: yes
   when: (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "10")
 
-- name: Add the WireGuard PPA repository (Debian)
-  apt_repository:
-    repo: deb http://deb.debian.org/debian/ unstable main
-    state: present
-    update_cache: yes
-  when: (ansible_facts['distribution'] == "Debian") and (ansible_facts['distribution_major_version'] != "10" and ansible_facts['distribution_major_version'] != "11")
-
 - name: Install WireGuard (Ubuntu/ Debian)
   apt:
     name: "{{item}}"
@@ -33,69 +26,29 @@
     - wireguard-tools
   when: (ansible_facts['distribution'] == "CentOS")
 
+  # DO NOT REMOVE THIS TASK. Wireguard re-writes it's config file
+  # With the *in use config* whenever it's stopped or restarted.
+  # If you remove this task, WG will fail to pair on all subsequent
+  # deploys. You have been warned.
+- name: Disable WireGuard system service
+  shell: systemctl stop wg-quick@wg0
+  become: yes
+
 - name: Create WireGuard configurations directory
   file:
     dest: /etc/wireguard
     state: directory
 
-- name: Check to see if private key already exists
-  stat:
-    path: /etc/wireguard/privatekey
-  register: private_key
-
-- name: Generate WireGuard private and public keys
-  shell: umask 077 && wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
-  when: private_key.stat.exists == False
-
-- name: Register BastionServer WireGuard private key as a variable
+- name: Register WireGuard private key as a variable
   slurp:
     src: /etc/wireguard/privatekey
-  register: wg_bastion_server_private_key
-  when: "'bastion' in group_names"
+  register: wg_private_keys
 
-- name: Register HomeServer WireGuard private key as a variable
+
+- name: Register Wireguard *public* keys in a variable
   slurp:
-    src: /etc/wireguard/privatekey
-  register: wg_home_server_private_key
-  when: "'vivumlab' in group_names"
-
-- name: Fetch BastionServer Public Key
-  fetch:
     src: /etc/wireguard/publickey
-    dest: fetch/server_public_key
-    flat: true
-  when: "'bastion' in group_names"
-
-- name: Fetch HomeServer Public Key
-  fetch:
-    src: /etc/wireguard/publickey
-    dest: fetch/client_public_key
-    flat: true
-  when: "'vivumlab' in group_names"
-
-- name: Copy BastionServer public key to HomeServer
-  copy:
-    src: fetch/server_public_key
-    dest: /etc/wireguard/serverpublickey
-  when: "'vivumlab' in group_names"
-
-- name: Copy HomeServer public key to BastionServer
-  copy:
-    src: fetch/client_public_key
-    dest: /etc/wireguard/homeserverpublickey
-  when: "'bastion' in group_names"
-
-- name: Register BastionServer public key as a variable
-  slurp:
-    src: /etc/wireguard/serverpublickey
-  register: wg_bastion_server_public_key
-  when: "'vivumlab' in group_names"
-
-- name: Register HomeServer public key as a variable
-  slurp:
-    src: /etc/wireguard/homeserverpublickey
-  register: wg_home_server_public_key
-  when: "'bastion' in group_names"
+  register: wg_public_keys
 
 - name: Generate WireGuard server configuration file
   template:
@@ -104,7 +57,7 @@
     owner: root
     group: root
     mode: 0600
-    force: true
+    force: yes
   when: "'bastion' in group_names"
 
 - name: Generate WireGuard client configuration file
@@ -114,7 +67,7 @@
     owner: root
     group: root
     mode: 0600
-    force: true
+    force: yes
   when: "'vivumlab' in group_names"
 
 - name: Enable WireGuard system service

@@ -1,9 +1,9 @@
 [Interface]
 Address = {{ bastion.wireguard.bastion_vpn_address ~ bastion.wireguard.netmask }}
 ListenPort = {{ bastion.wireguard.port }}
-PrivateKey = {{ wg_bastion_server_private_key['content'] | b64decode }}
+PrivateKey = {{ hostvars.bastion_server.wg_private_keys.content | b64decode }}
 SaveConfig = true
 
 [Peer]
-PublicKey = {{ wg_home_server_public_key['content'] | b64decode }}
+PublicKey = {{ hostvars.myserver.wg_public_keys.content | b64decode }}
 AllowedIPs = {{ bastion.wireguard.vlab_vpn_address ~ bastion.wireguard.netmask }}
