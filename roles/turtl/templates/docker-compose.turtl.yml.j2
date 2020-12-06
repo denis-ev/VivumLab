@@ -45,6 +45,11 @@ services:
       POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
       POSTGRES_USER: turtl
       POSTGRES_DB: turtl
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U turtl"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - turtl_internal
     volumes:
