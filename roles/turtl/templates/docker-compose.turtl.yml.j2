@@ -16,8 +16,7 @@ services:
       - traefik_network
       - turtl_internal
     depends_on:
-      db:
-        conditon: service_healthy
+      - db
     environment:
       TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
@@ -27,9 +26,9 @@ services:
       TURTL_APP_SECURE_HASH_SALT: {{ lookup('password', './settings/passwords/turtl_hashsalt chars=ascii_letters,digits') }}
       TURTL_APP_API_URL: http{% if turtl.https_only %}s{% endif %}://{% if turtl.domain %}{{ turtl.domain }}{% else %}{{ service_domain }}{% endif %}
       TURTL_APP_WWW_URL: http{% if turtl.https_only %}s{% endif %}://{% if turtl.domain %}{{ turtl.domain }}{% else %}{{ service_domain }}{% endif %}
-      TURTL_EMAILS_ADMIN: "{{ admin_email }}"
-      TURTL_EMAILS_INFO: "{{ admin_email }}"
-      TURTL_EMAILS_INVITES: "{{ admin_email }}"
+      TURTL_EMAILS_ADMIN: {{ admin_email }}
+      TURTL_EMAILS_INFO: {{ admin_email }}
+      TURTL_EMAILS_INVITES: {{ admin_email }}
       TURTL_UPLOADS_URL: http{% if turtl.https_only %}s{% endif %}://{% if turtl.domain %}{{ turtl.domain }}{% else %}{{ service_domain }}{% endif %}/uploads
     volumes:
       - "{{ volumes_root }}/turtl/uploads:/uploads"
@@ -45,11 +44,6 @@ services:
       POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
       POSTGRES_USER: turtl
       POSTGRES_DB: turtl
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U turtl"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - turtl_internal
     volumes:
