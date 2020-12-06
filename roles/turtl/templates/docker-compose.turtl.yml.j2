@@ -1,6 +1,6 @@
 #jinja2: trim_blocks:False
 ---
-version: '3'
+version: '2.4'
 
 networks:
   traefik_network:
@@ -17,7 +17,8 @@ services:
       - traefik_network
       - turtl_internal
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       TURTL_DB_HOST: db
       TURTL_DB_PORT: 5432
@@ -45,6 +46,11 @@ services:
       POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
       POSTGRES_USER: turtl
       POSTGRES_DB: turtl
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U turtl"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - turtl_internal
     volumes:
