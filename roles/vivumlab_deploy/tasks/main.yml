@@ -8,7 +8,7 @@
     - "{{ volumes_root }}/traefik"
     - "{{ volumes_root }}/traefik/conf.d"
     - /etc/docker
-  become: True
+  become: yes
 
 - name: Copy VERSION file
   copy:
