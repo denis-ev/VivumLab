@@ -12,11 +12,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      — uses: actions/setup-node@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      — run: npm install
+      - name: NPM install
+        run: npm install
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
         id: semantic   # Need an `id` for output variables
@@ -46,11 +48,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      — uses: actions/setup-node@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      — run: npm install
+      - name: NPM install
+        run: npm install
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
         id: semantic   # Need an `id` for output variables
