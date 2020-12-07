@@ -1,0 +1,23 @@
+name: "Publish to Registry"
+on:
+  push:
+    release:
+      types: [published]
+    branches:
+      - master
+
+  schedule:
+    - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: steps.semantic.outputs.new_release_published == 'true'
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: vivumlab/vivumlab
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tag_semver: true
