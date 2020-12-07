@@ -10,9 +10,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Step 2
-        if: github.actor == github.event.repository.owner.login
       - name: Mirror action step
+        if: github.actor == github.event.repository.owner.login
         id: mirror
         uses: google/mirror-branch-action@v1.0
         with:
