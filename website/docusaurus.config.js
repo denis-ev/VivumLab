@@ -22,7 +22,7 @@ module.exports = {
       title: 'Vivumlab',
       logo: {
         alt: 'Vivumlab',
-        src: 'img/logo.svg',
+        src: 'logo250x75.png',
       },
       items: [
         {to: 'docs/welcome', label: 'Docs', position: 'left'},
