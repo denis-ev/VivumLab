@@ -26,4 +26,4 @@ repos:
         stages:
           - commit-msg
 
-exclude: 'vivumlablogo.txt'
+exclude: 'vendor/bundle/ruby/2.7.0/'

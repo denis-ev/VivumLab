@@ -22,8 +22,8 @@ module Vlab
     > $ vlab testing inBlue inRed
   LONGDESC
     def testing(param1, param2)
-      puts "param1 #{param1}".blue # the .blue colorizes this output to be blue
-      puts "param2 #{param2}".red # makes it red
+      say "param1 #{param1}".blue # the .blue colorizes this output to be blue
+      say "param2 #{param2}".red # makes it red
     end
 
     # This task accepts options, which are different from params
@@ -38,7 +38,7 @@ module Vlab
       output << "from: #{options[:from]}" if options[:from]
       output << "Hello #{name}"
       output = output.join("\n")
-      puts options[:yell] ? output.upcase : output
+      say options[:yell] ? output.upcase : output
     end
 
     # This task accepts options, one of which is required
@@ -53,7 +53,7 @@ module Vlab
       output << "from: #{options[:requiredParam]}"
       output << "Hello #{name}"
       output = output.join("\n")
-      puts options[:yell] ? output.upcase : output
+      say options[:yell] ? output.upcase : output
     end
 
     desc "fireShell", "Use this to fire and forget a shell command"
@@ -66,8 +66,8 @@ module Vlab
 
     desc "Demonstrate Optional PARAMs", "Demonstrates how to have optional parameters"
     def optional_demo(name, optional=nil)
-      puts "name #{name}".blue # the .blue colorizes this output to be blue
-      puts "optional #{optional}".red # makes it red
+      say "name #{name}".blue # the .blue colorizes this output to be blue
+      say "optional #{optional}".red # makes it red
     end
   end
 end

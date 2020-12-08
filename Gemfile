@@ -5,3 +5,6 @@ ruby '2.7.1'
 
 gem 'thor'
 gem 'colorize'
+gem 'httparty'
+gem 'dotenv'
+gem 'tty-command'
