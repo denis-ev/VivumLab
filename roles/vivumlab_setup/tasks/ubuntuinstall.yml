@@ -53,6 +53,12 @@
 - name: Timezone - reconfigure tzdata
   command: dpkg-reconfigure --frontend noninteractive tzdata
 
+- name: determine if snap is installed
+  shell: "which snap"
+  register: snap_installed
+  failed_when: "False"
+  ignore_errors: true
+
 - name: Ensure Docker is not installed via Snap
   snap:
     name: docker
@@ -60,6 +66,7 @@
   when:
     - ansible_facts['distribution_major_version'] is version('16.04', '>=')
     - "'vivumlab' in group_names"
+    - snap_installed.rc == 0
   become: yes
   ignore_errors: yes
 
