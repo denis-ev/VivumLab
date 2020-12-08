@@ -28,6 +28,9 @@ module Vlab
       self.name.gsub(%r{.*::}, '').gsub(%r{^[A-Z]}) { |match| match[0].downcase }.gsub(%r{[A-Z]}) { |match| "-#{match[0].downcase}" }
     end
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5723c340 (new gems, and sanity checks complete.)
 
     no_commands {
       def invoke_subcommand(klass, task, *params)
@@ -36,6 +39,7 @@ module Vlab
         classConst.new.invoke(task, params)
       end
     }
+<<<<<<< HEAD
   end
 
   class CLI < Thor
@@ -53,6 +57,8 @@ module Vlab
     def self.exit_on_failure?
       true
 =======
+=======
+>>>>>>> 5723c340 (new gems, and sanity checks complete.)
   end
 
   class CLI < Thor
