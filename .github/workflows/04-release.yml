@@ -23,7 +23,7 @@ jobs:
         uses: cycjimmy/semantic-release-action@v2
         id: semantic   # Need an `id` for output variables
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DE_PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
           branch: dev
@@ -59,7 +59,7 @@ jobs:
         uses: cycjimmy/semantic-release-action@v2
         id: semantic   # Need an `id` for output variables
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DE_PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
           branch: master

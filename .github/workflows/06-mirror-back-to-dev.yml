@@ -13,6 +13,6 @@ jobs:
       id: mirror
       uses: google/mirror-branch-action@v1.0
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.DE_PAT }}
         source: 'master'
         dest: 'dev'
