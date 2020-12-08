@@ -62,7 +62,7 @@ module Vlab
 
     desc "check_for_precommit", "Checks for the presence of Pre-commit"
     def check_for_precommit
-      if system("which pre-commit > /dev/null 2>&1")
+      if system("which pre-commit", :out => File::NULL)
         pre_commit_version = `pre-commit --version`.chomp.split(' ').last if $?.success?
         python_version = `python3 --version`.chomp.split(' ').last if $?.success?
         if python_version >= REQUIRED_PYTHON_VERSION
