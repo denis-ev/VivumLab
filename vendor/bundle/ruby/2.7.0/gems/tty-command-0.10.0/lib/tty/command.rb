@@ -103,7 +103,7 @@ module TTY
       cmd = command(*args)
       result = execute_command(cmd, &block)
       if result && result.failure?
-        raise ExitError.new(cmd.to_command, result)
+        #raise ExitError.new(cmd.to_command, result)
       end
       result
     end
