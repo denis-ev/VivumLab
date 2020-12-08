@@ -1,6 +1,13 @@
 module Utils
+  def current_version
+    @current_version ||= File.read("VERSION").chomp
+  end
+
+  def latest_version
+    @latest_version ||= HTTParty.get('https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION').chomp
+  end
+
   def run_docker(*params)
-    current_version = File.read("VERSION").chomp
     args = (not params.nil? && args.nil?) ? params : args
     executable = <<-DOCKERRUN
       docker run --rm -it \
@@ -10,8 +17,12 @@ module Utils
       -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
       vivumlab/vivumlab:#{current_version} #{args.join ' '}
     DOCKERRUN
-    cmd = TTY::Command.new(pty: true)
-    cmd.run(executable.chomp)
+    execute_in_shell(executable)
+  end
+
+  def execute_in_shell(params)
+    cmd = TTY::Command.new(pty: true, uuid: false)
+    cmd.run!(params.chomp)
   end
 
   def cat file
