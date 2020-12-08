@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'bundler'
+require 'securerandom'
 Bundler.require(:default)
 
 # This file contains just enough code to bootstrap the CLI.
@@ -11,6 +12,8 @@ Bundler.require(:default)
 
 module Vlab
   class SubCommandBase < Thor
+    require './tasks/utils.rb'
+    include Utils
     def self.banner(command, namespace = nil, subcommand = false)
       "#{basename} #{subcommand_prefix} #{command.usage}"
     end
@@ -18,6 +21,14 @@ module Vlab
     def self.subcommand_prefix
       self.name.gsub(%r{.*::}, '').gsub(%r{^[A-Z]}) { |match| match[0].downcase }.gsub(%r{[A-Z]}) { |match| "-#{match[0].downcase}" }
     end
+
+    no_commands {
+      def invoke_subcommand(klass, task, *params)
+        fully_qualified_class_name = "::Vlab::#{klass}"
+        classConst = Object.const_get( fully_qualified_class_name )
+        classConst.new.invoke(task, params)
+      end
+    }
   end
 
   class CLI < Thor
