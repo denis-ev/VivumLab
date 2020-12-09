@@ -6,7 +6,7 @@ on:
 
 jobs:
   release-dry-run:
-    if: "github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip ci')"
+    if: "github.event.client_payload.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
             @semantic-release/github
             @semantic-release/release-notes-generator
   release:
-    if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'skip ci')"
+    if: "github.event.client_payload.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
