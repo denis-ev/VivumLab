@@ -103,9 +103,5 @@ module Vlab
     def install_cli()
       execute_in_shell("sudo ln -s $PWD/vlab /usr/local/bin/vlab")
     end
-<<<<<<< HEAD
-
-=======
->>>>>>> bde7a499 (additional core tasks)
   end
 end
