@@ -101,5 +101,11 @@ module Vlab
       say "optional #{optional}".red # makes it red
 >>>>>>> 5723c340... new gems, and sanity checks complete.
     end
+
+    desc "enum_test", "tests enums"
+    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
+    def enum_test()
+      puts convert_debug_enum(options[:debug].to_sym)
+    end
   end
 end
