@@ -69,21 +69,14 @@ module Vlab
     desc "deploy", "Deploys VivumLab, configures it first if needed"
     option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
     option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :debug, :desc => "Debugs Ansible-playbook commands"
+    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
     option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def deploy()
       invoke_subcommand "Core", "logo"
       invoke 'build', [], {:force => options[:force], :build => options[:build], :cache => options[:cache]}
       say "Deploying Vivumlab".green
-      debug_flag = options[:debug] ? '-vvv' : ''
-      playbook_command = <<-PLAYBOOK
-      ansible-playbook playbook.vivumlab.yml #{debug_flag} \
-      --extra-vars="@#{options[:config_dir]}/config.yml" \
-      --extra-vars="@#{options[:config_dir]}/vault.yml" \
-      -i inventory
-      PLAYBOOK
-      run_docker(playbook_command)
+      run_playbook("playbook.vivumlab.yml", options)
     end
 
     desc "sync", "Syncs your settings git repo"
@@ -126,7 +119,7 @@ module Vlab
     desc "uninstall", "Uninstalls VivumLab"
     option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
     option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :debug, :desc => "Debugs Ansible-playbook commands"
+    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
     option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def deploy()
@@ -134,30 +127,15 @@ module Vlab
       invoke 'build', [], {:force => options[:force], :build => options[:build], :cache => options[:cache]}
       say "Uninstalling Vivumlab".red
       return unless yes? "Are you sure?"
-
-      debug_flag = options[:debug] ? '-vvv' : ''
-      playbook_command = <<-PLAYBOOK
-      ansible-playbook playbook.remove.yml #{debug_flag} \
-      --extra-vars="@#{options[:config_dir]}/config.yml" \
-      --extra-vars="@#{options[:config_dir]}/vault.yml" \
-      -i inventory
-      PLAYBOOK
-      run_docker(playbook_command)
+      run_playbook("playbook.remove.yml", options)
     end
 
     desc "restore", "Restores a server from backups. Assuming you ran them"
-    option :debug, :desc => "Debugs Ansible-playbook commands"
+    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
     def restore()
       say "Restoring..."
-      debug_flag = options[:debug] ? '-vvv' : ''
-      playbook_command = <<-PLAYBOOK
-      ansible-playbook prestore.yml #{debug_flag} \
-      --extra-vars="@#{options[:config_dir]}/config.yml" \
-      --extra-vars="@#{options[:config_dir]}/vault.yml" \
-      -i inventory
-      PLAYBOOK
-      run_docker(playbook_command)
+      run_playbook("playbook.restore.yml", options)
     end
 
     desc "install_cli", "Installs the CLI to /usr/local/bin so you can call vlab without ./"
