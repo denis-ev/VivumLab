@@ -35,13 +35,6 @@ jobs:
             @semantic-release/git
             @semantic-release/github
             @semantic-release/release-notes-generator
-      - name: Echo release
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          echo ${{ steps.semantic.outputs.new_release_version }}
-          echo ${{ steps.semantic.outputs.new_release_major_version }}
-          echo ${{ steps.semantic.outputs.new_release_minor_version }}
-          echo ${{ steps.semantic.outputs.new_release_patch_version }}
   release:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -77,3 +70,20 @@ jobs:
           echo ${{ steps.semantic.outputs.new_release_major_version }}
           echo ${{ steps.semantic.outputs.new_release_minor_version }}
           echo ${{ steps.semantic.outputs.new_release_patch_version }}
+      - name: Trigger next workflow
+        if: success()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.DE_PAT }}
+          repository: VivumLab/VivumLab
+          event-type: 05-docker-publish
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+
+      - name: Set final status check
+        if: failure()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.DE_PAT }}
+          repository: VivumLab/VivumLab
+          event-type: 07-final-status-check
+          client-payload: '{"success": false}'
