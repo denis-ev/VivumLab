@@ -69,5 +69,11 @@ module Vlab
       say "name #{name}".blue # the .blue colorizes this output to be blue
       say "optional #{optional}".red # makes it red
     end
+
+    desc "enum_test", "tests enums"
+    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
+    def enum_test()
+      puts convert_debug_enum(options[:debug].to_sym)
+    end
   end
 end
