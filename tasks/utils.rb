@@ -34,5 +34,14 @@ module Utils
     @ansible_vars ||= Dotenv.load 'tasks/ansible_bash.vars'
   end
 
-
+  def convert_debug_enum(level)
+    case level
+    when :warn
+      return '-v'
+    when :debug
+      return '-vv'
+    when :trace
+      return '-vvv'
+    end
+  end
 end
