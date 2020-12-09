@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: 'refs/heads/dev'
+          ref: 'dev'
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: 'refs/heads/master'
+          ref: 'master'
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
