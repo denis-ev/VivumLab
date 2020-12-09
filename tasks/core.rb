@@ -164,5 +164,6 @@ module Vlab
     def install_cli()
       execute_in_shell("sudo ln -s $PWD/vlab /usr/local/bin/vlab")
     end
+
   end
 end
