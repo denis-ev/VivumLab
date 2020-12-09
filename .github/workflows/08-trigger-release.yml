@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Mirror action step
-        if: ${{ github.actor == "denis-ev" OR github.actor == "voryzen" OR github.actor == "codefriar" }}
+        if: ${{ github.actor == 'denis-ev' || github.actor == 'voryzen' || github.actor == 'codefriar' }}
         id: mirror
         uses: google/mirror-branch-action@v1.0
         with:
