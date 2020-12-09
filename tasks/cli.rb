@@ -24,7 +24,7 @@ module Vlab
 
     desc "debug", "Launches Pry"
     def debug()
-      ::Vlab::SanityChecks.new.check_ssh_with_keys()
+      binding.pry
     end
 
     desc "docker_run", "runs a command inside the Vlab docker container"
