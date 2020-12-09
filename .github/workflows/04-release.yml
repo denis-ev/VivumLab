@@ -1,9 +1,8 @@
 name: "Release Workflow"
+
 on:
-  push:
-    branches:
-      - dev
-      - master
+  repository_dispatch:
+    types: [04-release]
 
 jobs:
   release-dry-run:
@@ -70,6 +69,7 @@ jobs:
           echo ${{ steps.semantic.outputs.new_release_major_version }}
           echo ${{ steps.semantic.outputs.new_release_minor_version }}
           echo ${{ steps.semantic.outputs.new_release_patch_version }}
+
       - name: Trigger next workflow
         if: success()
         uses: peter-evans/repository-dispatch@v1
