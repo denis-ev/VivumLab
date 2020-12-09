@@ -20,6 +20,16 @@ module Utils
     execute_in_shell(executable)
   end
 
+  def run_playbook(playbook, options)
+    playbook_command = <<-PLAYBOOK
+    ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
+    --extra-vars="@#{options[:config_dir]}/config.yml" \
+    --extra-vars="@#{options[:config_dir]}/vault.yml" \
+    -i inventory
+    PLAYBOOK
+    run_docker(playbook_command)
+  end
+
   def execute_in_shell(params)
     cmd = TTY::Command.new(pty: true, uuid: false)
     cmd.run!(params.chomp)
