@@ -100,3 +100,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tag_semver: true
+          tags: "latest,${{ steps.semantic.outputs.new_release_version }}"
