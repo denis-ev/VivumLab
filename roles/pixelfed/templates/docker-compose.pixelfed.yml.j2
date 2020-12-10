@@ -1,63 +1,77 @@
+#jinja2: trim_blocks:False
 ---
-version: '3'
+version: '2.4'
 
 networks:
   traefik_network:
     external:
       name: vivumlab_traefik
-  pixelfed:
+  pixelfed_internal:
+    name: pixelfed_internal
 
 services:
   pixelfed:
     container_name: pixelfed
-    image: ethibox/pixelfed:{{ pixelfed.version }}
+    image: voryzen/pixelfed:{{ pixelfed.version }}
     restart: unless-stopped
+    depends_on:
+      - worker
+    env_file:
+      - "{{ volumes_root }}/pixelfed/pixelfed.env"
     networks:
       - traefik_network
-      - pixelfed
+      - pixelfed_internal
+    volumes:
+      - "{{ volumes_root }}/pixelfed/storage:/var/www/storage"
+      - "{{ volumes_root }}/pixelfed/pixelfed.env:/var/www/.env"
     labels:
       - "traefik.http.services.pixelfed.loadbalancer.server.scheme=http"
       - "traefik.http.services.pixelfed.loadbalancer.server.port=80"
 {% include './labels.j2' %}
-    env_file:
-      - "{{ volumes_root }}/pixelfed/pixelfed.env"
-    volumes:
-      - "{{ volumes_root }}/pixelfed/storage:/var/www/storage"
 
 # Comment this whole block if HORIZON_EMBED is true.
   worker:
     container_name: pixelfed_worker
-    image: ethibox/pixelfed
+    image: voryzen/pixelfed:{{ pixelfed.version }}
     restart: unless-stopped
+    command: gosu www-data php artisan horizon
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     env_file:
       - "{{ volumes_root }}/pixelfed/pixelfed.env"
+    networks:
+      - pixelfed_internal
     volumes:
       - "{{ volumes_root }}/pixelfed/storage:/var/www/storage"
-    networks:
-      - pixelfed
-    command: gosu www-data php artisan horizon
 
   db:
     container_name: pixelfed_db
     image: mariadb:{{ pixelfed.db_version }}
     restart: unless-stopped
-    networks:
-      - pixelfed
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--user=pixelfed", "--password={{ lookup('password', './settings/passwords/pixelfed_db_password chars=ascii_letters length=15') }}", "--silent"]
     environment:
       - MYSQL_DATABASE=pixelfed
       - MYSQL_USER=pixelfed
       - MYSQL_PASSWORD={{ lookup('password', './settings/passwords/pixelfed_db_password chars=ascii_letters length=15') }}
-      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/passwords/pixelfed_db_root_password chars=ascii_letters length=15') }}
+    networks:
+      - pixelfed_internal
     volumes:
-      - "{{ volumes_root }}/pixelfed/mariadb:/var/lib/mysql"
+      - "{{ volumes_root }}/pixelfed/db:/var/lib/mysql"
 
   redis:
     container_name: pixelfed_redis
-    image: redis:5-alpine
+    image: redis:{{pixelfed.redis_version}}
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    networks:
+      - pixelfed_internal
     volumes:
       - "{{ volumes_root }}/pixelfed/redis:/data"
-    networks:
-      - pixelfed
     command: >
      --requirepass {{ lookup('password', './settings/passwords/pixelfed_redis_password chars=ascii_letters length=15') }}
