@@ -21,15 +21,17 @@ module Vlab
 
     desc "remote", "Remote Server sanity checks"
     def remote()
+      say "Verifying SSH Keys, and the ability to remotely log in to your vLab server via passwordless ssh".yellow
       invoke check_ssh_keys
       invoke check_ssh_with_keys
+      say "SSH Keys good to go".green
     end
 
     desc "check_for_settings", "Verifies settings exist"
     def check_for_settings
-      FileUtils.mkdir_p 'settings/passwords'
-      File.write("settings/config.yml", "blank_on_purpose: True") unless File.exist? "settings/config.yml"
-      File.write("settings/vault.yml", "blank_on_purpose: True") unless File.exist? "settings/vault.yml"
+      FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
+      File.write("#{options[:config_dir]}/config.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/config.yml"
+      File.write("#{options[:config_dir]}/vault.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/vault.yml"
       File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
     end
 

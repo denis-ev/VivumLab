@@ -12,9 +12,7 @@ module Vlab
       say "You have version #{current_version} and #{latest_version} is the latest".blue
       say "You're up to date".green if current_version == latest_version
       cat "MOTD"
-
       invoke_subcommand "SanityChecks", "local"
-
     end
 
     desc "generate_ansible_pass", "Creates a new Vault Password"
@@ -40,9 +38,6 @@ module Vlab
     end
 
     desc "build", "Forces a rebuild/repull of the Vlab Docker image"
-    option :cache, :type => :boolean, :default => true
-    option :force, :type => :boolean, :default => false
-    option :build, :type => :boolean, :default => false
     def build()
       # if cache is ok, just pull, because if we're on the latest, cache will have it
       if options[:cache] and not options[:force]
@@ -67,11 +62,6 @@ module Vlab
     end
 
     desc "deploy", "Deploys VivumLab, configures it first if needed"
-    option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
-    option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
-    option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-    option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def deploy()
       invoke_subcommand "Core", "logo"
       invoke 'build', [], {:force => options[:force], :build => options[:build], :cache => options[:cache]}
@@ -79,49 +69,27 @@ module Vlab
       run_playbook("playbook.vivumlab.yml", options)
     end
 
-    desc "sync", "Syncs your settings git repo"
-    def sync
-      cmd = TTY::Command.new(pty: true, uuid: false, printer: :progress)
-      if Dir.exist? "settings/.git"
-        say "Synching settings via Git".green
-        FileUtils.mkdir_p 'settings/.git/hooks'
-        FileUtils.cp 'git_sync_pre_commit', 'settings/.git/hooks/pre-commit'
-        FileUtils.chmod '+x', 'settings/.git/hooks/pre-commit'
-        cmd.run!("git pull", chdir: "settings/")
-        cmd.run!("git add . > /dev/null", chdir: "settings/")
-        cmd.run!("git commit -a -m 'Settings update' || true", chdir: "settings/")
-        cmd.run!("git push > /dev/null", chdir: "settings/")
-      else
-        say "Warning! Your settings directory is not setup as a Git Repository. Make sure to back them up using some other method. https://vivumlab.com/setup/installation/#syncing-settings-via-git ".light_red
-      end
-    end
-
     desc "encrypt", "Encrypts the Vault"
     def encrypt()
       say "Encrypting the vault".red
-      result = run_docker("ansible-vault encrypt settings/vault.yml")
+      result = run_docker("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
       user_info = Etc.getpwnam(Etc.getlogin)
-      execute_in_shell("sudo chmod 640 settings/vault.yml")
-      execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} settings/vault.yml")
+      execute_in_shell("sudo chmod 640 #{options[:config_dir]}/vault.yml")
+      execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} #{options[:config_dir]}/vault.yml")
       say "Vault Encrypted".green if result.success? or result.out.include? "input is already encrypted"
     end
 
     desc "decrypt", "Decrypts the Vault"
     def decrypt()
       say "Decrypting the vault"
-      result = run_docker("ansible-vault decrypt settings/vault.yml")
+      result = run_docker("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
       user_info = Etc.getpwnam(Etc.getlogin)
-      execute_in_shell("sudo chmod 640 settings/vault.yml")
-      execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} settings/vault.yml")
+      execute_in_shell("sudo chmod 640 #{options[:config_dir]}/vault.yml")
+      execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} #{options[:config_dir]}/vault.yml")
       say "Vault Decrypted".green if result.success? or result.out.include? "is not a vault encrypted file"
     end
 
     desc "uninstall", "Uninstalls VivumLab"
-    option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
-    option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
-    option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-    option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def uninstall()
       invoke_subcommand "Core", "logo"
       invoke 'build', [], options
@@ -131,8 +99,6 @@ module Vlab
     end
 
     desc "restore", "Restores a server from backups. Assuming you ran them"
-    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
-    option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
     def restore()
       say "Restoring..."
       run_playbook("playbook.restore.yml", options)
