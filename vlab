@@ -13,6 +13,12 @@ Bundler.require(:default)
 
 module Vlab
   class SubCommandBase < Thor
+    class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
+    class_option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image", :default => false
+    class_option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image", :default => false
+    class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
+    class_option :cache, :type => :boolean, :desc => "Allows the build to use the Cache", :default => true
+
     require './tasks/utils.rb'
     include Utils
     def self.banner(command, namespace = nil, subcommand = false)
