@@ -54,4 +54,28 @@ module Utils
       return '-vvv'
     end
   end
+
+  def hash_to_a(object)  # { 3 => 4 }
+    return object unless object.is_a? Hash
+      object.map do |k, v|
+      [hash_to_a(k), hash_to_a(v)]
+    end
+  end
+
+  def last_good_key(hsh, key)
+    # binding.pry
+    while true do
+      key_bad = hsh.instance_eval(key) rescue nil
+      if key_bad.nil?  # if the user specified key is bad
+        parts = key.split('.') # break that key up into an array of strings
+        return nil if parts.size() == 1
+        key = parts.take(parts.size() -1).join('.') # reset the key to be one section shorter. ie: sui.enabled -> sui
+        # restart the loop.
+      else
+        # the provided key (or shortened key) is valid
+        break # stop the loop
+      end
+    end
+    return key # return the current, valid key.
+  end
 end

@@ -122,9 +122,9 @@ module Vlab
     option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
     option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
-    def deploy()
+    def uninstall()
       invoke_subcommand "Core", "logo"
-      invoke 'build', [], {:force => options[:force], :build => options[:build], :cache => options[:cache]}
+      invoke 'build', [], options
       say "Uninstalling Vivumlab".red
       return unless yes? "Are you sure?"
       run_playbook("playbook.remove.yml", options)
