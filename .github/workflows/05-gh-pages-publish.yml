@@ -16,20 +16,17 @@ jobs:
   checks:
     if: github.event_name != 'push'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: website
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
       - run: ./vlab ci
-        working-directory: /
       - name: Test Build
         run: |
           yarn install --frozen-lockfile
           npm run build
+        working-directory: website
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-18.04
@@ -43,6 +40,9 @@ jobs:
         uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
+
+      - run: ./vlab ci
+        working-directory: ../
 
       - name: Get yarn cache
         id: yarn-cache
