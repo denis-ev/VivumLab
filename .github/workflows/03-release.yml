@@ -93,11 +93,3 @@ jobs:
           github-token: ${{ secrets.DE_PAT }}
           source: 'master'
           dest: 'dev'
-      - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: vivumlab/vivumlab
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tag_semver: true
-          tags: "latest,${{ steps.semantic.outputs.new_release_version }}"
