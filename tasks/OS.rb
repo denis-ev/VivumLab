@@ -22,7 +22,7 @@ module OS
   end
 
   def OS.service?
-    `which serice`
+    `which service`
     OS.linux? and $?.success? and not OS.systemctl?
   end
 
