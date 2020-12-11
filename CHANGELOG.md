@@ -1,3 +1,46 @@
+### [0.5.2](https://github.com/VivumLab/VivumLab/compare/v0.5.1...v0.5.2) (2020-12-10)
+
+
+### Bug Fixes
+
+* **service:** :pencil2: fix typo ([#215](https://github.com/VivumLab/VivumLab/issues/215)) ([9388c19](https://github.com/VivumLab/VivumLab/commit/9388c191aa86f3baa00a32829cd1dcc9f71c72e6))
+* **ci:** fix docker-publish lint ([#213](https://github.com/VivumLab/VivumLab/issues/213)) ([5765f59](https://github.com/VivumLab/VivumLab/commit/5765f59171dd94ce21662490ceecd7f5229ddb6c))
+
+### [0.5.1](https://github.com/VivumLab/VivumLab/compare/v0.5.0...v0.5.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* **ci:** fix docker-publish workflow ([#212](https://github.com/VivumLab/VivumLab/issues/212)) ([e5b2de9](https://github.com/VivumLab/VivumLab/commit/e5b2de9443a8750ee8ba5f20fa5cbdead5d63086))
+
+## [0.5.0](https://github.com/VivumLab/VivumLab/compare/v0.4.0...v0.5.0) (2020-12-09)
+
+
+### Features
+
+* **service:** add kutt ([#180](https://github.com/VivumLab/VivumLab/issues/180)) ([cab85e2](https://github.com/VivumLab/VivumLab/commit/cab85e2271e11c3e8c430897228a6822cb62d6ee))
+* **service:** add wificard ([#182](https://github.com/VivumLab/VivumLab/issues/182)) ([1f1a15e](https://github.com/VivumLab/VivumLab/commit/1f1a15e374fa9d842dffa87ff7f1a278ab44d242))
+* **core:** allows user to create/use different config files ([#133](https://github.com/VivumLab/VivumLab/issues/133)) ([cb5e885](https://github.com/VivumLab/VivumLab/commit/cb5e88534285a47a04d2020383a4333ebf8b133d))
+* **service:** service/adds hastebin ([#145](https://github.com/VivumLab/VivumLab/issues/145)) ([977b8bd](https://github.com/VivumLab/VivumLab/commit/977b8bd179ffd99095c70b8940f1e72a5a40b601))
+
+
+### Bug Fixes
+
+* **core:** add new package wizard ([#118](https://github.com/VivumLab/VivumLab/issues/118)) ([0510d1a](https://github.com/VivumLab/VivumLab/commit/0510d1afaf08dfd2901139520f6863f0447f37e2))
+* **sui:** fix for SUI not working ([#166](https://github.com/VivumLab/VivumLab/issues/166)) ([b7f9f7a](https://github.com/VivumLab/VivumLab/commit/b7f9f7a0d7619622022e2c58591b7d5cb95422d6))
+* **service:** fixes turtl ([#181](https://github.com/VivumLab/VivumLab/issues/181)) ([269de05](https://github.com/VivumLab/VivumLab/commit/269de05453c42cbd017555853ab6558053c28152))
+* **wireguard:** fixing wireguard key exchange ([#187](https://github.com/VivumLab/VivumLab/issues/187)) ([89d471b](https://github.com/VivumLab/VivumLab/commit/89d471baeb427f84e92b0c73d05edcd5ceb7d20b))
+* **service:** kutt docker-compose.yml ([#186](https://github.com/VivumLab/VivumLab/issues/186)) ([c40e6a2](https://github.com/VivumLab/VivumLab/commit/c40e6a2726b032323406148888060dacaade9fb3))
+* latest unbound variable error ([#153](https://github.com/VivumLab/VivumLab/issues/153)) ([c5b9fdf](https://github.com/VivumLab/VivumLab/commit/c5b9fdff1bd8b4353c06cf70eb02e2f3d22d6cb6))
+* **ci:** pre-commit should not run on push master or dev ([#191](https://github.com/VivumLab/VivumLab/issues/191)) ([192b411](https://github.com/VivumLab/VivumLab/commit/192b4118f04e3aa3e50fbe306b040ba581746982))
+* **travis:** travis build instead of pull docker images ([#174](https://github.com/VivumLab/VivumLab/issues/174)) ([7bfae96](https://github.com/VivumLab/VivumLab/commit/7bfae964d22782fbb8dcaf027a960e62e2e6e66a))
+* **service:** wificard main.yml ([#185](https://github.com/VivumLab/VivumLab/issues/185)) ([b37505f](https://github.com/VivumLab/VivumLab/commit/b37505fb938d0ebeda2654bbb0998f65c7d8c7cd))
+
+
+### Reverts
+
+* **core:** allows user to create/use different config files ([#133](https://github.com/VivumLab/VivumLab/issues/133)) ([#160](https://github.com/VivumLab/VivumLab/issues/160)) ([3ad5d77](https://github.com/VivumLab/VivumLab/commit/3ad5d77f9b2cceb241363abc855aa5d2396f0e57))
+
 ## [0.4.0](https://github.com/VivumLab/VivumLab/compare/v0.3.1...v0.4.0) (2020-11-02)
 
 
