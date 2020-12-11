@@ -2,7 +2,6 @@
 require 'rubygems'
 require 'bundler'
 require 'securerandom'
-require 'pry'
 Bundler.require(:default)
 
 # This file contains just enough code to bootstrap the CLI.
