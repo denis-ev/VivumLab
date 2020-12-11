@@ -2,9 +2,9 @@
 
 Enabling the TICK stack enables Telegraf, [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/), Chronograf, and Kapacitor.
 
-[InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/) is the Time Series Database that [Darksky](software/darksky) writes to and [Grafana](software/grafana) can visualize.
+[InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/) is the Time Series Database that [Darksky](darksky) writes to and [Grafana](grafana) can visualize.
 
-It can also take data from [Home Assistant](software/homeassistant) and many other sources.
+It can also take data from [Home Assistant](homeassistant) and many other sources.
 
 ![amd64](https://img.shields.io/badge/{% if not tick.amd64 %}untested{% else %}{{ tick.amd64 }}{% endif %}-amd64-{% if not tick.amd64 %}inactive{% elif tick.amd64 == "verified" %}success{% elif tick.amd64 == "supported" %}informational{% elif tick.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not tick.arm64 %}untested{% else %}{{ tick.arm64 }}{% endif %}-arm64-{% if not tick.arm64 %}inactive{% elif tick.arm64 == "verified" %}success{% elif tick.arm64 == "supported" %}informational{% elif tick.arm64 == "unsupported" %}critical{% endif %}?style=flat)

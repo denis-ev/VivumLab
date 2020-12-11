@@ -1,6 +1,6 @@
 # Darksky
 
-[darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb) pulls in weather data for your location every 2 minutes from [Darksky](http://darksky.net/) and saves it to your [InfluxDB](software/influxdb) instance.
+[darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb) pulls in weather data for your location every 2 minutes from [Darksky](http://darksky.net/) and saves it to your [InfluxDB](tick) instance.
 
 ![amd64](https://img.shields.io/badge/{% if not dark_sky.amd64 %}untested{% else %}{{ dark_sky.amd64 }}{% endif %}-amd64-{% if not dark_sky.amd64 %}inactive{% elif dark_sky.amd64 == "verified" %}success{% elif dark_sky.amd64 == "supported" %}informational{% elif dark_sky.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not dark_sky.arm64 %}untested{% else %}{{ dark_sky.arm64 }}{% endif %}-arm64-{% if not dark_sky.arm64 %}inactive{% elif dark_sky.arm64 == "verified" %}success{% elif dark_sky.arm64 == "supported" %}informational{% elif dark_sky.arm64 == "unsupported" %}critical{% endif %}?style=flat)
@@ -42,7 +42,7 @@ run: **`vlab update_one service=dark_sky`**
 
 ## Access
 
-There is no direct access to it, but you can create graphs via [Grafana](software/grafana) to visualize it.
+There is no direct access to it, but you can create graphs via [Grafana](grafana) to visualize it.
 
 ## OPTIONS
 

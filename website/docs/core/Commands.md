@@ -131,7 +131,7 @@ Options: none
     example: **`./vlab install_cli`**
 
 #### service_edit
-Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Next Steps](Next-Step.md) for more information.
+Allows the user to make changes to the way a specified service is deployed, without making changes to the core/provided files. See [Getting-Started](Getting-Started) for more information.
 Options: debug, service
     example (editing Jellyfin): **`vlab service_edit service=jellyfin`**
 

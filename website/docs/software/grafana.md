@@ -42,12 +42,12 @@ run: **`vlab update_one service=grafana`**
 
 #### ADMINISTRATOR SETUP
 
-You can use it to visualize the Weather data imported by [influxdb_darksky](software/influxdb_darksky),
-power, activity, and other data from [Home Assistant](software/homeassistant), and general server
+You can use it to visualize the Weather data imported by [influxdb_darksky](darksky),
+power, activity, and other data from [Home Assistant](homeassistant), and general server
 information via Telegraf.
 
 Grafana comes configured with a Dashboard and Datasource connected for you out of the box. This default
-dash and datasource will only with if you have the [TICK](software/tick) stack enabled.
+dash and datasource will only with if you have the [TICK](tick) stack enabled.
 
 You can login with the default user and pass you setup for VivumLab.
 
