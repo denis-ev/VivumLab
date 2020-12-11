@@ -7,7 +7,7 @@ module Utils
     @latest_version ||= HTTParty.get('https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION').chomp
   end
 
-  def run_docker(*params)
+  def generate_docker_executable_call(*params)
     args = (not params.nil? && args.nil?) ? params : args
     executable = <<-DOCKERRUN
       docker run --rm -it \
@@ -17,7 +17,14 @@ module Utils
       -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
       vivumlab/vivumlab:#{current_version} #{args.join ' '}
     DOCKERRUN
-    execute_in_shell(executable)
+  end
+
+  def run_docker(*params)
+    execute_in_shell(generate_docker_executable_call(params))
+  end
+
+  def exec_docker(*params)
+    exec generate_docker_executable_call(params)
   end
 
   def run_playbook(playbook, options, extra="")
@@ -43,6 +50,10 @@ module Utils
   def ansible_vars()
     # Load the .env file found in tasks/ansible_bash.vars
     @ansible_vars ||= Dotenv.load 'tasks/ansible_bash.vars'
+  end
+
+  def config_file
+    @config_file ||= Hashie::Mash.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
   end
 
   def convert_debug_enum(level)

@@ -32,11 +32,6 @@ module Vlab
       end
     end
 
-    desc "show", "Show the docs for the specified service"
-    def show(service)
-      puts TTY::Markdown.parse_file("docs/software/#{service}.md")
-    end
-
     desc "build", "Forces a rebuild/repull of the Vlab Docker image"
     def build()
       # if cache is ok, just pull, because if we're on the latest, cache will have it
