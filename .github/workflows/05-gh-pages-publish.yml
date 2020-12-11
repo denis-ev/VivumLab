@@ -43,7 +43,7 @@ jobs:
           node-version: '12.x'
 
       - run: "curl https://pre-commit.com/install-local.py | /usr/bin/env python -"
-      - run: ./vlab ci
+      - run: "source ~/.profile && ./vlab ci"
         working-directory: ../
 
       - name: Get yarn cache
