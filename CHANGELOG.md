@@ -1,3 +1,11 @@
+### [0.5.2](https://github.com/VivumLab/VivumLab/compare/v0.5.1...v0.5.2) (2020-12-10)
+
+
+### Bug Fixes
+
+* **service:** :pencil2: fix typo ([#215](https://github.com/VivumLab/VivumLab/issues/215)) ([9388c19](https://github.com/VivumLab/VivumLab/commit/9388c191aa86f3baa00a32829cd1dcc9f71c72e6))
+* **ci:** fix docker-publish lint ([#213](https://github.com/VivumLab/VivumLab/issues/213)) ([5765f59](https://github.com/VivumLab/VivumLab/commit/5765f59171dd94ce21662490ceecd7f5229ddb6c))
+
 ### [0.5.1](https://github.com/VivumLab/VivumLab/compare/v0.5.0...v0.5.1) (2020-12-09)
 
 
