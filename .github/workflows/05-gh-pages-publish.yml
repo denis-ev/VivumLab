@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.x'
-      - run: "curl https://pre-commit.com/install-local.py | /usr/bin/env python3 -"
+      - run: "curl https://pre-commit.com/install-local.py | /usr/bin/env python -"
       - run: ./vlab ci
       - name: Test Build
         run: |
@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - run: "curl https://pre-commit.com/install-local.py | /usr/bin/env python3 -"
+      - run: "curl https://pre-commit.com/install-local.py | /usr/bin/env python -"
       - run: ./vlab ci
         working-directory: ../
 
