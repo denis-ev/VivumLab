@@ -4,52 +4,68 @@ module Vlab
     desc "remove_one", "Removes the specified service from the VivumLab server"
     option :service, :type => :string, :required => true, desc: "Name of service"
     def remove_one()
-      invoke_subcommand "Core", "logo"
-      invoke_subcommand "Core", "build"
-      invoke_subcommand "Git", "sync"
-      invoke_subcommand "Config", "config"
+      run_common()
       say "Removing data for service: #{options[:service]}"
-      extra = "{\"services\":[\"#{options[:service]}\"]}"
-      run_playbook("playbook.remove.yml", options,  extra)
+      run_playbook("playbook.remove.yml", options,  limit_to_service)
     end
 
     desc "reset_one", "Resets the specified service's files on the server "
     option :service, :type => :string, :required => true, desc: "Name of service"
     def reset_one()
-      invoke_subcommand "Core", "logo"
-      invoke_subcommand "Core", "build"
-      invoke_subcommand "Git", "sync"
-      invoke_subcommand "Config", "config"
+      run_common()
       extra = "{\"services\":[\"#{options[:service]}\"]}"
-      run_playbook("playbook.stop.yml", options, extra)
-      run_playbook("playbook.remove.yml", options, extra)
-      extra += " -t deploy "
-      run_playbook("playbook.vivumlab.yml", options,  extra)
+      run_playbook("playbook.stop.yml", options, limit_to_service)
+      run_playbook("playbook.remove.yml", options, limit_to_service)
+      extra = " -t deploy "
+      run_playbook("playbook.vivumlab.yml", options, limit_to_service + extra)
 
       say "Reset #{options[:service]}"
     end
 
-    # desc "stop_one", "Stops the specified service"
-    # option :service, :type => :string, :required => true, desc: "Name of service"
-    # def stop_one()
-    #   invoke_subcommand "Core", "logo"
-    #   invoke_subcommand "Core", "build"
-    #   invoke_subcommand "Git", "sync"
-    #   invoke_subcommand "Config", "config"
-    #   extra = "{\"services\":[\"#{options[:service]}\"]}"
-    #   run_playbook("playbook.stop.yml", extra)
-    # end
-
-    desc "stop", "Stops ALL services"
+    desc "stop", "Stops all services, or a selected service if you specify --service"
     option :service, :type => :string, desc: "Optional name of service. Without, it stops all services."
     def stop()
-      invoke_subcommand "Core", "logo"
-      invoke_subcommand "Core", "build"
-      invoke_subcommand "Git", "sync"
-      invoke_subcommand "Config", "config"
-      extra = "{\"services\":[\"#{options[:service]}\"]}" unless options[:service].nil?
-
-      # run_playbook("playbook.stop.yml", options, extra)
+      run_common()
+      run_playbook("playbook.stop.yml", options, limit_to_service)
     end
+
+    desc "restart", "Restart all services, or a selected service if you specify --service"
+    option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
+    def restart()
+      run_common()
+      run_playbook("playbook.restart.yml", options, limit_to_service)
+    end
+
+    desc "update", "Updates all services, or a selected service if you specify --service"
+    option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
+    def update()
+      run_common()
+      run_playbook("playbook.vivumlab.yml", options, limit_to_service)
+      run_playbook("playbook.restart.yml", options, limit_to_service)
+    end
+
+    desc "show", "Show the docs for the specified service"
+    def show(service)
+      puts TTY::Markdown.parse_file("docs/software/#{service}.md")
+    end
+
+    desc "customize_service", "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+    option :service, type: :string, required: true, desc: "The name of the service to create an override file for"
+    def customize_service
+      run_playbook("playbook.service-edit.yml", options, limit_to_service)
+    end
+
+    no_tasks {
+      def limit_to_service()
+        "{\"services\":[\"#{options[:service]}\"]}" unless options[:service].nil?
+      end
+
+      def run_common
+        invoke_subcommand "Core", "logo"
+        invoke_subcommand "Core", "build"
+        invoke_subcommand "Git", "sync"
+        invoke_subcommand "Config", "config"
+      end
+    }
   end
 end

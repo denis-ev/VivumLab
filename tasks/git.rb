@@ -1,7 +1,6 @@
 module Vlab
   class Git < SubCommandBase
 
-
     desc "sync", "Syncs your settings git repo"
     def sync
       cmd = TTY::Command.new(pty: true, uuid: false, printer: :progress)
@@ -17,6 +16,12 @@ module Vlab
       else
         say "Warning! Your settings directory is not setup as a Git Repository. Make sure to back them up using some other method. https://vivumlab.com/setup/installation/#syncing-settings-via-git ".light_red
       end
+    end
+
+    desc "track", "Allows you to switch between different branches or tags of Vlab"
+    option :branch, :required => true, :type => :string, :desc => "The name of the branch, or tag you'd like to use"
+    def track()
+      execute_in_shell("git checkout #{options[:branch]}")
     end
 
   end
