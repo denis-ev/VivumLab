@@ -8,6 +8,7 @@ fetch/
 .DS_Store
 pkg/
 venv/
+vendor/
 
 # swp files
 *.swp
@@ -16,6 +17,7 @@ bootstrap_install/server_credentials
 
 # User Specific
 settings/
+settings_*/
 tasks/ansible_bash.vars
 package_template/tmp_service
 package_template/tmp*.yml
