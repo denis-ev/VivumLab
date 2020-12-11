@@ -30,15 +30,15 @@
 - name: Copy docs md files into place
   template:
     src: "{{ item.src }}"
-    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
-  with_filetree: docs/
+    dest: "{{ volumes_root }}/docs/src/website/{{ item.path }}"
+  with_filetree: website/
   when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
 
 - name: Copy docs other files into place
   copy:
     src: "{{ item.src }}"
-    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
-  with_filetree: docs/
+    dest: "{{ volumes_root }}/docs/src/website/{{ item.path }}"
+  with_filetree: website/
   when: item.state == 'file' and (item.path | basename | regex_search('[^\.md]*$'))
 
 - name: Copy docs docker-compose.yml file into place.
