@@ -42,7 +42,6 @@ function Snippet({label, config}) {
 const features = [
   {
     title: 'Makes it easy to host your own services',
-    // imageUrl: 'img/Blobboring.svg',
     description: (
       <>
         <p>
@@ -52,51 +51,6 @@ const features = [
       </>
     ),
   }
-  // {
-  //   title: 'Well Connected',
-  //   imageUrl: 'img/Blobborg.svg',
-  //   description: (
-  //     <>
-  //       <p>
-  //         Benthos is able to glue a wide range of <a href="/docs/index">sources</a> and <a href="/docs/index">sinks</a> together and hook into a variety of <a href="/docs/components/processors/sql">databases</a>, <a href="/docs/components/processors/cache">caches</a>, <a href="/docs/components/processors/http">HTTP APIs</a>, <a href="/docs/components/processors/lambda">lambdas</a> and <a href="/docs/components/processors/about">more</a>, enabling you to seamlessly drop it into your existing infrastructure.
-  //       </p>
-  //       <p>
-  //         Working with disparate APIs and services can be a daunting task, doubly so in a streaming data context. With Benthos it's possible to break these tasks down and automatically parallelize them as <a href="/cookbooks/enrichments">a streaming workflow</a>.
-  //       </p>
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Reliable and Scalable',
-  //   imageUrl: 'img/Blobscales.svg',
-  //   description: (
-  //     <>
-  //       <p>
-  //         Benthos runs fast and processes messages using a transaction model, making it able to guarantee at-least-once delivery even in the event of crashes or unexpected server faults.
-  //       </p>
-  //       <p>
-  //         It's completely stateless, allowing for easy deployment and liberal scaling. It also exposes <a href="/docs/index">metrics</a> and <a href="/docs/index">tracing</a> events to targets of your choice.
-  //       </p>
-  //       <p>
-  //         At Meltwater it's enriching over 450 million documents per day with a network of more than 20 NLP services. It sounds very interesting but rest assured, <a href="https://underthehood.meltwater.com/blog/2019/08/26/enriching-450m-docs-daily-with-a-boring-stream-processor">it's totally drab</a>.
-  //       </p>
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Extendable',
-  //   imageUrl: 'img/Blobextended.svg',
-  //   description: (
-  //     <>
-  //       <p>
-  //         Sometimes the components that come with Benthos aren't enough. Luckily, Benthos has been designed to be easily plugged with whatever components you need.
-  //       </p>
-  //       <p>
-  //         You can either write plugins <a href="https://github.com/benthosdev/benthos-plugin-example">directly in Go (recommended)</a> or you can have Benthos run your plugin as a <a href="/docs/index">subprocess</a>.
-  //       </p>
-  //     </>
-  //   ),
-  // },
 ];
 
 function Feature({imageUrl, title, description}) {
@@ -151,7 +105,7 @@ function Home() {
             <div className={classnames(`${styles.pitch} col col--6`)}>
               <h2>It's boringly easy to use</h2>
               <p>
-                Written in Go, deployed as a static binary, declarative configuration. Cloud native as utter heck.
+                Written by the VivumLab Community.
               </p>
               {installs && installs.length && (
                 <Tabs defaultValue={installs[0].label} values={installs.map((props, idx) => {
