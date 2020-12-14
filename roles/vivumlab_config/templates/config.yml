@@ -1125,9 +1125,9 @@ pixelfed:
   auth: {{ pixelfed.auth | default(False) }}
   domain: {{ pixelfed.domain | default(False) }}
   subdomain: {{ pixelfed.subdomain | default("pixelfed") }}
-  version: {{ pixelfed.version | default("latest") }}
-  db_version: {{ pixelfed.db_version | default("10.4") }}
-  redis_version: {{ pixelfed.redis_version | default("5-alpine") }}
+  version: {{ pixelfed.version | default("v0.10.9") }}
+  db_version: {{ pixelfed.db_version | default("10.4.17") }}
+  redis_version: {{ pixelfed.redis_version | default("6-alpine") }}
   amd64: False
   arm64: False
   armv7: False
