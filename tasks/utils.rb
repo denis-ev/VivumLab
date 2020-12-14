@@ -38,16 +38,16 @@ module Utils
     run_docker(playbook_command)
   end
 
-  def run_playbook(playbook, options, extra="")
-    playbook_command = <<-PLAYBOOK
-    ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
-    --extra-vars="@#{options[:config_dir]}/config.yml" \
-    --extra-vars="@#{options[:config_dir]}/vault.yml" \
-    #{extra} -i inventory
-    PLAYBOOK
-    say playbook_command
-    run_docker(playbook_command)
-  end
+  # def run_playbook(playbook, options, extra="")
+  #   playbook_command = <<-PLAYBOOK
+  #   ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
+  #   --extra-vars="@#{options[:config_dir]}/config.yml" \
+  #   --extra-vars="@#{options[:config_dir]}/vault.yml" \
+  #   #{extra} -i inventory
+  #   PLAYBOOK
+  #   say playbook_command
+  #   run_docker(playbook_command)
+  # end
 
   def execute_in_shell(params)
     cmd = TTY::Command.new(pty: true, uuid: false)
