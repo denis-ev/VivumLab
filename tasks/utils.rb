@@ -7,24 +7,24 @@ module Utils
     @latest_version ||= HTTParty.get('https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION').chomp
   end
 
-  def generate_docker_executable_call(*params)
-    args = (not params.nil? && args.nil?) ? params : args
-    executable = <<-DOCKERRUN
-      docker run --rm -it \
-      -v "$HOME/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}":"/root/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}" \
-      -v "$HOME/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}.pub":"/root/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}.pub" \
-      -v $(pwd):/data \
-      -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-      vivumlab/vivumlab:#{current_version} #{args.join ' '}
-    DOCKERRUN
-  end
+  # def generate_docker_executable_call(*params)
+  #   args = (not params.nil? && args.nil?) ? params : args
+  #   executable = <<-DOCKERRUN
+  #     docker run --rm -it \
+  #     -v "$HOME/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}":"/root/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}" \
+  #     -v "$HOME/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}.pub":"/root/.ssh/#{ansible_vars["PASSWORDLESS_SSHKEY"]}.pub" \
+  #     -v $(pwd):/data \
+  #     -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
+  #     vivumlab/vivumlab:#{current_version} #{args.join ' '}
+  #   DOCKERRUN
+  # end
 
   def run_docker(*params)
-    execute_in_shell(generate_docker_executable_call(params))
+    execute_in_shell(params)
   end
 
   def exec_docker(*params)
-    exec generate_docker_executable_call(params)
+    exec params
   end
 
   def run_playbook(playbook, options, extra="")
