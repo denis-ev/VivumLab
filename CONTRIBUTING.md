@@ -75,23 +75,23 @@ Doing the above will require some prior knowledge; you'll need a working underst
 !!!NOTE: The following instructions are provided as a guideline, and is by no means, definitive, Follow the link, do some research.
 
 ### Contribution: Forking VivumLab
-1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](fork.png)
+1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](dev/fork.png)
 
 2. In your fork, goto Settings/Repository -> "Mirroring repositories" and setup mirroring of Vivumlab/VivumLab
-![Screen Shot of Mirror setup](mirror.png)
+![Screen Shot of Mirror setup](dev/mirror.png)
 
     Mirror direction = Pull
     Only mirror protected branches = enabled
 
 3. Then set your Protected Branches in Settings/Repository -> "Protected Branches" like this
-![Setting Protected Branches](protected-branches.png)
+![Setting Protected Branches](dev/protected-branches.png)
 (you can ignore CODEOWNER though) you can even set push to "no one" so you can't accidentally push to that branch.
 
 ### Contribution: Forked VivumLab... Now what?
 
 1. Make sure you don't have any outstanding un-related changes in your local repository with **`git status`**; You should see `nothing to commit, working tree clean`.
 2. Identify the branch name by navigating to the issues' linked Merge Request and clicking the copy icon next to the Branch name.
-    ![Finding the Branch Name](branch-name.png)
+    ![Finding the Branch Name](dev/branch-name.png)
 4. Run `git fetch origin`
 5. Run `git checkout <<branch name>>`
 6. Make your changes
@@ -227,4 +227,4 @@ By contributing, you agree that your contributions will be licensed under its MI
 
 #### Attribution/ Reference
 
-Please see [Legal/ Licensing/ Acknowledgement](../Legal.md)
+Please see [Legal/ Licensing/ Acknowledgement](Legal)
