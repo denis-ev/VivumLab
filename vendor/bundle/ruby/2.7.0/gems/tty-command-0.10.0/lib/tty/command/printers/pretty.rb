@@ -12,9 +12,9 @@ module TTY
         end
 
         def print_command_start(cmd, *args)
-          # message = ["Running #{decorate(cmd.to_command, :yellow, :bold)}"]
-          # message << args.map(&:chomp).join(" ") unless args.empty?
-          # write(cmd, message.join)
+          message = ["Running #{decorate(cmd.to_command, :yellow, :bold)}"]
+          message << args.map(&:chomp).join(" ") unless args.empty?
+          write(cmd, message.join)
         end
 
         def print_command_out_data(cmd, *args)
@@ -36,7 +36,7 @@ module TTY
           runtime = TIME_FORMAT % [runtime, pluralize(runtime, "second")]
           message = ["Finished in #{runtime}"]
           message << " with exit status #{status}" if status
-          # message << " (#{success_or_failure(status)})"
+          message << " (#{success_or_failure(status)})"
           write(cmd, message.join)
         end
 
