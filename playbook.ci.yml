@@ -7,7 +7,7 @@
     - name: Copy docs md files into place
       template:
         src: "{{ playbook_dir }}/website/docs/{{ item.path }}"
-        dest: "{{ playbook_dir }}/website/docs/{{ item.path }}"
+        dest: "{{ playbook_dir }}/website/{{ item.path }}"
       with_filetree: website/
       when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
 
