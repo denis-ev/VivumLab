@@ -6,17 +6,10 @@
   tasks:
     - name: Copy docs md files into place
       template:
-        src: "{{ item.src }}"
-        dest: "{{ playbook_dir }}/website/{{ item.path }}"
+        src: "{{ playbook_dir }}/website/docs/{{ item.path }}"
+        dest: "{{ playbook_dir }}/website/docs/{{ item.path }}"
       with_filetree: website/
       when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
-
-    - name: Copy docs other files into place
-      copy:
-        src: "{{ item.src }}"
-        dest: "{{ playbook_dir }}/website/{{ item.path }}"
-      with_filetree: website/
-      when: item.state == 'file' and (item.path | basename | regex_search('[^\.md]*$'))
 
     - name: Copy CONTRIBUTING.md
       template:
