@@ -20,3 +20,4 @@ yarn-debug.log*
 yarn-error.log*
 
 docs/CONTRIBUTING.md
+docs/CHANGELOG.md

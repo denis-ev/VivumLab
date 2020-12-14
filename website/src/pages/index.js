@@ -134,13 +134,13 @@ function Home() {
                     'button button--outline button--primary button--lg',
                     styles.getStarted,
                   )}
-                  to={useBaseUrl('docs/index')}>
+                  to={useBaseUrl('docs/Welcome')}>
                   Get Started
                 </Link>
               </div>
             </div>
             <div className={classnames('col col--5')}>
-              <img className={styles.heroImg} src="img/logo_hero.svg" />
+              <img className={styles.heroImg} src="img/dashboard.png" />
             </div>
           </div>
         </div>

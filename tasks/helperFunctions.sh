@@ -49,6 +49,14 @@ function cache_check() {
   fi
 }
 
+function ci_check() {
+  if [[ ${_ci-false} == true ]]; then
+    echo 'ci=true'
+  else
+    echo ''
+  fi
+}
+
 function countdown() {
   if [[ ${_t} == '' ]]; then
     echo 'now'

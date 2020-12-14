@@ -42,6 +42,7 @@ Task::build() {
     : @param force true "Forces a rebuild/repull of the docker image"
     : @param build true "Pulls the image"
     : @param cache true "Allows the build to use the cache"
+    : @param ci false "CI disable highlight"
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
@@ -70,8 +71,11 @@ Task::build() {
   fi
 
 
-
-  highlight "Getting VivumLab Docker Image"
+  if [[ ${_ci-true} == true ]]; then
+      echo ''
+  else
+    highlight "Getting VivumLab Docker Image"
+  fi
   if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
     colorize light_yellow "Image number: ${vlab_dockerimagid}"
     colorize light_yellow "is the latest vlab image"
@@ -192,9 +196,10 @@ Task::ci(){
   : @param build true "Forces to build the image locally"
   : @param debug true "Debugs ansible-playbook commands"
   : @param cache true "Allows the build to use the cache"
+  : @param ci true "Disable highlight"
 
   Task::logo_local
-  Task::build $(build_check) $(force_check) $(cache_check)
+  Task::build $(build_check) $(force_check) $(cache_check) $(ci_check)
 
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
@@ -220,23 +225,23 @@ Task::ci(){
     echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
   fi
 
-  highlight "Creating or Updating ci config file"
+  echo "Creating or Updating ci config file"
   mkdir -p $_config_dir/passwords
   [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.ci_config.yml || colorize red "error: ci_config"
-  highlight "End Creating or Updating ci config file"
-  highlight "Encrypting Secrets in the Vault"
+  echo "End Creating or Updating ci config file"
+  echo "Encrypting Secrets in the Vault"
   Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize red "error: ci_config: encrypt"
-  highlight "End Encrypting Secrets in the Vault"
+  echo "End Encrypting Secrets in the Vault"
 
-  highlight "Copying files"
+  echo "Copying files"
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory playbook.ci.yml || colorize red "error: ci"
-  highlight "End Copying files"
+  echo "End Copying files"
 }
 
 Task::run_docker() {

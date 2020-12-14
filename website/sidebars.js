@@ -5,25 +5,22 @@ module.exports = {
       id: 'Welcome',
     },
     {
+      type: 'doc',
+      id: 'core/Installation',
+    },
+    {
+      type: 'doc',
+      id: 'core/Getting-Started',
+    },
+    {
       type: 'category',
-      label: 'Core',
+      label: 'Setup',
       items: [
-        'core/Installation',
-        'core/Getting-Started',
         'core/Backup',
         'core/Commands',
         'core/Storage',
         'core/Terraform',
         'core/Tor'
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Dev',
-      items: [
-        'dev/Adding-Services',
-        'dev/Developer-Tips',
-        'dev/Vagrant'
       ],
     },
     {
@@ -153,6 +150,28 @@ module.exports = {
         'software/wificard',
         'software/zammad',
         'software/zulip'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Development',
+      items: [
+        'dev/Adding-Services',
+        'CONTRIBUTING',
+        'dev/Developer-Tips',
+        'dev/Vagrant'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'About',
+      items: [
+        'About-VivumLab',
+        'Required-jobs',
+        'Contact-us',
+        'Code-of-Conduct',
+        'Legal',
+        'CHANGELOG'
       ],
     },
   ],
