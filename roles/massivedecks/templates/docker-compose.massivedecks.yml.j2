@@ -11,12 +11,8 @@ networks:
 
 services:
   server:
-<<<<<<< HEAD
     container_name: massivedecks_server
-    image: massivedecks/server:{{ massivedecks.server_version}}
-=======
     image: massivedecks/server:{{ massivedecks.server_version }}
->>>>>>> 8376976... docs(cleanup): :art: updated docs
     environment:
         - NODE_ENV=production
         - MD_SECRET={{"lookup('password', './settings/passwords/massivedecks_md_secret chars=ascii_letters')"}}
