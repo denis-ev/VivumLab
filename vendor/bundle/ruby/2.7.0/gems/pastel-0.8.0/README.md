@@ -250,7 +250,7 @@ pastel = Pastel.new(enabled: true)
 pastel.enabled?   # => true
 ```
 
-If you are outputting to stdout or stderr, and want to suppress color if output is redirected to a file,
+If you are outputting to stdout or stderr, and want to suppress color if output is redirected to a file, 
 you can set the enabled attribute dynamically, as in:
 
 ```ruby
