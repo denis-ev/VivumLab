@@ -37,7 +37,7 @@ RUN set -x && \
     \
     echo "==> Adding build dependencies..." && \
     apt-get update && \
-    apt-get install -y ${BUILD_PACKAGES} && \
+    apt-get install --no-install-recommends -y ${BUILD_PACKAGES} && \
     pip3 install --upgrade pip && \
     pip3 install ${PYTHON_PACKAGES} && \
     \
@@ -47,6 +47,7 @@ RUN set -x && \
     \
     echo "==> Cleaning up..." && \
     apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/* && \
     \
     echo "==> Adding Hosts to Anisible directory for convenience..." && \
     mkdir -p /etc/ansible /ansible && \
