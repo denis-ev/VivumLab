@@ -42,7 +42,6 @@ Task::build() {
     : @param force true "Forces a rebuild/repull of the docker image"
     : @param build true "Pulls the image"
     : @param cache true "Allows the build to use the cache"
-    : @param ci false "CI disable highlight"
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
@@ -70,12 +69,7 @@ Task::build() {
     fi
   fi
 
-
-  if [[ ${_ci-true} == true ]]; then
-      echo ''
-  else
-    highlight "Getting VivumLab Docker Image"
-  fi
+  highlight "Getting VivumLab Docker Image"
   if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
     colorize light_yellow "Image number: ${vlab_dockerimagid}"
     colorize light_yellow "is the latest vlab image"
@@ -187,61 +181,6 @@ Task::restore() {
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory restore.yml  || colorize red "error: restore"
-}
-
-# CI - Updates the config file, and ensures the vault is encrypted.
-Task::ci(){
-  : @param config_dir="settings_ci"
-  : @param force true "Forces a rebuild/repull of the docker image"
-  : @param build true "Forces to build the image locally"
-  : @param debug true "Debugs ansible-playbook commands"
-  : @param cache true "Allows the build to use the cache"
-  : @param ci true "Disable highlight"
-
-  Task::logo_local
-  Task::build $(build_check) $(force_check) $(cache_check) $(ci_check)
-
-  mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
-
-  if [[ ! -d $_config_dir ]]; then
-      colorize light_red "Creating settings directory"
-      mkdir -p $_config_dir
-  fi
-  if  [[ ! -d $_config_dir/passwords ]]; then
-      colorize light_red "Creating passwords directory"
-      mkdir -p $_config_dir/passwords
-  fi
-  if [[ ! -f $_config_dir/config.yml ]]; then
-      colorize light_red "Creating an empty config file"
-      echo "blank_on_purpose: True" > $_config_dir/config.yml
-  fi
-  if [[ ! -f $_config_dir/vault.yml ]]; then
-      colorize light_red "Creating an empty Vault"
-      echo "blank_on_purpose: True" > $_config_dir/vault.yml
-  fi
-  if [[ ! -f tasks/ansible_bash.vars ]]; then
-    colorize light_red "Creating ansible_bash.vars file"
-    echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
-  fi
-
-  echo "Creating or Updating ci config file"
-  mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
-
-  Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci_config.yml || colorize red "error: ci_config"
-  echo "End Creating or Updating ci config file"
-  echo "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize red "error: ci_config: encrypt"
-  echo "End Encrypting Secrets in the Vault"
-
-  echo "Copying files"
-  Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci.yml || colorize red "error: ci"
-  echo "End Copying files"
 }
 
 Task::run_docker() {
