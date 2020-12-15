@@ -22,7 +22,8 @@ ENV BUILD_PACKAGES \
     python3-dateutil \
     python3-httplib2 \
     python3-jinja2 \
-    python3-paramiko
+    python3-paramiko \ 
+    python3-setuptools
 
 ENV PYTHON_PACKAGES \
     python3-keyczar \
