@@ -19,7 +19,7 @@ module Utils
   #   DOCKERRUN
   # end
 
-  def run_docker(*params)
+  def run_docker(params)
     execute_in_shell(params)
   end
 
@@ -34,7 +34,6 @@ module Utils
     --extra-vars="@#{options[:config_dir]}/vault.yml" \
     #{extra} -i inventory
     PLAYBOOK
-    say playbook_command
     run_docker(playbook_command)
   end
 
@@ -61,8 +60,7 @@ module Utils
   end
 
   def execute_in_shell(params)
-    cmd = TTY::Command.new(pty: true, uuid: false)
-    cmd.run!(params.chomp)
+    Subprocess.call(params.split(' '))
   end
 
   def cat file

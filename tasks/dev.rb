@@ -2,7 +2,7 @@ module Vlab
   class Dev < SubCommandBase
     desc "lint", "Lints all the YAML files"
     def lint()
-      run_docker "pip install yamllint; find . -type f -name '*.yml' | sed 's|\./||g' | egrep -v '(\.kitchen/|\[warning\]|\.molecule/)' | xargs yamllint -c yamllint.conf -f parsable"
+      run_docker "pip3 install yamllint; find . -type f -name '*.yml' | sed 's|\./||g' | egrep -v '(\.kitchen/|\[warning\]|\.molecule/)' | xargs yamllint -c yamllint.conf -f parsable"
     end
 
     desc "setup", "Run to install Dev Requirements"

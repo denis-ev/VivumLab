@@ -9,9 +9,13 @@ function pwless_sshkey () {
   fi
 }
 
+if [[ ! -f ~/.vlab_vault_pass ]]; then
+    touch ~/.vlab_vault_pass
+fi
+
 docker run --rm -it \
   -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-  ad382ea11e43 /bin/bash
+  ef410c4e56a3 /bin/bash

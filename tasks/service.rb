@@ -46,7 +46,7 @@ module Vlab
 
     desc "show", "Show the docs for the specified service"
     def show(service)
-      puts TTY::Markdown.parse_file("docs/software/#{service}.md")
+      say TTY::Markdown.parse_file("docs/software/#{service}.md")
     end
 
     desc "customize_service", "Allows you to edit a specific deployed service with a docker-compose.override.yml"

@@ -6,7 +6,7 @@ module Vlab
 
     desc "find_help", "Shows the user how to contact the VivumLab community"
     def find_help
-      puts TTY::Markdown.parse_file("docs/Contact-us.md")
+      say TTY::Markdown.parse_file("docs/Contact-us.md")
     end
 
     desc "debug_cli", "Launches Pry within the context of the CLI. Used to debug the CLI"
