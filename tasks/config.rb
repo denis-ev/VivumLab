@@ -10,7 +10,7 @@ module Vlab
     option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def config()
       invoke_subcommand "Core", "logo"
-      invoke_subcommand "Core", "build"
+      # invoke_subcommand "Core", "build"
       say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
       run_playbook("playbook.config.yml", options)
       invoke_subcommand "Core", "encrypt"
@@ -22,7 +22,7 @@ module Vlab
       config = YAML.load_file("#{options[:config_dir]}/config.yml")
       config_hash = hash_to_a(config[options[:service]])
       table = TTY::Table.new(header: ["option", "value"], rows: config_hash)
-      puts table.render(:unicode)
+      say table.render(:unicode)
     end
 
     desc "config_reset", "Resets Vlab config"
@@ -82,7 +82,7 @@ module Vlab
         say "Unable to find a full match for the key #{options[:config_key]}".red
         say "Here's the most specific match found:".red
         table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", "value"], rows: config[good_config_key])
-        puts table.render(:unicode)
+        say table.render(:unicode)
       end
       # regardless of the change (or not), re-encrypt the vault
       invoke_subcommand "Core", "encrypt"

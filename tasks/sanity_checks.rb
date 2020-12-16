@@ -14,7 +14,7 @@ module Vlab
       invoke "check_vault_pass"
       invoke "check_for_git"
       invoke "check_for_precommit"
-      invoke "check_for_host_docker_daemon"
+      # invoke "check_for_host_docker_daemon"
 
       say "Local sanity checks passed".green
     end
@@ -37,7 +37,7 @@ module Vlab
 
     desc "check_vault_pass", "Checks for the presence of a Vault Password file"
     def check_vault_pass
-      if not File.exist?("#{Dir.home}/.vlab_vault_pass")
+      if (!File.exist?("/ansible_vault_pass")) || (File.size("/ansible_vault_pass") == 0)
         missing = <<-NOVAULT
         Oops, your vault password in #{Dir.home}, doesn't appear to exist.
         This is unusual, but could be the result of the username changing after setup.
@@ -50,7 +50,9 @@ module Vlab
         CREATE
         say create.light_yellow
 
-        if yes("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :yellow, limited_to: ['yes', 'no'])
+        decision = yes?("Let Vlab create a new .vlab_vault_pass for you? [y/n]", :yellow)
+        # decision = yes?("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :red, limited_to: ['yes', 'no'])
+        if decision
           invoke_subcommand "Core", "generate_ansible_pass"
         end
       end
@@ -80,15 +82,15 @@ module Vlab
       end
     end
 
-    desc "check_for_host_docker_daemon", "Verify's the local machine has docker running"
-    def check_for_host_docker_daemon
-      `docker info`
-      say "Starting Docker".blue unless $?.success?
+    # desc "check_for_host_docker_daemon", "Verify's the local machine has docker running"
+    # def check_for_host_docker_daemon
+    #   `docker info`
+    #   say "Starting Docker".blue unless $?.success?
 
-      `open -g -a Docker.app` if OS.mac?
-      `sudo systemctl start docker` if OS.systemctl?
-      `sudo service docker start` if OS.service?
-    end
+    #   `open -g -a Docker.app` if OS.mac?
+    #   `sudo systemctl start docker` if OS.systemctl?
+    #   `sudo service docker start` if OS.service?
+    # end
 
     no_commands {
       def check_ssh_with_keys()
