@@ -14,5 +14,10 @@ module Vlab
       binding.pry
     end
 
+    desc "config", "Launches the intial config.yml generator"
+    def config
+      Config.new.initial_config
+    end
+
   end
 end

@@ -18,4 +18,4 @@ docker run --rm -it \
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-  ef410c4e56a3 /bin/bash
+  36281de0f837 /bin/bash

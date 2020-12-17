@@ -94,7 +94,7 @@ module Vlab
 
     no_commands {
       def check_ssh_with_keys()
-        ssh_success = run_docker "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{ansible_vars["VLAB_SSH_USER"]}@#{ansible_vars["VLAB_IP"]} exit"
+        ssh_success = run_docker "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{config_file["VLAB_SSH_USER"]}@#{config_file["VLAB_IP"]} exit"
         say "VivumLab is unable to ssh to your server using the information in your config.yml".red if not $?.success?
       end
     }
