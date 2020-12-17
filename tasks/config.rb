@@ -4,11 +4,11 @@ module Vlab
     class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
     class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
 
-    desc "config", "Creates or Updates the config file, as necessary"
+    desc "initial_config", "Creates or Updates the config file, as necessary"
     option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
     option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
     option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
-    def config()
+    def initial_config()
       invoke_subcommand "Core", "logo"
       # invoke_subcommand "Core", "build"
       say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
@@ -17,7 +17,7 @@ module Vlab
     end
 
     desc "show_config", "Shows the configuration settings for a specified service"
-    option :service, :required => true, :desc => "Name of the service to display"
+    option :service, :required => true, :desc => "Name of the service to display", aliases: ['-s']
     def show_config()
       config = YAML.load_file("#{options[:config_dir]}/config.yml")
       config_hash = hash_to_a(config[options[:service]])
