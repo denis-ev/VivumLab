@@ -1,3 +1,17 @@
+---
+id: firefly
+title: Firefly III
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Firefly III
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Firefly III
 
 [Firefly III](https://firefly-iii.org/) is a money management app.

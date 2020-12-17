@@ -1,4 +1,18 @@
-# Lazylibrarian
+---
+id: lazylibrarian
+title: LazyLibrarian
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: LazyLibrarian
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
+# LazyLibrarian
 
 [Lazylibrarian](https://lazylibrarian.gitlab.io/) LazyLibrarian is a program to follow authors and grab metadata for all your digital reading needs.
 

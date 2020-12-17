@@ -1,3 +1,17 @@
+---
+id: vagrant
+title: Vagrant
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Vagrant
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Developing with Vagrant (FOR FUTURE RELEASE)
 
 If you don't have a server to test against, you can use Vagrant to test VivumLab.

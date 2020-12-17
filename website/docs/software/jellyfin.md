@@ -1,3 +1,17 @@
+---
+id: jellyfin
+title: Jellyfin
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Jellyfin
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Jellyfin
 
 [Jellyfin](https://github.com/jellyfin/jellyfin) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.

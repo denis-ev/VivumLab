@@ -1,3 +1,17 @@
+---
+id: pleroma
+title: Pleroma
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Pleroma
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Pleroma
 
 [Pleroma](https://github.com/angristan/docker-pleroma) Pleroma is a federated social networking platform, compatible with GNU social and other OStatus implementations. It is free software licensed under the AGPLv3.

@@ -1,3 +1,17 @@
+---
+id: pixelfed
+title: Pixelfed
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Pixelfed
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Pixelfed
 
 [Pixelfed](https://pixelfed.org/) is a free and ethical photo sharing platform, powered by ActivityPub federation.

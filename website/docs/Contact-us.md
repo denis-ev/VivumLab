@@ -1,3 +1,17 @@
+---
+id: contact
+title: Contact Us
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Contact Us
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Contacting VivumLab
 
 Thank you for attempting to reach us. Our small development team is passionate about this project, and we hope that you will be too.

@@ -1,6 +1,20 @@
-# Rsshub
+---
+id: rsshub
+title: RSSHub
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: RSSHub
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
 
-[Rsshub](https://docs.rsshub.app/en/) RSSHub is an open source, easy to use, and extensible RSS feed aggregator, it's capable of generating RSS feeds from pretty much everything.
+# RSSHub
+
+[RSSHub](https://docs.rsshub.app/en/) RSSHub is an open source, easy to use, and extensible RSS feed aggregator, it's capable of generating RSS feeds from pretty much everything.
 
 ![amd64](https://img.shields.io/badge/{% if not rsshub.amd64 %}untested{% else %}{{ rsshub.amd64 }}{% endif %}-amd64-{% if not rsshub.amd64 %}inactive{% elif rsshub.amd64 == "verified" %}success{% elif rsshub.amd64 == "supported" %}informational{% elif rsshub.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not rsshub.arm64 %}untested{% else %}{{ rsshub.arm64 }}{% endif %}-arm64-{% if not rsshub.arm64 %}inactive{% elif rsshub.arm64 == "verified" %}success{% elif rsshub.arm64 == "supported" %}informational{% elif rsshub.arm64 == "unsupported" %}critical{% endif %}?style=flat)

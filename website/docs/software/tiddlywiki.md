@@ -1,6 +1,20 @@
-# Tiddlywiki
+---
+id: tiddlywiki
+title: TiddlyWiki
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: TiddlyWiki
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
 
-[Tiddlywiki](https://tiddlywiki.com) a unique non-linear notebook for capturing, organizing and sharing complex information
+# TiddlyWiki
+
+[TiddlyWiki](https://tiddlywiki.com) a unique non-linear notebook for capturing, organizing and sharing complex information
 
 ![amd64](https://img.shields.io/badge/{% if not tiddlywiki.amd64 %}untested{% else %}{{ tiddlywiki.amd64 }}{% endif %}-amd64-{% if not tiddlywiki.amd64 %}inactive{% elif tiddlywiki.amd64 == "verified" %}success{% elif tiddlywiki.amd64 == "supported" %}informational{% elif tiddlywiki.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not tiddlywiki.arm64 %}untested{% else %}{{ tiddlywiki.arm64 }}{% endif %}-arm64-{% if not tiddlywiki.arm64 %}inactive{% elif tiddlywiki.arm64 == "verified" %}success{% elif tiddlywiki.arm64 == "supported" %}informational{% elif tiddlywiki.arm64 == "unsupported" %}critical{% endif %}?style=flat)

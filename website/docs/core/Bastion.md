@@ -1,3 +1,17 @@
+---
+id: bastion
+title: Cloud Bastion Server
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Cloud Bastion Server
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Cloud Bastion Server
 
 VivumLab can optionally configure a cloud based bastion server, which will route

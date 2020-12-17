@@ -2,25 +2,26 @@ module.exports = {
   docs: [
     {
       type: 'doc',
-      id: 'Welcome',
+      id: 'welcome',
     },
     {
       type: 'doc',
-      id: 'core/Installation',
+      id: 'core/installation',
     },
     {
       type: 'doc',
-      id: 'core/Getting-Started',
+      id: 'core/getting-started',
     },
     {
       type: 'category',
       label: 'Setup',
       items: [
-        'core/Backup',
-        'core/Commands',
-        'core/Storage',
-        'core/Terraform',
-        'core/Tor'
+        'core/backup',
+        'core/bastion',
+        'core/commands',
+        'core/storage',
+        'core/terraform',
+        'core/tor'
       ],
     },
     {
@@ -156,21 +157,21 @@ module.exports = {
       type: 'category',
       label: 'Development',
       items: [
-        'dev/Adding-Services',
+        'dev/adding-services',
         'CONTRIBUTING',
-        'dev/Developer-Tips',
-        'dev/Vagrant'
+        'dev/tips',
+        'dev/vagrant'
       ],
     },
     {
       type: 'category',
       label: 'About',
       items: [
-        'About-VivumLab',
-        'Required-jobs',
-        'Contact-us',
-        'Code-of-Conduct',
-        'Legal',
+        'about',
+        'jobs',
+        'contact',
+        'code-of-conduct',
+        'legal',
         'CHANGELOG'
       ],
     },

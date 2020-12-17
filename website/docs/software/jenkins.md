@@ -1,3 +1,17 @@
+---
+id: jenkins
+title: Jenkins
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Jenkins
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Jenkins
 
 [Jenkins](https://www.jenkins.io/) The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project.

@@ -1,3 +1,17 @@
+---
+id: legal
+title: Legal
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Legal
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Legal/ Licensing/ Acknowledgement
 Every good project is a collaboration of many people, never just one person.
 

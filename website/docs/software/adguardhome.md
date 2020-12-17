@@ -1,3 +1,17 @@
+---
+id: adguardhome
+title: AdGuard Home
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: AdGuard Home
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # AdGuard Home
 
 [AdGuard Home](https://adguard.com/en/adguard-home/overview.html) Network-wide software for blocking ads and tracking.

@@ -1,3 +1,17 @@
+---
+id: tips
+title: Developer Tips
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Developer Tips
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Developer Tips
 
 ## Labels

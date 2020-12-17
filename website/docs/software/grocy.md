@@ -1,3 +1,17 @@
+---
+id: grocy
+title: Grocy
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Grocy
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Grocy
 
 [Grocy](https://grocy.info) ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home

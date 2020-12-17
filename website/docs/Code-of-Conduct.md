@@ -1,3 +1,17 @@
+---
+id: code-of-conduct
+title: Code of Conduct
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Code of Conduct
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # VivumLab Code of Conduct
 
 Owners, Core Team Personnel, and appointed representitives, for the purpose of this document, are hereby known as 'Community Leaders'

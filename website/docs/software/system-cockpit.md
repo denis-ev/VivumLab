@@ -1,6 +1,20 @@
-# cockpit
+---
+id: system-cockpit
+title: Cockpit
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Cockpit
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
 
-[cockpit](https://cockpit-project.org) Cockpit admin interface package for configuring and troubleshooting a system
+# Cockpit
+
+[Cockpit](https://cockpit-project.org) Cockpit admin interface package for configuring and troubleshooting a system
 
 {# ![amd64](https://img.shields.io/badge/{% if not cockpit.amd64 %}untested{% else %}{{ cockpit.amd64 }}{% endif %}-amd64-{% if not cockpit.amd64 %}inactive{% elif cockpit.amd64 == "verified" %}success{% elif cockpit.amd64 == "supported" %}informational{% elif cockpit.amd64 == "unsupported" %}critical{% endif %}?style=flat)
 ![arm64](https://img.shields.io/badge/{% if not cockpit.arm64 %}untested{% else %}{{ cockpit.arm64 }}{% endif %}-arm64-{% if not cockpit.arm64 %}inactive{% elif cockpit.arm64 == "verified" %}success{% elif cockpit.arm64 == "supported" %}informational{% elif cockpit.arm64 == "unsupported" %}critical{% endif %}?style=flat)

@@ -79,7 +79,7 @@ function Home() {
       <header className={classnames('hero', styles.heroBanner)}>
         <div className="container">
           <div className="row">
-            <div className={classnames('col col--5 col--offset-1')}>
+            <div className={classnames('col')}> {/* col col--5 col--offset-1 */}
               <h1 className="hero__title">{siteConfig.title}</h1>
               <p className="hero__subtitle">{siteConfig.tagline}</p>
               <div className={styles.buttons}>
@@ -93,9 +93,9 @@ function Home() {
                 </Link>
               </div>
             </div>
-            <div className={classnames('col col--5')}>
+            {/* <div className={classnames('col col--5')}>
               <img className={styles.heroImg} src="img/dashboard.png" />
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

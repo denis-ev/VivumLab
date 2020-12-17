@@ -1,3 +1,12 @@
+---
+id: CONTRIBUTING
+title: Contributing to Vivumlab
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: CONTRIBUTING
+custom_edit_url: https://github.com/VivumLab/VivumLab/edit/dev/CONTRIBUTING.md
+---
+
 # Contributing to VivumLab
 
 ## Open source, VivumLab and You

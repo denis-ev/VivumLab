@@ -1,4 +1,18 @@
-# MassiveDecks
+---
+id: massivedecks
+title: Massive Decks
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Massive Decks
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
+# Massive Decks
 
 [MassiveDecks](https://github.com/Lattyware/massivedecks/blob/master/README.md) Massive Decks is a comedy party game based on Cards against Humanity. Play with friends! It works great with a bunch of people in the same room on phones, or on voice chat online.
 

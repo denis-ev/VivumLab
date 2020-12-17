@@ -1,3 +1,17 @@
+---
+id: webdavserver
+title: WebDAV Server
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: WebDAV Server
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # WebDAV Server
 
 [WebDAV Server](https://hub.docker.com/r/bytemark/webdav/) A simple WebDAV service.

@@ -1,3 +1,17 @@
+---
+id: apache2
+title: Apache 2
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Apache 2
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Apache 2
 
 [Apache 2](https://httpd.apache.org/) is a free web server.

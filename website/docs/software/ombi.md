@@ -1,3 +1,17 @@
+---
+id: ombi
+title: Ombi
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Ombi
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Ombi
 
 [Ombi](https://ombi.io) Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves!

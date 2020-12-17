@@ -1,3 +1,17 @@
+---
+id: backup
+title: VivumLab Backup
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Backup
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # VivumLab Backups
 
 VivumLab is capable of automatically backing itself up in a smart, incremental, encrypted way to any S3 compatible storage provider, using [Restic](https://restic.net/) and [Minio](https://minio.io/).

@@ -1,3 +1,17 @@
+---
+id: matomo
+title: Matomo
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Matomo
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Matomo
 
 [Matomo](https://matomo.org) Google Analytics alternative that protects your data and your customers' privacy.

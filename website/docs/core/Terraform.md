@@ -1,3 +1,17 @@
+---
+id: terraform
+title: Terraform
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Terraform
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Terraform
 
 VivumLab can utilise [Terraform](https://duckduckgo.com/?q=terraform) to spin up cloud servers for you using other infrastructure (eg. Digital Ocean) if you don't have any physical hardware for your own use.

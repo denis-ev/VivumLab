@@ -1,3 +1,17 @@
+---
+id: heimdall
+title: Heimdall
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Heimdall
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Heimdall
 
 [Heimdall](https://heimdall.site/) Heimdall Application Dashboard is a dashboard for all your web applications.

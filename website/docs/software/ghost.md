@@ -1,3 +1,17 @@
+---
+id: ghost
+title: Ghost
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Ghost
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Ghost
 
 [Ghost](http://ghost.org/) is a fully open source, adaptable platform for building and running a modern online publication.

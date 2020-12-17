@@ -1,4 +1,18 @@
-# MinecraftBedrockServer
+---
+id: minecraftbedrockserver
+title: Minecraft Bedrock Server
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Minecraft Bedrock Server
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
+# Minecraft Bedrock Server
 
 [MinecraftBedrockServer](https://www.minecraft.net/en-us/download/server/bedrock/) Minecraft Bedrock Server
 

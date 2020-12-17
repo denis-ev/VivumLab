@@ -1,3 +1,17 @@
+---
+id: getting-started
+title: Next Step
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Getting Started
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Next Step
 
 Once you are all setup and ready to go you should be able to load SUI at [https://{% if sui.domain %}{{ sui.domain }}{% else %}{{ sui.subdomain + "." + domain }}{% endif %}/].

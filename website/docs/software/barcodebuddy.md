@@ -1,3 +1,17 @@
+---
+id: barcodebuddy
+title: Barcode Buddy
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Barcode Buddy
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # BarcodeBuddy
 
 [BarcodeBuddy](https://github.com/Forceu/barcodebuddy) Barcode system for Grocy

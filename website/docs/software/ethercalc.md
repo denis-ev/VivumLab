@@ -1,3 +1,17 @@
+---
+id: ethercalc
+title: EtherCalc
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: EtherCalc
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # EtherCalc
 
 [EtherCalc](https://ethercalc.net) EtherCalc is a web spreadsheet

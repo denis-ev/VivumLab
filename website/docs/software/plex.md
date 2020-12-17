@@ -1,3 +1,17 @@
+---
+id: plex
+title: Plex Media Server
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Plex Media Server
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Plex Media Server
 
 [Plex](https://plex.tv/) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.

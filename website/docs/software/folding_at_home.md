@@ -1,3 +1,17 @@
+---
+id: folding_at_home
+title: Folding@home
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Folding@home
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Folding@home
 
 [Folding@home](https://hub.docker.com/r/johnktims/folding-at-home) Folding@home software allows you to share your unused computer power with scientists researching diseases.

@@ -1,3 +1,17 @@
+---
+id: photoprism
+title: PhotoPrism
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: PhotoPrism
+#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # PhotoPrism
 
 [PhotoPrism](https://photoprism.org) Personal Photo Management powered by Go and Google TensorFlow. Free and open-source.
