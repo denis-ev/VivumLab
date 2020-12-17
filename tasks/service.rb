@@ -62,7 +62,6 @@ module Vlab
 
       def run_common
         invoke_subcommand "Core", "logo"
-        invoke_subcommand "Core", "build"
         invoke_subcommand "Git", "sync"
         invoke_subcommand "Config", "config"
       end

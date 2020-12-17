@@ -14,7 +14,6 @@ module Vlab
       invoke "check_vault_pass"
       invoke "check_for_git"
       invoke "check_for_precommit"
-      # invoke "check_for_host_docker_daemon"
 
       say "Local sanity checks passed".green
     end
@@ -81,16 +80,6 @@ module Vlab
         say "Contributions require installing 'pre-commit'. Run vlab dev_setup, when you're ready".yellow
       end
     end
-
-    # desc "check_for_host_docker_daemon", "Verify's the local machine has docker running"
-    # def check_for_host_docker_daemon
-    #   `docker info`
-    #   say "Starting Docker".blue unless $?.success?
-
-    #   `open -g -a Docker.app` if OS.mac?
-    #   `sudo systemctl start docker` if OS.systemctl?
-    #   `sudo service docker start` if OS.service?
-    # end
 
     no_commands {
       def check_ssh_with_keys()

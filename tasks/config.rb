@@ -5,9 +5,6 @@ module Vlab
     class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
 
     desc "initial_config", "Creates or Updates the config file, as necessary"
-    option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
-    option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def initial_config()
       invoke_subcommand "Core", "logo"
       # invoke_subcommand "Core", "build"
