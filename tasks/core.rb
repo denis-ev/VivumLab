@@ -32,29 +32,29 @@ module Vlab
       end
     end
 
-    desc "build", "Forces a rebuild/repull of the Vlab Docker image"
-    def build()
-      # if cache is ok, just pull, because if we're on the latest, cache will have it
-      if options[:cache] and not options[:force]
-        say "Pulling latest version, using cache if available".yellow
-        execute_in_shell("sudo docker pull vivumlab/vivumlab")
-        return #break
-      else
-        vlab_image = execute_in_shell("docker images -a | grep vivumlab/vivumlab")&.first&.split(/ {2,}/) rescue nil
-        unless vlab_image.nil?
-          say "test"
-          # delete the existing image
-          execute_in_shell("sudo docker rmi --force #{vlab_image[2]}")
-        end
-        if options[:build]
-          # build from local directory, no cache.
-          execute_in_shell("sudo docker build . --no-cache --force-rm -t vivumlab/vivumlab:latest")
-        else
-          # having forced the delte, pull a new version
-          execute_in_shell("sudo docker pull vivumlab/vivumlab")
-        end
-      end
-    end
+    # desc "build", "Forces a rebuild/repull of the Vlab Docker image"
+    # def build()
+    #   # if cache is ok, just pull, because if we're on the latest, cache will have it
+    #   if options[:cache] and not options[:force]
+    #     say "Pulling latest version, using cache if available".yellow
+    #     execute_in_shell("sudo docker pull vivumlab/vivumlab")
+    #     return #break
+    #   else
+    #     vlab_image = execute_in_shell("docker images -a | grep vivumlab/vivumlab")&.first&.split(/ {2,}/) rescue nil
+    #     unless vlab_image.nil?
+    #       say "test"
+    #       # delete the existing image
+    #       execute_in_shell("sudo docker rmi --force #{vlab_image[2]}")
+    #     end
+    #     if options[:build]
+    #       # build from local directory, no cache.
+    #       execute_in_shell("sudo docker build . --no-cache --force-rm -t vivumlab/vivumlab:latest")
+    #     else
+    #       # having forced the delte, pull a new version
+    #       execute_in_shell("sudo docker pull vivumlab/vivumlab")
+    #     end
+    #   end
+    # end
 
     desc "deploy", "Deploys VivumLab, configures it first if needed"
     def deploy()
