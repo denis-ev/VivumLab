@@ -45,14 +45,11 @@ Task::build() {
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
-  vlab_dockerimagver=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $2}')
-  vlab_dockerimagid=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $3}')
+  vlab_dockerimagver=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $2}')
+  vlab_dockerimagid=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $3}')
 
-  if [[ ${vlab_dockerimagver} == "latest" ]]; then
-    sudo docker rmi --force ${vlab_dockerimagver}
-  fi
-  if [[ $VERSION_CURRENT == $VERSION_LATEST ]] ; then
-    VERSION_DOCKER=${VERSION_LATEST}
+  if [[ ${vlab_dockerimagver} != ${VERSION_CURRENT} ]]; then
+    sudo docker rmi --force ${vlab_dockerimagid}
   fi
 
   function build_cache() {
@@ -70,15 +67,15 @@ Task::build() {
   fi
 
   highlight "Getting VivumLab Docker Image"
-  if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
+  if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_CURRENT} == ${VERSION_LATEST} ]]; then
     colorize light_yellow "Image number: ${vlab_dockerimagid}"
     colorize light_yellow "is the latest vlab image"
     colorize light_blue "Skipping vlab image retrieval"
   else
     if [[ ${_build-true} == true ]]; then
-      sudo docker build . $(build_cache) -t vivumlab/vivumlab:$VERSION_DOCKER
+      sudo docker build . $(build_cache) -t vivumlab/vivumlab:${VERSION_CURRENT}
     else
-      sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
+      sudo docker pull vivumlab/vivumlab:${VERSION_CURRENT}
     fi
   fi
 }

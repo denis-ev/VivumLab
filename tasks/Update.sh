@@ -35,7 +35,6 @@ Task::update_one(){
   : @param cache true "Allows the build to use the cache"
 
   Task::logo
-  Task::build $(build_check) $(force_check) $(cache_check)
 
   Task::git_sync
   Task::config
