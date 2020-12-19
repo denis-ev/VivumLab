@@ -57,14 +57,14 @@ class Config < Thor
       say "Key #{options[:config_key]} not found in either config file. Did you spell it right?".red
       # Following else if block only executes if the user supplied key is entirely valid and found in the config file
     elsif options[:config_key] == good_config_key
-      config[good_vault_key] = options[:value] # this sets the new value
+      eval "config.#{good_config_key.chomp}=#{options[:value]}"
       say "Saving config.yml"
       File.open("#{options[:config_dir]}/config.yml", 'w') do |file|
         file.write(Psych.dump(config.to_hash))
       end
       # Following else if block only executes if the user supplied key is entirely valid and found in the vault
     elsif options[:config_key] == good_vault_key
-      config[good_vault_key] = options[:value]
+      eval "config.#{good_vault_key.chomp}=#{options[:value]}"
       say "Saving Vault.yml"
       File.open("#{options[:config_dir]}/vault.yml", 'w') do |file|
         file.write(Psych.dump(vault.to_hash))
@@ -78,7 +78,6 @@ class Config < Thor
       table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", "value"], rows: config[good_config_key])
       say table.render(:unicode)
     end
-    binding.pry
     # regardless of the change (or not), re-encrypt the vault
     invoke "core:encrypt"
   end
