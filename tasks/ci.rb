@@ -1,20 +1,14 @@
-module Vlab
-  class CI < SubCommandBase
-    desc "build", "ci build for VivumLab, configures it first if needed"
-    option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
-    option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
-    option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-    option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
-    def build()
-      invoke_subtask "Core", "logo"
-      invoke_subtask "Core", "local", options
-      File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
-      run_playbook("playbook.ci_config.yml", options)
+class CI < Thor
+  desc "build", "ci build for VivumLab, configures it first if needed"
+  def build()
+    invoke "core:logo"
+    invoke "core:local", options
+    File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
+    run_playbook("playbook.ci_config.yml", options)
 
-      invoke_subtask "Core", "encrypt"
+    invoke "core:encrypt"
 
-      run_playbook("playbook.ci.yml", options)
-    end
-
+    run_playbook("playbook.ci.yml", options)
   end
+
 end
