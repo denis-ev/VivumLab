@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+#if developer run as "./launch.sh dev"
+
+if [ -z $1 ]; then
+  version=latest
+else
+  if [ $1 == 'dev' ]; then
+    docker build -t vivumlab/vivumlab:dev .
+    version=dev
+  else
+    version=$1
+  fi
+fi
+
 function pwless_sshkey () {
   if [ -z ${PASSWORDLESS_SSHKEY} ]; then
     PASSWORDLESS_SSHKEY='id_rsa'
@@ -18,4 +31,4 @@ docker run --rm -it \
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
-  36281de0f837 /bin/bash
+  vivumlab/vivumlab:${version} /bin/bash
