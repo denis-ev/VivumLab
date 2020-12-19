@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Docusaurus v2](https://v2.docusaurus.io) VivumLab Docs
 
-![amd64](https://img.shields.io/badge/{% if not docs.amd64 %}untested{% else %}{{ docs.amd64 }}{% endif %}-amd64-{% if not docs.amd64 %}inactive{% elif docs.amd64 == "verified" %}success{% elif docs.amd64 == "supported" %}informational{% elif docs.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not docs.arm64 %}untested{% else %}{{ docs.arm64 }}{% endif %}-arm64-{% if not docs.arm64 %}inactive{% elif docs.arm64 == "verified" %}success{% elif docs.arm64 == "supported" %}informational{% elif docs.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not docs.armv7 %}untested{% else %}{{ docs.armv7 }}{% endif %}-armv7-{% if not docs.armv7 %}inactive{% elif docs.armv7 == "verified" %}success{% elif docs.armv7 == "supported" %}informational{% elif docs.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not docs.amd64 %}untested{% else %}{{ docs.amd64 }}{% endif %}-amd64-{% if not docs.amd64 %}inactive{% elif docs.amd64 == "verified" %}success{% elif docs.amd64 == "supported" %}informational{% elif docs.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not docs.arm64 %}untested{% else %}{{ docs.arm64 }}{% endif %}-arm64-{% if not docs.arm64 %}inactive{% elif docs.arm64 == "verified" %}success{% elif docs.arm64 == "supported" %}informational{% elif docs.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not docs.armv7 %}untested{% else %}{{ docs.armv7 }}{% endif %}-armv7-{% if not docs.armv7 %}inactive{% elif docs.armv7 == "verified" %}success{% elif docs.armv7 == "supported" %}informational{% elif docs.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** [vivumlab/docusaurus](https://hub.docker.com/r/vivumlab/docusaurus) <br>
+**Docker Image:** [vivumlab/docusaurus](https://hub.docker.com/r/vivumlab/docusaurus) <br />
 **Current Image Version:** {{ docs.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=docs`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 ### SMTP/ MAIL
@@ -75,7 +75,7 @@ smtp:
 
 ## ACCESS
 
-docs (HTTPS) link: [https://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/](https://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/) <br>
+docs (HTTPS) link: [https://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/](https://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/) <br />
 docs (HTTP) link: [http://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/](http://{% if docs.domain %}{{ docs.domain }}{% else %}{{ docs.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
@@ -85,7 +85,7 @@ Tor link: [http://{{ docs.subdomain + "." + tor_domain }}/](http://{{ docs.subdo
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -107,7 +107,7 @@ docs
 run: **`vlab update_one service=docs`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -129,7 +129,7 @@ docs
 run: **`vlab update_one service=docs`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -151,7 +151,7 @@ docs
 run: **`vlab update_one service=docs`**
 
 ### SUBDOMAIN
-*Default: docs* <br>
+*Default: docs* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -173,7 +173,7 @@ docs
 run: **`vlab update_one service=docs`**
 
 ### VERSION
-*Default: {{  docs.version  }}* <br>
+*Default: {{  docs.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -195,6 +195,6 @@ docs
 run: **`vlab update_one service=docs`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [PrivateBin](https://privatebin.info) PrivateBin is a minimalist, open source online pastebin where the server has zero knowledge of pasted data.
 
-![amd64](https://img.shields.io/badge/{% if not privatebin.amd64 %}untested{% else %}{{ privatebin.amd64 }}{% endif %}-amd64-{% if not privatebin.amd64 %}inactive{% elif privatebin.amd64 == "verified" %}success{% elif privatebin.amd64 == "supported" %}informational{% elif privatebin.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not privatebin.arm64 %}untested{% else %}{{ privatebin.arm64 }}{% endif %}-arm64-{% if not privatebin.arm64 %}inactive{% elif privatebin.arm64 == "verified" %}success{% elif privatebin.arm64 == "supported" %}informational{% elif privatebin.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not privatebin.armv7 %}untested{% else %}{{ privatebin.armv7 }}{% endif %}-armv7-{% if not privatebin.armv7 %}inactive{% elif privatebin.armv7 == "verified" %}success{% elif privatebin.armv7 == "supported" %}informational{% elif privatebin.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not privatebin.amd64 %}untested{% else %}{{ privatebin.amd64 }}{% endif %}-amd64-{% if not privatebin.amd64 %}inactive{% elif privatebin.amd64 == "verified" %}success{% elif privatebin.amd64 == "supported" %}informational{% elif privatebin.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not privatebin.arm64 %}untested{% else %}{{ privatebin.arm64 }}{% endif %}-arm64-{% if not privatebin.arm64 %}inactive{% elif privatebin.arm64 == "verified" %}success{% elif privatebin.arm64 == "supported" %}informational{% elif privatebin.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not privatebin.armv7 %}untested{% else %}{{ privatebin.armv7 }}{% endif %}-armv7-{% if not privatebin.armv7 %}inactive{% elif privatebin.armv7 == "verified" %}success{% elif privatebin.armv7 == "supported" %}informational{% elif privatebin.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ privatebin.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=privatebin`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 ### Known Problems
@@ -89,7 +89,7 @@ Tor link: [http://{{ privatebin.subdomain + "." + tor_domain }}/](http://{{ priv
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -111,7 +111,7 @@ privatebin
 run: **`vlab update_one service=privatebin`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -133,7 +133,7 @@ privatebin
 run: **`vlab update_one service=privatebin`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -155,7 +155,7 @@ privatebin
 run: **`vlab update_one service=privatebin`**
 
 ### SUBDOMAIN
-*Default: privatebin* <br>
+*Default: privatebin* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -177,7 +177,7 @@ privatebin
 run: **`vlab update_one service=privatebin`**
 
 ### VERSION
-*Default: {{  privatebin.version  }}* <br>
+*Default: {{  privatebin.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -199,6 +199,6 @@ privatebin
 run: **`vlab update_one service=privatebin`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

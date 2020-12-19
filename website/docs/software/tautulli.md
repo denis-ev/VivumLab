@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Tautulli](https://github.com/tautulli/tautulli) A Python based monitoring and tracking tool for Plex Media Server.
 
-![amd64](https://img.shields.io/badge/{% if not tautulli.amd64 %}untested{% else %}{{ tautulli.amd64 }}{% endif %}-amd64-{% if not tautulli.amd64 %}inactive{% elif tautulli.amd64 == "verified" %}success{% elif tautulli.amd64 == "supported" %}informational{% elif tautulli.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not tautulli.arm64 %}untested{% else %}{{ tautulli.arm64 }}{% endif %}-arm64-{% if not tautulli.arm64 %}inactive{% elif tautulli.arm64 == "verified" %}success{% elif tautulli.arm64 == "supported" %}informational{% elif tautulli.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not tautulli.armv7 %}untested{% else %}{{ tautulli.armv7 }}{% endif %}-armv7-{% if not tautulli.armv7 %}inactive{% elif tautulli.armv7 == "verified" %}success{% elif tautulli.armv7 == "supported" %}informational{% elif tautulli.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not tautulli.amd64 %}untested{% else %}{{ tautulli.amd64 }}{% endif %}-amd64-{% if not tautulli.amd64 %}inactive{% elif tautulli.amd64 == "verified" %}success{% elif tautulli.amd64 == "supported" %}informational{% elif tautulli.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not tautulli.arm64 %}untested{% else %}{{ tautulli.arm64 }}{% endif %}-arm64-{% if not tautulli.arm64 %}inactive{% elif tautulli.arm64 == "verified" %}success{% elif tautulli.arm64 == "supported" %}informational{% elif tautulli.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not tautulli.armv7 %}untested{% else %}{{ tautulli.armv7 }}{% endif %}-armv7-{% if not tautulli.armv7 %}inactive{% elif tautulli.armv7 == "verified" %}success{% elif tautulli.armv7 == "supported" %}informational{% elif tautulli.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ tautulli.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=tautulli`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ tautulli.subdomain + "." + tor_domain }}/](http://{{ tautul
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ tautulli
 run: **`vlab update_one service=tautulli`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ tautulli
 run: **`vlab update_one service=tautulli`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ tautulli
 run: **`vlab update_one service=tautulli`**
 
 ### SUBDOMAIN
-*Default: tautulli* <br>
+*Default: tautulli* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ tautulli
 run: **`vlab update_one service=tautulli`**
 
 ### VERSION
-*Default: {{  tautulli.version  }}* <br>
+*Default: {{  tautulli.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ tautulli
 run: **`vlab update_one service=tautulli`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

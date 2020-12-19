@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Grocy](https://grocy.info) ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home
 
-![amd64](https://img.shields.io/badge/{% if not grocy.amd64 %}untested{% else %}{{ grocy.amd64 }}{% endif %}-amd64-{% if not grocy.amd64 %}inactive{% elif grocy.amd64 == "verified" %}success{% elif grocy.amd64 == "supported" %}informational{% elif grocy.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not grocy.arm64 %}untested{% else %}{{ grocy.arm64 }}{% endif %}-arm64-{% if not grocy.arm64 %}inactive{% elif grocy.arm64 == "verified" %}success{% elif grocy.arm64 == "supported" %}informational{% elif grocy.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not grocy.armv7 %}untested{% else %}{{ grocy.armv7 }}{% endif %}-armv7-{% if not grocy.armv7 %}inactive{% elif grocy.armv7 == "verified" %}success{% elif grocy.armv7 == "supported" %}informational{% elif grocy.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not grocy.amd64 %}untested{% else %}{{ grocy.amd64 }}{% endif %}-amd64-{% if not grocy.amd64 %}inactive{% elif grocy.amd64 == "verified" %}success{% elif grocy.amd64 == "supported" %}informational{% elif grocy.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not grocy.arm64 %}untested{% else %}{{ grocy.arm64 }}{% endif %}-arm64-{% if not grocy.arm64 %}inactive{% elif grocy.arm64 == "verified" %}success{% elif grocy.arm64 == "supported" %}informational{% elif grocy.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not grocy.armv7 %}untested{% else %}{{ grocy.armv7 }}{% endif %}-armv7-{% if not grocy.armv7 %}inactive{% elif grocy.armv7 == "verified" %}success{% elif grocy.armv7 == "supported" %}informational{% elif grocy.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ grocy.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=grocy`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -89,7 +89,7 @@ Tor link: [http://{{ grocy.subdomain + "." + tor_domain }}/](http://{{ grocy.sub
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -111,7 +111,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -133,7 +133,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -155,7 +155,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### SUBDOMAIN
-*Default: grocy* <br>
+*Default: grocy* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -177,7 +177,7 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ### VERSION
-*Default: {{  grocy.version  }}* <br>
+*Default: {{  grocy.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -199,6 +199,6 @@ grocy
 run: **`vlab update_one service=grocy`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

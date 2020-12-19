@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Synchthing](https://syncthing.net/) is a powerful file synchronization tool. [NextCloud](nextcloud.md) can also do this, but Syncthing is nicer to work with servers and other people.
 
-![amd64](https://img.shields.io/badge/{% if not syncthing.amd64 %}untested{% else %}{{ syncthing.amd64 }}{% endif %}-amd64-{% if not syncthing.amd64 %}inactive{% elif syncthing.amd64 == "verified" %}success{% elif syncthing.amd64 == "supported" %}informational{% elif syncthing.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not syncthing.arm64 %}untested{% else %}{{ syncthing.arm64 }}{% endif %}-arm64-{% if not syncthing.arm64 %}inactive{% elif syncthing.arm64 == "verified" %}success{% elif syncthing.arm64 == "supported" %}informational{% elif syncthing.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not syncthing.armv7 %}untested{% else %}{{ syncthing.armv7 }}{% endif %}-armv7-{% if not syncthing.armv7 %}inactive{% elif syncthing.armv7 == "verified" %}success{% elif syncthing.armv7 == "supported" %}informational{% elif syncthing.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not syncthing.amd64 %}untested{% else %}{{ syncthing.amd64 }}{% endif %}-amd64-{% if not syncthing.amd64 %}inactive{% elif syncthing.amd64 == "verified" %}success{% elif syncthing.amd64 == "supported" %}informational{% elif syncthing.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not syncthing.arm64 %}untested{% else %}{{ syncthing.arm64 }}{% endif %}-arm64-{% if not syncthing.arm64 %}inactive{% elif syncthing.arm64 == "verified" %}success{% elif syncthing.arm64 == "supported" %}informational{% elif syncthing.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not syncthing.armv7 %}untested{% else %}{{ syncthing.armv7 }}{% endif %}-armv7-{% if not syncthing.armv7 %}inactive{% elif syncthing.armv7 == "verified" %}success{% elif syncthing.armv7 == "supported" %}informational{% elif syncthing.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ syncthing.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=syncthing`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ syncthing.subdomain + "." + tor_domain }}/](http://{{ synct
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ syncthing
 run: **`vlab update_one service=syncthing`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ syncthing
 run: **`vlab update_one service=syncthing`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ syncthing
 run: **`vlab update_one service=syncthing`**
 
 ### SUBDOMAIN
-*Default: syncthing* <br>
+*Default: syncthing* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ syncthing
 run: **`vlab update_one service=syncthing`**
 
 ### VERSION
-*Default: {{  syncthing.version  }}* <br>
+*Default: {{  syncthing.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ syncthing
 run: **`vlab update_one service=syncthing`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

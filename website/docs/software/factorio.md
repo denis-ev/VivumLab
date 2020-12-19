@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Factorio](https://github.com/factoriotools/factorio-docker) Factorio headless server in a Docker container
 
-![amd64](https://img.shields.io/badge/{% if not factorio.amd64 %}untested{% else %}{{ factorio.amd64 }}{% endif %}-amd64-{% if not factorio.amd64 %}inactive{% elif factorio.amd64 == "verified" %}success{% elif factorio.amd64 == "supported" %}informational{% elif factorio.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not factorio.arm64 %}untested{% else %}{{ factorio.arm64 }}{% endif %}-arm64-{% if not factorio.arm64 %}inactive{% elif factorio.arm64 == "verified" %}success{% elif factorio.arm64 == "supported" %}informational{% elif factorio.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not factorio.armv7 %}untested{% else %}{{ factorio.armv7 }}{% endif %}-armv7-{% if not factorio.armv7 %}inactive{% elif factorio.armv7 == "verified" %}success{% elif factorio.armv7 == "supported" %}informational{% elif factorio.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not factorio.amd64 %}untested{% else %}{{ factorio.amd64 }}{% endif %}-amd64-{% if not factorio.amd64 %}inactive{% elif factorio.amd64 == "verified" %}success{% elif factorio.amd64 == "supported" %}informational{% elif factorio.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not factorio.arm64 %}untested{% else %}{{ factorio.arm64 }}{% endif %}-arm64-{% if not factorio.arm64 %}inactive{% elif factorio.arm64 == "verified" %}success{% elif factorio.arm64 == "supported" %}informational{% elif factorio.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not factorio.armv7 %}untested{% else %}{{ factorio.armv7 }}{% endif %}-armv7-{% if not factorio.armv7 %}inactive{% elif factorio.armv7 == "verified" %}success{% elif factorio.armv7 == "supported" %}informational{% elif factorio.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ factorio.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=factorio`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -86,7 +86,7 @@ It is available at {{ domain }}. No subdomain needed since it works on exposed p
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -108,7 +108,7 @@ factorio
 run: **`vlab update_one service=factorio`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -130,7 +130,7 @@ factorio
 run: **`vlab update_one service=factorio`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -152,7 +152,7 @@ factorio
 run: **`vlab update_one service=factorio`**
 
 ### SUBDOMAIN
-*Default: factorio* <br>
+*Default: factorio* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -174,7 +174,7 @@ factorio
 run: **`vlab update_one service=factorio`**
 
 ### VERSION
-*Default: {{  factorio.version  }}* <br>
+*Default: {{  factorio.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -196,6 +196,6 @@ factorio
 run: **`vlab update_one service=factorio`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

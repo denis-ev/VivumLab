@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [RSSHub](https://docs.rsshub.app/en/) RSSHub is an open source, easy to use, and extensible RSS feed aggregator, it's capable of generating RSS feeds from pretty much everything.
 
-![amd64](https://img.shields.io/badge/{% if not rsshub.amd64 %}untested{% else %}{{ rsshub.amd64 }}{% endif %}-amd64-{% if not rsshub.amd64 %}inactive{% elif rsshub.amd64 == "verified" %}success{% elif rsshub.amd64 == "supported" %}informational{% elif rsshub.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not rsshub.arm64 %}untested{% else %}{{ rsshub.arm64 }}{% endif %}-arm64-{% if not rsshub.arm64 %}inactive{% elif rsshub.arm64 == "verified" %}success{% elif rsshub.arm64 == "supported" %}informational{% elif rsshub.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not rsshub.armv7 %}untested{% else %}{{ rsshub.armv7 }}{% endif %}-armv7-{% if not rsshub.armv7 %}inactive{% elif rsshub.armv7 == "verified" %}success{% elif rsshub.armv7 == "supported" %}informational{% elif rsshub.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not rsshub.amd64 %}untested{% else %}{{ rsshub.amd64 }}{% endif %}-amd64-{% if not rsshub.amd64 %}inactive{% elif rsshub.amd64 == "verified" %}success{% elif rsshub.amd64 == "supported" %}informational{% elif rsshub.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not rsshub.arm64 %}untested{% else %}{{ rsshub.arm64 }}{% endif %}-arm64-{% if not rsshub.arm64 %}inactive{% elif rsshub.arm64 == "verified" %}success{% elif rsshub.arm64 == "supported" %}informational{% elif rsshub.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not rsshub.armv7 %}untested{% else %}{{ rsshub.armv7 }}{% endif %}-armv7-{% if not rsshub.armv7 %}inactive{% elif rsshub.armv7 == "verified" %}success{% elif rsshub.armv7 == "supported" %}informational{% elif rsshub.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ rsshub.version }}
 
 ## SETUP
@@ -84,7 +84,7 @@ Tor link: [http://{{ rsshub.subdomain + "." + tor_domain }}/](http://{{ rsshub.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -106,7 +106,7 @@ rsshub
 run: **`vlab update_one service=rsshub`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -128,7 +128,7 @@ rsshub
 run: **`vlab update_one service=rsshub`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -150,7 +150,7 @@ rsshub
 run: **`vlab update_one service=rsshub`**
 
 ### SUBDOMAIN
-*Default: rsshub* <br>
+*Default: rsshub* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -172,7 +172,7 @@ rsshub
 run: **`vlab update_one service=rsshub`**
 
 ### VERSION
-*Default: {{  rsshub.version  }}* <br>
+*Default: {{  rsshub.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -194,6 +194,6 @@ rsshub
 run: **`vlab update_one service=rsshub`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

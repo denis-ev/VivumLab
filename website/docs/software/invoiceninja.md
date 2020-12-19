@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Invoice Ninja](https://www.invoiceninja.org/) Free Open-Source Invoicing
 
-![amd64](https://img.shields.io/badge/{% if not invoiceninja.amd64 %}untested{% else %}{{ invoiceninja.amd64 }}{% endif %}-amd64-{% if not invoiceninja.amd64 %}inactive{% elif invoiceninja.amd64 == "verified" %}success{% elif invoiceninja.amd64 == "supported" %}informational{% elif invoiceninja.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not invoiceninja.arm64 %}untested{% else %}{{ invoiceninja.arm64 }}{% endif %}-arm64-{% if not invoiceninja.arm64 %}inactive{% elif invoiceninja.arm64 == "verified" %}success{% elif invoiceninja.arm64 == "supported" %}informational{% elif invoiceninja.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not invoiceninja.armv7 %}untested{% else %}{{ invoiceninja.armv7 }}{% endif %}-armv7-{% if not invoiceninja.armv7 %}inactive{% elif invoiceninja.armv7 == "verified" %}success{% elif invoiceninja.armv7 == "supported" %}informational{% elif invoiceninja.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not invoiceninja.amd64 %}untested{% else %}{{ invoiceninja.amd64 }}{% endif %}-amd64-{% if not invoiceninja.amd64 %}inactive{% elif invoiceninja.amd64 == "verified" %}success{% elif invoiceninja.amd64 == "supported" %}informational{% elif invoiceninja.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not invoiceninja.arm64 %}untested{% else %}{{ invoiceninja.arm64 }}{% endif %}-arm64-{% if not invoiceninja.arm64 %}inactive{% elif invoiceninja.arm64 == "verified" %}success{% elif invoiceninja.arm64 == "supported" %}informational{% elif invoiceninja.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not invoiceninja.armv7 %}untested{% else %}{{ invoiceninja.armv7 }}{% endif %}-armv7-{% if not invoiceninja.armv7 %}inactive{% elif invoiceninja.armv7 == "verified" %}success{% elif invoiceninja.armv7 == "supported" %}informational{% elif invoiceninja.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ invoiceninja.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=invoiceninja`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ invoiceninja.subdomain + "." + tor_domain }}/](http://{{ in
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### SUBDOMAIN
-*Default: invoiceninja* <br>
+*Default: invoiceninja* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ### VERSION
-*Default: {{  invoiceninja.version  }}* <br>
+*Default: {{  invoiceninja.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ invoiceninja
 run: **`vlab update_one service=invoiceninja`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

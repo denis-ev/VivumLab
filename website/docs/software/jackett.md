@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Jackett](https://github.com/Jackett/Jackett) provides API Support for your favorite torrent trackers.
 
-![amd64](https://img.shields.io/badge/{% if not jackett.amd64 %}untested{% else %}{{ jackett.amd64 }}{% endif %}-amd64-{% if not jackett.amd64 %}inactive{% elif jackett.amd64 == "verified" %}success{% elif jackett.amd64 == "supported" %}informational{% elif jackett.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not jackett.arm64 %}untested{% else %}{{ jackett.arm64 }}{% endif %}-arm64-{% if not jackett.arm64 %}inactive{% elif jackett.arm64 == "verified" %}success{% elif jackett.arm64 == "supported" %}informational{% elif jackett.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not jackett.armv7 %}untested{% else %}{{ jackett.armv7 }}{% endif %}-armv7-{% if not jackett.armv7 %}inactive{% elif jackett.armv7 == "verified" %}success{% elif jackett.armv7 == "supported" %}informational{% elif jackett.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not jackett.amd64 %}untested{% else %}{{ jackett.amd64 }}{% endif %}-amd64-{% if not jackett.amd64 %}inactive{% elif jackett.amd64 == "verified" %}success{% elif jackett.amd64 == "supported" %}informational{% elif jackett.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not jackett.arm64 %}untested{% else %}{{ jackett.arm64 }}{% endif %}-arm64-{% if not jackett.arm64 %}inactive{% elif jackett.arm64 == "verified" %}success{% elif jackett.arm64 == "supported" %}informational{% elif jackett.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not jackett.armv7 %}untested{% else %}{{ jackett.armv7 }}{% endif %}-armv7-{% if not jackett.armv7 %}inactive{% elif jackett.armv7 == "verified" %}success{% elif jackett.armv7 == "supported" %}informational{% elif jackett.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ jackett.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=jackett`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -94,7 +94,7 @@ Tor link: [http://{{ jackett.subdomain + "." + tor_domain }}/](http://{{ jackett
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -116,7 +116,7 @@ jackett
 run: **`vlab update_one service=jackett`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -138,7 +138,7 @@ jackett
 run: **`vlab update_one service=jackett`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -160,7 +160,7 @@ jackett
 run: **`vlab update_one service=jackett`**
 
 ### SUBDOMAIN
-*Default: jackett* <br>
+*Default: jackett* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -182,7 +182,7 @@ jackett
 run: **`vlab update_one service=jackett`**
 
 ### VERSION
-*Default: {{  jackett.version  }}* <br>
+*Default: {{  jackett.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -204,6 +204,6 @@ jackett
 run: **`vlab update_one service=jackett`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

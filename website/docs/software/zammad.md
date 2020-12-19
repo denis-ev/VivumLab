@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Zammad](https://zammad.org/) Zammad is a web-based, open source user support/ticketing solution.
 
-![amd64](https://img.shields.io/badge/{% if not zammad.amd64 %}untested{% else %}{{ zammad.amd64 }}{% endif %}-amd64-{% if not zammad.amd64 %}inactive{% elif zammad.amd64 == "verified" %}success{% elif zammad.amd64 == "supported" %}informational{% elif zammad.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not zammad.arm64 %}untested{% else %}{{ zammad.arm64 }}{% endif %}-arm64-{% if not zammad.arm64 %}inactive{% elif zammad.arm64 == "verified" %}success{% elif zammad.arm64 == "supported" %}informational{% elif zammad.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not zammad.armv7 %}untested{% else %}{{ zammad.armv7 }}{% endif %}-armv7-{% if not zammad.armv7 %}inactive{% elif zammad.armv7 == "verified" %}success{% elif zammad.armv7 == "supported" %}informational{% elif zammad.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not zammad.amd64 %}untested{% else %}{{ zammad.amd64 }}{% endif %}-amd64-{% if not zammad.amd64 %}inactive{% elif zammad.amd64 == "verified" %}success{% elif zammad.amd64 == "supported" %}informational{% elif zammad.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not zammad.arm64 %}untested{% else %}{{ zammad.arm64 }}{% endif %}-arm64-{% if not zammad.arm64 %}inactive{% elif zammad.arm64 == "verified" %}success{% elif zammad.arm64 == "supported" %}informational{% elif zammad.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not zammad.armv7 %}untested{% else %}{{ zammad.armv7 }}{% endif %}-armv7-{% if not zammad.armv7 %}inactive{% elif zammad.armv7 == "verified" %}success{% elif zammad.armv7 == "supported" %}informational{% elif zammad.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ zammad.version }}
 
 ## Requirements Hardware
@@ -62,7 +62,7 @@ run: **`vlab update_one service=zammad`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -103,7 +103,7 @@ Tor link: [http://{{ zammad.subdomain + "." + tor_domain }}/](http://{{ zammad.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -125,7 +125,7 @@ zammad
 run: **`vlab update_one service=zammad`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -147,7 +147,7 @@ zammad
 run: **`vlab update_one service=zammad`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -169,7 +169,7 @@ zammad
 run: **`vlab update_one service=zammad`**
 
 ### SUBDOMAIN
-*Default: zammad* <br>
+*Default: zammad* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -191,7 +191,7 @@ zammad
 run: **`vlab update_one service=zammad`**
 
 ### VERSION
-*Default: {{  zammad.version  }}* <br>
+*Default: {{  zammad.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -213,6 +213,6 @@ zammad
 run: **`vlab update_one service=zammad`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

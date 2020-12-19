@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Apache 2](https://httpd.apache.org/) is a free web server.
 
-![amd64](https://img.shields.io/badge/{% if not apache2.amd64 %}untested{% else %}{{ apache2.amd64 }}{% endif %}-amd64-{% if not apache2.amd64 %}inactive{% elif apache2.amd64 == "verified" %}success{% elif apache2.amd64 == "supported" %}informational{% elif apache2.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not apache2.arm64 %}untested{% else %}{{ apache2.arm64 }}{% endif %}-arm64-{% if not apache2.arm64 %}inactive{% elif apache2.arm64 == "verified" %}success{% elif apache2.arm64 == "supported" %}informational{% elif apache2.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not apache2.armv7 %}untested{% else %}{{ apache2.armv7 }}{% endif %}-armv7-{% if not apache2.armv7 %}inactive{% elif apache2.armv7 == "verified" %}success{% elif apache2.armv7 == "supported" %}informational{% elif apache2.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not apache2.amd64 %}untested{% else %}{{ apache2.amd64 }}{% endif %}-amd64-{% if not apache2.amd64 %}inactive{% elif apache2.amd64 == "verified" %}success{% elif apache2.amd64 == "supported" %}informational{% elif apache2.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not apache2.arm64 %}untested{% else %}{{ apache2.arm64 }}{% endif %}-arm64-{% if not apache2.arm64 %}inactive{% elif apache2.arm64 == "verified" %}success{% elif apache2.arm64 == "supported" %}informational{% elif apache2.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not apache2.armv7 %}untested{% else %}{{ apache2.armv7 }}{% endif %}-armv7-{% if not apache2.armv7 %}inactive{% elif apache2.armv7 == "verified" %}success{% elif apache2.armv7 == "supported" %}informational{% elif apache2.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ apache2.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=apache2`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ apache2.subdomain + "." + tor_domain }}/](http://{{ apache2
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### SUBDOMAIN
-*Default: apache2* <br>
+*Default: apache2* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ### VERSION
-*Default: {{  apache2.version  }}* <br>
+*Default: {{  apache2.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ apache2
 run: **`vlab update_one service=apache2`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

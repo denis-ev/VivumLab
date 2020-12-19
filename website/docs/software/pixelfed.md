@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Pixelfed](https://pixelfed.org/) is a free and ethical photo sharing platform, powered by ActivityPub federation.
 
-![amd64](https://img.shields.io/badge/{% if not pixelfed.amd64 %}untested{% else %}{{ pixelfed.amd64 }}{% endif %}-amd64-{% if not pixelfed.amd64 %}inactive{% elif pixelfed.amd64 == "verified" %}success{% elif pixelfed.amd64 == "supported" %}informational{% elif pixelfed.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not pixelfed.arm64 %}untested{% else %}{{ pixelfed.arm64 }}{% endif %}-arm64-{% if not pixelfed.arm64 %}inactive{% elif pixelfed.arm64 == "verified" %}success{% elif pixelfed.arm64 == "supported" %}informational{% elif pixelfed.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not pixelfed.armv7 %}untested{% else %}{{ pixelfed.armv7 }}{% endif %}-armv7-{% if not pixelfed.armv7 %}inactive{% elif pixelfed.armv7 == "verified" %}success{% elif pixelfed.armv7 == "supported" %}informational{% elif pixelfed.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not pixelfed.amd64 %}untested{% else %}{{ pixelfed.amd64 }}{% endif %}-amd64-{% if not pixelfed.amd64 %}inactive{% elif pixelfed.amd64 == "verified" %}success{% elif pixelfed.amd64 == "supported" %}informational{% elif pixelfed.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not pixelfed.arm64 %}untested{% else %}{{ pixelfed.arm64 }}{% endif %}-arm64-{% if not pixelfed.arm64 %}inactive{% elif pixelfed.arm64 == "verified" %}success{% elif pixelfed.arm64 == "supported" %}informational{% elif pixelfed.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not pixelfed.armv7 %}untested{% else %}{{ pixelfed.armv7 }}{% endif %}-armv7-{% if not pixelfed.armv7 %}inactive{% elif pixelfed.armv7 == "verified" %}success{% elif pixelfed.armv7 == "supported" %}informational{% elif pixelfed.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ pixelfed.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=pixelfed`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 ### Environment variables
@@ -109,7 +109,7 @@ Tor link: [http://{{ pixelfed.subdomain + "." + tor_domain }}/](http://{{ pixelf
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -131,7 +131,7 @@ pixelfed
 run: **`vlab update_one service=pixelfed`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -153,7 +153,7 @@ pixelfed
 run: **`vlab update_one service=pixelfed`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -175,7 +175,7 @@ pixelfed
 run: **`vlab update_one service=pixelfed`**
 
 ### SUBDOMAIN
-*Default: pixelfed* <br>
+*Default: pixelfed* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -197,7 +197,7 @@ pixelfed
 run: **`vlab update_one service=pixelfed`**
 
 ### VERSION
-*Default: {{  pixelfed.version  }}* <br>
+*Default: {{  pixelfed.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -219,6 +219,6 @@ pixelfed
 run: **`vlab update_one service=pixelfed`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

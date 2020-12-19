@@ -27,14 +27,14 @@ Using the pattern:
   devices: ['/dev/device1', '/dev/device2']
 ```
 
-![amd64](https://img.shields.io/badge/{% if not octoprint.amd64 %}untested{% else %}{{ octoprint.amd64 }}{% endif %}-amd64-{% if not octoprint.amd64 %}inactive{% elif octoprint.amd64 == "verified" %}success{% elif octoprint.amd64 == "supported" %}informational{% elif octoprint.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not octoprint.arm64 %}untested{% else %}{{ octoprint.arm64 }}{% endif %}-arm64-{% if not octoprint.arm64 %}inactive{% elif octoprint.arm64 == "verified" %}success{% elif octoprint.arm64 == "supported" %}informational{% elif octoprint.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not octoprint.armv7 %}untested{% else %}{{ octoprint.armv7 }}{% endif %}-armv7-{% if not octoprint.armv7 %}inactive{% elif octoprint.armv7 == "verified" %}success{% elif octoprint.armv7 == "supported" %}informational{% elif octoprint.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not octoprint.amd64 %}untested{% else %}{{ octoprint.amd64 }}{% endif %}-amd64-{% if not octoprint.amd64 %}inactive{% elif octoprint.amd64 == "verified" %}success{% elif octoprint.amd64 == "supported" %}informational{% elif octoprint.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not octoprint.arm64 %}untested{% else %}{{ octoprint.arm64 }}{% endif %}-arm64-{% if not octoprint.arm64 %}inactive{% elif octoprint.arm64 == "verified" %}success{% elif octoprint.arm64 == "supported" %}informational{% elif octoprint.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not octoprint.armv7 %}untested{% else %}{{ octoprint.armv7 }}{% endif %}-armv7-{% if not octoprint.armv7 %}inactive{% elif octoprint.armv7 == "verified" %}success{% elif octoprint.armv7 == "supported" %}informational{% elif octoprint.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ octoprint.version }}
 
 ## SETUP
@@ -61,7 +61,7 @@ run: **`vlab update_one service=octoprint`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -102,7 +102,7 @@ Tor link: [http://{{ octoprint.subdomain + "." + tor_domain }}/](http://{{ octop
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -124,7 +124,7 @@ octoprint
 run: **`vlab update_one service=octoprint`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -146,7 +146,7 @@ octoprint
 run: **`vlab update_one service=octoprint`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -168,7 +168,7 @@ octoprint
 run: **`vlab update_one service=octoprint`**
 
 ### SUBDOMAIN
-*Default: octoprint* <br>
+*Default: octoprint* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -190,7 +190,7 @@ octoprint
 run: **`vlab update_one service=octoprint`**
 
 ### VERSION
-*Default: {{  octoprint.version  }}* <br>
+*Default: {{  octoprint.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -212,6 +212,6 @@ octoprint
 run: **`vlab update_one service=octoprint`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

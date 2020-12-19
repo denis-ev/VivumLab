@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Wallabag](https://wallabag.org/en/) Save and classify articles. Read them later. Freely.
 
-![amd64](https://img.shields.io/badge/{% if not wallabag.amd64 %}untested{% else %}{{ wallabag.amd64 }}{% endif %}-amd64-{% if not wallabag.amd64 %}inactive{% elif wallabag.amd64 == "verified" %}success{% elif wallabag.amd64 == "supported" %}informational{% elif wallabag.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not wallabag.arm64 %}untested{% else %}{{ wallabag.arm64 }}{% endif %}-arm64-{% if not wallabag.arm64 %}inactive{% elif wallabag.arm64 == "verified" %}success{% elif wallabag.arm64 == "supported" %}informational{% elif wallabag.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not wallabag.armv7 %}untested{% else %}{{ wallabag.armv7 }}{% endif %}-armv7-{% if not wallabag.armv7 %}inactive{% elif wallabag.armv7 == "verified" %}success{% elif wallabag.armv7 == "supported" %}informational{% elif wallabag.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not wallabag.amd64 %}untested{% else %}{{ wallabag.amd64 }}{% endif %}-amd64-{% if not wallabag.amd64 %}inactive{% elif wallabag.amd64 == "verified" %}success{% elif wallabag.amd64 == "supported" %}informational{% elif wallabag.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not wallabag.arm64 %}untested{% else %}{{ wallabag.arm64 }}{% endif %}-arm64-{% if not wallabag.arm64 %}inactive{% elif wallabag.arm64 == "verified" %}success{% elif wallabag.arm64 == "supported" %}informational{% elif wallabag.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not wallabag.armv7 %}untested{% else %}{{ wallabag.armv7 }}{% endif %}-armv7-{% if not wallabag.armv7 %}inactive{% elif wallabag.armv7 == "verified" %}success{% elif wallabag.armv7 == "supported" %}informational{% elif wallabag.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ wallabag.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=wallabag`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -93,7 +93,7 @@ Tor link: [http://{{ wallabag.subdomain + "." + tor_domain }}/](http://{{ wallab
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -115,7 +115,7 @@ wallabag
 run: **`vlab update_one service=wallabag`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -137,7 +137,7 @@ wallabag
 run: **`vlab update_one service=wallabag`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +159,7 @@ wallabag
 run: **`vlab update_one service=wallabag`**
 
 ### SUBDOMAIN
-*Default: wallabag* <br>
+*Default: wallabag* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +181,7 @@ wallabag
 run: **`vlab update_one service=wallabag`**
 
 ### VERSION
-*Default: {{  wallabag.version  }}* <br>
+*Default: {{  wallabag.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +203,6 @@ wallabag
 run: **`vlab update_one service=wallabag`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

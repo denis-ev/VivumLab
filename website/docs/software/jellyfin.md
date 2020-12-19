@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Jellyfin](https://github.com/jellyfin/jellyfin) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.
 
-![amd64](https://img.shields.io/badge/{% if not jellyfin.amd64 %}untested{% else %}{{ jellyfin.amd64 }}{% endif %}-amd64-{% if not jellyfin.amd64 %}inactive{% elif jellyfin.amd64 == "verified" %}success{% elif jellyfin.amd64 == "supported" %}informational{% elif jellyfin.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not jellyfin.arm64 %}untested{% else %}{{ jellyfin.arm64 }}{% endif %}-arm64-{% if not jellyfin.arm64 %}inactive{% elif jellyfin.arm64 == "verified" %}success{% elif jellyfin.arm64 == "supported" %}informational{% elif jellyfin.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not jellyfin.armv7 %}untested{% else %}{{ jellyfin.armv7 }}{% endif %}-armv7-{% if not jellyfin.armv7 %}inactive{% elif jellyfin.armv7 == "verified" %}success{% elif jellyfin.armv7 == "supported" %}informational{% elif jellyfin.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not jellyfin.amd64 %}untested{% else %}{{ jellyfin.amd64 }}{% endif %}-amd64-{% if not jellyfin.amd64 %}inactive{% elif jellyfin.amd64 == "verified" %}success{% elif jellyfin.amd64 == "supported" %}informational{% elif jellyfin.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not jellyfin.arm64 %}untested{% else %}{{ jellyfin.arm64 }}{% endif %}-arm64-{% if not jellyfin.arm64 %}inactive{% elif jellyfin.arm64 == "verified" %}success{% elif jellyfin.arm64 == "supported" %}informational{% elif jellyfin.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not jellyfin.armv7 %}untested{% else %}{{ jellyfin.armv7 }}{% endif %}-armv7-{% if not jellyfin.armv7 %}inactive{% elif jellyfin.armv7 == "verified" %}success{% elif jellyfin.armv7 == "supported" %}informational{% elif jellyfin.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ jellyfin.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=jellyfin`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ jellyfin.subdomain + "." + tor_domain }}/](http://{{ jellyf
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### SUBDOMAIN
-*Default: jellyfin* <br>
+*Default: jellyfin* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ### VERSION
-*Default: {{  jellyfin.version  }}* <br>
+*Default: {{  jellyfin.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ jellyfin
 run: **`vlab update_one service=jellyfin`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

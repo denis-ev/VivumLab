@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [qBittorrent](https://www.qbittorrent.org/) An open-source alternative to µTorrent
 
-![amd64](https://img.shields.io/badge/{% if not qbittorrent.amd64 %}untested{% else %}{{ qbittorrent.amd64 }}{% endif %}-amd64-{% if not qbittorrent.amd64 %}inactive{% elif qbittorrent.amd64 == "verified" %}success{% elif qbittorrent.amd64 == "supported" %}informational{% elif qbittorrent.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not qbittorrent.arm64 %}untested{% else %}{{ qbittorrent.arm64 }}{% endif %}-arm64-{% if not qbittorrent.arm64 %}inactive{% elif qbittorrent.arm64 == "verified" %}success{% elif qbittorrent.arm64 == "supported" %}informational{% elif qbittorrent.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not qbittorrent.armv7 %}untested{% else %}{{ qbittorrent.armv7 }}{% endif %}-armv7-{% if not qbittorrent.armv7 %}inactive{% elif qbittorrent.armv7 == "verified" %}success{% elif qbittorrent.armv7 == "supported" %}informational{% elif qbittorrent.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not qbittorrent.amd64 %}untested{% else %}{{ qbittorrent.amd64 }}{% endif %}-amd64-{% if not qbittorrent.amd64 %}inactive{% elif qbittorrent.amd64 == "verified" %}success{% elif qbittorrent.amd64 == "supported" %}informational{% elif qbittorrent.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not qbittorrent.arm64 %}untested{% else %}{{ qbittorrent.arm64 }}{% endif %}-arm64-{% if not qbittorrent.arm64 %}inactive{% elif qbittorrent.arm64 == "verified" %}success{% elif qbittorrent.arm64 == "supported" %}informational{% elif qbittorrent.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not qbittorrent.armv7 %}untested{% else %}{{ qbittorrent.armv7 }}{% endif %}-armv7-{% if not qbittorrent.armv7 %}inactive{% elif qbittorrent.armv7 == "verified" %}success{% elif qbittorrent.armv7 == "supported" %}informational{% elif qbittorrent.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ qbittorrent.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=qbittorrent`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ qbittorrent.subdomain + "." + tor_domain }}/](http://{{ qbi
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ qbittorrent
 run: **`vlab update_one service=qbittorrent`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ qbittorrent
 run: **`vlab update_one service=qbittorrent`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ qbittorrent
 run: **`vlab update_one service=qbittorrent`**
 
 ### SUBDOMAIN
-*Default: qbittorrent* <br>
+*Default: qbittorrent* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ qbittorrent
 run: **`vlab update_one service=qbittorrent`**
 
 ### VERSION
-*Default: {{  qbittorrent.version  }}* <br>
+*Default: {{  qbittorrent.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ qbittorrent
 run: **`vlab update_one service=qbittorrent`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

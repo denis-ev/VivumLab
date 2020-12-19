@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Inventario](https://gitlab.com/NickBusey/inventario) is a home inventory managament system.
 
-![amd64](https://img.shields.io/badge/{% if not inventario.amd64 %}untested{% else %}{{ inventario.amd64 }}{% endif %}-amd64-{% if not inventario.amd64 %}inactive{% elif inventario.amd64 == "verified" %}success{% elif inventario.amd64 == "supported" %}informational{% elif inventario.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not inventario.arm64 %}untested{% else %}{{ inventario.arm64 }}{% endif %}-arm64-{% if not inventario.arm64 %}inactive{% elif inventario.arm64 == "verified" %}success{% elif inventario.arm64 == "supported" %}informational{% elif inventario.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not inventario.armv7 %}untested{% else %}{{ inventario.armv7 }}{% endif %}-armv7-{% if not inventario.armv7 %}inactive{% elif inventario.armv7 == "verified" %}success{% elif inventario.armv7 == "supported" %}informational{% elif inventario.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not inventario.amd64 %}untested{% else %}{{ inventario.amd64 }}{% endif %}-amd64-{% if not inventario.amd64 %}inactive{% elif inventario.amd64 == "verified" %}success{% elif inventario.amd64 == "supported" %}informational{% elif inventario.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not inventario.arm64 %}untested{% else %}{{ inventario.arm64 }}{% endif %}-arm64-{% if not inventario.arm64 %}inactive{% elif inventario.arm64 == "verified" %}success{% elif inventario.arm64 == "supported" %}informational{% elif inventario.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not inventario.armv7 %}untested{% else %}{{ inventario.armv7 }}{% endif %}-armv7-{% if not inventario.armv7 %}inactive{% elif inventario.armv7 == "verified" %}success{% elif inventario.armv7 == "supported" %}informational{% elif inventario.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ inventario.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=inventario`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ inventario.subdomain + "." + tor_domain }}/](http://{{ inve
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### SUBDOMAIN
-*Default: inventario* <br>
+*Default: inventario* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ### VERSION
-*Default: {{  inventario.version  }}* <br>
+*Default: {{  inventario.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ inventario
 run: **`vlab update_one service=inventario`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

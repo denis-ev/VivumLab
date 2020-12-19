@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Home Assistant](https://www.home-assistant.io/) can automate just about any part of your home.
 
-![amd64](https://img.shields.io/badge/{% if not homeassistant.amd64 %}untested{% else %}{{ homeassistant.amd64 }}{% endif %}-amd64-{% if not homeassistant.amd64 %}inactive{% elif homeassistant.amd64 == "verified" %}success{% elif homeassistant.amd64 == "supported" %}informational{% elif homeassistant.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not homeassistant.arm64 %}untested{% else %}{{ homeassistant.arm64 }}{% endif %}-arm64-{% if not homeassistant.arm64 %}inactive{% elif homeassistant.arm64 == "verified" %}success{% elif homeassistant.arm64 == "supported" %}informational{% elif homeassistant.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not homeassistant.armv7 %}untested{% else %}{{ homeassistant.armv7 }}{% endif %}-armv7-{% if not homeassistant.armv7 %}inactive{% elif homeassistant.armv7 == "verified" %}success{% elif homeassistant.armv7 == "supported" %}informational{% elif homeassistant.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not homeassistant.amd64 %}untested{% else %}{{ homeassistant.amd64 }}{% endif %}-amd64-{% if not homeassistant.amd64 %}inactive{% elif homeassistant.amd64 == "verified" %}success{% elif homeassistant.amd64 == "supported" %}informational{% elif homeassistant.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not homeassistant.arm64 %}untested{% else %}{{ homeassistant.arm64 }}{% endif %}-arm64-{% if not homeassistant.arm64 %}inactive{% elif homeassistant.arm64 == "verified" %}success{% elif homeassistant.arm64 == "supported" %}informational{% elif homeassistant.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not homeassistant.armv7 %}untested{% else %}{{ homeassistant.armv7 }}{% endif %}-armv7-{% if not homeassistant.armv7 %}inactive{% elif homeassistant.armv7 == "verified" %}success{% elif homeassistant.armv7 == "supported" %}informational{% elif homeassistant.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ homeassistant.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=homeassistant`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ homeassistant.subdomain + "." + tor_domain }}/](http://{{ h
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### SUBDOMAIN
-*Default: homeassistant* <br>
+*Default: homeassistant* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ### VERSION
-*Default: {{  homeassistant.version  }}* <br>
+*Default: {{  homeassistant.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ homeassistant
 run: **`vlab update_one service=homeassistant`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

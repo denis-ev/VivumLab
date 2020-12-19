@@ -17,14 +17,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 [Duplicati](https://www.duplicati.com/) Free backup software to store encrypted backups online
 For Windows, macOS and Linux.
 
-![amd64](https://img.shields.io/badge/{% if not duplicati.amd64 %}untested{% else %}{{ duplicati.amd64 }}{% endif %}-amd64-{% if not duplicati.amd64 %}inactive{% elif duplicati.amd64 == "verified" %}success{% elif duplicati.amd64 == "supported" %}informational{% elif duplicati.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not duplicati.arm64 %}untested{% else %}{{ duplicati.arm64 }}{% endif %}-arm64-{% if not duplicati.arm64 %}inactive{% elif duplicati.arm64 == "verified" %}success{% elif duplicati.arm64 == "supported" %}informational{% elif duplicati.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not duplicati.armv7 %}untested{% else %}{{ duplicati.armv7 }}{% endif %}-armv7-{% if not duplicati.armv7 %}inactive{% elif duplicati.armv7 == "verified" %}success{% elif duplicati.armv7 == "supported" %}informational{% elif duplicati.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not duplicati.amd64 %}untested{% else %}{{ duplicati.amd64 }}{% endif %}-amd64-{% if not duplicati.amd64 %}inactive{% elif duplicati.amd64 == "verified" %}success{% elif duplicati.amd64 == "supported" %}informational{% elif duplicati.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not duplicati.arm64 %}untested{% else %}{{ duplicati.arm64 }}{% endif %}-arm64-{% if not duplicati.arm64 %}inactive{% elif duplicati.arm64 == "verified" %}success{% elif duplicati.arm64 == "supported" %}informational{% elif duplicati.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not duplicati.armv7 %}untested{% else %}{{ duplicati.armv7 }}{% endif %}-armv7-{% if not duplicati.armv7 %}inactive{% elif duplicati.armv7 == "verified" %}success{% elif duplicati.armv7 == "supported" %}informational{% elif duplicati.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ duplicati.version }}
 
 ## SETUP
@@ -65,7 +65,7 @@ Tor link: [http://{{ duplicati.subdomain + "." + tor_domain }}/](http://{{ dupli
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -87,7 +87,7 @@ duplicati
 run: **`vlab update_one service=duplicati`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -109,7 +109,7 @@ duplicati
 run: **`vlab update_one service=duplicati`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -131,7 +131,7 @@ duplicati
 run: **`vlab update_one service=duplicati`**
 
 ### SUBDOMAIN
-*Default: duplicati* <br>
+*Default: duplicati* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -153,7 +153,7 @@ duplicati
 run: **`vlab update_one service=duplicati`**
 
 ### VERSION
-*Default: {{  duplicati.version  }}* <br>
+*Default: {{  duplicati.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -175,6 +175,6 @@ duplicati
 run: **`vlab update_one service=duplicati`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

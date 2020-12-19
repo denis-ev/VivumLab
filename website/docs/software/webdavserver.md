@@ -18,14 +18,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 If you enable WebDAV over SSL you will have a secure file transfer service setup, which is useful for e.g. syncing your notes from Joplin.
 If you don't need all the extra from NextCloud/OwnCloud, this service could be what you need.
 
-![amd64](https://img.shields.io/badge/{% if not webdavserver.amd64 %}untested{% else %}{{ webdavserver.amd64 }}{% endif %}-amd64-{% if not webdavserver.amd64 %}inactive{% elif webdavserver.amd64 == "verified" %}success{% elif webdavserver.amd64 == "supported" %}informational{% elif webdavserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not webdavserver.arm64 %}untested{% else %}{{ webdavserver.arm64 }}{% endif %}-arm64-{% if not webdavserver.arm64 %}inactive{% elif webdavserver.arm64 == "verified" %}success{% elif webdavserver.arm64 == "supported" %}informational{% elif webdavserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not webdavserver.armv7 %}untested{% else %}{{ webdavserver.armv7 }}{% endif %}-armv7-{% if not webdavserver.armv7 %}inactive{% elif webdavserver.armv7 == "verified" %}success{% elif webdavserver.armv7 == "supported" %}informational{% elif webdavserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not webdavserver.amd64 %}untested{% else %}{{ webdavserver.amd64 }}{% endif %}-amd64-{% if not webdavserver.amd64 %}inactive{% elif webdavserver.amd64 == "verified" %}success{% elif webdavserver.amd64 == "supported" %}informational{% elif webdavserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not webdavserver.arm64 %}untested{% else %}{{ webdavserver.arm64 }}{% endif %}-arm64-{% if not webdavserver.arm64 %}inactive{% elif webdavserver.arm64 == "verified" %}success{% elif webdavserver.arm64 == "supported" %}informational{% elif webdavserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not webdavserver.armv7 %}untested{% else %}{{ webdavserver.armv7 }}{% endif %}-armv7-{% if not webdavserver.armv7 %}inactive{% elif webdavserver.armv7 == "verified" %}success{% elif webdavserver.armv7 == "supported" %}informational{% elif webdavserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ webdavserver.version }}
 
 ## SETUP
@@ -52,7 +52,7 @@ run: **`vlab update_one service=webdavserver`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -93,7 +93,7 @@ Tor link: [http://{{ webdavserver.subdomain + "." + tor_domain }}/](http://{{ we
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -115,7 +115,7 @@ webdavserver
 run: **`vlab update_one service=webdavserver`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -137,7 +137,7 @@ webdavserver
 run: **`vlab update_one service=webdavserver`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +159,7 @@ webdavserver
 run: **`vlab update_one service=webdavserver`**
 
 ### SUBDOMAIN
-*Default: webdavserver* <br>
+*Default: webdavserver* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +181,7 @@ webdavserver
 run: **`vlab update_one service=webdavserver`**
 
 ### VERSION
-*Default: {{  webdavserver.version  }}* <br>
+*Default: {{  webdavserver.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +203,6 @@ webdavserver
 run: **`vlab update_one service=webdavserver`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

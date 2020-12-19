@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Matomo](https://matomo.org) Google Analytics alternative that protects your data and your customers' privacy.
 
-![amd64](https://img.shields.io/badge/{% if not matomo.amd64 %}untested{% else %}{{ matomo.amd64 }}{% endif %}-amd64-{% if not matomo.amd64 %}inactive{% elif matomo.amd64 == "verified" %}success{% elif matomo.amd64 == "supported" %}informational{% elif matomo.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not matomo.arm64 %}untested{% else %}{{ matomo.arm64 }}{% endif %}-arm64-{% if not matomo.arm64 %}inactive{% elif matomo.arm64 == "verified" %}success{% elif matomo.arm64 == "supported" %}informational{% elif matomo.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not matomo.armv7 %}untested{% else %}{{ matomo.armv7 }}{% endif %}-armv7-{% if not matomo.armv7 %}inactive{% elif matomo.armv7 == "verified" %}success{% elif matomo.armv7 == "supported" %}informational{% elif matomo.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not matomo.amd64 %}untested{% else %}{{ matomo.amd64 }}{% endif %}-amd64-{% if not matomo.amd64 %}inactive{% elif matomo.amd64 == "verified" %}success{% elif matomo.amd64 == "supported" %}informational{% elif matomo.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not matomo.arm64 %}untested{% else %}{{ matomo.arm64 }}{% endif %}-arm64-{% if not matomo.arm64 %}inactive{% elif matomo.arm64 == "verified" %}success{% elif matomo.arm64 == "supported" %}informational{% elif matomo.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not matomo.armv7 %}untested{% else %}{{ matomo.armv7 }}{% endif %}-armv7-{% if not matomo.armv7 %}inactive{% elif matomo.armv7 == "verified" %}success{% elif matomo.armv7 == "supported" %}informational{% elif matomo.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ matomo.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=matomo`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -89,7 +89,7 @@ Tor link: [http://{{ matomo.subdomain + "." + tor_domain }}/](http://{{ matomo.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -111,7 +111,7 @@ matomo
 run: **`vlab update_one service=matomo`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -133,7 +133,7 @@ matomo
 run: **`vlab update_one service=matomo`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -155,7 +155,7 @@ matomo
 run: **`vlab update_one service=matomo`**
 
 ### SUBDOMAIN
-*Default: matomo* <br>
+*Default: matomo* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -177,7 +177,7 @@ matomo
 run: **`vlab update_one service=matomo`**
 
 ### VERSION
-*Default: {{ matomo.version }}* <br>
+*Default: {{ matomo.version }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -199,6 +199,6 @@ matomo
 run: **`vlab update_one service=matomo`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Pi-hole](http://pi-hole.net/) provides network-wide ad blocking via your own Linux hardware.
 
-![amd64](https://img.shields.io/badge/{% if not pihole.amd64 %}untested{% else %}{{ pihole.amd64 }}{% endif %}-amd64-{% if not pihole.amd64 %}inactive{% elif pihole.amd64 == "verified" %}success{% elif pihole.amd64 == "supported" %}informational{% elif pihole.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not pihole.arm64 %}untested{% else %}{{ pihole.arm64 }}{% endif %}-arm64-{% if not pihole.arm64 %}inactive{% elif pihole.arm64 == "verified" %}success{% elif pihole.arm64 == "supported" %}informational{% elif pihole.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not pihole.armv7 %}untested{% else %}{{ pihole.armv7 }}{% endif %}-armv7-{% if not pihole.armv7 %}inactive{% elif pihole.armv7 == "verified" %}success{% elif pihole.armv7 == "supported" %}informational{% elif pihole.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not pihole.amd64 %}untested{% else %}{{ pihole.amd64 }}{% endif %}-amd64-{% if not pihole.amd64 %}inactive{% elif pihole.amd64 == "verified" %}success{% elif pihole.amd64 == "supported" %}informational{% elif pihole.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not pihole.arm64 %}untested{% else %}{{ pihole.arm64 }}{% endif %}-arm64-{% if not pihole.arm64 %}inactive{% elif pihole.arm64 == "verified" %}success{% elif pihole.arm64 == "supported" %}informational{% elif pihole.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not pihole.armv7 %}untested{% else %}{{ pihole.armv7 }}{% endif %}-armv7-{% if not pihole.armv7 %}inactive{% elif pihole.armv7 == "verified" %}success{% elif pihole.armv7 == "supported" %}informational{% elif pihole.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ pihole.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=pihole`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -89,7 +89,7 @@ Tor link: [http://{{ pihole.subdomain + "." + tor_domain }}/](http://{{ pihole.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -111,7 +111,7 @@ pihole
 run: **`vlab update_one service=pihole`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -133,7 +133,7 @@ pihole
 run: **`vlab update_one service=pihole`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -155,7 +155,7 @@ pihole
 run: **`vlab update_one service=pihole`**
 
 ### SUBDOMAIN
-*Default: pihole* <br>
+*Default: pihole* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -177,7 +177,7 @@ pihole
 run: **`vlab update_one service=pihole`**
 
 ### VERSION
-*Default: {{  pihole.version  }}* <br>
+*Default: {{  pihole.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -199,6 +199,6 @@ pihole
 run: **`vlab update_one service=pihole`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

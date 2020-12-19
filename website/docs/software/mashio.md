@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Mashio](https://gitlab.com/NickBusey/mashio) is a home brewery management software.
 
-![amd64](https://img.shields.io/badge/{% if not mashio.amd64 %}untested{% else %}{{ mashio.amd64 }}{% endif %}-amd64-{% if not mashio.amd64 %}inactive{% elif mashio.amd64 == "verified" %}success{% elif mashio.amd64 == "supported" %}informational{% elif mashio.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not mashio.arm64 %}untested{% else %}{{ mashio.arm64 }}{% endif %}-arm64-{% if not mashio.arm64 %}inactive{% elif mashio.arm64 == "verified" %}success{% elif mashio.arm64 == "supported" %}informational{% elif mashio.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not mashio.armv7 %}untested{% else %}{{ mashio.armv7 }}{% endif %}-armv7-{% if not mashio.armv7 %}inactive{% elif mashio.armv7 == "verified" %}success{% elif mashio.armv7 == "supported" %}informational{% elif mashio.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not mashio.amd64 %}untested{% else %}{{ mashio.amd64 }}{% endif %}-amd64-{% if not mashio.amd64 %}inactive{% elif mashio.amd64 == "verified" %}success{% elif mashio.amd64 == "supported" %}informational{% elif mashio.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not mashio.arm64 %}untested{% else %}{{ mashio.arm64 }}{% endif %}-arm64-{% if not mashio.arm64 %}inactive{% elif mashio.arm64 == "verified" %}success{% elif mashio.arm64 == "supported" %}informational{% elif mashio.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not mashio.armv7 %}untested{% else %}{{ mashio.armv7 }}{% endif %}-armv7-{% if not mashio.armv7 %}inactive{% elif mashio.armv7 == "verified" %}success{% elif mashio.armv7 == "supported" %}informational{% elif mashio.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ mashio.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=mashio`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ mashio.subdomain + "." + tor_domain }}/](http://{{ mashio.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ mashio
 run: **`vlab update_one service=mashio`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ mashio
 run: **`vlab update_one service=mashio`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ mashio
 run: **`vlab update_one service=mashio`**
 
 ### SUBDOMAIN
-*Default: mashio* <br>
+*Default: mashio* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ mashio
 run: **`vlab update_one service=mashio`**
 
 ### VERSION
-*Default: {{  mashio.version  }}* <br>
+*Default: {{  mashio.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ mashio
 run: **`vlab update_one service=mashio`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

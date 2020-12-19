@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Monica](https://www.monicahq.com/) is an open source personal CRM.
 
-![amd64](https://img.shields.io/badge/{% if not monicahq.amd64 %}untested{% else %}{{ monicahq.amd64 }}{% endif %}-amd64-{% if not monicahq.amd64 %}inactive{% elif monicahq.amd64 == "verified" %}success{% elif monicahq.amd64 == "supported" %}informational{% elif monicahq.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not monicahq.arm64 %}untested{% else %}{{ monicahq.arm64 }}{% endif %}-arm64-{% if not monicahq.arm64 %}inactive{% elif monicahq.arm64 == "verified" %}success{% elif monicahq.arm64 == "supported" %}informational{% elif monicahq.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not monicahq.armv7 %}untested{% else %}{{ monicahq.armv7 }}{% endif %}-armv7-{% if not monicahq.armv7 %}inactive{% elif monicahq.armv7 == "verified" %}success{% elif monicahq.armv7 == "supported" %}informational{% elif monicahq.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not monicahq.amd64 %}untested{% else %}{{ monicahq.amd64 }}{% endif %}-amd64-{% if not monicahq.amd64 %}inactive{% elif monicahq.amd64 == "verified" %}success{% elif monicahq.amd64 == "supported" %}informational{% elif monicahq.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not monicahq.arm64 %}untested{% else %}{{ monicahq.arm64 }}{% endif %}-arm64-{% if not monicahq.arm64 %}inactive{% elif monicahq.arm64 == "verified" %}success{% elif monicahq.arm64 == "supported" %}informational{% elif monicahq.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not monicahq.armv7 %}untested{% else %}{{ monicahq.armv7 }}{% endif %}-armv7-{% if not monicahq.armv7 %}inactive{% elif monicahq.armv7 == "verified" %}success{% elif monicahq.armv7 == "supported" %}informational{% elif monicahq.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ monicahq.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=monicahq`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -99,7 +99,7 @@ Tor link: [http://{{ monicahq.subdomain + "." + tor_domain }}/](http://{{ monica
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -121,7 +121,7 @@ monicahq
 run: **`vlab update_one service=monicahq`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -143,7 +143,7 @@ monicahq
 run: **`vlab update_one service=monicahq`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -165,7 +165,7 @@ monicahq
 run: **`vlab update_one service=monicahq`**
 
 ### SUBDOMAIN
-*Default: monicahq* <br>
+*Default: monicahq* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -187,7 +187,7 @@ monicahq
 run: **`vlab update_one service=monicahq`**
 
 ### VERSION
-*Default: {{  monicahq.version  }}* <br>
+*Default: {{  monicahq.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -209,6 +209,6 @@ monicahq
 run: **`vlab update_one service=monicahq`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

@@ -16,13 +16,13 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [ERPNext](https://github.com/frappe/frappe_docker) Open Source ERP for Everyone.
 
-![amd64](https://img.shields.io/badge/{% if not erpnext.amd64 %}untested{% else %}{{ erpnext.amd64 }}{% endif %}-amd64-{% if not erpnext.amd64 %}inactive{% elif erpnext.amd64 == "verified" %}success{% elif erpnext.amd64 == "supported" %}informational{% elif erpnext.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not erpnext.arm64 %}untested{% else %}{{ erpnext.arm64 }}{% endif %}-arm64-{% if not erpnext.arm64 %}inactive{% elif erpnext.arm64 == "verified" %}success{% elif erpnext.arm64 == "supported" %}informational{% elif erpnext.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not erpnext.armv7 %}untested{% else %}{{ erpnext.armv7 }}{% endif %}-armv7-{% if not erpnext.armv7 %}inactive{% elif erpnext.armv7 == "verified" %}success{% elif erpnext.armv7 == "supported" %}informational{% elif erpnext.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not erpnext.amd64 %}untested{% else %}{{ erpnext.amd64 }}{% endif %}-amd64-{% if not erpnext.amd64 %}inactive{% elif erpnext.amd64 == "verified" %}success{% elif erpnext.amd64 == "supported" %}informational{% elif erpnext.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not erpnext.arm64 %}untested{% else %}{{ erpnext.arm64 }}{% endif %}-arm64-{% if not erpnext.arm64 %}inactive{% elif erpnext.arm64 == "verified" %}success{% elif erpnext.arm64 == "supported" %}informational{% elif erpnext.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not erpnext.armv7 %}untested{% else %}{{ erpnext.armv7 }}{% endif %}-armv7-{% if not erpnext.armv7 %}inactive{% elif erpnext.armv7 == "verified" %}success{% elif erpnext.armv7 == "supported" %}informational{% elif erpnext.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ erpnext.version }}
 
 ## SETUP
@@ -49,7 +49,7 @@ run: **`vlab update_one service=erpnext`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -98,7 +98,7 @@ Tor link: [http://{{ erpnext.subdomain + "." + tor_domain }}/](http://{{ erpnext
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -120,7 +120,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -142,7 +142,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -164,7 +164,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### SUBDOMAIN
-*Default: erpnext* <br>
+*Default: erpnext* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -186,7 +186,7 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ### VERSION
-*Default: {{  erpnext.version  }}* <br>
+*Default: {{  erpnext.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -208,6 +208,6 @@ erpnext
 run: **`vlab update_one service=erpnext`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

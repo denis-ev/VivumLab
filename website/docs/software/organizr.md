@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Organizr](https://lamarios.github.io/organizr2/) is a simple dashboard that allows to monitor and interact with many different services.
 
-![amd64](https://img.shields.io/badge/{% if not organizr.amd64 %}untested{% else %}{{ organizr.amd64 }}{% endif %}-amd64-{% if not organizr.amd64 %}inactive{% elif organizr.amd64 == "verified" %}success{% elif organizr.amd64 == "supported" %}informational{% elif organizr.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not organizr.arm64 %}untested{% else %}{{ organizr.arm64 }}{% endif %}-arm64-{% if not organizr.arm64 %}inactive{% elif organizr.arm64 == "verified" %}success{% elif organizr.arm64 == "supported" %}informational{% elif organizr.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not organizr.armv7 %}untested{% else %}{{ organizr.armv7 }}{% endif %}-armv7-{% if not organizr.armv7 %}inactive{% elif organizr.armv7 == "verified" %}success{% elif organizr.armv7 == "supported" %}informational{% elif organizr.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not organizr.amd64 %}untested{% else %}{{ organizr.amd64 }}{% endif %}-amd64-{% if not organizr.amd64 %}inactive{% elif organizr.amd64 == "verified" %}success{% elif organizr.amd64 == "supported" %}informational{% elif organizr.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not organizr.arm64 %}untested{% else %}{{ organizr.arm64 }}{% endif %}-arm64-{% if not organizr.arm64 %}inactive{% elif organizr.arm64 == "verified" %}success{% elif organizr.arm64 == "supported" %}informational{% elif organizr.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not organizr.armv7 %}untested{% else %}{{ organizr.armv7 }}{% endif %}-armv7-{% if not organizr.armv7 %}inactive{% elif organizr.armv7 == "verified" %}success{% elif organizr.armv7 == "supported" %}informational{% elif organizr.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ organizr.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=organizr`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ organizr.subdomain + "." + tor_domain }}/](http://{{ organi
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ organizr
 run: **`vlab update_one service=organizr`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ organizr
 run: **`vlab update_one service=organizr`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ organizr
 run: **`vlab update_one service=organizr`**
 
 ### SUBDOMAIN
-*Default: organizr* <br>
+*Default: organizr* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ organizr
 run: **`vlab update_one service=organizr`**
 
 ### VERSION
-*Default: {{  organizr.version  }}* <br>
+*Default: {{  organizr.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ organizr
 run: **`vlab update_one service=organizr`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

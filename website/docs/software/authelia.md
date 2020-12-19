@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Authelia](https://www.Authelia.com) is an open-source full-featured authentication server.
 
-![amd64](https://img.shields.io/badge/{% if not authelia.amd64 %}untested{% else %}{{ authelia.amd64 }}{% endif %}-amd64-{% if not authelia.amd64 %}inactive{% elif authelia.amd64 == "verified" %}success{% elif authelia.amd64 == "supported" %}informational{% elif authelia.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not authelia.arm64 %}untested{% else %}{{ authelia.arm64 }}{% endif %}-arm64-{% if not authelia.arm64 %}inactive{% elif authelia.arm64 == "verified" %}success{% elif authelia.arm64 == "supported" %}informational{% elif authelia.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not authelia.armv7 %}untested{% else %}{{ authelia.armv7 }}{% endif %}-armv7-{% if not authelia.armv7 %}inactive{% elif authelia.armv7 == "verified" %}success{% elif authelia.armv7 == "supported" %}informational{% elif authelia.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not authelia.amd64 %}untested{% else %}{{ authelia.amd64 }}{% endif %}-amd64-{% if not authelia.amd64 %}inactive{% elif authelia.amd64 == "verified" %}success{% elif authelia.amd64 == "supported" %}informational{% elif authelia.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not authelia.arm64 %}untested{% else %}{{ authelia.arm64 }}{% endif %}-arm64-{% if not authelia.arm64 %}inactive{% elif authelia.arm64 == "verified" %}success{% elif authelia.arm64 == "supported" %}informational{% elif authelia.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not authelia.armv7 %}untested{% else %}{{ authelia.armv7 }}{% endif %}-armv7-{% if not authelia.armv7 %}inactive{% elif authelia.armv7 == "verified" %}success{% elif authelia.armv7 == "supported" %}informational{% elif authelia.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ authelia.version }}
 
 ## SETUP
@@ -124,7 +124,7 @@ run: **`vlab update_one service=authelia`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -165,7 +165,7 @@ Tor link: [http://{{ authelia.subdomain + "." + tor_domain }}/](http://{{ authel
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -187,7 +187,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -209,7 +209,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -231,7 +231,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### SUBDOMAIN
-*Default: authelia* <br>
+*Default: authelia* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -253,7 +253,7 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ### VERSION
-*Default: {{  authelia.version  }}* <br>
+*Default: {{  authelia.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -275,6 +275,6 @@ authelia
 run: **`vlab update_one service=authelia`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

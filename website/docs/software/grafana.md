@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Grafana](https://grafana.com/) is a Time Series Database graphing application.
 
-![amd64](https://img.shields.io/badge/{% if not grafana.amd64 %}untested{% else %}{{ grafana.amd64 }}{% endif %}-amd64-{% if not grafana.amd64 %}inactive{% elif grafana.amd64 == "verified" %}success{% elif grafana.amd64 == "supported" %}informational{% elif grafana.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not grafana.arm64 %}untested{% else %}{{ grafana.arm64 }}{% endif %}-arm64-{% if not grafana.arm64 %}inactive{% elif grafana.arm64 == "verified" %}success{% elif grafana.arm64 == "supported" %}informational{% elif grafana.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not grafana.armv7 %}untested{% else %}{{ grafana.armv7 }}{% endif %}-armv7-{% if not grafana.armv7 %}inactive{% elif grafana.armv7 == "verified" %}success{% elif grafana.armv7 == "supported" %}informational{% elif grafana.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not grafana.amd64 %}untested{% else %}{{ grafana.amd64 }}{% endif %}-amd64-{% if not grafana.amd64 %}inactive{% elif grafana.amd64 == "verified" %}success{% elif grafana.amd64 == "supported" %}informational{% elif grafana.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not grafana.arm64 %}untested{% else %}{{ grafana.arm64 }}{% endif %}-arm64-{% if not grafana.arm64 %}inactive{% elif grafana.arm64 == "verified" %}success{% elif grafana.arm64 == "supported" %}informational{% elif grafana.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not grafana.armv7 %}untested{% else %}{{ grafana.armv7 }}{% endif %}-armv7-{% if not grafana.armv7 %}inactive{% elif grafana.armv7 == "verified" %}success{% elif grafana.armv7 == "supported" %}informational{% elif grafana.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ grafana.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=grafana`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -98,7 +98,7 @@ Tor link: [http://{{ grafana.subdomain + "." + tor_domain }}/](http://{{ grafana
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -120,7 +120,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -142,7 +142,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -164,7 +164,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### SUBDOMAIN
-*Default: grafana* <br>
+*Default: grafana* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -186,7 +186,7 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ### VERSION
-*Default: {{  grafana.version  }}* <br>
+*Default: {{  grafana.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -208,6 +208,6 @@ grafana
 run: **`vlab update_one service=grafana`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

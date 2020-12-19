@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [MinecraftBedrockServer](https://www.minecraft.net/en-us/download/server/bedrock/) Minecraft Bedrock Server
 
-![amd64](https://img.shields.io/badge/{% if not minecraftbedrockserver.amd64 %}untested{% else %}{{ minecraftbedrockserver.amd64 }}{% endif %}-amd64-{% if not minecraftbedrockserver.amd64 %}inactive{% elif minecraftbedrockserver.amd64 == "verified" %}success{% elif minecraftbedrockserver.amd64 == "supported" %}informational{% elif minecraftbedrockserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not minecraftbedrockserver.arm64 %}untested{% else %}{{ minecraftbedrockserver.arm64 }}{% endif %}-arm64-{% if not minecraftbedrockserver.arm64 %}inactive{% elif minecraftbedrockserver.arm64 == "verified" %}success{% elif minecraftbedrockserver.arm64 == "supported" %}informational{% elif minecraftbedrockserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not minecraftbedrockserver.armv7 %}untested{% else %}{{ minecraftbedrockserver.armv7 }}{% endif %}-armv7-{% if not minecraftbedrockserver.armv7 %}inactive{% elif minecraftbedrockserver.armv7 == "verified" %}success{% elif minecraftbedrockserver.armv7 == "supported" %}informational{% elif minecraftbedrockserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not minecraftbedrockserver.amd64 %}untested{% else %}{{ minecraftbedrockserver.amd64 }}{% endif %}-amd64-{% if not minecraftbedrockserver.amd64 %}inactive{% elif minecraftbedrockserver.amd64 == "verified" %}success{% elif minecraftbedrockserver.amd64 == "supported" %}informational{% elif minecraftbedrockserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not minecraftbedrockserver.arm64 %}untested{% else %}{{ minecraftbedrockserver.arm64 }}{% endif %}-arm64-{% if not minecraftbedrockserver.arm64 %}inactive{% elif minecraftbedrockserver.arm64 == "verified" %}success{% elif minecraftbedrockserver.arm64 == "supported" %}informational{% elif minecraftbedrockserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not minecraftbedrockserver.armv7 %}untested{% else %}{{ minecraftbedrockserver.armv7 }}{% endif %}-armv7-{% if not minecraftbedrockserver.armv7 %}inactive{% elif minecraftbedrockserver.armv7 == "verified" %}success{% elif minecraftbedrockserver.armv7 == "supported" %}informational{% elif minecraftbedrockserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ minecraftbedrockserver.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=minecraftbedrockserver`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ minecraftbedrockserver.subdomain + "." + tor_domain }}/](ht
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ minecraftbedrockserver
 run: **`vlab update_one service=minecraftbedrockserver`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ minecraftbedrockserver
 run: **`vlab update_one service=minecraftbedrockserver`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ minecraftbedrockserver
 run: **`vlab update_one service=minecraftbedrockserver`**
 
 ### SUBDOMAIN
-*Default: minecraftbedrockserver* <br>
+*Default: minecraftbedrockserver* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ minecraftbedrockserver
 run: **`vlab update_one service=minecraftbedrockserver`**
 
 ### VERSION
-*Default: {{  minecraftbedrockserver.version  }}* <br>
+*Default: {{  minecraftbedrockserver.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ minecraftbedrockserver
 run: **`vlab update_one service=minecraftbedrockserver`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

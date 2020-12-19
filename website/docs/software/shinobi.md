@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Shinobi](https://gitlab.com/Shinobi-Systems/Shinobi) The Next Generation in Open-Source Video Management Software with support for over 6000 IP and USB Cameras
 
-![amd64](https://img.shields.io/badge/{% if not shinobi.amd64 %}untested{% else %}{{ shinobi.amd64 }}{% endif %}-amd64-{% if not shinobi.amd64 %}inactive{% elif shinobi.amd64 == "verified" %}success{% elif shinobi.amd64 == "supported" %}informational{% elif shinobi.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not shinobi.arm64 %}untested{% else %}{{ shinobi.arm64 }}{% endif %}-arm64-{% if not shinobi.arm64 %}inactive{% elif shinobi.arm64 == "verified" %}success{% elif shinobi.arm64 == "supported" %}informational{% elif shinobi.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not shinobi.armv7 %}untested{% else %}{{ shinobi.armv7 }}{% endif %}-armv7-{% if not shinobi.armv7 %}inactive{% elif shinobi.armv7 == "verified" %}success{% elif shinobi.armv7 == "supported" %}informational{% elif shinobi.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not shinobi.amd64 %}untested{% else %}{{ shinobi.amd64 }}{% endif %}-amd64-{% if not shinobi.amd64 %}inactive{% elif shinobi.amd64 == "verified" %}success{% elif shinobi.amd64 == "supported" %}informational{% elif shinobi.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not shinobi.arm64 %}untested{% else %}{{ shinobi.arm64 }}{% endif %}-arm64-{% if not shinobi.arm64 %}inactive{% elif shinobi.arm64 == "verified" %}success{% elif shinobi.arm64 == "supported" %}informational{% elif shinobi.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not shinobi.armv7 %}untested{% else %}{{ shinobi.armv7 }}{% endif %}-armv7-{% if not shinobi.armv7 %}inactive{% elif shinobi.armv7 == "verified" %}success{% elif shinobi.armv7 == "supported" %}informational{% elif shinobi.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ shinobi.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=shinobi`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ shinobi.subdomain + "." + tor_domain }}/](http://{{ shinobi
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ shinobi
 run: **`vlab update_one service=shinobi`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ shinobi
 run: **`vlab update_one service=shinobi`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ shinobi
 run: **`vlab update_one service=shinobi`**
 
 ### SUBDOMAIN
-*Default: shinobi* <br>
+*Default: shinobi* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ shinobi
 run: **`vlab update_one service=shinobi`**
 
 ### VERSION
-*Default: {{  shinobi.version  }}* <br>
+*Default: {{  shinobi.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ shinobi
 run: **`vlab update_one service=shinobi`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

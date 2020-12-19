@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Minecraft](https://hub.docker.com/r/itzg/minecraft-server) Minecraft server with select-able version
 
-![amd64](https://img.shields.io/badge/{% if not minecraft.amd64 %}untested{% else %}{{ minecraft.amd64 }}{% endif %}-amd64-{% if not minecraft.amd64 %}inactive{% elif minecraft.amd64 == "verified" %}success{% elif minecraft.amd64 == "supported" %}informational{% elif minecraft.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not minecraft.arm64 %}untested{% else %}{{ minecraft.arm64 }}{% endif %}-arm64-{% if not minecraft.arm64 %}inactive{% elif minecraft.arm64 == "verified" %}success{% elif minecraft.arm64 == "supported" %}informational{% elif minecraft.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not minecraft.armv7 %}untested{% else %}{{ minecraft.armv7 }}{% endif %}-armv7-{% if not minecraft.armv7 %}inactive{% elif minecraft.armv7 == "verified" %}success{% elif minecraft.armv7 == "supported" %}informational{% elif minecraft.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not minecraft.amd64 %}untested{% else %}{{ minecraft.amd64 }}{% endif %}-amd64-{% if not minecraft.amd64 %}inactive{% elif minecraft.amd64 == "verified" %}success{% elif minecraft.amd64 == "supported" %}informational{% elif minecraft.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not minecraft.arm64 %}untested{% else %}{{ minecraft.arm64 }}{% endif %}-arm64-{% if not minecraft.arm64 %}inactive{% elif minecraft.arm64 == "verified" %}success{% elif minecraft.arm64 == "supported" %}informational{% elif minecraft.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not minecraft.armv7 %}untested{% else %}{{ minecraft.armv7 }}{% endif %}-armv7-{% if not minecraft.armv7 %}inactive{% elif minecraft.armv7 == "verified" %}success{% elif minecraft.armv7 == "supported" %}informational{% elif minecraft.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ minecraft.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=minecraft`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -90,7 +90,7 @@ It is also available via Tor at {{ minecraft.subdomain + "." + tor_domain }}:255
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -112,7 +112,7 @@ minecraft
 run: **`vlab update_one service=minecraft`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -134,7 +134,7 @@ minecraft
 run: **`vlab update_one service=minecraft`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -156,7 +156,7 @@ minecraft
 run: **`vlab update_one service=minecraft`**
 
 ### SUBDOMAIN
-*Default: minecraft* <br>
+*Default: minecraft* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -178,7 +178,7 @@ minecraft
 run: **`vlab update_one service=minecraft`**
 
 ### VERSION
-*Default: {{  minecraft.version  }}* <br>
+*Default: {{  minecraft.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -200,6 +200,6 @@ minecraft
 run: **`vlab update_one service=minecraft`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

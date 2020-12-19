@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Lazylibrarian](https://lazylibrarian.gitlab.io/) LazyLibrarian is a program to follow authors and grab metadata for all your digital reading needs.
 
-![amd64](https://img.shields.io/badge/{% if not lazylibrarian.amd64 %}untested{% else %}{{ lazylibrarian.amd64 }}{% endif %}-amd64-{% if not lazylibrarian.amd64 %}inactive{% elif lazylibrarian.amd64 == "verified" %}success{% elif lazylibrarian.amd64 == "supported" %}informational{% elif lazylibrarian.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not lazylibrarian.arm64 %}untested{% else %}{{ lazylibrarian.arm64 }}{% endif %}-arm64-{% if not lazylibrarian.arm64 %}inactive{% elif lazylibrarian.arm64 == "verified" %}success{% elif lazylibrarian.arm64 == "supported" %}informational{% elif lazylibrarian.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not lazylibrarian.armv7 %}untested{% else %}{{ lazylibrarian.armv7 }}{% endif %}-armv7-{% if not lazylibrarian.armv7 %}inactive{% elif lazylibrarian.armv7 == "verified" %}success{% elif lazylibrarian.armv7 == "supported" %}informational{% elif lazylibrarian.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not lazylibrarian.amd64 %}untested{% else %}{{ lazylibrarian.amd64 }}{% endif %}-amd64-{% if not lazylibrarian.amd64 %}inactive{% elif lazylibrarian.amd64 == "verified" %}success{% elif lazylibrarian.amd64 == "supported" %}informational{% elif lazylibrarian.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not lazylibrarian.arm64 %}untested{% else %}{{ lazylibrarian.arm64 }}{% endif %}-arm64-{% if not lazylibrarian.arm64 %}inactive{% elif lazylibrarian.arm64 == "verified" %}success{% elif lazylibrarian.arm64 == "supported" %}informational{% elif lazylibrarian.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not lazylibrarian.armv7 %}untested{% else %}{{ lazylibrarian.armv7 }}{% endif %}-armv7-{% if not lazylibrarian.armv7 %}inactive{% elif lazylibrarian.armv7 == "verified" %}success{% elif lazylibrarian.armv7 == "supported" %}informational{% elif lazylibrarian.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ lazylibrarian.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=lazylibrarian`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ lazylibrarian.subdomain + "." + tor_domain }}/](http://{{ l
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### SUBDOMAIN
-*Default: lazylibrarian* <br>
+*Default: lazylibrarian* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ### VERSION
-*Default: {{  lazylibrarian.version  }}* <br>
+*Default: {{  lazylibrarian.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ lazylibrarian
 run: **`vlab update_one service=lazylibrarian`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

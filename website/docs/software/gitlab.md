@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Gitlab](https://docs.gitlab.com/) "the single application for the entire DevOps lifecycle".
 
-![amd64](https://img.shields.io/badge/{% if not gitlab.amd64 %}untested{% else %}{{ gitlab.amd64 }}{% endif %}-amd64-{% if not gitlab.amd64 %}inactive{% elif gitlab.amd64 == "verified" %}success{% elif gitlab.amd64 == "supported" %}informational{% elif gitlab.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not gitlab.arm64 %}untested{% else %}{{ gitlab.arm64 }}{% endif %}-arm64-{% if not gitlab.arm64 %}inactive{% elif gitlab.arm64 == "verified" %}success{% elif gitlab.arm64 == "supported" %}informational{% elif gitlab.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not gitlab.armv7 %}untested{% else %}{{ gitlab.armv7 }}{% endif %}-armv7-{% if not gitlab.armv7 %}inactive{% elif gitlab.armv7 == "verified" %}success{% elif gitlab.armv7 == "supported" %}informational{% elif gitlab.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not gitlab.amd64 %}untested{% else %}{{ gitlab.amd64 }}{% endif %}-amd64-{% if not gitlab.amd64 %}inactive{% elif gitlab.amd64 == "verified" %}success{% elif gitlab.amd64 == "supported" %}informational{% elif gitlab.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not gitlab.arm64 %}untested{% else %}{{ gitlab.arm64 }}{% endif %}-arm64-{% if not gitlab.arm64 %}inactive{% elif gitlab.arm64 == "verified" %}success{% elif gitlab.arm64 == "supported" %}informational{% elif gitlab.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not gitlab.armv7 %}untested{% else %}{{ gitlab.armv7 }}{% endif %}-armv7-{% if not gitlab.armv7 %}inactive{% elif gitlab.armv7 == "verified" %}success{% elif gitlab.armv7 == "supported" %}informational{% elif gitlab.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ gitlab.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=gitlab`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -92,7 +92,7 @@ Tor link: [http://{{ gitlab.subdomain + "." + tor_domain }}/](http://{{ gitlab.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -114,7 +114,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -136,7 +136,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -158,7 +158,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### SUBDOMAIN
-*Default: gitlab* <br>
+*Default: gitlab* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -180,7 +180,7 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ### VERSION
-*Default: {{  gitlab.version  }}* <br>
+*Default: {{  gitlab.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -202,6 +202,6 @@ gitlab
 run: **`vlab update_one service=gitlab`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

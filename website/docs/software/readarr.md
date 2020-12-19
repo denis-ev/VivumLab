@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Readarr](https://readarr.com/) Readarr is a ebook collection manager for Usenet and BitTorrent users.
 
-![amd64](https://img.shields.io/badge/{% if not readarr.amd64 %}untested{% else %}{{ readarr.amd64 }}{% endif %}-amd64-{% if not readarr.amd64 %}inactive{% elif readarr.amd64 == "verified" %}success{% elif readarr.amd64 == "supported" %}informational{% elif readarr.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not readarr.arm64 %}untested{% else %}{{ readarr.arm64 }}{% endif %}-arm64-{% if not readarr.arm64 %}inactive{% elif readarr.arm64 == "verified" %}success{% elif readarr.arm64 == "supported" %}informational{% elif readarr.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not readarr.armv7 %}untested{% else %}{{ readarr.armv7 }}{% endif %}-armv7-{% if not readarr.armv7 %}inactive{% elif readarr.armv7 == "verified" %}success{% elif readarr.armv7 == "supported" %}informational{% elif readarr.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not readarr.amd64 %}untested{% else %}{{ readarr.amd64 }}{% endif %}-amd64-{% if not readarr.amd64 %}inactive{% elif readarr.amd64 == "verified" %}success{% elif readarr.amd64 == "supported" %}informational{% elif readarr.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not readarr.arm64 %}untested{% else %}{{ readarr.arm64 }}{% endif %}-arm64-{% if not readarr.arm64 %}inactive{% elif readarr.arm64 == "verified" %}success{% elif readarr.arm64 == "supported" %}informational{% elif readarr.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not readarr.armv7 %}untested{% else %}{{ readarr.armv7 }}{% endif %}-armv7-{% if not readarr.armv7 %}inactive{% elif readarr.armv7 == "verified" %}success{% elif readarr.armv7 == "supported" %}informational{% elif readarr.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ readarr.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=readarr`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ readarr.subdomain + "." + tor_domain }}/](http://{{ readarr
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ readarr
 run: **`vlab update_one service=readarr`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ readarr
 run: **`vlab update_one service=readarr`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ readarr
 run: **`vlab update_one service=readarr`**
 
 ### SUBDOMAIN
-*Default: readarr* <br>
+*Default: readarr* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ readarr
 run: **`vlab update_one service=readarr`**
 
 ### VERSION
-*Default: {{  readarr.version  }}* <br>
+*Default: {{  readarr.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ readarr
 run: **`vlab update_one service=readarr`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

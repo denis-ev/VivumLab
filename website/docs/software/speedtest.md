@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Speedtest](https://github.com/atribe/Speedtest-for-InfluxDB-and-Grafana) A tool to run periodic speedtests and save them in InfluxDB for graphing in Grafana
 
-![amd64](https://img.shields.io/badge/{% if not speedtest.amd64 %}untested{% else %}{{ speedtest.amd64 }}{% endif %}-amd64-{% if not speedtest.amd64 %}inactive{% elif speedtest.amd64 == "verified" %}success{% elif speedtest.amd64 == "supported" %}informational{% elif speedtest.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not speedtest.arm64 %}untested{% else %}{{ speedtest.arm64 }}{% endif %}-arm64-{% if not speedtest.arm64 %}inactive{% elif speedtest.arm64 == "verified" %}success{% elif speedtest.arm64 == "supported" %}informational{% elif speedtest.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not speedtest.armv7 %}untested{% else %}{{ speedtest.armv7 }}{% endif %}-armv7-{% if not speedtest.armv7 %}inactive{% elif speedtest.armv7 == "verified" %}success{% elif speedtest.armv7 == "supported" %}informational{% elif speedtest.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not speedtest.amd64 %}untested{% else %}{{ speedtest.amd64 }}{% endif %}-amd64-{% if not speedtest.amd64 %}inactive{% elif speedtest.amd64 == "verified" %}success{% elif speedtest.amd64 == "supported" %}informational{% elif speedtest.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not speedtest.arm64 %}untested{% else %}{{ speedtest.arm64 }}{% endif %}-arm64-{% if not speedtest.arm64 %}inactive{% elif speedtest.arm64 == "verified" %}success{% elif speedtest.arm64 == "supported" %}informational{% elif speedtest.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not speedtest.armv7 %}untested{% else %}{{ speedtest.armv7 }}{% endif %}-armv7-{% if not speedtest.armv7 %}inactive{% elif speedtest.armv7 == "verified" %}success{% elif speedtest.armv7 == "supported" %}informational{% elif speedtest.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ speedtest.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=speedtest`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ speedtest.subdomain + "." + tor_domain }}/](http://{{ speed
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ speedtest
 run: **`vlab update_one service=speedtest`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ speedtest
 run: **`vlab update_one service=speedtest`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ speedtest
 run: **`vlab update_one service=speedtest`**
 
 ### SUBDOMAIN
-*Default: speedtest* <br>
+*Default: speedtest* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ speedtest
 run: **`vlab update_one service=speedtest`**
 
 ### VERSION
-*Default: {{  speedtest.version  }}* <br>
+*Default: {{  speedtest.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ speedtest
 run: **`vlab update_one service=speedtest`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

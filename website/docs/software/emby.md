@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Emby](https://emby.media/) is a media server. Just point it at your NAS collections of Movies and TV and you're off to the races.
 
-![amd64](https://img.shields.io/badge/{% if not emby.amd64 %}untested{% else %}{{ emby.amd64 }}{% endif %}-amd64-{% if not emby.amd64 %}inactive{% elif emby.amd64 == "verified" %}success{% elif emby.amd64 == "supported" %}informational{% elif emby.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not emby.arm64 %}untested{% else %}{{ emby.arm64 }}{% endif %}-arm64-{% if not emby.arm64 %}inactive{% elif emby.arm64 == "verified" %}success{% elif emby.arm64 == "supported" %}informational{% elif emby.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not emby.armv7 %}untested{% else %}{{ emby.armv7 }}{% endif %}-armv7-{% if not emby.armv7 %}inactive{% elif emby.armv7 == "verified" %}success{% elif emby.armv7 == "supported" %}informational{% elif emby.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not emby.amd64 %}untested{% else %}{{ emby.amd64 }}{% endif %}-amd64-{% if not emby.amd64 %}inactive{% elif emby.amd64 == "verified" %}success{% elif emby.amd64 == "supported" %}informational{% elif emby.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not emby.arm64 %}untested{% else %}{{ emby.arm64 }}{% endif %}-arm64-{% if not emby.arm64 %}inactive{% elif emby.arm64 == "verified" %}success{% elif emby.arm64 == "supported" %}informational{% elif emby.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not emby.armv7 %}untested{% else %}{{ emby.armv7 }}{% endif %}-armv7-{% if not emby.armv7 %}inactive{% elif emby.armv7 == "verified" %}success{% elif emby.armv7 == "supported" %}informational{% elif emby.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ emby.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=emby`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ emby.subdomain + "." + tor_domain }}/](http://{{ emby.subdo
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### SUBDOMAIN
-*Default: emby* <br>
+*Default: emby* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ emby
 run: **`vlab update_one service=emby`**
 
 ### VERSION
-*Default: {{  emby.version  }}* <br>
+*Default: {{  emby.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ emby
 run: **`vlab update_one service=emby`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

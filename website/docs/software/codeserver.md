@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Codeserver](https://github.com/cdr/code-server) Run VS Code on a remote server.
 
-![amd64](https://img.shields.io/badge/{% if not codeserver.amd64 %}untested{% else %}{{ codeserver.amd64 }}{% endif %}-amd64-{% if not codeserver.amd64 %}inactive{% elif codeserver.amd64 == "verified" %}success{% elif codeserver.amd64 == "supported" %}informational{% elif codeserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![arm64](https://img.shields.io/badge/{% if not codeserver.arm64 %}untested{% else %}{{ codeserver.arm64 }}{% endif %}-arm64-{% if not codeserver.arm64 %}inactive{% elif codeserver.arm64 == "verified" %}success{% elif codeserver.arm64 == "supported" %}informational{% elif codeserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
-![armv7](https://img.shields.io/badge/{% if not codeserver.armv7 %}untested{% else %}{{ codeserver.armv7 }}{% endif %}-armv7-{% if not codeserver.armv7 %}inactive{% elif codeserver.armv7 == "verified" %}success{% elif codeserver.armv7 == "supported" %}informational{% elif codeserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![amd64](https://img.shields.io/badge/{% if not codeserver.amd64 %}untested{% else %}{{ codeserver.amd64 }}{% endif %}-amd64-{% if not codeserver.amd64 %}inactive{% elif codeserver.amd64 == "verified" %}success{% elif codeserver.amd64 == "supported" %}informational{% elif codeserver.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not codeserver.arm64 %}untested{% else %}{{ codeserver.arm64 }}{% endif %}-arm64-{% if not codeserver.arm64 %}inactive{% elif codeserver.arm64 == "verified" %}success{% elif codeserver.arm64 == "supported" %}informational{% elif codeserver.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not codeserver.armv7 %}untested{% else %}{{ codeserver.armv7 }}{% endif %}-armv7-{% if not codeserver.armv7 %}inactive{% elif codeserver.armv7 == "verified" %}success{% elif codeserver.armv7 == "supported" %}informational{% elif codeserver.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
 **Current Image Version:** {{ codeserver.version }}
 
 ## SETUP
@@ -50,7 +50,7 @@ run: **`vlab update_one service=codeserver`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -91,7 +91,7 @@ Tor link: [http://{{ codeserver.subdomain + "." + tor_domain }}/](http://{{ code
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -113,7 +113,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### AUTH
-*Default: False* <br>
+*Default: False* <br />
 *Options: True/False*
 
 #### Command:
@@ -135,7 +135,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### DOMAIN
-*Default: False* <br>
+*Default: False* <br />
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +157,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### SUBDOMAIN
-*Default: codeserver* <br>
+*Default: codeserver* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +179,7 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ### VERSION
-*Default: {{  codeserver.version  }}* <br>
+*Default: {{  codeserver.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +201,6 @@ codeserver
 run: **`vlab update_one service=codeserver`**
 
 ## Need more help?
-Further information regarding services can be found. <br>
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
+Further information regarding services can be found. <br />
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
