@@ -4,7 +4,7 @@ title: Firefly III
 hide_title: true
 hide_table_of_contents: false
 sidebar_label: Firefly III
-#custom_edit_url: https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md
+custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
 #description: How do I find you when I cannot solve this problem
 #keywords:
 #  - docs
