@@ -5,7 +5,7 @@ module Vlab
     def terraform
       invoke_subcommand "Core", "logo"
       invoke_subcommand "Git", "sync"
-      invoke_subcommand "Config", "config"
+      invoke_subcommand "Config", "initial_config"
 
       say "Deploying cloud server".yellow
       run_playbook("playbook.terraform.yml", options)

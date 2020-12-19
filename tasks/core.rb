@@ -59,7 +59,6 @@ module Vlab
     desc "deploy", "Deploys VivumLab, configures it first if needed"
     def deploy()
       invoke_subcommand "Core", "logo"
-      invoke 'build', [], {:force => options[:force], :build => options[:build], :cache => options[:cache]}
       say "Deploying Vivumlab".green
       run_playbook("playbook.vivumlab.yml", options)
     end

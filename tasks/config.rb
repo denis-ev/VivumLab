@@ -7,7 +7,6 @@ module Vlab
     desc "initial_config", "Creates or Updates the config file, as necessary"
     def initial_config()
       invoke_subcommand "Core", "logo"
-      # invoke_subcommand "Core", "build"
       say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
       run_playbook("playbook.config.yml", options)
       invoke_subcommand "Core", "encrypt"
@@ -23,12 +22,8 @@ module Vlab
     end
 
     desc "config_reset", "Resets Vlab config"
-    option :force, :type => :boolean, :desc => "Forces a rebuild of the docker image"
-    option :build, :type => :boolean, :desc => "Forces a *local* build of the docker image"
-    option :cache, :type => :boolean, :desc => "Allows the build to use the Cache"
     def config_reset()
       invoke_subcommand "Core", "logo"
-      invoke_subcommand "Core", "build"
       say "Resetting Config file #{options[:config_dir]}/config.yml".green
       say "Backing up your existing config"
       FileUtils.mv("#{options[:config_dir]}/", "settings-backup")

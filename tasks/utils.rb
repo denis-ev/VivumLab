@@ -12,13 +12,20 @@ module Utils
   end
 
   def run_playbook(playbook, options, extra="")
+    say "#{options[:config_dir]}/config.yml".yellow
+    # NOTE THIS IS NOT A DIRECT PORT OF THE BASH VERSION
+    # THE BASH VERSION DOES SHELL EXPANSION, AND SHELL EXPANSION WITHIN " "'S
+    # BREAKS RUBY'S EXECUTION OF THIS IN A SUB-PROCESS SHELL.
+    # DO NOT, I REPEAT, DO NOT PUT THE QUOTES BACK IN
     playbook_command = <<-PLAYBOOK
-    ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
-    --extra-vars="@#{options[:config_dir]}/config.yml" \
-    --extra-vars="@#{options[:config_dir]}/vault.yml" \
-    #{extra} -i inventory
+    ansible-playbook #{convert_debug_enum(options[:debug].to_sym)} \
+    -e \@./#{options[:config_dir]}/config.yml \
+    -e \@./#{options[:config_dir]}/vault.yml \
+    #{extra} \
+    -i inventory \
+    #{playbook}
     PLAYBOOK
-    run_docker(playbook_command)
+    run_docker(playbook_command.squeeze(" ").strip)
   end
 
   # def run_playbook(playbook, options, extra="")
