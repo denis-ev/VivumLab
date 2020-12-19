@@ -15,14 +15,14 @@ services:
     networks:
       - traefik_network
     volumes:
-      - "{{ volumes_root }}/docs/website:/docusaurus/website"
+      - "{{ volumes_root }}/docs/website:/docusaurus/Vivumlab"
     environment:
       - UID=1000
       - GID=1000
       - AUTO_UPDATE=true
-      - WEBSITE_NAME=website #Do not change
+      - WEBSITE_NAME=Vivumlab
       - TEMPLATE=classic
-      - RUN_MODE=development
+      - RUN_MODE=production
     labels:
       - "traefik.http.services.docs.loadbalancer.server.scheme=http"
       - "traefik.http.services.docs.loadbalancer.server.port=80"
