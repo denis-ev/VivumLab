@@ -1,4 +1,8 @@
 module Utils
+  class ConfigFile < Hashie::Mash
+    disable_warnings
+  end
+
   def current_version
     @current_version ||= File.read("VERSION").chomp
   end
@@ -37,7 +41,7 @@ module Utils
   end
 
   def config_file
-    @config_file ||= Hashie::Mash.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
+    @config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
   end
 
   def convert_debug_enum(level)
