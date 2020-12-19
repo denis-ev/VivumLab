@@ -16,9 +16,9 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [MassiveDecks](https://github.com/Lattyware/massivedecks/blob/master/README.md) Massive Decks is a comedy party game based on Cards against Humanity. Play with friends! It works great with a bunch of people in the same room on phones, or on voice chat online.
 
-![amd64](https://img.shields.io/badge/{% if not massivedecks.amd64 %}untested{% else %}{{ massivedecks.amd64 }}{% endif %}-amd64-{% if not massivedecks.amd64 %}inactive{% elif massivedecks.amd64 == "verified" %}success{% elif massivedecks.amd64 == "supported" %}informational{% elif massivedecks.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not massivedecks.arm64 %}untested{% else %}{{ massivedecks.arm64 }}{% endif %}-arm64-{% if not massivedecks.arm64 %}inactive{% elif massivedecks.arm64 == "verified" %}success{% elif massivedecks.arm64 == "supported" %}informational{% elif massivedecks.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not massivedecks.armv7 %}untested{% else %}{{ massivedecks.armv7 }}{% endif %}-armv7-{% if not massivedecks.armv7 %}inactive{% elif massivedecks.armv7 == "verified" %}success{% elif massivedecks.armv7 == "supported" %}informational{% elif massivedecks.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not massivedecks.amd64 %}untested{% else %}{{ massivedecks.amd64 }}{% endif %}-amd64-{% if not massivedecks.amd64 %}inactive{% elif massivedecks.amd64 == "verified" %}success{% elif massivedecks.amd64 == "supported" %}informational{% elif massivedecks.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not massivedecks.arm64 %}untested{% else %}{{ massivedecks.arm64 }}{% endif %}-arm64-{% if not massivedecks.arm64 %}inactive{% elif massivedecks.arm64 == "verified" %}success{% elif massivedecks.arm64 == "supported" %}informational{% elif massivedecks.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not massivedecks.armv7 %}untested{% else %}{{ massivedecks.armv7 }}{% endif %}-armv7-{% if not massivedecks.armv7 %}inactive{% elif massivedecks.armv7 == "verified" %}success{% elif massivedecks.armv7 == "supported" %}informational{% elif massivedecks.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
@@ -51,8 +51,7 @@ run: **`vlab update_one service=massivedecks`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -61,14 +60,13 @@ Navigate to *https://{{ massivedecks.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, massivedecks makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -94,7 +92,7 @@ Tor link: [http://{{ massivedecks.subdomain + "." + tor_domain }}/](http://{{ ma
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -116,7 +114,7 @@ massivedecks
 run: **`vlab update_one service=massivedecks`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -138,7 +136,7 @@ massivedecks
 run: **`vlab update_one service=massivedecks`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -160,7 +158,7 @@ massivedecks
 run: **`vlab update_one service=massivedecks`**
 
 ### SUBDOMAIN
-*Default: massivedecks*
+*Default: massivedecks* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -183,7 +181,7 @@ run: **`vlab update_one service=massivedecks`**
 
 ### VERSION
 *Default: {{ massivedecks.client_version }}*
-*Default: {{ massivedecks.server_version }}*
+*Default: {{ massivedecks.server_version }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -206,6 +204,6 @@ massivedecks
 run: **`vlab update_one service=massivedecks`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

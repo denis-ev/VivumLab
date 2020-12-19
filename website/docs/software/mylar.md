@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [mylar](https://github.com/evilhero/mylar) An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents
 
-![amd64](https://img.shields.io/badge/{% if not mylar.amd64 %}untested{% else %}{{ mylar.amd64 }}{% endif %}-amd64-{% if not mylar.amd64 %}inactive{% elif mylar.amd64 == "verified" %}success{% elif mylar.amd64 == "supported" %}informational{% elif mylar.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not mylar.arm64 %}untested{% else %}{{ mylar.arm64 }}{% endif %}-arm64-{% if not mylar.arm64 %}inactive{% elif mylar.arm64 == "verified" %}success{% elif mylar.arm64 == "supported" %}informational{% elif mylar.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not mylar.armv7 %}untested{% else %}{{ mylar.armv7 }}{% endif %}-armv7-{% if not mylar.armv7 %}inactive{% elif mylar.armv7 == "verified" %}success{% elif mylar.armv7 == "supported" %}informational{% elif mylar.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not mylar.amd64 %}untested{% else %}{{ mylar.amd64 }}{% endif %}-amd64-{% if not mylar.amd64 %}inactive{% elif mylar.amd64 == "verified" %}success{% elif mylar.amd64 == "supported" %}informational{% elif mylar.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not mylar.arm64 %}untested{% else %}{{ mylar.arm64 }}{% endif %}-arm64-{% if not mylar.arm64 %}inactive{% elif mylar.arm64 == "verified" %}success{% elif mylar.arm64 == "supported" %}informational{% elif mylar.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not mylar.armv7 %}untested{% else %}{{ mylar.armv7 }}{% endif %}-armv7-{% if not mylar.armv7 %}inactive{% elif mylar.armv7 == "verified" %}success{% elif mylar.armv7 == "supported" %}informational{% elif mylar.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ mylar.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=mylar`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ mylar.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, mylar makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ mylar.subdomain + "." + tor_domain }}/](http://{{ mylar.sub
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ mylar
 run: **`vlab update_one service=mylar`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ mylar
 run: **`vlab update_one service=mylar`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ mylar
 run: **`vlab update_one service=mylar`**
 
 ### SUBDOMAIN
-*Default: mylar*
+*Default: mylar* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ mylar
 run: **`vlab update_one service=mylar`**
 
 ### VERSION
-*Default: {{  mylar.version  }}*
+*Default: {{  mylar.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ mylar
 run: **`vlab update_one service=mylar`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Hubzilla](https://framagit.org/hubzilla) is a powerful platform for creating interconnected websites featuring a [decentralized/nomadic identity](https://zotlabs.org/page/hubzilla/hubzilla-project).
 
-![amd64](https://img.shields.io/badge/{% if not hubzilla.amd64 %}untested{% else %}{{ hubzilla.amd64 }}{% endif %}-amd64-{% if not hubzilla.amd64 %}inactive{% elif hubzilla.amd64 == "verified" %}success{% elif hubzilla.amd64 == "supported" %}informational{% elif hubzilla.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not hubzilla.arm64 %}untested{% else %}{{ hubzilla.arm64 }}{% endif %}-arm64-{% if not hubzilla.arm64 %}inactive{% elif hubzilla.arm64 == "verified" %}success{% elif hubzilla.arm64 == "supported" %}informational{% elif hubzilla.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not hubzilla.armv7 %}untested{% else %}{{ hubzilla.armv7 }}{% endif %}-armv7-{% if not hubzilla.armv7 %}inactive{% elif hubzilla.armv7 == "verified" %}success{% elif hubzilla.armv7 == "supported" %}informational{% elif hubzilla.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not hubzilla.amd64 %}untested{% else %}{{ hubzilla.amd64 }}{% endif %}-amd64-{% if not hubzilla.amd64 %}inactive{% elif hubzilla.amd64 == "verified" %}success{% elif hubzilla.amd64 == "supported" %}informational{% elif hubzilla.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not hubzilla.arm64 %}untested{% else %}{{ hubzilla.arm64 }}{% endif %}-arm64-{% if not hubzilla.arm64 %}inactive{% elif hubzilla.arm64 == "verified" %}success{% elif hubzilla.arm64 == "supported" %}informational{% elif hubzilla.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not hubzilla.armv7 %}untested{% else %}{{ hubzilla.armv7 }}{% endif %}-armv7-{% if not hubzilla.armv7 %}inactive{% elif hubzilla.armv7 == "verified" %}success{% elif hubzilla.armv7 == "supported" %}informational{% elif hubzilla.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ hubzilla.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=hubzilla`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -110,7 +109,7 @@ Tor link: [http://{{ hubzilla.subdomain + "." + tor_domain }}/](http://{{ hubzil
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -132,7 +131,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -154,7 +153,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -176,7 +175,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### SUBDOMAIN
-*Default: hubzilla*
+*Default: hubzilla* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -198,7 +197,7 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ### VERSION
-*Default: {{  hubzilla.version  }}*
+*Default: {{  hubzilla.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -220,6 +219,6 @@ hubzilla
 run: **`vlab update_one service=hubzilla`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

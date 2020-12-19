@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Zulip](https://github.com/zulip/zulip) is a threaded chat service.
 
-![amd64](https://img.shields.io/badge/{% if not zulip.amd64 %}untested{% else %}{{ zulip.amd64 }}{% endif %}-amd64-{% if not zulip.amd64 %}inactive{% elif zulip.amd64 == "verified" %}success{% elif zulip.amd64 == "supported" %}informational{% elif zulip.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not zulip.arm64 %}untested{% else %}{{ zulip.arm64 }}{% endif %}-arm64-{% if not zulip.arm64 %}inactive{% elif zulip.arm64 == "verified" %}success{% elif zulip.arm64 == "supported" %}informational{% elif zulip.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not zulip.armv7 %}untested{% else %}{{ zulip.armv7 }}{% endif %}-armv7-{% if not zulip.armv7 %}inactive{% elif zulip.armv7 == "verified" %}success{% elif zulip.armv7 == "supported" %}informational{% elif zulip.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not zulip.amd64 %}untested{% else %}{{ zulip.amd64 }}{% endif %}-amd64-{% if not zulip.amd64 %}inactive{% elif zulip.amd64 == "verified" %}success{% elif zulip.amd64 == "supported" %}informational{% elif zulip.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not zulip.arm64 %}untested{% else %}{{ zulip.arm64 }}{% endif %}-arm64-{% if not zulip.arm64 %}inactive{% elif zulip.arm64 == "verified" %}success{% elif zulip.arm64 == "supported" %}informational{% elif zulip.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not zulip.armv7 %}untested{% else %}{{ zulip.armv7 }}{% endif %}-armv7-{% if not zulip.armv7 %}inactive{% elif zulip.armv7 == "verified" %}success{% elif zulip.armv7 == "supported" %}informational{% elif zulip.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ zulip.version }}
 
 ## SETUP
@@ -50,22 +50,20 @@ run: **`vlab update_one service=zulip`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
 
 [https://github.com/zulip/docker-zulip](https://github.com/zulip/docker-zulip)
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -91,7 +89,7 @@ Tor link: [http://{{ zulip.subdomain + "." + tor_domain }}/](http://{{ zulip.sub
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -113,7 +111,7 @@ zulip
 run: **`vlab update_one service=zulip`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -135,7 +133,7 @@ zulip
 run: **`vlab update_one service=zulip`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +155,7 @@ zulip
 run: **`vlab update_one service=zulip`**
 
 ### SUBDOMAIN
-*Default: zulip*
+*Default: zulip* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +177,7 @@ zulip
 run: **`vlab update_one service=zulip`**
 
 ### VERSION
-*Default: {{  zulip.version  }}*
+*Default: {{  zulip.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +199,6 @@ zulip
 run: **`vlab update_one service=zulip`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

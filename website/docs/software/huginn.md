@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Huginn](https://github.com/huginn/huginn) Create agents that monitor and act on your behalf. Your agents are standing by!
 
-![amd64](https://img.shields.io/badge/{% if not huginn.amd64 %}untested{% else %}{{ huginn.amd64 }}{% endif %}-amd64-{% if not huginn.amd64 %}inactive{% elif huginn.amd64 == "verified" %}success{% elif huginn.amd64 == "supported" %}informational{% elif huginn.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not huginn.arm64 %}untested{% else %}{{ huginn.arm64 }}{% endif %}-arm64-{% if not huginn.arm64 %}inactive{% elif huginn.arm64 == "verified" %}success{% elif huginn.arm64 == "supported" %}informational{% elif huginn.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not huginn.armv7 %}untested{% else %}{{ huginn.armv7 }}{% endif %}-armv7-{% if not huginn.armv7 %}inactive{% elif huginn.armv7 == "verified" %}success{% elif huginn.armv7 == "supported" %}informational{% elif huginn.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not huginn.amd64 %}untested{% else %}{{ huginn.amd64 }}{% endif %}-amd64-{% if not huginn.amd64 %}inactive{% elif huginn.amd64 == "verified" %}success{% elif huginn.amd64 == "supported" %}informational{% elif huginn.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not huginn.arm64 %}untested{% else %}{{ huginn.arm64 }}{% endif %}-arm64-{% if not huginn.arm64 %}inactive{% elif huginn.arm64 == "verified" %}success{% elif huginn.arm64 == "supported" %}informational{% elif huginn.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not huginn.armv7 %}untested{% else %}{{ huginn.armv7 }}{% endif %}-armv7-{% if not huginn.armv7 %}inactive{% elif huginn.armv7 == "verified" %}success{% elif huginn.armv7 == "supported" %}informational{% elif huginn.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ huginn.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=huginn`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ huginn.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, huginn makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ huginn.subdomain + "." + tor_domain }}/](http://{{ huginn.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### SUBDOMAIN
-*Default: huginn*
+*Default: huginn* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ### VERSION
-*Default: {{  huginn.version  }}*
+*Default: {{  huginn.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ huginn
 run: **`vlab update_one service=huginn`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

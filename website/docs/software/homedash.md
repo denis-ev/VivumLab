@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Homedash](https://lamarios.github.io/Homedash2/) is a simple dashboard that allows to monitor and interact with many different services.
 
-![amd64](https://img.shields.io/badge/{% if not homedash.amd64 %}untested{% else %}{{ homedash.amd64 }}{% endif %}-amd64-{% if not homedash.amd64 %}inactive{% elif homedash.amd64 == "verified" %}success{% elif homedash.amd64 == "supported" %}informational{% elif homedash.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not homedash.arm64 %}untested{% else %}{{ homedash.arm64 }}{% endif %}-arm64-{% if not homedash.arm64 %}inactive{% elif homedash.arm64 == "verified" %}success{% elif homedash.arm64 == "supported" %}informational{% elif homedash.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not homedash.armv7 %}untested{% else %}{{ homedash.armv7 }}{% endif %}-armv7-{% if not homedash.armv7 %}inactive{% elif homedash.armv7 == "verified" %}success{% elif homedash.armv7 == "supported" %}informational{% elif homedash.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not homedash.amd64 %}untested{% else %}{{ homedash.amd64 }}{% endif %}-amd64-{% if not homedash.amd64 %}inactive{% elif homedash.amd64 == "verified" %}success{% elif homedash.amd64 == "supported" %}informational{% elif homedash.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not homedash.arm64 %}untested{% else %}{{ homedash.arm64 }}{% endif %}-arm64-{% if not homedash.arm64 %}inactive{% elif homedash.arm64 == "verified" %}success{% elif homedash.arm64 == "supported" %}informational{% elif homedash.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not homedash.armv7 %}untested{% else %}{{ homedash.armv7 }}{% endif %}-armv7-{% if not homedash.armv7 %}inactive{% elif homedash.armv7 == "verified" %}success{% elif homedash.armv7 == "supported" %}informational{% elif homedash.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ homedash.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=homedash`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ homedash.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, homedash makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ homedash.subdomain + "." + tor_domain }}/](http://{{ homeda
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### SUBDOMAIN
-*Default: homedash*
+*Default: homedash* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ### VERSION
-*Default: {{  homedash.version  }}*
+*Default: {{  homedash.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ homedash
 run: **`vlab update_one service=homedash`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

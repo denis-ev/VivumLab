@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [TiddlyWiki](https://tiddlywiki.com) a unique non-linear notebook for capturing, organizing and sharing complex information
 
-![amd64](https://img.shields.io/badge/{% if not tiddlywiki.amd64 %}untested{% else %}{{ tiddlywiki.amd64 }}{% endif %}-amd64-{% if not tiddlywiki.amd64 %}inactive{% elif tiddlywiki.amd64 == "verified" %}success{% elif tiddlywiki.amd64 == "supported" %}informational{% elif tiddlywiki.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not tiddlywiki.arm64 %}untested{% else %}{{ tiddlywiki.arm64 }}{% endif %}-arm64-{% if not tiddlywiki.arm64 %}inactive{% elif tiddlywiki.arm64 == "verified" %}success{% elif tiddlywiki.arm64 == "supported" %}informational{% elif tiddlywiki.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not tiddlywiki.armv7 %}untested{% else %}{{ tiddlywiki.armv7 }}{% endif %}-armv7-{% if not tiddlywiki.armv7 %}inactive{% elif tiddlywiki.armv7 == "verified" %}success{% elif tiddlywiki.armv7 == "supported" %}informational{% elif tiddlywiki.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not tiddlywiki.amd64 %}untested{% else %}{{ tiddlywiki.amd64 }}{% endif %}-amd64-{% if not tiddlywiki.amd64 %}inactive{% elif tiddlywiki.amd64 == "verified" %}success{% elif tiddlywiki.amd64 == "supported" %}informational{% elif tiddlywiki.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not tiddlywiki.arm64 %}untested{% else %}{{ tiddlywiki.arm64 }}{% endif %}-arm64-{% if not tiddlywiki.arm64 %}inactive{% elif tiddlywiki.arm64 == "verified" %}success{% elif tiddlywiki.arm64 == "supported" %}informational{% elif tiddlywiki.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not tiddlywiki.armv7 %}untested{% else %}{{ tiddlywiki.armv7 }}{% endif %}-armv7-{% if not tiddlywiki.armv7 %}inactive{% elif tiddlywiki.armv7 == "verified" %}success{% elif tiddlywiki.armv7 == "supported" %}informational{% elif tiddlywiki.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ tiddlywiki.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=tiddlywiki`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ tiddlywiki.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, tiddlywiki makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ tiddlywiki.subdomain + "." + tor_domain }}/](http://{{ tidd
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ tiddlywiki
 run: **`vlab update_one service=tiddlywiki`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ tiddlywiki
 run: **`vlab update_one service=tiddlywiki`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ tiddlywiki
 run: **`vlab update_one service=tiddlywiki`**
 
 ### SUBDOMAIN
-*Default: tiddlywiki*
+*Default: tiddlywiki* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ tiddlywiki
 run: **`vlab update_one service=tiddlywiki`**
 
 ### VERSION
-*Default: {{  tiddlywiki.version  }}*
+*Default: {{  tiddlywiki.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ tiddlywiki
 run: **`vlab update_one service=tiddlywiki`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

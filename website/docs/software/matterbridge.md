@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [matterbridge](https://github.com/42wim/matterbridge) A program that allows users to link multiple chat platforms.
 
-![amd64](https://img.shields.io/badge/{% if not matterbridge.amd64 %}untested{% else %}{{ matterbridge.amd64 }}{% endif %}-amd64-{% if not matterbridge.amd64 %}inactive{% elif matterbridge.amd64 == "verified" %}success{% elif matterbridge.amd64 == "supported" %}informational{% elif matterbridge.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not matterbridge.arm64 %}untested{% else %}{{ matterbridge.arm64 }}{% endif %}-arm64-{% if not matterbridge.arm64 %}inactive{% elif matterbridge.arm64 == "verified" %}success{% elif matterbridge.arm64 == "supported" %}informational{% elif matterbridge.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not matterbridge.armv7 %}untested{% else %}{{ matterbridge.armv7 }}{% endif %}-armv7-{% if not matterbridge.armv7 %}inactive{% elif matterbridge.armv7 == "verified" %}success{% elif matterbridge.armv7 == "supported" %}informational{% elif matterbridge.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not matterbridge.amd64 %}untested{% else %}{{ matterbridge.amd64 }}{% endif %}-amd64-{% if not matterbridge.amd64 %}inactive{% elif matterbridge.amd64 == "verified" %}success{% elif matterbridge.amd64 == "supported" %}informational{% elif matterbridge.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not matterbridge.arm64 %}untested{% else %}{{ matterbridge.arm64 }}{% endif %}-arm64-{% if not matterbridge.arm64 %}inactive{% elif matterbridge.arm64 == "verified" %}success{% elif matterbridge.arm64 == "supported" %}informational{% elif matterbridge.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not matterbridge.armv7 %}untested{% else %}{{ matterbridge.armv7 }}{% endif %}-armv7-{% if not matterbridge.armv7 %}inactive{% elif matterbridge.armv7 == "verified" %}success{% elif matterbridge.armv7 == "supported" %}informational{% elif matterbridge.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ matterbridge.version }}
 
 ## SETUP
@@ -50,22 +50,20 @@ run: **`vlab update_one service=matterbridge`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
 
 Create an account with your desired username; as this is the first user, matterbridge makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -87,7 +85,7 @@ Edit the matterbridge.toml file according to the instructions at:
 ## OPTIONS
 
 ### VERSION
-*Default: {{ matterbridge.version   }}*
+*Default: {{ matterbridge.version   }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -109,6 +107,6 @@ matterbridge
 run: **`vlab update_one service=matterbridge`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

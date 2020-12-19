@@ -43,6 +43,7 @@ module.exports = {
         'software/codimd',
         'software/darksky',
         'software/digikam',
+        'software/docs',
         'software/drone',
         'software/duckdns',
         'software/duplicati',

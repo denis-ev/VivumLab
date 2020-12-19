@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Kutt](https://kutt.it) Kutt your links shorter.
 
-![amd64](https://img.shields.io/badge/{% if not kutt.amd64 %}untested{% else %}{{ kutt.amd64 }}{% endif %}-amd64-{% if not kutt.amd64 %}inactive{% elif kutt.amd64 == "verified" %}success{% elif kutt.amd64 == "supported" %}informational{% elif kutt.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not kutt.arm64 %}untested{% else %}{{ kutt.arm64 }}{% endif %}-arm64-{% if not kutt.arm64 %}inactive{% elif kutt.arm64 == "verified" %}success{% elif kutt.arm64 == "supported" %}informational{% elif kutt.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not kutt.armv7 %}untested{% else %}{{ kutt.armv7 }}{% endif %}-armv7-{% if not kutt.armv7 %}inactive{% elif kutt.armv7 == "verified" %}success{% elif kutt.armv7 == "supported" %}informational{% elif kutt.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not kutt.amd64 %}untested{% else %}{{ kutt.amd64 }}{% endif %}-amd64-{% if not kutt.amd64 %}inactive{% elif kutt.amd64 == "verified" %}success{% elif kutt.amd64 == "supported" %}informational{% elif kutt.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not kutt.arm64 %}untested{% else %}{{ kutt.arm64 }}{% endif %}-arm64-{% if not kutt.arm64 %}inactive{% elif kutt.arm64 == "verified" %}success{% elif kutt.arm64 == "supported" %}informational{% elif kutt.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not kutt.armv7 %}untested{% else %}{{ kutt.armv7 }}{% endif %}-armv7-{% if not kutt.armv7 %}inactive{% elif kutt.armv7 == "verified" %}success{% elif kutt.armv7 == "supported" %}informational{% elif kutt.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ kutt.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=kutt`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ kutt.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, kutt makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ kutt.subdomain + "." + tor_domain }}/](http://{{ kutt.subdo
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -111,7 +109,7 @@ kutt
 ```
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -129,7 +127,7 @@ kutt
 ```
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -147,7 +145,7 @@ kutt
 ```
 
 ### SUBDOMAIN
-*Default: kutt*
+*Default: kutt* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -165,7 +163,7 @@ kutt
 ```
 
 ### VERSION
-*Default: {{  kutt.version  }}*
+*Default: {{  kutt.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -187,6 +185,6 @@ kutt
 run: **`vlab update_one service=kutt`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

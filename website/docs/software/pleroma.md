@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Pleroma](https://github.com/angristan/docker-pleroma) Pleroma is a federated social networking platform, compatible with GNU social and other OStatus implementations. It is free software licensed under the AGPLv3.
 
-![amd64](https://img.shields.io/badge/{% if not pleroma.amd64 %}untested{% else %}{{ pleroma.amd64 }}{% endif %}-amd64-{% if not pleroma.amd64 %}inactive{% elif pleroma.amd64 == "verified" %}success{% elif pleroma.amd64 == "supported" %}informational{% elif pleroma.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not pleroma.arm64 %}untested{% else %}{{ pleroma.arm64 }}{% endif %}-arm64-{% if not pleroma.arm64 %}inactive{% elif pleroma.arm64 == "verified" %}success{% elif pleroma.arm64 == "supported" %}informational{% elif pleroma.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not pleroma.armv7 %}untested{% else %}{{ pleroma.armv7 }}{% endif %}-armv7-{% if not pleroma.armv7 %}inactive{% elif pleroma.armv7 == "verified" %}success{% elif pleroma.armv7 == "supported" %}informational{% elif pleroma.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not pleroma.amd64 %}untested{% else %}{{ pleroma.amd64 }}{% endif %}-amd64-{% if not pleroma.amd64 %}inactive{% elif pleroma.amd64 == "verified" %}success{% elif pleroma.amd64 == "supported" %}informational{% elif pleroma.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not pleroma.arm64 %}untested{% else %}{{ pleroma.arm64 }}{% endif %}-arm64-{% if not pleroma.arm64 %}inactive{% elif pleroma.arm64 == "verified" %}success{% elif pleroma.arm64 == "supported" %}informational{% elif pleroma.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not pleroma.armv7 %}untested{% else %}{{ pleroma.armv7 }}{% endif %}-armv7-{% if not pleroma.armv7 %}inactive{% elif pleroma.armv7 == "verified" %}success{% elif pleroma.armv7 == "supported" %}informational{% elif pleroma.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ pleroma.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=pleroma`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 ### Additional Installation Steps
@@ -62,14 +61,13 @@ run: **`vlab update_one service=pleroma`**
 docker-compose exec web /opt/pleroma/bin/pleroma_ctl user new {{default_username}} {{admin_email}} --name {{default_username}} --password {{default_password}} --admin --moderator -y
 ```
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -95,7 +93,7 @@ Tor link: [http://{{ pleroma.subdomain + "." + tor_domain }}/](http://{{ pleroma
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -117,7 +115,7 @@ pleroma
 run: **`vlab update_one service=pleroma`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -139,7 +137,7 @@ pleroma
 run: **`vlab update_one service=pleroma`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -161,7 +159,7 @@ pleroma
 run: **`vlab update_one service=pleroma`**
 
 ### SUBDOMAIN
-*Default: pleroma*
+*Default: pleroma* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -183,7 +181,7 @@ pleroma
 run: **`vlab update_one service=pleroma`**
 
 ### VERSION
-*Default: {{  pleroma.version  }}*
+*Default: {{  pleroma.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -205,6 +203,6 @@ pleroma
 run: **`vlab update_one service=pleroma`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

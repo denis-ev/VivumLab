@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Turtl](https://github.com/turtl/server) Turtl is a note taking app with desktop and mobile apps.
 
-![amd64](https://img.shields.io/badge/{% if not turtl.amd64 %}untested{% else %}{{ turtl.amd64 }}{% endif %}-amd64-{% if not turtl.amd64 %}inactive{% elif turtl.amd64 == "verified" %}success{% elif turtl.amd64 == "supported" %}informational{% elif turtl.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not turtl.arm64 %}untested{% else %}{{ turtl.arm64 }}{% endif %}-arm64-{% if not turtl.arm64 %}inactive{% elif turtl.arm64 == "verified" %}success{% elif turtl.arm64 == "supported" %}informational{% elif turtl.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not turtl.armv7 %}untested{% else %}{{ turtl.armv7 }}{% endif %}-armv7-{% if not turtl.armv7 %}inactive{% elif turtl.armv7 == "verified" %}success{% elif turtl.armv7 == "supported" %}informational{% elif turtl.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not turtl.amd64 %}untested{% else %}{{ turtl.amd64 }}{% endif %}-amd64-{% if not turtl.amd64 %}inactive{% elif turtl.amd64 == "verified" %}success{% elif turtl.amd64 == "supported" %}informational{% elif turtl.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not turtl.arm64 %}untested{% else %}{{ turtl.arm64 }}{% endif %}-arm64-{% if not turtl.arm64 %}inactive{% elif turtl.arm64 == "verified" %}success{% elif turtl.arm64 == "supported" %}informational{% elif turtl.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not turtl.armv7 %}untested{% else %}{{ turtl.armv7 }}{% endif %}-armv7-{% if not turtl.armv7 %}inactive{% elif turtl.armv7 == "verified" %}success{% elif turtl.armv7 == "supported" %}informational{% elif turtl.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** None
 
 ## SETUP
@@ -52,14 +52,13 @@ run: **`vlab update_one service=turtl`**
 
 You must then download a desktop client or Android or iOS app. Get the newest version here <https://github.com/turtl/desktop/releases>
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -85,7 +84,7 @@ Tor link: [http://{{ turtl.subdomain + "." + tor_domain }}/](http://{{ turtl.sub
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -107,7 +106,7 @@ turtl
 run: **`vlab update_one service=turtl`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -129,7 +128,7 @@ turtl
 run: **`vlab update_one service=turtl`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -151,7 +150,7 @@ turtl
 run: **`vlab update_one service=turtl`**
 
 ### SUBDOMAIN
-*Default: turtl*
+*Default: turtl* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -195,6 +194,6 @@ turtl
 run: **`vlab update_one service=turtl`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

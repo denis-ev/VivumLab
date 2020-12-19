@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [HealthChecks](https://HealthChecks.io) A Cron Monitoring Tool written in Python & Django
 
-![amd64](https://img.shields.io/badge/{% if not healthchecks.amd64 %}untested{% else %}{{ healthchecks.amd64 }}{% endif %}-amd64-{% if not healthchecks.amd64 %}inactive{% elif healthchecks.amd64 == "verified" %}success{% elif healthchecks.amd64 == "supported" %}informational{% elif healthchecks.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not healthchecks.arm64 %}untested{% else %}{{ healthchecks.arm64 }}{% endif %}-arm64-{% if not healthchecks.arm64 %}inactive{% elif healthchecks.arm64 == "verified" %}success{% elif healthchecks.arm64 == "supported" %}informational{% elif healthchecks.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not healthchecks.armv7 %}untested{% else %}{{ healthchecks.armv7 }}{% endif %}-armv7-{% if not healthchecks.armv7 %}inactive{% elif healthchecks.armv7 == "verified" %}success{% elif healthchecks.armv7 == "supported" %}informational{% elif healthchecks.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not healthchecks.amd64 %}untested{% else %}{{ healthchecks.amd64 }}{% endif %}-amd64-{% if not healthchecks.amd64 %}inactive{% elif healthchecks.amd64 == "verified" %}success{% elif healthchecks.amd64 == "supported" %}informational{% elif healthchecks.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not healthchecks.arm64 %}untested{% else %}{{ healthchecks.arm64 }}{% endif %}-arm64-{% if not healthchecks.arm64 %}inactive{% elif healthchecks.arm64 == "verified" %}success{% elif healthchecks.arm64 == "supported" %}informational{% elif healthchecks.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not healthchecks.armv7 %}untested{% else %}{{ healthchecks.armv7 }}{% endif %}-armv7-{% if not healthchecks.armv7 %}inactive{% elif healthchecks.armv7 == "verified" %}success{% elif healthchecks.armv7 == "supported" %}informational{% elif healthchecks.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ healthchecks.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=healthchecks`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ healthchecks.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, healthchecks makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ healthchecks.subdomain + "." + tor_domain }}/](http://{{ he
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ healthchecks
 run: **`vlab update_one service=healthchecks`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ healthchecks
 run: **`vlab update_one service=healthchecks`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ healthchecks
 run: **`vlab update_one service=healthchecks`**
 
 ### SUBDOMAIN
-*Default: healthchecks*
+*Default: healthchecks* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ healthchecks
 run: **`vlab update_one service=healthchecks`**
 
 ### VERSION
-*Default: {{  healthchecks.version  }}*
+*Default: {{  healthchecks.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ healthchecks
 run: **`vlab update_one service=healthchecks`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

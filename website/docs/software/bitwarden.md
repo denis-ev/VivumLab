@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Bitwarden](https://bitwarden.com/) is an open source password manager. VivumLab utilizes an Open Source clone of the Bitwarden API server, [bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs). This is primarily due to performance and complexity reasons. `bitwarden_rs` requires just one Docker container, whereas the official `Bitwarden` install requires something like six different containers.
 
-![amd64](https://img.shields.io/badge/{% if not bitwarden.amd64 %}untested{% else %}{{ bitwarden.amd64 }}{% endif %}-amd64-{% if not bitwarden.amd64 %}inactive{% elif bitwarden.amd64 == "verified" %}success{% elif bitwarden.amd64 == "supported" %}informational{% elif bitwarden.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not bitwarden.arm64 %}untested{% else %}{{ bitwarden.arm64 }}{% endif %}-arm64-{% if not bitwarden.arm64 %}inactive{% elif bitwarden.arm64 == "verified" %}success{% elif bitwarden.arm64 == "supported" %}informational{% elif bitwarden.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not bitwarden.armv7 %}untested{% else %}{{ bitwarden.armv7 }}{% endif %}-armv7-{% if not bitwarden.armv7 %}inactive{% elif bitwarden.armv7 == "verified" %}success{% elif bitwarden.armv7 == "supported" %}informational{% elif bitwarden.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not bitwarden.amd64 %}untested{% else %}{{ bitwarden.amd64 }}{% endif %}-amd64-{% if not bitwarden.amd64 %}inactive{% elif bitwarden.amd64 == "verified" %}success{% elif bitwarden.amd64 == "supported" %}informational{% elif bitwarden.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not bitwarden.arm64 %}untested{% else %}{{ bitwarden.arm64 }}{% endif %}-arm64-{% if not bitwarden.arm64 %}inactive{% elif bitwarden.arm64 == "verified" %}success{% elif bitwarden.arm64 == "supported" %}informational{% elif bitwarden.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not bitwarden.armv7 %}untested{% else %}{{ bitwarden.armv7 }}{% endif %}-armv7-{% if not bitwarden.armv7 %}inactive{% elif bitwarden.armv7 == "verified" %}success{% elif bitwarden.armv7 == "supported" %}informational{% elif bitwarden.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ bitwarden.version }}
 
 ## SETUP
@@ -54,8 +54,7 @@ run: **`vlab update_one service=bitwarden`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -64,14 +63,13 @@ Navigate to *https://{{ bitwarden.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, bitwarden makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -97,7 +95,7 @@ Tor link: [http://{{ bitwarden.subdomain + "." + tor_domain }}/](http://{{ bitwa
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -119,7 +117,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -141,7 +139,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -163,7 +161,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### SUBDOMAIN
-*Default: bitwarden*
+*Default: bitwarden* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -185,7 +183,7 @@ bitwarden
 run: **`vlab update_one service=bitwarden`**
 
 ### VERSION
-*Default: {{  bitwarden.version  }}*
+*Default: {{  bitwarden.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -207,6 +205,6 @@ s
 run: **`vlab update_one service=bitwarden`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

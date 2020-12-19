@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [docker-phpLDAPadmin](https://github.com/osixia/docker-phpLDAPadmin) provides LDAP.
 
-![amd64](https://img.shields.io/badge/{% if not openldap.amd64 %}untested{% else %}{{ openldap.amd64 }}{% endif %}-amd64-{% if not openldap.amd64 %}inactive{% elif openldap.amd64 == "verified" %}success{% elif openldap.amd64 == "supported" %}informational{% elif openldap.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not openldap.arm64 %}untested{% else %}{{ openldap.arm64 }}{% endif %}-arm64-{% if not openldap.arm64 %}inactive{% elif openldap.arm64 == "verified" %}success{% elif openldap.arm64 == "supported" %}informational{% elif openldap.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not openldap.armv7 %}untested{% else %}{{ openldap.armv7 }}{% endif %}-armv7-{% if not openldap.armv7 %}inactive{% elif openldap.armv7 == "verified" %}success{% elif openldap.armv7 == "supported" %}informational{% elif openldap.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not openldap.amd64 %}untested{% else %}{{ openldap.amd64 }}{% endif %}-amd64-{% if not openldap.amd64 %}inactive{% elif openldap.amd64 == "verified" %}success{% elif openldap.amd64 == "supported" %}informational{% elif openldap.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not openldap.arm64 %}untested{% else %}{{ openldap.arm64 }}{% endif %}-arm64-{% if not openldap.arm64 %}inactive{% elif openldap.arm64 == "verified" %}success{% elif openldap.arm64 == "supported" %}informational{% elif openldap.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not openldap.armv7 %}untested{% else %}{{ openldap.armv7 }}{% endif %}-armv7-{% if not openldap.armv7 %}inactive{% elif openldap.armv7 == "verified" %}success{% elif openldap.armv7 == "supported" %}informational{% elif openldap.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ openldap.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=openldap`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ openldap.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, openldap makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ openldap.subdomain + "." + tor_domain }}/](http://{{ openld
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ openldap
 run: **`vlab update_one service=openldap`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ openldap
 run: **`vlab update_one service=openldap`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ openldap
 run: **`vlab update_one service=openldap`**
 
 ### SUBDOMAIN
-*Default: openldap*
+*Default: openldap* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ openldap
 run: **`vlab update_one service=openldap`**
 
 ### VERSION
-*Default: {{  openldap.version  }}*
+*Default: {{  openldap.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ openldap
 run: **`vlab update_one service=openldap`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

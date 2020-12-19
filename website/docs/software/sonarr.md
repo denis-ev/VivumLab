@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Sonarr](https://sonarr.tv/) Automated TV show downloading
 
-![amd64](https://img.shields.io/badge/{% if not sonarr.amd64 %}untested{% else %}{{ sonarr.amd64 }}{% endif %}-amd64-{% if not sonarr.amd64 %}inactive{% elif sonarr.amd64 == "verified" %}success{% elif sonarr.amd64 == "supported" %}informational{% elif sonarr.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not sonarr.arm64 %}untested{% else %}{{ sonarr.arm64 }}{% endif %}-arm64-{% if not sonarr.arm64 %}inactive{% elif sonarr.arm64 == "verified" %}success{% elif sonarr.arm64 == "supported" %}informational{% elif sonarr.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not sonarr.armv7 %}untested{% else %}{{ sonarr.armv7 }}{% endif %}-armv7-{% if not sonarr.armv7 %}inactive{% elif sonarr.armv7 == "verified" %}success{% elif sonarr.armv7 == "supported" %}informational{% elif sonarr.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not sonarr.amd64 %}untested{% else %}{{ sonarr.amd64 }}{% endif %}-amd64-{% if not sonarr.amd64 %}inactive{% elif sonarr.amd64 == "verified" %}success{% elif sonarr.amd64 == "supported" %}informational{% elif sonarr.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not sonarr.arm64 %}untested{% else %}{{ sonarr.arm64 }}{% endif %}-arm64-{% if not sonarr.arm64 %}inactive{% elif sonarr.arm64 == "verified" %}success{% elif sonarr.arm64 == "supported" %}informational{% elif sonarr.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not sonarr.armv7 %}untested{% else %}{{ sonarr.armv7 }}{% endif %}-armv7-{% if not sonarr.armv7 %}inactive{% elif sonarr.armv7 == "verified" %}success{% elif sonarr.armv7 == "supported" %}informational{% elif sonarr.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ sonarr.version }}
 
 ## SETUP
@@ -77,14 +77,13 @@ We recommend that you make sure you point Sonarr to `/tv`, when you add a TV sho
 
 Now if you add some content to Sonarr, they will automatically be searched and downloaded according to your settings.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -110,7 +109,7 @@ Tor link: [http://{{ sonarr.subdomain + "." + tor_domain }}/](http://{{ sonarr.s
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -132,7 +131,7 @@ sonarr
 run: **`vlab update_one service=sonarr`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -154,7 +153,7 @@ sonarr
 run: **`vlab update_one service=sonarr`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -176,7 +175,7 @@ sonarr
 run: **`vlab update_one service=sonarr`**
 
 ### SUBDOMAIN
-*Default: sonarr*
+*Default: sonarr* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -198,7 +197,7 @@ sonarr
 run: **`vlab update_one service=sonarr`**
 
 ### VERSION
-*Default: {{  sonarr.version  }}*
+*Default: {{  sonarr.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -220,6 +219,6 @@ sonarr
 run: **`vlab update_one service=sonarr`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

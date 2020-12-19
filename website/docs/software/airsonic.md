@@ -16,9 +16,9 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Airsonic](https://airsonic.github.io/) is a free, web-based media streamer, providing ubiquitous access to your music.
 
-![amd64](https://img.shields.io/badge/{% if not airsonic.amd64 %}untested{% else %}{{ airsonic.amd64 }}{% endif %}-amd64-{% if not airsonic.amd64 %}inactive{% elif airsonic.amd64 == "verified" %}success{% elif airsonic.amd64 == "supported" %}informational{% elif airsonic.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not airsonic.arm64 %}untested{% else %}{{ airsonic.arm64 }}{% endif %}-arm64-{% if not airsonic.arm64 %}inactive{% elif airsonic.arm64 == "verified" %}success{% elif airsonic.arm64 == "supported" %}informational{% elif airsonic.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not airsonic.armv7 %}untested{% else %}{{ airsonic.armv7 }}{% endif %}-armv7-{% if not airsonic.armv7 %}inactive{% elif airsonic.armv7 == "verified" %}success{% elif airsonic.armv7 == "supported" %}informational{% elif airsonic.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not airsonic.amd64 %}untested{% else %}{{ airsonic.amd64 }}{% endif %}-amd64-{% if not airsonic.amd64 %}inactive{% elif airsonic.amd64 == "verified" %}success{% elif airsonic.amd64 == "supported" %}informational{% elif airsonic.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not airsonic.arm64 %}untested{% else %}{{ airsonic.arm64 }}{% endif %}-arm64-{% if not airsonic.arm64 %}inactive{% elif airsonic.arm64 == "verified" %}success{% elif airsonic.arm64 == "supported" %}informational{% elif airsonic.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not airsonic.armv7 %}untested{% else %}{{ airsonic.armv7 }}{% endif %}-armv7-{% if not airsonic.armv7 %}inactive{% elif airsonic.armv7 == "verified" %}success{% elif airsonic.armv7 == "supported" %}informational{% elif airsonic.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
@@ -49,8 +49,7 @@ run: **`vlab update_one service=airsonic`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -59,14 +58,13 @@ Navigate to *https://{{ airsonic.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, Airsonic makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -91,7 +89,7 @@ Tor link: [http://{{ airsonic.subdomain + "." + tor_domain }}/](http://{{ airson
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -113,7 +111,7 @@ airsonic
 run: **`vlab update_one service=airsonic`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -135,7 +133,7 @@ airsonic
 run: **`vlab update_one service=airsonic`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -157,7 +155,7 @@ airsonic
 run: **`vlab update_one service=airsonic`**
 
 ### SUBDOMAIN
-*Default: airsonic*
+*Default: airsonic* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -179,7 +177,7 @@ airsonic
 run: **`vlab update_one service=airsonic`**
 
 ### VERSION
-*Default: {{  airsonic.version  }}*
+*Default: {{  airsonic.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -201,6 +199,6 @@ airsonic
 run: **`vlab update_one service=airsonic`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

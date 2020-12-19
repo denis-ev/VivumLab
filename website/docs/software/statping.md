@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Statping](https://github.com/statping/statping) Web and App Status Monitoring for Any Type of Project
 
-![amd64](https://img.shields.io/badge/{% if not statping.amd64 %}untested{% else %}{{ statping.amd64 }}{% endif %}-amd64-{% if not statping.amd64 %}inactive{% elif statping.amd64 == "verified" %}success{% elif statping.amd64 == "supported" %}informational{% elif statping.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not statping.arm64 %}untested{% else %}{{ statping.arm64 }}{% endif %}-arm64-{% if not statping.arm64 %}inactive{% elif statping.arm64 == "verified" %}success{% elif statping.arm64 == "supported" %}informational{% elif statping.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not statping.armv7 %}untested{% else %}{{ statping.armv7 }}{% endif %}-armv7-{% if not statping.armv7 %}inactive{% elif statping.armv7 == "verified" %}success{% elif statping.armv7 == "supported" %}informational{% elif statping.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not statping.amd64 %}untested{% else %}{{ statping.amd64 }}{% endif %}-amd64-{% if not statping.amd64 %}inactive{% elif statping.amd64 == "verified" %}success{% elif statping.amd64 == "supported" %}informational{% elif statping.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not statping.arm64 %}untested{% else %}{{ statping.arm64 }}{% endif %}-arm64-{% if not statping.arm64 %}inactive{% elif statping.arm64 == "verified" %}success{% elif statping.arm64 == "supported" %}informational{% elif statping.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not statping.armv7 %}untested{% else %}{{ statping.armv7 }}{% endif %}-armv7-{% if not statping.armv7 %}inactive{% elif statping.armv7 == "verified" %}success{% elif statping.armv7 == "supported" %}informational{% elif statping.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ statping.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=statping`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -59,14 +58,13 @@ run: **`vlab update_one service=statping`**
 To login, click on 'Dashboard' at the end of the page.
 A default username and password named 'admin' is generated on first start, please change them.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -92,7 +90,7 @@ Tor link: [http://{{ statping.subdomain + "." + tor_domain }}/](http://{{ statpi
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -114,7 +112,7 @@ statping
 run: **`vlab update_one service=statping`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -136,7 +134,7 @@ statping
 run: **`vlab update_one service=statping`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -158,7 +156,7 @@ statping
 run: **`vlab update_one service=statping`**
 
 ### SUBDOMAIN
-*Default: statping*
+*Default: statping* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -180,7 +178,7 @@ statping
 run: **`vlab update_one service=statping`**
 
 ### VERSION
-*Default: {{  statping.version  }}*
+*Default: {{  statping.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -202,6 +200,6 @@ statping
 run: **`vlab update_one service=statping`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

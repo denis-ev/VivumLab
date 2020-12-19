@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Paperless](https://github.com/danielquinn/paperless) is a document management server. Point it at a folder on your NAS that your scanner is set to scan to, scan all your paper docs, have a searchable secure document archive.
 
-![amd64](https://img.shields.io/badge/{% if not paperless.amd64 %}untested{% else %}{{ paperless.amd64 }}{% endif %}-amd64-{% if not paperless.amd64 %}inactive{% elif paperless.amd64 == "verified" %}success{% elif paperless.amd64 == "supported" %}informational{% elif paperless.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not paperless.arm64 %}untested{% else %}{{ paperless.arm64 }}{% endif %}-arm64-{% if not paperless.arm64 %}inactive{% elif paperless.arm64 == "verified" %}success{% elif paperless.arm64 == "supported" %}informational{% elif paperless.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not paperless.armv7 %}untested{% else %}{{ paperless.armv7 }}{% endif %}-armv7-{% if not paperless.armv7 %}inactive{% elif paperless.armv7 == "verified" %}success{% elif paperless.armv7 == "supported" %}informational{% elif paperless.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not paperless.amd64 %}untested{% else %}{{ paperless.amd64 }}{% endif %}-amd64-{% if not paperless.amd64 %}inactive{% elif paperless.amd64 == "verified" %}success{% elif paperless.amd64 == "supported" %}informational{% elif paperless.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not paperless.arm64 %}untested{% else %}{{ paperless.arm64 }}{% endif %}-arm64-{% if not paperless.arm64 %}inactive{% elif paperless.arm64 == "verified" %}success{% elif paperless.arm64 == "supported" %}informational{% elif paperless.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not paperless.armv7 %}untested{% else %}{{ paperless.armv7 }}{% endif %}-armv7-{% if not paperless.armv7 %}inactive{% elif paperless.armv7 == "verified" %}success{% elif paperless.armv7 == "supported" %}informational{% elif paperless.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ paperless.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=paperless`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ To create a user, ssh into your server and run the following: `docker exec -it p
 
 You will be prompted to enter a username, email (optional) and password.  Once the user has been created successfully, you may need to break (Ctrl+C)  This is the login info that can be used at [https://{% if paperless.domain %}{{ paperless.domain }}{% else %}{{ paperless.subdomain + "." + domain }}{% endif %}/](https://{% if paperless.domain %}{{ paperless.domain }}{% else %}{{ paperless.subdomain + "." + domain }}{% endif %}/) or [http://{% if paperless.domain %}{{ paperless.domain }}{% else %}{{ paperless.subdomain + "." + domain }}{% endif %}/](http://{% if paperless.domain %}{{ paperless.domain }}{% else %}{{ paperless.subdomain + "." + domain }}{% endif %}/)
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ paperless.subdomain + "." + tor_domain }}/](http://{{ paper
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ paperless
 run: **`vlab update_one service=paperless`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ paperless
 run: **`vlab update_one service=paperless`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ paperless
 run: **`vlab update_one service=paperless`**
 
 ### SUBDOMAIN
-*Default: paperless*
+*Default: paperless* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ paperless
 run: **`vlab update_one service=paperless`**
 
 ### VERSION
-*Default: {{  paperless.version  }}*
+*Default: {{  paperless.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ paperless
 run: **`vlab update_one service=paperless`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.

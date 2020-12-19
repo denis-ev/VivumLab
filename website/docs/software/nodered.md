@@ -16,14 +16,14 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [NodeRED](https://nodered.org/) Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
 
-![amd64](https://img.shields.io/badge/{% if not nodered.amd64 %}untested{% else %}{{ nodered.amd64 }}{% endif %}-amd64-{% if not nodered.amd64 %}inactive{% elif nodered.amd64 == "verified" %}success{% elif nodered.amd64 == "supported" %}informational{% elif nodered.amd64 == "unsupported" %}critical{% endif %}?style=flat)
-![arm64](https://img.shields.io/badge/{% if not nodered.arm64 %}untested{% else %}{{ nodered.arm64 }}{% endif %}-arm64-{% if not nodered.arm64 %}inactive{% elif nodered.arm64 == "verified" %}success{% elif nodered.arm64 == "supported" %}informational{% elif nodered.arm64 == "unsupported" %}critical{% endif %}?style=flat)
-![armv7](https://img.shields.io/badge/{% if not nodered.armv7 %}untested{% else %}{{ nodered.armv7 }}{% endif %}-armv7-{% if not nodered.armv7 %}inactive{% elif nodered.armv7 == "verified" %}success{% elif nodered.armv7 == "supported" %}informational{% elif nodered.armv7 == "unsupported" %}critical{% endif %}?style=flat)
+![amd64](https://img.shields.io/badge/{% if not nodered.amd64 %}untested{% else %}{{ nodered.amd64 }}{% endif %}-amd64-{% if not nodered.amd64 %}inactive{% elif nodered.amd64 == "verified" %}success{% elif nodered.amd64 == "supported" %}informational{% elif nodered.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![arm64](https://img.shields.io/badge/{% if not nodered.arm64 %}untested{% else %}{{ nodered.arm64 }}{% endif %}-arm64-{% if not nodered.arm64 %}inactive{% elif nodered.arm64 == "verified" %}success{% elif nodered.arm64 == "supported" %}informational{% elif nodered.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br>
+![armv7](https://img.shields.io/badge/{% if not nodered.armv7 %}untested{% else %}{{ nodered.armv7 }}{% endif %}-armv7-{% if not nodered.armv7 %}inactive{% elif nodered.armv7 == "verified" %}success{% elif nodered.armv7 == "supported" %}informational{% elif nodered.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br>
 
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!  
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br>
 **Current Image Version:** {{ nodered.version }}
 
 ## SETUP
@@ -50,8 +50,7 @@ run: **`vlab update_one service=nodered`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
-
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br>
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -60,14 +59,13 @@ Navigate to *https://{{ nodered.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, nodered makes this account the administrator.
 
-#### SMTP/ MAIL
+### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-
 2. make some changes
 
 
-##### SMTP Settings
+#### SMTP Settings
 ```
 smtp:
   host:
@@ -93,7 +91,7 @@ Tor link: [http://{{ nodered.subdomain + "." + tor_domain }}/](http://{{ nodered
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -115,7 +113,7 @@ nodered
 run: **`vlab update_one service=nodered`**
 
 ### AUTH
-*Default: False*
+*Default: False* <br>
 *Options: True/False*
 
 #### Command:
@@ -137,7 +135,7 @@ nodered
 run: **`vlab update_one service=nodered`**
 
 ### DOMAIN
-*Default: False*
+*Default: False* <br>
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -159,7 +157,7 @@ nodered
 run: **`vlab update_one service=nodered`**
 
 ### SUBDOMAIN
-*Default: nodered*
+*Default: nodered* <br>
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -181,7 +179,7 @@ nodered
 run: **`vlab update_one service=nodered`**
 
 ### VERSION
-*Default: {{  nodered.version  }}*
+*Default: {{  nodered.version  }}* <br>
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -203,6 +201,6 @@ nodered
 run: **`vlab update_one service=nodered`**
 
 ## Need more help?
-Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
+Further information regarding services can be found. <br>
+General Information can be found in the [documentation](https://docs.vivumlab.com). <br>
 Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
