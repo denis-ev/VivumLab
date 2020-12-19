@@ -10,7 +10,7 @@ networks:
 
 services:
   docs:
-    image: awesometic/docusaurus:{{ docs.version }}
+    image: vivumlab/docusaurus:{{ docs.version }}
     restart: unless-stopped
     networks:
       - traefik_network
