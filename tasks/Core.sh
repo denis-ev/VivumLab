@@ -48,9 +48,9 @@ Task::build() {
   vlab_dockerimagver=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $2}')
   vlab_dockerimagid=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $3}')
 
-  if [[ ${vlab_dockerimagver} != ${VERSION_CURRENT} ]]; then
-    sudo docker rmi --force ${vlab_dockerimagid}
-  fi
+  # if [[ ${vlab_dockerimagver} != ${VERSION_CURRENT} ]]; then
+  #   sudo docker rmi --force ${vlab_dockerimagid}
+  # fi
 
   function build_cache() {
     if [[ ${_cache-true} == true ]]; then
