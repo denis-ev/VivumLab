@@ -60,7 +60,7 @@ class Config < Thor
       eval "config.#{good_config_key.chomp}=#{options[:value]}"
       say "Saving config.yml"
       File.open("#{options[:config_dir]}/config.yml", 'w') do |file|
-        # 'igt kids, circle wround for a note on Ansible, Python and aribitrary decisions
+        # 'igt kids, circle round for a note on Ansible, Python and aribitrary decisions
         # made by developers that bite interoperability in the ass.
         #
         # The following line, and effectively identical one in the next else-if block
