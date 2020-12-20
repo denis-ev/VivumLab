@@ -19,11 +19,17 @@ class Vlab < Thor
 
   # Next line loads all ruby files in tasks/**/*.rb
   Dir["./tasks/**/*.rb"].each {|file| require file }
-  # If the included files are classes inheriting from SubCommandBase
+  # If the included files are classes inheriting from Thor
   # dynamically add them to the available tasks list.
+  # Note, we have to manually exclude *this* class.
   ObjectSpace.each_object(Class).select { |c| c.superclass.to_s == "Thor" && c.to_s != 'Vlab'}.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
     subcommand "#{klass.to_s.downcase}", Kernel.const_get("::#{klass.to_s}")
+  end
+
+  desc "find_help", "Shows the user how to contact the VivumLab community"
+  def find_help
+    say TTY::Markdown.parse_file("docs/Contact-us.md")
   end
 
   # This method ensures that if we have an error, the resulting return code

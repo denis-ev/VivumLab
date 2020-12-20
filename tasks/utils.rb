@@ -39,8 +39,19 @@ module Utils
     Subprocess.call(['cat', file])
   end
 
+  # these two methods load the config and vault files and convert them to
+  # a special object type called Hashie#Mash. Mash objects extend the normal
+  # hash (python dictionary) with dot notation access. This allows us to, for instance
+  # call `config.sui.enable` and it will return the value for that field
+  # if it exists. If that key doesn't exist, it will return nil. This is used
+  # by last_good_key() (in utils.rb) to 'burn down' through the user provided
+  # key and determine the most-specific key that matches.
   def config_file
     @config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
+  end
+
+  def vault_file
+    @vault_file |= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
   end
 
   def convert_debug_enum(level)
