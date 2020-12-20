@@ -67,21 +67,23 @@ class Core < Thor
   desc "encrypt", "Encrypts the Vault"
   def encrypt()
     say "Encrypting the vault".red
-    result = run_docker("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
-    # user_info = Etc.getpwnam(Etc.getlogin)
-    # execute_in_shell("sudo chmod 640 #{options[:config_dir]}/vault.yml")
-    # execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} #{options[:config_dir]}/vault.yml")
-    say "Vault Encrypted".green if result.success? or result.out.include? "input is already encrypted"
+    begin
+      execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
+      say "Vault Encrypted".green
+    rescue Subprocess::NonZeroExit => e
+      say "This command can fail, if the vault was already encrypted".green
+    end
   end
 
   desc "decrypt", "Decrypts the Vault"
   def decrypt()
-    say "Decrypting the vault"
-    result = run_docker("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
-    # user_info = Etc.getpwnam(Etc.getlogin)
-    # execute_in_shell("sudo chmod 640 #{options[:config_dir]}/vault.yml")
-    # execute_in_shell("sudo chown #{user_info['uid']}:#{user_info['gid']} #{options[:config_dir]}/vault.yml")
-    say "Vault Decrypted".green if result.success? or result.out.include? "is not a vault encrypted file"
+    say "Decrypting the vault".blue
+    begin
+      execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
+      say "Vault Decrypted".green
+    rescue Subprocess::NonZeroExit => e
+      say "This command can fail, if the vault was already decrypted".green
+    end
   end
 
   desc "uninstall", "Uninstalls VivumLab"

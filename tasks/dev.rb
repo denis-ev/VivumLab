@@ -3,7 +3,7 @@ class Dev < Thor
   include Utils
   desc "lint", "Lints all the YAML files"
   def lint()
-    run_docker "pip3 install yamllint; find . -type f -name '*.yml' | sed 's|\./||g' | egrep -v '(\.kitchen/|\[warning\]|\.molecule/)' | xargs yamllint -c yamllint.conf -f parsable"
+    execute_in_shell "pip3 install yamllint; find . -type f -name '*.yml' | sed 's|\./||g' | egrep -v '(\.kitchen/|\[warning\]|\.molecule/)' | xargs yamllint -c yamllint.conf -f parsable"
   end
 
   desc "setup", "Run to install Dev Requirements"

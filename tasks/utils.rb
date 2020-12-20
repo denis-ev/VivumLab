@@ -11,10 +11,6 @@ module Utils
     @latest_version ||= HTTParty.get('https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION').chomp
   end
 
-  def run_docker(params)
-    execute_in_shell(params)
-  end
-
   def run_playbook(playbook, options, extra="")
     say "#{options[:config_dir]}/config.yml".yellow
     # NOTE THIS IS NOT A DIRECT PORT OF THE BASH VERSION
@@ -28,11 +24,11 @@ module Utils
     #{extra} \
     -i inventory
     PLAYBOOK
-    run_docker(playbook_command.squeeze(" ").strip)
+    execute_in_shell(playbook_command.squeeze(" ").strip)
   end
 
   def execute_in_shell(params)
-    Subprocess.call(params.split(' '))
+    Subprocess.check_call(params.split(' '))
   end
 
   def cat file
