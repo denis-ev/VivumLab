@@ -60,14 +60,24 @@ class Config < Thor
       eval "config.#{good_config_key.chomp}=#{options[:value]}"
       say "Saving config.yml"
       File.open("#{options[:config_dir]}/config.yml", 'w') do |file|
-        file.write(Psych.dump(config.to_hash))
+        # 'igt kids, circle wround for a note on Ansible, Python and aribitrary decisions
+        # made by developers that bite interoperability in the ass.
+        #
+        # The following line, and effectively identical one in the next else-if block
+        # have to Dirty Dirty Hack around Ansible & Pythons fetish with Capitalized boolean values.
+        # You see, YAML defines boolean as true, false and null, but for whatever reason, ansible
+        # and I understand python, only understand True/False -- capitialized versions of the tried
+        # and true / false. And I, for one, think that it's bullshit we have to globally search/replace
+        # true and false in the config file whenever we write it because ansible/python doesn't understand
+        # true and false.
+        file.write(Psych.dump(config.to_hash).gsub(': false', ': False').gsub(': true', ': True'))
       end
       # Following else if block only executes if the user supplied key is entirely valid and found in the vault
     elsif options[:config_key] == good_vault_key
       eval "config.#{good_vault_key.chomp}=#{options[:value]}"
       say "Saving Vault.yml"
       File.open("#{options[:config_dir]}/vault.yml", 'w') do |file|
-        file.write(Psych.dump(vault.to_hash))
+        file.write(Psych.dump(vault.to_hash).gsub(': false', ': False').gsub(': true', ': True'))
       end
       # this else block runs only when the user provided key partially matches. For instance if they
       # gave us 'sui.enabled' instead of 'sui.enable' this block runs, and prints a table

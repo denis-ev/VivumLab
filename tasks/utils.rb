@@ -22,12 +22,11 @@ module Utils
     # BREAKS RUBY'S EXECUTION OF THIS IN A SUB-PROCESS SHELL.
     # DO NOT, I REPEAT, DO NOT PUT THE QUOTES BACK IN
     playbook_command = <<-PLAYBOOK
-    ansible-playbook #{convert_debug_enum(options[:debug].to_sym)} \
+    ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
     -e \@./#{options[:config_dir]}/config.yml \
     -e \@./#{options[:config_dir]}/vault.yml \
     #{extra} \
-    -i inventory \
-    #{playbook}
+    -i inventory
     PLAYBOOK
     run_docker(playbook_command.squeeze(" ").strip)
   end

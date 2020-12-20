@@ -5,7 +5,7 @@ class Service < Thor
   desc "remove_one", "Removes the specified service from the VivumLab server"
   option :service, :type => :string, :required => true, desc: "Name of service"
   def remove_one()
-    invoke 'run_common'
+    run_common
     say "Removing data for service: #{options[:service]}"
     run_playbook("playbook.remove.yml", options,  limit_to_service)
   end
@@ -13,7 +13,7 @@ class Service < Thor
   desc "reset_one", "Resets the specified service's files on the server "
   option :service, :type => :string, :required => true, desc: "Name of service"
   def reset_one()
-    invoke 'run_common'
+    run_common
     extra = "{\"services\":[\"#{options[:service]}\"]}"
     run_playbook("playbook.stop.yml", options, limit_to_service)
     run_playbook("playbook.remove.yml", options, limit_to_service)
@@ -26,21 +26,21 @@ class Service < Thor
   desc "stop", "Stops all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it stops all services."
   def stop()
-    invoke 'run_common'
+    run_common
     run_playbook("playbook.stop.yml", options, limit_to_service)
   end
 
   desc "restart", "Restart all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
   def restart()
-    invoke 'run_common'
+    run_common
     run_playbook("playbook.restart.yml", options, limit_to_service)
   end
 
   desc "update", "Updates all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
   def update()
-    invoke 'run_common'
+    run_common
     run_playbook("playbook.vivumlab.yml", options, limit_to_service)
     run_playbook("playbook.restart.yml", options, limit_to_service)
   end
@@ -73,13 +73,13 @@ class Service < Thor
 
   no_tasks {
     def limit_to_service()
-      "{\"services\":[\"#{options[:service]}\"]}" unless options[:service].nil?
+      "-e {\"services\":[\"#{options[:service]}\"]}" unless options[:service].nil?
     end
 
     def run_common
-      invoke "core:logo"
-      invoke "git:sync"
-      invoke "config:initial_config"
+      invoke "core:logo", [], {}
+      invoke "git:sync", [], {}
+      invoke "config:initial_config", [], {config_dir: options[:config_dir]}
     end
   }
 end
