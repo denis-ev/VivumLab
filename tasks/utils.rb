@@ -1,30 +1,30 @@
 module Utils
-  class ConfigFile < Hashie::Mash
-    disable_warnings
-  end
-
-  def current_version
-    @current_version ||= File.read("VERSION").chomp
-  end
-
-  def latest_version
-    @latest_version ||= HTTParty.get('https://raw.githubusercontent.com/Vivumlab/VivumLab/master/VERSION').chomp
-  end
+  require_relative './lib/vlab_constants.rb'
+  include VlabConstants
+  require_relative './lib/config_file_utils.rb'
+  include ConfigFileUtils
 
   def run_playbook(playbook, options, extra="")
-    say "#{options[:config_dir]}/config.yml".yellow
+    say "Using config directory: #{options[:config_dir]}/config.yml".yellow
     # NOTE THIS IS NOT A DIRECT PORT OF THE BASH VERSION
     # THE BASH VERSION DOES SHELL EXPANSION, AND SHELL EXPANSION WITHIN " "'S
     # BREAKS RUBY'S EXECUTION OF THIS IN A SUB-PROCESS SHELL.
     # DO NOT, I REPEAT, DO NOT PUT THE QUOTES BACK IN
-    playbook_command = <<-PLAYBOOK
-    ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
-    -e \@./#{options[:config_dir]}/config.yml \
-    -e \@./#{options[:config_dir]}/vault.yml \
-    #{extra} \
-    -i inventory
-    PLAYBOOK
-    execute_in_shell(playbook_command.squeeze(" ").strip)
+    begin
+      write_temporary_decrypted_config
+      playbook_command = <<-PLAYBOOK
+      ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
+      -e \@./#{@temp_config} \
+      -e \@./#{options[:config_dir]}/vault.yml \
+      #{extra} \
+      -i inventory
+      PLAYBOOK
+      execute_in_shell(playbook_command.squeeze(" ").strip)
+    rescue
+      say "Ansible Playbook command returned with an error code.".red
+    ensure
+      FileUtils.rm_f @temp_config
+    end
   end
 
   def execute_in_shell(params)
@@ -33,21 +33,6 @@ module Utils
 
   def cat file
     Subprocess.call(['cat', file])
-  end
-
-  # these two methods load the config and vault files and convert them to
-  # a special object type called Hashie#Mash. Mash objects extend the normal
-  # hash (python dictionary) with dot notation access. This allows us to, for instance
-  # call `config.sui.enable` and it will return the value for that field
-  # if it exists. If that key doesn't exist, it will return nil. This is used
-  # by last_good_key() (in utils.rb) to 'burn down' through the user provided
-  # key and determine the most-specific key that matches.
-  def config_file
-    @config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
-  end
-
-  def vault_file
-    @vault_file |= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
   end
 
   def convert_debug_enum(level)
@@ -59,29 +44,5 @@ module Utils
     when :trace
       return '-vvv'
     end
-  end
-
-  def hash_to_a(object)  # { 3 => 4 }
-    return object unless object.is_a? Hash
-      object.map do |k, v|
-      [hash_to_a(k), hash_to_a(v)]
-    end
-  end
-
-  def last_good_key(hsh, key)
-    # binding.pry
-    while true do
-      key_bad = hsh.instance_eval(key) rescue nil
-      if key_bad.nil?  # if the user specified key is bad
-        parts = key.split('.') # break that key up into an array of strings
-        return nil if parts.size() == 1
-        key = parts.take(parts.size() -1).join('.') # reset the key to be one section shorter. ie: sui.enabled -> sui
-        # restart the loop.
-      else
-        # the provided key (or shortened key) is valid
-        break # stop the loop
-      end
-    end
-    return key # return the current, valid key.
   end
 end
