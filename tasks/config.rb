@@ -48,7 +48,7 @@ class Config < Thor
       say "Key #{options[:config_key]} not found in either config file. Did you spell it right?".red
       # Following else if block only executes if the user supplied key is entirely valid and found in the config file
     elsif options[:config_key] == good_config_key
-      eval "config.#{good_config_key.chomp}=#{options[:value]}"
+      eval "config_file.#{good_config_key.chomp}=#{options[:value]}"
       say "Saving config.yml"
       File.open("#{options[:config_dir]}/config.yml", 'w') do |file|
         # 'igt kids, circle round for a note on Ansible, Python and aribitrary decisions
