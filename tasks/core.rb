@@ -99,9 +99,4 @@ class Core < Thor
     run_playbook("playbook.restore.yml", options)
   end
 
-  desc "install_cli", "Installs the CLI to /usr/local/bin so you can call vlab without ./"
-  def install_cli()
-    execute_in_shell("sudo ln -s $PWD/vlab /usr/local/bin/vlab")
-  end
-
 end
