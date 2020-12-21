@@ -30,5 +30,5 @@ docker run --rm -it \
   -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
   -v $(pwd):/data \
-  -v $HOME/.vlab_vault_pass:/ansible_vault_pass \
+  -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
   vivumlab/vivumlab:${version} /bin/bash

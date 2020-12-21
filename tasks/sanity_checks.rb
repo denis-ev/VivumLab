@@ -36,7 +36,7 @@ class SanityChecks < Thor
 
   desc "check_vault_pass", "Checks for the presence of a Vault Password file"
   def check_vault_pass
-    if (!File.exist?("/ansible_vault_pass")) || (File.size("/ansible_vault_pass") == 0)
+    if (!File.exist?("/vlab_vault_pass")) || (File.size("/vlab_vault_pass") == 0)
       missing = <<-NOVAULT
       Oops, your vault password in #{Dir.home}, doesn't appear to exist.
       This is unusual, but could be the result of the username changing after setup.
