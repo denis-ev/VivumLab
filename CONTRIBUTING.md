@@ -194,27 +194,6 @@ The footer should contain any information about **Breaking Changes** and is also
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
 The rest of the commit message is then used for this.
 
-## Developing Locally with Vagrant
-
-You can play around with the stack locally without needing an actual server to spin it up against.
-First run `make config` as normal. The local IP and SSH username are not used for Vagrant, so they can be
-for your real server, or fake. For `What is the domain you have pointed at your Vivumlab server with ports 80 and 443?:`
-enter `localhost`.
-
-Now run `make develop` to spin up a local instance inside a Vagrant machine.
-For easy access to the services run `vagrant ssh -c "cat {{ volumes_root }}/vivumlab_hosts"`. Append the output of this to your
-machine's host file (usually `/etc/hosts`). Now you should be able to access http://servicename.localhost:2280/
-where `servicename` is the name of any services you have enabled in `config.yml`.
-If you make changes to the Ansible scripts you can run `make provision` to run them again.
-
-To deploy just one service you can run `make update_one SERVICE_NAME` e.g. `make update_one zulip`
-
-To run just one set of tags you can run `make tag TAG_NAME` e.g. `make tag tinc`
-
-`[client]$ make web` - Spins up a development stack
-
-`[client]$ make lint` - Run linting scripts
-
 ## Working locally on the documentation
 
 To serve the docs locally run `make docs_local`.
