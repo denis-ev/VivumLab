@@ -13,7 +13,7 @@ if [ "$UID" != "0" ]; then
 fi
 
 if [[ ! -f ./launch.sh ]]; then
-  echo "launch.sh not locally available"
+  echo "launch.sh is not locally available"
   echo    # (optional) move to a new line
   if [[! command -v gpg &> /dev/null]]; then
     read -p "Securely download file? (y/n):" -n 1 -r
@@ -49,6 +49,10 @@ if [[ ! -f ./launch.sh ]]; then
       fi
     fi
   fi
+  echo "====================="
+  echo "Run ./launch.sh again"
+  echo "====================="
+  exit 0
 fi
 
 if [[ -z $1 ]]; then
@@ -83,17 +87,17 @@ docker run --rm -it \
   vivumlab/vivumlab:${version} /bin/bash
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEYNLZ/92/m7OQgyvU3Inf8MFijPAFAl/gNw4ACgkQ3Inf8MFi
-jPBVbBAAoz8jCCTRoG1wkqR1bHpeKSilnAgodgGWFEutgfY5RV9ZX6B/1DHq+uEC
-7QI9PS7b5EHPOLo9cdPkpF9H1AYyBtMCSRm+DfN50FT/vr94md8hHBMsaTWJPuMp
-uLkzyJZ054WMs6zzvqpoH/yh247I9uGDTW/KBqenRqvnkxBhERrmPCHZ7ssmQI68
-iEv8mPi2GhRbZ8aZsbymv5Eh7EAepncOUcbvb3Jxn8w8PADVkczUiCvrGemgzIqS
-tLEfhSCn9HxrI5yqBIVKK5mml06kweKJOLwNfWJXw1McBykKLm/8be3mh9CXh9qr
-z2f2/79Rwq6ls35Bh/FXNYrjGflLRnDzv74T8tLDcdVtnLFr9lHd70TChWRdBYcW
-4DupWdtOH1lMX5pQlfnj7G1ehR+pWLiOowsBW0k8YW4g2X/py2o0bTSG5pHFYYaI
-MhEafkD1ON5VkNx0sGH+UeEHvz6cSZ8h9n+G2ripu52skS43uWA78Q9JfuL6fIMY
-dCSSXvtLb0F0yxmTyIl9JcFaqIFYGgJcBeFa9lHX6y3vquI9gd692rO+x66C+WRF
-TspJVGOEZYKCHRn7R6qruP0GZQOGI2n50mcol93T5x7iqCE9cs7JDnAJ2FJ7lxgW
-qZgLvTh+2oy9KEc+yhT5vXOKpNBzEMxj+iZgmha8hxWiz+6Fhs4=
-=Q+G/
+iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAl/gjTgACgkQ+4SMbaIP
+99RJTA/+OHndj8+VwH+6ugdyR2q12B+zTqbHLW1s1Aws+VrVnI4VChcPBvn40mqK
+owNaR0XlpCzdSYjlU1P5EX8breVth0iEUB4E8zn7kE22LB9W1sD+egSAB5AIZhmH
+hKPX+zMo8TH7WyXKNgKwmt49dIgeNGzZt/YJRtBv5F2bY4+JOZUwJxScbAz7ZkPs
+Ks+unMNQYtOyP7jrKmGjShMn7BOb9+q1AqgpS1OOIn+XMZ8jUv2ByTpvdN++U+F4
+2oXi/bY1LW3fBpEmlVTEQ9PdgVGE9tbtL0q813KpIb90QwJzidlmFnkEAcZi8qcE
+piNOU1fMmgQedtDAi6m7jLWqcSbJczKmKzh0Dh077oLfgDsfCQi/ASAhJbQReoKw
+yKZc3TNto1l6PQfrPDfGvnyttoZ3o2fDnvT7d74Yin9GFnYl0jZCCBscVBSAHvOZ
+WilAFhWFe4K1V4Bj+FZ6Fy04P5p/lQI6XhWer/eaFPDhAeTlrhv/4LIO1eJrYq3l
+1lcY+SfnjobY2py6tfouewnKV0ZNdzzbEjwSM9RLUjyhZcuvrWcLqybaAn1xZ2Oz
+sF1IAvij1f3g5PPeq4VjHU/74VJuLSFZJXle7A3pQvn0N5aM6Ts5H3NAKnNOtrWT
+ldz0Ij5Ezmn+O/IHMnI9xeCUnTSywfIy0Q/DPbv+6k+fc3aZdNw=
+=1qm+
 -----END PGP SIGNATURE-----
