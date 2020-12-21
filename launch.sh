@@ -99,6 +99,8 @@ docker run --rm -it \
   -v $(pwd):/data \
   -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
   vivumlab/vivumlab:${version} /bin/bash
+
+exit 0
 -----BEGIN PGP SIGNATURE-----
 
 iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAl/gjTgACgkQ+4SMbaIP
