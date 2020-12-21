@@ -21,7 +21,7 @@ module ConfigFileUtils
 
   def decrypted_config_file
     return @decrypted_config_file unless @decrypted_config_file.nil?
-    pass = File.read("/ansible_vault_pass")
+    pass = File.read("/vlab_vault_pass")
     temp = YamlVault::Main.from_file(
         "#{options[:config_dir]}/encrypted.yml", [['*']],
         passphrase: pass
@@ -31,7 +31,7 @@ module ConfigFileUtils
 
   def save_config_file
     say "Saving config.yml".blue
-    to_encrypt = YamlVault::Main.from_content(ansible_yml, [['*']], passphrase: File.read('/ansible_vault_pass'))
+    to_encrypt = YamlVault::Main.from_content(ansible_yml, [['*']], passphrase: File.read('/vlab_vault_pass'))
     File.open("#{options[:config_dir]}/encrypted.yml", 'w') do |file|
       file.write(to_encrypt.encrypt_yaml)
     end
