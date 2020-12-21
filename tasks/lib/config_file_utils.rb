@@ -30,25 +30,25 @@ module ConfigFileUtils
   end
 
   def save_config_file
-    say "Saving config.yml"
+    say "Saving config.yml".blue
     to_encrypt = YamlVault::Main.from_content(ansible_yml, [['*']], passphrase: File.read('/ansible_vault_pass'))
     File.open("#{options[:config_dir]}/encrypted.yml", 'w') do |file|
       file.write(to_encrypt.encrypt_yaml)
     end
+    say "#{options[:config_dir]}/encrypted.yml saved".green
   end
 
   # this writes a temporarially decrypted version of the config file to disk.
   # run playbook executes this just before invoking ansible, and no matter the
   # outcome of the playbook, it deletes this version.
   def write_temporary_decrypted_config
-    @temp_config ||= "#{options[:config_dir]}/.#{SecureRandom.urlsafe_base64}"
+    @temp_config ||= "#{options[:config_dir]}/.#{SecureRandom.urlsafe_base64}.yml"
     File.open(@temp_config, 'w') do |file|
       file.write(ansible_yml)
     end
   end
 
   def last_good_key(hsh, key)
-    # binding.pry
     while true do
       key_bad = hsh.instance_eval(key) rescue nil
       if key_bad.nil?  # if the user specified key is bad

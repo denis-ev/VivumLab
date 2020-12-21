@@ -65,26 +65,26 @@ class Core < Thor
   end
 
   desc "encrypt", "Encrypts the Vault"
-  def encrypt()
-    say "Encrypting the vault".red
-    begin
-      execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
-      say "Vault Encrypted".green
-    rescue Subprocess::NonZeroExit => e
-      say "This command can fail, if the vault was already encrypted".green
-    end
-  end
+  # def encrypt()
+  #   say "Encrypting the vault".red
+  #   begin
+  #     execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
+  #     say "Vault Encrypted".green
+  #   rescue Subprocess::NonZeroExit => e
+  #     say "This command can fail, if the vault was already encrypted".green
+  #   end
+  # end
 
-  desc "decrypt", "Decrypts the Vault"
-  def decrypt()
-    say "Decrypting the vault".blue
-    begin
-      execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
-      say "Vault Decrypted".green
-    rescue Subprocess::NonZeroExit => e
-      say "This command can fail, if the vault was already decrypted".green
-    end
-  end
+  # desc "decrypt", "Decrypts the Vault"
+  # def decrypt()
+  #   say "Decrypting the vault".blue
+  #   begin
+  #     execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
+  #     say "Vault Decrypted".green
+  #   rescue Subprocess::NonZeroExit => e
+  #     say "This command can fail, if the vault was already decrypted".green
+  #   end
+  # end
 
   desc "uninstall", "Uninstalls VivumLab"
   def uninstall()
