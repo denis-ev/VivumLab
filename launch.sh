@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 #if developer run as "./launch.sh dev"
-
+<<ENDOFSIGSTART=
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
+
+ENDOFSIGSTART=
 
 SUDO=
 if [ "$UID" != "0" ]; then
