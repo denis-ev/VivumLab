@@ -40,13 +40,6 @@ jobs:
             @semantic-release/git
             @semantic-release/github
             @semantic-release/release-notes-generator
-      - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: vivumlab/vivumlab
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tag_semver: true
   release:
     if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
