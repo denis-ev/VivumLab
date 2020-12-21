@@ -20,7 +20,7 @@ Task::logo() {
   Task::sanity_check_remote
 }
 
-Task::generate_ansible_pass(){
+Task::generate_vault_pass(){
   if [[ "$OSTYPE" == "darwin"* ]]; then
     function sha256sum() { shasum -a 256 "$@" ; } && export -f sha256sum
   fi

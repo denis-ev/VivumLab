@@ -16,8 +16,8 @@ class Core < Thor
     invoke "sanity_checks:local"
   end
 
-  desc "generate_ansible_pass", "Creates a new Vault Password"
-  def generate_ansible_pass()
+  desc "generate_vault_pass", "Creates a new Vault Password"
+  def generate_vault_pass()
     # This *is* a deviation from the shell based version. Instead of
     # generating a datetime stamp, sha256sum'ing it then base64ing it
     # and snagging the first 32 bytes ... we're relying on ruby's
