@@ -115,14 +115,27 @@ Fore more information, look [here](Bastion.md)
 
 S3 is Amazon's Simple Storage Service which VivumLab can optionally use to back up to. You can use Amazon's service, or one of many other S3 compatible providers. You can also back up to another VivumLab instance if that other instance is running Minio, a self-hosted S3 service.
 
-### Manual Set-up
+### Set-up
 
-* Download the [master](https://github.com/Vivumlab/VivumLab/archive/master.zip) version to your client computer and extract the folder. From inside the folder run **`./vlab install_cli`** now you can run any **`vlab`** command directly. Otherwise just append **`./`** to all further **`vlab`** commands.
+* Debian and RPM based distributions including Debian, Ubuntu, CentOS, RHEL, Fedora, and others are supported via a script.
+
+_If you’re willing to rely on SSL to authenticate the site, a one line install can be done with:_
+
+```
+curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | sudo bash
+```
+
+_If you have GPG installed, a more secure option is available:_
+
+```
+curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
+if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
+```
 
 !!! Note
     If you are using VivumLab to provision a [bastion](Bastion.md) server, run: **`vlab terraform`**
 
-* From inside the VivumLab folder, set up the initial config: **`vlab config`**
+* Start the docker container: **`./launch.sh`** and run **`vlab`**
 
 !!! Note
     You will be prompted for the basic information to get started. The passwords entered here will be stored on the client computer and are used by ansible to configure your server. After you enter the information, VivumLab will configure your local docker images and build your initial `settings/` files.
