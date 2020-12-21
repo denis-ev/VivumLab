@@ -1,23 +1,24 @@
 ---
-- name: Make adguardhome directory.
-  file:
-    path: "{{ volumes_root }}/adguardhome"
-    state: directory
-
 - name: Make adguard directories
   file:
-    path: "{{ volumes_root }}/adguardhome/{{item}}"
+    path: "{{ volumes_root }}/{{item}}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
-    - "work"
-    - "config"
+    - "adguardhome/work"
+    - "adguardhome/config"
+  become: yes
 
 - name: Copy adguardhome docker-compose.yml file into place.
   template:
     src: docker-compose.adguardhome.yml.j2
     dest: "{{ volumes_root }}/adguardhome/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Install bCrypt
   command: >
@@ -32,8 +33,11 @@
   template:
     src: AdGuardHome.j2
     dest: "{{ volumes_root }}/adguardhome/config/AdGuardHome.yaml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     password: "{{passwrd.stdout}}"
+  become: yes
 
 - name: Configure adguardhome systemd service.
   become: yes

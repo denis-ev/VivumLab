@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/matomo"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy matomo docker-compose.yml file into place.
   template:
     src: docker-compose.matomo.yml.j2
     dest: "{{ volumes_root }}/matomo/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure matomo systemd service.
   become: yes

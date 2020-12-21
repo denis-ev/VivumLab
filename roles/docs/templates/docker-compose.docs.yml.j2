@@ -10,20 +10,19 @@ networks:
 
 services:
   docs:
-    image: vivumlab/docusaurus:{{ docs.version }}
+    # Mkdocs and Nginx
+    container_name: docs
+    image: polinux/mkdocs:{{ docs.version }}
     restart: unless-stopped
     networks:
       - traefik_network
-    volumes:
-      - "{{ volumes_root }}/docs/website:/docusaurus/Vivumlab"
     environment:
-      - UID=1000
-      - GID=1000
-      - AUTO_UPDATE=true
-      - WEBSITE_NAME=Vivumlab
-      - TEMPLATE=classic
-      - RUN_MODE=production
+      LIVE_RELOAD_SUPPORT: 'true'
+      ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material'
+      DOCS_DIRECTORY: '/mkdocs'
+    volumes:
+      - "{{ volumes_root }}/docs/src:/mkdocs:ro"
     labels:
       - "traefik.http.services.docs.loadbalancer.server.scheme=http"
-      - "traefik.http.services.docs.loadbalancer.server.port=80"
+      - "traefik.http.services.docs.loadbalancer.server.port=8000"
 {% include './labels.j2' %}
