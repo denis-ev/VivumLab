@@ -11,13 +11,11 @@ class Config < Thor
     invoke "core:logo"
     say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
     run_playbook("playbook.config.yml", options)
-    invoke "core:encrypt"
   end
 
   desc "show_config", "Shows the configuration settings for a specified service"
   option :service, required: true, :desc => "Name of the service to display", aliases: ['-s']
   def show_config
-    config = YAML.load_file("#{options[:config_dir]}/config.yml")
     config_hash = decrypted_config_file[options[:service]]
     table = TTY::Table.new(header: ["option", "value"], rows: config_hash)
     say table.render(:unicode)
@@ -38,25 +36,17 @@ class Config < Thor
   # This method contains some advanced, idiomatic ruby that may not be entirely
   # clear to new rubyists. I've tried to comment for clarity.
   def set()
-    invoke "core:decrypt", [], {} # decrypt the vault
     # These two lines ensure the user-provided config_key exists, and identify
     # which file it's in. (config or vault).
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
-    good_vault_key = last_good_key(vault_file, options[:config_key])
+    # good_vault_key = last_good_key(vault_file, options[:config_key])
     # if both good_*_key variables are nil, then the key provided doesn't match *at all* throw an error.
-    if good_config_key.nil? && good_vault_key.nil?
+    if good_config_key.nil?
       say "Key #{options[:config_key]} not found in either config file. Did you spell it right?".red
       # Following else if block only executes if the user supplied key is entirely valid and found in the config file
     elsif options[:config_key] == good_config_key
       eval "decrypted_config_file.#{good_config_key.chomp}=#{options[:value]}"
       save_config_file
-      # Following else if block only executes if the user supplied key is entirely valid and found in the vault
-    elsif options[:config_key] == good_vault_key
-      eval "vault_file.#{good_vault_key.chomp}=#{options[:value]}"
-      say "Saving Vault.yml"
-      File.open("#{options[:config_dir]}/vault.yml", 'w') do |file|
-        file.write(Psych.dump(vault.to_hash).gsub(': false', ': False').gsub(': true', ': True'))
-      end
       # this else block runs only when the user provided key partially matches. For instance if they
       # gave us 'sui.enabled' instead of 'sui.enable' this block runs, and prints a table
       # of all the sui.* keys and their current values.
@@ -67,7 +57,6 @@ class Config < Thor
       say table.render(:unicode)
     end
     # regardless of the change (or not), re-encrypt the vault
-    invoke "core:encrypt", [], {}
   end
 
 end

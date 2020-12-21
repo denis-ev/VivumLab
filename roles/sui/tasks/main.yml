@@ -3,9 +3,12 @@
   file:
     path: "{{ volumes_root }}/{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   with_items:
     - "sui"
     - "sui/config"
+  become: yes
 
 - name: Copy sui docker-compose.yml file into place.
   template:

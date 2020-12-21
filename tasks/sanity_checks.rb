@@ -28,8 +28,9 @@ class SanityChecks < Thor
   desc "check_for_settings", "Verifies settings exist"
   def check_for_settings
     FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
-    File.write("#{options[:config_dir]}/config.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/config.yml"
-    File.write("#{options[:config_dir]}/vault.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/vault.yml"
+    invoke 'migration:single_config'
+    # File.write("#{options[:config_dir]}/config.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/config.yml"
+    # File.write("#{options[:config_dir]}/vault.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/vault.yml"
     File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
   end
 
