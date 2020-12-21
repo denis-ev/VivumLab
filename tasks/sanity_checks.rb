@@ -52,7 +52,7 @@ class SanityChecks < Thor
       decision = yes?("Let Vlab create a new .vlab_vault_pass for you? [y/n]", :yellow)
       # decision = yes?("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :red, limited_to: ['yes', 'no'])
       if decision
-        invoke "core:generate_ansible_pass"
+        invoke "core:generate_vault_pass"
       end
     end
   end

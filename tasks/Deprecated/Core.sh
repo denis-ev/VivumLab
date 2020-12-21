@@ -20,7 +20,7 @@ Task::logo() {
   Task::sanity_check_remote
 }
 
-Task::generate_ansible_pass(){
+Task::generate_vault_pass(){
   if [[ "$OSTYPE" == "darwin"* ]]; then
     function sha256sum() { shasum -a 256 "$@" ; } && export -f sha256sum
   fi
@@ -197,7 +197,7 @@ Task::ci(){
   Task::build $(build_check) $(force_check) $(cache_check)
 
   mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
+  [ -f ~/.vlab_vault_pass ] || Task::generate_vault_pass
 
   if [[ ! -d $_config_dir ]]; then
       colorize light_red "Creating settings directory"
@@ -222,7 +222,7 @@ Task::ci(){
 
   highlight "Creating or Updating ci config file"
   mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
+  [ -f ~/.vlab_vault_pass ] || Task::generate_vault_pass
 
   Task::run_docker ansible-playbook $(debug_check) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \

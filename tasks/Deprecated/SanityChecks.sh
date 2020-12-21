@@ -25,13 +25,13 @@ Task::sanity_check_remote(){
 }
 
 Task::create_vault_pass() {
-    [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
+    [ -f ~/.vlab_vault_pass ] || Task::generate_vault_pass
 }
 
 # Ensures there is a place to put all the required settings..
 Task::check_for_settings(){
     mkdir -p settings/passwords
-    [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
+    [ -f ~/.vlab_vault_pass ] || Task::generate_vault_pass
 
     if [[ ! -d settings ]]; then
         colorize light_red "Creating settings directory"
@@ -84,7 +84,7 @@ Task::check_vault_pass(){
     read -p "Let VivumLab create a new '.vlab_vault_pass' file for you? [yes/no]" decision_missingvaultpass
         case decision_missingvaultpass in
           [Yy][Ee][Ss]|[Tt][Rr][Uu][Ee])
-            Task::generate_ansible_pass
+            Task::generate_vault_pass
            ;;
            *)
             Task::find_help
