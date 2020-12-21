@@ -6,7 +6,7 @@ if [ -z $1 ]; then
   version=latest
 else
   if [ $1 == 'dev' ]; then
-    docker build -t vivumlab/vivumlab:dev .
+    docker build --no-cache -t vivumlab/vivumlab:dev .
     version=dev
   else
     version=$1
