@@ -1,7 +1,6 @@
 # General Files
 *.retry
 *.lock
-.vagrant/
 inventory
 fetch/
 /site
@@ -40,4 +39,3 @@ docker-compose.override.yml
 
 # CI
 settings_ci/
-docs/CONTRIBUTING.md

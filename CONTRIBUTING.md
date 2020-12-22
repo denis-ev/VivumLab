@@ -1,3 +1,12 @@
+---
+id: CONTRIBUTING
+title: Contributing to Vivumlab
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: CONTRIBUTING
+custom_edit_url: https://github.com/VivumLab/VivumLab/edit/dev/CONTRIBUTING.md
+---
+
 # Contributing to VivumLab
 
 ## Open source, VivumLab and You
@@ -75,23 +84,23 @@ Doing the above will require some prior knowledge; you'll need a working underst
 !!!NOTE: The following instructions are provided as a guideline, and is by no means, definitive, Follow the link, do some research.
 
 ### Contribution: Forking VivumLab
-1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](fork.png)
+1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](dev/fork.png)
 
 2. In your fork, goto Settings/Repository -> "Mirroring repositories" and setup mirroring of Vivumlab/VivumLab
-![Screen Shot of Mirror setup](mirror.png)
+![Screen Shot of Mirror setup](dev/mirror.png)
 
     Mirror direction = Pull
     Only mirror protected branches = enabled
 
 3. Then set your Protected Branches in Settings/Repository -> "Protected Branches" like this
-![Setting Protected Branches](protected-branches.png)
+![Setting Protected Branches](dev/protected-branches.png)
 (you can ignore CODEOWNER though) you can even set push to "no one" so you can't accidentally push to that branch.
 
 ### Contribution: Forked VivumLab... Now what?
 
 1. Make sure you don't have any outstanding un-related changes in your local repository with **`git status`**; You should see `nothing to commit, working tree clean`.
 2. Identify the branch name by navigating to the issues' linked Merge Request and clicking the copy icon next to the Branch name.
-    ![Finding the Branch Name](branch-name.png)
+    ![Finding the Branch Name](dev/branch-name.png)
 4. Run `git fetch origin`
 5. Run `git checkout <<branch name>>`
 6. Make your changes
@@ -185,27 +194,6 @@ The footer should contain any information about **Breaking Changes** and is also
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
 The rest of the commit message is then used for this.
 
-## Developing Locally with Vagrant
-
-You can play around with the stack locally without needing an actual server to spin it up against.
-First run `make config` as normal. The local IP and SSH username are not used for Vagrant, so they can be
-for your real server, or fake. For `What is the domain you have pointed at your Vivumlab server with ports 80 and 443?:`
-enter `localhost`.
-
-Now run `make develop` to spin up a local instance inside a Vagrant machine.
-For easy access to the services run `vagrant ssh -c "cat {{ volumes_root }}/vivumlab_hosts"`. Append the output of this to your
-machine's host file (usually `/etc/hosts`). Now you should be able to access http://servicename.localhost:2280/
-where `servicename` is the name of any services you have enabled in `config.yml`.
-If you make changes to the Ansible scripts you can run `make provision` to run them again.
-
-To deploy just one service you can run `make update_one SERVICE_NAME` e.g. `make update_one zulip`
-
-To run just one set of tags you can run `make tag TAG_NAME` e.g. `make tag tinc`
-
-`[client]$ make web` - Spins up a development stack
-
-`[client]$ make lint` - Run linting scripts
-
 ## Working locally on the documentation
 
 To serve the docs locally run `make docs_local`.
@@ -227,4 +215,4 @@ By contributing, you agree that your contributions will be licensed under its MI
 
 #### Attribution/ Reference
 
-Please see [Legal/ Licensing/ Acknowledgement](../Legal.md)
+Please see [Legal/ Licensing/ Acknowledgement](Legal)

@@ -61,7 +61,7 @@ if [[ -z $1 ]]; then
   version=latest
 else
   if [[ $1 == 'dev' ]]; then
-    docker build --no-cache -t vivumlab/vivumlab:dev .
+    #docker build --no-cache -t vivumlab/vivumlab:dev .
     version=dev
   else
     version=$1
@@ -82,8 +82,9 @@ if [[ ! -f ~/.vlab_vault_pass ]]; then
 fi
 
 ### Check Docker, run if it isn't ###
-if ! docker info >/dev/null 2>&1 ; then
+if ! docker info > /dev/null 2>&1 ; then
   printf "Starting Docker.."
+  echo    # (optional) move to a new line
   if [[ "$OSTYPE" == "darwin"* ]]; then
     open -g -a Docker.app || exit
   elif [[ `systemctl` =~ -\.mount ]]; then
@@ -91,11 +92,9 @@ if ! docker info >/dev/null 2>&1 ; then
   elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
     sudo service docker start
   fi
-else
-  echo "======================================================================="
-  echo "Search how to download docker https://duckduckgo.com/?q=download+docker"
-  echo "======================================================================="
-  exit 1
+  echo "============================"
+  echo "Try to run ./launch.sh again"
+  echo "============================"
 fi
 
 docker run --rm -it \

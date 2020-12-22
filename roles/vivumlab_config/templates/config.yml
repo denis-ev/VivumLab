@@ -1,3 +1,5 @@
+#jinja2: trim_blocks:False
+---
 ### REQUIRED ###
 # These values are REQUIRED for VivumLab to work.
 
@@ -157,10 +159,10 @@ docs:
   auth: {{ docs.auth | default(False) }}
   domain: {{ docs.domain | default(False) }}
   subdomain: {{ docs.subdomain | default("docs") }}
-  version: {{ docs.version | default("1.1.2") }}
-  amd64: False
-  arm64: False
-  armv7: False
+  version: {{ docs.version | default("1.0.4") }}
+  amd64: "verified" {# "verified" or "supported" or "unsupported" or False #}
+  arm64: "verified"
+  armv7: "verified"
 apache2:
   enable: {{ apache2.enable | default(False) }}
   https_only: {{ apache2.https_only | default(False) }}
