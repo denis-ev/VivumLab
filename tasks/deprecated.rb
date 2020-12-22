@@ -1,4 +1,6 @@
 class Deprecated < Thor
+  require './tasks/utils.rb'
+  include Utils
   desc "encrypt", "Encrypts the ansible vault.yml - DEPRECATED"
   def encrypt()
     say "Encrypting the vault".red
