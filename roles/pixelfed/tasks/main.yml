@@ -1,5 +1,5 @@
 ---
-- name: Make pixelfed directory.
+- name: Make pixelfed directories.
   file:
     path: "{{ volumes_root }}/pixelfed/{{ item }}"
     state: directory
@@ -11,7 +11,7 @@
     - "redis"
   become: yes
 
-- name: Make pixelfed directory.
+- name: Make pixelfed DB directory.
   file:
     path: "{{ volumes_root }}/pixelfed/db"
     state: directory
