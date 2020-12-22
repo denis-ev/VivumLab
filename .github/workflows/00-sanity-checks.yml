@@ -1,0 +1,21 @@
+name: Sanity check
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - labeled
+      - unlabeled
+
+jobs:
+  pr_wip_check:
+    runs-on: ubuntu-latest
+    name: WIP Check
+    steps:
+    - name: WIP Check
+      uses: tim-actions/wip-check@master
+      with:
+        labels: '["do-not-merge", "wip", "rfc", ":hammer_and_wrench: WIP"]'
+        keywords: '["WIP", "wip", "RFC", "rfc"]'
