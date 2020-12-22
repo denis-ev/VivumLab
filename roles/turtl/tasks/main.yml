@@ -1,14 +1,19 @@
 ---
 - name: Make turtl directories.
   file:
-    path: "{{ volumes_root }}/{{ item }}"
+    path: "{{ volumes_root }}/turtl/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
-  with_items:
-    - "turtl"
-    - "turtl/uploads"
-    - "turtl/db"
+  loop:
+    - "uploads"
+    - "db"
+  become: yes
+
+- name: Make turtl DB directories.
+  file:
+    path: "{{ volumes_root }}/turtl/db"
+    state: directory
   become: yes
 
 - name: Copy turtl docker-compose.yml file into place.
