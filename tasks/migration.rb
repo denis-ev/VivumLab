@@ -3,6 +3,7 @@ class Migration < Thor
     include Utils
     desc "single_config", "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
     def single_config
+        invoke "deprecated:decrypt", [], {}
         # This task should return, having done nothing UNLESS
         # * There is no encrypted.yml in the current settings folder
         # * There is a vault.yml in the current settings folder
