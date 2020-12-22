@@ -5,7 +5,15 @@
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
-  with_items: ["conf", "data", "db"]
+  loop:
+    - "conf"
+    - "data"
+  become: yes
+  
+- name: Make hubzilla DB directory
+  file:
+    path: "{{ volumes_root }}/hubzilla/db"
+    state: directory
   become: yes
 
 - name: Copy hubzilla docker-compose.yml file into place.
@@ -21,9 +29,9 @@
 - name: Copy nginx configuration file into place.
   template:
     src: hubzilla-nginx.conf.j2
-    dest: "{{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+    dest: "{{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf"
   become: yes
 
 - name: Configure hubzilla systemd service.

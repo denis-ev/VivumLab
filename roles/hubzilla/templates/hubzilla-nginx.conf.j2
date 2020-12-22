@@ -1,12 +1,9 @@
 worker_processes  8;
 pid        /var/run/nginx.pid;
-
-user nginx nginx;
-
 events {
     worker_connections  1024;
-}
-http {
+}       
+http {  
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
@@ -15,11 +12,8 @@ http {
     gzip_static on;
     sendfile        on;
     keepalive_timeout  65;
-
-    resolver 127.0.0.11 ipv6=off;
-
     server {
-        listen 80;
+        listen 80; 
         root /var/www/html;
         index index.php;
         server_name {% if hubzilla.domain %}{{ hubzilla.domain }}{% else %}{{ hubzilla.subdomain + "." + domain }}{% endif %};
