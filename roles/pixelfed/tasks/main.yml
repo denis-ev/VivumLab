@@ -1,14 +1,20 @@
 ---
 - name: Make pixelfed directory.
   file:
-    path: "{{ volumes_root }}/{{ item }}"
+    path: "{{ volumes_root }}/pixelfed/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   with_items:
-    - "pixelfed/storage"
+    - "storage"
     - "pixelfed/db"
-    - "pixelfed/redis"
+    - "redis"
+  become: yes
+
+- name: Make pixelfed directory.
+  file:
+    path: "{{ volumes_root }}/pixelfed/db"
+    state: directory
   become: yes
 
 - name: Copy pixelfed docker-compose.yml file into place.
