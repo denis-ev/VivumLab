@@ -175,7 +175,7 @@
   lineinfile:
     path: "{{ volumes_root }}/vivumlab_hosts"
     line: "{{ ansible_host }} {{ service_domain }} {{ service_item }}"
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
@@ -219,7 +219,7 @@
 - name: Deploy enabled Services
   include_role:
     name: "{{ service_item }}"
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
@@ -237,7 +237,7 @@
     name: "{{ service_item }}"
     state: stopped
     enabled: no
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item

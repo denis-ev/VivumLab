@@ -3,18 +3,27 @@
   file:
     path: "{{ volumes_root }}/searx"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
-- name: Copy Searx settins file.
+- name: Copy Searx settings file.
   template:
     src: settings.yml.j2
     dest: "{{ volumes_root }}/searx/settings.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy searx docker-compose.yml file into place.
   template:
     src: docker-compose.searx.yml.j2
     dest: "{{ volumes_root }}/searx/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure searx systemd service.
   become: yes

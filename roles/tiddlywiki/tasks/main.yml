@@ -3,18 +3,27 @@
   file:
     path: "{{ volumes_root }}/tiddlywiki"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy tiddlywiki docker-compose.yml file into place.
   template:
     src: docker-compose.tiddlywiki.yml.j2
     dest: "{{ volumes_root }}/tiddlywiki/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Copy tiddlywiki.info file into place.
   template:
     src: tiddlywiki.info
     dest: "{{ volumes_root }}/tiddlywiki/tiddlywiki.info"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure tiddlywiki systemd service.
   become: yes
