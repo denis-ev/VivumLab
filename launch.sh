@@ -78,19 +78,24 @@ function pwless_sshkey () {
 }
 
 if [[ ! -f ~/.vlab_vault_pass ]]; then
-    touch ~/.vlab_vault_pass
+  touch ~/.vlab_vault_pass
 fi
 
 ### Check Docker, run if it isn't ###
 if ! docker info >/dev/null 2>&1 ; then
-    printf "Starting Docker.."
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        open -g -a Docker.app || exit
-    elif [[ `systemctl` =~ -\.mount ]]; then
-        sudo systemctl start docker
-    elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
-        sudo service docker start
-    fi
+  printf "Starting Docker.."
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    open -g -a Docker.app || exit
+  elif [[ `systemctl` =~ -\.mount ]]; then
+    sudo systemctl start docker
+  elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
+    sudo service docker start
+  fi
+else
+  echo "======================================================================="
+  echo "Search how to download docker https://duckduckgo.com/?q=download+docker"
+  echo "======================================================================="
+  exit 1
 fi
 
 docker run --rm -it \
