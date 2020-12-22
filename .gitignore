@@ -1,7 +1,6 @@
 # General Files
 *.retry
 *.lock
-.vagrant/
 inventory
 fetch/
 /site

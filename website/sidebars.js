@@ -160,8 +160,7 @@ module.exports = {
       items: [
         'dev/adding-services',
         'CONTRIBUTING',
-        'dev/tips',
-        'dev/vagrant'
+        'dev/tips'
       ],
     },
     {

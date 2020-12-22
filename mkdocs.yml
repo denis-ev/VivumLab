@@ -189,7 +189,6 @@ nav:
       - Adding Services: dev/Adding-Services.md
       - Contributing: /CONTRIBUTING.md
       - Dev Tips: dev/Developer-Tips.md
-      - Vagrant: dev/Vagrant.md
   - About:
       - About VivumLab: About-VivumLab.md
       - Required Jobs: Required-jobs.md
