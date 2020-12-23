@@ -10,13 +10,13 @@ class Service < Thor
   end
 
   desc "reset_one", "Resets the specified service's files on the server "
-  def reset(service)
+  def reset_one(service)
     run_common
     extra = "{\"services\":[\"#{service}\"]}"
-    run_playbook("playbook.stop.yml", options, limit_to_service)
-    run_playbook("playbook.remove.yml", options, limit_to_service)
+    run_playbook("playbook.stop.yml", options, limit_to_service(service))
+    run_playbook("playbook.remove.yml", options, limit_to_service(service))
     extra = " -t deploy "
-    run_playbook("playbook.vivumlab.yml", options, limit_to_service + extra)
+    run_playbook("playbook.vivumlab.yml", options, limit_to_service(service) + extra)
 
     say "Reset #{options[:service]}"
   end
@@ -25,22 +25,22 @@ class Service < Thor
   option :service, :type => :string, desc: "Optional name of service. Without, it stops all services."
   def stop()
     run_common
-    run_playbook("playbook.stop.yml", options, limit_to_service)
+    run_playbook("playbook.stop.yml", options, limit_to_service(options[:service]))
   end
 
   desc "restart", "Restart all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
   def restart()
     run_common
-    run_playbook("playbook.restart.yml", options, limit_to_service)
+    run_playbook("playbook.restart.yml", options, limit_to_service(options[:service]))
   end
 
   desc "update", "Updates all services, or a selected service if you specify --service"
-  option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
+  option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services.", aliases: ['-s']
   def update()
     run_common
-    run_playbook("playbook.vivumlab.yml", options, limit_to_service)
-    run_playbook("playbook.restart.yml", options, limit_to_service)
+    run_playbook("playbook.vivumlab.yml", options, limit_to_service(options[:service]))
+    run_playbook("playbook.restart.yml", options, limit_to_service(options[:service]))
   end
 
   desc "show", "Show the docs for the specified service"
@@ -49,9 +49,8 @@ class Service < Thor
   end
 
   desc "customize_service", "Allows you to edit a specific deployed service with a docker-compose.override.yml"
-  option :service, type: :string, required: true, desc: "The name of the service to create an override file for"
   def customize_service(service)
-    run_playbook("playbook.service-edit.yml", options, limit_to_service)
+    run_playbook("playbook.service-edit.yml", options, limit_to_service(service))
   end
 
   desc "enable", "Enables NAME"
@@ -70,16 +69,11 @@ class Service < Thor
   end
 
   no_tasks {
-    def limit_to_service()
-      "-e {\"services\":[\"#{options[:service]}\"]}" unless options[:service].nil?
-    end
-
-    def limit_to_service(service)
+    def limit_to_service(service = nil)
       "-e {\"services\":[\"#{service}\"]}" unless service.nil?
     end
 
     def run_common
-      invoke "core:logo", [], {}
       invoke "git:sync", [], {}
       invoke "config:initial_config", [], {config_dir: options[:config_dir]}
     end
