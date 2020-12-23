@@ -7,7 +7,6 @@
     group: "{{ gid_output.stdout }}"
   with_items:
     - "storage"
-    - "pixelfed/db"
     - "redis"
   become: yes
 
@@ -15,7 +14,6 @@
   file:
     path: "{{ volumes_root }}/pixelfed/db"
     state: directory
-  become: yes
 
 - name: Copy pixelfed docker-compose.yml file into place.
   template:
