@@ -19,6 +19,7 @@ module Utils
       #{extra} \
       -i inventory
       PLAYBOOK
+      say "executing playbook command: #{playbook_command}".yellow if options[:debug] != :none
       execute_in_shell(playbook_command.squeeze(" ").strip)
     rescue
       say "Ansible Playbook command returned with an error code.".red
