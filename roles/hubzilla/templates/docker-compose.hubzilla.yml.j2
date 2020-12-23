@@ -15,14 +15,14 @@ services:
     container_name: hubzilla_web
     image: nginx:{{ hubzilla.web_version }}
     restart: unless-stopped
-    networks:
-      - traefik_network
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - "{{ volumes_root }}/hubzilla/data:/var/www/hubzilla"
       - "{{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf:/etc/nginx/nginx.conf:ro"
+    networks:
+      - traefik_network
     labels:
       - "traefik.http.services.hubzilla.loadbalancer.server.scheme=http"
       - "traefik.http.services.hubzilla.loadbalancer.server.port=80"
@@ -60,6 +60,8 @@ services:
       db:
         condition: service_healthy
     command: ["crond", "-f"]
+    volumes:
+      - "{{ volumes_root }}/hubzilla/data:/var/www/hubzilla"
     networks:
       - hubzilla_internal
 
