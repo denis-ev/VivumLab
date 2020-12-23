@@ -2,11 +2,6 @@ class Core < Thor
   require './tasks/utils.rb'
   include Utils
   require 'etc'
-  desc "logo", "displays the VivumLab logo"
-  def logo()
-    cat "vivumlablogo.txt"
-    invoke "core:check_version"
-  end
 
   desc "check_version", "checks the local version against the latest from github"
   def check_version()
@@ -35,14 +30,12 @@ class Core < Thor
 
   desc "deploy", "Deploys VivumLab, configures it first if needed"
   def deploy()
-    invoke "core:logo"
     say "Deploying Vivumlab".green
     run_playbook("playbook.vivumlab.yml", options)
   end
 
   desc "uninstall", "Uninstalls VivumLab"
   def uninstall()
-    invoke "core:logo"
     invoke 'build', options
     say "Uninstalling Vivumlab".red
     return unless yes? "Are you sure?"
