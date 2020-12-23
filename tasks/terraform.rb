@@ -2,7 +2,6 @@ class Terraform < Thor
 
   desc "terraform", "Spins up a cloud server with Terraform"
   def terraform
-    invoke "core:logo"
     invoke "git:sync"
     invoke "config:initial_config"
 
