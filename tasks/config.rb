@@ -8,7 +8,6 @@ class Config < Thor
 
   desc "initial_config", "Creates or Updates the config file, as necessary"
   def initial_config()
-    invoke "core:logo"
     say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
     run_playbook("playbook.config.yml", options)
   end
@@ -23,11 +22,37 @@ class Config < Thor
 
   desc "config_reset", "Resets Vlab config"
   def config_reset()
-    invoke "core:logo"
     say "Resetting Config file #{options[:config_dir]}/config.yml".green
     say "Backing up your existing config"
     FileUtils.mv("#{options[:config_dir]}/", "settings-backup")
     invoke "config:initial_config"
+  end
+
+  desc "edit_raw", "Decrypts, and opens the config file in nano. Encrypts on save"
+  def edit_raw
+    say "Decrypting and editing the config file at #{options[:config_dir]}/encrypted.yml".light_blue
+    begin
+      write_temporary_decrypted_config
+      execute_in_shell "nano #{@temp_config}"
+    rescue
+      say "Something went wrong executing the decryption and or editing the file".red
+    ensure
+      FileUtils.rm_f @temp_config
+      say "For security reasons the temoporary decrypted config file was being deleted.".light_blue
+    end
+  end
+
+  desc "decyrpt", "Decrypts the encrypted config file. **WARNING**, you must Re-ENCRYPT yourself using vlab config encrypt"
+  option :outputfile, required: false, desc: "Name of the file to write", default: 'decrypted.yml', aliases: ['-o']
+  def decrypt
+    write_temporary_decrypted_config
+    FileUtils.mv @temp_config, "#{options[:config_dir]}/#{options[:outputfile]}"
+  end
+
+  desc "encrypt", "Encrypts a given config.yml to encrypted.yml"
+  option :inputfile, required: false, desc: "Name of the file to encrypt", default: 'decrypted.yml', aliases: ['-i']
+  def encrypt
+    encrypt_temporary_decrypted_config "#{options[:config_dir]}/#{options[:inputfile]}"
   end
 
   desc "set", "Sets a config variable"
