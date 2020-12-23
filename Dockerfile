@@ -17,6 +17,7 @@ ENV ANSIBLE_STRATEGY=mitogen_linear
 
 ENV BUILD_PACKAGES \
     jq \
+    nano \
     python3-dev \
     python3-pip \
     python3-dateutil \
@@ -40,6 +41,7 @@ RUN set -x && \
     apt-get update && \
     apt-get install --no-install-recommends -y ${BUILD_PACKAGES} && \
     pip3 install --upgrade pip && \
+    pip3 install wheel && \
     pip3 install ${PYTHON_PACKAGES} && \
     \
     echo "==> Installing Ansible... " && \
@@ -59,8 +61,12 @@ RUN set -x && \
     wget https://releases.hashicorp.com/terraform/$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')/terraform_$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')_linux_amd64.zip && \
     unzip terraform_$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')_linux_amd64.zip && \
     mv terraform /usr/local/bin && \
+    echo "==> installing gems"  && \
     bundle install && \
-    ln -s /data/vlab /usr/local/bin/vlab
+    echo "==> linking vlab into path" && \
+    ln -s /data/vlab /usr/local/bin/vlab && \
+    echo "==> Installing sytax highlighting for nano" && \
+    curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
 
 
 WORKDIR /data
