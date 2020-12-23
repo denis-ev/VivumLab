@@ -97,6 +97,10 @@ if ! docker info > /dev/null 2>&1 ; then
   echo "============================"
 fi
 
+clear
+cat vivumlablogo.txt
+cat MOTD
+
 docker run --rm -it \
   -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
   -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
