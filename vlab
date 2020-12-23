@@ -15,7 +15,7 @@ class Vlab < Thor
   include Utils
 
   class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-  class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
+  class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none, aliases: ['-d']
 
   # Next line loads all ruby files in tasks/**/*.rb
   Dir["./tasks/**/*.rb"].each {|file| require file }
@@ -30,6 +30,21 @@ class Vlab < Thor
   desc "find_help", "Shows the user how to contact the VivumLab community"
   def find_help
     say TTY::Markdown.parse_file("docs/Contact-us.md")
+  end
+
+  ########
+  # Quick Aliases
+  ########
+
+  desc "deploy", "Deploy to your server with the current config"
+  def deploy
+    invoke "core:deploy", [], options
+  end
+
+  desc "update", "Updates all services - or, if you specify --service, a single service."
+  option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
+  def update
+    invoke "service:update", [], options
   end
 
   # This method ensures that if we have an error, the resulting return code
