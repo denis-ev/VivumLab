@@ -15,7 +15,6 @@
   file:
     path: "{{ volumes_root }}/wallabag/db"
     state: directory
-  become: yes
 
 - name: Copy wallabag docker-compose.yml file into place.
   template:
