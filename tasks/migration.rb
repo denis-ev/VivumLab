@@ -3,7 +3,6 @@ class Migration < Thor
     include Utils
     desc "single_config", "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
     def single_config
-        invoke "deprecated:decrypt", [], {}
         # This task should return, having done nothing UNLESS
         # * There is no encrypted.yml in the current settings folder
         # * There is a vault.yml in the current settings folder
@@ -11,6 +10,7 @@ class Migration < Thor
         if(File.exist? "#{options[:config_dir]}/config.yml") &&
             (File.exist? "#{options[:config_dir]}/vault.yml") &&
             (!File.exist? "#{options[:config_dir]}/encrypted.yml")
+            invoke "deprecated:decrypt", [], {}
             config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
             vault_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
 
@@ -20,6 +20,8 @@ class Migration < Thor
             save_config_file
             FileUtils.mv "#{options[:config_dir]}/config.yml", "#{options[:config_dir]}/config.old"
             FileUtils.mv "#{options[:config_dir]}/vault.yml", "#{options[:config_dir]}/vault.old"
+        else
+            say "Single Config Migration did not run, because it was not needed".light_blue
         end
     end
 end

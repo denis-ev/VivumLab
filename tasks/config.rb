@@ -36,11 +36,8 @@ class Config < Thor
   # This method contains some advanced, idiomatic ruby that may not be entirely
   # clear to new rubyists. I've tried to comment for clarity.
   def set()
-    # These two lines ensure the user-provided config_key exists, and identify
-    # which file it's in. (config or vault).
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
-    # good_vault_key = last_good_key(vault_file, options[:config_key])
-    # if both good_*_key variables are nil, then the key provided doesn't match *at all* throw an error.
+    # if good_config_key is nil, then the key provided doesn't match *at all* throw an error.
     if good_config_key.nil?
       say "Key #{options[:config_key]} not found in either config file. Did you spell it right?".red
       # Following else if block only executes if the user supplied key is entirely valid and found in the config file
@@ -56,7 +53,6 @@ class Config < Thor
       table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", "value"], rows: decrypted_config_file[good_config_key])
       say table.render(:unicode)
     end
-    # regardless of the change (or not), re-encrypt the vault
   end
 
 end
