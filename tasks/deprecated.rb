@@ -1,8 +1,8 @@
 class Deprecated < Thor
   require './tasks/utils.rb'
   include Utils
-  desc "encrypt", "Encrypts the ansible vault.yml - DEPRECATED"
-  def encrypt()
+  desc "vault_encrypt", "Encrypts the ansible vault.yml - DEPRECATED"
+  def vault_encrypt()
     say "Encrypting the vault".red
     begin
       execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
@@ -12,8 +12,8 @@ class Deprecated < Thor
     end
   end
 
-  desc "decrypt", "Decrypts the ansible vault.yml - DEPRECATED"
-  def decrypt()
+  desc "vault_decrypt", "Decrypts the ansible vault.yml - DEPRECATED"
+  def vault_decrypt()
     say "Decrypting the vault".blue
     begin
       execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
