@@ -1,17 +1,19 @@
 class Git < Thor
+  require './tasks/utils.rb'
+  include Utils
 
   desc "sync", "Syncs your settings git repo"
   def sync
-    cmd = TTY::Command.new(pty: true, uuid: false, printer: :progress)
     if Dir.exist? "#{options[:config_dir]}/.git"
       say "Synching settings via Git".green
       FileUtils.mkdir_p '#{options[:config_dir]}/.git/hooks'
       FileUtils.cp 'git_sync_pre_commit', '#{options[:config_dir]}/.git/hooks/pre-commit'
       FileUtils.chmod '+x', '#{options[:config_dir]}/.git/hooks/pre-commit'
-      cmd.run!("git pull", chdir: "#{options[:config_dir]}/")
-      cmd.run!("git add . > /dev/null", chdir: "#{options[:config_dir]}/")
-      cmd.run!("git commit -a -m 'Settings update' || true", chdir: "#{options[:config_dir]}/")
-      cmd.run!("git push > /dev/null", chdir: "#{options[:config_dir]}/")
+
+      execute_in_shell("cd #{options[:config_dir]}/ && git pull")
+      execute_in_shell("cd #{options[:config_dir]}/ && git add . > /dev/null")
+      execute_in_shell("cd #{options[:config_dir]}/ && git commit -a -m 'Settings update' || true")
+      execute_in_shell("cd #{options[:config_dir]}/ && git push > /dev/null")
     else
       say "Warning! Your settings directory is not setup as a Git Repository. Make sure to back them up using some other method. https://vivumlab.com/setup/installation/#syncing-settings-via-git ".light_red
     end
