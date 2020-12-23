@@ -9,7 +9,7 @@
     - "conf"
     - "data"
   become: yes
-  
+
 - name: Make hubzilla DB directory
   file:
     path: "{{ volumes_root }}/hubzilla/db"

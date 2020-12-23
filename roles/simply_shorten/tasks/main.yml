@@ -16,7 +16,7 @@
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
   become: yes
-  
+
 - name: Configure simply_shorten systemd service.
   become: yes
   template:
