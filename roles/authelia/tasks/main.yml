@@ -26,8 +26,8 @@
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   with_items:
-    - "authelia/redis"
-    - "authelia/config"
+    - "redis"
+    - "config"
   become: yes
 
 - name: Copy authelia docker-compose.yml file into place.
