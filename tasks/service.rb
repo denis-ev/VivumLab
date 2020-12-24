@@ -2,15 +2,15 @@ class Service < Thor
   require './tasks/utils.rb'
   include Utils
 
-  desc "remove_one", "Removes the specified service from the VivumLab server"
-  def remove_one(service)
+  desc "remove", "Removes the specified service from the VivumLab server"
+  def remove(service)
     run_common
     say "Removing data for service: #{service}"
     run_playbook("playbook.remove.yml", options,  limit_to_service(service))
   end
 
-  desc "reset_one", "Resets the specified service's files on the server "
-  def reset_one(service)
+  desc "reset", "Resets the specified service's files on the server "
+  def reset(service)
     run_common
     extra = "{\"services\":[\"#{service}\"]}"
     run_playbook("playbook.stop.yml", options, limit_to_service(service))
@@ -23,21 +23,21 @@ class Service < Thor
 
   desc "stop", "Stops all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it stops all services."
-  def stop()
+  def stop_all()
     run_common
     run_playbook("playbook.stop.yml", options, limit_to_service(options[:service]))
   end
 
   desc "restart", "Restart all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
-  def restart()
+  def restart_all()
     run_common
     run_playbook("playbook.restart.yml", options, limit_to_service(options[:service]))
   end
 
   desc "update", "Updates all services, or a selected service if you specify --service"
   option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services.", aliases: ['-s']
-  def update()
+  def update_all()
     run_common
     run_playbook("playbook.vivumlab.yml", options, limit_to_service(options[:service]))
     run_playbook("playbook.restart.yml", options, limit_to_service(options[:service]))
@@ -48,8 +48,8 @@ class Service < Thor
     say TTY::Markdown.parse_file("docs/software/#{service}.md")
   end
 
-  desc "customize_service", "Allows you to edit a specific deployed service with a docker-compose.override.yml"
-  def customize_service(service)
+  desc "customize", "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+  def customize(service)
     run_playbook("playbook.service-edit.yml", options, limit_to_service(service))
   end
 

@@ -2,8 +2,8 @@ class Ssh < Thor
   require './tasks/utils.rb'
   include Utils
 
-  desc "run_shell", "Opens a shell on your VivumLab server"
-  def run_shell
+  desc "shell", "Opens a shell on your VivumLab server"
+  def shell
     say "Launching an SSH session to your server"
     exec("ssh -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey} #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip} -p #{decrypted_config_file.vlab_port}")
   end
@@ -29,8 +29,8 @@ class Ssh < Thor
     execute_in_shell(to_run)
   end
 
-  desc "setup_ssh", "Creates and copies ssh keys to your server"
-  def setup_ssh
+  desc "setup", "Creates and copies ssh keys to your server"
+  def setup
     invoke create_sshkey
     invoke copy_sshkey
   end

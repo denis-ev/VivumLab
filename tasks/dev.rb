@@ -14,7 +14,7 @@ class Dev < Thor
       say "Thanks for helping out".light_green
       # todo: add url to dev docs
       say "First, please make sure you have read the developer docs".light_yellow
-      say "Before you push and changes you've made, pre-commit will need to be installed on your system".light_yellow
+      say "Before you push any changes you've made, pre-commit will need to be installed on your system".light_yellow
       if system("which python3")
         if yes?("Install pre-commit now?")
           %x{curl https://pre-commit.com/install-local.py | python3 -}

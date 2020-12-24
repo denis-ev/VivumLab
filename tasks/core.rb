@@ -5,9 +5,9 @@ class Core < Thor
 
   desc "check_version", "checks the local version against the latest from github"
   def check_version()
-    say "You have version #{current_version} and #{latest_version} is the latest".blue
+    say "You have version #{current_version}".blue
     say "You're up to date".green if current_version == latest_version
-    cat "MOTD"
+    say "Consider updating to #{latest_version}".yellow if current_version != latest_version
     invoke "sanity_checks:local"
   end
 

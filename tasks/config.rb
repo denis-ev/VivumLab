@@ -6,22 +6,22 @@ class Config < Thor
   class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none
   class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
 
-  desc "initial_config", "Creates or Updates the config file, as necessary"
-  def initial_config()
+  desc "new", "Creates or Updates the config file, as necessary"
+  def new()
     say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
     run_playbook("playbook.config.yml", options)
   end
 
-  desc "show_config", "Shows the configuration settings for a specified service"
+  desc "show", "Shows the configuration settings for a specified service"
   option :service, required: true, :desc => "Name of the service to display", aliases: ['-s']
-  def show_config
+  def show
     config_hash = decrypted_config_file[options[:service]]
     table = TTY::Table.new(header: ["option", "value"], rows: config_hash)
     say table.render(:unicode)
   end
 
-  desc "config_reset", "Resets Vlab config"
-  def config_reset()
+  desc "reset", "Resets Vlab config"
+  def reset()
     say "Resetting Config file #{options[:config_dir]}/config.yml".green
     say "Backing up your existing config"
     FileUtils.mv("#{options[:config_dir]}/", "settings-backup")
@@ -38,11 +38,11 @@ class Config < Thor
       say "Something went wrong executing the decryption and or editing the file".red
     ensure
       FileUtils.rm_f @temp_config
-      say "For security reasons the temoporary decrypted config file was being deleted.".light_blue
+      say "For security reasons the temporary decrypted config file was being deleted.".light_blue
     end
   end
 
-  desc "decyrpt", "Decrypts the encrypted config file. **WARNING**, you must Re-ENCRYPT yourself using vlab config encrypt"
+  desc "decrypt", "Decrypts the encrypted config file. **WARNING**, you must Re-ENCRYPT yourself using vlab config encrypt"
   option :outputfile, required: false, desc: "Name of the file to write", default: 'decrypted.yml', aliases: ['-o']
   def decrypt
     write_temporary_decrypted_config

@@ -57,6 +57,19 @@ if [[ ! -f ./launch.sh ]]; then
   exit 0
 fi
 
+### Check Docker, run if it isn't ###
+if ! docker info > /dev/null 2>&1 ; then
+  printf "Starting Docker.."
+  echo    # (optional) move to a new line
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    open -g -a Docker.app || exit
+  elif [[ `systemctl` =~ -\.mount ]]; then
+    sudo systemctl start docker
+  elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
+    sudo service docker start
+  fi
+fi
+
 if [[ -z $1 ]]; then
   version=latest
 else
@@ -79,22 +92,6 @@ function pwless_sshkey () {
 
 if [[ ! -f ~/.vlab_vault_pass ]]; then
   touch ~/.vlab_vault_pass
-fi
-
-### Check Docker, run if it isn't ###
-if ! docker info > /dev/null 2>&1 ; then
-  printf "Starting Docker.."
-  echo    # (optional) move to a new line
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    open -g -a Docker.app || exit
-  elif [[ `systemctl` =~ -\.mount ]]; then
-    sudo systemctl start docker
-  elif [[ -f /etc/init.d/cron && ! -h /etc/init.d/cron ]]; then
-    sudo service docker start
-  fi
-  echo "============================"
-  echo "Try to run ./launch.sh again"
-  echo "============================"
 fi
 
 clear
