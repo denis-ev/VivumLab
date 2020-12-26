@@ -1,5 +1,5 @@
 class SanityChecks < Thor
-  include VlabI18N
+  include VlabI18n
   
   REQUIRED_PYTHON_VERSION = "3.6.1"
   REQUIRED_PRECOMMIT_VERSION = "2.6.0"
@@ -16,15 +16,15 @@ class SanityChecks < Thor
     invoke "check_for_git"
     invoke "check_for_precommit"
 
-    I18n.t(:s_local_sanity_passed).green
+    I18n.t(:s_sc_localpassed).green
   end
 
   desc "remote", "Remote Server sanity checks"
   def remote()
-    I18n.t(:s_sshkey_verify).yellow
+    I18n.t(:s_sc_sshkeyverifying).yellow
     invoke check_ssh_keys
     invoke check_ssh_with_keys
-    I18n.t(:s_sshkeys_good).green
+    I18n.t(:s_sc_sshkeyverified).green
   end
 
   desc "check_for_settings", "Verifies settings exist"
@@ -39,10 +39,10 @@ class SanityChecks < Thor
   desc "check_vault_pass", "Checks for the presence of a Vault Password file"
   def check_vault_pass
     if (!File.exist?("/vlab_vault_pass")) || (File.size("/vlab_vault_pass") == 0)
-      I18n.t(:s_vaultpass_missing).red
-      I18n.t(:s_vaultpass_create).light_yellow
+      I18n.t(:s_sc_vaultpassmissing).red
+      I18n.t(:s_sc_vaultpasscreate).light_yellow
 
-      decision = yes?("I18n.t(:q_vaultpass_create)", :yellow)
+      decision = yes?("I18n.t(:q_sc_vaultpasscreate)", :yellow)
       # decision = yes?("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :red, limited_to: ['yes', 'no'])
       if decision
         invoke "core:generate_vault_pass"
@@ -53,7 +53,7 @@ class SanityChecks < Thor
   desc "check_for_git", "Checks the local machine for Git"
   def check_for_git
     `which git`
-    I18n.t(:s_git_exist_no).red unless $?.success?
+    I18n.t(:s_sc_gitnoexist).red unless $?.success?
   end
 
   desc "check_for_precommit", "Checks for the presence of Pre-commit"
@@ -63,20 +63,20 @@ class SanityChecks < Thor
       python_version = `python3 --version`.chomp.split(' ').last if $?.success?
       if python_version >= REQUIRED_PYTHON_VERSION
         if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
-          I18n.t(:s_low_no_precommit).yellow
+          I18n.t(:s_sc_lowprecommit).yellow
         end
       else
-        I18n.t(:s_low_no_python).yellow
+        I18n.t(:s_sc_lowpython).yellow
       end
     else
-      I18n.t(:s_no_precommit).yellow
+      I18n.t(:s_sc_noprecommit).yellow
     end
   end
 
   no_commands {
     def check_ssh_with_keys()
       ssh_success = execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file["VLAB_SSH_USER"]}@#{decrypted_config_file["VLAB_IP"]} exit"
-      I18n.t(:s_ssh_unable).red if not $?.success?
+      I18n.t(:s_sc_sshunable).red if not $?.success?
     end
   }
 end

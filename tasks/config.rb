@@ -3,7 +3,7 @@
 # Config namespace for vlab cli
 class Config < Thor
   require './tasks/utils'
-  include VlabI18N
+  include VlabI18n
   include Utils
   namespace 'config'
   require 'yaml'

@@ -4,7 +4,7 @@
 class Deprecated < Thor
   require './tasks/utils'
   include Utils
-  include VlabI18N
+  include VlabI18n
 
   desc 'vault_encrypt', 'Encrypts the ansible vault.yml - DEPRECATED'
   def vault_encrypt

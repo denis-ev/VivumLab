@@ -1,5 +1,5 @@
 class Server < Thor
-  include VlabI18N
+  include VlabI18n
 
   desc "shutdown", "Executes a shutdown of the Vlab server, optionally with countdown"
   option :time, :type => :numeric, :desc => "Sets a countdown in minutes until the server shuts down"

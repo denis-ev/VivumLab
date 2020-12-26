@@ -4,7 +4,7 @@
 class Git < Thor
   require './tasks/utils'
   include Utils
-  include VlabI18N
+  include VlabI18n
 
   desc 'sync', 'Syncs your settings git repo'
   def sync

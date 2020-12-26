@@ -14,33 +14,52 @@ fr:
   # migration.rb
   
   # sanity_checks.rb
-  s_local_sanity_passed: "Local sanity checks passed."
-  s_sshkey_verify: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
-  s_sshkeys_good: "SSH Keys are good to go!"
-  s_vaultpass_missing: |+
+  s_sc_localpassed: "Local sanity checks passed."
+  s_sc_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
+  s_sc_sshkeyverified: "SSH Keys are good to go!"
+  s_sc_vaultpassmissing: |+
     "Oops, your vault password in #{Dir.home}, doesn't appear to exist."
     "This is unusual, but could be the result of the username changing after setup."
-  s_vaultpass_create: |+
+  s_sc_vaultpasscreate: |+
     "A new `.vlab_vault_pass` file can be created for you;"
     "or you can exit, and try to sort this out yourself."
-  q_vaultpass_create: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
-  s_git_exist_no: "You need to install git!"
-  s_low_no_precommit: |+
+  q_sc_vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+  s_sc_gitnoexist: "You need to install git!"
+  s_sc_lowprecommit: |+
     "Pre-commit is not installed or an earlier version than required."
     "Contributing to VivumLab requires Pre-Commit version #{REQUIRED_PRECOMMIT_VERSION} or above."
+
     "Run `vlab dev setup` when you're ready.."
-  s_low_no_python: "Python version #{REQUIRED_PYTHON_VERSION} is required for VivumLab to work"
-  s_no_precommit: |+
+  s_sc_lowpython: "Python version #{REQUIRED_PYTHON_VERSION} is required for VivumLab to work"
+  s_sc_noprecommit: |+
     "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
     "Run vlab dev_setup, when you're ready"
-  s_ssh_unable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+  s_sc_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
   
   # server.rb
 
   # service.rb
 
   # ssh.rb
+  s_ssh_launching: "Launching an SSH session to your server"
+  s_ssh_keyexists: "SSH Key already exists at #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}"
+  s_ssh_keycreating: "Creating #{decrypted_config_file.passwordless_sshkey} and #{decrypted_config_file.passwordless_sshkey}.pub"
+  s_ssh_keycreated: "Key created"
+  s_ssh_keycopying: "Copying keys to your server at #{decrypted_config_file.vlab_ip}"
+  s_ssh_keycopied: "Key copied"
 
   # terraform.rb
+  s_terraform_creating: "Creating a cloud server"
+  s_terraform_created_success: "Successfully created a server at: #{terraform_ip}"
+  s_terraform_ip_set: |+
+    "Place this IP where you want it in your settings.."
+    "either as vlab_ip or bastion.server_address"
+
+    "Then run 'vlab deploy' to complete the setup."
+  s_terraform_destroying: "Destroying terraform built server"
+  s_terraform_destroy_success: "Cloud server(s) destroyed."
 
   # utils.rb
+  s_utils_playbookexecuting: "executing playbook command: #{playbook_command}"
+  s_utils_playbookexecuted: "#{playbook_command} finished"
+  s_utils_playbookerror: "Ansible Playbook command returned with an error code."
