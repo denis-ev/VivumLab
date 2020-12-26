@@ -20,3 +20,7 @@ gem 'ffi', "1.13.1"
 gem 'ffi-locale'
 gem 'ffi-ncurses'
 gem 'yaml_vault'
+
+group :dev do
+    gem 'solargraph'
+end
