@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'bundler'
 require 'securerandom'
@@ -8,44 +11,45 @@ Bundler.require(:default)
 # This file contains just enough code to bootstrap the CLI.
 # Bias towards putting actual tasks in namespaced files under
 # tasks/. ie: tasks/sanitychecks.rb
-# Namespaced Task classes must be part of module Vlab and inherit from
-# SubCommandBase
-
 class Vlab < Thor
-  require './tasks/utils.rb'
+  require './tasks/utils'
   include Utils
 
-  class_option :config_dir, :type => :string, :desc => "Config dir to use", :default => "settings"
-  class_option :debug, :desc => "Debugs Ansible-playbook commands", :enum => ["none", "warn", "debug", "trace"], :default => :none, aliases: ['-d']
+  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :debug, desc: 'Debugs Ansible-playbook commands',
+                       enum: %w[none warn debug trace], default: :none, aliases: ['-d']
 
   # Next line loads all ruby files in tasks/**/*.rb
-  Dir["./tasks/**/*.rb"].each {|file| require file }
+  Dir['./tasks/**/*.rb'].sort.each { |file| require file }
   # If the included files are classes inheriting from Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
-  ObjectSpace.each_object(Class).select { |c| c.superclass.to_s == "Thor" && c.to_s != 'Vlab' && c.to_s != 'DemoTasks'}.each do |klass|
+  namespaces = ObjectSpace.each_object(Class).select do |c|
+    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks'
+  end
+  namespaces.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
-    subcommand "#{klass.to_s.downcase}", Kernel.const_get("::#{klass.to_s}")
+    subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
   end
 
-  desc "find_help", "Shows the user how to contact the VivumLab community"
+  desc 'find_help', 'Shows the user how to contact the VivumLab community'
   def find_help
-    say TTY::Markdown.parse_file("docs/Contact-us.md")
+    say TTY::Markdown.parse_file('docs/Contact-us.md')
   end
 
   ########
   # Quick Aliases
   ########
 
-  desc "deploy", "Deploy to your server with the current config"
+  desc 'deploy', 'Deploy to your server with the current config'
   def deploy
-    invoke "core:deploy", [], options
+    invoke 'core:deploy', [], options
   end
 
-  desc "update", "Updates all services - or, if you specify --service, a single service."
-  option :service, :type => :string, desc: "Optional name of service. Without, it restarts all services."
+  desc 'update', 'Updates all services - or, if you specify --service, a single service.'
+  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.'
   def update
-    invoke "service:update", [], options
+    invoke 'service:update', [], options
   end
 
   # This method ensures that if we have an error, the resulting return code
