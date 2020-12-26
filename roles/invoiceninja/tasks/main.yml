@@ -1,40 +1,36 @@
 ---
-- name: Make invoiceninja directory.
-  file:
-    path: "{{ volumes_root }}/invoiceninja"
-    state: directory
-
-- name: Make config directories
-  file:
-    path: "{{ volumes_root }}/invoiceninja/config/{{item}}"
-    state: directory
-  loop:
-    - nginx/conf.d
-    - php
-
 - name: Make invoiceninja directories
   file:
     path: "{{ volumes_root }}/invoiceninja/{{item}}"
     state: directory
-    owner: "{{vlab_ssh_user}}"
-    group: "{{vlab_ssh_user}}"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
+    - "config/nginx/conf.d"
+    - "config/php"
     - "public"
     - "logo"
     - "storage"
+  become: yes
 
 - name: install nginx config
   template:
     src: nginx.conf
     dest: "{{  volumes_root }}/invoiceninja/config/nginx/nginx.conf"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: install PHP config files
   template:
     src: php-cli.j2
     dest: "{{ volumes_root }}/invoiceninja/config/php/{{item}}"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
     - php-cli.ini
     - php.ini
+  become: yes
 
 - name: Generate new encryption key.
   shell: >
@@ -45,9 +41,12 @@
   template:
     src: docker-compose.invoiceninja.yml.j2
     dest: "{{ volumes_root }}/invoiceninja/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
     application_key: application_key
+  become: yes
 
 - name: Configure invoiceninja systemd service.
   become: yes

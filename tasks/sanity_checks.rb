@@ -6,6 +6,7 @@ class SanityChecks < Thor
   require 'English'
   REQUIRED_PYTHON_VERSION = '3.6.1'
   REQUIRED_PRECOMMIT_VERSION = '2.6.0'
+  include VlabI18n
 
   desc 'check_ssh_keys', 'Creates or updates SSH keys as necessary'
   # @TODO: Write this task
@@ -20,52 +21,44 @@ class SanityChecks < Thor
     invoke 'check_for_git'
     invoke 'check_for_precommit'
 
-    say 'Local sanity checks passed'.green
+    I18n.t(:s_sc_localpassed).green
   end
 
-  desc 'remote', 'Remote Server sanity checks'
-  def remote
-    say 'Verifying SSH Keys, and the ability to remotely log in to your vLab server via passwordless ssh'.yellow
+  desc "remote", "Remote Server sanity checks"
+  def remote()
+    I18n.t(:s_sc_sshkeyverifying).yellow
     invoke check_ssh_keys
     invoke check_ssh_with_keys
-    say 'SSH Keys good to go'.green
+    I18n.t(:s_sc_sshkeyverified).green
   end
 
   desc 'check_for_settings', 'Verifies settings exist'
   def check_for_settings
     FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
     invoke 'migration:single_config'
-    # rubocop:disable Layout/LineLength
-    File.write("#{options[:config_dir]}/config.yml", 'blank_on_purpose: True') unless File.exist? "#{options[:config_dir]}/config.yml"
-    File.write("#{options[:config_dir]}/vault.yml", 'blank_on_purpose: True') unless File.exist? "#{options[:config_dir]}/vault.yml"
-    # rubocop:enable Layout/LineLength
-    File.write('tasks/ansible_bash.vars', "PASSWORDLESS_SSHKEY=''") unless File.exist? 'tasks/ansible_bash.vars'
+    #File.write("#{options[:config_dir]}/config.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/config.yml"
+    #File.write("#{options[:config_dir]}/vault.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/vault.yml"
+    File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
   end
 
   desc 'check_vault_pass', 'Checks for the presence of a Vault Password file'
   def check_vault_pass
-    return unless !File.exist?('/vlab_vault_pass') || File.size('/vlab_vault_pass').zero?
+    if (!File.exist?("/vlab_vault_pass")) || (File.size("/vlab_vault_pass") == 0)
+      I18n.t(:s_sc_vaultpassmissing).red
+      I18n.t(:s_sc_vaultpasscreate).light_yellow
 
-    missing = <<-NOVAULT
-    Oops, your vault password in #{Dir.home}, doesn't appear to exist.
-    This is unusual, but could be the result of the username changing after setup.
-    NOVAULT
-    say missing.red
-
-    create = <<-CREATE
-    Vlab can create a new `.vlab_vault_pass` file for you.
-    Or you can exit, and try to sort this out yourself
-    CREATE
-    say create.light_yellow
-
-    decision = yes?('Let Vlab create a new .vlab_vault_pass for you? [y/n]', :yellow)
-    invoke 'core:generate_vault_pass' if decision
+      decision = yes?("I18n.t(:q_sc_vaultpasscreate)", :yellow)
+      # decision = yes?("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :red, limited_to: ['yes', 'no'])
+      if decision
+        invoke "core:generate_vault_pass"
+      end
+    end
   end
 
   desc 'check_for_git', 'Checks the local machine for Git'
   def check_for_git
     `which git`
-    say 'You need to install git!'.red unless $CHILD_STATUS.success?
+    I18n.t(:s_sc_gitnoexist).red unless $?.success?
   end
 
   desc 'check_for_precommit', 'Checks for the presence of Pre-commit'
@@ -75,28 +68,20 @@ class SanityChecks < Thor
       python_version = `python3 --version`.chomp.split(' ').last if $CHILD_STATUS.success?
       if python_version >= REQUIRED_PYTHON_VERSION
         if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
-          required_version = <<-REQUIRED
-          Pre-commit is not installed or a new enough version.
-          Vlab requires Pre-Commit version #{REQUIRED_PRECOMMIT_VERSION} for Contributions.
-          Run `vlab dev setup` when you're ready
-          REQUIRED
-          say required_version.blue
+          I18n.t(:s_sc_lowprecommit).yellow
         end
       else
-        say "Python version #{REQUIRED_PYTHON_VERSION} is required for vLab to work"
+        I18n.t(:s_sc_lowpython).yellow
       end
     else
-      say 'Pre-commit is not installed'.yellow
-      say 'Contributions require installing \'pre-commit\'. Run vlab dev_setup, when you\'re ready'.yellow
+      I18n.t(:s_sc_noprecommit).yellow
     end
   end
 
   no_commands do
-    def check_ssh_with_keys
-      # rubocop:disable Layout/LineLength
-      execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file['VLAB_SSH_USER']}@#{decrypted_config_file['VLAB_IP']} exit"
-      # rubocop:enable Layout/LineLength
-      say 'VivumLab is unable to ssh to your server using the information in your config.yml'.red unless $CHILD_STATUS.success?
+    def check_ssh_with_keys()
+      ssh_success = execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file["VLAB_SSH_USER"]}@#{decrypted_config_file["VLAB_IP"]} exit"
+      I18n.t(:s_sc_sshunable).red if not $?.success?
     end
   end
 end

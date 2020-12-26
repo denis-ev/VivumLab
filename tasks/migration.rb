@@ -4,6 +4,7 @@
 class Migration < Thor
   require './tasks/utils'
   include Utils
+  include VlabI18n
 
   desc 'single_config', 'Migrates away from a config.yml, and vault.yml to a single encrypted.yml'
   def single_config
@@ -25,7 +26,7 @@ class Migration < Thor
       FileUtils.mv "#{options[:config_dir]}/config.yml", "#{options[:config_dir]}/config.old"
       FileUtils.mv "#{options[:config_dir]}/vault.yml", "#{options[:config_dir]}/vault.old"
     else
-      say 'Single Config Migration did not run, because it was not needed'.light_blue
+      I18n.t(:s_migration_notdone)
     end
   end
 end

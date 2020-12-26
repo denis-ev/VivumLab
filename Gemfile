@@ -22,6 +22,7 @@ gem 'tty-markdown'
 gem 'tty-prompt'
 gem 'tty-table'
 gem 'yaml_vault'
+gem 'i18n'
 
 group :dev do
   gem 'solargraph'

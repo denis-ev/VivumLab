@@ -1,0 +1,141 @@
+en:
+  # config.rb
+  s_config_creating: "Creating, or updating Config file #{options[:config_dir]}/config.yml"
+  s_config_resetting: "Resetting config file #{options[:config_dir]}/config.yml"
+  s_config_backup: "Backing up your existing config"
+  S_config_editfile: "Decrypting and editing the config file at #{options[:config_dir]}/encrypted.yml"
+  s_config_editerror: "Something went wrong executing the decryption and or editing the file"
+  s_config_fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+  s_config_decrypted: "Config file is now, decrypted"
+  s_config_encrypted: "Config file is now, encrypted"
+  s_config_nokey: "Key #{options[:config_key]} not found in either config file. Did you spell it right?"
+  s_config_keynomatch: "Unable to find a full match for the key #{config_key}"
+  s_config_possiblekey: "Here\'s some possible matches:"
+
+  # core.rb
+  s_core_currentversion: "You have version #{current_version}"
+  s_core_versionlatest: "You\'re up to date"
+  s_core_versionupdate: "Consider updating to #{latest_version}"
+  s_core_deploy: "Deploying Vivumlab"
+  s_core_uninstall: |+
+    "Uninstalling VivumLab is irreversible, and should always be done with caution"
+    "Make sure to backup any files that you may want to keep before uninstalling"
+  q_core_uninstall: "Are you sure you want to uninstall VivumLab"
+  q_core_uninstallconfirm: "Confirm again, if you are sure"
+  s_core_uninstalled: "VivumLab has been uninstalled."
+  s_core_restoring: "Restoring your backups, now.."
+  s_core_restored: "Backups have been restored"
+
+  # deprecated.rb
+  s_deprecated_encrypting: "Encrypting the vault"
+  s_deprecated_encrypted: "Vault Encrypted"
+  s_deprecated_decrypting: "Decrypting the vault"
+  s_deprecated_decrypted: "Vault Decrypted"
+  s_deprecated_failencrypt: "This command can fail, if the vault was already encrypted"
+  s_deprecated_faildecrypt: "This command can fail, if the vault was already decrypted"
+  
+  # dev.rb
+  s_dev_welcome: "Welcome to VivumLab Developer Setup"
+  q_dev_contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+  s_dev_thanks: "Thanks for helping out"
+  s_dev_readdevdocs: |+
+    "First and foremost, please make sure you have read the developer docs"
+    "You can find the developers docs. here:"
+    "# TODO: add url to dev docs"
+    
+  s_dev_precommitwarning: "Before you push any changes you\'ve made, pre-commit will need to be installed on your system"
+  s_dev_pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+  s_dev_precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+  s_dev_readythanks: |+
+    "Ok, all set! Thank you for being a part of the VivumLab Community"
+    "We hope that you will enjoy your time with us"
+    "And we look forward to achieving great things, together"
+
+  # git.rb
+  s_git_settingssyncing: "Syncing settings via Git"
+  s_git_settingssynced: "Settings synced"
+  s_git_notsetup: |+
+    "Warning! Your settings directory is not setup as a Git Repository"
+    "Make sure to back them up using some other method. For more information, see:"
+    "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
+  s_git_trackbranch: "You are now tracking the #{options[:branch]} branch"
+
+  # migration.rb
+  s_migration_notdone: "Single Config Migration did not run, because it was not needed"
+  
+  # sanity_checks.rb
+  s_sc_localpassed: "Local sanity checks passed."
+  s_sc_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
+  s_sc_sshkeyverified: "SSH Keys are good to go!"
+  s_sc_vaultpassmissing: |+
+    "Oops, your vault password in #{Dir.home}, doesn't appear to exist."
+    "This is unusual, but could be the result of the username changing after setup."
+  s_sc_vaultpasscreate: |+
+    "A new `.vlab_vault_pass` file can be created for you;"
+    "or you can exit, and try to sort this out yourself."
+  q_sc_vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+  s_sc_gitnoexist: "You need to install git!"
+  s_sc_lowprecommit: |+
+    "Pre-commit is not installed or an earlier version than required."
+    "Contributing to VivumLab requires Pre-Commit version #{REQUIRED_PRECOMMIT_VERSION} or above."
+
+    "Run `vlab dev setup` when you're ready.."
+  s_sc_lowpython: "Python version #{REQUIRED_PYTHON_VERSION} is required for VivumLab to work"
+  s_sc_noprecommit: |+
+    "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
+    "Run vlab dev_setup, when you're ready"
+  s_sc_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+  
+  # server.rb
+  s_server_shutdown: "Server will shutdown in #{time} minute(s)"
+  s_server_restart: "Server will restart in #{time} minute(s)"
+
+  # service.rb
+  s_service_removing: "Removing data for service: #{options[:service]}"
+  s_service_removed: "Data for #{options[:service]}, removed"
+  s_service_resetting: "Resetting #{options[:service]}"
+  s_service_reset: "#{options[:service]} has been reset}"
+  s_service_stopping: |+
+    "Note: If no services are specified, VivumLab will stop all enabled services"
+    "Stopping services now.."
+  s_service_stopped: "All specified services have been stopped"
+  s_service_restarting: |+
+    "Note: If no services are specified, VivumLab will restart all enabled services"
+    "Restarting services now.."
+  s_service_restarted: "All specified services have been restarted"
+  s_service_updating: |+
+    "Note: If no services are specified, VivumLab will update all enabled services"
+    "Updating services now.."
+  s_service_updated: "All specified services have been updated"
+  s_service_customizing: |+
+    "This command creates a file, that will override the original docker-compose file for #{options[:service]}"
+    "Any changes that the user wishes to make, should be made to the override file, not the original."
+    "VivumLab will not change, nor delete the original file; the original file will just be ignored"
+  q_service_customizing: "Did you want to make changes to the #{options[:service]} service?"
+  s_service_customized: "#{options[:service]} is ready to customize"
+  s_service_enabled: "#{options[:service]} is now enabled"
+  s_service_disabled: "#{options[:service]} is now disabled"
+
+  # ssh.rb
+  s_ssh_launching: "Launching an SSH session to your server"
+  s_ssh_keyexists: "SSH Key already exists at #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}"
+  s_ssh_keycreating: "Creating #{decrypted_config_file.passwordless_sshkey} and #{decrypted_config_file.passwordless_sshkey}.pub"
+  s_ssh_keycreated: "Key created"
+  s_ssh_keycopying: "Copying keys to your server at #{decrypted_config_file.vlab_ip}"
+  s_ssh_keycopied: "Key copied"
+
+  # terraform.rb
+  s_terraform_creating: "Creating a cloud server"
+  s_terraform_created_success: "Successfully created a server at: #{terraform_ip}"
+  s_terraform_ip_set: |+
+    "Place this IP where you want it in your settings.."
+    "either as vlab_ip or bastion.server_address"
+
+    "Then run 'vlab deploy' to complete the setup."
+  s_terraform_destroying: "Destroying terraform built server"
+  s_terraform_destroy_success: "Cloud server(s) destroyed."
+
+  # utils.rb
+  s_utils_playbookexecuting: "executing playbook command: #{playbook_command}"
+  s_utils_playbookexecuted: "#{playbook_command} finished"
+  s_utils_playbookerror: "Ansible Playbook command returned with an error code."

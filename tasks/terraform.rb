@@ -1,25 +1,25 @@
 class Terraform < Thor
+  include VlabI18n
 
-  desc "terraform", "Spins up a cloud server with Terraform"
-  def terraform
+  desc "create", "Spins up a cloud server with Terraform"
+  def create
     invoke "git:sync"
-    invoke "config:initial_config"
+    invoke "config:new"
 
-    say "Deploying cloud server".yellow
+    I18n.t(:s_terraform_creating).yellow
     run_playbook("playbook.terraform.yml", options)
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform init && terraform apply'")
     terraform_ip = execute_in_shell "/bin/bash -c cd #{options[:config_dir]}; terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address"
 
-    say "Succesfully created a server at: #{terraform_ip}".green
-    say "Place this IP where you want it in your settings - either as vlab_ip or bastion.server_address".green
-    say "Then run vlab deploy to complete the setup.".green
+    I18n.t(:s_terraform_create_success).green
+    I18n.t(:s_terraform_ip_set).green
   end
 
-  desc "destroy", "Destroys server(s) creatd by terraform"
+  desc "destroy", "Destroys server(s) created by terraform"
   def destroy
-    say "Destroying terraform built server".red
+    I18n.t(:s_terraform_destroying).yellow
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform destroy'")
-    say "Cloud server(s) destroyed.".green
+    I18n.t(:s_terraform_destroy_success).green
   end
 
 end

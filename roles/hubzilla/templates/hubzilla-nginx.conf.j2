@@ -1,8 +1,5 @@
 worker_processes  8;
 pid        /var/run/nginx.pid;
-
-user nginx nginx;
-
 events {
     worker_connections  1024;
 }
@@ -15,9 +12,6 @@ http {
     gzip_static on;
     sendfile        on;
     keepalive_timeout  65;
-
-    resolver 127.0.0.11 ipv6=off;
-
     server {
         listen 80;
         root /var/www/html;

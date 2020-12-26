@@ -1,34 +1,45 @@
 ---
 - name: Make grafana directory.
   file:
-    path: "{{ item }}"
+    path: "{{ volumes_root }}/grafana/{{ item }}"
     state: directory
     mode: 0777
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
-    - "{{ volumes_root }}/grafana"
-    - "{{ volumes_root }}/grafana/data"
-    - "{{ volumes_root }}/grafana/dashboards"
-    - "{{ volumes_root }}/grafana/datasources"
+    - "data"
+    - "dashboards"
+    - "datasources"
+  become: yes
 
 - name: Copy grafana docker-compose.yml file into place.
   template:
     src: docker-compose.grafana.yml.j2
     dest: "{{ volumes_root }}/grafana/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure grafana influx datasource
   template:
     src: grafana.datasource.influxdb.yaml
     dest: "{{ volumes_root }}/grafana/datasources/"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure grafana influx dashboard
   template:
     src: "{{item}}"
     dest: "{{ volumes_root }}/grafana/dashboards/"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
     - grafana.dashboards.yaml
     - grafana.dash.vlab.json
+  become: yes
 
 - name: Configure grafana systemd service.
   become: yes

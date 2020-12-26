@@ -1,24 +1,25 @@
 ---
-- name: Make nodered directory.
-  file:
-    path: "{{ volumes_root }}/nodered"
-    state: directory
-
 # Node-RED container runs with UID 1000
 - name: Create data directory and set permissions
   file:
-    path: "{{ volumes_root }}/nodered/data"
+    path: "{{ volumes_root }}/nodered/{{ item }}"
     state: directory
     mode: '0755'
     owner: '1000'
     group: '1000'
+  loop:
+    - "data"
+  become: yes
 
 - name: Copy nodered docker-compose.yml file into place.
   template:
     src: docker-compose.nodered.yml.j2
     dest: "{{ volumes_root }}/nodered/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure nodered systemd service.
   become: yes

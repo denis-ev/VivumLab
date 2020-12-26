@@ -3,6 +3,7 @@ module Utils
   include VlabConstants
   require_relative './lib/config_file_utils.rb'
   include ConfigFileUtils
+  include VlabI18n
 
   def run_playbook(playbook, options, extra="")
     say "Using config directory: #{options[:config_dir]}/config.yml".yellow
@@ -19,10 +20,11 @@ module Utils
       #{extra} \
       -i inventory
       PLAYBOOK
-      say "executing playbook command: #{playbook_command}".yellow if options[:debug] != :none
+      I18n.t(:s_utils_playbookexecuting).yellow if options[:debug] != :none
       execute_in_shell(playbook_command.squeeze(" ").strip)
+      I18n.t(:s_utils_playbookexecuted).green
     rescue
-      say "Ansible Playbook command returned with an error code.".red
+      I18n.t(:s_utils_playbookerror).red
     ensure
       FileUtils.rm_f @temp_config
     end

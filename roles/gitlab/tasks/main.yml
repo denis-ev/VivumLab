@@ -1,12 +1,14 @@
 ---
 - name: Make gitlab directories
   file:
-    path: "{{ item }}"
+    path: "{{ volumes_root }}/gitlab/{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
-    - "{{ volumes_root }}/gitlab"
-    - "{{ volumes_root }}/gitlab/certs"
-    - "{{ volumes_root }}/gitlab/registry"
+    - "certs"
+    - "registry"
+  become: yes
 
 - name: Generate Registry OpenSSL private key with the default values (4096 bits, RSA)
   openssl_privatekey:
@@ -28,6 +30,9 @@
   template:
     src: docker-compose.gitlab.yml.j2
     dest: "{{ volumes_root }}/gitlab/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure gitlab systemd service.
   become: yes

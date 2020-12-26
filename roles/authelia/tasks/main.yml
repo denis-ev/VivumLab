@@ -19,11 +19,6 @@
     msg: "Your kernel version {{ ansible_kernel }} Does not meet the minimum requirements for Authelia. Please see https://github.com/pimlie/ubuntu-mainline-kernel.sh for a kernel upgrade script"
   when: "{{ kernel_version is not version(kernel_options[kernel_major_minor], '>=', true) }}"
 
-- name: Make authelia directory.
-  file:
-    path: "{{ volumes_root }}/authelia"
-    state: directory
-
 - name: Create necessary folders, with appropriate permissions.
   file:
     path: "{{ volumes_root }}/authelia/{{ item }}"
@@ -39,8 +34,11 @@
   template:
     src: docker-compose.authelia.yml.j2
     dest: "{{ volumes_root }}/authelia/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Generate new argon2id compatible password.
   shell: >
@@ -51,22 +49,31 @@
   template:
     src: userdb.yml.j2
     dest: "{{ volumes_root }}/authelia/userdb.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     authelia_hash: "{{ authelia_hash.stdout }}"
+  become: yes
 
 - name: Copy authelia_config.yml file into place.
   template:
     src: authelia_config.yml.j2
     dest: "{{ volumes_root }}/authelia/config/configuration.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     domain_parts: "{{ domain.split('.') }}"
+  become: yes
 
 - name: Copy authelia_config-tor.yml file into place.
   template:
     src: authelia_config-tor.yml.j2
     dest: "{{ volumes_root }}/authelia/authelia_config-tor.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     domain_parts: "{{ domain.split('.') }}"
+  become: yes
 
 - name: Configure authelia systemd service.
   become: yes

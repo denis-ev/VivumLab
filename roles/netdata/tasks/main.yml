@@ -3,8 +3,11 @@
   file:
     path: "{{ volumes_root }}/netdata/{{item}}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   loop:
     - "config"
+  become: yes
 
 - name: Install necessities and nice-to-haves
   become: yes
@@ -12,13 +15,6 @@
     name:
       - apache2-utils
   when: (ansible_facts['distribution'] == "Ubuntu") or (ansible_facts['distribution'] == "Debian")
-
-- name: Install necessities and nice-to-haves (CentOS)
-  become: yes
-  yum:
-    name:
-      - httpd-tools
-  when: ansible_facts['distribution'] == "CentOS"
 
 - name: Test Setting Fact.
   shell: htpasswd -nbB {{ default_username }} "{{ default_password }}" | sed -e s/\\$/\\$\\$/g
@@ -31,15 +27,18 @@
   template:
     src: docker-compose.netdata.yml.j2
     dest: "{{ volumes_root }}/netdata/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
     htpasswd: "{{htpasswd.stdout}}"
+  become: yes
 
 - name: Configure netdata systemd service.
-  become: yes
   template:
     src: service.j2
     dest: /etc/systemd/system/netdata.service
+  become: yes
 
 - name: Pull netdata docker images
   docker_compose:
@@ -64,15 +63,6 @@
 - name: Remove temp container.
   shell: docker rm -f netdata_tmp
   ignore_errors: yes
-
-- name: Recursively change ownership of a directory
-  file:
-    path: "{{ volumes_root}}/netdata"
-    state: directory
-    recurse: yes
-    owner: "{{ uid_output.stdout }}"
-    group: "{{ gid_output.stdout }}"
-  become: yes
 
 - name: Start netdata
   systemd:

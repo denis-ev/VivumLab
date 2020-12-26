@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/n8n"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy n8n docker-compose.yml file into place.
   template:
     src: docker-compose.n8n.yml.j2
     dest: "{{ volumes_root }}/n8n/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure n8n systemd service.
   become: yes

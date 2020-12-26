@@ -5,6 +5,7 @@
 require 'rubygems'
 require 'bundler'
 require 'securerandom'
+require_relative 'tasks/lib/vlab_i18n'
 Bundler.require(:default)
 
 # This file contains just enough code to bootstrap the CLI.
@@ -57,5 +58,6 @@ class Vlab < Thor
     true
   end
 end
+
 # Kick off the actual cli app.
 Vlab.start
