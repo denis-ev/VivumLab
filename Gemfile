@@ -20,3 +20,4 @@ gem 'ffi', "1.13.1"
 gem 'ffi-locale'
 gem 'ffi-ncurses'
 gem 'yaml_vault'
+gem 'i18n'
