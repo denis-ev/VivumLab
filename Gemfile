@@ -22,5 +22,5 @@ gem 'ffi-ncurses'
 gem 'yaml_vault'
 
 group :dev do
-    gem 'solargraph'
+  gem 'solargraph'
 end
