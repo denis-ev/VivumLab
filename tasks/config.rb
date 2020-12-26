@@ -7,14 +7,14 @@ class Config < Thor
   include Utils
   namespace 'config'
   require 'yaml'
-  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none
+  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
   desc 'new', 'Creates or Updates the config file, as necessary'
   def new
-    I18n.t(:s_config_creating)
+    say I18n.t(:s_config_creating).light_blue
     invoke 'sanity_checks:local'
-    run_playbook('playbook.config.yml', options)
+    run_config_playbook(options)
   end
 
   desc 'show', 'Shows the configuration settings for a specified service'
@@ -86,11 +86,13 @@ class Config < Thor
     end
   end
 
-  def draw_error_table(config_key, good_config_key)
-    I18n.t(:s_config_keynomatch).red
-    I18n.t(:s_config_possiblekey).yellow
-    table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
-                           rows: decrypted_config_file[good_config_key])
-    say table.render(:unicode)
+  no_commands do
+    def draw_error_table(config_key, good_config_key)
+      I18n.t(:s_config_keynomatch).red
+      I18n.t(:s_config_possiblekey).yellow
+      table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
+                            rows: decrypted_config_file[good_config_key])
+      say table.render(:unicode)
+    end
   end
 end

@@ -6,6 +6,9 @@ class Migration < Thor
   include Utils
   include VlabI18n
 
+  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+
   desc 'single_config', 'Migrates away from a config.yml, and vault.yml to a single encrypted.yml'
   def single_config
     # This task should return, having done nothing UNLESS
@@ -23,8 +26,8 @@ class Migration < Thor
       @decrypted_config_file.ansible_become_password = vault_file.ansible_become_password
       @decrypted_config_file.default_password = vault_file.default_password
       save_config_file
-      FileUtils.mv "#{options[:config_dir]}/config.yml", "#{options[:config_dir]}/config.old"
-      FileUtils.mv "#{options[:config_dir]}/vault.yml", "#{options[:config_dir]}/vault.old"
+      FileUtils.rm "#{options[:config_dir]}/config.yml"
+      FileUtils.rm "#{options[:config_dir]}/vault.yml"
     else
       I18n.t(:s_migration_notdone)
     end

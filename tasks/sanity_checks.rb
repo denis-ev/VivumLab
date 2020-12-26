@@ -21,7 +21,7 @@ class SanityChecks < Thor
     invoke 'check_for_git'
     invoke 'check_for_precommit'
 
-    I18n.t(:s_sc_localpassed).green
+    say I18n.t(:s_sc_localpassed).green
   end
 
   desc "remote", "Remote Server sanity checks"
@@ -36,8 +36,6 @@ class SanityChecks < Thor
   def check_for_settings
     FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
     invoke 'migration:single_config'
-    #File.write("#{options[:config_dir]}/config.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/config.yml"
-    #File.write("#{options[:config_dir]}/vault.yml", "blank_on_purpose: True") unless File.exist? "#{options[:config_dir]}/vault.yml"
     File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
   end
 
@@ -58,7 +56,7 @@ class SanityChecks < Thor
   desc 'check_for_git', 'Checks the local machine for Git'
   def check_for_git
     `which git`
-    I18n.t(:s_sc_gitnoexist).red unless $?.success?
+    I18n.t(:s_sc_gitnoexist).red unless $CHILD_STATUS.success?
   end
 
   desc 'check_for_precommit', 'Checks for the presence of Pre-commit'

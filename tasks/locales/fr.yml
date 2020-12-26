@@ -1,9 +1,9 @@
 fr:
   # config.rb
-  
+
   # core.rb
   s_core_currentversion: "You have version #{current_version}"
-  s_core_versionlatest: "You\'re up to date"
+  s_core_versionlatest: "You're up to date"
   s_core_versionupdate: "Consider updating to #{latest_version}"
   s_core_deploy: "Deploying Vivumlab"
   s_core_uninstall: |+
@@ -22,7 +22,7 @@ fr:
   s_deprecated_decrypted: "Vault Decrypted"
   s_deprecated_failencrypt: "This command can fail, if the vault was already encrypted"
   s_deprecated_faildecrypt: "This command can fail, if the vault was already decrypted"
-  
+
   # dev.rb
   s_dev_welcome: "Welcome to VivumLab Developer Setup"
   q_dev_contribute: "Do you want to contribute to VivumLab (Yes or no)?"
@@ -31,8 +31,8 @@ fr:
     "First and foremost, please make sure you have read the developer docs"
     "You can find the developers docs. here:"
     "# TODO: add url to dev docs"
-    
-  s_dev_precommitwarning: "Before you push any changes you\'ve made, pre-commit will need to be installed on your system"
+
+  s_dev_precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
   s_dev_pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
   s_dev_precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
   s_dev_readythanks: |+
@@ -51,7 +51,7 @@ fr:
 
   # migration.rb
   s_migration_notdone: "Single Config Migration did not run, because it was not needed"
-  
+
   # sanity_checks.rb
   s_sc_localpassed: "Local sanity checks passed."
   s_sc_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
@@ -74,7 +74,7 @@ fr:
     "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
     "Run vlab dev_setup, when you're ready"
   s_sc_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
-  
+
   # server.rb
   s_server_shutdown: "Server will shutdown in #{time} minute(s)"
   s_server_restart: "Server will restart in #{time} minute(s)"

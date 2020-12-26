@@ -16,17 +16,41 @@ module Utils
       playbook_command = <<-PLAYBOOK
       ansible-playbook #{playbook} #{convert_debug_enum(options[:debug].to_sym)} \
       -e \@./#{@temp_config} \
-      -e \@./#{options[:config_dir]}/vault.yml \
       #{extra} \
       -i inventory
       PLAYBOOK
-      I18n.t(:s_utils_playbookexecuting).yellow if options[:debug] != :none
-      execute_in_shell(playbook_command.squeeze(" ").strip)
-      I18n.t(:s_utils_playbookexecuted).green
-    rescue
-      I18n.t(:s_utils_playbookerror).red
+      binding.pry
+      say I18n.t(:s_utils_playbookexecuting).yellow if options[:debug] != :none
+      execute_in_shell(playbook_command.squeeze(' ').strip)
+      say I18n.t(:s_utils_playbookexecuted).green
+    rescue => e
+      say I18n.t(:s_utils_playbookerror).red
+      binding.pry
     ensure
       FileUtils.rm_f @temp_config
+    end
+  end
+
+  def run_config_playbook(options, extra='')
+    begin
+      playbook_command = <<-PLAYBOOK
+      ansible-playbook playbook.config.yml #{convert_debug_enum(options[:debug].to_sym)} \
+      #{extra} \
+      -i inventory
+      PLAYBOOK
+      say I18n.t(:s_utils_playbookexecuting).yellow if options[:debug] != :none
+      execute_in_shell(playbook_command.squeeze(' ').strip)
+      say I18n.t(:s_utils_playbookexecuted).green
+      # Because we always invoke migrations as part of the sanity checks,
+      # this invoke call fails (as already run) if written this way:
+      # invoke 'migration:single_config', [], options
+      # so we'll invoke it manually
+      migration = Migration.new
+      migration.options = options
+      migration.single_config
+    rescue => e
+      say "Failed to run Ansible playbook: playbook.config.yml".red
+      say "Error is: #{e}"
     end
   end
 
