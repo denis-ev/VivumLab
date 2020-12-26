@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/ownphotos"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy ownPhotos docker-compose.yml file into place.
   template:
     src: docker-compose.ownphotos.yml.j2
     dest: "{{ volumes_root }}/ownphotos/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure ownPhotos systemd service.
   become: yes

@@ -33,7 +33,7 @@ services:
 {% include './labels.j2' %}
 
 
-  PackageFileName_db:
+  db:
     image: "postgres"
     restart: unless-stopped
     networks:

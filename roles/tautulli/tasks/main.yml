@@ -3,23 +3,19 @@
   file:
     path: "{{ volumes_root }}/tautulli"
     state: directory
-
-- name: Get UID
-  command: id -u {{ vlab_ssh_user }}
-  register: uid_output
-
-- name: Get GID
-  command: id -g {{ vlab_ssh_user }}
-  register: gid_output
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy tautulli docker-compose.yml file into place.
   template:
     src: docker-compose.tautulli.yml.j2
     dest: "{{ volumes_root }}/tautulli/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
-    uid: "{{ uid_output.stdout }}"
-    gid: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure tautulli systemd service.
   become: yes

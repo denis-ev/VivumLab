@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/folding_at_home"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy folding_at_home docker-compose.yml file into place.
   template:
     src: docker-compose.folding_at_home.yml.j2
     dest: "{{ volumes_root }}/folding_at_home/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  Become: yes
 
 - name: Configure folding_at_home systemd service.
   become: yes

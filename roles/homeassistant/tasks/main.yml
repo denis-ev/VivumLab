@@ -4,22 +4,28 @@
   file:
     path: "{{ volumes_root }}/homeassistant"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   when: not homeassistant.use_supervisord
+  become: yes
 
 - name: Copy homeassistant docker-compose.yml file into place.
   template:
     src: docker-compose.homeassistant.yml.j2
     dest: "{{ volumes_root }}/homeassistant/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
   when: not homeassistant.use_supervisord
+  become: yes
 
 - name: Configure homeassistant systemd service.
-  become: yes
   template:
     src: service.j2
     dest: /etc/systemd/system/homeassistant.service
   when: not homeassistant.use_supervisord
+  become: yes
 
 - name: Start homeassistant
   systemd:

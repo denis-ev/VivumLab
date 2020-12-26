@@ -3,19 +3,28 @@
   file:
     path: "{{ volumes_root }}/jenkins"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Make jenkins home directory.
   file:
     path: "{{ volumes_root }}/jenkins/jenkins_home"
     state: directory
     mode: '777'
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy jenkins docker-compose.yml file into place.
   template:
     src: docker-compose.jenkins.yml.j2
     dest: "{{ volumes_root }}/jenkins/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure jenkins systemd service.
   become: yes

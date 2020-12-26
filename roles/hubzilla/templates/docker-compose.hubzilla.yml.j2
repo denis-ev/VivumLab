@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '2.4'
 
 # This networks section required for the package to be visible to Traefik.
 # DO NOT Remove
@@ -7,23 +7,22 @@ networks:
   traefik_network:
     external:
       name: vivumlab_traefik
-  hubzilla_frontnet:
-  hubzilla_backnet:
-
+  hubzilla_internal:
+    name: hubzilla_net
 
 services:
   web:
     container_name: hubzilla_web
     image: nginx:{{ hubzilla.web_version }}
     restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - "{{ volumes_root }}/hubzilla/data:/var/www/hubzilla"
+      - "{{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf:/etc/nginx/nginx.conf:ro"
     networks:
       - traefik_network
-      - hubzilla_frontnet
-    depends_on:
-      - app
-    volumes:
-      - {{ volumes_root }}/hubzilla/data:/var/www/hubzilla
-      - {{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf:/etc/nginx/nginx.conf:ro
     labels:
       - "traefik.http.services.hubzilla.loadbalancer.server.scheme=http"
       - "traefik.http.services.hubzilla.loadbalancer.server.port=80"
@@ -31,10 +30,10 @@ services:
 
   app:
     container_name: hubzilla
-    image: voryzen/hubzilla-docker:{{ hubzilla.version }}
+    image: sebt3/hubzilla:{{ hubzilla.version }}
     restart: unless-stopped
     depends_on:
-      - db
+      - web
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -48,13 +47,23 @@ services:
       SMTP_PORT: {{ smtp.port }}
       SMTP_USER: {{ smtp.user }}
       SMTP_PASS: {{ smtp.pass }}
-      FEDERATE: "yes"
-      TIMEZONE: {{ common_timezone }}
-    networks:
-      - hubzilla_frontnet
-      - hubzilla_backnet
     volumes:
-      - {{ volumes_root }}/hubzilla/data:/var/www/hubzilla
+      - "{{ volumes_root }}/hubzilla/data:/var/www/hubzilla"
+    networks:
+      - traefik_network
+      - hubzilla_internal
+
+  cron:
+    container_name: hubzilla_cron
+    image: sebt3/hubzilla:{{ hubzilla.version }}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["crond", "-f"]
+    volumes:
+      - "{{ volumes_root }}/hubzilla/data:/var/www/hubzilla"
+    networks:
+      - hubzilla_internal
 
   db:
     container_name: hubzilla_db
@@ -64,7 +73,12 @@ services:
       POSTGRES_PASSWORD: {{lookup('password', './settings/passwords/hubzilla-db_password')}}
       POSTGRES_USER: hubzilla
       POSTGRES_DB: hubzilla
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hubzilla"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
-      - {{ volumes_root }}/hubzilla/db:/var/lib/postgresql/data/
+      - "{{ volumes_root }}/hubzilla/db:/var/lib/postgresql/data/"
     networks:
-      - hubzilla_backnet
+      - hubzilla_internal

@@ -1,20 +1,23 @@
 ---
 - name: Make funkwhale directory.
   file:
-    path: "{{ volumes_root }}/funkwhale"
+    path: "{{ volumes_root }}/funkwhale/{{ item }}"
     state: directory
-
-- name: Make funkwhale media directory.
-  file:
-    path: "{{ volumes_root }}/funkwhale/media"
-    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "media"
+  become: yes
 
 - name: Copy funkwhale docker-compose.yml file into place.
   template:
     src: docker-compose.funkwhale.yml.j2
     dest: "{{ volumes_root }}/funkwhale/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure funkwhale systemd service.
   become: yes

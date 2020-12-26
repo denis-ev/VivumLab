@@ -3,6 +3,9 @@
   file:
     path: "{{ volumes_root }}/privatebin"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Create necessary folders, with appropriate permissions.
   file:
@@ -28,6 +31,9 @@
   template:
     src: docker-compose.privatebin.yml.j2
     dest: "{{ volumes_root }}/privatebin/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure privatebin systemd service.
   become: yes
