@@ -3,6 +3,7 @@ module Utils
   include VlabConstants
   require_relative './lib/config_file_utils.rb'
   include ConfigFileUtils
+  include VlabI18N
 
   def run_playbook(playbook, options, extra="")
     say "Using config directory: #{options[:config_dir]}/config.yml".yellow

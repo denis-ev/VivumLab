@@ -4,6 +4,7 @@
 class Dev < Thor
   require './tasks/utils'
   include Utils
+  include VlabI18N
 
   desc 'lint', 'Lints all the YAML files'
   def lint

@@ -1,6 +1,7 @@
 class Service < Thor
   require './tasks/utils.rb'
   include Utils
+  include VlabI18N
 
   desc "remove", "Removes the specified service from the VivumLab server"
   def remove(service)

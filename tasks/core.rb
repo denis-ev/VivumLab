@@ -5,6 +5,7 @@ class Core < Thor
   require './tasks/utils'
   include Utils
   require 'etc'
+  include VlabI18N
 
   ENCRYPTION_KEY = "#{Dir.home}/.vlab_vault_pass"
 

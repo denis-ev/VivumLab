@@ -4,6 +4,7 @@
 class Migration < Thor
   require './tasks/utils'
   include Utils
+  include VlabI18N
 
   desc 'single_config', 'Migrates away from a config.yml, and vault.yml to a single encrypted.yml'
   def single_config

@@ -1,4 +1,5 @@
 class Terraform < Thor
+  include VlabI18N
 
   desc "terraform", "Spins up a cloud server with Terraform"
   def terraform

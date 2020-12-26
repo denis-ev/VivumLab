@@ -1,6 +1,7 @@
 class Ssh < Thor
   require './tasks/utils.rb'
   include Utils
+  include VlabI18N
 
   desc "launch", "Opens a shell on your VivumLab server"
   def launch
