@@ -160,7 +160,7 @@ docs:
   domain: {{ docs.domain | default(False) }}
   subdomain: {{ docs.subdomain | default("docs") }}
   version: {{ docs.version | default("1.0.4") }}
-  amd64: "verified"
+  amd64: "verified" {# "verified" or "supported" or "unsupported" or False #}
   arm64: "verified"
   armv7: "verified"
 apache2:
