@@ -1,4 +1,7 @@
 en:
+  config:
+    test: "this is a test"
+
   # config.rb
   s_config_creating: "Creating, or updating Config file #{options[:config_dir]}/config.yml"
   s_config_resetting: "Resetting config file #{options[:config_dir]}/config.yml"
