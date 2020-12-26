@@ -20,17 +20,15 @@ class Dev < Thor
   def setup
     return if system('which pre-commit >/dev/null')
 
-    say 'Welcome to VivumLab Developer Setup'.blue
-    return unless yes?('Do you want to contribute to VivumLab (Yes or no)?')
+    I18n.t(:s_dev_welcome)
+    return unless yes?("I18n.t(:q_dev_contribute)", :yellow)
 
-    say 'Thanks for helping out'.light_green
-    # TODO: add url to dev docs
-    say 'First, please make sure you have read the developer docs'.light_yellow
-    say 'Before you push any changes you\'ve made, pre-commit will need to be installed on your system'.light_yellow
+    I18n.t(:s_dev_welcome).green
+    I18n.t(:s_dev_readdevdocs).yellow
+    I18n.t(:s_dev_precommitwarning).yellow
     `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?('Install pre-commit now?')
-    say 'Vlab was unable to find Python3 using `which python3`. You must install python3'.red unless python3_installed
-    failed_to_find_precommit = 'Unable to find pre-commit in your path, you may need to add ~/bin to your path.'
-    say failed_to_find_precommit.red unless system('which pre-commit >/dev/null')
-    say 'All set!'.green
+    I18n.t(:s_dev_pythonerror).red unless python3_installed
+    I18n.t(:s_dev_precommiterror).red unless system('which pre-commit >/dev/null')
+    I18n.t(:s_dev_readythanks).green
   end
 end

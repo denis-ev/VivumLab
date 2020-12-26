@@ -11,9 +11,9 @@ class Core < Thor
 
   desc 'check_version', 'checks the local version against the latest from github'
   def check_version
-    say "You have version #{current_version}".blue
-    say 'You\'re up to date'.green if current_version == latest_version
-    say "Consider updating to #{latest_version}".yellow if current_version != latest_version
+    I18n.t(:s_core_currentversion)
+    I18n.t(:s_core_versionlatest).green if current_version == latest_version
+    I18n.t(:s_core_versionupdate).yellow if current_version != latest_version
     invoke 'sanity_checks:local'
   end
 
@@ -34,22 +34,24 @@ class Core < Thor
 
   desc 'deploy', 'Deploys VivumLab, configures it first if needed'
   def deploy
-    say 'Deploying Vivumlab'.green
+    I18n.t(:s_core_deploy).green
     run_playbook('playbook.vivumlab.yml', options)
   end
 
-  desc 'uninstall', 'Uninstalls VivumLab'
-  def uninstall
-    invoke 'build', options
-    say 'Uninstalling Vivumlab'.red
-    return unless yes? 'Are you sure?'
-
-    run_playbook('playbook.remove.yml', options)
-  end
+  #desc 'uninstall', 'Uninstalls VivumLab'
+  #def uninstall
+  #  invoke 'build', options
+  #  I18n.t(:s_core_uninstall).yellow
+  #  return unless yes? I18n.t(:q_core_uninstall).red
+  #
+  #  run_playbook('playbook.remove.yml', options)
+  #  I18n.t(:s_core_uninstalled).yellow
+  #end
 
   desc 'restore', 'Restores a server from backups. Assuming you ran them'
   def restore
-    say 'Restoring...'
+    I18n.t(:s_core_restoring).yellow
     run_playbook('playbook.restore.yml', options)
+    I18n.t(:s_core_restored).yellow
   end
 end

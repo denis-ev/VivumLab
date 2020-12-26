@@ -1,14 +1,56 @@
 en:
-  # cli.rb
-  
   # config.rb
-  
+  s_config_creating: "Creating, or updating Config file #{options[:config_dir]}/config.yml"
+  s_config_resetting: "Resetting config file #{options[:config_dir]}/config.yml"
+  s_config_backup: "Backing up your existing config"
+  S_config_editfile: "Decrypting and editing the config file at #{options[:config_dir]}/encrypted.yml"
+  s_config_editerror: "Something went wrong executing the decryption and or editing the file"
+  s_config_fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+  s_config_decrypted: "Config file is now, decrypted"
+  s_config_encrypted: "Config file is now, encrypted"
+  s_config_nokey: "Key #{options[:config_key]} not found in either config file. Did you spell it right?"
+  s_config_keynomatch: "Unable to find a full match for the key #{config_key}"
+  s_config_possiblekey: "Here\'s some possible matches:"
+
   # core.rb
-  
+  s_core_currentversion: "You have version #{current_version}"
+  s_core_versionlatest: "You\'re up to date"
+  s_core_versionupdate: "Consider updating to #{latest_version}"
+  s_core_deploy: "Deploying Vivumlab"
+  s_core_uninstall: |+
+    "Uninstalling VivumLab is irreversible, and should always be done with caution"
+    "Make sure to backup any files that you may want to keep before uninstalling"
+  q_core_uninstall: "Are you sure you want to uninstall VivumLab"
+  q_core_uninstallconfirm: "Confirm again, if you are sure"
+  s_core_uninstalled: "VivumLab has been uninstalled."
+  s_core_restoring: "Restoring your backups, now.."
+  s_core_restored: "Backups have been restored"
+
   # deprecated.rb
+  s_deprecated_encrypting: "Encrypting the vault"
+  s_deprecated_encrypted: "Vault Encrypted"
+  s_deprecated_decrypting: "Decrypting the vault"
+  s_deprecated_decrypted: "Vault Decrypted"
+  s_deprecated_failencrypt: "This command can fail, if the vault was already encrypted"
+  s_deprecated_faildecrypt: "This command can fail, if the vault was already decrypted"
   
   # dev.rb
-  
+  s_dev_welcome: "Welcome to VivumLab Developer Setup"
+  q_dev_contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+  s_dev_thanks: "Thanks for helping out"
+  s_dev_readdevdocs: |+
+    "First and foremost, please make sure you have read the developer docs"
+    "You can find the developers docs. here:"
+    "# TODO: add url to dev docs"
+    
+  s_dev_precommitwarning: "Before you push any changes you\'ve made, pre-commit will need to be installed on your system"
+  s_dev_pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+  s_dev_precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+  s_dev_readythanks: |+
+    "Ok, all set! Thank you for being a part of the VivumLab Community"
+    "We hope that you will enjoy your time with us"
+    "And we look forward to achieving great things, together"
+
   # git.rb
   s_git_settingssyncing: "Syncing settings via Git"
   s_git_settingssynced: "Settings synced"

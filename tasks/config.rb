@@ -12,7 +12,7 @@ class Config < Thor
 
   desc 'new', 'Creates or Updates the config file, as necessary'
   def new
-    say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
+    I18n.t(:s_config_creating)
     invoke 'sanity_checks:local'
     run_playbook('playbook.config.yml', options)
   end
@@ -27,23 +27,23 @@ class Config < Thor
 
   desc 'reset', 'Resets Vlab config'
   def reset
-    say "Resetting Config file #{options[:config_dir]}/config.yml".blue
-    say 'Backing up your existing config'.blue
+    I18n.t(:s_config_resetting)
+    I18n.t(:s_config_backup)
     FileUtils.mv("#{options[:config_dir]}/", 'settings-backup')
     invoke 'config:new'
   end
 
   desc 'edit_raw', 'Decrypts, and opens the config file in nano. Encrypts on save'
   def edit_raw
-    say "Decrypting and editing the config file at #{options[:config_dir]}/encrypted.yml".light_blue
+    I18n.t(:s_config_editfile)
     begin
       write_temporary_decrypted_config
       execute_in_shell "nano #{@temp_config}"
     rescue Subprocess::NonZeroExit
-      say 'Something went wrong executing the decryption and or editing the file'.red
+      I18n.t(:s_config_editerror).red
     ensure
       FileUtils.rm_f @temp_config
-      say 'For security reasons the temporary decrypted config file was being deleted.'.green
+      I18n.t(:s_config_fileremove).yellow
     end
   end
 
@@ -52,12 +52,14 @@ class Config < Thor
   def decrypt
     write_temporary_decrypted_config
     FileUtils.mv @temp_config, "#{options[:config_dir]}/#{options[:outputfile]}"
+    I18n.t(:s_config_decrypted).green
   end
 
   desc 'encrypt', 'Encrypts a given config.yml to encrypted.yml'
   option :inputfile, required: false, desc: 'Name of the file to encrypt', default: 'decrypted.yml', aliases: ['-i']
   def encrypt
     encrypt_temporary_decrypted_config "#{options[:config_dir]}/#{options[:inputfile]}"
+    I18n.t(:s_config_encrypted).green
   end
 
   desc 'set', 'Sets a config variable'
@@ -69,7 +71,7 @@ class Config < Thor
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
     # if good_config_key is nil, then the key provided doesn't match *at all* throw an error.
     if good_config_key.nil?
-      say "Key #{options[:config_key]} not found in either config file. Did you spell it right?".red
+      I18n.t(:s_config_nokey).red
       # Following else if block only executes if the user supplied key is entirely valid and found in the config file
     elsif options[:config_key] == good_config_key
       # rubocop:disable Security/Eval
@@ -85,8 +87,8 @@ class Config < Thor
   end
 
   def draw_error_table(config_key, good_config_key)
-    say "Unable to find a full match for the key #{config_key}".red
-    say 'Here\'s the most specific match found:'.red
+    I18n.t(:s_config_keynomatch).red
+    I18n.t(:s_config_possiblekey).yellow
     table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
                            rows: decrypted_config_file[good_config_key])
     say table.render(:unicode)

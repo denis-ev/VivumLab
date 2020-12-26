@@ -1,6 +1,5 @@
 class CLI < Thor
   include Utils
-  include VlabI18n
 
   desc 'debug_cli', 'Launches Pry within the context of the CLI. Used to debug the CLI'
   def debug_cli
