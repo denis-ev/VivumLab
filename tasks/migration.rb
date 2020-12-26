@@ -10,7 +10,7 @@ class Migration < Thor
         if(File.exist? "#{options[:config_dir]}/config.yml") &&
             (File.exist? "#{options[:config_dir]}/vault.yml") &&
             (!File.exist? "#{options[:config_dir]}/encrypted.yml")
-            invoke "deprecated:decrypt", [], {}
+            invoke "deprecated:vault_decrypt", [], {}
             config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
             vault_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
 

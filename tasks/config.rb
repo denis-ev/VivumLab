@@ -9,6 +9,7 @@ class Config < Thor
   desc "new", "Creates or Updates the config file, as necessary"
   def new()
     say "Creating, or updating Config file #{options[:config_dir]}/config.yml".green
+    invoke "sanity_checks:local"
     run_playbook("playbook.config.yml", options)
   end
 
@@ -25,7 +26,7 @@ class Config < Thor
     say "Resetting Config file #{options[:config_dir]}/config.yml".green
     say "Backing up your existing config"
     FileUtils.mv("#{options[:config_dir]}/", "settings-backup")
-    invoke "config:initial_config"
+    invoke "config:new"
   end
 
   desc "edit_raw", "Decrypts, and opens the config file in nano. Encrypts on save"
