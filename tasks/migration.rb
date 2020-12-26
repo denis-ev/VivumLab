@@ -26,7 +26,8 @@ class Migration < Thor
       FileUtils.mv "#{options[:config_dir]}/config.yml", "#{options[:config_dir]}/config.old"
       FileUtils.mv "#{options[:config_dir]}/vault.yml", "#{options[:config_dir]}/vault.old"
     else
-      say 'Single Config Migration did not run, because it was not needed'.light_blue
+      I18n.t(:s_migration_notdone)
+      say 'Single Config Migration did not run, because it was not needed'
     end
   end
 end

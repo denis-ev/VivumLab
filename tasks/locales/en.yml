@@ -10,8 +10,16 @@ en:
   # dev.rb
   
   # git.rb
-  
+  s_git_settingssyncing: "Syncing settings via Git"
+  s_git_settingssynced: "Settings synced"
+  s_git_notsetup: |+
+    "Warning! Your settings directory is not setup as a Git Repository"
+    "Make sure to back them up using some other method. For more information, see:"
+    "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
+  s_git_trackbranch: "You are now tracking the #{options[:branch]} branch"
+
   # migration.rb
+  s_migration_notdone: "Single Config Migration did not run, because it was not needed"
   
   # sanity_checks.rb
   s_sc_localpassed: "Local sanity checks passed."
@@ -37,8 +45,34 @@ en:
   s_sc_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
   
   # server.rb
+  s_server_shutdown: "Server will shutdown in #{time} minute(s)"
+  s_server_restart: "Server will restart in #{time} minute(s)"
 
   # service.rb
+  s_service_removing: "Removing data for service: #{options[:service]}"
+  s_service_removed: "Data for #{options[:service]}, removed"
+  s_service_resetting: "Resetting #{options[:service]}"
+  s_service_reset: "#{options[:service]} has been reset}"
+  s_service_stopping: |+
+    "Note: If no services are specified, VivumLab will stop all enabled services"
+    "Stopping services now.."
+  s_service_stopped: "All specified services have been stopped"
+  s_service_restarting: |+
+    "Note: If no services are specified, VivumLab will restart all enabled services"
+    "Restarting services now.."
+  s_service_restarted: "All specified services have been restarted"
+  s_service_updating: |+
+    "Note: If no services are specified, VivumLab will update all enabled services"
+    "Updating services now.."
+  s_service_updated: "All specified services have been updated"
+  s_service_customizing: |+
+    "This command creates a file, that will override the original docker-compose file for #{options[:service]}"
+    "Any changes that the user wishes to make, should be made to the override file, not the original."
+    "VivumLab will not change, nor delete the original file; the original file will just be ignored"
+  q_service_customizing: "Did you want to make changes to the #{options[:service]} service?"
+  s_service_customized: "#{options[:service]} is ready to customize"
+  s_service_enabled: "#{options[:service]} is now enabled"
+  s_service_disabled: "#{options[:service]} is now disabled"
 
   # ssh.rb
   s_ssh_launching: "Launching an SSH session to your server"

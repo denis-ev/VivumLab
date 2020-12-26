@@ -15,7 +15,7 @@ class Terraform < Thor
     I18n.t(:s_terraform_ip_set).green
   end
 
-  desc "destroy", "Destroys server(s) creatd by terraform"
+  desc "destroy", "Destroys server(s) created by terraform"
   def destroy
     I18n.t(:s_terraform_destroying).yellow
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform destroy'")
