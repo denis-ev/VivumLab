@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 # Contains logic surrounding vivumlab config files
 module ConfigFileUtils
-
   # Class extends hashie::mash to silence warnings
   class ConfigFile < Hashie::Mash
     disable_warnings
@@ -26,10 +26,7 @@ module ConfigFileUtils
     return @decrypted_config_file unless @decrypted_config_file.nil?
 
     pass = File.read('/vlab_vault_pass')
-    temp = YamlVault::Main.from_file(
-      "#{options[:config_dir]}/encrypted.yml", [['*']],
-      passphrase: pass
-      ).decrypt_hash
+    temp = YamlVault::Main.from_file("#{options[:config_dir]}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
     @decrypted_config_file ||= ConfigFile.new(temp)
   end
 
@@ -63,15 +60,16 @@ module ConfigFileUtils
 
   def last_good_key(hsh, key)
     while true
+      # rubocop:disable Style/RescueModifier
       key_bad = hsh.instance_eval(key) rescue nil
+      # rubocop:enable Style/RescueModifier
       break unless key_bad.nil?
 
       parts = key.split('.') # break that key up into an array of strings
-      return nil if parts.size() == 1
+      return nil if parts.size == 1
 
-      key = parts.take(parts.size() -1).join('.') # reset the key to be one section shorter. ie: sui.enabled -> sui
+      key = parts.take(parts.size - 1).join('.') # reset the key to be one section shorter. ie: sui.enabled -> sui
     end
     key # return the current, valid key.
   end
-
 end
