@@ -1,4 +1,4 @@
-de:
+es:
   config:
     s_creating: "Creating, or updating Config file #{options[:config_dir]}/config.yml"
     s_resetting: "Resetting config file #{options[:config_dir]}/config.yml"

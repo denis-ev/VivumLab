@@ -9,12 +9,12 @@ class Git < Thor
   desc 'sync', 'Syncs your settings git repo'
   def sync
     if Dir.exist? "#{options[:config_dir]}/.git"
-      say I18n.t(:s_git_settingssyncing).yellow
+      say I18n.t(:git.s_settingssyncing).yellow
       ensure_precommit
       execute_git_sync
-      say I18n.t(:s_git_settingssynced).green
+      say I18n.t(:git.s_settingssynced).green
     else
-      say I18n.t(:s_git_notsetup).red
+      say I18n.t(:git.s_notsetup).red
     end
   end
 
@@ -22,7 +22,7 @@ class Git < Thor
   option :branch, required: true, type: :string, desc: 'The name of the branch, or tag you\'d like to use'
   def track
     execute_in_shell("git checkout #{options[:branch]}")
-    say I18n.t(:s_git_trackbranch).green
+    say I18n.t(:git.s_trackbranch).green
   end
 
   no_commands do

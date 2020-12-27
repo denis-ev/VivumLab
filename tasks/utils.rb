@@ -11,9 +11,9 @@ module Utils
   def run_playbook(playbook, options, extra = nil)
     write_temporary_decrypted_config
     execute_in_shell(playbook_command(playbook, extra, options[:debug].to_sym).strip)
-    say I18n.t(:s_utils_playbookexecuted).green
+    say I18n.t(:utils.s_playbookexecuted).green
   rescue Subprocess::NonZeroExit => e
-    say I18n.t(:s_utils_playbookerror).red
+    say I18n.t(:utils.s_playbookerror).red
     say "Exception is: #{e}"
   ensure
     FileUtils.rm_f @temp_config
@@ -29,9 +29,9 @@ module Utils
   end
 
   def run_config_playbook(options, extra = '')
-    say I18n.t(:s_utils_playbookexecuting).yellow if options[:debug] != :none
+    say I18n.t(:utils.s_playbookexecuting).yellow if options[:debug] != :none
     execute_in_shell(playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip)
-    say I18n.t(:s_utils_playbookexecuted).green
+    say I18n.t(:utils.s_playbookexecuted).green
     migration_invoke_override
   rescue Subprocess::NonZeroExit => e
     say 'Failed to run Ansible playbook: playbook.config.yml'.red

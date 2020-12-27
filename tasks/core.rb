@@ -11,9 +11,9 @@ class Core < Thor
 
   desc 'check_version', 'checks the local version against the latest from github'
   def check_version
-    say I18n.t(:s_core_currentversion)
-    say I18n.t(:s_core_versionlatest).green if current_version == latest_version
-    say I18n.t(:s_core_versionupdate).yellow if current_version != latest_version
+    say I18n.t(:core.s_currentversion)
+    say I18n.t(:core.s_versionlatest).green if current_version == latest_version
+    say I18n.t(:core.s_versionupdate).yellow if current_version != latest_version
     invoke 'sanity_checks:local'
   end
 
@@ -34,14 +34,14 @@ class Core < Thor
 
   desc 'deploy', 'Deploys VivumLab, configures it first if needed'
   def deploy
-    say I18n.t(:s_core_deploy).green
+    say I18n.t(:core.s_deploy).green
     run_playbook('playbook.vivumlab.yml', options)
   end
 
   desc 'restore', 'Restores a server from backups. Assuming you ran them'
   def restore
-    say I18n.t(:s_core_restoring).yellow
+    say I18n.t(:core.s_restoring).yellow
     run_playbook('playbook.restore.yml', options)
-    say I18n.t(:s_core_restored).yellow
+    say I18n.t(:core.s_restored).yellow
   end
 end

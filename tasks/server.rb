@@ -10,7 +10,7 @@ class Server < Thor
     # rubocop:disable Layout/LineLength
     execute_in_shell "ssh -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey} #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip} -p #{decrypted_config_file.vlab_port} sudo shutdown #{options[:time]}"
     # rubocop:enable Layout/LineLength
-    say I18n.t(:s_server_shutdown).yellow
+    say I18n.t(:server.s_shutdown).yellow
   end
 
   desc 'restart', 'Executes a restart of the Vlab server, optionally with countdown'
@@ -19,6 +19,6 @@ class Server < Thor
     # rubocop:disable Layout/LineLength
     execute_in_shell "ssh -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey} #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip} -p #{decrypted_config_file.vlab_port} sudo shutdown -r #{options[:time]}"
     # rubocop:enable Layout/LineLength
-    say I18n.t(:s_server_restart).yellow
+    say I18n.t(:server.s_restart).yellow
   end
 end
