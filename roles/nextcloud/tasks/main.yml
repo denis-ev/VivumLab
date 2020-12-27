@@ -7,7 +7,7 @@
     group: "{{ gid_output.stdout }}"
   with_items:
     - "config"
-    - "apps"
+    - "custom_apps"
     - "themes"
     - "postgres"
     - "web"

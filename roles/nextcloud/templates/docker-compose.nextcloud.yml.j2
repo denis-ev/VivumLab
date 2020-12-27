@@ -40,7 +40,7 @@ services:
     volumes:
       - "nextcloud:/var/www/html"
       - "{{ volumes_root }}/nextcloud/config:/var/www/html/config"
-      - "{{ volumes_root }}/nextcloud/apps:/var/www/html/custom_apps"
+      - "{{ volumes_root }}/nextcloud/custom_apps:/var/www/html/custom_apps"
       - "{{ volumes_root }}/nextcloud/themes:/var/www/html/themes"
       - "{{ storage_dir }}/Documents/NextCloud/data:/var/www/html/data"
     environment:
