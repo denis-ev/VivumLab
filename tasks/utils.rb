@@ -21,10 +21,12 @@ module Utils
 
   def playbook_command(playbook, extra, debug = '')
     command = []
-    command << "ansible-playbook #{playbook} #{debug}"
-    command << "-e \@./#{@temp_config}" if playbook.equals('playbook.config.yml')
+    command << "ansible-playbook #{playbook}"
+    command << convert_debug_enum(debug)
+    command << "-e \@./#{@temp_config}" if playbook != 'playbook.config.yml'
     command << extra.to_s
     command << '-i inventory'
+    binding.pry
     command.join(' ')
   end
 

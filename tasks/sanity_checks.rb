@@ -7,6 +7,7 @@ class SanityChecks < Thor
   REQUIRED_PYTHON_VERSION = '3.6.1'
   REQUIRED_PRECOMMIT_VERSION = '2.6.0'
   include VlabI18n
+  include VlabConstants
 
   desc 'check_ssh_keys', 'Creates or updates SSH keys as necessary'
   # @TODO: Write this task
@@ -41,7 +42,7 @@ class SanityChecks < Thor
 
   desc 'check_vault_pass', 'Checks for the presence of a Vault Password file'
   def check_vault_pass
-    return unless File.exist?('/vlab_vault_pass') || File.size('/vlab_vault_pass').zero?
+    return unless File.exist?('/vlab_vault_pass') && File.size('/vlab_vault_pass').zero?
 
     say I18n.t(:s_sc_vaultpassmissing).red
     say I18n.t(:s_sc_vaultpasscreate).light_yellow
