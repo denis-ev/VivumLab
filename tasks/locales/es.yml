@@ -78,7 +78,7 @@ es:
     s_lowprecommit: |+
       "Pre-commit is not installed or an earlier version than required."
       "Contributing to VivumLab requires Pre-Commit version #{REQUIRED_PRECOMMIT_VERSION} or above."
-      
+
       "Run `vlab dev setup` when you're ready.."
     s_lowpython: "Python version #{REQUIRED_PYTHON_VERSION} is required for VivumLab to work"
     s_noprecommit: |+
@@ -130,7 +130,7 @@ es:
     s_ip_set: |+
       "Place this IP where you want it in your settings.."
       "either as vlab_ip or bastion.server_address"
-       
+
       "Then run 'vlab deploy' to complete the setup."
     s_destroying: "Destroying terraform built server"
     s_destroy_success: "Cloud server(s) destroyed."
