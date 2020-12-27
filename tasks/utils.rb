@@ -26,7 +26,6 @@ module Utils
     command << "-e \@./#{@temp_config}" if playbook != 'playbook.config.yml'
     command << extra.to_s
     command << '-i inventory'
-    binding.pry
     command.join(' ')
   end
 
