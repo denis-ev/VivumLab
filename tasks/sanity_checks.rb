@@ -47,7 +47,7 @@ class SanityChecks < Thor
     say I18n.t(:sanity_checks.s_vaultpassmissing).red
     say I18n.t(:sanity_checks.s_vaultpasscreate).light_yellow
 
-    decision = yes?(I18n.t(:q_sc_vaultpasscreate), :yellow)
+    decision = yes?(I18n.t(:sanity_checks.q__vaultpasscreate), :yellow)
     invoke 'core:generate_vault_pass' if decision
   end
 

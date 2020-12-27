@@ -60,7 +60,7 @@ class Service < Thor
   desc 'customize', 'Allows you to edit a specific deployed service with a docker-compose.override.yml'
   def customize(service)
     say I18n.t(:service.s_customizing).yellow
-    return unless yes?(I18n.t(:q_service_customizing), :yellow)
+    return unless yes?(I18n.t(:service.q_customizing), :yellow)
 
     run_playbook('playbook.service-edit.yml', options, limit_to_service(service))
     say I18n.t(:service.s_customized).green

@@ -21,7 +21,7 @@ class Dev < Thor
     return if system('which pre-commit >/dev/null')
 
     say I18n.t(:dev.s_welcome)
-    return unless yes?(I18n.t(:q_dev_contribute), :yellow)
+    return unless yes?(I18n.t(:dev.q_contribute), :yellow)
 
     install_precommit
     say I18n.t(:dev.s_precommiterror).red unless system('which pre-commit >/dev/null')
