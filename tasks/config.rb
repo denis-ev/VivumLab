@@ -7,7 +7,10 @@ class Config < Thor
   include Utils
   namespace 'config'
   require 'yaml'
-  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :debug, desc: 'Debugs Ansible-playbook commands',
+                       enum: %w[none warn debug trace],
+                       default: :none,
+                       aliases: ['-d']
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
   desc 'new', 'Creates or Updates the config file, as necessary'
@@ -69,29 +72,24 @@ class Config < Thor
   # clear to new rubyists. I've tried to comment for clarity.
   def set
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
-    # if good_config_key is nil, then the key provided doesn't match *at all* throw an error.
-    if good_config_key.nil?
-      say I18n.t(:s_config_nokey).red
-      # Following else if block only executes if the user supplied key is entirely valid and found in the config file
-    elsif options[:config_key] == good_config_key
+    say I18n.t(:s_config_nokey).red unless good_config_key
+    eval_config_setting(good_config_key, options[:value]) if options[:config_key] == good_config_key
+    draw_error_table options[:config_key], good_config_key if options[:config_key].include? good_config_key
+  end
+
+  no_commands do
+    def eval_config_setting(key, value)
       # rubocop:disable Security/Eval
       eval("decrypted_config_file.#{good_config_key.chomp}=#{options[:value]}", binding, __FILE__, __LINE__)
       # rubocop:enable Security/Eval
       save_config_file
-      # this else block runs only when the user provided key partially matches. For instance if they
-      # gave us 'sui.enabled' instead of 'sui.enable' this block runs, and prints a table
-      # of all the sui.* keys and their current values.
-    else
-      draw_error_table options[:config_key], good_config_key
     end
-  end
 
-  no_commands do
     def draw_error_table(config_key, good_config_key)
-      say I18n.t(:s_config_keynomatch).red
+      say I18n.t(:s_config_keynomatch, config_key: config_key).red
       say I18n.t(:s_config_possiblekey).yellow
       table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
-                            rows: decrypted_config_file[good_config_key])
+                             rows: decrypted_config_file[good_config_key])
       say table.render(:unicode)
     end
   end

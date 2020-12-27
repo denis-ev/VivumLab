@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# serves as a namespace for cli development
 class CLI < Thor
   include Utils
 
@@ -10,5 +13,4 @@ class CLI < Thor
     binding.pry
     # rubocop:enable Lint/Debugger
   end
-
 end

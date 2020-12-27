@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class contains logic for verifing the "sanity" of the environment before
+# Class contains logic for verifing the 'sanity' of the environment before
 # vlab attempts to deploy, or configure services
 class SanityChecks < Thor
   require 'English'
@@ -24,7 +24,7 @@ class SanityChecks < Thor
     say I18n.t(:s_sc_localpassed).green
   end
 
-  desc "remote", "Remote Server sanity checks"
+  desc 'remote', 'Remote Server sanity checks'
   def remote
     say I18n.t(:s_sc_sshkeyverifying).yellow
     invoke check_ssh_keys
@@ -36,21 +36,18 @@ class SanityChecks < Thor
   def check_for_settings
     FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
     invoke 'migration:single_config'
-    File.write("tasks/ansible_bash.vars", "PASSWORDLESS_SSHKEY=''") unless File.exist? "tasks/ansible_bash.vars"
+    File.write('tasks/ansible_bash.vars', "PASSWORDLESS_SSHKEY=''") unless File.exist? 'tasks/ansible_bash.vars'
   end
 
   desc 'check_vault_pass', 'Checks for the presence of a Vault Password file'
   def check_vault_pass
-    if (!File.exist?("/vlab_vault_pass")) || (File.size("/vlab_vault_pass") == 0)
-      say I18n.t(:s_sc_vaultpassmissing).red
-      say I18n.t(:s_sc_vaultpasscreate).light_yellow
+    return unless File.exist?('/vlab_vault_pass') || File.size('/vlab_vault_pass').zero?
 
-      decision = yes?("say I18n.t(:q_sc_vaultpasscreate)", :yellow)
-      # decision = yes?("Let Vlab create a new `.vlab_vault_pass` for you? [yes/no]", :red, limited_to: ['yes', 'no'])
-      if decision
-        invoke "core:generate_vault_pass"
-      end
-    end
+    say I18n.t(:s_sc_vaultpassmissing).red
+    say I18n.t(:s_sc_vaultpasscreate).light_yellow
+
+    decision = yes?(I18n.t(:q_sc_vaultpasscreate), :yellow)
+    invoke 'core:generate_vault_pass' if decision
   end
 
   desc 'check_for_git', 'Checks the local machine for Git'
@@ -62,12 +59,8 @@ class SanityChecks < Thor
   desc 'check_for_precommit', 'Checks for the presence of Pre-commit'
   def check_for_precommit
     if system('which pre-commit', out: File::NULL)
-      pre_commit_version = `pre-commit --version`.chomp.split(' ').last if $CHILD_STATUS.success?
-      python_version = `python3 --version`.chomp.split(' ').last if $CHILD_STATUS.success?
       if python_version >= REQUIRED_PYTHON_VERSION
-        if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
-          say I18n.t(:s_sc_lowprecommit).yellow
-        end
+        say I18n.t(:s_sc_lowprecommit).yellow if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
       else
         say I18n.t(:s_sc_lowpython).yellow
       end
@@ -77,9 +70,11 @@ class SanityChecks < Thor
   end
 
   no_commands do
-    def check_ssh_with_keys()
-      execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file["VLAB_SSH_USER"]}@#{decrypted_config_file["VLAB_IP"]} exit"
-      say I18n.t(:s_sc_sshunable).red unless $?.success?
+    def check_ssh_with_keys
+      # rubocop:disable Layout/LineLength
+      execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file['VLAB_SSH_USER']}@#{decrypted_config_file['VLAB_IP']} exit"
+      # rubocop:enable Layout/LineLength
+      say I18n.t(:s_sc_sshunable).red unless $CHILD_STATUS.success?
     end
   end
 end

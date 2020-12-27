@@ -10,13 +10,8 @@ class Git < Thor
   def sync
     if Dir.exist? "#{options[:config_dir]}/.git"
       say I18n.t(:s_git_settingssyncing).yellow
-      FileUtils.mkdir_p "#{options[:config_dir]}/.git/hooks"
-      FileUtils.cp 'git_sync_pre_commit', "#{options[:config_dir]}/.git/hooks/pre-commit"
-      FileUtils.chmod '+x', "#{options[:config_dir]}/.git/hooks/pre-commit"
-
-      execute_in_shell("cd #{options[:config_dir]}/ && git pull && git add . > /dev/null")
-      execute_in_shell("cd #{options[:config_dir]}/ && git commit -a -m 'Settings update' || true")
-      execute_in_shell("cd #{options[:config_dir]}/ && git push > /dev/null")
+      ensure_precommit
+      execute_git_sync
       say I18n.t(:s_git_settingssynced).green
     else
       say I18n.t(:s_git_notsetup).red
@@ -28,5 +23,19 @@ class Git < Thor
   def track
     execute_in_shell("git checkout #{options[:branch]}")
     say I18n.t(:s_git_trackbranch).green
+  end
+
+  no_commands do
+    def ensure_precommit
+      FileUtils.mkdir_p "#{options[:config_dir]}/.git/hooks"
+      FileUtils.cp 'git_sync_pre_commit', "#{options[:config_dir]}/.git/hooks/pre-commit"
+      FileUtils.chmod '+x', "#{options[:config_dir]}/.git/hooks/pre-commit"
+    end
+
+    def execute_git_sync
+      execute_in_shell("cd #{options[:config_dir]}/ && git pull && git add . > /dev/null")
+      execute_in_shell("cd #{options[:config_dir]}/ && git commit -a -m 'Settings update' || true")
+      execute_in_shell("cd #{options[:config_dir]}/ && git push > /dev/null")
+    end
   end
 end

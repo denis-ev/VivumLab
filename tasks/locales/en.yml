@@ -12,7 +12,7 @@ en:
   s_config_decrypted: "Config file is now, decrypted"
   s_config_encrypted: "Config file is now, encrypted"
   s_config_nokey: "Key #{options[:config_key]} not found in either config file. Did you spell it right?"
-  s_config_keynomatch: "Unable to find a full match for the key #{config_key}"
+  s_config_keynomatch: "Unable to find a full match for the key %{config_key}"
   s_config_possiblekey: "Here's some possible matches:"
 
   # core.rb
@@ -129,7 +129,7 @@ en:
 
   # terraform.rb
   s_terraform_creating: "Creating a cloud server"
-  s_terraform_created_success: "Successfully created a server at: #{terraform_ip}"
+  s_terraform_created_success: "Successfully created a server at: %{terraform_ip}"
   s_terraform_ip_set: |+
     "Place this IP where you want it in your settings.."
     "either as vlab_ip or bastion.server_address"

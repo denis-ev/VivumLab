@@ -38,16 +38,6 @@ class Core < Thor
     run_playbook('playbook.vivumlab.yml', options)
   end
 
-  #desc 'uninstall', 'Uninstalls VivumLab'
-  #def uninstall
-  #  invoke 'build', options
-  #  say I18n.t(:s_core_uninstall).yellow
-  #  return unless yes? say I18n.t(:q_core_uninstall).red
-  #
-  #  run_playbook('playbook.remove.yml', options)
-  #  say I18n.t(:s_core_uninstalled).yellow
-  #end
-
   desc 'restore', 'Restores a server from backups. Assuming you ran them'
   def restore
     say I18n.t(:s_core_restoring).yellow
