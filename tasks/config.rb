@@ -72,7 +72,11 @@ class Config < Thor
   # clear to new rubyists. I've tried to comment for clarity.
   def set
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
+<<<<<<< HEAD
     say I18n.t(:config.s_nokey).red unless good_config_key
+=======
+    say I18n.t(:s_config_nokey).red && return unless good_config_key
+>>>>>>> e04de2fafb2c2d1679af8bbea24cfe9ac8a3cb06
     eval_config_setting(good_config_key, options[:value]) if options[:config_key] == good_config_key
     draw_error_table options[:config_key], good_config_key if options[:config_key].include? good_config_key
   end
