@@ -26,5 +26,7 @@ gem 'tty-table'
 gem 'yaml_vault'
 
 group :dev do
+  gem 'rubocop', '1.6.1'
   gem 'solargraph'
+  gem 'yard', '0.9.25'
 end
