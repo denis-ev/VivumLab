@@ -14,7 +14,6 @@ module Utils
     say I18n.t('utils.s_playbookexecuted').green
   rescue Subprocess::NonZeroExit => e
     say I18n.t('utils.s_playbookerror').red
-    say "Exception is: #{e}"
   ensure
     FileUtils.rm_f @temp_config
   end
@@ -35,8 +34,7 @@ module Utils
     say I18n.t('utils.s_playbookexecuted').green
     migration_invoke_override
   rescue Subprocess::NonZeroExit => e
-    say 'Failed to run Ansible playbook: playbook.config.yml'.red
-    say "Error is: #{e}"
+    say I18n.t('utils.s_configplaybookerror').red
   end
 
   def execute_in_shell(params)
