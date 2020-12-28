@@ -60,4 +60,36 @@ class Vlab < Thor
 end
 
 # Kick off the actual cli app.
-Vlab.start
+def log_filename
+  file = 'VlabDebug.txt'
+  dir  = File.dirname(file)
+  base = File.basename(file, '.*')
+  time = Time.now.to_i  # or format however you like
+  ext  = File.extname(file)
+  File.join(dir, "#{base}_#{time}#{ext}")
+end
+
+# rubocop:disable Style/GlobalVars
+$this_log = log_filename
+$logfile = File.new($this_log, 'w')
+$logfile.sync = true
+
+def $stdout.write(string)
+  $logfile.write string
+  super
+end
+
+def $stderr.write(string)
+  $logfile.write string
+  super
+end
+
+begin
+  Vlab.start
+ensure
+  if ARGV.join(' ').include? '-d'
+    results = HTTParty.post 'https://hastebin.com/documents', body: File.read($this_log)
+    puts "Your logs have been posted to: https://hastebin.com/#{results['key']}"
+  end
+end
+# rubocop:enable Style/GlobalVars
