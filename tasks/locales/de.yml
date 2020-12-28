@@ -1,14 +1,14 @@
 de:
   config:
     s_creating: "Creating, or updating Config file %{config_dir}/config.yml"
-    s_resetting: "Resetting config file %{config_dir}/config.yml"
+    s_resetting: "Resetting config file at %{config_dir}/config.yml"
     s_backup: "Backing up your existing config"
-    s_editfile: "Decrypting and editing the config file at %{config_dir}/encrypted.yml"
+    s_editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
     s_editerror: "Something went wrong executing the decryption and or editing the file"
     s_fileremove: "For security reasons, the temporary decrypted config file has been deleted."
     s_decrypted: "Config file is now, decrypted"
     s_encrypted: "Config file is now, encrypted"
-    s_nokey: "Key %{options[:config_key]} not found in either config file. Please check the key."
+    s_nokey: "Key %{config_key} not found in either config file. Please check the key."
     s_keynomatch: "Unable to find a full match for the key %{config_key}"
     s_possiblekey: "Here's some possible matches:"
 
@@ -58,17 +58,17 @@ de:
       "Warning! Your settings directory is not setup as a Git Repository"
       "Make sure to back them up using some other method. For more information, see:"
       "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
-    s_trackbranch: "You are now tracking the %{options[:branch]} branch"
+    s_trackbranch: "You are now tracking the %{branch} branch"
 
   migration:
-    s_notdone: "Single Config Migration did not run, because it was not needed"
+    s_notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
     s_localpassed: "Local sanity checks passed."
     s_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
     s_sshkeyverified: "SSH Keys are good to go!"
     s_vaultpassmissing: |+
-      "Oops, your vault password in %{Dir.home}, doesn't appear to exist."
+      "Oops, your vault password in %{home_dir}, doesn't appear to exist."
       "This is unusual, but could be the result of the username changing after setup."
     s_vaultpasscreate: |+
       "A new `.vlab_vault_pass` file can be created for you;"
@@ -77,10 +77,10 @@ de:
     s_gitnoexist: "You need to install git!"
     s_lowprecommit: |+
       "Pre-commit is not installed or an earlier version than required."
-      "Contributing to VivumLab requires Pre-Commit version %{REQUIRED_PRECOMMIT_VERSION} or above."
+      "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
 
       "Run `vlab dev setup` when you're ready.."
-    s_lowpython: "Python version %{REQUIRED_PYTHON_VERSION} is required for VivumLab to work"
+    s_lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
     s_noprecommit: |+
       "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
       "Run vlab dev_setup, when you're ready"
@@ -91,10 +91,10 @@ de:
     s_restart: "Server will restart in %{time} minute(s)"
 
   service:
-    s_removing: "Removing data for service: %{options[:service]}"
-    s_removed: "Data for %{options[:service]}, removed"
-    s_resetting: "Resetting %{options[:service]}"
-    s_reset: "%{options[:service]} has been reset}"
+    s_removing: "Removing data for service: %{service}"
+    s_removed: "Data for %{service}, removed"
+    s_resetting: "Resetting %{service}"
+    s_reset: "%{service} has been reset"
     s_stopping: |+
       "Note: If no services are specified, VivumLab will stop all enabled services"
       "Stopping services now.."
@@ -108,17 +108,17 @@ de:
       "Updating services now.."
     s_updated: "All specified services have been updated"
     s_customizing: |+
-      "This command creates a file, that will override the original docker-compose file for %{options[:service]}"
+      "This command creates a file, that will override the original docker-compose file for %{service}"
       "Any changes that the user wishes to make, should be made to the override file, not the original."
       "VivumLab will not change, nor delete the original file; the original file will just be ignored"
-    q_customizing: "Did you want to make changes to the %{options[:service]} service?"
-    s_customized: "%{options[:service]} is ready to customize"
-    s_enabled: "%{options[:service]} is now enabled"
-    s_disabled: "%{options[:service]} is now disabled"
+    q_customizing: "Did you want to make changes to the %{service} service?"
+    s_customized: "%{service} is ready to customize"
+    s_enabled: "%{service} is now enabled"
+    s_disabled: "%{service} is now disabled"
 
   ssh:
     s_launching: "Launching an SSH session to your server"
-    s_keyexists: "SSH Key already exists at %{Dir.home}/.ssh/%{decrypted_config_file.passwordless_sshkey}"
+    s_keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{decrypted_config_file.passwordless_sshkey}"
     s_keycreating: "Creating %{decrypted_config_file.passwordless_sshkey} and %{decrypted_config_file.passwordless_sshkey}.pub"
     s_keycreated: "Key created"
     s_keycopying: "Copying keys to your server at %{decrypted_config_file.vlab_ip}"

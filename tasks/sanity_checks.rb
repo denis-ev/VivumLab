@@ -44,7 +44,7 @@ class SanityChecks < Thor
   def check_vault_pass
     return unless File.exist?('/vlab_vault_pass') && File.size('/vlab_vault_pass').zero?
 
-    say I18n.t('sanity_checks.s_vaultpassmissing').red
+    say I18n.t('sanity_checks.s_vaultpassmissing', home_dir: Dir.home).red
     say I18n.t('sanity_checks.s_vaultpasscreate').light_yellow
 
     decision = yes?(I18n.t('sanity_checks.q__vaultpasscreate'), :yellow)
@@ -61,9 +61,9 @@ class SanityChecks < Thor
   def check_for_precommit
     if system('which pre-commit', out: File::NULL)
       if python_version >= REQUIRED_PYTHON_VERSION
-        say I18n.t('sanity_checks.s_lowprecommit').yellow if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
+        say I18n.t('sanity_checks.s_lowprecommit', req_precommit_ver: REQUIRED_PRECOMMIT_VERSION).yellow if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
       else
-        say I18n.t('sanity_checks.s_lowpython').yellow
+        say I18n.t('sanity_checks.s_lowpython', req_python_ver: REQUIRED_PYTHON_VERSION).yellow
       end
     else
       say I18n.t('sanity_checks.s_noprecommit').yellow

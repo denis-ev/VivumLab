@@ -16,7 +16,7 @@ class Ssh < Thor
 
   desc 'create_sshkey', 'Creates an SSH key, if one doesn\'t exist'
   def create_sshkey
-    say I18n.t('ssh.s_keyexists', Dir: Dir.home, decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).red && return if ssh_key_exists?
+    say I18n.t('ssh.s_keyexists', home_dir: Dir.home, decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).red && return if ssh_key_exists?
     say I18n.t('ssh.s_keycreating', decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
     # rubocop:disable Layout/LineLength
     execute_in_shell("ssh-keygen -q -N '' -C 'VivumLab@#{decrypted_config_file.domain}' -f #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}")

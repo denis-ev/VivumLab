@@ -9,19 +9,19 @@ class Service < Thor
   desc 'remove', 'Removes the specified service from the VivumLab server'
   def remove(service)
     run_common
-    say I18n.t('service.s_removing').yellow
+    say I18n.t('service.s_removing', service: options[:service]).yellow
     run_playbook('playbook.remove.yml', options, limit_to_service(service))
-    say I18n.t('service.s_removed').green
+    say I18n.t('service.s_removed', service: options[:service]).green
   end
 
   desc 'reset', 'Resets the specified service\'s files on the server'
   def reset(service)
-    say I18n.t('service.s_resetting').yellow
+    say I18n.t('service.s_resetting', service: options[:service]).yellow
     run_common
     run_playbook('playbook.stop.yml', options, limit_to_service(service))
     run_playbook('playbook.remove.yml', options, limit_to_service(service))
     run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service)} -t deploy")
-    say I18n.t('service.s_reset').green
+    say I18n.t('service.s_reset', service: options[:service]).green
   end
 
   desc 'stop', 'Stops all services, or a selected service if you specify --service'
@@ -59,23 +59,23 @@ class Service < Thor
 
   desc 'customize', 'Allows you to edit a specific deployed service with a docker-compose.override.yml'
   def customize(service)
-    say I18n.t('service.s_customizing').yellow
-    return unless yes?(I18n.t('service.q_customizing'), :yellow)
+    say I18n.t('service.s_customizing', service: options[:service]).yellow
+    return unless yes?(I18n.t('service.q_customizing', service: options[:service]), :yellow)
 
     run_playbook('playbook.service-edit.yml', options, limit_to_service(service))
-    say I18n.t('service.s_customized').green
+    say I18n.t('service.s_customized', service: options[:service]).green
   end
 
   desc 'enable', 'Enables NAME'
   def enable(service_name)
     invoke 'config:set', [], config_key: "#{service_name}.enable", value: true
-    say I18n.t('service.s_enabled').green
+    say I18n.t('service.s_enabled', service: options[:service]).green
   end
 
   desc 'disable', 'Disables NAME'
   def disable(service_name)
     invoke 'config:set', [], config_key: "#{service_name}.enable", value: false
-    say I18n.t('service.s_disabled').green
+    say I18n.t('service.s_disabled', service: options[:service]).green
   end
 
   desc 'show', 'Show the configuration options for NAME'
