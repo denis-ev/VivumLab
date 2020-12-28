@@ -13,18 +13,38 @@ en:
     s_possiblekey: "Here's some possible matches:"
 
   core:
-    s_currentversion: "You have version %{current_version}"
-    s_versionlatest: "You're up to date"
-    s_versionupdate: "Consider updating to %{latest_version}"
-    s_deploy: "Deploying Vivumlab"
-    s_uninstall: |+
-      "Uninstalling VivumLab is irreversible, and should always be done with caution"
-      "Make sure to backup any files that you may want to keep before uninstalling"
-    q_uninstall: "Are you sure you want to uninstall VivumLab"
-    q_uninstallconfirm: "Confirm again, if you are sure"
-    s_uninstalled: "VivumLab has been uninstalled."
-    s_restoring: "Restoring your backups, now.."
-    s_restored: "Backups have been restored"
+    checkversion:
+      name: "check-version"
+      desc: "checks the local version against the latest from github"
+      out:
+        currentversion: "You have version %{current_version}"
+        versionlatest: "You're up to date"
+        versionupdate: "Consider updating to %{latest_version}"
+    generate_vault_pass:
+      name: "generate-vault-pass"
+      desc: "Creates a new Vault Password"
+    deploy:
+      name: "deploy"
+      desc: "Deploys VivumLab, configures it first if needed"
+      out:
+        deploy: "Deploying Vivumlab"
+    restore:
+      name: "restore"
+      desc: "restores a vlab install, assuming backups exist"
+      out:
+        restoring: "Restoring your backups, now.."
+        restored: "Backups have been restored"
+    uninstall:
+      name: "uninstall"
+      desc: "irreversably removes vlab"
+      out:
+        uninstall: |+
+          "Uninstalling VivumLab is irreversible, and should always be done with caution"
+          "Make sure to backup any files that you may want to keep before uninstalling"
+        uninstalled: "VivumLab has been uninstalled."
+      in:
+        uninstall: "Are you sure you want to uninstall VivumLab"
+        uninstallconfirm: "Confirm again, if you are sure"
 
   deprecated:
     s_encrypting: "Encrypting the vault"

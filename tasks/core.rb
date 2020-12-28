@@ -9,15 +9,15 @@ class Core < Thor
 
   ENCRYPTION_KEY = "#{Dir.home}/.vlab_vault_pass"
 
-  desc 'check_version', 'checks the local version against the latest from github'
+  desc I18n.t('core.checkversion.name'), I18n.t('core.checkversion.desc')
   def check_version
-    say I18n.t('core.s_currentversion').light_blue
-    say I18n.t('core.s_versionlatest').green if current_version == latest_version
-    say I18n.t('core.s_versionupdate').yellow if current_version != latest_version
+    say I18n.t('core.out.currentversion', current_version: current_version).light_blue
+    say I18n.t('core.out.latestversion').green if current_version == latest_version
+    say I18n.t('core.out.versionupdate').yellow if current_version != latest_version
     invoke 'sanity_checks:local'
   end
 
-  desc 'generate_vault_pass', 'Creates a new Vault Password'
+  desc I18n.t('core.generate_vault_pass.name'), I18n.t('core.generate_vault_pass.desc')
   def generate_vault_pass
     # This *is* a deviation from the shell based version. Instead of
     # generating a datetime stamp, sha256sum'ing it then base64ing it
@@ -32,16 +32,16 @@ class Core < Thor
     File.write(ENCRYPTION_KEY, SecureRandom.base64(32)) unless File.exist? "#{Dir.home}/.vlab_vault_pass"
   end
 
-  desc 'deploy', 'Deploys VivumLab, configures it first if needed'
+  desc I18n.t('core.deploy.name'), I18n.t('core.deploy.desc')
   def deploy
-    say I18n.t('core.s_deploy').light_blue
+    say I18n.t('core.deploy.out.deploy').light_blue
     run_playbook('playbook.vivumlab.yml', options)
   end
 
-  desc 'restore', 'Restores a server from backups. Assuming you ran them'
+  desc I18n.t('core.restore.name'), I18n.t('core.restore.desc')
   def restore
-    say I18n.t('core.s_restoring').yellow
+    say I18n.t('core.restore.out.restoring').yellow
     run_playbook('playbook.restore.yml', options)
-    say I18n.t('core.s_restored').green
+    say I18n.t('core.restore.out.restored').green
   end
 end
