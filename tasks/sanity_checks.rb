@@ -61,12 +61,12 @@ class SanityChecks < Thor
   def check_for_precommit
     if system('which pre-commit', out: File::NULL)
       if python_version >= REQUIRED_PYTHON_VERSION
-        say I18n.t('sanity_checks.s_lowprecommit', req_precommit_ver: REQUIRED_PRECOMMIT_VERSION).yellow if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
+        say I18n.t('sanity_checks.s_lowprecommit', req_precommit_ver: REQUIRED_PRECOMMIT_VERSION).red if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
       else
-        say I18n.t('sanity_checks.s_lowpython', req_python_ver: REQUIRED_PYTHON_VERSION).yellow
+        say I18n.t('sanity_checks.s_lowpython', req_python_ver: REQUIRED_PYTHON_VERSION).red
       end
     else
-      say I18n.t('sanity_checks.s_noprecommit').yellow
+      say I18n.t('sanity_checks.s_noprecommit').red
     end
   end
 

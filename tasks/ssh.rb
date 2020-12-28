@@ -8,7 +8,7 @@ class Ssh < Thor
 
   desc 'launch', 'Opens a shell on your VivumLab server'
   def launch
-    say I18n.t('ssh.s_launching')
+    say I18n.t('ssh.s_launching').light_blue
     # rubocop:disable Layout/LineLength
     exec("ssh -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey} #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip} -p #{decrypted_config_file.vlab_port}")
     # rubocop:enable Layout/LineLength
@@ -16,7 +16,7 @@ class Ssh < Thor
 
   desc 'create_sshkey', 'Creates an SSH key, if one doesn\'t exist'
   def create_sshkey
-    say I18n.t('ssh.s_keyexists', home_dir: Dir.home, decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).red && return if ssh_key_exists?
+    say I18n.t('ssh.s_keyexists', home_dir: Dir.home, decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow && return if ssh_key_exists?
     say I18n.t('ssh.s_keycreating', decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
     # rubocop:disable Layout/LineLength
     execute_in_shell("ssh-keygen -q -N '' -C 'VivumLab@#{decrypted_config_file.domain}' -f #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}")

@@ -50,6 +50,7 @@ es:
       "Ok, all set! Thank you for being a part of the VivumLab Community"
       "We hope that you will enjoy your time with us"
       "And we look forward to achieving great things, together"
+    q_installprecommit: "Install pre-commit now?"
 
   git:
     s_settingssyncing: "Syncing settings via Git"

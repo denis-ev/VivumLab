@@ -34,7 +34,7 @@ class Core < Thor
 
   desc 'deploy', 'Deploys VivumLab, configures it first if needed'
   def deploy
-    say I18n.t('core.s_deploy').green
+    say I18n.t('core.s_deploy').light_blue
     run_playbook('playbook.vivumlab.yml', options)
   end
 
@@ -42,6 +42,6 @@ class Core < Thor
   def restore
     say I18n.t('core.s_restoring').yellow
     run_playbook('playbook.restore.yml', options)
-    say I18n.t('core.s_restored').yellow
+    say I18n.t('core.s_restored').green
   end
 end

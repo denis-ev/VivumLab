@@ -29,7 +29,7 @@ class Migration < Thor
       FileUtils.rm "#{options[:config_dir]}/config.yml"
       FileUtils.rm "#{options[:config_dir]}/vault.yml"
     else
-      say I18n.t('migration.s_notdone')
+      say I18n.t('migration.s_notdone').light_blue
     end
   end
 end

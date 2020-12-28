@@ -16,7 +16,7 @@ class Terraform < Thor
     terraform_ip = execute_in_shell "/bin/bash -c cd #{options[:config_dir]}; terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address"
     # rubocop:enable Layout/LineLength
     say I18n.t('terraform.s_create_success, terraform_ip: terraform_ip').green
-    say I18n.t('terraform.s_ip_set').green
+    say I18n.t('terraform.s_ip_set').light_blue
   end
 
   desc 'destroy', 'Destroys server(s) created by terraform'

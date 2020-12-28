@@ -20,7 +20,7 @@ class Dev < Thor
   def setup
     return if system('which pre-commit >/dev/null')
 
-    say I18n.t('dev.s_welcome')
+    say I18n.t('dev.s_welcome').light_blue
     return unless yes?(I18n.t('dev.q_contribute'), :yellow)
 
     install_precommit
@@ -30,11 +30,11 @@ class Dev < Thor
 
   no_commands do
     def install_precommit
-      say I18n.t('dev.s_welcome').green
+      say I18n.t('dev.s_welcome').light_blue
       say I18n.t('dev.s_readdevdocs').yellow
       say I18n.t('dev.s_precommitwarning').yellow
       say I18n.t('dev.s_pythonerror').red unless python3_installed
-      `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?('Install pre-commit now?')
+      `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?(I18n.t('dev.q_installprecommit'), :yellow)
     end
   end
 end

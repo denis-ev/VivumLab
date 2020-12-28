@@ -13,7 +13,7 @@ class Deprecated < Thor
       execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
       say I18n.t('deprecated.s_encrypted').green
     rescue Subprocess::NonZeroExit
-      say I18n.t('deprecated.s_failencrypt').green
+      say I18n.t('deprecated.s_failencrypt').light_blue
     end
   end
 
@@ -24,7 +24,7 @@ class Deprecated < Thor
       execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
       say I18n.t('deprecated.s_decrypted').green
     rescue Subprocess::NonZeroExit
-      say I18n.t('deprecated.s_faildecrypt').green
+      say I18n.t('deprecated.s_faildecrypt').light_blue
     end
   end
 end
