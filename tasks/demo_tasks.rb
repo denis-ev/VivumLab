@@ -23,7 +23,7 @@ class DemoTasks < Thor
   > $ vlab testing inBlue inRed
   LONGDESC
   def testing(param1, param2)
-    say "param1 #{param1}".blue # the .blue colorizes this output to be blue
+    say "param1 #{param1}".light_blue # the .light_blue colorizes this output to be blue
     say "param2 #{param2}".red # makes it red
   end
 
@@ -70,7 +70,7 @@ class DemoTasks < Thor
 
   desc 'Demonstrate Optional PARAMs', 'Demonstrates how to have optional parameters'
   def optional_demo(name, optional = nil)
-    say "name #{name}".blue # the .blue colorizes this output to be blue
+    say "name #{name}".light_blue # the .light_blue colorizes this output to be blue
     say "optional #{optional}".red # makes it red
   end
 

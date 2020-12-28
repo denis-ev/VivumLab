@@ -31,7 +31,7 @@ module ConfigFileUtils
   end
 
   def save_config_file
-    say 'Saving config.yml'.blue
+    say 'Saving config.yml'.light_blue
     to_encrypt = YamlVault::Main.from_content(ansible_yml, [['*']], passphrase: File.read('/vlab_vault_pass'))
     persist_current_config to_encrypt
   end
