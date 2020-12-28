@@ -8,7 +8,7 @@ class Git < Thor
 
   desc 'sync', 'Syncs your settings git repo'
   def sync
-    if Dir.exist? "#{options[:config_dir]}/.git"
+    if Dir.exist? "./#{options[:config_dir]}/.git"
       say I18n.t('git.s_settingssyncing').yellow
       ensure_precommit
       execute_git_sync
