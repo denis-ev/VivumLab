@@ -138,4 +138,10 @@ en:
   utils:
     s_playbookexecuting: "executing playbook command: #{playbook_command}"
     s_playbookexecuted: "#{playbook_command} finished"
-    s_playbookerror: "Ansible Playbook command returned with an error code."
+    s_playbookerror: |+
+      "Ansible Playbook command returned with an error code."
+      "Exception is: #{e}"
+    s_configplaybookerror: |+
+      "Failed to run Ansible playbook: playbook.config.yml"
+      "Error is: #{e}"
+
