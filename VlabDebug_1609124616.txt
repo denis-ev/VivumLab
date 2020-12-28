@@ -1,0 +1,4 @@
+[0;32;49mDeploying Vivumlab[0m
+[0;31;49m"Ansible Playbook command returned with an error code."
+"Exception is: #{e}"
+[0m

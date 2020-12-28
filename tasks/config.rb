@@ -15,7 +15,7 @@ class Config < Thor
 
   desc 'new', 'Creates or Updates the config file, as necessary'
   def new
-    say I18n.t('config.s_creating').light_blue
+    say I18n.t('config.s_creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
     run_config_playbook(options)
   end
@@ -30,15 +30,15 @@ class Config < Thor
 
   desc 'reset', 'Resets Vlab config'
   def reset
-    say I18n.t(:config.s_resetting)
-    say I18n.t('config.s_backup')
+    say I18n.t('config.s_resetting', config_dir: options[:config_dir]).light_blue
+    say I18n.t('config.s_backup').light_blue
     FileUtils.mv("#{options[:config_dir]}/", 'settings-backup')
     invoke 'config:new'
   end
 
   desc 'edit_raw', 'Decrypts, and opens the config file in nano. Encrypts on save'
   def edit_raw
-    say I18n.t('config.s_editfile')
+    say I18n.t('config.s_editfile', config_dir: options[:config_dir]).light_blue
     begin
       write_temporary_decrypted_config
       execute_in_shell "nano #{@temp_config}"
@@ -72,7 +72,7 @@ class Config < Thor
   # clear to new rubyists. I've tried to comment for clarity.
   def set
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
-    say I18n.t('config.s_nokey').red && return unless good_config_key
+    say I18n.t('config.s_nokey', config_key: options[:config_key]).red && return unless good_config_key
     eval_config_setting(good_config_key, options[:value]) if options[:config_key] == good_config_key
     return unless (options[:config_key].include? good_config_key) && (options[:config_key] != good_config_key)
 
@@ -88,7 +88,7 @@ class Config < Thor
     end
 
     def draw_error_table(config_key, good_config_key)
-      say I18n.t('config.s_keynomatch', config_key: config_key).red
+      say I18n.t('config.s_keynomatch', config_key: options[:config_key]).red
       say I18n.t('config.s_possiblekey').yellow
       table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
                              rows: decrypted_config_file[good_config_key])

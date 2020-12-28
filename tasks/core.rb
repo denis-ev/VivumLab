@@ -11,7 +11,7 @@ class Core < Thor
 
   desc 'check_version', 'checks the local version against the latest from github'
   def check_version
-    say I18n.t('core.s_currentversion')
+    say I18n.t('core.s_currentversion').light_blue
     say I18n.t('core.s_versionlatest').green if current_version == latest_version
     say I18n.t('core.s_versionupdate').yellow if current_version != latest_version
     invoke 'sanity_checks:local'

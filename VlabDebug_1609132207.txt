@@ -1,0 +1,5 @@
+[0;94;49mCreating, or updating Config file settings/config.yml[0m
+Single Config Migration did not run, because it was not needed
+[0;32;49mLocal sanity checks passed.[0m
+[0;32;49m%{playbook_command} finished[0m
+Single Config Migration did not run, because it was not needed

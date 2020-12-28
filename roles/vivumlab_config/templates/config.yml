@@ -30,7 +30,7 @@ admin_email: {{ admin_email | default('admin_email@vivumlab.com') }}
 default_username: {{ default_username }}
 
 # Default storage location for service data, such as configuration data
-volumes_root: {{ volumes_root | default('/var/vivumlab') }}
+volumes_root: {{ volumes_root | default("/home/{{ vlab_ssh_user }}/vivumlab") }}
 
 # Default storage location for media (These are used as local directories or NAS mount points depending on configuration)
 storage_dir: {{ storage_dir | default('/mnt/nas') }}

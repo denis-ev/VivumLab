@@ -22,7 +22,7 @@ class Git < Thor
   option :branch, required: true, type: :string, desc: 'The name of the branch, or tag you\'d like to use'
   def track
     execute_in_shell("git checkout #{options[:branch]}")
-    say I18n.t('git.s_trackbranch').green
+    say I18n.t('git.s_trackbranch', branch: options[:branch]).green
   end
 
   no_commands do

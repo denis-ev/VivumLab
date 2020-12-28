@@ -16,8 +16,8 @@ class Ssh < Thor
 
   desc 'create_sshkey', 'Creates an SSH key, if one doesn\'t exist'
   def create_sshkey
-    say I18n.t('ssh.s_keyexists').red && return if ssh_key_exists?
-    say I18n.t('ssh.s_keycreating').yellow
+    say I18n.t('ssh.s_keyexists', Dir: Dir.home, decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).red && return if ssh_key_exists?
+    say I18n.t('ssh.s_keycreating', decrypted_config_file.passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
     # rubocop:disable Layout/LineLength
     execute_in_shell("ssh-keygen -q -N '' -C 'VivumLab@#{decrypted_config_file.domain}' -f #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}")
     # rubocop:enable Layout/LineLength
@@ -26,7 +26,7 @@ class Ssh < Thor
 
   desc 'copy_sshkey', 'Copy your ssh key over to the server'
   def copy_sshkey
-    say I18n.t('ssh.s_keycopying').yellow
+    say I18n.t('ssh.s_keycopying', decrypted_config_file.vlab_ip: decrypted_config_file.vlab_ip).yellow
     to_run = <<-EXECUTE
     ssh-copy-id -p #{decrypted_config_file.vlab_ip} -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}.pub \
     #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip}
