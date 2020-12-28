@@ -34,7 +34,7 @@ class Vlab < Thor
 
   desc 'find_help', 'Shows the user how to contact the VivumLab community'
   def find_help
-    say TTY::Markdown.parse_file('docs/Contact-us.md')
+    say TTY::Markdown.parse_file('website/docs/Contact-us.md')
   end
 
   ########
