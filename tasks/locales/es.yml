@@ -119,10 +119,10 @@ es:
 
   ssh:
     s_launching: "Launching an SSH session to your server"
-    s_keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{decrypted_config_file.passwordless_sshkey}"
-    s_keycreating: "Creating %{decrypted_config_file.passwordless_sshkey} and %{decrypted_config_file.passwordless_sshkey}.pub"
+    s_keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
+    s_keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
     s_keycreated: "Key created"
-    s_keycopying: "Copying keys to your server at %{decrypted_config_file.vlab_ip}"
+    s_keycopying: "Copying keys to your server at %{vlab_ip}"
     s_keycopied: "Key copied"
 
   terraform:
