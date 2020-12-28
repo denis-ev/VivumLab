@@ -10,20 +10,21 @@ module Utils
 
   def run_playbook(playbook, options, extra = nil)
     write_temporary_decrypted_config
-    execute_in_shell(playbook_command(playbook, extra, options[:debug].to_sym).strip)
-    say I18n.t('utils.s_playbookexecuted', playbook_command: playbook_command).green
+    cmd = playbook_command(playbook, extra, options[:debug].to_sym).strip
+    execute_in_shell(cmd)
+    say I18n.t('utils.s_playbookexecuted', playbook_command: cmd).green
   rescue Subprocess::NonZeroExit => e
     say I18n.t('utils.s_playbookerror', e: e).red
   ensure
     FileUtils.rm_f @temp_config
   end
 
-  def playbook_command(playbook, extra, debug = '')
+  def playbook_command(playbook, extra = nil, debug = '')
     command = []
-    command << "ansible-playbook #{playbook}"
-    command << convert_debug_enum(debug)
-    command << "-e \@./#{@temp_config}" if playbook != 'playbook.config.yml'
-    command << extra.to_s
+    command << "ansible-playbook #{playbook.chomp}"
+    command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
+    command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
+    command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')
   end
@@ -37,8 +38,9 @@ module Utils
     say I18n.t('utils.s_configplaybookerror', e: e).red
   end
 
-  def execute_in_shell(params)
-    Subprocess.check_call(params.split(' '))
+  def execute_in_shell(params, cwd = './', fail_ok = nil)
+    Subprocess.call(params.split(/\s(?=(?:[^"]|"[^"]*")*$)/), cwd: cwd) if fail_ok
+    Subprocess.check_call(params.split(/\s(?=(?:[^"]|"[^"]*")*$)/), cwd: cwd) unless fail_ok
   end
 
   def cat(file)

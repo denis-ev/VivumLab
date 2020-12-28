@@ -87,9 +87,11 @@ end
 begin
   Vlab.start
 ensure
-  if ARGV.join(' ').include? '-d'
+  if ARGV.include?('-d') || ARGV.include?('--debug')
     results = HTTParty.post 'https://hastebin.com/documents', body: File.read($this_log)
     puts "Your logs have been posted to: https://hastebin.com/#{results['key']}"
+  else
+    FileUtils.rm $this_log
   end
 end
 # rubocop:enable Style/GlobalVars
