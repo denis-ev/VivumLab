@@ -19,6 +19,6 @@ class Server < Thor
     # rubocop:disable Layout/LineLength
     execute_in_shell "ssh -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey} #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip} -p #{decrypted_config_file.vlab_port} sudo shutdown -r #{options[:time]}"
     # rubocop:enable Layout/LineLength
-    say I18n.t('server.s_restart'time: options[:time]).yellow
+    say I18n.t('server.s_restart', time: options[:time]).yellow
   end
 end
