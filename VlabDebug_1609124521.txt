@@ -1,8 +1,0 @@
-[0;94;49mCreating, or updating Config file #{options[:config_dir]}/config.yml[0m
-Single Config Migration did not run, because it was not needed
-[0;32;49mLocal sanity checks passed.[0m
-[0;32;49m#{playbook_command} finished[0m
-[0;33;49mDecrypting the vault[0m
-[0;32;49mThis command can fail, if the vault was already decrypted[0m
-[0;34;49mSaving config.yml[0m
-[0;32;49msettings/encrypted.yml saved[0m
