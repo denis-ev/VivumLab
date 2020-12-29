@@ -87,7 +87,11 @@ class Config < Thor
   no_commands do
     def eval_config_setting(key, value)
       # rubocop:disable Security/Eval
-      eval("decrypted_config_file.#{key.chomp}=#{value}", binding, __FILE__, __LINE__)
+      if [true, false].include? value # sometimes the value is a string that also acts like a decimal (ip address)
+        eval("decrypted_config_file.#{key.chomp}=#{value}", binding, __FILE__, __LINE__)
+      else
+        eval("decrypted_config_file.#{key.chomp}=\"#{value}\"", binding, __FILE__, __LINE__)
+      end
       # rubocop:enable Security/Eval
       save_config_file
     end
