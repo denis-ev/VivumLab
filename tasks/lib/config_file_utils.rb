@@ -39,6 +39,7 @@ module ConfigFileUtils
   def encrypt_temporary_decrypted_config(tmp_file = @temp_config)
     to_encrypt = YamlVault::Main.from_file(tmp_file, [['*']], passphrase: File.read('/vlab_vault_pass'))
     persist_current_config to_encrypt
+    FileUtils.rm tmp_file
   end
 
   def persist_current_config(to_encrypt)

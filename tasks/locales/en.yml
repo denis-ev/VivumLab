@@ -1,4 +1,12 @@
 en:
+  bastion:
+    enable:
+      name: "enable"
+      desc: "Enables the Bastion server"
+    disable:
+      name: "disable"
+      desc: "Disables the Bastion server"
+
   config:
     s_creating: "Creating, or updating Config file %{config_dir}/config.yml"
     s_resetting: "Resetting config file at %{config_dir}/config.yml"
@@ -23,6 +31,8 @@ en:
     generate_vault_pass:
       name: "generate-vault-pass"
       desc: "Creates a new Vault Password"
+      out:
+        noaction: "Vault pass exists, no action taking"
     deploy:
       name: "deploy"
       desc: "Deploys VivumLab, configures it first if needed"

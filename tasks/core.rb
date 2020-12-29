@@ -11,9 +11,9 @@ class Core < Thor
 
   desc I18n.t('core.checkversion.name'), I18n.t('core.checkversion.desc')
   def check_version
-    say I18n.t('core.out.currentversion', current_version: current_version).light_blue
-    say I18n.t('core.out.latestversion').green if current_version == latest_version
-    say I18n.t('core.out.versionupdate').yellow if current_version != latest_version
+    say I18n.t('core.checkversion.out.currentversion', current_version: current_version).light_blue
+    say I18n.t('core.checkversion.out.versionlatest').green if current_version == latest_version
+    say I18n.t('core.checkversion.out.versionupdate').yellow if current_version != latest_version
     invoke 'sanity_checks:local'
   end
 
@@ -29,6 +29,7 @@ class Core < Thor
     # ~/.vlab_vault_pass *does not exist* It's imperative that calling
     # tasks that want to overwrite the vault pass, need to delete the existing
     # vault pass before calling this.
+    say I18n.t('core.generate_vault_pass.out.noaction').light_blue
     File.write(ENCRYPTION_KEY, SecureRandom.base64(32)) unless File.exist? "#{Dir.home}/.vlab_vault_pass"
   end
 

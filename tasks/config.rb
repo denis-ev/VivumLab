@@ -24,8 +24,13 @@ class Config < Thor
   option :service, required: true, desc: 'Name of the service to display', aliases: ['-s']
   def show
     config_hash = decrypted_config_file[options[:service]]
-    table = TTY::Table.new(header: %w[option value], rows: config_hash)
-    say table.render(:unicode)
+    begin
+      table = TTY::Table.new(header: %w[option value], rows: config_hash)
+      say table.render(:unicode)
+    rescue => e
+      say 'Unable to render table, due to object complexity. Reverting to text'.light_blue
+      ap config_hash
+    end
   end
 
   desc 'reset', 'Resets Vlab config'

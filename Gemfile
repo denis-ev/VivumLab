@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.7.1'
 
+gem 'awesome_print'
 gem 'colorize'
 gem 'dotenv'
 gem 'ffi', '1.13.1'
