@@ -91,7 +91,7 @@ class Service < Thor
     end
 
     def run_common
-      invoke 'git:sync', [], options[:config_dir], disable_push: options[:disable_push]
+      invoke 'git:sync', [], options
       invoke 'config:new', [], { config_dir: options[:config_dir] }
     end
   end

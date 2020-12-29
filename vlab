@@ -48,6 +48,7 @@ class Vlab < Thor
 
   desc 'update', 'Updates all services - or, if you specify --service, a single service.'
   option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.'
+  option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def update
     invoke 'service:update', [], options
   end

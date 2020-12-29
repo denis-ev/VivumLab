@@ -17,7 +17,7 @@ class Config < Thor
   def new
     say I18n.t('config.s_creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
-    run_config_playbook(options)
+    run_config_playbook(options) unless File.exist? "#{options[:config_dir]}/encrypted.yml"
   end
 
   desc 'show', 'Shows the configuration settings for a specified service'
