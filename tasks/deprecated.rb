@@ -6,25 +6,25 @@ class Deprecated < Thor
   include Utils
   include VlabI18n
 
-  desc 'vault_encrypt', 'Encrypts the ansible vault.yml - DEPRECATED'
+  desc I18n.t('deprecated.vault_encrypt.name'), I18n.t('deprecated.vault_encrypt.desc')
   def vault_encrypt
-    say I18n.t('deprecated.s_encrypting').yellow
+    say I18n.t('deprecated.vault_encrypt.out.encrypting').yellow
     begin
       execute_in_shell("ansible-vault encrypt #{options[:config_dir]}/vault.yml")
-      say I18n.t('deprecated.s_encrypted').green
+      say I18n.t('deprecated.vault_encrypt.out.encrypted').green
     rescue Subprocess::NonZeroExit
-      say I18n.t('deprecated.s_failencrypt').light_blue
+      say I18n.t('deprecated.vault_encrypt.out.failencrypt').light_blue
     end
   end
 
-  desc 'vault_decrypt', 'Decrypts the ansible vault.yml - DEPRECATED'
+  desc I18n.t('deprecated.vault_decrypt.name'), I18n.t('deprecated.vault_decrypt.desc')
   def vault_decrypt
-    say I18n.t('deprecated.s_decrypting').yellow
+    say I18n.t('deprecated.vault_decrypt.out.decrypting').yellow
     begin
       execute_in_shell("ansible-vault decrypt #{options[:config_dir]}/vault.yml")
-      say I18n.t('deprecated.s_decrypted').green
+      say I18n.t('deprecated.vault_decrypt.out.decrypted').green
     rescue Subprocess::NonZeroExit
-      say I18n.t('deprecated.s_faildecrypt').light_blue
+      say I18n.t('deprecated.vault_decrypt.out.faildecrypt').light_blue
     end
   end
 end

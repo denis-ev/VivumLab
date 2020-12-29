@@ -8,17 +8,48 @@ en:
       desc: "Disables the Bastion server"
 
   config:
-    s_creating: "Creating, or updating Config file %{config_dir}/config.yml"
-    s_resetting: "Resetting config file at %{config_dir}/config.yml"
-    s_backup: "Backing up your existing config"
-    s_editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
-    s_editerror: "Something went wrong executing the decryption and or editing the file"
-    s_fileremove: "For security reasons, the temporary decrypted config file has been deleted."
-    s_decrypted: "Config file is now, decrypted"
-    s_encrypted: "Config file is now, encrypted"
-    s_nokey: "Key %{config_key} not found in either config file. Please check the key."
-    s_keynomatch: "Unable to find a full match for the key %{config_key}"
-    s_possiblekey: "Here's some possible matches:"
+    new:
+      name: "new"
+      desc: "Creates or Updates the config file, as necessary"
+      out:
+        creating: "Creating, or updating Config file %{config_dir}/config.yml"
+    show:
+      name: "show"
+      desc: "Shows the configuration settings for a specified service"
+      out:
+        tablenorender: "Unable to render table, due to object complexity. Reverting to text"
+    reset:
+      name: "reset"
+      desc: "Resets VivumLab config"
+      out:
+        resetting: "Resetting config file at %{config_dir}/config.yml"
+        backup: "Backing up your existing config"
+    edit_raw:
+      name: "edit_raw"
+      desc: "Decrypts, and opens the config file in nano. Encrypts on save"
+      out:
+        editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
+        editerror: "Something went wrong executing the decryption and or editing the file"
+        fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+    decrypt:
+      name: "decrypt"
+      desc: "Decrypts the encrypted config file. You must Re-ENCRYPT yourself using vlab config encrypt"
+      out:
+        decrypted: "Config file is now, decrypted"
+    encrypt:
+      name: "encrypt"
+      desc: "Encrypts a given config.yml to encrypted.yml"
+      out:
+        encrypted: "Config file is now, encrypted"
+    set:
+      name: "set"
+      desc: "Sets a config variable"
+      out:
+        nokey: "Key %{config_key} not found in either config file. Please check the key."
+    draw_error_table:
+      out:
+        keynomatch: "Unable to find a full match for the key %{config_key}"
+        possiblekey: "Here's some possible matches:"
 
   core:
     checkversion:
@@ -57,30 +88,47 @@ en:
         uninstallconfirm: "Confirm again, if you are sure"
 
   deprecated:
-    s_encrypting: "Encrypting the vault"
-    s_encrypted: "Vault Encrypted"
-    s_decrypting: "Decrypting the vault"
-    s_decrypted: "Vault Decrypted"
-    s_failencrypt: "This command can fail, if the vault was already encrypted"
-    s_faildecrypt: "This command can fail, if the vault was already decrypted"
+    vault_encrypt:
+      name: "vault_encrypt"
+      desc: "Encrypts the ansible vault.yml - DEPRECATED"
+      out:
+        encrypting: "Encrypting the vault"
+        encrypted: "Vault Encrypted"
+        failencrypt: "This command can fail, if the vault was already encrypted"
+    vault_decrypt:
+      name: "vault_decrypt"
+      desc: "Decrypts the ansible vault.yml - DEPRECATED"
+      out:
+        decrypting: "Decrypting the vault"
+        decrypted: "Vault Decrypted"
+        faildecrypt: "This command can fail, if the vault was already decrypted"
 
   dev:
-    s_welcome: "Welcome to VivumLab Developer Setup"
-    q_contribute: "Do you want to contribute to VivumLab (Yes or no)?"
-    s_thanks: "Thanks for helping out"
-    s_readdevdocs: |+
-      "First and foremost, please make sure you have read the developer docs"
-      "You can find the developers docs. here:"
-      "# TODO: add url to dev docs"
-
-    s_precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
-    s_pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
-    s_precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
-    s_readythanks: |+
-      "Ok, all set! Thank you for being a part of the VivumLab Community"
-      "We hope that you will enjoy your time with us"
-      "And we look forward to achieving great things, together"
-    q_installprecommit: "Install pre-commit now?"
+    lint:
+      name: "lint"
+      desc: "Lints all the YAML files"
+    setup:
+      name: "setup"
+      desc: "Run to install Dev Requirements"
+      out:
+        welcome: "Welcome to VivumLab Developer Setup"
+        precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+        readythanks: |+
+          "Ok, all set! Thank you for being a part of the VivumLab Community"
+          "We hope that you will enjoy your time with us"
+          "And we look forward to achieving great things, together"
+      in:
+        contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+    install_precommit:
+      out:
+        readdevdocs: |+
+          "First and foremost, please make sure you have read the developer docs"
+          "You can find the developers docs. here:"
+          "# TODO: add url to dev docs"
+        precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
+        pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+      in:
+        installprecommit: "Install pre-commit now?"
 
   git:
     s_settingssyncing: "Syncing settings via Git"
