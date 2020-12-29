@@ -131,16 +131,28 @@ en:
         installprecommit: "Install pre-commit now?"
 
   git:
-    s_settingssyncing: "Syncing settings via Git"
-    s_settingssynced: "Settings synced"
-    s_notsetup: |+
-      "Warning! Your settings directory is not setup as a Git Repository"
-      "Make sure to back them up using some other method. For more information, see:"
-      "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
-    s_trackbranch: "You are now tracking the %{branch} branch"
+    sync:
+      name: "sync"
+      desc: "Syncs your settings git repo"
+      out:
+        settingssyncing: "Syncing settings via Git"
+        settingssynced: "Settings synced"
+        notsetup: |+
+          "Warning! Your settings directory is not setup as a Git Repository"
+          "Make sure to back them up using some other method. For more information, see:"
+          "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
+    track:
+      name: "track"
+      desc: "Allows you to switch between different branches or tags of Vivumlab"
+      out:
+        trackbranch: "You are now tracking the %{branch} branch"
 
   migration:
-    s_notdone: "Migration not needed. Config files valid."
+    single_config:
+      name: "single_config"
+      desc: "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
+      out:
+        notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
     s_localpassed: "Local sanity checks passed."
@@ -204,22 +216,35 @@ en:
     s_keycopied: "Key copied"
 
   terraform:
-    s_creating: "Creating a cloud server"
-    s_created_success: "Successfully created a server at: %{ip}"
-    s_ip_set: |+
-      "Place this IP where you want it in your settings.."
-      "either as vlab_ip or bastion.server_address"
+    create:
+      name: "create"
+      desc: "Spins up a cloud server with Terraform'"
+      out:
+        creating: "Creating a cloud server"
+        created: "Successfully created a server at: %{ip}"
+        setip: |+
+          "Place this IP where you want it in your settings.."
+          "either as vlab_ip or bastion.server_address"
 
-      "Then run 'vlab deploy' to complete the setup."
-    s_destroying: "Destroying terraform built server"
-    s_destroy_success: "Cloud server(s) destroyed."
+          "Then run 'vlab deploy' to complete the setup."
+    destroy:
+      name: "destroy"
+      desc: "Destroys server(s) created by terraform"
+      out:
+        destroying: "Destroying terraform built server"
+        destroyed: "Cloud server(s) destroyed."
 
   utils:
-    s_playbookexecuting: "executing playbook command: %{playbook_command}"
-    s_playbookexecuted: "%{playbook_command} finished"
-    s_playbookerror: |+
-      "Ansible Playbook command returned with an error code."
-      "Exception is: %{e}"
-    s_configplaybookerror: |+
-      "Failed to run Ansible playbook: playbook.config.yml"
-      "Error is: %{e}"
+    run_playbook:
+      out:
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          "Ansible Playbook command returned with an error code."
+          "Exception is: %{e}"
+    run_config_playbook:
+      out:
+        playbookexecuting: "executing playbook command: %{playbook_command}"
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          "Failed to run Ansible playbook: playbook.config.yml"
+          "Error is: %{e}"

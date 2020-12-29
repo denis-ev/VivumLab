@@ -5,24 +5,24 @@ class Terraform < Thor
   include VlabI18n
   include Utils
 
-  desc 'create', 'Spins up a cloud server with Terraform'
+  desc I18n.t('terraform.create.name'), I18n.t('terraform.create.desc')
   def create
     invoke 'git:sync'
     invoke 'config:new'
-    say I18n.t('terraform.s_creating').yellow
+    say I18n.t('terraform.create.out.creating').yellow
     run_playbook('playbook.terraform.yml', options)
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform init && terraform apply'")
     # rubocop:disable Layout/LineLength
     terraform_ip = execute_in_shell "/bin/bash -c cd #{options[:config_dir]}; terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address"
     # rubocop:enable Layout/LineLength
-    say I18n.t('terraform.s_create_success, terraform_ip: terraform_ip').green
-    say I18n.t('terraform.s_ip_set').light_blue
+    say I18n.t('terraform.create.out.created, terraform_ip: terraform_ip').green
+    say I18n.t('terraform.create.out.setip').light_blue
   end
 
-  desc 'destroy', 'Destroys server(s) created by terraform'
+  desc I18n.t('terraform.destroy.name'), I18n.t('terraform.destroy.desc')
   def destroy
-    say I18n.t('terraform.s_destroying').yellow
+    say I18n.t('terraform.destroy.out.destroying').yellow
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform destroy'")
-    say I18n.t('terraform.s_destroy_success').green
+    say I18n.t('terraform.destroy.out.destroyed').green
   end
 end

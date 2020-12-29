@@ -6,24 +6,24 @@ class Git < Thor
   include Utils
   include VlabI18n
 
-  desc 'sync', 'Syncs your settings git repo'
+  desc I18n.t('git.sync.name'), I18n.t('git.sync.desc')
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def sync
     if Dir.exist? "./#{options[:config_dir]}/.git"
-      say I18n.t('git.s_settingssyncing').yellow
+      say I18n.t('git.sync.out.settingssyncing').yellow
       ensure_precommit
       execute_git_sync options[:config_dir], options[:disable_push]
-      say I18n.t('git.s_settingssynced').green
+      say I18n.t('git.sync.out.settingssynced').green
     else
-      say I18n.t('git.s_notsetup').red
+      say I18n.t('git.sync.out.notsetup').red
     end
   end
 
-  desc 'track', 'Allows you to switch between different branches or tags of Vlab'
+  desc I18n.t('git.track.name'), I18n.t('git.track.desc')
   option :branch, required: true, type: :string, desc: 'The name of the branch, or tag you\'d like to use'
   def track
     execute_in_shell("git checkout #{options[:branch]}")
-    say I18n.t('git.s_trackbranch', branch: options[:branch]).green
+    say I18n.t('git.track.out.trackbranch', branch: options[:branch]).green
   end
 
   no_commands do
