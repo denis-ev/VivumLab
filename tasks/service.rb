@@ -7,6 +7,7 @@ class Service < Thor
   include VlabI18n
 
   class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
+  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
   desc 'remove', 'Removes the specified service from the VivumLab server'
   def remove(service)

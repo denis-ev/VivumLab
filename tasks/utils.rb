@@ -33,7 +33,8 @@ module Utils
     say I18n.t('utils.run_config_playbook.out.playbookexecuting', playbook_command: playbook_command).yellow if options[:debug] != :none
     execute_in_shell(playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip)
     say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_command).green
-    migration_invoke_override
+    # migration_invoke_override
+    manual_invoke('migration:single_config', options)
   rescue Subprocess::NonZeroExit => e
     say I18n.t('utils.run_config_playbook.out.playbookerror', e: e).red
   end
@@ -55,6 +56,16 @@ module Utils
     migration = Migration.new
     migration.options = options
     migration.single_config
+  end
+
+  # Because Thor automatically de-dupes repeated invocations of the same task, if we need to
+  # manually invoke a task more than once, we do it through this method
+  # Example: manual_invoke('config:set', options)
+  def manual_invoke(what, options)
+    what_arr = what.split(':')
+    klass = Kernel.const_get("::#{what_arr.first.capitalize}").new
+    klass.options = options
+    klass.send(what_arr.last)
   end
 
   def convert_debug_enum(level)

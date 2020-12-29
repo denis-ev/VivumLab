@@ -6,6 +6,8 @@ en:
     disable:
       name: "disable"
       desc: "Disables the Bastion server"
+    in:
+      serveraddress: "What is your Bastion Server Ip?"
 
   config:
     new:

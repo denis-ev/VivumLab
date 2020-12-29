@@ -6,6 +6,8 @@ class Git < Thor
   include Utils
   include VlabI18n
 
+  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+
   desc I18n.t('git.sync.name'), I18n.t('git.sync.desc')
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def sync

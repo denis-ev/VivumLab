@@ -9,6 +9,8 @@ class SanityChecks < Thor
   include VlabI18n
   include VlabConstants
 
+  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+
   desc 'check_ssh_keys', 'Creates or updates SSH keys as necessary'
   # @TODO: Write this task
   def check_ssh_keys
