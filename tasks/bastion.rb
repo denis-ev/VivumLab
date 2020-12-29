@@ -19,11 +19,12 @@ bastion
     # Do not alter the indentation, or spacing either.
 
     already_done = File.read('inventory').include? 'bastion'
-    say 'Bastion already present in Inventory file'.light_blue if already_done
+    say I18n.t('bastion.enable.out.alreadyininventory').light_blue if already_done
     File.write('inventory', INVENTORY_TAG, File.size('inventory'), mode: 'a') unless already_done
     invoke 'config:set', [], { config_key: 'bastion.enable', value: true }
     server_address = ask(I18n.t('bastion.in.serveraddress'))
     manual_invoke 'config:set', { config_key: 'bastion.server_address', value: server_address, config_dir: options[:config_dir] } unless server_address.nil?
+    say I18n.t('bastion.enable.out.done').green
   end
 
   desc I18n.t('bastion.disable.name'), I18n.t('bastion.disable.desc')
@@ -36,5 +37,6 @@ bastion
       end
     end
     invoke 'config:set', [], { config_key: 'bastion.enable', value: false }
+    say I18n.t('bastion.disable.out.success').green
   end
 end

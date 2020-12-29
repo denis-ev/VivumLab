@@ -3,9 +3,15 @@ en:
     enable:
       name: "enable"
       desc: "Enables the Bastion server"
+      out:
+        done: "Bastion ip set, and enabled in the inventory file"
+        alreadyininventory: "Bastion already present in Inventory file"
     disable:
       name: "disable"
       desc: "Disables the Bastion server"
+      out:
+        success: "Bastion disabled in config, and removed from Inventory"
+
     in:
       serveraddress: "What is your Bastion Server Ip?"
 
