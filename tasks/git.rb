@@ -38,7 +38,7 @@ class Git < Thor
     def execute_git_sync(config_dir, disable_push)
       execute_in_shell("git config --global user.email \"#{decrypted_config_file['admin_email']}\"")
       execute_in_shell("git config --global user.name \"#{decrypted_config_file['default_username']}\"")
-      execute_in_shell('git pull', config_dir)
+      execute_in_shell('git pull', config_dir) unless disable_push
       execute_in_shell('git add *', config_dir)
       execute_in_shell('git commit -a -m "updating settings"', config_dir, true )
       execute_in_shell('git push', config_dir) unless disable_push
