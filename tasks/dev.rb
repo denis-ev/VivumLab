@@ -6,7 +6,7 @@ class Dev < Thor
   include Utils
   include VlabI18n
 
-  desc 'lint', 'Lints all the YAML files'
+  desc I18n.t('dev.lint.name'), I18n.t('dev.lint.desc')
   def lint
     lint_exec = <<-LINT
     pip3 install yamllint; \
@@ -16,25 +16,24 @@ class Dev < Thor
     execute_in_shell lint_exec
   end
 
-  desc 'setup', 'Run to install Dev Requirements'
+  desc I18n.t('dev.setup.name'), I18n.t('dev.setup.desc')
   def setup
     return if system('which pre-commit >/dev/null')
 
-    say I18n.t('dev.s_welcome').light_blue
-    return unless yes?(I18n.t('dev.q_contribute'), :yellow)
+    say I18n.t('dev.setup.out.welcome').light_blue
+    return unless yes?(I18n.t('dev.setup.in.contribute'), :yellow)
 
     install_precommit
-    say I18n.t('dev.s_precommiterror').red unless system('which pre-commit >/dev/null')
-    say I18n.t('dev.s_readythanks').green
+    say I18n.t('dev.setup.out.precommiterror').red unless system('which pre-commit >/dev/null')
+    say I18n.t('dev.setup.out.readythanks').green
   end
 
   no_commands do
     def install_precommit
-      say I18n.t('dev.s_welcome').light_blue
-      say I18n.t('dev.s_readdevdocs').yellow
-      say I18n.t('dev.s_precommitwarning').yellow
-      say I18n.t('dev.s_pythonerror').red unless python3_installed
-      `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?(I18n.t('dev.q_installprecommit'), :yellow)
+      say I18n.t('dev.install_precommit.out.readdevdocs').yellow
+      say I18n.t('dev.install_precommit.out.precommitwarning').yellow
+      say I18n.t('dev.install_precommit.out.pythonerror').red unless python3_installed
+      `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?(I18n.t('dev.install_precommit.in.installprecommit'), :yellow)
     end
   end
 end

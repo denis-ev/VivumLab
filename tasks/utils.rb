@@ -12,9 +12,9 @@ module Utils
     write_temporary_decrypted_config
     cmd = playbook_command(playbook, extra, options[:debug].to_sym).strip
     execute_in_shell(cmd)
-    say I18n.t('utils.s_playbookexecuted', playbook_command: cmd).green
+    say I18n.t('utils.run_playbook.out.playbookexecuted', playbook_command: cmd).green
   rescue Subprocess::NonZeroExit => e
-    say I18n.t('utils.s_playbookerror', e: e).red
+    say I18n.t('utils.run_playbook.out.playbookerror', e: e).red
   ensure
     FileUtils.rm_f @temp_config
   end
@@ -30,12 +30,12 @@ module Utils
   end
 
   def run_config_playbook(options, extra = '')
-    say I18n.t('utils.s_playbookexecuting', playbook_command: playbook_command).yellow if options[:debug] != :none
+    say I18n.t('utils.run_config_playbook.out.playbookexecuting', playbook_command: playbook_command).yellow if options[:debug] != :none
     execute_in_shell(playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip)
-    say I18n.t('utils.s_playbookexecuted', playbook_command: playbook_command).green
+    say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_command).green
     migration_invoke_override
   rescue Subprocess::NonZeroExit => e
-    say I18n.t('utils.s_configplaybookerror', e: e).red
+    say I18n.t('utils.run_config_playbook.out.playbookerror', e: e).red
   end
 
   def execute_in_shell(params, cwd = './', fail_ok = nil)

@@ -9,7 +9,7 @@ class Migration < Thor
   class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc 'single_config', 'Migrates away from a config.yml, and vault.yml to a single encrypted.yml'
+  desc I18n.t('migration.single_config.name'), I18n.t('migration.single_config.desc')
   def single_config
     # This task should return, having done nothing UNLESS
     # * There is no encrypted.yml in the current settings folder
@@ -29,7 +29,7 @@ class Migration < Thor
       FileUtils.rm "#{options[:config_dir]}/config.yml"
       FileUtils.rm "#{options[:config_dir]}/vault.yml"
     else
-      say I18n.t('migration.s_notdone').light_blue
+      say I18n.t('migration.single_config.out.notdone').light_blue
     end
   end
 end

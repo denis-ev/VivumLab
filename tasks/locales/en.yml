@@ -8,17 +8,48 @@ en:
       desc: "Disables the Bastion server"
 
   config:
-    s_creating: "Creating, or updating Config file %{config_dir}/config.yml"
-    s_resetting: "Resetting config file at %{config_dir}/config.yml"
-    s_backup: "Backing up your existing config"
-    s_editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
-    s_editerror: "Something went wrong executing the decryption and or editing the file"
-    s_fileremove: "For security reasons, the temporary decrypted config file has been deleted."
-    s_decrypted: "Config file is now, decrypted"
-    s_encrypted: "Config file is now, encrypted"
-    s_nokey: "Key %{config_key} not found in either config file. Please check the key."
-    s_keynomatch: "Unable to find a full match for the key %{config_key}"
-    s_possiblekey: "Here's some possible matches:"
+    new:
+      name: "new"
+      desc: "Creates or Updates the config file, as necessary"
+      out:
+        creating: "Creating, or updating Config file %{config_dir}/config.yml"
+    show:
+      name: "show"
+      desc: "Shows the configuration settings for a specified service"
+      out:
+        tablenorender: "Unable to render table, due to object complexity. Reverting to text"
+    reset:
+      name: "reset"
+      desc: "Resets VivumLab config"
+      out:
+        resetting: "Resetting config file at %{config_dir}/config.yml"
+        backup: "Backing up your existing config"
+    edit_raw:
+      name: "edit_raw"
+      desc: "Decrypts, and opens the config file in nano. Encrypts on save"
+      out:
+        editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
+        editerror: "Something went wrong executing the decryption and or editing the file"
+        fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+    decrypt:
+      name: "decrypt"
+      desc: "Decrypts the encrypted config file. You must Re-ENCRYPT yourself using vlab config encrypt"
+      out:
+        decrypted: "Config file is now, decrypted"
+    encrypt:
+      name: "encrypt"
+      desc: "Encrypts a given config.yml to encrypted.yml"
+      out:
+        encrypted: "Config file is now, encrypted"
+    set:
+      name: "set"
+      desc: "Sets a config variable"
+      out:
+        nokey: "Key %{config_key} not found in either config file. Please check the key."
+    draw_error_table:
+      out:
+        keynomatch: "Unable to find a full match for the key %{config_key}"
+        possiblekey: "Here's some possible matches:"
 
   core:
     checkversion:
@@ -57,42 +88,71 @@ en:
         uninstallconfirm: "Confirm again, if you are sure"
 
   deprecated:
-    s_encrypting: "Encrypting the vault"
-    s_encrypted: "Vault Encrypted"
-    s_decrypting: "Decrypting the vault"
-    s_decrypted: "Vault Decrypted"
-    s_failencrypt: "This command can fail, if the vault was already encrypted"
-    s_faildecrypt: "This command can fail, if the vault was already decrypted"
+    vault_encrypt:
+      name: "vault_encrypt"
+      desc: "Encrypts the ansible vault.yml - DEPRECATED"
+      out:
+        encrypting: "Encrypting the vault"
+        encrypted: "Vault Encrypted"
+        failencrypt: "This command can fail, if the vault was already encrypted"
+    vault_decrypt:
+      name: "vault_decrypt"
+      desc: "Decrypts the ansible vault.yml - DEPRECATED"
+      out:
+        decrypting: "Decrypting the vault"
+        decrypted: "Vault Decrypted"
+        faildecrypt: "This command can fail, if the vault was already decrypted"
 
   dev:
-    s_welcome: "Welcome to VivumLab Developer Setup"
-    q_contribute: "Do you want to contribute to VivumLab (Yes or no)?"
-    s_thanks: "Thanks for helping out"
-    s_readdevdocs: |+
-      "First and foremost, please make sure you have read the developer docs"
-      "You can find the developers docs. here:"
-      "# TODO: add url to dev docs"
-
-    s_precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
-    s_pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
-    s_precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
-    s_readythanks: |+
-      "Ok, all set! Thank you for being a part of the VivumLab Community"
-      "We hope that you will enjoy your time with us"
-      "And we look forward to achieving great things, together"
-    q_installprecommit: "Install pre-commit now?"
+    lint:
+      name: "lint"
+      desc: "Lints all the YAML files"
+    setup:
+      name: "setup"
+      desc: "Run to install Dev Requirements"
+      out:
+        welcome: "Welcome to VivumLab Developer Setup"
+        precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+        readythanks: |+
+          "Ok, all set! Thank you for being a part of the VivumLab Community"
+          "We hope that you will enjoy your time with us"
+          "And we look forward to achieving great things, together"
+      in:
+        contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+    install_precommit:
+      out:
+        readdevdocs: |+
+          "First and foremost, please make sure you have read the developer docs"
+          "You can find the developers docs. here:"
+          "# TODO: add url to dev docs"
+        precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
+        pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+      in:
+        installprecommit: "Install pre-commit now?"
 
   git:
-    s_settingssyncing: "Syncing settings via Git"
-    s_settingssynced: "Settings synced"
-    s_notsetup: |+
-      "Warning! Your settings directory is not setup as a Git Repository"
-      "Make sure to back them up using some other method. For more information, see:"
-      "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
-    s_trackbranch: "You are now tracking the %{branch} branch"
+    sync:
+      name: "sync"
+      desc: "Syncs your settings git repo"
+      out:
+        settingssyncing: "Syncing settings via Git"
+        settingssynced: "Settings synced"
+        notsetup: |+
+          "Warning! Your settings directory is not setup as a Git Repository"
+          "Make sure to back them up using some other method. For more information, see:"
+          "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
+    track:
+      name: "track"
+      desc: "Allows you to switch between different branches or tags of Vivumlab"
+      out:
+        trackbranch: "You are now tracking the %{branch} branch"
 
   migration:
-    s_notdone: "Migration not needed. Config files valid."
+    single_config:
+      name: "single_config"
+      desc: "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
+      out:
+        notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
     s_localpassed: "Local sanity checks passed."
@@ -118,8 +178,16 @@ en:
     s_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
 
   server:
-    s_shutdown: "Server will shutdown in %{time} minute(s)"
-    s_restart: "Server will restart in %{time} minute(s)"
+    shutdown:
+      name: "shutdown"
+      desc: "Executes a shutdown of the Vlab server, optionally with countdown"
+      out:
+        shutdown: "Server will shutdown in %{time} minute(s)"
+    restart:
+      name: "restart"
+      desc: "Executes a restart of the Vlab server, optionally with countdown"
+      out:
+        restart: "Server will restart in %{time} minute(s)"
 
   service:
     s_removing: "Removing data for service: %{service}"
@@ -148,30 +216,58 @@ en:
     s_disabled: "%{service} is now disabled"
 
   ssh:
-    s_launching: "Launching an SSH session to your server"
-    s_keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
-    s_keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
-    s_keycreated: "Key created"
-    s_keycopying: "Copying keys to your server at %{vlab_ip}"
-    s_keycopied: "Key copied"
+    launch:
+      name: "launch"
+      desc: "Opens a shell on your VivumLab server"
+      out:
+        launching: "Launching an SSH session to your server"
+    create_sshkey:
+      name: "create_sshkey"
+      desc: "Creates an SSH key, if one doesn't exist"
+      out:
+        keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
+        keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
+        keycreated: "Key created"
+    copy_sshkey:
+      name: "copy_sshkey"
+      desc: "Copy your ssh key over to the server"
+      out:
+        keycopying: "Copying keys to your server at %{vlab_ip}"
+        keycopied: "Key copied"
+    setup:
+      name: "setup"
+      desc: "Creates and copies your ssh key over to the server"
 
   terraform:
-    s_creating: "Creating a cloud server"
-    s_created_success: "Successfully created a server at: %{ip}"
-    s_ip_set: |+
-      "Place this IP where you want it in your settings.."
-      "either as vlab_ip or bastion.server_address"
+    create:
+      name: "create"
+      desc: "Spins up a cloud server with Terraform'"
+      out:
+        creating: "Creating a cloud server"
+        created: "Successfully created a server at: %{ip}"
+        setip: |+
+          "Place this IP where you want it in your settings.."
+          "either as vlab_ip or bastion.server_address"
 
-      "Then run 'vlab deploy' to complete the setup."
-    s_destroying: "Destroying terraform built server"
-    s_destroy_success: "Cloud server(s) destroyed."
+          "Then run 'vlab deploy' to complete the setup."
+    destroy:
+      name: "destroy"
+      desc: "Destroys server(s) created by terraform"
+      out:
+        destroying: "Destroying terraform built server"
+        destroyed: "Cloud server(s) destroyed."
 
   utils:
-    s_playbookexecuting: "executing playbook command: %{playbook_command}"
-    s_playbookexecuted: "%{playbook_command} finished"
-    s_playbookerror: |+
-      "Ansible Playbook command returned with an error code."
-      "Exception is: %{e}"
-    s_configplaybookerror: |+
-      "Failed to run Ansible playbook: playbook.config.yml"
-      "Error is: %{e}"
+    run_playbook:
+      out:
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          "Ansible Playbook command returned with an error code."
+          "Exception is: %{e}"
+    run_config_playbook:
+      out:
+        playbookexecuting: "executing playbook command: %{playbook_command}"
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          "Failed to run Ansible playbook: playbook.config.yml"
+          "Error is: %{e}"
