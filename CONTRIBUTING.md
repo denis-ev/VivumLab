@@ -194,13 +194,10 @@ The footer should contain any information about **Breaking Changes** and is also
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines.
 The rest of the commit message is then used for this.
 
-## Working locally on the documentation
+## Working locally on the website and documentation
 
-To serve the docs locally run `make docs_local`.
+To work on the [VivumLab website](https://vivumlab.com/) just run `docker-compose -f dev/docker-compose.docs-local.yml up` to serve it via docker locally on port `8000` or read `cd website && cat README.md` for yarn instructions.
 
-## Working locally on the website
-
-To work on the [VivumLab website](https://vivumlab.com/) just type `make web` to serve it locally.
 
 
 ## Contributions and Licensing
