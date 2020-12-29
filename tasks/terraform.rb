@@ -15,7 +15,7 @@ class Terraform < Thor
     # rubocop:disable Layout/LineLength
     terraform_ip = execute_in_shell "/bin/bash -c cd #{options[:config_dir]}; terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address"
     # rubocop:enable Layout/LineLength
-    say I18n.t('terraform.create.out.created, terraform_ip: terraform_ip').green
+    say I18n.t('terraform.create.out.created', terraform_ip: terraform_ip).green
     say I18n.t('terraform.create.out.setip').light_blue
   end
 
