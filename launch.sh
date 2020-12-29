@@ -74,7 +74,9 @@ if [[ -z $1 ]]; then
   version=latest
 else
   if [[ $1 == 'local' ]]; then
-    docker build --no-cache -t vivumlab/vivumlab:local .
+    if [[ $2 != 'start' ]]; then
+      docker build --no-cache -t vivumlab/vivumlab:local .
+    fi
     version=local
   else
     version=$1
@@ -109,18 +111,18 @@ docker run --rm -it \
 <<ENDOFSIGSTART=
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAl/pfgwACgkQ+4SMbaIP
-99RsTA/+KqI3imkeMRzmKLYRPkKqJagm/8aRjQDI2arCeR4ZF5Nn3zG5icpRw0OC
-oCw4bnEGWnmcJZfbacwHQVs0VGygFCkOxZWEmQuJammGy6BPzixuF1fC0RWu2PyS
-vaD57jXK151rE2O4W7bAF/j3InQw0ce6f9hYufXRG0dG16uAWJS8RU+EoeU14al/
-y5cj1RFUjyfRoCFU8iZDMa5n1WnvqEvyRa+HrNel2dq4Nvl4lVJtrRnn8FzNdhOc
-wCPgry+iwpXaRgqbca3vOKq8ijgTozJB0naXcpltYNLPQUR2T2FY1OHyWSEI/Dn2
-vSAlIpiwj6P5bdvR5UnTyqat4LLOH6piZ4SoiCMyg8nsQpWfchr6xIXzyKVlMTRW
-nf2vSTt8IZ1ZUvEG8rghrBRNKGKp79huBjq06Nfrl+7ssExUjsA4bJ0BjqXKJaRF
-wC66prjXYz2LVbjlF5ONN/6BIUzxWuo7MHZW1WjImMMyUIgf9Q9tmnrrZEfJ4QIi
-INaX/Nn12pQ+0IYnAHW6RW1hQm2Fm5ZiFnCbR9EzdC/39iWfULw+UPFAwfPy+7aQ
-TChcy826nk6Sp5iIMZJEiYb56Hnz4dE1mRW5gfzKu2I6kzPJdweHmV1l2UScrv3m
-gAXzu0AS9JJZYXy7nceY/4pA8TaQilwQFx6rPDycRbKfo0UQErA=
-=QQzj
+iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAl/rFK0ACgkQ+4SMbaIP
+99QMCQ/8Du5tYFC/9O4sgpR+IhzMh0YcT1H+1Y4pN/YhSmNBL8WVvs9E0siJm/6B
+6eWztPVSW+OqEQFRO11FidpyPwjwfJfMMOKQBU9Kx9dn1sJAgwo+fwRkXF6ucq1f
+j7coUwtj4E4MWZWkPIOUdyBmSCldz5Ceu6/aK07S8hn04hMB3Yc8NBNDD36QS7rZ
+om68IR6x/edvXkwDV7hmsHWjLVEuWQhR6us1VjZZX19OxAdKRTfFe4DZw56bCk78
+lShgOqrts09z+66sOqTbhLZb2hnn83n5OKXKjrLN2IeS1xPlf5X48lHlYlsHdv7L
+kfFdEhMTiXhl9MSxBTXls9BIQXz6QtwtE1Uoc0DOTAKSsRfOe7shGwd3qXMqKhgb
+eIUAimicrvFEjB493HYafJsvk/Me9c/xiAJ4+yS5KXcP+VAP2UNRr7zbHpBJlGik
+Y+4aYfJ7h+noT29ppuWV8viXBBiD0Gd5qZGx6Mmx+om/ywOj0BL4yq/pJwS4TBLP
+S2mSjbWTB04b/tNSt4nkUpm1AeeD9GirXJEBVqYWfGHFBhOl3MUgRlUoEBNzwJjj
+vS4yom0Z5kvhMvlftUulCK2dtXVPejRTIXmfQ4p83xIL9jxJU/8ilZnt10R2RKZj
+HNlBnKoykC/oNFaDjOVxZDqutxnpmfIRvds9eADvJU4ceG71BDc=
+=CNMI
 -----END PGP SIGNATURE-----
 ENDOFSIGSTART=
