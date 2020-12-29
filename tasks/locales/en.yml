@@ -178,8 +178,16 @@ en:
     s_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
 
   server:
-    s_shutdown: "Server will shutdown in %{time} minute(s)"
-    s_restart: "Server will restart in %{time} minute(s)"
+    shutdown:
+      name: "shutdown"
+      desc: "Executes a shutdown of the Vlab server, optionally with countdown"
+      out:
+        shutdown: "Server will shutdown in %{time} minute(s)"
+    restart:
+      name: "restart"
+      desc: "Executes a restart of the Vlab server, optionally with countdown"
+      out:
+        restart: "Server will restart in %{time} minute(s)"
 
   service:
     s_removing: "Removing data for service: %{service}"
@@ -208,12 +216,27 @@ en:
     s_disabled: "%{service} is now disabled"
 
   ssh:
-    s_launching: "Launching an SSH session to your server"
-    s_keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
-    s_keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
-    s_keycreated: "Key created"
-    s_keycopying: "Copying keys to your server at %{vlab_ip}"
-    s_keycopied: "Key copied"
+    launch:
+      name: "launch"
+      desc: "Opens a shell on your VivumLab server"
+      out:
+        launching: "Launching an SSH session to your server"
+    create_sshkey:
+      name: "create_sshkey"
+      desc: "Creates an SSH key, if one doesn't exist"
+      out:
+        keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
+        keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
+        keycreated: "Key created"
+    copy_sshkey:
+      name: "copy_sshkey"
+      desc: "Copy your ssh key over to the server"
+      out:
+        keycopying: "Copying keys to your server at %{vlab_ip}"
+        keycopied: "Key copied"
+    setup:
+      name: "setup"
+      desc: "Creates and copies your ssh key over to the server"
 
   terraform:
     create:
