@@ -81,7 +81,6 @@ If you are having problems you can:
 
 - [Home Assistant](software/homeassistant) - Home Automation
 - [HomeBridge](software/homebridge) - HomeKit support for the impatient
-- [Kibitzr](software/kibitzr) - IFTTT replacement
 
 ### Blogging Platforms
 
@@ -147,7 +146,7 @@ If you are having problems you can:
 ### Gateways and terminal sharing
 
 - [Guacamole](software/guacamole) - a clientless remote desktop gateway
-- [WebVirtMg](software/webvirtmgr) is a complete Kernel Virtual Machine (KVM) hypervisor manager.
+- [WebVirtMgr](software/webvirtmgr) is a complete Kernel Virtual Machine (KVM) hypervisor manager.
 
 ### Media Streaming
 
@@ -173,9 +172,7 @@ If you are having problems you can:
 - [Folding@home](software/folding_at_home) Folding@home software allows you to share your unused computer power with scientists researching diseases.
 - [Grocy](software/grocy) - ERP beyond your fridge - grocy is a web-based self-hosted groceries & household management solution for your home
 - [Hubzilla](software/hubzilla) - a powerful platform for creating interconnected websites featuring a decentralized identity
-- [Inventario](software/inventario) - Home inventory software
 - [InvoiceNinja](software/invoiceninja) - Free Open-Source Invoicing Software
-- [Mashio](software/mashio) - Home brewery management software
 - [Monica](software/monica) - Contact / relationship manager
 - [n8n](software/n8n) - n8n is a free and open node based Workflow Automation Tool.
 - [NodeRED](software/nodered) - Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
@@ -209,7 +206,6 @@ If you are having problems you can:
 
 ### Note-taking and Editors
 
-- [BulletNotes](software/bulletnotes) - Note taking application
 - [Trilium](software/trilium) - Build your personal knowledge base with Trilium Notes
 - [Turtl](software/turtl) - Note taking application with mobile and desktop apps
 
