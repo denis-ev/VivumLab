@@ -13,7 +13,7 @@ class Dev < Thor
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
   desc I18n.t('dev.setup.usage'), I18n.t('dev.setup.desc')
-  def dev_setup
+  def setup
     return if system('which pre-commit >/dev/null')
 
     say I18n.t('dev.setup.out.welcome').light_blue

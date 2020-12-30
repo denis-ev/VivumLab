@@ -108,7 +108,7 @@ fr:
 
   dev:
     setup:
-      usage: "dev_setup"
+      usage: "setup"
       desc: "Run to install Dev Requirements"
       out:
         welcome: "Welcome to VivumLab Developer Setup"

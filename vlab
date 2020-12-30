@@ -67,11 +67,6 @@ class Vlab < Thor
     invoke 'core:restore', [], {}
   end
 
-  desc I18n.t('dev.setup.usage'), I18n.t('dev.setup.desc')
-  def dev_setup
-    invoke 'dev:dev_setup', [], {}
-  end
-
   # This method ensures that if we have an error, the resulting return code
   # in the shell is not 0.
   def self.exit_on_failure?
