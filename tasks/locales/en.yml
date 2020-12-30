@@ -163,27 +163,56 @@ en:
         notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
-    s_localpassed: "Local sanity checks passed."
-    s_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
-    s_sshkeyverified: "SSH Keys are good to go!"
-    s_vaultpassmissing: |+
-      "Oops, your vault password in %{home_dir}, doesn't appear to exist."
-      "This is unusual, but could be the result of the username changing after setup."
-    s_vaultpasscreate: |+
-      "A new `.vlab_vault_pass` file can be created for you;"
-      "or you can exit, and try to sort this out yourself."
-    q_vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
-    s_gitnoexist: "You need to install git!"
-    s_lowprecommit: |+
-      "Pre-commit is not installed or an earlier version than required."
-      "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
+    check_ssh_keys:
+      name: "check_ssh_keys"
+      desc: "Creates or updates SSH keys as necessary"
+    local:
+      name: "local"
+      desc: "Local Sanity Checks"
+      out:
+        passed: "Local sanity checks passed."
+    remote:
+      name: "remote"
+      desc: "Remote Server sanity checks"
+      out:
+        sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
+        sshkeyverified: "SSH Keys are good to go!"
+    check_for_settings:
+      name: "check_for_settings"
+      desc: "Verifies settings exist"
+    check_vault_pass:
+      name: "check_vault_pass"
+      desc: "Checks for the presence of a Vault Password file"
+      out:
+        vaultpassmissing: |+
+          "Oops, your vault password in %{home_dir}, doesn't appear to exist."
+          "This is unusual, but could be the result of the username changing after setup."
+        vaultpasscreate: |+
+          "A new `.vlab_vault_pass` file can be created for you;"
+          "or you can exit, and try to sort this out yourself."
+      in:
+        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+    check_for_git:
+      name: "check_for_git"
+      desc: "Checks the local machine for Git"
+      out:
+        gitnoexist: "You need to install git!"
+    check_for_precommit:
+      name: "check_for_precommit"
+      desc: "Checks for the presence of Pre-commit"
+      out:
+        lowprecommit: |+
+          "Pre-commit is not installed or an earlier version than required."
+          "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
 
-      "Run `vlab dev setup` when you're ready.."
-    s_lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
-    s_noprecommit: |+
-      "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
-      "Run vlab dev_setup, when you're ready"
-    s_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+          "Run `vlab dev setup` when you're ready.."
+        lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
+        noprecommit: |+
+          "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
+          "Run vlab dev_setup, when you're ready"
+    check_ssh_with_keys:
+      out:
+        sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
 
   server:
     shutdown:
