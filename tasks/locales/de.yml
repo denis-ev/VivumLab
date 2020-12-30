@@ -1,13 +1,13 @@
 de:
   bastion:
     enable:
-      name: "enable"
+      usage: "enable"
       desc: "Enables the Bastion server"
       out:
         done: "Bastion ip set, and enabled in the inventory file"
         alreadyininventory: "Bastion already present in Inventory file"
     disable:
-      name: "disable"
+      usage: "disable"
       desc: "Disables the Bastion server"
       out:
         success: "Bastion disabled in config, and removed from Inventory"
@@ -17,43 +17,38 @@ de:
 
   config:
     new:
-      name: "new"
+      usage: "new"
       desc: "Creates or Updates the config file, as necessary"
       out:
         creating: "Creating, or updating Config file %{config_dir}/config.yml"
     show:
-      name: "show"
+      usage: "show"
       desc: "Shows the configuration settings for a specified service"
       out:
         tablenorender: "Unable to render table, due to object complexity. Reverting to text"
     reset:
-      name: "reset"
+      usage: "reset"
       desc: "Resets VivumLab config"
       out:
         resetting: "Resetting config file at %{config_dir}/config.yml"
         backup: "Backing up your existing config"
     edit_raw:
-      name: "edit_raw"
+      usage: "edit_raw"
       desc: "Decrypts, and opens the config file in nano. Encrypts on save"
       out:
         editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
         editerror: "Something went wrong executing the decryption and or editing the file"
         fileremove: "For security reasons, the temporary decrypted config file has been deleted."
     decrypt:
-      name: "decrypt"
+      usage: "decrypt"
       desc: "Decrypts the encrypted config file. You must Re-ENCRYPT yourself using vlab config encrypt"
       out:
         decrypted: "Config file is now, decrypted"
     encrypt:
-      name: "encrypt"
+      usage: "encrypt"
       desc: "Encrypts a given config.yml to encrypted.yml"
       out:
         encrypted: "Config file is now, encrypted"
-    set:
-      name: "set"
-      desc: "Sets a config variable"
-      out:
-        nokey: "Key %{config_key} not found in either config file. Please check the key."
     draw_error_table:
       out:
         keynomatch: "Unable to find a full match for the key %{config_key}"
@@ -61,30 +56,30 @@ de:
 
   core:
     checkversion:
-      name: "check-version"
+      usage: "check-version"
       desc: "checks the local version against the latest from github"
       out:
         currentversion: "You have version %{current_version}"
         versionlatest: "You're up to date"
         versionupdate: "Consider updating to %{latest_version}"
     generate_vault_pass:
-      name: "generate-vault-pass"
+      usage: "generate-vault-pass"
       desc: "Creates a new Vault Password"
       out:
         noaction: "Vault pass exists, no action taking"
     deploy:
-      name: "deploy"
+      usage: "deploy"
       desc: "Deploys VivumLab, configures it first if needed"
       out:
         deploy: "Deploying Vivumlab"
     restore:
-      name: "restore"
+      usage: "restore"
       desc: "restores a vlab install, assuming backups exist"
       out:
         restoring: "Restoring your backups, now.."
         restored: "Backups have been restored"
     uninstall:
-      name: "uninstall"
+      usage: "uninstall"
       desc: "irreversably removes vlab"
       out:
         uninstall: |+
@@ -97,14 +92,14 @@ de:
 
   deprecated:
     vault_encrypt:
-      name: "vault_encrypt"
+      usage: "vault_encrypt"
       desc: "Encrypts the ansible vault.yml - DEPRECATED"
       out:
         encrypting: "Encrypting the vault"
         encrypted: "Vault Encrypted"
         failencrypt: "This command can fail, if the vault was already encrypted"
     vault_decrypt:
-      name: "vault_decrypt"
+      usage: "vault_decrypt"
       desc: "Decrypts the ansible vault.yml - DEPRECATED"
       out:
         decrypting: "Decrypting the vault"
@@ -112,11 +107,8 @@ de:
         faildecrypt: "This command can fail, if the vault was already decrypted"
 
   dev:
-    lint:
-      name: "lint"
-      desc: "Lints all the YAML files"
     setup:
-      name: "setup"
+      usage: "dev_setup"
       desc: "Run to install Dev Requirements"
       out:
         welcome: "Welcome to VivumLab Developer Setup"
@@ -127,6 +119,12 @@ de:
           "And we look forward to achieving great things, together"
       in:
         contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+    set:
+      usage: "set"
+      desc: "Sets a config variable"
+      out:
+        noservice: "Service %{service} not found in config file. Please check the service."
+        nokey: "Key %{config_key} not found in config file. Please check the key."
     install_precommit:
       out:
         readdevdocs: |+
@@ -140,7 +138,7 @@ de:
 
   git:
     sync:
-      name: "sync"
+      usage: "sync"
       desc: "Syncs your settings git repo"
       out:
         settingssyncing: "Syncing settings via Git"
@@ -150,38 +148,38 @@ de:
           "Make sure to back them up using some other method. For more information, see:"
           "https://vivumlab.com/setup/installation/#syncing-settings-via-git"
     track:
-      name: "track"
+      usage: "track"
       desc: "Allows you to switch between different branches or tags of Vivumlab"
       out:
         trackbranch: "You are now tracking the %{branch} branch"
 
   migration:
     single_config:
-      name: "single_config"
+      usage: "single_config"
       desc: "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
       out:
         notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
     check_ssh_keys:
-      name: "check_ssh_keys"
+      usage: "check_ssh_keys"
       desc: "Creates or updates SSH keys as necessary"
     local:
-      name: "local"
+      usage: "local"
       desc: "Local Sanity Checks"
       out:
         passed: "Local sanity checks passed."
     remote:
-      name: "remote"
+      usage: "remote"
       desc: "Remote Server sanity checks"
       out:
         sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
         sshkeyverified: "SSH Keys are good to go!"
     check_for_settings:
-      name: "check_for_settings"
+      usage: "check_for_settings"
       desc: "Verifies settings exist"
     check_vault_pass:
-      name: "check_vault_pass"
+      usage: "check_vault_pass"
       desc: "Checks for the presence of a Vault Password file"
       out:
         vaultpassmissing: |+
@@ -193,12 +191,12 @@ de:
       in:
         vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
     check_for_git:
-      name: "check_for_git"
+      usage: "check_for_git"
       desc: "Checks the local machine for Git"
       out:
         gitnoexist: "You need to install git!"
     check_for_precommit:
-      name: "check_for_precommit"
+      usage: "check_for_precommit"
       desc: "Checks for the presence of Pre-commit"
       out:
         lowprecommit: |+
@@ -216,31 +214,31 @@ de:
 
   server:
     shutdown:
-      name: "shutdown"
+      usage: "shutdown"
       desc: "Executes a shutdown of the Vlab server, optionally with countdown"
       out:
         shutdown: "Server will shutdown in %{time} minute(s)"
     restart:
-      name: "restart"
+      usage: "restart"
       desc: "Executes a restart of the Vlab server, optionally with countdown"
       out:
         restart: "Server will restart in %{time} minute(s)"
 
   service:
     remove:
-      name: "remove"
+      usage: "remove --service SERVICENAME"
       desc: "Removes the specified service from the VivumLab server"
       out:
         removing: "Removing data for service: %{service}"
         removed: "Data for %{service}, removed"
     reset:
-      name: "reset"
+      usage: "reset --service SERVICENAME,SERVICENAME"
       desc: "Resets the specified services files on the server"
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
     stop:
-      name: "stop"
+      usage: "stop --service SERVICENAME"
       desc: "Stops all services, or a selected service if you specify --service"
       out:
         stopping: |+
@@ -248,7 +246,7 @@ de:
           "Stopping services now.."
         stopped: "All specified services have been stopped"
     restart:
-      name: "restart"
+      usage: "restart --service SERVICENAME"
       desc: "Restart all services, or a selected service if you specify --service"
       out:
         restarting: |+
@@ -256,7 +254,7 @@ de:
           "Restarting services now.."
         restarted: "All specified services have been restarted"
     update:
-      name: "update"
+      usage: "update -s, --service=SERVICE"
       desc: "Updates all services, or a selected service if you specify --service"
       out:
         updating: |+
@@ -265,10 +263,10 @@ de:
           "Updating now.."
         updated: "All specified services have been updated"
     docs:
-      name: "docs"
+      usage: "docs"
       desc: "Show the docs for the specified service"
-    customizing:
-      name: "customizing"
+    customize:
+      usage: "customize"
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
       out:
         customizing: |+
@@ -279,47 +277,72 @@ de:
       in:
         customizing: "Did you want to make changes to the %{service} service?"
     enable:
-      name: "enable"
+      usage: "enable"
       desc: "Enables specified service"
       out:
         enabled: "%{service} is now enabled"
     disable:
-      name: "disable"
+      usage: "disable"
       desc: "Disables specified service"
       out:
         disabled: "%{service} is now disabled"
     show:
-      name: "show"
+      usage: "show"
       desc: "Show the configuration options for specified service"
       out:
         disabled: "%{service} is now disabled"
+    https_only:
+      usage: "https_only"
+      desc: "Enables/Disables specified service's https_only"
+      out:
+        value: "%{service} https_only is now %{value}"
+    auth:
+      usage: "auth"
+      desc: "Enables/Disables specified service's auth"
+      out:
+        value: "%{service} auth is now %{value}"
+    domain:
+      usage: "domain"
+      desc: "Sets specified service's domain"
+      out:
+        value: "%{service} domain is now %{value}"
+    subdomain:
+      usage: "subdomain"
+      desc: "Sets specified service's subdomain"
+      out:
+        value: "%{service} subdomain is now %{value}"
+    version:
+      usage: "version"
+      desc: "Sets specified service's version"
+      out:
+        value: "%{service} version is now %{value}"
 
   ssh:
     launch:
-      name: "launch"
+      usage: "launch"
       desc: "Opens a shell on your VivumLab server"
       out:
         launching: "Launching an SSH session to your server"
     create_sshkey:
-      name: "create_sshkey"
+      usage: "create_sshkey"
       desc: "Creates an SSH key, if one doesn't exist"
       out:
         keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
         keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
         keycreated: "Key created"
     copy_sshkey:
-      name: "copy_sshkey"
+      usage: "copy_sshkey"
       desc: "Copy your ssh key over to the server"
       out:
         keycopying: "Copying keys to your server at %{vlab_ip}"
         keycopied: "Key copied"
     setup:
-      name: "setup"
+      usage: "setup"
       desc: "Creates and copies your ssh key over to the server"
 
   terraform:
     create:
-      name: "create"
+      usage: "create"
       desc: "Spins up a cloud server with Terraform'"
       out:
         creating: "Creating a cloud server"
@@ -330,7 +353,7 @@ de:
 
           "Then run 'vlab deploy' to complete the setup."
     destroy:
-      name: "destroy"
+      usage: "destroy"
       desc: "Destroys server(s) created by terraform"
       out:
         destroying: "Destroying terraform built server"

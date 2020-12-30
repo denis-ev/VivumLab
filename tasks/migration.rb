@@ -9,7 +9,7 @@ class Migration < Thor
   class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc I18n.t('migration.single_config.name'), I18n.t('migration.single_config.desc')
+  desc I18n.t('migration.single_config.usage'), I18n.t('migration.single_config.desc')
   def single_config
     # This task should return, having done nothing UNLESS
     # * There is no encrypted.yml in the current settings folder

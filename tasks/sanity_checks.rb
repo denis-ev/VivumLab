@@ -9,13 +9,13 @@ class SanityChecks < Thor
   include VlabI18n
   include VlabConstants
 
-  desc I18n.t('sanity_checks.check_ssh_keys.name'), I18n.t('sanity_checks.check_ssh_keys.desc')
+  desc I18n.t('sanity_checks.check_ssh_keys.usage'), I18n.t('sanity_checks.check_ssh_keys.desc')
   # @TODO: Write this task
   def check_ssh_keys
     # if File.exist?
   end
 
-  desc I18n.t('sanity_checks.local.name'), I18n.t('sanity_checks.local.desc')
+  desc I18n.t('sanity_checks.local.usage'), I18n.t('sanity_checks.local.desc')
   def local
     invoke 'check_for_settings'
     invoke 'check_vault_pass'
@@ -25,7 +25,7 @@ class SanityChecks < Thor
     say I18n.t('sanity_checks.local.out.passed').green
   end
 
-  desc I18n.t('sanity_checks.remote.name'), I18n.t('sanity_checks.remote.desc')
+  desc I18n.t('sanity_checks.remote.usage'), I18n.t('sanity_checks.remote.desc')
   def remote
     say I18n.t('sanity_checks.remote.out.sshkeyverifying').yellow
     invoke check_ssh_keys
@@ -33,14 +33,14 @@ class SanityChecks < Thor
     say I18n.t('sanity_checks.remote.out.sshkeyverified').green
   end
 
-  desc I18n.t('sanity_checks.check_for_settings.name'), I18n.t('sanity_checks.check_for_settings.desc')
+  desc I18n.t('sanity_checks.check_for_settings.usage'), I18n.t('sanity_checks.check_for_settings.desc')
   def check_for_settings
     FileUtils.mkdir_p "#{options[:config_dir]}/passwords"
     invoke 'migration:single_config'
     File.write('tasks/ansible_bash.vars', "PASSWORDLESS_SSHKEY=''") unless File.exist? 'tasks/ansible_bash.vars'
   end
 
-  desc I18n.t('sanity_checks.check_vault_pass.name'), I18n.t('sanity_checks.check_vault_pass.desc')
+  desc I18n.t('sanity_checks.check_vault_pass.usage'), I18n.t('sanity_checks.check_vault_pass.desc')
   def check_vault_pass
     return unless File.exist?('/vlab_vault_pass') && File.size('/vlab_vault_pass').zero?
 
@@ -51,13 +51,13 @@ class SanityChecks < Thor
     invoke 'core:generate_vault_pass' if decision
   end
 
-  desc I18n.t('sanity_checks.check_for_git.name'), I18n.t('sanity_checks.check_for_git..desc')
+  desc I18n.t('sanity_checks.check_for_git.usage'), I18n.t('sanity_checks.check_for_git..desc')
   def check_for_git
     `which git`
     say I18n.t('sanity_checks.check_for_git.out.gitnoexist').red unless $CHILD_STATUS.success?
   end
 
-  desc I18n.t('sanity_checks.check_for_precommit.name'), I18n.t('sanity_checks.check_for_precommit.desc')
+  desc I18n.t('sanity_checks.check_for_precommit.usage'), I18n.t('sanity_checks.check_for_precommit.desc')
   def check_for_precommit
     if system('which pre-commit', out: File::NULL)
       if python_version >= REQUIRED_PYTHON_VERSION
