@@ -316,6 +316,11 @@ es:
       desc: "Sets specified service's version"
       out:
         value: "%{service} version is now %{value}"
+    set:
+      usage: "set"
+      desc: "Sets specified service's parameter"
+      out:
+        value: "%{service} parameters changed"
 
   ssh:
     launch:

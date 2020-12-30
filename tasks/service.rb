@@ -136,7 +136,7 @@ class Service < Thor
     say I18n.t('service.version.out.value', service: options[:service], value: options[:value]).green
   end
 
-  desc I18n.t('service.version.usage'), I18n.t('service.version.desc')
+  desc I18n.t('service.set.usage'), I18n.t('service.set.desc')
   option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
   option :enable, type: :boolean, desc: 'Enable the service (true/false).'
   option :https_only, type: :boolean, desc: 'Enable https_only for service (true/false).'
@@ -151,7 +151,7 @@ class Service < Thor
     invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:domain]}" unless options[:domain].nil?
     invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:subdomain]}" unless options[:subdomain].nil?
     invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:version]}" unless options[:version].nil?
-    say I18n.t('service.version.out.value', service: options[:service], value: options[:value]).green
+    say I18n.t('service.set.out.value', service: options[:service], value: options[:value]).green
   end
 
   no_tasks do
