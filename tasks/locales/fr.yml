@@ -212,6 +212,7 @@ fr:
     s_restarted: "All specified services have been restarted"
     s_updating: |+
       "Note: If no services are specified, VivumLab will update all enabled services"
+      "Services specified: %{service}"
       "Updating services now.."
     s_updated: "All specified services have been updated"
     s_customizing: |+

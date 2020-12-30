@@ -46,9 +46,9 @@ class Service < Thor
   end
 
   desc 'update', 'Updates all services, or a selected service if you specify --service'
-  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.', aliases: ['-s']
+  option :service, type: :string, desc: 'Optional name of service. Without, it updates all services.', aliases: ['-s']
   def update
-    say I18n.t('service.s_updating').yellow
+    say I18n.t('service.s_updating', service: options[:service]).yellow
     run_common
     run_playbook('playbook.vivumlab.yml', options, limit_to_service(options[:service]))
     run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
