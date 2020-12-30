@@ -19,12 +19,14 @@ class Service < Thor
 
   desc 'reset', 'Resets the specified service\'s files on the server'
   def reset(service)
-    say I18n.t('service.s_resetting', service: options[:service]).yellow
-    run_common
-    run_playbook('playbook.stop.yml', options, limit_to_service(service))
-    run_playbook('playbook.remove.yml', options, limit_to_service(service))
-    run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service)} -t deploy")
-    say I18n.t('service.s_reset', service: options[:service]).green
+    service.split(',').each do |service|
+      say I18n.t('service.s_resetting', service: service).yellow
+      run_common
+      run_playbook('playbook.stop.yml', options, limit_to_service(service))
+      run_playbook('playbook.remove.yml', options, limit_to_service(service))
+      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service)} -t deploy")
+      say I18n.t('service.s_reset', service: service).green
+    end
   end
 
   desc 'stop', 'Stops all services, or a selected service if you specify --service'
