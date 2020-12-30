@@ -9,15 +9,15 @@ class Service < Thor
   class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc 'remove', 'Removes the specified service from the VivumLab server'
+  desc I18n.t('service.remove.name'), I18n.t('service.remove.desc')
   def remove(service)
     run_common
-    say I18n.t('service.s_removing', service: options[:service]).yellow
+    say I18n.t('service.remove.out.removing', service: options[:service]).yellow
     run_playbook('playbook.remove.yml', options, limit_to_service(service))
-    say I18n.t('service.s_removed', service: options[:service]).green
+    say I18n.t('service.remove.out.removed', service: options[:service]).green
   end
 
-  desc 'reset', 'Resets the specified service\'s files on the server'
+  desc I18n.t('service.reset.name'), I18n.t('service.reset.desc')
   def reset(service)
     service.split(',').each do |service|
       say I18n.t('service.s_resetting', service: service).yellow
@@ -29,61 +29,61 @@ class Service < Thor
     end
   end
 
-  desc 'stop', 'Stops all services, or a selected service if you specify --service'
+  desc I18n.t('service.stop.name'), I18n.t('service.stop.desc')
   option :service, type: :string, desc: 'Optional name of service. Without, it stops all services.'
   def stop
-    say I18n.t('service.s_stopping').yellow
+    say I18n.t('service.stop.out.stopping').yellow
     run_common
     run_playbook('playbook.stop.yml', options, limit_to_service(options[:service]))
-    say I18n.t('service.s_stopped').green
+    say I18n.t('service.stop.out.stopped').green
   end
 
-  desc 'restart', 'Restart all services, or a selected service if you specify --service'
+  desc I18n.t('service.restart.name'), I18n.t('service.restart.desc')
   option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.'
   def restart
-    say I18n.t('service.s_restarting').yellow
+    say I18n.t('service.restart.out.restarting').yellow
     run_common
     run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
-    say I18n.t('service.s_restarted').green
+    say I18n.t('service.restart.out.restarted').green
   end
 
-  desc 'update', 'Updates all services, or a selected service if you specify --service'
+  desc I18n.t('service.update.name'), I18n.t('service.update.desc')
   option :service, type: :string, desc: 'Optional name of service. Without, it updates all services.', aliases: ['-s']
   def update
-    say I18n.t('service.s_updating', service: options[:service]).yellow
+    say I18n.t('service.update.out.updating', service: options[:service]).yellow
     run_common
     run_playbook('playbook.vivumlab.yml', options, limit_to_service(options[:service]))
     run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
-    say I18n.t('service.s_updated').green
+    say I18n.t('service.update.out.updated').green
   end
 
-  desc 'docs', 'Show the docs for the specified service'
+  desc I18n.t('service.docs.name'), I18n.t('service.docs.desc')
   def docs(service)
     say TTY::Markdown.parse_file("docs/software/#{service}.md")
   end
 
-  desc 'customize', 'Allows you to edit a specific deployed service with a docker-compose.override.yml'
+  desc I18n.t('service.customize.name'), I18n.t('service.customize.desc')
   def customize(service)
-    say I18n.t('service.s_customizing', service: options[:service]).yellow
-    return unless yes?(I18n.t('service.q_customizing', service: options[:service]), :yellow)
+    say I18n.t('service.customize.out.customizing', service: options[:service]).yellow
+    return unless yes?(I18n.t('service.customize.in.customizing', service: options[:service]), :yellow)
 
     run_playbook('playbook.service-edit.yml', options, limit_to_service(service))
-    say I18n.t('service.s_customized', service: options[:service]).green
+    say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
 
-  desc 'enable', 'Enables NAME'
+  desc I18n.t('service.enable.name'), I18n.t('service.enable.desc')
   def enable(service_name)
     invoke 'config:set', [], config_key: "#{service_name}.enable", value: true
-    say I18n.t('service.s_enabled', service: options[:service]).green
+    say I18n.t('service.enable.out.enabled', service: service_name).green
   end
 
-  desc 'disable', 'Disables NAME'
+  desc I18n.t('service.disable.name'), I18n.t('service.disable.desc')
   def disable(service_name)
     invoke 'config:set', [], config_key: "#{service_name}.enable", value: false
-    say I18n.t('service.s_disabled', service: options[:service]).green
+    say I18n.t('service.disable.out.disabled', service: service_name).green
   end
 
-  desc 'show', 'Show the configuration options for NAME'
+  desc I18n.t('service.show.name'), I18n.t('service.show.desc')
   def show(service_name)
     invoke 'config:show', [], service: service_name
   end

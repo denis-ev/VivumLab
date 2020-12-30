@@ -163,27 +163,56 @@ es:
         notdone: "Migration not needed. Config files valid."
 
   sanity_checks:
-    s_localpassed: "Local sanity checks passed."
-    s_sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
-    s_sshkeyverified: "SSH Keys are good to go!"
-    s_vaultpassmissing: |+
-      "Oops, your vault password in %{home_dir}, doesn't appear to exist."
-      "This is unusual, but could be the result of the username changing after setup."
-    s_vaultpasscreate: |+
-      "A new `.vlab_vault_pass` file can be created for you;"
-      "or you can exit, and try to sort this out yourself."
-    q_vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
-    s_gitnoexist: "You need to install git!"
-    s_lowprecommit: |+
-      "Pre-commit is not installed or an earlier version than required."
-      "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
+    check_ssh_keys:
+      name: "check_ssh_keys"
+      desc: "Creates or updates SSH keys as necessary"
+    local:
+      name: "local"
+      desc: "Local Sanity Checks"
+      out:
+        passed: "Local sanity checks passed."
+    remote:
+      name: "remote"
+      desc: "Remote Server sanity checks"
+      out:
+        sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
+        sshkeyverified: "SSH Keys are good to go!"
+    check_for_settings:
+      name: "check_for_settings"
+      desc: "Verifies settings exist"
+    check_vault_pass:
+      name: "check_vault_pass"
+      desc: "Checks for the presence of a Vault Password file"
+      out:
+        vaultpassmissing: |+
+          "Oops, your vault password in %{home_dir}, doesn't appear to exist."
+          "This is unusual, but could be the result of the username changing after setup."
+        vaultpasscreate: |+
+          "A new `.vlab_vault_pass` file can be created for you;"
+          "or you can exit, and try to sort this out yourself."
+      in:
+        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+    check_for_git:
+      name: "check_for_git"
+      desc: "Checks the local machine for Git"
+      out:
+        gitnoexist: "You need to install git!"
+    check_for_precommit:
+      name: "check_for_precommit"
+      desc: "Checks for the presence of Pre-commit"
+      out:
+        lowprecommit: |+
+          "Pre-commit is not installed or an earlier version than required."
+          "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
 
-      "Run `vlab dev setup` when you're ready.."
-    s_lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
-    s_noprecommit: |+
-      "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
-      "Run vlab dev_setup, when you're ready"
-    s_sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+          "Run `vlab dev setup` when you're ready.."
+        lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
+        noprecommit: |+
+          "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
+          "Run vlab dev_setup, when you're ready"
+    check_ssh_with_keys:
+      out:
+        sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
 
   server:
     shutdown:
@@ -198,31 +227,72 @@ es:
         restart: "Server will restart in %{time} minute(s)"
 
   service:
-    s_removing: "Removing data for service: %{service}"
-    s_removed: "Data for %{service}, removed"
-    s_resetting: "Resetting %{service}"
-    s_reset: "%{service} has been reset"
-    s_stopping: |+
-      "Note: If no services are specified, VivumLab will stop all enabled services"
-      "Stopping services now.."
-    s_stopped: "All specified services have been stopped"
-    s_restarting: |+
-      "Note: If no services are specified, VivumLab will restart all enabled services"
-      "Restarting services now.."
-    s_restarted: "All specified services have been restarted"
-    s_updating: |+
-      "Note: If no service is specified, VivumLab will update all enabled services"
-      "Service specified: %{service}"
-      "Updating now.."
-    s_updated: "All specified services have been updated"
-    s_customizing: |+
-      "This command creates a file, that will override the original docker-compose file for %{service}"
-      "Any changes that the user wishes to make, should be made to the override file, not the original."
-      "VivumLab will not change, nor delete the original file; the original file will just be ignored"
-    q_customizing: "Did you want to make changes to the %{service} service?"
-    s_customized: "%{service} is ready to customize"
-    s_enabled: "%{service} is now enabled"
-    s_disabled: "%{service} is now disabled"
+    remove:
+      name: "remove"
+      desc: "Removes the specified service from the VivumLab server"
+      out:
+        removing: "Removing data for service: %{service}"
+        removed: "Data for %{service}, removed"
+    reset:
+      name: "reset"
+      desc: "Resets the specified services files on the server"
+      out:
+        resetting: "Resetting %{service}"
+        reset: "%{service} has been reset"
+    stop:
+      name: "stop"
+      desc: "Stops all services, or a selected service if you specify --service"
+      out:
+        stopping: |+
+          "Note: If no services are specified, VivumLab will stop all enabled services"
+          "Stopping services now.."
+        stopped: "All specified services have been stopped"
+    restart:
+      name: "restart"
+      desc: "Restart all services, or a selected service if you specify --service"
+      out:
+        restarting: |+
+          "Note: If no services are specified, VivumLab will restart all enabled services"
+          "Restarting services now.."
+        restarted: "All specified services have been restarted"
+    update:
+      name: "update"
+      desc: "Updates all services, or a selected service if you specify --service"
+      out:
+        updating: |+
+          "Note: If no service is specified, VivumLab will update all enabled services"
+          "Service specified: %{service}"
+          "Updating now.."
+        updated: "All specified services have been updated"
+    docs:
+      name: "docs"
+      desc: "Show the docs for the specified service"
+    customizing:
+      name: "customizing"
+      desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+      out:
+        customizing: |+
+          "This command creates a file, that will override the original docker-compose file for %{service}"
+          "Any changes that the user wishes to make, should be made to the override file, not the original."
+          "VivumLab will not change, nor delete the original file; the original file will just be ignored"
+        customized: "%{service} is ready to customize"
+      in:
+        customizing: "Did you want to make changes to the %{service} service?"
+    enable:
+      name: "enable"
+      desc: "Enables specified service"
+      out:
+        enabled: "%{service} is now enabled"
+    disable:
+      name: "disable"
+      desc: "Disables specified service"
+      out:
+        disabled: "%{service} is now disabled"
+    show:
+      name: "show"
+      desc: "Show the configuration options for specified service"
+      out:
+        disabled: "%{service} is now disabled"
 
   ssh:
     launch:
