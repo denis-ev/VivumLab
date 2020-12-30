@@ -15,6 +15,7 @@ class Vlab < Thor
   require './tasks/utils'
   include Utils
 
+  class_option :dev, type: :boolean, desc: 'Enable Developer tasks', default: false
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
   class_option :debug, desc: 'Debugs Ansible-playbook commands',
                        enum: %w[none warn debug trace], default: :none, aliases: ['-d']
@@ -25,8 +26,9 @@ class Vlab < Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
   namespaces = ObjectSpace.each_object(Class).select do |c|
-    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks'
+    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks' && c.to_s != 'Dev'
   end
+  namespaces << 'Dev' if ARGV.include?('-e') || ARGV.include?('--dev')
   namespaces.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
     subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
