@@ -7,12 +7,12 @@ An open-source data-center, owned by you, the user.
 Including over 50 services; VivumLab wants to make it easy for anyone to run their own services and own all their data in an easy and secure way, with minimal reliance, or intervention from cloud or service providers.
 
 ## Documentation
-Available for your viewing pleasure [here](https://docs.vivumlab.com/)
+Available for your viewing pleasure [here](https://vivumlab.com/docs/)
 
 VivumLab allows a user to deploy their own set of documentation. Further information is available in the docs
 
 ## Installation
-Installation is simple; Instructions are available [here](https://docs.vivumlab.com/core/Installation/)
+Installation is simple; Instructions are available [here](https://vivumlab.com/docs/core/Installation/)
 
 ### Installation Tutorial / Demo Video COMING SOON
 
@@ -22,19 +22,19 @@ Deploys web services to a server. Deployment is managed by Ansible, the services
 
 ## Features
 
-- Manual deployment - [Installation](https://docs.vivumlab.com/core/Installation/#manual-set-up)
+- Manual deployment - [Installation](https://vivumlab.com/docs/core/Installation/#manual-set-up)
 - Automated Backups - COMING SOON
 - Easy Restore
 - Automated Tor Onion Service access
 - Automated HTTPS via LetsEncrypt
-- [Automated Settings Sync](https://docs.vivumlab.com/core/Installation/#syncing-settings-via-git)
+- [Automated Settings Sync](https://vivumlab.com/docs/core/Installation/#syncing-settings-via-git)
 - Optional Cloud Bastion Server with WireGuard VPN
 
 - Check out other planned features [here](https://github.com/Vivumlab/VivumLab/labels/enhancement)
 
 ### Available Software
 
-You can view the complete list of available software [here](https://docs.vivumlab.com/#available-software)
+You can view the complete list of available software [here](https://vivumlab.com/docs/#available-software)
 
 ## Get Support
 

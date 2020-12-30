@@ -145,5 +145,5 @@ run: **`vlab update_one service=wificard`**
 
 ## Need more help?
 Further information regarding services can be found. \
-General Information can be found in the [documentation](https://docs.vivumlab.com). \
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). \
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.
