@@ -1,3 +1,13 @@
+### [0.5.3](https://github.com/VivumLab/VivumLab/compare/v0.5.2...v0.5.3) (2020-12-30)
+
+
+### Bug Fixes
+
+* **services:** correct ownership permissions ([#230](https://github.com/VivumLab/VivumLab/issues/230)) ([2c0aa47](https://github.com/VivumLab/VivumLab/commit/2c0aa479151d606fd6444efa23d2fcafb603159e))
+* not working when: query | bool ([f713c13](https://github.com/VivumLab/VivumLab/commit/f713c13165d354985533ef25962b9e03220b464e))
+* switch from mkdocs to docusaurus v2 ([#190](https://github.com/VivumLab/VivumLab/issues/190)) ([c3c4687](https://github.com/VivumLab/VivumLab/commit/c3c4687dd11935186b3559331dcee9ac9c715056))
+* **service:** use python3 with debinstall ([#217](https://github.com/VivumLab/VivumLab/issues/217)) ([1e19432](https://github.com/VivumLab/VivumLab/commit/1e19432e22a36ef0ebd907f498f968c3598b9d6a))
+
 ### [0.5.2](https://github.com/VivumLab/VivumLab/compare/v0.5.1...v0.5.2) (2020-12-10)
 
 
