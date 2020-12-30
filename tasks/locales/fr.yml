@@ -211,9 +211,9 @@ fr:
       "Restarting services now.."
     s_restarted: "All specified services have been restarted"
     s_updating: |+
-      "Note: If no services are specified, VivumLab will update all enabled services"
-      "Services specified: %{service}"
-      "Updating services now.."
+      "Note: If no service is specified, VivumLab will update all enabled services"
+      "Service specified: %{service}"
+      "Updating now.."
     s_updated: "All specified services have been updated"
     s_customizing: |+
       "This command creates a file, that will override the original docker-compose file for %{service}"
