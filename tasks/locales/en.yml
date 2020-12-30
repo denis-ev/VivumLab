@@ -227,31 +227,72 @@ en:
         restart: "Server will restart in %{time} minute(s)"
 
   service:
-    s_removing: "Removing data for service: %{service}"
-    s_removed: "Data for %{service}, removed"
-    s_resetting: "Resetting %{service}"
-    s_reset: "%{service} has been reset"
-    s_stopping: |+
-      "Note: If no services are specified, VivumLab will stop all enabled services"
-      "Stopping services now.."
-    s_stopped: "All specified services have been stopped"
-    s_restarting: |+
-      "Note: If no services are specified, VivumLab will restart all enabled services"
-      "Restarting services now.."
-    s_restarted: "All specified services have been restarted"
-    s_updating: |+
-      "Note: If no service is specified, VivumLab will update all enabled services"
-      "Service specified: %{service}"
-      "Updating now.."
-    s_updated: "All specified services have been updated"
-    s_customizing: |+
-      "This command creates a file, that will override the original docker-compose file for %{service}"
-      "Any changes that the user wishes to make, should be made to the override file, not the original."
-      "VivumLab will not change, nor delete the original file; the original file will just be ignored"
-    q_customizing: "Did you want to make changes to the %{service} service?"
-    s_customized: "%{service} is ready to customize"
-    s_enabled: "%{service} is now enabled"
-    s_disabled: "%{service} is now disabled"
+    remove:
+      name: "remove"
+      desc: "Removes the specified service from the VivumLab server"
+      out:
+        removing: "Removing data for service: %{service}"
+        removed: "Data for %{service}, removed"
+    reset:
+      name: "reset"
+      desc: "Resets the specified services files on the server"
+      out:
+        resetting: "Resetting %{service}"
+        reset: "%{service} has been reset"
+    stop:
+      name: "stop"
+      desc: "Stops all services, or a selected service if you specify --service"
+      out:
+        stopping: |+
+          "Note: If no services are specified, VivumLab will stop all enabled services"
+          "Stopping services now.."
+        stopped: "All specified services have been stopped"
+    restart:
+      name: "restart"
+      desc: "Restart all services, or a selected service if you specify --service"
+      out:
+        restarting: |+
+          "Note: If no services are specified, VivumLab will restart all enabled services"
+          "Restarting services now.."
+        restarted: "All specified services have been restarted"
+    update:
+      name: "update"
+      desc: "Updates all services, or a selected service if you specify --service"
+      out:
+        updating: |+
+          "Note: If no service is specified, VivumLab will update all enabled services"
+          "Service specified: %{service}"
+          "Updating now.."
+        updated: "All specified services have been updated"
+    docs:
+      name: "docs"
+      desc: "Show the docs for the specified service"
+    customizing:
+      name: "customizing"
+      desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+      out:
+        customizing: |+
+          "This command creates a file, that will override the original docker-compose file for %{service}"
+          "Any changes that the user wishes to make, should be made to the override file, not the original."
+          "VivumLab will not change, nor delete the original file; the original file will just be ignored"
+        customized: "%{service} is ready to customize"
+      in:
+        customizing: "Did you want to make changes to the %{service} service?"
+    enable:
+      name: "enable"
+      desc: "Enables specified service"
+      out:
+        enabled: "%{service} is now enabled"
+    disable:
+      name: "disable"
+      desc: "Disables specified service"
+      out:
+        disabled: "%{service} is now disabled"
+    show:
+      name: "show"
+      desc: "Show the configuration options for specified service"
+      out:
+        disabled: "%{service} is now disabled"
 
   ssh:
     launch:
