@@ -53,7 +53,8 @@ en:
       name: "set"
       desc: "Sets a config variable"
       out:
-        nokey: "Key %{config_key} not found in either config file. Please check the key."
+        noservice: "Service %{service} not found in config file. Please check the service."
+        nokey: "Key %{config_key} not found in config file. Please check the key."
     draw_error_table:
       out:
         keynomatch: "Unable to find a full match for the key %{config_key}"
