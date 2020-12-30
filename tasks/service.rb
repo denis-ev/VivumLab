@@ -72,7 +72,7 @@ class Service < Thor
   desc 'enable', 'Enables NAME'
   def enable(service_name)
     invoke 'config:set', [], config_key: "#{service_name}.enable", value: true
-    say I18n.t('service.s_enabled', service: options[:service]).green
+    say I18n.t('service.s_enabled', service: service_name).green
   end
 
   desc 'disable', 'Disables NAME'
