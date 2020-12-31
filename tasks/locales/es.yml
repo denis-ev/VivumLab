@@ -1,19 +1,4 @@
 es:
-  options:
-    configdir: "Config directory to use"
-    servicename: "Name of the service to display"
-    filetowrite: "Name of the file to write"
-    filetoencrypt: "Name of the file to encrypt"
-    keytoset: "Dot notation key to set"
-    valuetoset: "Value to set"
-    disablegitsync: "Disable pushing git to remote"
-    branchtrack: "The name of the branch, or tag you'd like to use"
-    ansibledebug:  "Debugs Ansible-playbook commands"
-    timershutdown: "Sets a countdown in minutes until the server shuts down"
-    timerrestart: "Sets a countdown in minutes until the server restarts"
-    serviceswarning: "Optional name of service. Without, it removes all services."
-    servicerequired: "Required name of service."
-
   bastion:
     enable:
       usage: "enable"
@@ -360,3 +345,30 @@ es:
         playbookerror: |+
           "Failed to run Ansible playbook: playbook.config.yml"
           "Error is: %{e}"
+
+  vlab:
+    find_help:
+      usage: "find_help"
+      desc: "Shows the user how to contact the VivumLab community"
+    version:
+      usage: "version"
+      desc: "Show VivumLab version"
+      out:
+        vlabversion: "Current VivumLab version: #{vlabversion}"
+
+  options:
+    configdir: "Config directory to use"
+    servicename: "Name of the service to display"
+    filetowrite: "Name of the file to write"
+    filetoencrypt: "Name of the file to encrypt"
+    keytoset: "Dot notation key to set"
+    valuetoset: "Value to set"
+    disablegitsync: "Disable pushing git to remote"
+    branchtrack: "The name of the branch, or tag you'd like to use"
+    ansibledebug:  "Debugs Ansible-playbook commands"
+    timershutdown: "Sets a countdown in minutes until the server shuts down"
+    timerrestart: "Sets a countdown in minutes until the server restarts"
+    serviceswarning: "Optional name of service. Without, it removes all services."
+    servicerequired: "Required name of service."
+    enabledevtasks: "Enable Developer tasks"
+    vlabversion: "Shows current VivumLab version"
