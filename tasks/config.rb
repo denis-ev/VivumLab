@@ -11,7 +11,7 @@ class Config < Thor
                        enum: %w[none warn debug trace],
                        default: :none,
                        aliases: ['-d']
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('config.new.usage'), I18n.t('config.new.desc')
   def new
@@ -21,7 +21,7 @@ class Config < Thor
   end
 
   desc I18n.t('config.show.usage'), I18n.t('config.show.desc')
-  option :service, required: true, desc: 'Name of the service to display', aliases: ['-s']
+  option :service, required: true, desc: I18n.t('options.servicename'),, aliases: ['-s']
   def show
     config_hash = decrypted_config_file[options[:service]]
     begin
@@ -56,7 +56,7 @@ class Config < Thor
   end
 
   desc I18n.t('config.decrypt.usage'), I18n.t('config.decrypt.desc')
-  option :outputfile, required: false, desc: 'Name of the file to write', default: 'decrypted.yml', aliases: ['-o']
+  option :outputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-o']
   def decrypt
     write_temporary_decrypted_config
     FileUtils.mv @temp_config, "#{options[:config_dir]}/#{options[:outputfile]}"
@@ -64,7 +64,7 @@ class Config < Thor
   end
 
   desc I18n.t('config.encrypt.usage'), I18n.t('config.encrypt.desc')
-  option :inputfile, required: false, desc: 'Name of the file to encrypt', default: 'decrypted.yml', aliases: ['-i']
+  option :inputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-i']
   def encrypt
     encrypt_temporary_decrypted_config "#{options[:config_dir]}/#{options[:inputfile]}"
     say I18n.t('config.encrypt.out.encrypted').green

@@ -13,7 +13,7 @@ de:
         success: "Bastion disabled in config, and removed from Inventory"
 
     in:
-      serveraddress: "What is your Bastion Server Ip?"
+      serveraddress: "What is your Bastion Server IP?"
 
   config:
     new:
@@ -233,7 +233,7 @@ de:
         removed: "Data for %{service}, removed"
     reset:
       usage: "reset --service SERVICENAME,SERVICENAME"
-      desc: "Resets the specified services files on the server"
+      desc: "Resets the files for the specified, deployed services"
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
