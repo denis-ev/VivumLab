@@ -20,12 +20,12 @@ class Service < Thor
   desc I18n.t('service.reset.name'), I18n.t('service.reset.desc')
   def reset(service)
     service.split(',').each do |service|
-      say I18n.t('service.s_resetting', service: service).yellow
+      say I18n.t('service.s_resetting', service: service.chomp).yellow
       run_common
-      run_playbook('playbook.stop.yml', options, limit_to_service(service))
-      run_playbook('playbook.remove.yml', options, limit_to_service(service))
-      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service)} -t deploy")
-      say I18n.t('service.s_reset', service: service).green
+      run_playbook('playbook.stop.yml', options, limit_to_service(service.chomp))
+      run_playbook('playbook.remove.yml', options, limit_to_service(service.chomp))
+      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service.chomp)} -t deploy")
+      say I18n.t('service.s_reset', service: service.chomp).green
     end
   end
 
