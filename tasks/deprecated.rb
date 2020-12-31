@@ -6,7 +6,7 @@ class Deprecated < Thor
   include Utils
   include VlabI18n
 
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('deprecated.vault_encrypt.usage'), I18n.t('deprecated.vault_encrypt.desc')
   def vault_encrypt

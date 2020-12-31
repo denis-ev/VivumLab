@@ -6,10 +6,10 @@ class Git < Thor
   include Utils
   include VlabI18n
 
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('git.sync.usage'), I18n.t('git.sync.desc')
-  option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
+  option :disable_push, required: false, type: :boolean, desc: I18n.t('options.disablegitsync'), default: false
   def sync
     if Dir.exist? "./#{options[:config_dir]}/.git"
       say I18n.t('git.sync.out.settingssyncing').yellow
@@ -22,7 +22,7 @@ class Git < Thor
   end
 
   desc I18n.t('git.track.usage'), I18n.t('git.track.desc')
-  option :branch, required: true, type: :string, desc: 'The name of the branch, or tag you\'d like to use'
+  option :branch, required: true, type: :string, desc: I18n.t('options.branchtrack')
   def track
     execute_in_shell("git checkout #{options[:branch]}")
     say I18n.t('git.track.out.trackbranch', branch: options[:branch]).green

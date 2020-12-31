@@ -5,7 +5,10 @@
 require 'rubygems'
 require 'bundler'
 require 'securerandom'
-require_relative 'tasks/lib/vlab_i18n'
+require_relative 'tasks/lib'
+include VlabConstants
+include VlabI18n
+
 Bundler.require(:default)
 
 # This file contains just enough code to bootstrap the CLI.
@@ -15,9 +18,10 @@ class Vlab < Thor
   require './tasks/utils'
   include Utils
 
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
-  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
-  class_option :dev, type: :boolean, desc: 'Enable Developer tasks', default: false
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
+  class_option :debug, desc: I18n.t('options.ansibledebug'), enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :dev, type: :boolean, desc: I18n.t('options.enabledevtasks'), default: false
+  class_option :version, :type => :boolean, desc: I18n.t('options.vlabversion')
 
   # Next line loads all ruby files in tasks/**/*.rb
   Dir['./tasks/**/*.rb'].sort.each { |file| require file }
@@ -37,9 +41,16 @@ class Vlab < Thor
     subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
   end
 
-  desc 'find_help', 'Shows the user how to contact the VivumLab community'
+  desc I18n.t('vlab.find_help.usage'), I18n.t('vlab.find_help.desc')
   def find_help
     say TTY::Markdown.parse_file('website/docs/Contact-us.md')
+  end
+
+  desc I18n.t('vlab.version.usage'), I18n.t('vlab.version.desc')
+  def version
+    if options[:version]
+      say I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
+    end
   end
 
   #################

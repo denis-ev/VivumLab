@@ -10,7 +10,7 @@ class Dev < Thor
                        enum: %w[none warn debug trace],
                        default: :none,
                        aliases: ['-d']
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('dev.setup.usage'), I18n.t('dev.setup.desc')
   def setup
@@ -25,8 +25,8 @@ class Dev < Thor
   end
 
   desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc')
-  option :config_key, type: :string, required: true, desc: 'Dot notation key to set'
-  option :value, type: :string, required: true, desc: 'value to set'
+  option :config_key, type: :string, required: true, desc: I18n.t('options.keytoset'),
+  option :value, type: :string, required: true, desc: I18n.t('options.valuetoset'),
   # This method contains some advanced, idiomatic ruby that may not be entirely
   # clear to new rubyists. I've tried to comment for clarity.
   def set

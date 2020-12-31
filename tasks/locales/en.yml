@@ -13,7 +13,7 @@ en:
         success: "Bastion disabled in config, and removed from Inventory"
 
     in:
-      serveraddress: "What is your Bastion Server Ip?"
+      serveraddress: "What is your Bastion Server IP?"
 
   config:
     new:
@@ -226,39 +226,39 @@ en:
 
   service:
     remove:
-      usage: "remove --service SERVICENAME"
-      desc: "Removes the specified service from the VivumLab server"
+      usage: "remove -s, --service SERVICENAME"
+      desc: "Removes any specified service(s) from the VivumLab server"
       out:
         removing: "Removing data for service: %{service}"
         removed: "Data for %{service}, removed"
     reset:
-      usage: "reset --service SERVICENAME,SERVICENAME"
-      desc: "Resets the specified services files on the server"
+      usage: "reset --service SERVICENAME "
+      desc: "Resets the files for any specified, deployed service(s)."
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
     stop:
-      usage: "stop --service SERVICENAME"
-      desc: "Stops all services, or a selected service if you specify --service"
+      usage: "stop -s, --service SERVICENAME"
+      desc: "Stops all services, or any specified service(s) if you specify --service"
       out:
         stopping: |+
-          "Note: If no services are specified, VivumLab will stop all enabled services"
-          "Stopping services now.."
+          "Note: If no service(s) are specified, VivumLab will stop all enabled service(s)"
+          "Stopping service(s) now.."
         stopped: "All specified services have been stopped"
     restart:
-      usage: "restart --service SERVICENAME"
-      desc: "Restart all services, or a selected service if you specify --service"
+      usage: "restart -s, --service SERVICENAME"
+      desc: "Restart all services, or any specified service(s) if you specify --service"
       out:
         restarting: |+
-          "Note: If no services are specified, VivumLab will restart all enabled services"
-          "Restarting services now.."
-        restarted: "All specified services have been restarted"
+          "Note: If no services(s) are specified, VivumLab will restart all enabled services"
+          "Restarting service(s) now.."
+        restarted: "All specified service(s) have been restarted"
     update:
-      usage: "update -s, --service=SERVICE"
-      desc: "Updates all services, or a selected service if you specify --service"
+      usage: "update -s, --service SERVICE"
+      desc: "Updates all services, or any selected service(s) if you specify --service"
       out:
         updating: |+
-          "Note: If no service is specified, VivumLab will update all enabled services"
+          "Note: If no service(s) are specified, VivumLab will update all enabled services"
           "Service specified: %{service}"
           "Updating now.."
         updated: "All specified services have been updated"
@@ -276,51 +276,18 @@ en:
         customized: "%{service} is ready to customize"
       in:
         customizing: "Did you want to make changes to the %{service} service?"
-    enable:
-      usage: "enable"
-      desc: "Enables specified service"
-      out:
-        enabled: "%{service} is now enabled"
-    disable:
-      usage: "disable"
-      desc: "Disables specified service"
-      out:
-        disabled: "%{service} is now disabled"
     show:
       usage: "show"
       desc: "Show the configuration options for specified service"
       out:
         disabled: "%{service} is now disabled"
-    https_only:
-      usage: "https_only"
-      desc: "Enables/Disables specified service's https_only"
+    setup:
+      usage: "setup"
+      desc: "Interactive setup of any specified service(s) configuration settings"
       out:
-        value: "%{service} https_only is now %{value}"
-    auth:
-      usage: "auth"
-      desc: "Enables/Disables specified service's auth"
-      out:
-        value: "%{service} auth is now %{value}"
-    domain:
-      usage: "domain"
-      desc: "Sets specified service's domain"
-      out:
-        value: "%{service} domain is now %{value}"
-    subdomain:
-      usage: "subdomain"
-      desc: "Sets specified service's subdomain"
-      out:
-        value: "%{service} subdomain is now %{value}"
-    version:
-      usage: "version"
-      desc: "Sets specified service's version"
-      out:
-        value: "%{service} version is now %{value}"
-    set:
-      usage: "set"
-      desc: "Sets specified service's parameter"
-      out:
-        value: "%{service} parameters changed"
+        searchfail: "Failed to find a service config for service: %{service}"
+      in:
+        keyvalue: "What value would you like to set for %{key}: "
 
   ssh:
     launch:
@@ -378,3 +345,30 @@ en:
         playbookerror: |+
           "Failed to run Ansible playbook: playbook.config.yml"
           "Error is: %{e}"
+
+  vlab:
+    find_help:
+      usage: "find_help"
+      desc: "Shows the user how to contact the VivumLab community"
+    version:
+      usage: "version"
+      desc: "Show VivumLab version"
+      out:
+        vlabversion: "Current VivumLab version: #{vlabversion}"
+
+  options:
+    configdir: "Config directory to use"
+    servicename: "Name of the service to display"
+    filetowrite: "Name of the file to write"
+    filetoencrypt: "Name of the file to encrypt"
+    keytoset: "Dot notation key to set"
+    valuetoset: "Value to set"
+    disablegitsync: "Disable pushing git to remote"
+    branchtrack: "The name of the branch, or tag you'd like to use"
+    ansibledebug:  "Debugs Ansible-playbook commands"
+    timershutdown: "Sets a countdown in minutes until the server shuts down"
+    timerrestart: "Sets a countdown in minutes until the server restarts"
+    serviceswarning: "Optional name of service. Without, it removes all services."
+    servicerequired: "Required name of service."
+    enabledevtasks: "Enable Developer tasks"
+    vlabversion: "Shows current VivumLab version"

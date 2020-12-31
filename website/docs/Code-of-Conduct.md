@@ -114,4 +114,4 @@ All VivumLab Community Leaders declare acknowledgement and agreement to these te
 
 #### Attribution/ Reference
 
-Please see [Legal/ Licensing/ Acknowledgement](Legal.md)
+Please see [Legal/ Licensing/ Acknowledgement](legal)

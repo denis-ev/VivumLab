@@ -6,8 +6,8 @@ class Migration < Thor
   include Utils
   include VlabI18n
 
-  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
+  class_option :debug, desc: I18n.t('options.ansibledebug'), enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('migration.single_config.usage'), I18n.t('migration.single_config.desc')
   def single_config
