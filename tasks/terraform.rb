@@ -5,7 +5,7 @@ class Terraform < Thor
   include VlabI18n
   include Utils
 
-  desc I18n.t('terraform.create.name'), I18n.t('terraform.create.desc')
+  desc I18n.t('terraform.create.usage'), I18n.t('terraform.create.desc')
   def create
     invoke 'git:sync'
     invoke 'config:new'
@@ -19,7 +19,7 @@ class Terraform < Thor
     say I18n.t('terraform.create.out.setip').light_blue
   end
 
-  desc I18n.t('terraform.destroy.name'), I18n.t('terraform.destroy.desc')
+  desc I18n.t('terraform.destroy.usage'), I18n.t('terraform.destroy.desc')
   def destroy
     say I18n.t('terraform.destroy.out.destroying').yellow
     execute_in_shell("/bin/bash -c 'cd #{options[:config_dir]}; terraform destroy'")

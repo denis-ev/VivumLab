@@ -4,7 +4,7 @@
 class Server < Thor
   include VlabI18n
 
-  desc I18n.t('server.shutdown.name'), I18n.t('server.shutdown.desc')
+  desc I18n.t('server.shutdown.usage'), I18n.t('server.shutdown.desc')
   option :time, type: :numeric, desc: 'Sets a countdown in minutes until the server shuts down'
   def shutdown
     # rubocop:disable Layout/LineLength
@@ -13,7 +13,7 @@ class Server < Thor
     say I18n.t('server.shutdown.out.shutdown', time: options[:time]).yellow
   end
 
-  desc I18n.t('server.restart.name'), I18n.t('server.restart.desc')
+  desc I18n.t('server.restart.usage'), I18n.t('server.restart.desc')
   option :time, type: :numeric, desc: 'Sets a countdown in minutes until the server restarts'
   def restart
     # rubocop:disable Layout/LineLength

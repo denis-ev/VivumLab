@@ -9,11 +9,13 @@ class Service < Thor
   class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc I18n.t('service.remove.name'), I18n.t('service.remove.desc')
-  def remove(service)
+  desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc')
+  option :service, type: :string, desc: 'Optional name of service. Without, it removes all services.', aliases: ['-s']
+  def remove
     run_common
     say I18n.t('service.remove.out.removing', service: options[:service]).yellow
     run_playbook('playbook.remove.yml', options, limit_to_service(service))
+    invoke 'dev:set', [], config_key: "#{service}.enable", value: false
     say I18n.t('service.remove.out.removed', service: options[:service]).green
   end
 
@@ -29,8 +31,8 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.stop.name'), I18n.t('service.stop.desc')
-  option :service, type: :string, desc: 'Optional name of service. Without, it stops all services.'
+  desc I18n.t('service.stop.usage'), I18n.t('service.stop.desc')
+  option :service, type: :string, desc: 'Optional name of service. Without, it stops all services.', aliases: ['-s']
   def stop
     say I18n.t('service.stop.out.stopping').yellow
     run_common
@@ -38,8 +40,8 @@ class Service < Thor
     say I18n.t('service.stop.out.stopped').green
   end
 
-  desc I18n.t('service.restart.name'), I18n.t('service.restart.desc')
-  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.'
+  desc I18n.t('service.restart.usage'), I18n.t('service.restart.desc')
+  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.', aliases: ['-s']
   def restart
     say I18n.t('service.restart.out.restarting').yellow
     run_common
@@ -47,7 +49,7 @@ class Service < Thor
     say I18n.t('service.restart.out.restarted').green
   end
 
-  desc I18n.t('service.update.name'), I18n.t('service.update.desc')
+  desc I18n.t('service.update.usage'), I18n.t('service.update.desc')
   option :service, type: :string, desc: 'Optional name of service. Without, it updates all services.', aliases: ['-s']
   def update
     say I18n.t('service.update.out.updating', service: options[:service]).yellow
@@ -57,35 +59,98 @@ class Service < Thor
     say I18n.t('service.update.out.updated').green
   end
 
-  desc I18n.t('service.docs.name'), I18n.t('service.docs.desc')
-  def docs(service)
-    say TTY::Markdown.parse_file("docs/software/#{service}.md")
+  desc I18n.t('service.docs.usage'), I18n.t('service.docs.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def docs
+    say TTY::Markdown.parse_file("website/docs/software/#{options[:service]}.md")
   end
 
-  desc I18n.t('service.customize.name'), I18n.t('service.customize.desc')
-  def customize(service)
+  desc I18n.t('service.customize.usage'), I18n.t('service.customize.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def customize
     say I18n.t('service.customize.out.customizing', service: options[:service]).yellow
     return unless yes?(I18n.t('service.customize.in.customizing', service: options[:service]), :yellow)
 
-    run_playbook('playbook.service-edit.yml', options, limit_to_service(service))
+    run_playbook('playbook.service-edit.yml', options, limit_to_service(options[:service]))
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
 
-  desc I18n.t('service.enable.name'), I18n.t('service.enable.desc')
-  def enable(service_name)
-    invoke 'config:set', [], config_key: "#{service_name}.enable", value: true
-    say I18n.t('service.enable.out.enabled', service: service_name).green
+  desc I18n.t('service.enable.usage'), I18n.t('service.enable.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def enable
+    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: true
+    say I18n.t('service.enable.out.enabled', service: options[:service]).green
   end
 
-  desc I18n.t('service.disable.name'), I18n.t('service.disable.desc')
-  def disable(service_name)
-    invoke 'config:set', [], config_key: "#{service_name}.enable", value: false
-    say I18n.t('service.disable.out.disabled', service: service_name).green
+  desc I18n.t('service.disable.usage'), I18n.t('service.disable.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def disable
+    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: false
+    say I18n.t('service.disable.out.disabled', service: options[:service]).green
   end
 
-  desc I18n.t('service.show.name'), I18n.t('service.show.desc')
-  def show(service_name)
-    invoke 'config:show', [], service: service_name
+  desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def show
+    invoke 'config:show', [], service: options[:service]
+  end
+
+  desc I18n.t('service.https_only.usage'), I18n.t('service.https_only.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :value, required: true, type: :string, desc: 'Required value (true/false).', aliases: ['-v']
+  def https_only
+    invoke 'dev:set', [], config_key: "#{options[:service]}.https_only", value: "#{options[:value]}"
+    say I18n.t('service.https_only.out.value', service: options[:service], value: options[:value]).green
+  end
+
+  desc I18n.t('service.auth.usage'), I18n.t('service.auth.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :value, required: true, type: :string, desc: 'Required value (true/false).', aliases: ['-v']
+  def auth
+    invoke 'dev:set', [], config_key: "#{options[:service]}.auth", value: "#{options[:value]}"
+    say I18n.t('service.auth.out.value', service: options[:service], value: options[:value]).green
+  end
+
+  desc I18n.t('service.domain.usage'), I18n.t('service.domain.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
+  def domain
+    invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:value]}"
+    say I18n.t('service.domain.out.value', service: options[:service], value: options[:value]).green
+  end
+
+  desc I18n.t('service.subdomain.usage'), I18n.t('service.subdomain.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
+  def subdomain
+    invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:value]}"
+    say I18n.t('service.subdomain.out.value', service: options[:service], value: options[:value]).green
+  end
+
+  desc I18n.t('service.version.usage'), I18n.t('service.version.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
+  def version
+    invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:value]}"
+    say I18n.t('service.version.out.value', service: options[:service], value: options[:value]).green
+  end
+
+  desc I18n.t('service.set.usage'), I18n.t('service.set.desc')
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  option :enable, type: :boolean, desc: 'Enable the service (true/false).'
+  option :https_only, type: :boolean, desc: 'Enable https_only for service (true/false).'
+  option :auth, type: :boolean, desc: 'Enable auth for service (true/false).'
+  option :domain, type: :string, desc: 'Set custom domain for service (subdomain.example.com).'
+  option :subdomain, type: :string, desc: 'Set subdomain for service (subdomain).'
+  option :version, type: :string, desc: 'Set version for service (latest).'
+  def set
+    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: "#{options[:enable]}" unless options[:enable].nil?
+    invoke 'dev:set', [], config_key: "#{options[:service]}.https_only", value: "#{options[:https_only]}" unless options[:https_only].nil?
+    invoke 'dev:set', [], config_key: "#{options[:service]}.auth", value: "#{options[:auth]}" unless options[:auth].nil?
+    invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:domain]}" unless options[:domain].nil?
+    invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:subdomain]}" unless options[:subdomain].nil?
+    invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:version]}" unless options[:version].nil?
+    say I18n.t('service.set.out.value', service: options[:service], value: options[:value]).green
   end
 
   no_tasks do

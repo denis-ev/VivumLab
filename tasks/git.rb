@@ -8,7 +8,7 @@ class Git < Thor
 
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc I18n.t('git.sync.name'), I18n.t('git.sync.desc')
+  desc I18n.t('git.sync.usage'), I18n.t('git.sync.desc')
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def sync
     if Dir.exist? "./#{options[:config_dir]}/.git"
@@ -21,7 +21,7 @@ class Git < Thor
     end
   end
 
-  desc I18n.t('git.track.name'), I18n.t('git.track.desc')
+  desc I18n.t('git.track.usage'), I18n.t('git.track.desc')
   option :branch, required: true, type: :string, desc: 'The name of the branch, or tag you\'d like to use'
   def track
     execute_in_shell("git checkout #{options[:branch]}")
@@ -37,7 +37,7 @@ class Git < Thor
 
     def execute_git_sync(config_dir, disable_push)
       execute_in_shell("git config --global user.email \"#{decrypted_config_file['admin_email']}\"")
-      execute_in_shell("git config --global user.name \"#{decrypted_config_file['default_username']}\"")
+      execute_in_shell("git config --global user.usage \"#{decrypted_config_file['default_username']}\"")
       execute_in_shell('git pull', config_dir) unless disable_push
       execute_in_shell('git add *', config_dir)
       execute_in_shell('git commit -a -m "updating settings"', config_dir, true )

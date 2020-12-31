@@ -15,10 +15,9 @@ class Vlab < Thor
   require './tasks/utils'
   include Utils
 
-  class_option :dev, type: :boolean, desc: 'Enable Developer tasks', default: false
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
-  class_option :debug, desc: 'Debugs Ansible-playbook commands',
-                       enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :debug, desc: 'Debugs Ansible-playbook commands', enum: %w[none warn debug trace], default: :none, aliases: ['-d']
+  class_option :dev, type: :boolean, desc: 'Enable Developer tasks', default: false
 
   # Next line loads all ruby files in tasks/**/*.rb
   Dir['./tasks/**/*.rb'].sort.each { |file| require file }
@@ -26,9 +25,16 @@ class Vlab < Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
   namespaces = ObjectSpace.each_object(Class).select do |c|
-    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks' && c.to_s != 'Dev'
+    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks' && c.to_s != 'CLI' && c.to_s != 'Core' && c.to_s != 'Config' && c.to_s != 'Deprecated' && c.to_s != 'Dev' && c.to_s != 'Migration' && c.to_s != 'SanityChecks' && c.to_s != 'Ssh'
   end
+  namespaces << 'CLI' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'Core' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'Config' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'Deprecated' if ARGV.include?('-e') || ARGV.include?('--dev')
   namespaces << 'Dev' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'Migration' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'SanityChecks' if ARGV.include?('-e') || ARGV.include?('--dev')
+  namespaces << 'Ssh' if ARGV.include?('-e') || ARGV.include?('--dev')
   namespaces.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
     subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
@@ -39,20 +45,26 @@ class Vlab < Thor
     say TTY::Markdown.parse_file('website/docs/Contact-us.md')
   end
 
-  ########
-  # Quick Aliases
-  ########
+  #################
+  # User Aliases #
+  #################
 
-  desc 'deploy', 'Deploy to your server with the current config'
+  desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')
+  option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def deploy
     invoke 'core:deploy', [], options
   end
 
-  desc 'update', 'Updates all services - or, if you specify --service, a single service.'
-  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.'
+  desc I18n.t('service.update.usage'), I18n.t('service.update.desc')
+  option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.', aliases: ['-s']
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def update
     invoke 'service:update', [], options
+  end
+
+  desc I18n.t('core.restore.usage'), I18n.t('core.restore.desc')
+  def restore
+    invoke 'core:restore', [], {}
   end
 
   # This method ensures that if we have an error, the resulting return code

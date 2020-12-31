@@ -8,7 +8,7 @@ class Deprecated < Thor
 
   class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
 
-  desc I18n.t('deprecated.vault_encrypt.name'), I18n.t('deprecated.vault_encrypt.desc')
+  desc I18n.t('deprecated.vault_encrypt.usage'), I18n.t('deprecated.vault_encrypt.desc')
   def vault_encrypt
     say I18n.t('deprecated.vault_encrypt.out.encrypting').yellow
     begin
@@ -19,7 +19,7 @@ class Deprecated < Thor
     end
   end
 
-  desc I18n.t('deprecated.vault_decrypt.name'), I18n.t('deprecated.vault_decrypt.desc')
+  desc I18n.t('deprecated.vault_decrypt.usage'), I18n.t('deprecated.vault_decrypt.desc')
   def vault_decrypt
     say I18n.t('deprecated.vault_decrypt.out.decrypting').yellow
     begin
