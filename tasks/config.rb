@@ -7,7 +7,7 @@ class Config < Thor
   include Utils
   namespace 'config'
   require 'yaml'
-  class_option :debug, desc: 'Debugs Ansible-playbook commands',
+  class_option :debug, desc: I18n.t('options.ansibledebug'),
                        enum: %w[none warn debug trace],
                        default: :none,
                        aliases: ['-d']

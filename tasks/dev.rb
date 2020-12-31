@@ -6,7 +6,7 @@ class Dev < Thor
   include Utils
   include VlabI18n
 
-  class_option :debug, desc: 'Debugs Ansible-playbook commands',
+  class_option :debug, desc: I18n.t('options.ansibledebug'),
                        enum: %w[none warn debug trace],
                        default: :none,
                        aliases: ['-d']
@@ -25,8 +25,8 @@ class Dev < Thor
   end
 
   desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc')
-  option :config_key, type: :string, required: true, desc: I18n.t('options.keytoset'),
-  option :value, type: :string, required: true, desc: I18n.t('options.valuetoset'),
+  option :config_key, type: :string, required: true, desc: I18n.t('options.keytoset')
+  option :value, type: :string, required: true, desc: I18n.t('options.valuetoset')
   # This method contains some advanced, idiomatic ruby that may not be entirely
   # clear to new rubyists. I've tried to comment for clarity.
   def set
