@@ -30,16 +30,13 @@ class Vlab < Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
   namespaces = ObjectSpace.each_object(Class).select do |c|
-    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks' && c.to_s != 'CLI' && c.to_s != 'Core' && c.to_s != 'Config' && c.to_s != 'Deprecated' && c.to_s != 'Dev' && c.to_s != 'Migration' && c.to_s != 'SanityChecks' && c.to_s != 'Ssh'
+    c.superclass.to_s == 'Thor' && c.to_s != 'Vlab' && c.to_s != 'DemoTasks' && c.to_s != 'Core' && c.to_s != 'Config' && c.to_s != 'Deprecated' && c.to_s != 'Dev' && c.to_s != 'Migration' && c.to_s != 'SanityChecks' && c.to_s != 'Ssh'
   end
-  namespaces << 'CLI' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Core' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Config' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Deprecated' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Dev' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Migration' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'SanityChecks' if ARGV.include?('-e') || ARGV.include?('--dev')
-  namespaces << 'Ssh' if ARGV.include?('-e') || ARGV.include?('--dev')
+
+  %w[Core Config Deprecated Dev Migration SanityChecks Ssh].each do |to_add|
+    namespaces << to_add if ARGV.include?('-e') || ARGV.include?('--dev')
+  end
+
   namespaces.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
     subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
