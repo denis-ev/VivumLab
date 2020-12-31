@@ -21,7 +21,7 @@ class Config < Thor
   end
 
   desc I18n.t('config.show.usage'), I18n.t('config.show.desc')
-  option :service, required: true, desc: I18n.t('options.servicename'),, aliases: ['-s']
+  option :service, required: true, desc: I18n.t('options.servicename'), aliases: ['-s']
   def show
     config_hash = decrypted_config_file[options[:service]]
     begin

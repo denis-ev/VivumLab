@@ -21,16 +21,10 @@ class Service < Thor
   end
 
   desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
-<<<<<<< HEAD
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
-  def reset
-    options[:service].split(',').each do |service|
-      say I18n.t('service.reset.out.resetting', service: service).yellow
-=======
   def reset(service)
     service.split(',').each do |service|
-      say I18n.t('service.s_resetting', service: service.chomp).yellow
->>>>>>> 5389d2f0e8b39b53dfef4198f0bfeba730327f99
+      say I18n.t('service.reset.out.resetting', service: service.chomp).yellow
       run_common
       run_playbook('playbook.stop.yml', options, limit_to_service(service.chomp))
       run_playbook('playbook.remove.yml', options, limit_to_service(service.chomp))
@@ -86,43 +80,24 @@ class Service < Thor
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
 
-<<<<<<< HEAD
-  desc I18n.t('service.enable.usage'), I18n.t('service.enable.desc')
-  option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
-  def enable
-    options[:service].split(',').each do |service|
-      invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: true
-      say I18n.t('service.enable.out.enabled', service: options[:service]).green
-  end
-
-  desc I18n.t('service.disable.usage'), I18n.t('service.disable.desc')
-  option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
-  def disable
-    options[:service].split(',').each do |service|
-      invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: false
-      say I18n.t('service.disable.out.disabled', service: options[:service]).green
-  end
-
-=======
->>>>>>> 5389d2f0e8b39b53dfef4198f0bfeba730327f99
   desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def show
     invoke 'config:show', [], service: options[:service]
   end
 
-  desc 'setup', 'Interactive setup of a service\'s configuration settings'
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
+  option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
     # need list of services config settings.
     # loop over hash asking for data, presenting the current example as the default
     service_config = decrypted_config_file[options[:service]]
-    say "Failed to find a service config for service: #{options[:service]}" if service_config.nil?
+    say I18n.t('service.setup.out.searchfail', service: options[:service]).green if service_config.nil?
     return if service_config.nil?
 
     service_config.each do |key,value|
       ignored = %w[amd64 arm64 armv7]
-      service_config[key] = ask "What value would you like to set for #{key}: ", default: service_config[key] unless ignored.include? key
+      service_config[key] = ask (I18n.t('service.setup.in.keyvalue', key: service_config[key]), default: service_config[key] unless ignored.include? key
     end
 
     decrypted_config_file.merge service_config

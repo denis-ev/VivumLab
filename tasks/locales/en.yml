@@ -249,13 +249,8 @@ en:
         removing: "Removing data for service: %{service}"
         removed: "Data for %{service}, removed"
     reset:
-<<<<<<< HEAD
       usage: "reset --service SERVICENAME,SERVICENAME"
       desc: "Resets the files for the specified, deployed services"
-=======
-      usage: "reset -s, --service SERVICENAME,SERVICENAME"
-      desc: "Resets the specified services files on the server"
->>>>>>> 5389d2f0e8b39b53dfef4198f0bfeba730327f99
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
@@ -303,6 +298,13 @@ en:
       desc: "Show the configuration options for specified service"
       out:
         disabled: "%{service} is now disabled"
+    setup:
+      usage: "setup"
+      desc: "Interactive setup of a service\'s configuration settings"
+      out:
+        searchfail: "Failed to find a service config for service: %{service}"
+      in:
+        keyvalue: "What value would you like to set for %{key}: "
 
   ssh:
     launch:
