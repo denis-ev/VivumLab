@@ -153,6 +153,25 @@ class Service < Thor
     say I18n.t('service.set.out.value', service: options[:service], value: options[:value]).green
   end
 
+  desc 'setup', 'Interactive setup of a service\'s configuration settings'
+  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
+  def setup
+    # need list of services config settings.
+    # loop over hash asking for data, presenting the current example as the default
+    service_config = decrypted_config_file[options[:service]]
+    say "Failed to find a service config for service: #{options[:service]}" if service_config.nil?
+    return if service_config.nil?
+
+    service_config.each do |key,value|
+      service_config[key] = ask "What value would you like to set for #{key}: ", default: service_config[key]
+    end
+
+    decrypted_config_file.merge service_config
+    save_config_file
+    @decrypted_config_file = nil
+    invoke 'config:show', [], service: options[:service]
+  end
+
   no_tasks do
     def limit_to_service(service = nil)
       "-e {'services':['#{service}']}" unless service.nil?
