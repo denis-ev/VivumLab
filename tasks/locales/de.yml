@@ -242,38 +242,38 @@ de:
   service:
     remove:
       usage: "remove -s, --service SERVICENAME"
-      desc: "Removes the specified service from the VivumLab server"
+      desc: "Removes any specified service(s) from the VivumLab server"
       out:
         removing: "Removing data for service: %{service}"
         removed: "Data for %{service}, removed"
     reset:
-      usage: "reset --service SERVICENAME,SERVICENAME"
-      desc: "Resets the files for the specified, deployed services"
+      usage: "reset --service SERVICENAME "
+      desc: "Resets the files for any specified, deployed service(s)."
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
     stop:
       usage: "stop -s, --service SERVICENAME"
-      desc: "Stops all services, or a selected service if you specify --service"
+      desc: "Stops all services, or any specified service(s) if you specify --service"
       out:
         stopping: |+
-          "Note: If no services are specified, VivumLab will stop all enabled services"
-          "Stopping services now.."
+          "Note: If no service(s) are specified, VivumLab will stop all enabled service(s)"
+          "Stopping service(s) now.."
         stopped: "All specified services have been stopped"
     restart:
       usage: "restart -s, --service SERVICENAME"
-      desc: "Restart all services, or a selected service if you specify --service"
+      desc: "Restart all services, or any specified service(s) if you specify --service"
       out:
         restarting: |+
-          "Note: If no services are specified, VivumLab will restart all enabled services"
-          "Restarting services now.."
-        restarted: "All specified services have been restarted"
+          "Note: If no services(s) are specified, VivumLab will restart all enabled services"
+          "Restarting service(s) now.."
+        restarted: "All specified service(s) have been restarted"
     update:
       usage: "update -s, --service SERVICE"
-      desc: "Updates all services, or a selected service if you specify --service"
+      desc: "Updates all services, or any selected service(s) if you specify --service"
       out:
         updating: |+
-          "Note: If no service is specified, VivumLab will update all enabled services"
+          "Note: If no service(s) are specified, VivumLab will update all enabled services"
           "Service specified: %{service}"
           "Updating now.."
         updated: "All specified services have been updated"
@@ -298,7 +298,7 @@ de:
         disabled: "%{service} is now disabled"
     setup:
       usage: "setup"
-      desc: "Interactive setup of a service\'s configuration settings"
+      desc: "Interactive setup of any specified service(s) configuration settings"
       out:
         searchfail: "Failed to find a service config for service: %{service}"
       in:
