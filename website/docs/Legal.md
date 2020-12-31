@@ -36,9 +36,13 @@ Community Impact Guidelines were inspired by Mozilla’s code of conduct enforce
 
 For answers to common questions about this code of conduct, see the [FAQ](https://www.contributor-covenant.org/faq). Original Document Translations are available [here](https://www.contributor-covenant.org/translations).
 
+Our [Code of Conduct](code-of-conduct)
+
 ## Contribution Guidelines
 The contribution guidelines document has been adapted from Briandk's basic 'contributing' template, available at https://gist.codeberg.com/briandk/3d2e8b3ec8daf5a27a62
 
+Our [Contribution Guidelines](CONTRIBUTING)
 
 
-##### Links current as of, Thursday 1 October 2020
+
+##### Links current as of, Thursday 31 December 2020

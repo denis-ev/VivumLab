@@ -64,10 +64,10 @@ true` is included.
 PRs are easy, follow these suggestions for a smooth experience:
 1. **Fork the right repo**: make sure you forked the *'dev'* branch
 2. **Label the PR appropriately**:
-  * Add the label *'Testing needed'*, if the code requires testing that you are unable to perform yourself. This is common, and it is good to let others test and give feedback.
-  * Add the label *'Work in Progress'* if the code isn't quite finished. This would be applicable if you had small (or large) amounts of code that is missing, doesn't work as expected, or maybe just isn't quite right. Use this label, if help isn't necessary or expected.
+  * Add the label *'needs testing'*, if the code requires testing that you are unable to perform yourself. This is common, and it is good to let others test and give feedback.
+  * Add the label *'WIP'* if the code isn't quite finished (Work in Progress). This would be applicable if you had small (or large) amounts of code that is missing, doesn't work as expected, or maybe just isn't quite right. Use this label.
     * It is expected that if collaboration or suggestions are offered, they are received and handled well; *keep the community healthy*.
-  * Add the label *'Help needed'*, if you want help with the PR. Everyone needs help at some point, so use the community; It's why we are here.
+  * Add the label *'help wanted'*, if you want help with the PR. Everyone needs help at some point, so use the community; It's why we are here.
 3. **Update the documentation**: If the code requires the user to interact differently with either VivumLab or the service, then educate them; irrespective of their technical skill level. *This is a REQUIREMENT, and will be ENFORCED*
 4. **Make sure your code lints**: simply speaking, make your code neat and make sure it is formatted correctly.
 5. **Issue the pull request**: As mentioned before, creating a corresponding issue assists with tracking changes and keeps the code focused. It is extremely rare that a PR is accepted without a corresponding issue.

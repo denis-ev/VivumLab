@@ -21,15 +21,21 @@ class Service < Thor
   end
 
   desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
+<<<<<<< HEAD
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def reset
     options[:service].split(',').each do |service|
       say I18n.t('service.reset.out.resetting', service: service).yellow
+=======
+  def reset(service)
+    service.split(',').each do |service|
+      say I18n.t('service.s_resetting', service: service.chomp).yellow
+>>>>>>> 5389d2f0e8b39b53dfef4198f0bfeba730327f99
       run_common
-      run_playbook('playbook.stop.yml', options, limit_to_service(service))
-      run_playbook('playbook.remove.yml', options, limit_to_service(service))
-      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service)} -t deploy")
-      say I18n.t('service.reset.out.reset', service: service).green
+      run_playbook('playbook.stop.yml', options, limit_to_service(service.chomp))
+      run_playbook('playbook.remove.yml', options, limit_to_service(service.chomp))
+      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service.chomp)} -t deploy")
+      say I18n.t('service.s_reset', service: service.chomp).green
     end
   end
 
@@ -80,6 +86,7 @@ class Service < Thor
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
 
+<<<<<<< HEAD
   desc I18n.t('service.enable.usage'), I18n.t('service.enable.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def enable
@@ -96,6 +103,8 @@ class Service < Thor
       say I18n.t('service.disable.out.disabled', service: options[:service]).green
   end
 
+=======
+>>>>>>> 5389d2f0e8b39b53dfef4198f0bfeba730327f99
   desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def show

@@ -24,7 +24,7 @@ git clone --branch master https://github.com/VivumLab/VivumLab.git
 ./launch.sh
 
 # Run within the started Docker container
-vlab core deploy`
+vlab deploy`
   },
   {
     label: 'dev-install',
@@ -35,7 +35,7 @@ git clone --branch dev https://github.com/VivumLab/VivumLab.git
 ./launch.sh dev
 
 # Run within the started Docker container
-vlab core deploy`
+vlab deploy`
   },
   {
     label: 'local-build',
@@ -49,7 +49,7 @@ git clone https://github.com/VivumLab/VivumLab.git
 ./launch.sh local start
 
 # Run within the started Docker container
-vlab core deploy`
+vlab deploy`
   }
 ]
 
@@ -57,31 +57,22 @@ const snippets = [
   {
     label: 'Deploy',
     further: '/docs/core/Installation#enabling-services',
-    config: `vlab core deploy`,
+    config: `vlab deploy`,
   },
   {
     label: 'Enable / Update Service',
     further: '/docs/core/Installation#enabling-services',
     config: `# Enable a service
-vlab service enable SERVICENAME
+vlab service setup --service SERVICENAME
 
 # Update a service
 vlab update --service SERVICENAME
 
 # Show config for a service
-vlab config show --service SERVICENAME
+vlab service show --service SERVICENAME
 
 # Change options for a service (Example for option https_only)
-vlab config set --config-key=SERVICENAME.https_only --value=true
-
-# Options Examples
-SERVICENAME.enable = true/false
-SERVICENAME.https_only = true/false
-SERVICENAME.auth = true/false
-SERVICENAME.domain = false or "example.com"
-SERVICENAME.subdomain = "SERVICENAME"
-SERVICENAME.version = "latest"
-`,
+vlab service setup --service SERVICENAME`,
   },
   {
     label: 'Update all Services',
@@ -92,7 +83,7 @@ SERVICENAME.version = "latest"
     label: 'Show config',
     further: '/docs/core/Installation#enabling-services',
     config: `# Show config for a service
-vlab config show --service SERVICENAME`,
+    vlab service show --service SERVICENAME`,
   }
 ];
 
