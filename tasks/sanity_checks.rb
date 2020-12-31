@@ -10,7 +10,7 @@ class SanityChecks < Thor
   include VlabConstants
 
   desc I18n.t('sanity_checks.check_ssh_keys.usage'), I18n.t('sanity_checks.check_ssh_keys.desc')
-  # @TODO: Write this task
+  # @TODO Write check_ssh_keys task (sanity_check.rb)
   def check_ssh_keys
     # if File.exist?
   end
