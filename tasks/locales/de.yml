@@ -13,8 +13,6 @@ de:
     timerrestart: "Sets a countdown in minutes until the server restarts"
     serviceswarning: "Optional name of service. Without, it removes all services."
     servicerequired: "Required name of service."
-    valuerequiredbool: ""
-    valuerequiredstring: ""
 
   bastion:
     enable:
