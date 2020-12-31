@@ -53,6 +53,7 @@ services:
   kibitzr:
   kutt:
   lazylibrarian:
+  librephotos:
   lidarr:
   mailu:
   mashio:
@@ -77,7 +78,6 @@ services:
   openldap:
   openvpn:
   organizr:
-  ownphotos:
   paperless:
   peertube:
   photoprism:
@@ -180,6 +180,7 @@ keycloak:
 kibitzr:
 kutt:
 lazylibrarian:
+librephotos:
 lidarr:
 mailu:
 massivedecks:
@@ -204,7 +205,6 @@ ombi:
 openldap:
 openvpn:
 organizr:
-ownphotos:
 paperless:
 peertube:
 photoprism:

@@ -1,9 +1,9 @@
 ---
-id: ownphotos
-title: OwnPhotos
+id: librephotos
+title: LibrePhotos
 hide_title: true
 hide_table_of_contents: false
-sidebar_label: OwnPhotos
+sidebar_label: LibrePhotos
 custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
 #description: How do I find you when I cannot solve this problem
 #keywords:
@@ -12,27 +12,27 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 #image: https://i.imgur.com/mErPwqL.png
 ---
 
-# OwnPhotos
+# LibrePhotos
 
-[OwnPhotos](https://github.com/hooram/ownphotos) Self hosted Google Photos clone.
+[LibrePhotos](https://github.com/hooram/librephotos) Self hosted Google Photos clone.
 
-![amd64](https://img.shields.io/badge/{% if not ownphotos.amd64 %}untested{% else %}{{ ownphotos.amd64 }}{% endif %}-amd64-{% if not ownphotos.amd64 %}inactive{% elif ownphotos.amd64 == "verified" %}success{% elif ownphotos.amd64 == "supported" %}informational{% elif ownphotos.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![arm64](https://img.shields.io/badge/{% if not ownphotos.arm64 %}untested{% else %}{{ ownphotos.arm64 }}{% endif %}-arm64-{% if not ownphotos.arm64 %}inactive{% elif ownphotos.arm64 == "verified" %}success{% elif ownphotos.arm64 == "supported" %}informational{% elif ownphotos.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![armv7](https://img.shields.io/badge/{% if not ownphotos.armv7 %}untested{% else %}{{ ownphotos.armv7 }}{% endif %}-armv7-{% if not ownphotos.armv7 %}inactive{% elif ownphotos.armv7 == "verified" %}success{% elif ownphotos.armv7 == "supported" %}informational{% elif ownphotos.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![amd64](https://img.shields.io/badge/{% if not librephotos.amd64 %}untested{% else %}{{ librephotos.amd64 }}{% endif %}-amd64-{% if not librephotos.amd64 %}inactive{% elif librephotos.amd64 == "verified" %}success{% elif librephotos.amd64 == "supported" %}informational{% elif librephotos.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not librephotos.arm64 %}untested{% else %}{{ librephotos.arm64 }}{% endif %}-arm64-{% if not librephotos.arm64 %}inactive{% elif librephotos.arm64 == "verified" %}success{% elif librephotos.arm64 == "supported" %}informational{% elif librephotos.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not librephotos.armv7 %}untested{% else %}{{ librephotos.armv7 }}{% endif %}-armv7-{% if not librephotos.armv7 %}inactive{% elif librephotos.armv7 == "verified" %}success{% elif librephotos.armv7 == "supported" %}informational{% elif librephotos.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
-**Current Image Version:** {{ ownphotos.version }}
+**Current Image Version:** {{ librephotos.version }}
 
 ## SETUP
 
-### Enabling ownphotos
+### Enabling librephotos
 
 #### Command:
 
-**`vlab set ownphotos.enable True`**
+**`vlab set librephotos.enable True`**
 
 #### File alteration:
 
@@ -40,13 +40,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
+librephotos
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ## FIRST RUN
 
@@ -55,9 +55,9 @@ run: **`vlab update_one service=ownphotos`**
 
 #### ADMINISTRATOR SETUP
 
-Navigate to *https://{{ ownphotos.domain }}/admin*
+Navigate to *https://{{ librephotos.domain }}/admin*
 
-Create an account with your desired username; as this is the first user, ownphotos makes this account the administrator.
+Create an account with your desired username; as this is the first user, librephotos makes this account the administrator.
 
 ### SMTP/ MAIL
 
@@ -76,16 +76,16 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=ownphotos`** to complete the changes
+3. run **`vlab update_one service=librephotos`** to complete the changes
 
 
 ## ACCESS
 
-ownphotos (HTTPS) link: [https://{% if ownphotos.domain %}{{ ownphotos.domain }}{% else %}{{ ownphotos.subdomain + "." + domain }}{% endif %}/](https://{% if ownphotos.domain %}{{ ownphotos.domain }}{% else %}{{ ownphotos.subdomain + "." + domain }}{% endif %}/)
-ownphotos (HTTP) link: [http://{% if ownphotos.domain %}{{ ownphotos.domain }}{% else %}{{ ownphotos.subdomain + "." + domain }}{% endif %}/](http://{% if ownphotos.domain %}{{ ownphotos.domain }}{% else %}{{ ownphotos.subdomain + "." + domain }}{% endif %}/)
+librephotos (HTTPS) link: [https://{% if librephotos.domain %}{{ librephotos.domain }}{% else %}{{ librephotos.subdomain + "." + domain }}{% endif %}/](https://{% if librephotos.domain %}{{ librephotos.domain }}{% else %}{{ librephotos.subdomain + "." + domain }}{% endif %}/)
+librephotos (HTTP) link: [http://{% if librephotos.domain %}{{ librephotos.domain }}{% else %}{{ librephotos.subdomain + "." + domain }}{% endif %}/](http://{% if librephotos.domain %}{{ librephotos.domain }}{% else %}{{ librephotos.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-Tor link: [http://{{ ownphotos.subdomain + "." + tor_domain }}/](http://{{ ownphotos.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ librephotos.subdomain + "." + tor_domain }}/](http://{{ librephotos.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## OPTIONS
@@ -96,7 +96,7 @@ Tor link: [http://{{ ownphotos.subdomain + "." + tor_domain }}/](http://{{ ownph
 
 #### Command:
 
-**`vlab set ownphotos.https_only True`**
+**`vlab set librephotos.https_only True`**
 
 #### File alteration:
 
@@ -104,13 +104,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
+librephotos
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ### AUTH
 *Default: False* <br />
@@ -118,7 +118,7 @@ run: **`vlab update_one service=ownphotos`**
 
 #### Command:
 
-**`vlab set ownphotos.auth True`**
+**`vlab set librephotos.auth True`**
 
 #### File alteration:
 
@@ -126,13 +126,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
+librephotos
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ### DOMAIN
 *Default: False* <br />
@@ -140,7 +140,7 @@ run: **`vlab update_one service=ownphotos`**
 
 #### Command:
 
-**`vlab set ownphotos.domain ownphotos.com`**
+**`vlab set librephotos.domain librephotos.com`**
 
 #### File alteration:
 
@@ -148,21 +148,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
-  domain: ownphotos.com
+librephotos
+  domain: librephotos.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ### SUBDOMAIN
-*Default: ownphotos* <br />
+*Default: librephotos* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set ownphotos.subdomain media`**
+**`vlab set librephotos.subdomain media`**
 
 #### File alteration:
 
@@ -170,21 +170,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
+librephotos
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ### VERSION
-*Default: {{  ownphotos.version  }}* <br />
+*Default: {{  librephotos.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set ownphotos.version 2.7`**
+**`vlab set librephotos.version 2.7`**
 
 #### File alteration:
 
@@ -192,13 +192,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-ownphotos
+librephotos
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=ownphotos`**
+run: **`vlab update_one service=librephotos`**
 
 ## Need more help?
 Further information regarding services can be found. <br />
