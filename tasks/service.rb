@@ -97,7 +97,7 @@ class Service < Thor
 
     service_config.each do |key,value|
       ignored = %w[amd64 arm64 armv7]
-      service_config[key] = ask (I18n.t('service.setup.in.keyvalue', key: service_config[key]), default: service_config[key] unless ignored.include? key
+      service_config[key] = ask (I18n.t('service.setup.in.keyvalue', key: service_config[key] default: service_config[key]) unless ignored.include? key
     end
 
     decrypted_config_file.merge service_config

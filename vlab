@@ -5,9 +5,10 @@
 require 'rubygems'
 require 'bundler'
 require 'securerandom'
-require_relative 'tasks/lib'
-include VlabConstants
+require_relative 'tasks/lib/vlab_i18n'
 include VlabI18n
+require_relative 'tasks/lib/vlab_constants'
+include VlabConstants
 
 Bundler.require(:default)
 
