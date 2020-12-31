@@ -136,24 +136,6 @@ class Service < Thor
     say I18n.t('service.version.out.value', service: options[:service], value: options[:value]).green
   end
 
-  desc I18n.t('service.set.usage'), I18n.t('service.set.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :enable, type: :boolean, desc: 'Enable the service (true/false).'
-  option :https_only, type: :boolean, desc: 'Enable https_only for service (true/false).'
-  option :auth, type: :boolean, desc: 'Enable auth for service (true/false).'
-  option :domain, type: :string, desc: 'Set custom domain for service (subdomain.example.com).'
-  option :subdomain, type: :string, desc: 'Set subdomain for service (subdomain).'
-  option :version, type: :string, desc: 'Set version for service (latest).'
-  def set
-    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: "#{options[:enable]}" unless options[:enable].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.https_only", value: "#{options[:https_only]}" unless options[:https_only].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.auth", value: "#{options[:auth]}" unless options[:auth].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:domain]}" unless options[:domain].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:subdomain]}" unless options[:subdomain].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:version]}" unless options[:version].nil?
-    say I18n.t('service.set.out.value', service: options[:service], value: options[:value]).green
-  end
-
   no_tasks do
     def limit_to_service(service = nil)
       "-e {'services':['#{service}']}" unless service.nil?
