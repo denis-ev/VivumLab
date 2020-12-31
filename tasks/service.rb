@@ -13,11 +13,12 @@ class Service < Thor
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def remove
     options[:service].split(',').each do |service|
-    run_common
+      run_common
       say I18n.t('service.remove.out.removing', service: options[:service]).yellow
       run_playbook('playbook.remove.yml', options, limit_to_service(service))
       invoke 'dev:set', [], config_key: "#{service}.enable", value: false
       say I18n.t('service.remove.out.removed', service: options[:service]).green
+    end
   end
 
   desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
@@ -41,6 +42,7 @@ class Service < Thor
       run_common
       run_playbook('playbook.stop.yml', options, limit_to_service(options[:service]))
       say I18n.t('service.stop.out.stopped').green
+    end
   end
 
   desc I18n.t('service.restart.usage'), I18n.t('service.restart.desc')
@@ -51,6 +53,7 @@ class Service < Thor
       run_common
       run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
       say I18n.t('service.restart.out.restarted').green
+    end
   end
 
   desc I18n.t('service.update.usage'), I18n.t('service.update.desc')
@@ -62,6 +65,7 @@ class Service < Thor
       run_playbook('playbook.vivumlab.yml', options, limit_to_service(options[:service]))
       run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
       say I18n.t('service.update.out.updated').green
+    end
   end
 
   desc I18n.t('service.docs.usage'), I18n.t('service.docs.desc')
