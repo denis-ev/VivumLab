@@ -75,82 +75,10 @@ class Service < Thor
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
 
-  desc I18n.t('service.enable.usage'), I18n.t('service.enable.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  def enable
-    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: true
-    say I18n.t('service.enable.out.enabled', service: options[:service]).green
-  end
-
-  desc I18n.t('service.disable.usage'), I18n.t('service.disable.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  def disable
-    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: false
-    say I18n.t('service.disable.out.disabled', service: options[:service]).green
-  end
-
   desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
   option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
   def show
     invoke 'config:show', [], service: options[:service]
-  end
-
-  desc I18n.t('service.https_only.usage'), I18n.t('service.https_only.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :value, required: true, type: :string, desc: 'Required value (true/false).', aliases: ['-v']
-  def https_only
-    invoke 'dev:set', [], config_key: "#{options[:service]}.https_only", value: "#{options[:value]}"
-    say I18n.t('service.https_only.out.value', service: options[:service], value: options[:value]).green
-  end
-
-  desc I18n.t('service.auth.usage'), I18n.t('service.auth.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :value, required: true, type: :string, desc: 'Required value (true/false).', aliases: ['-v']
-  def auth
-    invoke 'dev:set', [], config_key: "#{options[:service]}.auth", value: "#{options[:value]}"
-    say I18n.t('service.auth.out.value', service: options[:service], value: options[:value]).green
-  end
-
-  desc I18n.t('service.domain.usage'), I18n.t('service.domain.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
-  def domain
-    invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:value]}"
-    say I18n.t('service.domain.out.value', service: options[:service], value: options[:value]).green
-  end
-
-  desc I18n.t('service.subdomain.usage'), I18n.t('service.subdomain.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
-  def subdomain
-    invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:value]}"
-    say I18n.t('service.subdomain.out.value', service: options[:service], value: options[:value]).green
-  end
-
-  desc I18n.t('service.version.usage'), I18n.t('service.version.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :value, required: true, type: :string, desc: 'Required value.', aliases: ['-v']
-  def version
-    invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:value]}"
-    say I18n.t('service.version.out.value', service: options[:service], value: options[:value]).green
-  end
-
-  desc I18n.t('service.set.usage'), I18n.t('service.set.desc')
-  option :service, required: true, type: :string, desc: 'Required name of service.', aliases: ['-s']
-  option :enable, type: :boolean, desc: 'Enable the service (true/false).'
-  option :https_only, type: :boolean, desc: 'Enable https_only for service (true/false).'
-  option :auth, type: :boolean, desc: 'Enable auth for service (true/false).'
-  option :domain, type: :string, desc: 'Set custom domain for service (subdomain.example.com).'
-  option :subdomain, type: :string, desc: 'Set subdomain for service (subdomain).'
-  option :version, type: :string, desc: 'Set version for service (latest).'
-  def set
-    invoke 'dev:set', [], config_key: "#{options[:service]}.enable", value: "#{options[:enable]}" unless options[:enable].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.https_only", value: "#{options[:https_only]}" unless options[:https_only].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.auth", value: "#{options[:auth]}" unless options[:auth].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.domain", value: "#{options[:domain]}" unless options[:domain].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.subdomain", value: "#{options[:subdomain]}" unless options[:subdomain].nil?
-    invoke 'dev:set', [], config_key: "#{options[:service]}.version", value: "#{options[:version]}" unless options[:version].nil?
-    say I18n.t('service.set.out.value', service: options[:service], value: options[:value]).green
   end
 
   desc 'setup', 'Interactive setup of a service\'s configuration settings'
@@ -163,7 +91,8 @@ class Service < Thor
     return if service_config.nil?
 
     service_config.each do |key,value|
-      service_config[key] = ask "What value would you like to set for #{key}: ", default: service_config[key]
+      ignored = %w[amd64 arm64 armv7]
+      service_config[key] = ask "What value would you like to set for #{key}: ", default: service_config[key] unless ignored.include? key
     end
 
     decrypted_config_file.merge service_config
