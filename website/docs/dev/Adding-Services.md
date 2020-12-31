@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # Before you begin
 
-Before you begin, please familiarize yourself with the [Contribution Guidelines](CONTRIBUTING).
+Before you begin, please familiarize yourself with the [Contribution Guidelines](../CONTRIBUTING).
 
 This is "Work In Progress" at the moment.
 
