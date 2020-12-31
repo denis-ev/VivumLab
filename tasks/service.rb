@@ -19,7 +19,7 @@ class Service < Thor
     say I18n.t('service.remove.out.removed', service: options[:service]).green
   end
 
-  desc I18n.t('service.reset.name'), I18n.t('service.reset.desc')
+  desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
   def reset(service)
     service.split(',').each do |service|
       say I18n.t('service.s_resetting', service: service.chomp).yellow

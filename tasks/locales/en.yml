@@ -226,19 +226,19 @@ en:
 
   service:
     remove:
-      usage: "remove --service SERVICENAME"
+      usage: "remove -s, --service SERVICENAME"
       desc: "Removes the specified service from the VivumLab server"
       out:
         removing: "Removing data for service: %{service}"
         removed: "Data for %{service}, removed"
     reset:
-      usage: "reset --service SERVICENAME,SERVICENAME"
+      usage: "reset -s, --service SERVICENAME,SERVICENAME"
       desc: "Resets the specified services files on the server"
       out:
         resetting: "Resetting %{service}"
         reset: "%{service} has been reset"
     stop:
-      usage: "stop --service SERVICENAME"
+      usage: "stop -s, --service SERVICENAME"
       desc: "Stops all services, or a selected service if you specify --service"
       out:
         stopping: |+
@@ -246,7 +246,7 @@ en:
           "Stopping services now.."
         stopped: "All specified services have been stopped"
     restart:
-      usage: "restart --service SERVICENAME"
+      usage: "restart -s, --service SERVICENAME"
       desc: "Restart all services, or a selected service if you specify --service"
       out:
         restarting: |+
@@ -254,7 +254,7 @@ en:
           "Restarting services now.."
         restarted: "All specified services have been restarted"
     update:
-      usage: "update -s, --service=SERVICE"
+      usage: "update -s, --service SERVICE"
       desc: "Updates all services, or a selected service if you specify --service"
       out:
         updating: |+
@@ -276,51 +276,11 @@ en:
         customized: "%{service} is ready to customize"
       in:
         customizing: "Did you want to make changes to the %{service} service?"
-    enable:
-      usage: "enable"
-      desc: "Enables specified service"
-      out:
-        enabled: "%{service} is now enabled"
-    disable:
-      usage: "disable"
-      desc: "Disables specified service"
-      out:
-        disabled: "%{service} is now disabled"
     show:
       usage: "show"
       desc: "Show the configuration options for specified service"
       out:
         disabled: "%{service} is now disabled"
-    https_only:
-      usage: "https_only"
-      desc: "Enables/Disables specified service's https_only"
-      out:
-        value: "%{service} https_only is now %{value}"
-    auth:
-      usage: "auth"
-      desc: "Enables/Disables specified service's auth"
-      out:
-        value: "%{service} auth is now %{value}"
-    domain:
-      usage: "domain"
-      desc: "Sets specified service's domain"
-      out:
-        value: "%{service} domain is now %{value}"
-    subdomain:
-      usage: "subdomain"
-      desc: "Sets specified service's subdomain"
-      out:
-        value: "%{service} subdomain is now %{value}"
-    version:
-      usage: "version"
-      desc: "Sets specified service's version"
-      out:
-        value: "%{service} version is now %{value}"
-    set:
-      usage: "set"
-      desc: "Sets specified service's parameter"
-      out:
-        value: "%{service} parameters changed"
 
   ssh:
     launch:
