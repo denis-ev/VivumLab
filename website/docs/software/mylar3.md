@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # Mylar3
 
-[mylar3](https://github.com/linuxserver/docker-mylar3) An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents
+[mylar3](https://github.com/mylar3/mylar3) An automated Comic Book downloader (cbr/cbz) for use with SABnzbd, NZBGet and torrents
 
 ![amd64](https://img.shields.io/badge/{% if not mylar3.amd64 %}untested{% else %}{{ mylar3.amd64 }}{% endif %}-amd64-{% if not mylar3.amd64 %}inactive{% elif mylar3.amd64 == "verified" %}success{% elif mylar3.amd64 == "supported" %}informational{% elif mylar3.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
 ![arm64](https://img.shields.io/badge/{% if not mylar3.arm64 %}untested{% else %}{{ mylar3.arm64 }}{% endif %}-arm64-{% if not mylar3.arm64 %}inactive{% elif mylar3.arm64 == "verified" %}success{% elif mylar3.arm64 == "supported" %}informational{% elif mylar3.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
