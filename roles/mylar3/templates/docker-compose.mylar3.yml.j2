@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '2.4'
 
 networks:
   traefik_network:
@@ -7,20 +7,20 @@ networks:
       name: vivumlab_traefik
 
 services:
-  mylar:
-    container_name: mylar
-    image: linuxserver/mylar:{{ mylar.version }}
+  mylar3:
+    container_name: mylar3
+    image: linuxserver/mylar3:{{ mylar3.version }}
     environment:
       - PUID={{ uid }}
       - PGID={{ gid }}
     volumes:
-      - "{{ volumes_root }}/mylar/config:/config"
+      - "{{ volumes_root }}/mylar3/config:/config"
       - "{{ storage_dir }}/Books/Comics:/comics"
       - "{{ storage_dir }}/Downloads/Books/Comics:/downloads"
     restart: unless-stopped
     networks:
       - traefik_network
     labels:
-      - "traefik.http.services.mylar.loadbalancer.server.scheme=http"
-      - "traefik.http.services.mylar.loadbalancer.server.port=8090"
+      - "traefik.http.services.mylar3.loadbalancer.server.scheme=http"
+      - "traefik.http.services.mylar3.loadbalancer.server.port=8090"
 {% include './labels.j2' %}

@@ -127,7 +127,7 @@ If you are having problems you can:
 - [Jackett](software/jackett) - API Support for your favorite torrent trackers (helps Sonarr and Radarr)
 - [Lidarr](software/lidarr) - Sonarr but for Music.
 - [Minio](software/minio) - S3 hosting
-- [Mylar](software/mylar) - An automated Comic Book manager
+- [Mylar3](software/mylar3) - An automated Comic Book manager
 - [Ombi](software/ombi) - Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves!
 - [qBittorrent](software/qbittorrent) - Open-source alternative to µTorrent
 - [Radarr](software/radarr) - Automated movie downloading

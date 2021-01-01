@@ -939,13 +939,13 @@ mstream:
   amd64: False
   arm64: False
   armv7: False
-mylar:
-  enable: {{ mylar.enable | default(False) }}
-  https_only: {{ mylar.https_only | default(False) }}
-  auth: {{ mylar.auth | default(False) }}
-  domain: {{ mylar.domain | default(False) }}
-  subdomain: {{ mylar.subdomain | default("mylar") }}
-  version: {{ mylar.version | default("latest") }}
+mylar3:
+  enable: {{ mylar3.enable | default(False) }}
+  https_only: {{ mylar3.https_only | default(False) }}
+  auth: {{ mylar3.auth | default(False) }}
+  domain: {{ mylar3.domain | default(False) }}
+  subdomain: {{ mylar3.subdomain | default("mylar3") }}
+  version: {{ mylar3.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
