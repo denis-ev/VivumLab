@@ -11,6 +11,13 @@ module ConfigFileUtils
     Psych.dump(decrypted_config_file.to_hash).gsub(': false', ': False').gsub(': true', ': True')
   end
 
+  def service_list
+    @service_list ||= Dir.glob('roles/*')
+                         .select { |f| File.directory? f }
+                         .reject { |f| f.include? 'vivumlab' }
+                         .map { |x| x.split('/').last }
+  end
+
   # these two methods load the config and vault files and convert them to
   # a special object type called Hashie#Mash. Mash objects extend the normal
   # hash (python dictionary) with dot notation access. This allows us to, for instance
@@ -25,8 +32,9 @@ module ConfigFileUtils
   def decrypted_config_file
     return @decrypted_config_file unless @decrypted_config_file.nil?
 
+    config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir]
     pass = File.read('/vlab_vault_pass')
-    temp = YamlVault::Main.from_file("#{options[:config_dir]}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
+    temp = YamlVault::Main.from_file("#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
     @decrypted_config_file ||= ConfigFile.new(temp)
   end
 

@@ -28,6 +28,7 @@ gem 'yaml_vault'
 
 group :dev do
   gem 'rubocop', '1.6.1'
+  gem 'ruby-progressbar', '1.10.1'
   gem 'solargraph', '0.40.1'
   gem 'yard', '0.9.25'
 end

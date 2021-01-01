@@ -9,6 +9,15 @@ class Service < Thor
   class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
+  desc I18n.t('service.list.name'), I18n.t('service.list.desc')
+  option :columns, type: :numeric, required: false, default: 5, banner: 'example useage'
+  def list
+    services = service_list.each_slice(5).entries
+    (5 - (service_list.size % 5)).times { services.last << '' }
+    table = TTY::Table.new(rows: services)
+    say table.render(:unicode)
+  end
+
   desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def remove
@@ -24,13 +33,13 @@ class Service < Thor
   desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def reset(service)
-    service.split(',').each do |service|
-      say I18n.t('service.reset.out.resetting', service: service.chomp).yellow
+    service.split(',').each do |srv|
+      say I18n.t('service.reset.out.resetting', service: srv.chomp).yellow
       run_common
-      run_playbook('playbook.stop.yml', options, limit_to_service(service.chomp))
-      run_playbook('playbook.remove.yml', options, limit_to_service(service.chomp))
-      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(service.chomp)} -t deploy")
-      say I18n.t('service.s_reset', service: service.chomp).green
+      run_playbook('playbook.stop.yml', options, limit_to_service(srv.chomp))
+      run_playbook('playbook.remove.yml', options, limit_to_service(srv.chomp))
+      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(srv.chomp)} -t deploy")
+      say I18n.t('service.s_reset', service: srv.chomp).green
     end
   end
 
@@ -93,15 +102,14 @@ class Service < Thor
   desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
-    # need list of services config settings.
-    # loop over hash asking for data, presenting the current example as the default
     service_config = decrypted_config_file[options[:service]]
     say I18n.t('service.setup.out.searchfail', service: options[:service]).green if service_config.nil?
     return if service_config.nil?
 
+    say I18n.t('service.setup.out.editing', service: options[:service])
     service_config.each do |key,value|
       ignored = %w[amd64 arm64 armv7]
-      service_config[key] = ask(I18n.t('service.setup.in.keyvalue', key: service_config[key]), default: service_config[key]) unless ignored.include? key
+      service_config[key] = ask(I18n.t('service.setup.in.keyvalue', key: key), default: service_config[key]) unless ignored.include? key
     end
 
     decrypted_config_file.merge service_config
