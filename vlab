@@ -26,28 +26,6 @@ class Vlab < Thor
   class_option :dev, type: :boolean, desc: I18n.t('options.enabledevtasks'), default: false
   class_option :version, :type => :boolean, desc: I18n.t('options.vlabversion')
 
-  service_list.each do |service|
-    service_config = decrypted_config_file[service]
-    next if service_config.nil?
-
-    Object.const_set(service.split('_').collect(&:capitalize).join,
-        Class.new(Thor) do
-          service_config.each do |key,value|
-            desc key.to_s, "Sets the configuration value for #{service}.#{key}"
-            option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
-            define_method(key.to_s) do
-              invoke 'config:set', [], config_key: "#{service}.#{key}", value: options[:value]
-            end
-          end
-
-          desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
-          def setup
-            invoke 'service:setup', [], service: self.class.to_s.downcase
-          end
-        end
-    )
-  end
-
   # Next line loads all ruby files in tasks/**/*.rb
   Dir['./tasks/**/*.rb'].sort.each { |file| require file }
   # If the included files are classes inheriting from Thor
@@ -64,6 +42,28 @@ class Vlab < Thor
   namespaces.each do |klass|
     desc klass.to_s.downcase, "Use vlab #{klass.to_s.downcase} for more information"
     subcommand klass.to_s.downcase, Kernel.const_get("::#{klass}")
+  end
+
+  service_list.each do |service|
+    service_config = decrypted_config_file[service]
+    next if service_config.nil?
+
+    Object.const_set(service.split('_').collect(&:capitalize).join,
+        Class.new(Thor) do
+          service_config.each do |key,value|
+            desc key.to_s, "Sets the configuration value for #{service}.#{key}"
+            option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
+            define_method(key.to_s) do
+              invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
+            end
+          end
+
+          desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
+          def setup
+            invoke 'service:setup', [], service: self.class.to_s.downcase
+          end
+        end
+    )
   end
 
   desc I18n.t('vlab.find_help.usage'), I18n.t('vlab.find_help.desc')

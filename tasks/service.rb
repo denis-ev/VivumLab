@@ -118,6 +118,22 @@ class Service < Thor
     invoke 'config:show', [], service: options[:service]
   end
 
+  desc "default", "default task"
+  option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
+  def default(dynamic_namespace, command)
+    service_config = decrypted_config_file[dynamic_namespace]
+    say "Invalid service name, did you mistype it?" if service_config.nil?
+    exit 1 if service_config.nil?
+
+    if service_config.keys.include?(command) || command == 'setup'
+      invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
+    else
+      say "Invalid Command (#{command}) for namespace #{dynamic_namespace}".red
+      say 'Valid options are:'.light_blue
+      invoke dynamic_namespace.to_s, [], {}
+    end
+  end
+
   no_tasks do
     def limit_to_service(service = nil)
       "-e {'services':['#{service}']}" unless service.nil?
@@ -128,4 +144,6 @@ class Service < Thor
       invoke 'config:new', [], { config_dir: options[:config_dir] }
     end
   end
+
+  default_task :default
 end
