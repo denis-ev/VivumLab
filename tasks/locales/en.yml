@@ -225,6 +225,9 @@ en:
         restart: "Server will restart in %{time} minute(s)"
 
   service:
+    list:
+      name: 'list'
+      desc: 'List the available services'
     remove:
       usage: "remove -s, --service SERVICENAME"
       desc: "Removes any specified service(s) from the VivumLab server"
@@ -286,6 +289,7 @@ en:
       desc: "Interactive setup of any specified service(s) configuration settings"
       out:
         searchfail: "Failed to find a service config for service: %{service}"
+        editing: "Editing configuration parameters for: %{service}"
       in:
         keyvalue: "What value would you like to set for %{key}: "
 
@@ -365,7 +369,7 @@ en:
     valuetoset: "Value to set"
     disablegitsync: "Disable pushing git to remote"
     branchtrack: "The name of the branch, or tag you'd like to use"
-    ansibledebug:  "Debugs Ansible-playbook commands"
+    ansibledebug: "Debugs Ansible-playbook commands"
     timershutdown: "Sets a countdown in minutes until the server shuts down"
     timerrestart: "Sets a countdown in minutes until the server restarts"
     serviceswarning: "Optional name of service. Without, it removes all services."
