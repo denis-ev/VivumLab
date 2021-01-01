@@ -365,7 +365,7 @@ fr:
     valuetoset: "Value to set"
     disablegitsync: "Disable pushing git to remote"
     branchtrack: "The name of the branch, or tag you'd like to use"
-    ansibledebug:  "Debugs Ansible-playbook commands"
+    ansibledebug: "Debugs Ansible-playbook commands"
     timershutdown: "Sets a countdown in minutes until the server shuts down"
     timerrestart: "Sets a countdown in minutes until the server restarts"
     serviceswarning: "Optional name of service. Without, it removes all services."
