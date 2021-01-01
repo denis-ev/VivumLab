@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # LibrePhotos
 
-[LibrePhotos](https://github.com/hooram/librephotos) Self hosted Google Photos clone.
+[LibrePhotos](https://github.com/LibrePhotos/librephotos) Self hosted Google Photos clone.
 
 ![amd64](https://img.shields.io/badge/{% if not librephotos.amd64 %}untested{% else %}{{ librephotos.amd64 }}{% endif %}-amd64-{% if not librephotos.amd64 %}inactive{% elif librephotos.amd64 == "verified" %}success{% elif librephotos.amd64 == "supported" %}informational{% elif librephotos.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
 ![arm64](https://img.shields.io/badge/{% if not librephotos.arm64 %}untested{% else %}{{ librephotos.arm64 }}{% endif %}-arm64-{% if not librephotos.arm64 %}inactive{% elif librephotos.arm64 == "verified" %}success{% elif librephotos.arm64 == "supported" %}informational{% elif librephotos.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
