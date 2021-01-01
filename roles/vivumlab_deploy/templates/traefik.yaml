@@ -92,7 +92,11 @@ providers:
 {% if traefik.expose_internally or traefik.expose_externally %}
 api:
   dashboard: true
+{% if traefik.expose_internally or sui.enable %}
   insecure: true
+{% else %}
+  insecure: false
+{% endif %}
 {% endif %}
 
 log:
