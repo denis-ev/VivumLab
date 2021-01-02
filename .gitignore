@@ -25,6 +25,9 @@ package_template/tmp*.yml
 # IDE specific
 /.vscode
 
+# CLI specific
+vendor/
+
 # Commit specific
 INSTALL_PRECOMMIT.sh
 
