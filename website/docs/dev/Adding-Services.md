@@ -58,7 +58,7 @@ _Please review all other files, before pushing your changes to gitlab._
 
 ## Create Role Folder
 
-Copy an existing role folder like 'inventario' from the `roles/` folder,
+Copy an existing role folder like 'airsonic' from the `roles/` folder,
 then adapt the values as needed.
 
 ### Use hardcoded volume paths

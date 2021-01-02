@@ -21,7 +21,7 @@ vault:
   # After claiming your token at https://www.plex.tv/claim/ you will only have four minutes to run make and deploy plexinc
   plex_claim: {{ vault.plex_claim | default('CHANGE_TO_GIVEN_TOKEN') }}
 
-  # Mapbox Api keys: Used for OwnPhotos
+  # Mapbox Api keys: Used for LibrePhotos
   mapbox_api_key: {{ vault.mapbox_api_key | default() }}
 
   # Restic S3 Backup Server Information name: Docs: https://vivumlab.com/setup/backups/
