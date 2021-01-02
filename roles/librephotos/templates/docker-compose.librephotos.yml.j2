@@ -1,0 +1,79 @@
+---
+version: '3'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  librephotos:
+    name: librephotos_net
+
+services:
+  proxy:
+    container_name: librephotos_proxy
+    image: reallibrephotos/librephotos-proxy:{{ librephotos_proxy.version }}
+    restart: unless-stopped
+    tty: true
+    networks:
+      - traefik_network
+      - librephotos
+    labels:
+      - "traefik.http.services.librephotos.loadbalancer.server.scheme=http"
+      - "traefik.http.services.librephotos.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+
+  frontend:
+    container_name: librephotos_frontend
+    image: reallibrephotos/librephotos-frontend:{{ librephotos_frontend.version }}
+    restart: unless-stopped
+    tty: true
+    environment:
+      - BACKEND_HOST={% if librephotos.domain %}{{ librephotos.domain }}{% else %}{{ librephotos.subdomain + "." + domain }}{% endif %}
+    networks:
+      - librephotos
+
+  backend:
+    container_name: librephotos_backend
+    image: reallibrephotos/librephotos:{{ librephotos.version }}
+    restart: unless-stopped
+    networks:
+      - librephotos
+    volumes:
+      - "{{ storage_dir }}/Pictures:/data"
+      - "{{ volumes_root }}/librephotos/thumbnails/:/code/protected_media"
+      - "{{ volumes_root }}/librephotos/logs:/code/logs"
+    environment:
+      - SECRET_KEY="{{lookup('password', './settings/passwords/librephotos_secret_key chars=ascii_letters')}}"
+      - BACKEND_HOST=backend # DON'T CHANGE ME
+      - ADMIN_EMAIL={{ admin_email }}
+      - ADMIN_USERNAME={{ default_username }}
+      - ADMIN_PASSWORD="{{lookup('password', './settings/passwords/librephotos_admin_password chars=ascii_letters')}}"
+      - DEBUG=false
+      - DB_BACKEND=postgresql
+      - DB_NAME=librephotos
+      - DB_USER=postgres
+      - DB_PASS="{{lookup('password', './settings/passwords/librephotos_db_password chars=ascii_letters')}}"
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAPBOX_API_KEY={{ mapbox_api_key }}
+
+  db:
+    container_name: librephotos_db
+    image: postgres:{{ librephotos.db_version }}
+    networks:
+      - librephotos
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD="{{lookup('password', './settings/passwords/librephotos_db_password chars=ascii_letters')}}"
+      - POSTGRES_DB=librephotos
+    volumes:
+      - "{{ volumes_root }}/librephotos/db:/var/lib/postgresql/data"
+
+  redis:
+    container_name: librephotos_redis
+    image: redis:{{ librephotos.redis_version }}
+    restart: unless-stopped
+    networks:
+      - librephotos

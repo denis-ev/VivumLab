@@ -42,7 +42,6 @@ When you have entered those three pieces of information, The script then does th
 - Creates the Service Role Directory
   - Edits the role/PACKAGENAME/tasks/main.yml
 - Creates the Documentation file
-- Edits mkdocs.yml to include the new documentation file
 - Edits the Readme, and Changelog files
 - Edits the group_var/all file to include the new package in the Enabled Services list
 
@@ -59,7 +58,7 @@ _Please review all other files, before pushing your changes to gitlab._
 
 ## Create Role Folder
 
-Copy an existing role folder like 'inventario' from the `roles/` folder,
+Copy an existing role folder like 'airsonic' from the `roles/` folder,
 then adapt the values as needed.
 
 ### Use hardcoded volume paths
@@ -72,10 +71,6 @@ All mounted docker volumes should point to a folder named after the service that
 
 Each service should have it's own page within the `docs/software/` folder.
 Use existing docs as a template.
-
-### Link to Documentation Page
-
-Update the `mkdocs.yml` file with a reference to the newly created doc file.
 
 ## Add Service to Inventory File
 
