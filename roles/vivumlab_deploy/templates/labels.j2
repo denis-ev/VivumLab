@@ -3,11 +3,11 @@
       - "traefik.http.routers.{{ service_item }}-http.service={{ service_item }}"
       - "traefik.http.routers.{{ service_item }}-http.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.{{ service_item }}-http.entrypoints=http"
-      - "traefik.http.routers.{{ service_item }}-http.middlewares={% if https_only == True %}redirect@file, {% else %}{% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.{{ service_item }}-http.middlewares={% if https_only == True %}redirect@file{% else %}{% if auth == True %}{% if authelia.enable %}{% if https_only == True %}, {% endif %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% endif %}"
       - "traefik.http.routers.{{ service_item }}.service={{ service_item }}"
       - "traefik.http.routers.{{ service_item }}.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.{{ service_item }}.entrypoints=https"
-      - "traefik.http.routers.{{ service_item }}.middlewares={% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.{{ service_item }}.middlewares={% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% if nextcloud.enable %}{% if auth == True %}, {% endif %}{% if https_only == True %}security-headers@file, {% endif %}nextcloud-redirectregex@file{% endif %}"
       - "traefik.http.routers.{{ service_item }}.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.{{ service_item }}.tls.certresolver=dns"

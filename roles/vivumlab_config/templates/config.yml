@@ -101,7 +101,7 @@ do_region: "{{ vault.do_region }}"
 # After claiming your token at https://www.plex.tv/claim/ you will only have four minutes to run make and deploy plexinc
 plex_claim: "{{ vault.plex_claim }}"
 
-# Mapbox Api keys: Used for OwnPhotos
+# Mapbox Api keys: Used for LibrePhotos
 mapbox_api_key: "{{ vault.mapbox_api_key }}"
 
 # Restic S3 Backup Server Information name: Docs: https://vivumlab.com/setup/backups/
@@ -298,17 +298,6 @@ bookstack:
   subdomain: {{ bookstack.subdomain | default("bookstack") }}
   version: {{ bookstack.version | default("0.29.2") }}
   db_version: {{bookstack.db_version | default("5.7.21") }}
-  amd64: False
-  arm64: False
-  armv7: False
-bulletnotes:
-  enable: {{ bulletnotes.enable | default(False) }}
-  https_only: {{ bulletnotes.https_only | default(False) }}
-  auth: {{ bulletnotes.auth | default(False) }}
-  domain: {{ bulletnotes.domain | default(False) }}
-  subdomain: {{ bulletnotes.subdomain | default("bulletnotes") }}
-  version: {{ bulletnotes.version | default("latest") }}
-  db_version: {{ bulletnotes.db_version | default("3.2.21") }}
   amd64: False
   arm64: False
   armv7: False
@@ -689,17 +678,6 @@ huginn:
   amd64: False
   arm64: False
   armv7: False
-inventario:
-  enable: {{ inventario.enable | default(False) }}
-  https_only: {{ inventario.https_only | default(False) }}
-  auth: {{ inventario.auth | default(False) }}
-  domain: {{ inventario.domain | default(False) }}
-  subdomain: {{ inventario.subdomain | default("inventario") }}
-  version: {{ inventario.version | default("latest") }}
-  db_version: {{ inventario.db_version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 invoiceninja:
   enable: {{ invoiceninja.enable | default(False) }}
   https_only: {{ invoiceninja.https_only | default(False) }}
@@ -752,16 +730,6 @@ keycloak:
   amd64: False
   arm64: False
   armv7: False
-kibitzr:
-  enable: {{ kibitzr.enable | default(False) }}
-  https_only: {{ kibitzr.https_only | default(False) }}
-  auth: {{ kibitzr.auth | default(False) }}
-  domain: {{ kibitzr.domain | default(False) }}
-  subdomain: {{ kibitzr.subdomain | default("kibitzr") }}
-  version: {{ kibitzr.version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 kutt:
   enable: {{ kutt.enable | default(False) }}
   https_only: {{ kutt.https_only | default(False) }}
@@ -779,6 +747,20 @@ lazylibrarian:
   domain: {{ lazylibrarian.domain | default(False) }}
   subdomain: {{ lazylibrarian.subdomain | default("lazylibrarian") }}
   version: {{lazylibrarian.version | default ("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
+librephotos:
+  enable: {{ librephotos.enable | default(False) }}
+  https_only: {{ librephotos.https_only | default(False) }}
+  auth: {{ librephotos.auth | default(False) }}
+  domain: {{ librephotos.domain | default(False) }}
+  subdomain: {{ librephotos.subdomain | default("librephotos") }}
+  version: {{ librephotos.version | default("dev") }}
+  proxy_version: {{ librephotos_proxy.version | default("dev") }}
+  frontend_version: {{ librephotos_frontend.version | default("dev") }}
+  db_version: {{ librephotos.db_version | default("12-alpine") }}
+  redis_version: {{ librephotos.redis_version | default("6-alpine") }}
   amd64: False
   arm64: False
   armv7: False
@@ -804,17 +786,6 @@ mailu:
   arm64: False
   armv7: False
   forward_to_smtp: {{ mailu.forward_to_smtp | default(False)  }}
-mashio:
-  enable: {{ mashio.enable | default(False) }}
-  https_only: {{ mashio.https_only | default(False) }}
-  auth: {{ mashio.auth | default(False) }}
-  domain: {{ mashio.domain | default(False) }}
-  subdomain: {{ mashio.subdomain | default("mashio") }}
-  version: {{ mashio.version | default ("latest") }}
-  db_version: {{ mashio.db_version | default ("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 massivedecks:
   enable: {{ massivedecks.enable | default(False) }}
   https_only: {{ massivedecks.https_only | default(False) }}
@@ -939,13 +910,13 @@ mstream:
   amd64: False
   arm64: False
   armv7: False
-mylar:
-  enable: {{ mylar.enable | default(False) }}
-  https_only: {{ mylar.https_only | default(False) }}
-  auth: {{ mylar.auth | default(False) }}
-  domain: {{ mylar.domain | default(False) }}
-  subdomain: {{ mylar.subdomain | default("mylar") }}
-  version: {{ mylar.version | default("latest") }}
+mylar3:
+  enable: {{ mylar3.enable | default(False) }}
+  https_only: {{ mylar3.https_only | default(False) }}
+  auth: {{ mylar3.auth | default(False) }}
+  domain: {{ mylar3.domain | default(False) }}
+  subdomain: {{ mylar3.subdomain | default("mylar3") }}
+  version: {{ mylar3.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
@@ -975,7 +946,7 @@ nextcloud:
   auth: {{ nextcloud.auth | default(False) }}
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
-  version: {{ nextcloud.version | default("apache") }}
+  version: {{ nextcloud.version | default("fpm-alpine") }}
   db_version: {{ nextcloud.db_version | default("12-alpine") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
   amd64: False
@@ -1053,18 +1024,6 @@ organizr:
   domain: {{ organizr.domain | default(False) }}
   subdomain: {{ organizr.subdomain | default("organizr") }}
   version: {{ organizr.version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
-ownphotos:
-  enable: {{ ownphotos.enable | default(False) }}
-  https_only: {{ ownphotos.https_only | default(False) }}
-  auth: {{ ownphotos.auth | default(False) }}
-  domain: {{ ownphotos.domain | default(False) }}
-  subdomain: {{ ownphotos.subdomain | default("ownphotos") }}
-  version: {{ ownphotos.version | default("dev") }}
-  db_version: {{ ownphotos.db_version | default("latest") }}
-  redis_version: {{ ownphotos.redis_version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
