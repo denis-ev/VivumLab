@@ -222,7 +222,7 @@ If you are having problems you can:
 ### Photo and Video Galleries
 
 - [Digikam](software/digikam) - Professional Photo Management with the Power of Open Source
-- [OwnPhotos](software/ownphotos) Self hosted Google Photos clone.
+- [LibrePhotos](software/librephotos) Self hosted Google Photos clone.
 - [Piwigo](software/piwigo) - Manage your photo collection
 - [Pixelfed](software/pixelfed) - A free and ethical photo sharing platform, powered by ActivityPub federation.
 

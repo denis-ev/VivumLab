@@ -101,7 +101,7 @@ do_region: "{{ vault.do_region }}"
 # After claiming your token at https://www.plex.tv/claim/ you will only have four minutes to run make and deploy plexinc
 plex_claim: "{{ vault.plex_claim }}"
 
-# Mapbox Api keys: Used for OwnPhotos
+# Mapbox Api keys: Used for LibrePhotos
 mapbox_api_key: "{{ vault.mapbox_api_key }}"
 
 # Restic S3 Backup Server Information name: Docs: https://vivumlab.com/setup/backups/
@@ -750,6 +750,20 @@ lazylibrarian:
   amd64: False
   arm64: False
   armv7: False
+librephotos:
+  enable: {{ librephotos.enable | default(False) }}
+  https_only: {{ librephotos.https_only | default(False) }}
+  auth: {{ librephotos.auth | default(False) }}
+  domain: {{ librephotos.domain | default(False) }}
+  subdomain: {{ librephotos.subdomain | default("librephotos") }}
+  version: {{ librephotos.version | default("dev") }}
+  proxy_version: {{ librephotos_proxy.version | default("dev") }}
+  frontend_version: {{ librephotos_frontend.version | default("dev") }}
+  db_version: {{ librephotos.db_version | default("12-alpine") }}
+  redis_version: {{ librephotos.redis_version | default("6-alpine") }}
+  amd64: False
+  arm64: False
+  armv7: False
 lidarr:
   enable: {{ lidarr.enable | default(False) }}
   https_only: {{ lidarr.https_only | default(False) }}
@@ -1010,18 +1024,6 @@ organizr:
   domain: {{ organizr.domain | default(False) }}
   subdomain: {{ organizr.subdomain | default("organizr") }}
   version: {{ organizr.version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
-ownphotos:
-  enable: {{ ownphotos.enable | default(False) }}
-  https_only: {{ ownphotos.https_only | default(False) }}
-  auth: {{ ownphotos.auth | default(False) }}
-  domain: {{ ownphotos.domain | default(False) }}
-  subdomain: {{ ownphotos.subdomain | default("ownphotos") }}
-  version: {{ ownphotos.version | default("dev") }}
-  db_version: {{ ownphotos.db_version | default("latest") }}
-  redis_version: {{ ownphotos.redis_version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
