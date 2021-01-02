@@ -51,7 +51,7 @@ adguardhome
 
 #### Finalising changes:
 
-run: **`vlab update_one service=adguardhome`**
+run: **`vlab update -s adguardhome`**
 
 ## FIRST RUN
 

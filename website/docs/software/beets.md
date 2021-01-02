@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** linuxserver/beets <br />
 **Current Image Version:** {{ beets.version }}
 
 ## SETUP
@@ -52,7 +52,7 @@ beets
 
 #### Finalising changes:
 
-run: **`vlab update_one service=beets`**
+run: **`vlab update -s beets`**
 
 ## FIRST RUN
 
