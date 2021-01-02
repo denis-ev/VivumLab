@@ -1,31 +1,33 @@
 ---
-- name: Make mylar directory.
+- name: Make mylar3 directory.
   file:
-    path: "{{ volumes_root }}/mylar"
+    path: "{{ volumes_root }}/mylar3/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+  loop:
+    - "config"
   become: yes
 
-- name: Copy mylar docker-compose.yml file into place.
+- name: Copy mylar3 docker-compose.yml file into place.
   template:
-    src: docker-compose.mylar.yml.j2
-    dest: "{{ volumes_root }}/mylar/docker-compose.yml"
+    src: docker-compose.mylar3.yml.j2
+    dest: "{{ volumes_root }}/mylar3/docker-compose.yml"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
   become: yes
 
-- name: Configure mylar systemd service.
+- name: Configure mylar3 systemd service.
   become: yes
   template:
     src: service.j2
-    dest: /etc/systemd/system/mylar.service
+    dest: /etc/systemd/system/mylar3.service
 
-- name: Start mylar
+- name: Start mylar3
   systemd:
-    name: mylar
+    name: mylar3
     enabled: yes
     daemon-reload: yes
     state: started
