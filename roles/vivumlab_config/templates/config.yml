@@ -1129,7 +1129,7 @@ portainer:
   auth: {{ portainer.auth | default(False) }}
   domain: {{ portainer.domain | default(False) }}
   subdomain: {{ portainer.subdomain | default("portainer") }}
-  version: {{ portainer.version | default("latest") }}
+  version: {{ portainer.version | default("2.0.1") }}
   amd64: False
   arm64: False
   armv7: False
