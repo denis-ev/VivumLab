@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** bitwardenrs/server <br />
 **Current Image Version:** {{ bitwarden.version }}
 
 ## SETUP
@@ -58,7 +58,7 @@ bitwarden
 
 #### Finalising changes:
 
-run: **`vlab update_one service=bitwarden`**
+run: **`vlab update -s bitwarden`**
 
 ## FIRST RUN
 

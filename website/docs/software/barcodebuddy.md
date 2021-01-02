@@ -52,7 +52,7 @@ barcodebuddy
 
 #### Finalising changes:
 
-run: **`vlab update_one service=barcodebuddy`**
+run: **`vlab update -s barcodebuddy`**
 
 ## FIRST RUN
 

@@ -10,7 +10,7 @@ class Service < Thor
   class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('service.list.name'), I18n.t('service.list.desc')
-  option :columns, type: :numeric, required: false, default: 5, banner: 'example useage'
+  option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list
     services = service_list.each_slice(5).entries
     (5 - (service_list.size % 5)).times { services.last << '' }

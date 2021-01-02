@@ -51,7 +51,7 @@ airsonic
 
 #### Finalising changes:
 
-run: **`vlab update_one service=airsonic`**
+run: **`vlab update -s airsonic`**
 
 ## FIRST RUN
 

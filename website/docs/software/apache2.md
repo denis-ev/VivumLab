@@ -52,7 +52,7 @@ apache2
 
 #### Finalising changes:
 
-run: **`vlab update_one service=apache2`**
+run: **`vlab update -s apache2`**
 
 ## FIRST RUN
 

@@ -126,7 +126,7 @@ authelia
 
 #### Finalising changes:
 
-run: **`vlab update_one service=authelia`**
+run: **`vlab update -s authelia`**
 
 ## ACCESS
 
