@@ -8,7 +8,6 @@ services:
   beets:
   bitwarden:
   bookstack:
-  bulletnotes:
   calibre:
   chowdown:
   cockpit:
@@ -44,18 +43,15 @@ services:
   homedash:
   hubzilla:
   huginn:
-  inventario:
   invoiceninja:
   jackett:
   jellyfin:
   jenkins:
   keycloak:
-  kibitzr:
   kutt:
   lazylibrarian:
   lidarr:
   mailu:
-  mashio:
   massivedecks:
   matomo:
   matterbridge:
@@ -136,7 +132,6 @@ authelia:
 bitwarden:
 beets:
 bookstack:
-bulletnotes:
 calibre:
 chowdown:
 cockpit:
@@ -171,19 +166,16 @@ homebridge:
 homedash:
 hubzilla:
 huginn:
-inventario:
 invoiceninja:
 jackett:
 jellyfin:
 jenkins:
 keycloak:
-kibitzr:
 kutt:
 lazylibrarian:
 lidarr:
 mailu:
 massivedecks:
-mashio:
 matomo:
 matterbridge:
 mayan:

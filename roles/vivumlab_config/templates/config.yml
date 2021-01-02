@@ -301,17 +301,6 @@ bookstack:
   amd64: False
   arm64: False
   armv7: False
-bulletnotes:
-  enable: {{ bulletnotes.enable | default(False) }}
-  https_only: {{ bulletnotes.https_only | default(False) }}
-  auth: {{ bulletnotes.auth | default(False) }}
-  domain: {{ bulletnotes.domain | default(False) }}
-  subdomain: {{ bulletnotes.subdomain | default("bulletnotes") }}
-  version: {{ bulletnotes.version | default("latest") }}
-  db_version: {{ bulletnotes.db_version | default("3.2.21") }}
-  amd64: False
-  arm64: False
-  armv7: False
 calibre:
   enable: {{ calibre.enable | default(False) }}
   https_only: {{ calibre.https_only | default(False) }}
@@ -689,17 +678,6 @@ huginn:
   amd64: False
   arm64: False
   armv7: False
-inventario:
-  enable: {{ inventario.enable | default(False) }}
-  https_only: {{ inventario.https_only | default(False) }}
-  auth: {{ inventario.auth | default(False) }}
-  domain: {{ inventario.domain | default(False) }}
-  subdomain: {{ inventario.subdomain | default("inventario") }}
-  version: {{ inventario.version | default("latest") }}
-  db_version: {{ inventario.db_version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 invoiceninja:
   enable: {{ invoiceninja.enable | default(False) }}
   https_only: {{ invoiceninja.https_only | default(False) }}
@@ -752,16 +730,6 @@ keycloak:
   amd64: False
   arm64: False
   armv7: False
-kibitzr:
-  enable: {{ kibitzr.enable | default(False) }}
-  https_only: {{ kibitzr.https_only | default(False) }}
-  auth: {{ kibitzr.auth | default(False) }}
-  domain: {{ kibitzr.domain | default(False) }}
-  subdomain: {{ kibitzr.subdomain | default("kibitzr") }}
-  version: {{ kibitzr.version | default("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 kutt:
   enable: {{ kutt.enable | default(False) }}
   https_only: {{ kutt.https_only | default(False) }}
@@ -804,17 +772,6 @@ mailu:
   arm64: False
   armv7: False
   forward_to_smtp: {{ mailu.forward_to_smtp | default(False)  }}
-mashio:
-  enable: {{ mashio.enable | default(False) }}
-  https_only: {{ mashio.https_only | default(False) }}
-  auth: {{ mashio.auth | default(False) }}
-  domain: {{ mashio.domain | default(False) }}
-  subdomain: {{ mashio.subdomain | default("mashio") }}
-  version: {{ mashio.version | default ("latest") }}
-  db_version: {{ mashio.db_version | default ("latest") }}
-  amd64: False
-  arm64: False
-  armv7: False
 massivedecks:
   enable: {{ massivedecks.enable | default(False) }}
   https_only: {{ massivedecks.https_only | default(False) }}
