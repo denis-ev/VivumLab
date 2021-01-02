@@ -24,10 +24,10 @@ There are 3 kinds of storage related to Docker and Docker compose. And by extens
 
   ```yml
   volumes:
-    - /var/vivumlab/serviceName:/MyFiles
+    - /home/<ssh_user>/serviceName:/MyFiles
   ```
 
-  This mapping of a volume means that the container, and it's software can access the contents of `/var/vivumlab/serviceName` by accessing it's own `/MyFiles` directory.
+  This mapping of a volume means that the container, and it's software can access the contents of `/home/<ssh_user>/serviceName` by accessing it's own `/MyFiles` directory.
 
 - NAS - Network Attached Storage volume(s) - NAS Volumes - are volumes, but they're controlled, in part, by VivumLab. If you enable NAS storage in your config, and provide valid credentials to your NAS, VivumLab will take care of mounting your NAS for you.
 
