@@ -18,6 +18,10 @@ module ConfigFileUtils
                          .map { |x| x.split('/').last }
   end
 
+  def constantized_services
+    @constantized_services ||= service_list.map { |service| service.split('_').collect(&:capitalize).join}
+  end
+
   # these two methods load the config and vault files and convert them to
   # a special object type called Hashie#Mash. Mash objects extend the normal
   # hash (python dictionary) with dot notation access. This allows us to, for instance
@@ -31,8 +35,7 @@ module ConfigFileUtils
 
   def decrypted_config_file
     return @decrypted_config_file unless @decrypted_config_file.nil?
-
-    config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir]
+    config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
     pass = File.read('/vlab_vault_pass')
     temp = YamlVault::Main.from_file("#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
     @decrypted_config_file ||= ConfigFile.new(temp)

@@ -118,14 +118,18 @@ class Service < Thor
     invoke 'config:show', [], service: options[:service]
   end
 
-  desc "default", "default task"
+  # This 'task' is responsible for yeiling to dynamically created namespaces for the
+  # given service. Unlike other tasks, this one has a parameter, not an option.
+  # this means the usage is like this: `vlab service SERVICENAME COMMAND` where
+  # servicename and command are inputs from the user.
+  desc "dynamic", "dynamic task defers to service specific namespace provided as parameter"
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
-  def default(dynamic_namespace, command)
+  def dynamic(dynamic_namespace, command='help')
     service_config = decrypted_config_file[dynamic_namespace]
     say "Invalid service name, did you mistype it?" if service_config.nil?
     exit 1 if service_config.nil?
 
-    if service_config.keys.include?(command) || command == 'setup'
+    if Object::const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
     else
       say "Invalid Command (#{command}) for namespace #{dynamic_namespace}".red
@@ -145,5 +149,5 @@ class Service < Thor
     end
   end
 
-  default_task :default
+  default_task :dynamic
 end
