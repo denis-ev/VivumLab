@@ -35,8 +35,8 @@ services:
     volumes:
       - "{{ storage_dir }}/Pictures:/photoprism/originals" # [local path]:[container path]
       - "{{ storage_dir }}/Pictures/PhotoPrismImport:/photoprism/import" # [local path]:[container path] (optional)
-      - "{{ volumes_root }}/ownphotos/thumbnails/:/photoprism/cache" # keep thumbnail cache
-      - "{{ volumes_root }}/ownphotos/db/:/photoprism/database" # keep database files
+      - "{{ volumes_root }}/librephotos/thumbnails:/photoprism/cache" # keep thumbnail cache
+      - "{{ volumes_root }}/librephotos/db:/photoprism/database" # keep database files
     labels:
       - "traefik.http.services.photoprism.loadbalancer.server.scheme=http"
       - "traefik.http.services.photoprism.loadbalancer.server.port=2342"

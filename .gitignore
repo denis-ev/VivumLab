@@ -34,10 +34,6 @@ INSTALL_PRECOMMIT.sh
 # Node
 node_modules/
 
-# kibitzr service
-kibitzr.yml
-kibitzr-creds.yml
-
 # Service-edit Task
 docker-compose.override.yml
 
