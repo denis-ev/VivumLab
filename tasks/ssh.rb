@@ -16,10 +16,15 @@ class Ssh < Thor
 
   desc I18n.t('ssh.create_sshkey.usage'), I18n.t('ssh.create_sshkey.desc')
   def create_sshkey
-    say I18n.t('ssh.create_sshkey.out.keyexists', home_dir: Dir.home, passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow if ssh_key_exists?
-    return if ssh_key_exists?
+    if ssh_key_exists?
+      say I18n.t('ssh.create_sshkey.out.keyexists',
+                 home_dir: Dir.home,
+                 passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
+      return
+    end
 
-    say I18n.t('ssh.create_sshkey.out.keycreating', passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
+    say I18n.t('ssh.create_sshkey.out.keycreating',
+               passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
     # rubocop:disable Layout/LineLength
     execute_in_shell("ssh-keygen -q -N '' -C 'VivumLab@#{decrypted_config_file.domain}' -f #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}")
     # rubocop:enable Layout/LineLength
