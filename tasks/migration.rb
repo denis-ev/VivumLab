@@ -26,22 +26,24 @@ class Migration < Thor
     end
   end
 
-  def execute_single_config_migration(config_file, vault_file)
-    config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
-    vault_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
-    @decrypted_config_file = config_file.merge vault_file.vault
-    @decrypted_config_file.ansible_become_password = vault_file.ansible_become_password
-    @decrypted_config_file.default_password = vault_file.default_password
-  end
+  no_commands do
+    def execute_single_config_migration(config_file, vault_file)
+      config_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/config.yml"))
+      vault_file ||= ConfigFile.new(YAML.load_file("#{options[:config_dir]}/vault.yml"))
+      @decrypted_config_file = config_file.merge vault_file.vault
+      @decrypted_config_file.ansible_become_password = vault_file.ansible_become_password
+      @decrypted_config_file.default_password = vault_file.default_password
+    end
 
-  def meets_single_config_conditions?
-    (File.exist? "#{options[:config_dir]}/config.yml") &&
-      (File.exist? "#{options[:config_dir]}/vault.yml") &&
-      (!File.exist? "#{options[:config_dir]}/encrypted.yml")
-  end
+    def meets_single_config_conditions?
+      (File.exist? "#{options[:config_dir]}/config.yml") &&
+        (File.exist? "#{options[:config_dir]}/vault.yml") &&
+        (!File.exist? "#{options[:config_dir]}/encrypted.yml")
+    end
 
-  def cleanup
-    FileUtils.rm "#{options[:config_dir]}/config.yml"
-    FileUtils.rm "#{options[:config_dir]}/vault.yml"
+    def cleanup
+      FileUtils.rm "#{options[:config_dir]}/config.yml"
+      FileUtils.rm "#{options[:config_dir]}/vault.yml"
+    end
   end
 end

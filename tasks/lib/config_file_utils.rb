@@ -50,8 +50,9 @@ module ConfigFileUtils
     # rubocop:disable Style/RescueModifier
     config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
     # rubocop:enable Style/RescueModifier
-    puts "Unable to find #{config_dir}/encrypted.yml. Please run vlab config new".red
-    File.exist? "#{config_dir}/encrypted.yml"
+    exists = File.exist? "#{config_dir}/encrypted.yml"
+    puts "Unable to find #{config_dir}/encrypted.yml. Please run vlab config new".red unless exists
+    exists
   end
 
   def save_config_file
