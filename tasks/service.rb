@@ -122,7 +122,7 @@ class Service < Thor
   # given service. Unlike other tasks, this one has a parameter, not an option.
   # this means the usage is like this: `vlab service SERVICENAME COMMAND` where
   # servicename and command are inputs from the user.
-  desc "dynamic", "dynamic task defers to service specific namespace provided as parameter"
+  desc "SERVICENAME", "dynamic service task defers to service specific namespace provided as parameter"
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
   def dynamic(dynamic_namespace, command='help')
     service_config = decrypted_config_file[dynamic_namespace]
