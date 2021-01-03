@@ -25,7 +25,7 @@ module DynamicNamespaces
           services = service_config.reject {|s| rejected_properties.include? s}
           services.each do |key,value|
             # @TODO: I18n the desc and options line below
-            desc key.to_s, "Sets the configuration value for #{service}.#{key}"
+            desc "#{service} #{key.to_s}", "Sets the configuration value for #{service}.#{key}"
             option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
             define_method(key.to_s) do
               invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
