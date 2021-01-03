@@ -9,6 +9,41 @@
     - "config"
     - "custom_apps"
     - "themes"
+    - "postgres"
+    - "web"
+    - "build"
+  become: yes
+
+- name: Copy nextcloud web Dockerfile into place.
+  copy:
+    src: "web/Dockerfile"
+    dest: "{{ volumes_root }}/nextcloud/web/Dockerfile"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy nextcloud web nginx.conf into place.
+  copy:
+    src: "web/nginx.conf"
+    dest: "{{ volumes_root }}/nextcloud/web/nginx.conf"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy nextcloud build Dockerfile into place.
+  copy:
+    src: "build/Dockerfile"
+    dest: "{{ volumes_root }}/nextcloud/build/Dockerfile"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy nextcloud build entrypoint.sh into place.
+  copy:
+    src: "build/entrypoint.sh"
+    dest: "{{ volumes_root }}/nextcloud/build/entrypoint.sh"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   become: yes
 
 - name: Copy nextcloud docker-compose.yml file into place.

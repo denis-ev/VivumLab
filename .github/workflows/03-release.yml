@@ -40,6 +40,20 @@ jobs:
             @semantic-release/git
             @semantic-release/github
             @semantic-release/release-notes-generator
+      - name: Get Commit Difference Count Between Two Branches
+        id: cdc
+        uses: jessicalostinspace/commit-difference-action@v1.0.0
+        with:
+          base-branch: 'dev'
+          secondary-branch: 'master'
+      - name: Mirror action step
+        if: "cdc.commit-difference-count >= 10"
+        id: mirror
+        uses: google/mirror-branch-action@v1.0
+        with:
+          github-token: ${{ secrets.DE_PAT }}
+          source: 'dev'
+          dest: 'master'
   release:
     if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
