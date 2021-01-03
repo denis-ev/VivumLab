@@ -31,8 +31,9 @@ module Utils
 
   def run_config_playbook(options, extra = '')
     say I18n.t('utils.run_config_playbook.out.playbookexecuting', playbook_command: playbook_command).yellow if options[:debug] != :none
-    execute_in_shell(playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip)
-    say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_command).green
+    playbook_cmd = playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip
+    execute_in_shell(playbook_cmd)
+    say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_cmd).green
     # migration_invoke_override
     manual_invoke('migration:single_config', options)
   rescue Subprocess::NonZeroExit => e
