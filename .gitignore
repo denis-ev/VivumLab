@@ -7,8 +7,6 @@ fetch/
 .DS_Store
 pkg/
 venv/
-vendor/
-VlabDebug*.txt
 
 # swp files
 *.swp
@@ -26,6 +24,8 @@ package_template/tmp*.yml
 /.vscode
 
 # CLI specific
+decrypted.yml
+VlabDebug*.txt
 vendor/
 
 # Commit specific
