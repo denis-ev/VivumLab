@@ -47,6 +47,7 @@ class Config < Thor
     begin
       write_temporary_decrypted_config
       execute_in_shell "nano #{@temp_config}"
+      encrypt_temporary_decrypted_config
     rescue Subprocess::NonZeroExit
       say I18n.t('config.edit_raw.out.editerror').red
     ensure
