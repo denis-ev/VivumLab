@@ -17,7 +17,16 @@ class Config < Thor
   def new
     say I18n.t('config.new.out.creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
-    run_config_playbook(options) unless File.exist? "#{options[:config_dir]}/encrypted.yml"
+    if File.exist? "#{options[:config_dir]}/encrypted.yml"
+      write_temporary_decrypted_config
+      FileUtils.mv @temp_config, "decrypted.yml"
+      say I18n.t('config.decrypt.out.decrypted').green
+      run_config_playbook(options, "-e @decrypted.yml")
+      encrypt_temporary_decrypted_config "decrypted.yml"
+      say I18n.t('config.encrypt.out.encrypted').green
+    else
+      run_config_playbook(options)
+    end
   end
 
   desc I18n.t('config.show.usage'), I18n.t('config.show.desc')
