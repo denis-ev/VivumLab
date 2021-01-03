@@ -10,16 +10,16 @@ on:
       - unlabeled
 
 jobs:
-  check_pr_milestone:
+  check_wip_title:
     runs-on: ubuntu-latest
-    name: Sets status via label
+    name: Title WIP check
     steps:
-      - uses: cchantep/probot-pr-status-label@ghaction-1.0.x
+      - uses: wip/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint-pr:
     runs-on: ubuntu-latest
-    needs: check_pr_milestone
+    needs: check_wip_title
     name: Lint PR
     steps:
       - uses: amannn/action-semantic-pull-request@v2.1.0
