@@ -21,7 +21,9 @@ module DynamicNamespaces
           # vlab service NAME PropertyName -v = bob
           # This generates a 1:1 match between config file options for this service
           # and configuration setters.
-          service_config.each do |key,value|
+          rejected_properties = %w[amd64 arm64 armv7]
+          services = service_config.reject {|s| rejected_properties.include? s}
+          services.each do |key,value|
             # @TODO: I18n the desc and options line below
             desc key.to_s, "Sets the configuration value for #{service}.#{key}"
             option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
@@ -35,15 +37,14 @@ module DynamicNamespaces
           # anything in the rejected list is, of course rejected.
           require_relative '../service' unless defined? Service
           rejected = %w[limit_to_service run_common list dynamic help]
-          ::Service.new.public_methods(false).reject{ |klass_name| rejected.include? klass_name }.each do |meth|
-            desc "#{meth.to_s}", "Invokes #{meth.to_s} on #{service}"
+          ::Service.new.public_methods(false).reject { |klass_name| rejected.include? klass_name.to_s }.each do |meth|
+            desc meth.to_s, "Invokes #{meth} on #{service}"
             define_method(meth.to_s) do
-              invoke "service:#{meth.to_s}", [], service: service
+              invoke "service:#{meth}", [], service: service
             end
           end
           default_task :help
         end
     )
   end
-
 end
