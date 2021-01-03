@@ -71,6 +71,8 @@ module ConfigFileUtils
   end
 
   def last_good_key(hsh, key)
+    return key if hsh.keys.include? key
+
     while true
       # rubocop:disable Style/RescueModifier
       key_bad = hsh.instance_eval(key) rescue nil
