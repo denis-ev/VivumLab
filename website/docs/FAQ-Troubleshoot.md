@@ -167,7 +167,7 @@ VivumLab acknowledges that some versions of specific softwares may be more desir
 
 ### I can't find certain config values like Authelia
 
-Check your `config/vault.yml` file. If it's encrypted just run `vlab decrypt`, and attempt to access it again.
+Check your `config/encrypted.yml` file. If it's encrypted just run `vlab config decrypt --dev`, and attempt to access it again.
 
 ### Is it OK to manually edit my `settings/` files?
 

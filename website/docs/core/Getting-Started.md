@@ -44,7 +44,7 @@ In order for your applications to be able to utilise email (confirmation emails,
 
 Create an account, and follow their steps to register your domain.
 
-Once that is completed, you can plug the settings they provide into your `settings/vault.yml` file.
+Once that is completed, you can plug the settings they provide into your `settings/encrypted.yml` file.
 To do this:
 
 1. run the **`vlab config decrypt --dev`** command
