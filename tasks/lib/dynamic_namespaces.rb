@@ -25,7 +25,7 @@ module DynamicNamespaces
           services = service_config.reject {|s| rejected_properties.include? s}
           services.each do |key,value|
             # @TODO: I18n the desc and options line below
-            desc "#{service} #{key.to_s}", "Sets the configuration value for #{service}.#{key}"
+            desc "service #{service} #{key.to_s}", "Sets the configuration value for #{service}.#{key}"
             option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
             define_method(key.to_s) do
               invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
@@ -38,7 +38,7 @@ module DynamicNamespaces
           require_relative '../service' unless defined? Service
           rejected = %w[limit_to_service run_common list dynamic help]
           ::Service.new.public_methods(false).reject { |klass_name| rejected.include? klass_name.to_s }.each do |meth|
-            desc meth.to_s, "Invokes #{meth} on #{service}"
+            desc "service #{service} #{meth}", "Invokes #{meth} on #{service}"
             define_method(meth.to_s) do
               invoke "service:#{meth}", [], service: service
             end
