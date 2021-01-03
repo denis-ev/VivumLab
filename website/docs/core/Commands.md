@@ -31,6 +31,10 @@ For service specific commands, scroll down or click [here](#service-commands)
 deploys Vivumlab, useful when a server refresh is needed.  <br />
     example: **`vlab deploy`**
 
+#### setup
+Set a service up, follow interactive worklfow <br />
+    examples: **`vlab setup -s jellyfin`** <br />
+
 #### service restart
 Restart all enabled services.  <br />
     example: **`vlab service restart`**
@@ -72,14 +76,6 @@ Restore a server from backups. Assuming backups were running  <br />
 #### launch
 Opens a shell on the remote server.  <br />
     example: **`vlab ssh launch`**
-
-#### set
-Set a configuration variable  <br />
-    examples:  <br />
-    (enabling Jellyfin): **`vlab set jellyfin.enable=true`**  <br />
-    (setup Vivumlab for an Arm Arcitecture) **`vlab set arm=true`**  <br />
-    (change the default_password): **`vlab set vault.default_password=S0m3C00lP@s$word`**  <br />
-    (changing the CloudFlare API email) **`vlab set vault.traefik.additional_env_vars.CF_API_EMAIL=your@email.com`**
 
 #### track
 Switches you to the specified branch or tag.  <br />

@@ -167,21 +167,20 @@ VivumLab acknowledges that some versions of specific softwares may be more desir
 
 ### I can't find certain config values like Authelia
 
-Check your `config/vault.yml` file. If it's encrypted just run `vlab decrypt`, and attempt to access it again.
+Check your `config/encrypted.yml` file. If it's encrypted just run `vlab config decrypt --dev`, and attempt to access it again.
 
 ### Is it OK to manually edit my `settings/` files?
 
 Yes, but note that isn't specifically necessary to edit the `config/` files directly, or worry about where the config values are.
-Use of **`vlab get`** will access the variable correctly regardless of which config file it lives in.
->eg. **`vlab get jellyfin.domain`**
+Use of **`vlab service show -s jellyfin`** will access the variable correctly regardless of which config file it lives in.
 
-Use of **`vlab set`** will set the variable correctly,regardless of which config file
->eg. **`vlab set jellyfin.domain=magicfinger.com`**
+Use of **`vlab dev set --dev --config-key <key> --value <value>`** will set the variable correctly,regardless of which config file
+>eg. **`vlab dev set --dev --config-key jellyfin.domain --value magicfinger.com`**
 
 ### I get a exec user process caused 'exec format' error
 
 You may be trying to run AMD code on ARM infrastructure.
-Make sure you have set `arm` to True. e.g: **`vlab get arm`**
+Make sure you have set `arm` to True.
 
 You can set it with **`vlab dev set --dev --config-key arm --value True`**,
 or you can edit your config file, run `vlab config edit_raw --dev` (not recommended for none developers).
