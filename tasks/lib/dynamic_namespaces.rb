@@ -27,7 +27,6 @@ module DynamicNamespaces
           rejected_properties = %w[amd64 arm64 armv7]
           services = service_config.reject { |s| rejected_properties.include? s }
           services.each_key do |key|
-            # @TODO: I18n the desc and options line below
             desc I18n.t('dynamic_namespaces.service.config.usage'), I18n.t('dynamic_namespaces.service.config.desc'), "service: #{service}, key: #{key}"
             option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'), alias: ['-v']
             define_method(key.to_s) do
