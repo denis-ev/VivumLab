@@ -39,9 +39,19 @@ module ConfigFileUtils
     # rubocop:disable Style/RescueModifier
     config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
     # rubocop:enable Style/RescueModifier
+    return unless encrypted_yml_exist?
+
     pass = File.read('/vlab_vault_pass')
     temp = YamlVault::Main.from_file("#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
     @decrypted_config_file ||= ConfigFile.new(temp)
+  end
+
+  def encrypted_yml_exist?
+    # rubocop:disable Style/RescueModifier
+    config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
+    # rubocop:enable Style/RescueModifier
+    say "Unable to find #{config_dir}/encrypted.yml. Please run vlab config new".red
+    File.exist? "#{config_dir}/encrypted.yml"
   end
 
   def save_config_file
