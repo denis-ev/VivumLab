@@ -11,7 +11,9 @@ class Git < Thor
   desc I18n.t('git.sync.usage'), I18n.t('git.sync.desc')
   option :disable_push, required: false, type: :boolean, desc: I18n.t('options.disablegitsync'), default: false
   def sync
-    reject_if_dir_not_present unless dir_exists
+    # @todo Check git:sync
+    # @body reject_if_dir_not_present unless dir_exists not working
+    reject_if_dir_not_present unless Dir.exist? "./#{options[:config_dir]}/.git"
 
     say I18n.t('git.sync.out.settingssyncing').yellow
     execute_git_sync options[:config_dir], options[:disable_push]
