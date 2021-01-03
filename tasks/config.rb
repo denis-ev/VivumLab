@@ -27,7 +27,7 @@ class Config < Thor
     begin
       table = TTY::Table.new(header: %w[option value], rows: config_hash)
       say table.render(:unicode)
-    rescue => e
+    rescue StandardError
       say I18n.t('config.show.out.tablenorender').light_blue
       ap config_hash
     end
@@ -45,9 +45,7 @@ class Config < Thor
   def edit_raw
     say I18n.t('config.edit_raw.out.editfile', config_dir: options[:config_dir]).light_blue
     begin
-      write_temporary_decrypted_config
-      execute_in_shell "nano #{@temp_config}"
-      encrypt_temporary_decrypted_config
+      decrypt_edit_encrypt
     rescue Subprocess::NonZeroExit
       say I18n.t('config.edit_raw.out.editerror').red
     ensure
@@ -69,5 +67,13 @@ class Config < Thor
   def encrypt
     encrypt_temporary_decrypted_config "#{options[:config_dir]}/#{options[:inputfile]}"
     say I18n.t('config.encrypt.out.encrypted').green
+  end
+
+  no_commands do
+    def decrypt_edit_encrypt
+      write_temporary_decrypted_config
+      execute_in_shell "nano #{@temp_config}"
+      encrypt_temporary_decrypted_config
+    end
   end
 end
