@@ -29,18 +29,20 @@ class Dev < Thor
   option :value, type: :string, required: true, desc: I18n.t('options.valuetoset')
   # This method contains some advanced, idiomatic ruby that may not be entirely
   # clear to new rubyists. I've tried to comment for clarity.
+  # rubocop:disable Metrics/AbcSize
   def set
     good_config_key = last_good_key(decrypted_config_file, options[:config_key])
     say I18n.t('dev.set.out.nokey', config_key: options[:config_key]).red unless good_config_key
-    exit 1 unless good_config_key
     eval_config_setting(good_config_key, options[:value]) if options[:config_key] == good_config_key
     return unless (options[:config_key].include? good_config_key) && (options[:config_key] != good_config_key)
 
     draw_error_table options[:config_key], good_config_key
   end
+  # rubocop:enable Metrics/AbcSize
 
   no_commands do
     def eval_config_setting(key, value)
+      exit 1 unless key
       # rubocop:disable Security/Eval
       if [true, false].include? value # sometimes the value is a string that also acts like a decimal (ip address)
         eval("decrypted_config_file.#{key.chomp}=#{value}", binding, __FILE__, __LINE__)
@@ -52,7 +54,7 @@ class Dev < Thor
     end
 
     def draw_error_table(config_key, good_config_key)
-      say I18n.t('config.draw_error_table.out.keynomatch', config_key: options[:config_key]).red
+      say I18n.t('config.draw_error_table.out.keynomatch', config_key: config_key).red
       say I18n.t('config.draw_error_table.out.possiblekey').yellow
       table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
                              rows: decrypted_config_file[good_config_key])
@@ -63,7 +65,9 @@ class Dev < Thor
       say I18n.t('dev.install_precommit.out.readdevdocs').yellow
       say I18n.t('dev.install_precommit.out.precommitwarning').yellow
       say I18n.t('dev.install_precommit.out.pythonerror').red unless python3_installed
-      `curl https://pre-commit.com/install-local.py | python3 -` if python3_installed? && yes?(I18n.t('dev.install_precommit.in.installprecommit'), :yellow)
+      return unless python3_installed? && yes?(I18n.t('dev.install_precommit.in.installprecommit'), :yellow)
+
+      `curl https://pre-commit.com/install-local.py | python3 -`
     end
   end
 end
