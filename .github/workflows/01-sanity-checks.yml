@@ -10,18 +10,16 @@ on:
       - unlabeled
 
 jobs:
-  pr_wip_check:
+  check_pr_milestone:
     runs-on: ubuntu-latest
-    name: WIP Check
+    name: Sets status via label
     steps:
-    - name: WIP Check
-      uses: tim-actions/wip-check@master
-      with:
-        labels: '["do-not-merge", "wip", "rfc", ":hammer_and_wrench: WIP"]'
-        keywords: '["WIP", "wip", "RFC", "rfc"]'
+      - uses: cchantep/probot-pr-status-label@ghaction-1.0.x
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint-pr:
     runs-on: ubuntu-latest
-    needs: pr_wip_check
+    needs: check_pr_milestone
     name: Lint PR
     steps:
       - uses: amannn/action-semantic-pull-request@v2.1.0
