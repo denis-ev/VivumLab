@@ -47,8 +47,8 @@ Create an account, and follow their steps to register your domain.
 Once that is completed, you can plug the settings they provide into your `settings/vault.yml` file.
 To do this:
 
-1. run the **`vlab decrypt`** command
-2. find and edit the `vault.yml` file
+1. run the **`vlab config decrypt --dev`** command
+2. find and edit the `decrypted.yml` file
     > NOTE: editing this file may require superuser/ root permissions
 3. Set the following settings to what you have been provided
 
@@ -63,7 +63,7 @@ smtp:
   from_name:
 ```
 
-4. Now, edit the `settings/config.yml` file, and set:
+4. Now, edit the `settings/decrypted.yml` file, and set:
 ```
 mailu:
   forward_to_smtp: False

@@ -170,8 +170,8 @@ You can SSH into the server, and run **`systemctl status SERVICENAME`** where SE
 
 ## Syncing Settings via Git
 
-VivumLab will automatically keep the `settings/` folder in sync with a git repo if it has one.
-So you can create a private repo on your Gitea instance for example, then clone that repo over the settings folder. Now any changes you make to `settings/` files will be commited and pushed to that git repo whenever you run **`vlab deploy`**, **`vlab update`** or **`vlab config`**.
+VivumLab will automatically keep the `settings/` folder in sync with a git repo **if it has one**.
+So you can create a private repo on your Gitea instance for example, then clone that repo over the settings folder. Now any changes you make to `settings/` files will be commited and pushed to that git repo whenever you run **`vlab deploy`**, **`vlab update`** or any **`vlab service`**.
 
 ## Backing up your Vault Password
 
