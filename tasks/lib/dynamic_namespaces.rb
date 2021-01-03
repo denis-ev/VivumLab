@@ -4,6 +4,7 @@
 module DynamicNamespaces
   require './tasks/lib/config_file_utils'
   extend ConfigFileUtils
+  include VlabI18n
 
   if encrypted_yml_exist?
     service_list.each do |service|
@@ -27,8 +28,8 @@ module DynamicNamespaces
           services = service_config.reject { |s| rejected_properties.include? s }
           services.each_key do |key|
             # @TODO: I18n the desc and options line below
-            desc "service #{service} #{key}", "Sets the configuration value for #{service}.#{key}"
-            option :value, required: true, banner: 'this is the value that will be set', alias: ['-v']
+            desc I18n.t('dynamic_namespaces.service.config.usage'), I18n.t('dynamic_namespaces.service.config.desc'), "service: #{service}, key: #{key}"
+            option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'), alias: ['-v']
             define_method(key.to_s) do
               invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
             end
@@ -40,7 +41,7 @@ module DynamicNamespaces
           require_relative '../service' unless defined? Service
           rejected = %w[limit_to_service run_common list dynamic help]
           ::Service.new.public_methods(false).reject { |klass_name| rejected.include? klass_name.to_s }.each do |meth|
-            desc "service #{service} #{meth}", "Invokes #{meth} on #{service}"
+            desc I18n.t('dynamic_namespaces.service.classes.usage'), I18n.t('dynamic_namespaces.service.classes.desc'), "service: #{service}, meth: #{meth}"
             define_method(meth.to_s) do
               invoke "service:#{meth}", [], service: service
             end

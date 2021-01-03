@@ -360,6 +360,28 @@ en:
       out:
         vlabversion: "Current VivumLab version: #{vlabversion}"
 
+  dynamic_namespaces:
+    service:
+      config:
+        usage: "service %{service} %{key}"
+        desc: "Sets the configuration value for %{service}.%{key}"
+        options:
+          banner: "this is the value that will be set"
+      classes:
+        usage: "service %{service} %{meth}"
+        desc: "Invokes #{meth} on #{service}"
+        
+  conffile_utils:
+    encryptedyml:
+      out:
+        noexist: |+
+          "Unable to find %{config_dir}/encrypted.yml. Please run 'vlab config new --dev'"
+          "For further information, please run 'vlab config'
+    saveconf:
+      out:
+        saving: "Saving config.yml"
+
+
   options:
     configdir: "Config directory to use"
     servicename: "Name of the service to display"

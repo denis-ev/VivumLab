@@ -64,9 +64,9 @@ class DemoTasks < Thor
     So this method `fork{exec("command")}` is great for firing things
     off that you don't care about.
   FIRESHELL
-  def fire_shell
-    fork { exec('cat MOTD') }
-  end
+  #def fire_shell
+  #  fork { exec('cat MOTD') }
+  #end
 
   desc 'Demonstrate Optional PARAMs', 'Demonstrates how to have optional parameters'
   def optional_demo(name, optional = nil)
