@@ -40,14 +40,24 @@ jobs:
             @semantic-release/git
             @semantic-release/github
             @semantic-release/release-notes-generator
+      - name: Echo release
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
       - name: Get Commit Difference Count Between Two Branches
         id: cdc
         uses: jessicalostinspace/commit-difference-action@v1.0.0
         with:
-          base-branch: 'dev'
-          secondary-branch: 'master'
+          base-branch: 'master'
+          secondary-branch: 'dev'
+      - name: Echo count
+        run: |
+          echo ${{ steps.cdc.commit-difference-count }}
       - name: Mirror action step
-        if: "cdc.commit-difference-count >= 10"
+        if: "steps.cdc.commit-difference-count >= 10"
         id: mirror
         uses: google/mirror-branch-action@v1.0
         with:
