@@ -32,7 +32,7 @@ deploys Vivumlab, useful when a server refresh is needed.  <br />
     example: **`vlab deploy`**
 
 #### setup
-Set a service up, follow interactive worklfow <br />
+Set a service up, follow interactive workflow <br />
     examples: **`vlab setup -s jellyfin`** <br />
 
 #### service restart
