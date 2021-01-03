@@ -201,7 +201,7 @@ en:
       out:
         lowprecommit: |+
           "Pre-commit is not installed or an earlier version than required."
-          "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
+          "Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above."
 
           "Run `vlab dev setup` when you're ready.."
         lowpython: "Python version %{precom_ver} is required for VivumLab to work"
