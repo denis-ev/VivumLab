@@ -1,4 +1,4 @@
-# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/static/logo250x75.png)
+# ![VivumLab](https://github.com/Vivumlab/VivumLab/raw/master/website/static/logo250x75.png)
 
 [![GitHub issues](https://img.shields.io/github/issues/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/issues) [![GitHub forks](https://img.shields.io/github/forks/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/network) [![GitHub stars](https://img.shields.io/github/stars/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/stargazers) [![GitHub license](https://img.shields.io/github/license/VivumLab/VivumLab)](https://github.com/VivumLab/VivumLab/blob/master/LICENSE) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
