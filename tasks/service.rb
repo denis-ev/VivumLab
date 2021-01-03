@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Contains tasks and logic
+# rubocop:disable Metrics/ClassLength
 class Service < Thor
   require './tasks/utils'
   include Utils
@@ -21,35 +22,22 @@ class Service < Thor
   desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def remove
+    run_common
     options[:service].split(',').each do |service|
-      run_common
-      say I18n.t('service.remove.out.removing', service: options[:service]).yellow
+      say I18n.t('service.remove.out.removing', service: service).yellow
       run_playbook('playbook.remove.yml', options, limit_to_service(service))
       invoke 'dev:set', [], config_key: "#{service}.enable", value: false
-      say I18n.t('service.remove.out.removed', service: options[:service]).green
-    end
-  end
-
-  desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
-  option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
-  def reset(service)
-    service.split(',').each do |srv|
-      say I18n.t('service.reset.out.resetting', service: srv.chomp).yellow
-      run_common
-      run_playbook('playbook.stop.yml', options, limit_to_service(srv.chomp))
-      run_playbook('playbook.remove.yml', options, limit_to_service(srv.chomp))
-      run_playbook('playbook.vivumlab.yml', options, "#{limit_to_service(srv.chomp)} -t deploy")
-      say I18n.t('service.s_reset', service: srv.chomp).green
+      say I18n.t('service.remove.out.removed', service: service).green
     end
   end
 
   desc I18n.t('service.stop.usage'), I18n.t('service.stop.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def stop
+    run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.stop.out.stopping').yellow
-      run_common
-      run_playbook('playbook.stop.yml', options, limit_to_service(options[:service]))
+      run_playbook('playbook.stop.yml', options, limit_to_service(service))
       say I18n.t('service.stop.out.stopped').green
     end
   end
@@ -57,10 +45,10 @@ class Service < Thor
   desc I18n.t('service.restart.usage'), I18n.t('service.restart.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def restart
+    run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.restart.out.restarting').yellow
-      run_common
-      run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
+      run_playbook('playbook.restart.yml', options, limit_to_service(service))
       say I18n.t('service.restart.out.restarted').green
     end
   end
@@ -68,11 +56,11 @@ class Service < Thor
   desc I18n.t('service.update.usage'), I18n.t('service.update.desc')
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def update
+    run_common
     options[:service].split(',').each do |service|
-      say I18n.t('service.update.out.updating', service: options[:service]).yellow
-      run_common
-      run_playbook('playbook.vivumlab.yml', options, limit_to_service(options[:service]))
-      run_playbook('playbook.restart.yml', options, limit_to_service(options[:service]))
+      say I18n.t('service.update.out.updating', service: service).yellow
+      playbooks = %w[playbook restart]
+      run_playbooks(playbooks, options, limit_to_service(service))
       say I18n.t('service.update.out.updated').green
     end
   end
@@ -81,6 +69,18 @@ class Service < Thor
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def docs
     say TTY::Markdown.parse_file("website/docs/software/#{options[:service]}.md")
+  end
+
+  # rubocop:disable Metrics/AbcSize
+  desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
+  option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
+  def reset
+    run_common
+    options[:service].split(',').each do |srv|
+      say I18n.t('service.reset.out.resetting', service: srv.chomp).yellow
+      run_playbooks(%w[stop remove vivumlab], options, limit_to_service(srv.chomp))
+      say I18n.t('service.s_reset', service: srv.chomp).green
+    end
   end
 
   desc I18n.t('service.customize.usage'), I18n.t('service.customize.desc')
@@ -92,6 +92,7 @@ class Service < Thor
     run_playbook('playbook.service-edit.yml', options, limit_to_service(options[:service]))
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
+  # rubocop:enable Metrics/AbcSize
 
   desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
@@ -102,18 +103,9 @@ class Service < Thor
   desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
-    service_config = decrypted_config_file[options[:service]]
-    say I18n.t('service.setup.out.searchfail', service: options[:service]).green if service_config.nil?
-    return if service_config.nil?
+    return if guard_against_invalid_service_config?(options[:service])
 
-    say I18n.t('service.setup.out.editing', service: options[:service])
-    service_config.each do |key,value|
-      ignored = %w[amd64 arm64 armv7]
-      service_config[key] = ask(I18n.t('service.setup.in.keyvalue', key: key), default: service_config[key]) unless ignored.include? key
-    end
-
-    decrypted_config_file.merge service_config
-    save_config_file
+    interactive_setup(options[:service])
     @decrypted_config_file = nil
     invoke 'config:show', [], service: options[:service]
   end
@@ -122,14 +114,12 @@ class Service < Thor
   # given service. Unlike other tasks, this one has a parameter, not an option.
   # this means the usage is like this: `vlab service SERVICENAME COMMAND` where
   # servicename and command are inputs from the user.
-  desc "SERVICENAME", "dynamic service task defers to service specific namespace provided as parameter"
+  desc 'SERVICENAME', 'dynamic service task defers to service specific namespace provided as parameter'
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
-  def dynamic(dynamic_namespace, command='help')
-    service_config = decrypted_config_file[dynamic_namespace]
-    say "Invalid service name, did you mistype it?" if service_config.nil?
-    exit 1 if service_config.nil?
+  def dynamic(dynamic_namespace, command = 'help')
+    return if guard_against_invalid_service_config?(dynamic_namespace)
 
-    if Object::const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
+    if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
     else
       say "Invalid Command (#{command}) for namespace #{dynamic_namespace}".red
@@ -138,7 +128,33 @@ class Service < Thor
     end
   end
 
-  no_tasks do
+  # rubocop:disable Metrics/BlockLength
+  no_commands do
+    def interactive_setup(service)
+      say I18n.t('service.setup.out.editing', service: service)
+      ignored = %w[amd64 arm64 armv7]
+      service_config.each_key do |key|
+        unless ignored.include? key
+          service_config[key] = ask(I18n.t('service.setup.in.keyvalue', key: key), default: service_config[key])
+        end
+      end
+
+      decrypted_config_file.merge service_config
+      save_config_file
+    end
+
+    def run_playbooks(playbooks, options, service_limit)
+      playbooks.each do |playbook|
+        run_playbook("playbook.#{playbook}.yml", options, service_limit)
+      end
+    end
+
+    def guard_against_invalid_service_config?(service)
+      service_config = decrypted_config_file[service]
+      say I18n.t('service.setup.out.searchfail', service: service).green if service_config.nil?
+      service_config.nil?
+    end
+
     def limit_to_service(service = nil)
       "-e {'services':['#{service}']}" unless service.nil?
     end
@@ -148,6 +164,8 @@ class Service < Thor
       invoke 'config:new', [], { config_dir: options[:config_dir] }
     end
   end
+  # rubocop:enable Metrics/BlockLength
 
   default_task :dynamic
 end
+# rubocop:enable Metrics/ClassLength

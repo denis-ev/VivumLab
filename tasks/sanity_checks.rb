@@ -4,8 +4,8 @@
 # vlab attempts to deploy, or configure services
 class SanityChecks < Thor
   require 'English'
-  REQUIRED_PYTHON_VERSION = '3.6.1'
-  REQUIRED_PRECOMMIT_VERSION = '2.6.0'
+  REQ_PYTHON_VER = '3.6.1'
+  REQ_PRECOMMIT_VER = '2.6.0'
   include VlabI18n
   include VlabConstants
 
@@ -61,10 +61,10 @@ class SanityChecks < Thor
   desc I18n.t('sanity_checks.check_for_precommit.usage'), I18n.t('sanity_checks.check_for_precommit.desc')
   def check_for_precommit
     if system('which pre-commit', out: File::NULL)
-      if python_version >= REQUIRED_PYTHON_VERSION
-        say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', req_precommit_ver: REQUIRED_PRECOMMIT_VERSION).red if pre_commit_version <= REQUIRED_PRECOMMIT_VERSION
+      if python_version >= REQ_PYTHON_VER
+        required_precommit_exists
       else
-        say I18n.t('sanity_checks.check_for_precommit.out.lowpython', req_python_ver: REQUIRED_PYTHON_VERSION).red
+        say I18n.t('sanity_checks.check_for_precommit.out.lowpython', req_python_ver: REQ_PYTHON_VER).red
       end
     else
       say I18n.t('sanity_checks.check_for_precommit.out.noprecommit').red
@@ -77,6 +77,11 @@ class SanityChecks < Thor
       execute_in_shell "ssh -q -o StrictHostKeyChecking=no -o ConnectTimeout=3 #{decrypted_config_file['VLAB_SSH_USER']}@#{decrypted_config_file['VLAB_IP']} exit"
       # rubocop:enable Layout/LineLength
       say I18n.t('sanity_checks.check_ssh_with_keys.out.sshunable').red unless $CHILD_STATUS.success?
+    end
+
+    def required_precommit_exists
+      test = pre_commit_version <= REQ_PRECOMMIT_VER
+      say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red unless test
     end
   end
 end
