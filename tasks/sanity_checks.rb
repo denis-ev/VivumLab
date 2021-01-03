@@ -80,8 +80,12 @@ class SanityChecks < Thor
     end
 
     def required_precommit_exists
-      test = pre_commit_version <= REQ_PRECOMMIT_VER
-      say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red unless test
+      # @todo Fixing def required_precommit_exists
+      # @body pre_commit_version = execute_in_shell "$(which pre-commit) --version | grep /-Po '(?<=pre-commit )/\d./\d./\d'" does not work
+      #pre_commit_version = execute_in_shell "$(which pre-commit) --version | grep /-Po '(?<=pre-commit )/\d./\d./\d'"
+      if pre_commit_version <= REQ_PRECOMMIT_VER
+        say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red
+      end
     end
   end
 end
