@@ -7,9 +7,6 @@ class Service < Thor
   include Utils
   include VlabI18n
 
-  class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
-  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
-
   desc I18n.t('service.list.name'), I18n.t('service.list.desc')
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list

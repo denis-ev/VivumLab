@@ -7,11 +7,6 @@ class Config < Thor
   include Utils
   namespace 'config'
   require 'yaml'
-  class_option :debug, desc: I18n.t('options.ansibledebug'),
-                       enum: %w[none warn debug trace],
-                       default: :none,
-                       aliases: ['-d']
-  class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
 
   desc I18n.t('config.new.usage'), I18n.t('config.new.desc')
   def new

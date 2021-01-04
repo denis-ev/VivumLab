@@ -6,8 +6,6 @@ class Bastion < Thor
   include Utils
   include VlabI18n
 
-  class_option :config_dir, type: :string, desc: 'Config dir to use', default: 'settings'
-
   desc I18n.t('bastion.enable.usage'), I18n.t('bastion.enable.desc')
   def enable
     # Do not I18n this string. It is not user facing
