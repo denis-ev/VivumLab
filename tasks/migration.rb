@@ -41,7 +41,7 @@ class Migration < Thor
         (File.exist? "settings/#{options[:config_dir]}/vault.yml") &&
         (!File.exist? "settings/#{options[:config_dir]}/encrypted.yml")
     end
-    
+
     def meets_new_path_config_conditions?
       (File.exist? "settings/encrypted.yml") ||
         ((File.exist? "settings/config.yml") &&
