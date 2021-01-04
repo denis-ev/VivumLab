@@ -31,7 +31,8 @@ Obviously whichever provider you choose will have certain requirements and their
 ```
 do_access_token:<your_token_here>
 ```
-5. run `vlab config encrypt --dev`, to ensure your `settings/encrypted.yml` is encrypted
+5. set the datacenter region under `do_region` [Datacenter Regions](https://www.digitalocean.com/docs/platform/availability-matrix/#datacenter-regions)
+6. run `vlab config encrypt --dev`, to ensure your `settings/encrypted.yml` is encrypted
 
 If you are already a Digital Ocean user, you may receive an error about a pre-existing SSH key.
 (422 SSH Key is already in use on your account).
