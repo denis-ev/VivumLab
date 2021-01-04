@@ -22,7 +22,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## Information
 
-**Docker Image:** adguard/adguardhome <br />
+**Docker Image:** [adguard/adguardhome](https://registry.hub.docker.com/r/adguard/adguardhome) <br />
 **Current Image Version:** {{ adguardhome.version }}
 
 ## SETUP
