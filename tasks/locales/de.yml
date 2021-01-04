@@ -225,6 +225,9 @@ de:
         restart: "Server will restart in %{time} minute(s)"
 
   service:
+    list:
+      name: 'list'
+      desc: 'List the available services'
     remove:
       usage: "remove -s, --service SERVICENAME"
       desc: "Removes any specified service(s) from the VivumLab server"
@@ -286,6 +289,7 @@ de:
       desc: "Interactive setup of any specified service(s) configuration settings"
       out:
         searchfail: "Failed to find a service config for service: %{service}"
+        editing: "Editing configuration parameters for: %{service}"
       in:
         keyvalue: "What value would you like to set for %{key}: "
 
@@ -355,6 +359,28 @@ de:
       desc: "Show VivumLab version"
       out:
         vlabversion: "Current VivumLab version: #{vlabversion}"
+
+  dynamic_namespaces:
+    service:
+      config:
+        usage: "service %{service} %{key}"
+        desc: "Sets the configuration value for %{service}.%{key}"
+        options:
+          banner: "this is the value that will be set"
+      classes:
+        usage: "service %{service} %{meth}"
+        desc: "Invokes #{meth} on #{service}"
+        
+  conffile_utils:
+    encryptedyml:
+      out:
+        noexist: |+
+          "Unable to find %{config_dir}/encrypted.yml. Please run 'vlab config new --dev'"
+          "For further information, please run 'vlab config'
+    saveconf:
+      out:
+        saving: "Saving config.yml"
+
 
   options:
     configdir: "Config directory to use"

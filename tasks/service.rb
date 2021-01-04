@@ -59,7 +59,7 @@ class Service < Thor
     run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.update.out.updating', service: service).yellow
-      playbooks = %w[playbook restart]
+      playbooks = %w[vivumlab restart]
       run_playbooks(playbooks, options, limit_to_service(service))
       say I18n.t('service.update.out.updated').green
     end

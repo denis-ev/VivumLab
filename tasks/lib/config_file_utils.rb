@@ -3,6 +3,8 @@
 # Contains logic surrounding vivumlab config files
 module ConfigFileUtils
   # Class extends hashie::mash to silence warnings
+  include VlabI18n
+
   class ConfigFile < Hashie::Mash
     disable_warnings
   end
@@ -51,12 +53,12 @@ module ConfigFileUtils
     config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
     # rubocop:enable Style/RescueModifier
     exists = File.exist? "#{config_dir}/encrypted.yml"
-    puts "Unable to find #{config_dir}/encrypted.yml. Please run vlab config new".red unless exists
+    puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: options[:config_dir]).red unless exists
     exists
   end
 
   def save_config_file
-    say 'Saving config.yml'.light_blue
+    say I18n.t('conffile_utils.saveconf.out.saving').light_blue
     to_encrypt = YamlVault::Main.from_content(ansible_yml, [['*']], passphrase: File.read('/vlab_vault_pass'))
     persist_current_config to_encrypt
   end
