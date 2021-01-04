@@ -11,10 +11,10 @@ class Git < Thor
   def sync
     # @todo Check git:sync
     # @body 'reject_if_dir_not_present unless dir_exists' not working
-    reject_if_dir_not_present unless Dir.exist? "./#{options[:config_dir]}/.git"
+    reject_if_dir_not_present unless Dir.exist? "./settings_#{options[:config_dir]}/.git"
 
     say I18n.t('git.sync.out.settingssyncing').yellow
-    execute_git_sync options[:config_dir], options[:disable_push]
+    execute_git_sync "settings_#{options[:config_dir]}", options[:disable_push]
     say I18n.t('git.sync.out.settingssynced').green
   end
 
@@ -27,15 +27,15 @@ class Git < Thor
 
   no_commands do
     def reject_if_dir_not_present
-      dir_exists = Dir.exist? "./#{options[:config_dir]}/.git"
+      dir_exists = Dir.exist? "./settings_#{options[:config_dir]}/.git"
       say I18n.t('git.sync.out.notsetup').red unless dir_exists
       exit 1 unless dir_exists
     end
 
     def ensure_precommit
-      FileUtils.mkdir_p "#{options[:config_dir]}/.git/hooks"
-      FileUtils.cp 'git_sync_pre_commit', "#{options[:config_dir]}/.git/hooks/pre-commit"
-      FileUtils.chmod '+x', "#{options[:config_dir]}/.git/hooks/pre-commit"
+      FileUtils.mkdir_p "settings_#{options[:config_dir]}/.git/hooks"
+      FileUtils.cp 'git_sync_pre_commit', "settings_#{options[:config_dir]}/.git/hooks/pre-commit"
+      FileUtils.chmod '+x', "settings_#{options[:config_dir]}/.git/hooks/pre-commit"
     end
 
     def execute_git_sync(config_dir, disable_push)
