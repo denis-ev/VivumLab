@@ -44,9 +44,8 @@ class Terraform < Thor
       end
     end
     # rubocop:enable Layout/LineLength
-    invoke 'dev:set', [], config_key: "vlab_ip", value: terraform_ip
     say I18n.t('terraform.create.out.created', ip: terraform_ip).green
-    say I18n.t('terraform.create.out.setip').light_blue
+    say I18n.t('terraform.create.out.setip', ip: terraform_ip, config_dir: options[:config_dir]).light_blue
   end
 
   desc I18n.t('terraform.destroy.usage'), I18n.t('terraform.destroy.desc')
@@ -64,7 +63,7 @@ class Terraform < Thor
     FileUtils.rm("settings/#{options[:config_dir]}/.terraform.lock.hcl") unless !File.exist? "settings/#{options[:config_dir]}/.terraform.lock.hcl"
     FileUtils.rm("settings/#{options[:config_dir]}/terraform.tfstate") unless !File.exist? "settings/#{options[:config_dir]}/terraform.tfstate"
     FileUtils.rm("settings/#{options[:config_dir]}/terraform.tfstate.backup") unless !File.exist? "settings/#{options[:config_dir]}/terraform.tfstate.backup"
-    FileUtils.remove_dir("settings/#{options[:config_dir]}/.terraform") unless !Dir.exist? "settings/#{options[:config_dir]}/.terraform"
+    #FileUtils.remove_dir("settings/#{options[:config_dir]}/.terraform") unless !Dir.exist? "settings/#{options[:config_dir]}/.terraform"
     say I18n.t('terraform.destroy.out.destroyed').green
   end
 end
