@@ -27,6 +27,7 @@ package_template/tmp*.yml
 decrypted.yml
 VlabDebug*.txt
 vendor/
+/*.tf*
 
 # Commit specific
 INSTALL_PRECOMMIT.sh
