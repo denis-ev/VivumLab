@@ -39,7 +39,6 @@ class Terraform < Thor
     terraform_ip = ""
     Open3.popen2e(terraform_get_ip) do |stdin, stdout_and_stderr, wait_thr|
       while line = stdout_and_stderr.gets
-        puts line
         terraform_ip = line
       end
     end
