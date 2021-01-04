@@ -317,6 +317,9 @@ en:
       desc: "Creates and copies your ssh key over to the server"
 
   terraform:
+    bastion:
+      usage: "bastion"
+      desc: "Spins up a cloud server and sets it as your bastion server"
     create:
       usage: "create"
       desc: "Spins up a cloud server with Terraform'"

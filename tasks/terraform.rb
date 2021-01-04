@@ -6,13 +6,21 @@ class Terraform < Thor
   include Utils
   require 'json'
 
+  desc I18n.t('terraform.bastion.usage'), I18n.t('terraform.bastion.desc')
+  def bastion
+    exit 1 unless prerequisites_met?
+    terraform_ansible_setup(options)
+    @terraform_ip = terraform_shell_commands(options)
+    invoke 'config:set', [], config_key: 'bastion.server_address', value: @terraform_ip
+  end
+
   desc I18n.t('terraform.create.usage'), I18n.t('terraform.create.desc')
   def create
     exit 1 unless prerequisites_met?
     terraform_ansible_setup(options)
-    terraform_ip = terraform_shell_commands(options)
-    say I18n.t('terraform.create.out.created', ip: terraform_ip).green
-    say I18n.t('terraform.create.out.setip', ip: terraform_ip, config_dir: options[:config_dir]).light_blue
+    @terraform_ip = terraform_shell_commands(options)
+    say I18n.t('terraform.create.out.created', ip: @terraform_ip).green
+    say I18n.t('terraform.create.out.setip', ip: @terraform_ip, config_dir: options[:config_dir]).light_blue
   end
 
   desc I18n.t('terraform.destroy.usage'), I18n.t('terraform.destroy.desc')
