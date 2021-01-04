@@ -9,9 +9,9 @@ class Git < Thor
   desc I18n.t('git.sync.usage'), I18n.t('git.sync.desc')
   option :disable_push, required: false, type: :boolean, desc: I18n.t('options.disablegitsync'), default: false
   def sync
-    # @todo Check git:sync
-    # @body 'reject_if_dir_not_present unless dir_exists' not working
-    reject_if_dir_not_present unless Dir.exist? "settings/#{options[:config_dir]}/.git"
+    if !Dir.exist? "settings/#{options[:config_dir]}/.git"
+      execute_in_shell('git init', "settings/#{options[:config_dir]}")
+    end
 
     say I18n.t('git.sync.out.settingssyncing').yellow
     execute_git_sync options[:config_dir], options[:disable_push]
@@ -26,16 +26,11 @@ class Git < Thor
   end
 
   no_commands do
-    def reject_if_dir_not_present
-      dir_exists = Dir.exist? "settings/#{options[:config_dir]}/.git"
-      say I18n.t('git.sync.out.notsetup').red unless dir_exists
-      exit 1 unless dir_exists
-    end
 
     def execute_git_sync(config_dir, disable_push)
       execute_in_shell("git config --global user.email \"#{decrypted_config_file['admin_email']}\"")
       execute_in_shell("git config --global user.usage \"#{decrypted_config_file['default_username']}\"")
-      (execute_in_shell('git pull', "settings/#{config_dir}") unless disable_push) rescue say 'Failed to pull, continuing.'.red
+      (execute_in_shell('git pull', "settings/#{config_dir}") unless disable_push) rescue say 'Failed to pull, continuing.'.yellow
       execute_in_shell('git add .', "settings/#{config_dir}")
       execute_in_shell('git commit -a -m "updating settings"', "settings/#{config_dir}", true)
       execute_in_shell('git push', "settings/#{config_dir}") unless disable_push
