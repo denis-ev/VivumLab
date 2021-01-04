@@ -108,8 +108,10 @@ class Config < Thor
     def draw_error_table(config_key, good_config_key)
       say I18n.t('config.draw_error_table.out.keynomatch', config_key: config_key).red
       say I18n.t('config.draw_error_table.out.possiblekey').yellow
-      table = TTY::Table.new(header: ["#{good_config_key}.<<option>>", 'value'],
-                             rows: decrypted_config_file[good_config_key])
+      sanitized_array = decrypted_config_file[good_config_key].reject do |key,value|
+        value.instance_of? ConfigFileUtils::ConfigFile
+      end
+      table = TTY::Table.new(rows: sanitized_array.to_a)
       say table.render(:unicode)
     end
 
