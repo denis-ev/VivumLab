@@ -370,7 +370,7 @@ es:
       classes:
         usage: "service %{service} %{meth}"
         desc: "Invokes #{meth} on #{service}"
-        
+
   conffile_utils:
     encryptedyml:
       out:
