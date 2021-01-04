@@ -15,7 +15,7 @@ module VlabConstants
   end
 
   def pre_commit_version
-    @pre_commit_version ||= `pre-commit --version`.chomp.split(' ').last if $CHILD_STATUS.success?
+    @pre_commit_version ||= `$(which pre-commit) --version`.chomp.split(' ').last if $CHILD_STATUS.success?
   end
 
   def python_version
