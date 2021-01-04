@@ -25,6 +25,7 @@ class Vlab < Thor
   class_option :config_dir, type: :string, desc: I18n.t('options.configdir'), default: 'settings'
   class_option :debug, desc: I18n.t('options.ansibledebug'), enum: %w[none warn debug trace], default: :none, aliases: ['-d']
   class_option :dev, type: :boolean, desc: I18n.t('options.enabledevtasks'), default: false
+  class_option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   class_option :version, :type => :boolean, desc: I18n.t('options.vlabversion')
 
 # Next line loads all ruby files in tasks/**/*.rb
