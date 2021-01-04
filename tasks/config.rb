@@ -27,6 +27,8 @@ class Config < Thor
     else
       FileUtils.mkdir_p "#{options[:config_dir]}/passwords" unless Dir.exist? "#{options[:config_dir]}/passwords"
       run_config_playbook(options)
+      encrypt_temporary_decrypted_config "decrypted.yml"
+      say I18n.t('config.encrypt.out.encrypted').green
     end
   end
 
