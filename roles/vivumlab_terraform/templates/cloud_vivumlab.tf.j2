@@ -6,7 +6,7 @@ resource "digitalocean_ssh_key" "default" {
 resource "digitalocean_droplet" "web" {
   image = "ubuntu-18-04-x64"
   name = "vivumlab"
-  region = "{{ do_region | default('nyc1') }}"
+  region = "{{ do_region | default('fra1') }}"
   size = "s-1vcpu-1gb"
   ssh_keys = ["${digitalocean_ssh_key.default.fingerprint}"]
 }
