@@ -138,7 +138,9 @@ DEPENDENCIES
   hashie
   httparty
   i18n
+  mini_portile2 (~> 2.4.0)
   ncumbra
+  nokogiri (~> 1.10.10)
   pry
   rake
   regexp_parser (= 2.0.1)
