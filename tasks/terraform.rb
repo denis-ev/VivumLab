@@ -11,6 +11,10 @@ class Terraform < Thor
     invoke 'git:sync'
     invoke 'config:new'
     say I18n.t('terraform.create.out.creating').yellow
+    if decrypted_config_file['do_access_token'] == false
+      say "No valid DO access token found.  Please run 'vlab dev set --dev --config-key do_access_token --value <token>' before attempting terraform.".red
+      exit 1
+    end
     run_playbook('playbook.terraform.yml', options)
     FileUtils.mv "provider.tf", "settings/#{options[:config_dir]}/provider.tf"
     FileUtils.mv "cloud_vivumlab.tf", "settings/#{options[:config_dir]}/cloud_vivumlab.tf"
