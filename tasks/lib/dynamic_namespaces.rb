@@ -27,7 +27,7 @@ module DynamicNamespaces
           rejected_properties = %w[amd64 arm64 armv7]
           services = service_config.reject { |s| rejected_properties.include? s }
           services.each_key do |key|
-            desc I18n.t('dynamic_namespaces.service.config.usage'), I18n.t('dynamic_namespaces.service.config.desc'), "service: #{service}, key: #{key}"
+            desc I18n.t('dynamic_namespaces.service.config.usage', service: service, key: key), I18n.t('dynamic_namespaces.service.config.desc', service: service, key: key)
             option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'), alias: ['-v']
             define_method(key.to_s) do
               invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
@@ -40,7 +40,7 @@ module DynamicNamespaces
           require_relative '../service' unless defined? Service
           rejected = %w[limit_to_service run_common list dynamic help]
           ::Service.new.public_methods(false).reject { |klass_name| rejected.include? klass_name.to_s }.each do |meth|
-            desc I18n.t('dynamic_namespaces.service.classes.usage'), I18n.t('dynamic_namespaces.service.classes.desc'), "service: #{service}, meth: #{meth}"
+            desc I18n.t('dynamic_namespaces.service.classes.usage', service: service, meth: meth), I18n.t('dynamic_namespaces.service.classes.desc', service: service, meth: meth)
             define_method(meth.to_s) do
               invoke "service:#{meth}", [], service: service
             end

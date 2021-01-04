@@ -201,10 +201,10 @@ es:
       out:
         lowprecommit: |+
           "Pre-commit is not installed or an earlier version than required."
-          "Contributing to VivumLab requires Pre-Commit version %{req_precommit_ver} or above."
+          "Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above."
 
           "Run `vlab dev setup` when you're ready.."
-        lowpython: "Python version %{req_python_ver} is required for VivumLab to work"
+        lowpython: "Python version %{precom_ver} is required for VivumLab to work"
         noprecommit: |+
           "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
           "Run vlab dev_setup, when you're ready"
@@ -369,7 +369,7 @@ es:
           banner: "this is the value that will be set"
       classes:
         usage: "service %{service} %{meth}"
-        desc: "Invokes #{meth} on #{service}"
+        desc: "Invokes %{meth} on %{service}"
 
   conffile_utils:
     encryptedyml:

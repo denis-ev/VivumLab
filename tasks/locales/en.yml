@@ -369,7 +369,7 @@ en:
           banner: "this is the value that will be set"
       classes:
         usage: "service %{service} %{meth}"
-        desc: "Invokes #{meth} on #{service}"
+        desc: "Invokes %{meth} on %{service}"
 
   conffile_utils:
     encryptedyml:
