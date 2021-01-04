@@ -11,10 +11,10 @@ class Bastion < Thor
     # Do not I18n this string. It is not user facing
     # Do not alter the indentation, or spacing either.
     append_bastion_if_needed
-    invoke 'dev:set', [], { config_key: 'bastion.enable', value: true }
+    invoke 'config:set', [], { config_key: 'bastion.enable', value: true }
     server_address = ask(I18n.t('bastion.in.serveraddress'))
     unless server_address.nil?
-      manual_invoke 'dev:set', { config_key: 'bastion.server_address',
+      manual_invoke 'config:set', { config_key: 'bastion.server_address',
                                  value: server_address,
                                  config_dir: options[:config_dir] }
     end
@@ -30,7 +30,7 @@ class Bastion < Thor
         f.write line
       end
     end
-    invoke 'dev:set', [], { config_key: 'bastion.enable', value: false }
+    invoke 'config:set', [], { config_key: 'bastion.enable', value: false }
     say I18n.t('bastion.disable.out.success').green
   end
 

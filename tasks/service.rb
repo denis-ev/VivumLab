@@ -23,7 +23,7 @@ class Service < Thor
     options[:service].split(',').each do |service|
       say I18n.t('service.remove.out.removing', service: service).yellow
       run_playbook('playbook.remove.yml', options, limit_to_service(service))
-      invoke 'dev:set', [], config_key: "#{service}.enable", value: false
+      invoke 'config:set', [], config_key: "#{service}.enable", value: false
       say I18n.t('service.remove.out.removed', service: service).green
     end
   end

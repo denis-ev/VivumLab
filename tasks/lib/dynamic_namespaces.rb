@@ -30,7 +30,7 @@ module DynamicNamespaces
             desc I18n.t('dynamic_namespaces.service.config.usage', service: service, key: key), I18n.t('dynamic_namespaces.service.config.desc', service: service, key: key)
             option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'), alias: ['-v']
             define_method(key.to_s) do
-              invoke 'dev:set', [], config_key: "#{service}.#{key}", value: options[:value]
+              invoke 'config:set', [], config_key: "#{service}.#{key}", value: options[:value]
             end
           end
 

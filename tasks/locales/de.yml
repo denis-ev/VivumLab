@@ -326,9 +326,8 @@ de:
         setip: |+
           Place this IP where you want it in your settings..
           either run
-          'vlab config set --dev --config-key vlab_ip --value %{ip}' or
-          'vlab config set --dev --config-key bastion.server_address --value %{ip}'
-
+          vlab config set --dev --config-dir %{config_dir} --config-key vlab_ip --value %{ip}or
+          vlab config set --dev --config-dir %{config_dir} --config-key bastion.server_address --value %{ip}
           Then run 'vlab deploy' to complete the setup.
     destroy:
       usage: "destroy"
