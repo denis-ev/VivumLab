@@ -159,7 +159,7 @@ class Service < Thor
 
     def run_common
       invoke 'git:sync', [], options
-      invoke 'config:new', [], { config_dir: options[:config_dir] }
+      invoke 'config:new', [], options
     end
   end
   # rubocop:enable Metrics/BlockLength
