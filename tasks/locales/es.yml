@@ -36,7 +36,7 @@ es:
       usage: "edit_raw"
       desc: "Decrypts, and opens the config file in nano. Encrypts on save"
       out:
-        editfile: "Decrypting and editing the config file at %{config_dir]}/encrypted.yml"
+        editfile: "Decrypting and editing the config file at %{config_dir}/encrypted.yml"
         editerror: "Something went wrong executing the decryption and or editing the file"
         fileremove: "For security reasons, the temporary decrypted config file has been deleted."
     decrypt:
