@@ -16,12 +16,7 @@ class Ssh < Thor
 
   desc I18n.t('ssh.create_sshkey.usage'), I18n.t('ssh.create_sshkey.desc')
   def create_sshkey
-    if ssh_key_exists?
-      say I18n.t('ssh.create_sshkey.out.keyexists',
-                 home_dir: Dir.home,
-                 passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
-      return
-    end
+    return if ssh_key_exists?
 
     say I18n.t('ssh.create_sshkey.out.keycreating',
                passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
@@ -32,15 +27,17 @@ class Ssh < Thor
   end
 
   desc I18n.t('ssh.copy_sshkey.usage'), I18n.t('ssh.copy_sshkey.desc')
+  # rubocop:disable Metrics/AbcSize
   def copy_sshkey
-    say I18n.t('ssh.copy_sshkey.out.keycopying', vlab_ip: decrypted_config_file.vlab_ip).yellow
-    to_run = <<-EXECUTE
-    ssh-copy-id -p #{decrypted_config_file.vlab_port} -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}.pub \
-    #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip}
+    say I18n.t('ssh.copy_sshkey.out.keycopying', vlab_ip: decrypted_config_file.vlab_ip).light_blue
+    to_run = <<~EXECUTE
+      ssh-copy-id -p #{decrypted_config_file.vlab_port} -i #{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}.pub \
+      #{decrypted_config_file.vlab_ssh_user}@#{decrypted_config_file.vlab_ip}
     EXECUTE
     execute_in_shell(to_run)
     say I18n.t('ssh.copy_sshkey.out.keycopied').green
   end
+  # rubocop:enable Metrics/AbcSize
 
   desc I18n.t('ssh.setup.usage'), I18n.t('ssh.setup.desc')
   def setup

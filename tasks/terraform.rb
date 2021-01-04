@@ -12,36 +12,41 @@ class Terraform < Thor
     invoke 'config:new'
     say I18n.t('terraform.create.out.creating').yellow
     if decrypted_config_file['do_access_token'] == false
-      say "No valid DO access token found.  Please run 'vlab dev set --dev --config-key do_access_token --value <token>' before attempting terraform.".red
+      say 'No valid DO access token found.'
+      say "Please run 'vlab dev set --dev --config-key do_access_token --value <token>'"
+      say 'before attempting terraform.'.red
       exit 1
     end
     run_playbook('playbook.terraform.yml', options)
-    FileUtils.mv "provider.tf", "settings/#{options[:config_dir]}/provider.tf"
-    FileUtils.mv "cloud_vivumlab.tf", "settings/#{options[:config_dir]}/cloud_vivumlab.tf"
-    FileUtils.mv "terraform.tfvars", "settings/#{options[:config_dir]}/terraform.tfvars"
+    FileUtils.mv 'provider.tf', "settings/#{options[:config_dir]}/provider.tf"
+    FileUtils.mv 'cloud_vivumlab.tf', "settings/#{options[:config_dir]}/cloud_vivumlab.tf"
+    FileUtils.mv 'terraform.tfvars', "settings/#{options[:config_dir]}/terraform.tfvars"
     # @todo terraform create check functions
     # @body 'vlab terraform create' works, but code needs to be verified
-    terraform_init = "/bin/bash -c 'exit 0'"
-    terraform_init = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform init'" unless Dir.exist? "settings/#{options[:config_dir]}/.terraform"
-    Open3.popen2e(terraform_init) do |stdin, stdout_and_stderr, wait_thr|
-      while line = stdout_and_stderr.gets
-        puts line
-      end
-    end
-    terraform_apply = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform apply -auto-approve'"
-    Open3.popen2e(terraform_apply) do |stdin, stdout_and_stderr, wait_thr|
-      while line = stdout_and_stderr.gets
-        puts line
-      end
-    end
+    # terraform_init = "/bin/bash -c 'exit 0'"
+    # terraform_init = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform init'" unless Dir.exist? "settings/#{options[:config_dir]}/.terraform"
+    execute_in_shell('terraform init', "settings/#{options[:config_dir]}")
+    # Open3.popen2e(terraform_init) do |stdin, stdout_and_stderr, wait_thr|
+    #   while line = stdout_and_stderr.gets
+    #     puts line
+    #   end
+    # end
+    # terraform_apply = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform apply -auto-approve'"
+    execute_in_shell('terraform apply -auto-approve', "settings/#{options[:config_dir]}")
+    # Open3.popen2e(terraform_apply) do |stdin, stdout_and_stderr, wait_thr|
+    #   while line = stdout_and_stderr.gets
+    #     puts line
+    #   end
+    # end
     # rubocop:disable Layout/LineLength
-    terraform_get_ip = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address'"
-    terraform_ip = ""
-    Open3.popen2e(terraform_get_ip) do |stdin, stdout_and_stderr, wait_thr|
-      while line = stdout_and_stderr.gets
-        terraform_ip = line
-      end
-    end
+    # terraform_get_ip = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform show -json | jq -r .values.root_module.resources[0].values.ipv4_address'"
+    # terraform_ip = ""
+    # Open3.popen2e(terraform_get_ip) do |stdin, stdout_and_stderr, wait_thr|
+    #   while line = stdout_and_stderr.gets
+    #     terraform_ip = line
+    #   end
+    # end
+    execute_in_shell('terraform show -json | jq -r .valuse.root_module.resources[0].values.ipv4_address', "settings/#{options[:config_dir]}")
     # rubocop:enable Layout/LineLength
     say I18n.t('terraform.create.out.created', ip: terraform_ip).green
     say I18n.t('terraform.create.out.setip', ip: terraform_ip, config_dir: options[:config_dir]).light_blue
@@ -50,19 +55,18 @@ class Terraform < Thor
   desc I18n.t('terraform.destroy.usage'), I18n.t('terraform.destroy.desc')
   def destroy
     say I18n.t('terraform.destroy.out.destroying').yellow
-    terraform_destroy = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform destroy -auto-approve'"
-    Open3.popen2e(terraform_destroy) do |stdin, stdout_and_stderr, wait_thr|
-      while line = stdout_and_stderr.gets
-        puts line
-      end
+    # terraform_destroy = "/bin/bash -c 'cd settings/#{options[:config_dir]} && terraform destroy -auto-approve'"
+    # Open3.popen2e(terraform_destroy) do |stdin, stdout_and_stderr, wait_thr|
+    #   while line = stdout_and_stderr.gets
+    #     puts line
+    #   end
+    # end
+    execute_in_shell('terraform destroy -auto-approve', "settings/#{options[:config_dir]}")
+    files = %w[provider.tf cloud_vivumlab.tf terrraform.tfvars terraform.lock.hcl
+               terraform.tfstate terraform.tfstate.backup]
+    files.each do |file|
+      FileUtils.rm("settings/#{options[:config_dir]}/#{file}") if File.exist? "settings/#{options[:config_dir]}/#{file}"
     end
-    FileUtils.rm("settings/#{options[:config_dir]}/provider.tf") unless !File.exist? "settings/#{options[:config_dir]}/provider.tf"
-    FileUtils.rm("settings/#{options[:config_dir]}/cloud_vivumlab.tf") unless !File.exist? "settings/#{options[:config_dir]}/cloud_vivumlab.tf"
-    FileUtils.rm("settings/#{options[:config_dir]}/terraform.tfvars") unless !File.exist? "settings/#{options[:config_dir]}/terraform.tfvars"
-    FileUtils.rm("settings/#{options[:config_dir]}/.terraform.lock.hcl") unless !File.exist? "settings/#{options[:config_dir]}/.terraform.lock.hcl"
-    FileUtils.rm("settings/#{options[:config_dir]}/terraform.tfstate") unless !File.exist? "settings/#{options[:config_dir]}/terraform.tfstate"
-    FileUtils.rm("settings/#{options[:config_dir]}/terraform.tfstate.backup") unless !File.exist? "settings/#{options[:config_dir]}/terraform.tfstate.backup"
-    #FileUtils.remove_dir("settings/#{options[:config_dir]}/.terraform") unless !Dir.exist? "settings/#{options[:config_dir]}/.terraform"
     say I18n.t('terraform.destroy.out.destroyed').green
   end
 end

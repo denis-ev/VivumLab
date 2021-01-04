@@ -24,5 +24,11 @@ module VlabConstants
 
   def ssh_key_exists?
     @ssh_key_exists ||= File.exist?("#{Dir.home}/.ssh/#{decrypted_config_file.passwordless_sshkey}")
+    if @ssh_key_exists
+      say I18n.t('ssh.create_sshkey.out.keyexists',
+                 home_dir: Dir.home,
+                 passwordless_sshkey: decrypted_config_file.passwordless_sshkey).yellow
+    end
+    @ssh_key_exists
   end
 end
