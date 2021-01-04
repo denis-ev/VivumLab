@@ -53,7 +53,7 @@ module ConfigFileUtils
     config_dir = options[:config_dir].nil? ? 'settings' : options[:config_dir] rescue 'settings'
     # rubocop:enable Style/RescueModifier
     exists = File.exist? "#{config_dir}/encrypted.yml"
-    puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: options[:config_dir]).red unless exists
+    puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: config_dir).red unless exists
     exists
   end
 
