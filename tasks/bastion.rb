@@ -16,7 +16,7 @@ class Bastion < Thor
     unless server_address.nil?
       manual_invoke 'dev:set', { config_key: 'bastion.server_address',
                                  value: server_address,
-                                 config_dir: "settings_#{options[:config_dir]}" }
+                                 config_dir: options[:config_dir] }
     end
     say I18n.t('bastion.enable.out.done').green
   end

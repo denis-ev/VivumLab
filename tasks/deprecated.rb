@@ -10,7 +10,7 @@ class Deprecated < Thor
   def vault_encrypt
     say I18n.t('deprecated.vault_encrypt.out.encrypting').yellow
     begin
-      execute_in_shell("ansible-vault encrypt settings_#{options[:config_dir]}/vault.yml")
+      execute_in_shell("ansible-vault encrypt settings/#{options[:config_dir]}/vault.yml")
       say I18n.t('deprecated.vault_encrypt.out.encrypted').green
     rescue Subprocess::NonZeroExit
       say I18n.t('deprecated.vault_encrypt.out.failencrypt').light_blue
@@ -21,7 +21,7 @@ class Deprecated < Thor
   def vault_decrypt
     say I18n.t('deprecated.vault_decrypt.out.decrypting').yellow
     begin
-      execute_in_shell("ansible-vault decrypt settings_#{options[:config_dir]}/vault.yml")
+      execute_in_shell("ansible-vault decrypt settings/#{options[:config_dir]}/vault.yml")
       say I18n.t('deprecated.vault_decrypt.out.decrypted').green
     rescue Subprocess::NonZeroExit
       say I18n.t('deprecated.vault_decrypt.out.faildecrypt').light_blue

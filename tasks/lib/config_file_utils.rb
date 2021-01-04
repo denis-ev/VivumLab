@@ -32,27 +32,27 @@ module ConfigFileUtils
   # by last_good_key() (in utils.rb) to 'burn down' through the user provided
   # key and determine the most-specific key that matches.
   def vault_file
-    @vault_file ||= ConfigFile.new(YAML.load_file("settings_#{options[:config_dir]}/vault.yml"))
+    @vault_file ||= ConfigFile.new(YAML.load_file("settings/#{options[:config_dir]}/vault.yml"))
   end
 
   def decrypted_config_file
     return @decrypted_config_file unless @decrypted_config_file.nil?
 
     # rubocop:disable Style/RescueModifier
-    config_dir = "settings_#{options[:config_dir]}".nil? ? 'settings' : "settings_#{options[:config_dir]}" rescue 'settings'
+    config_dir = options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
     # rubocop:enable Style/RescueModifier
     return unless encrypted_yml_exist?
 
     pass = File.read('/vlab_vault_pass')
-    temp = YamlVault::Main.from_file("#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
+    temp = YamlVault::Main.from_file("settings/#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
     @decrypted_config_file ||= ConfigFile.new(temp)
   end
 
   def encrypted_yml_exist?
     # rubocop:disable Style/RescueModifier
-    config_dir = "settings_#{options[:config_dir]}".nil? ? 'settings' : "settings_#{options[:config_dir]}" rescue 'settings'
+    config_dir = options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
     # rubocop:enable Style/RescueModifier
-    exists = File.exist? "#{config_dir}/encrypted.yml"
+    exists = File.exist? "settings/#{config_dir}/encrypted.yml"
     puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: config_dir).red unless exists
     exists
   end
@@ -70,17 +70,17 @@ module ConfigFileUtils
   end
 
   def persist_current_config(to_encrypt)
-    File.open("settings_#{options[:config_dir]}/encrypted.yml", 'w') do |file|
+    File.open("settings/#{options[:config_dir]}/encrypted.yml", 'w') do |file|
       file.write(to_encrypt.encrypt_yaml)
     end
-    say "settings_#{options[:config_dir]}/encrypted.yml saved".green
+    say "settings/#{options[:config_dir]}/encrypted.yml saved".green
   end
 
   # this writes a temporarially decrypted version of the config file to disk.
   # run playbook executes this just before invoking ansible, and no matter the
   # outcome of the playbook, it deletes this version.
   def write_temporary_decrypted_config
-    @temp_config ||= "settings_#{options[:config_dir]}/.#{SecureRandom.urlsafe_base64}.yml"
+    @temp_config ||= "settings/#{options[:config_dir]}/.#{SecureRandom.urlsafe_base64}.yml"
     File.open(@temp_config, 'w') do |file|
       file.write(ansible_yml)
     end

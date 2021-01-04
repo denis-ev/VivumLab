@@ -20,7 +20,7 @@ es:
       usage: "new"
       desc: "Creates or Updates the config file, as necessary"
       out:
-        creating: "Creating, or updating Config file %{config_dir}/config.yml"
+        creating: "Creating, or updating Config file settings/%{config_dir}/config.yml"
     show:
       usage: "show"
       desc: "Shows the configuration settings for a specified service"
@@ -30,13 +30,13 @@ es:
       usage: "reset"
       desc: "Resets VivumLab config"
       out:
-        resetting: "Resetting config file at %{config_dir}/config.yml"
+        resetting: "Resetting config file at settings/%{config_dir}/config.yml"
         backup: "Backing up your existing config"
     edit_raw:
       usage: "edit_raw"
       desc: "Decrypts, and opens the config file in nano. Encrypts on save"
       out:
-        editfile: "Decrypting and editing the config file at %{config_dir}/encrypted.yml"
+        editfile: "Decrypting and editing the config file at settings/%{config_dir}/encrypted.yml"
         editerror: "Something went wrong executing the decryption and or editing the file"
         fileremove: "For security reasons, the temporary decrypted config file has been deleted."
     decrypt:
@@ -375,7 +375,7 @@ es:
     encryptedyml:
       out:
         noexist: |+
-          "Unable to find %{config_dir}/encrypted.yml. Please run 'vlab config new --dev'"
+          "Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'"
           "For further information, please run 'vlab config'
     saveconf:
       out:

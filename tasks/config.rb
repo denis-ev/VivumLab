@@ -10,9 +10,9 @@ class Config < Thor
 
   desc I18n.t('config.new.usage'), I18n.t('config.new.desc')
   def new
-    say I18n.t('config.new.out.creating', config_dir: "settings_#{options[:config_dir]}").light_blue
+    say I18n.t('config.new.out.creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
-    if File.exist? "settings_#{options[:config_dir]}/encrypted.yml"
+    if File.exist? "settings/#{options[:config_dir]}/encrypted.yml"
       write_temporary_decrypted_config
       FileUtils.mv @temp_config, "decrypted.yml"
       say I18n.t('config.decrypt.out.decrypted').green
@@ -20,7 +20,7 @@ class Config < Thor
       encrypt_temporary_decrypted_config "decrypted.yml"
       say I18n.t('config.encrypt.out.encrypted').green
     else
-      FileUtils.mkdir_p "settings_#{options[:config_dir]}/passwords" unless Dir.exist? "settings_#{options[:config_dir]}/passwords"
+      FileUtils.mkdir_p "settings/#{options[:config_dir]}/passwords" unless Dir.exist? "settings/#{options[:config_dir]}/passwords"
       run_config_playbook(options)
       encrypt_temporary_decrypted_config "decrypted.yml"
       say I18n.t('config.encrypt.out.encrypted').green
@@ -42,15 +42,15 @@ class Config < Thor
 
   desc I18n.t('config.reset.usage'), I18n.t('config.reset.desc')
   def reset
-    say I18n.t('config.reset.out.resetting', config_dir: "settings_#{options[:config_dir]}").light_blue
+    say I18n.t('config.reset.out.resetting', config_dir: options[:config_dir]).light_blue
     say I18n.t('config.reset.out.backup').light_blue
-    FileUtils.mv("settings_#{options[:config_dir]}/", 'settings-backup')
+    FileUtils.mv("settings/#{options[:config_dir]}/", "settings/backup-#{options[:config_dir]}")
     invoke 'config:new'
   end
 
   desc I18n.t('config.edit_raw.usage'), I18n.t('config.edit_raw.desc')
   def edit_raw
-    say I18n.t('config.edit_raw.out.editfile', config_dir: "settings_#{options[:config_dir]}").light_blue
+    say I18n.t('config.edit_raw.out.editfile', config_dir: options[:config_dir]).light_blue
     begin
       decrypt_edit_encrypt
     rescue Subprocess::NonZeroExit
@@ -65,14 +65,14 @@ class Config < Thor
   option :outputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-o']
   def decrypt
     write_temporary_decrypted_config
-    FileUtils.mv @temp_config, "settings_#{options[:config_dir]}/#{options[:outputfile]}"
+    FileUtils.mv @temp_config, "settings/#{options[:config_dir]}/#{options[:outputfile]}"
     say I18n.t('config.decrypt.out.decrypted').green
   end
 
   desc I18n.t('config.encrypt.usage'), I18n.t('config.encrypt.desc')
   option :inputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-i']
   def encrypt
-    encrypt_temporary_decrypted_config "settings_#{options[:config_dir]}/#{options[:inputfile]}"
+    encrypt_temporary_decrypted_config "settings/#{options[:config_dir]}/#{options[:inputfile]}"
     say I18n.t('config.encrypt.out.encrypted').green
   end
 

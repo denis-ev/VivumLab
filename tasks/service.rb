@@ -158,6 +158,7 @@ class Service < Thor
     end
 
     def run_common
+      invoke 'migration:single_config'
       invoke 'git:sync', [], options
       invoke 'config:new', [], options
     end
