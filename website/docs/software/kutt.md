@@ -1,3 +1,17 @@
+---
+id: kutt
+title: Kutt
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: Kutt
+custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # Kutt
 
 [Kutt](https://kutt.it) Kutt your links shorter.
