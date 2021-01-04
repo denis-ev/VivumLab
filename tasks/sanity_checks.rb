@@ -8,6 +8,7 @@ class SanityChecks < Thor
   REQ_PRECOMMIT_VER = '2.6.0'
   include VlabI18n
   include VlabConstants
+  include Utils
 
   desc I18n.t('sanity_checks.check_ssh_keys.usage'), I18n.t('sanity_checks.check_ssh_keys.desc')
   # @TODO Write check_ssh_keys task (sanity_check.rb)
@@ -81,11 +82,12 @@ class SanityChecks < Thor
 
     def required_precommit_exists
       # @todo Fixing def required_precommit_exists
-      # @body pre_commit_version = execute_in_shell "$(which pre-commit) --version | grep /-Po '(?<=pre-commit )/\d./\d./\d'" does not work
-      #pre_commit_version = execute_in_shell "$(which pre-commit) --version | grep /-Po '(?<=pre-commit )/\d./\d./\d'"
-      if pre_commit_version <= REQ_PRECOMMIT_VER
-        say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red
-      end
+      # @body pre_commit_version = execute_in_shell "$(which pre-commit) --version | grep -Po '(?<=pre-commit )\d.\d.\d'" does not work
+      # cmd = "$(which pre-commit) --version | grep -Po '(?<=pre-commit )\d.\d.\d'"
+      # pre_commit_version = execute_in_shell(cmd, "settings/#{options[:config_dir]}")
+      return unless pre_commit_version <= REQ_PRECOMMIT_VER
+
+      say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red
     end
   end
 end
