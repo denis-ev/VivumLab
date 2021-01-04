@@ -132,6 +132,7 @@ class Service < Thor
   no_commands do
     def interactive_setup(service)
       say I18n.t('service.setup.out.editing', service: service)
+      service_config = decrypted_config_file[service]
       ignored = %w[amd64 arm64 armv7]
       service_config.each_key do |key|
         unless ignored.include? key
