@@ -41,13 +41,11 @@ class Terraform < Thor
     end
 
     def extract_ip_from_terraform_json(json)
-      Hashie::Mash.new(JSON.parse(json))
-                  .values
-                  .last
-                  .root_module.resources[0]
-                  .values.select { |y| y.instance_of? Hashie::Mash }
-                  .first
-                  .ipv4_address
+      data = ConfigFile.new(JSON.parse(json))['values']
+      data.root_module
+          .resources
+          .first['values']
+          .ipv4_address
     end
 
     def terraform_ansible_setup(options)
@@ -60,7 +58,8 @@ class Terraform < Thor
     def terraform_shell_commands(options)
       execute_in_shell('terraform init', "settings/#{options[:config_dir]}")
       execute_in_shell('terraform apply -auto-approve', "settings/#{options[:config_dir]}")
-      terraform_json = Subprocess.check_output(%w[terraform show -json], "settings/#{options[:config_dir]}")
+      shell_command = 'terraform show -json'.split(/\s(?=(?:[^"]|"[^"]*")*$)/)
+      terraform_json = Subprocess.check_output(shell_command, cwd: "settings/#{options[:config_dir]}")
       extract_ip_from_terraform_json(terraform_json)
     end
   end
