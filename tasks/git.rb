@@ -32,14 +32,7 @@ class Git < Thor
       exit 1 unless dir_exists
     end
 
-    def ensure_precommit
-      FileUtils.mkdir_p ".git/hooks"
-      FileUtils.cp 'git_sync_pre_commit', ".git/hooks/pre-commit"
-      FileUtils.chmod '+x', ".git/hooks/pre-commit"
-    end
-
     def execute_git_sync(config_dir, disable_push)
-      ensure_precommit
       execute_in_shell("git config --global user.email \"#{decrypted_config_file['admin_email']}\"")
       execute_in_shell("git config --global user.usage \"#{decrypted_config_file['default_username']}\"")
       (execute_in_shell('git pull', "settings/#{config_dir}") unless disable_push) rescue say 'Failed to pull, continuing.'.red
