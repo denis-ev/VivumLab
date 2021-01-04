@@ -4,7 +4,6 @@
 module ConfigFileUtils
   # Class extends hashie::mash to silence warnings
   include VlabI18n
-
   class ConfigFile < Hashie::Mash
     disable_warnings
   end
@@ -87,7 +86,7 @@ module ConfigFileUtils
   end
 
   def last_good_key(hsh, key)
-    return key if hsh.keys.include? key
+    return key if nested_key_exists?(hsh, key) # hsh.keys.include? key
 
     while true
       # rubocop:disable Style/RescueModifier
@@ -101,5 +100,18 @@ module ConfigFileUtils
       key = parts.take(parts.size - 1).join('.') # reset the key to be one section shorter. ie: sui.enabled -> sui
     end
     key # return the current, valid key.
+  end
+
+  def nested_key_exists?(obj, key)
+    return true if obj.respond_to?(:key?) && obj.key?(key)
+    return false unless obj.is_a? Enumerable
+
+    parts = key.split('.') # 'foo.bar' -> [foo,bar]
+    return false if parts.size == 1
+
+    nested_object = parts.first
+    parts.shift
+    new_key = parts.join('.')
+    nested_key_exists?(obj.instance_eval(nested_object), new_key) if obj.key?(nested_object)
   end
 end
