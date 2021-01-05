@@ -83,8 +83,8 @@ de:
       desc: "irreversably removes vlab"
       out:
         uninstall: |+
-          "Uninstalling VivumLab is irreversible, and should always be done with caution"
-          "Make sure to backup any files that you may want to keep before uninstalling"
+          Uninstalling VivumLab is irreversible, and should always be done with caution
+          Make sure to backup any files that you may want to keep before uninstalling
         uninstalled: "VivumLab has been uninstalled."
       in:
         uninstall: "Are you sure you want to uninstall VivumLab"
@@ -114,9 +114,9 @@ de:
         welcome: "Welcome to VivumLab Developer Setup"
         precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
         readythanks: |+
-          "Ok, all set! Thank you for being a part of the VivumLab Community"
-          "We hope that you will enjoy your time with us"
-          "And we look forward to achieving great things, together"
+          Ok, all set! Thank you for being a part of the VivumLab Community
+          We hope that you will enjoy your time with us
+          And we look forward to achieving great things, together
       in:
         contribute: "Do you want to contribute to VivumLab (Yes or no)?"
     set:
@@ -128,9 +128,9 @@ de:
     install_precommit:
       out:
         readdevdocs: |+
-          "First and foremost, please make sure you have read the developer docs"
-          "You can find the developers docs. here:"
-          "# TODO: add url to dev docs"
+          First and foremost, please make sure you have read the developer docs
+          You can find the developers docs. here:
+          # TODO: add url to dev doc
         precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
         pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
       in:
@@ -144,9 +144,9 @@ de:
         settingssyncing: "Syncing settings via Git"
         settingssynced: "Settings synced"
         notsetup: |+
-          "Warning! Your settings directory is not setup as a Git Repository"
-          "Make sure to back them up using some other method. For more information, see:"
-          "https://vivumlab.com/docs/core/installation#syncing-settings-via-git"
+          Warning! Your settings directory is not setup as a Git Repository
+          Make sure to back them up using some other method. For more information, see:
+          https://vivumlab.com/docs/core/installation#syncing-settings-via-git
     track:
       usage: "track"
       desc: "Allows you to switch between different branches or tags of Vivumlab"
@@ -183,11 +183,11 @@ de:
       desc: "Checks for the presence of a Vault Password file"
       out:
         vaultpassmissing: |+
-          "Oops, your vault password in %{home_dir}, doesn't appear to exist."
-          "This is unusual, but could be the result of the username changing after setup."
+          Oops, your vault password in %{home_dir}, doesn't appear to exist.
+          This is unusual, but could be the result of the username changing after setup.
         vaultpasscreate: |+
-          "A new `.vlab_vault_pass` file can be created for you;"
-          "or you can exit, and try to sort this out yourself."
+          A new `.vlab_vault_pass` file can be created for you;
+          or you can exit, and try to sort this out yourself.
       in:
         vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
     check_for_git:
@@ -200,14 +200,14 @@ de:
       desc: "Checks for the presence of Pre-commit"
       out:
         lowprecommit: |+
-          "Pre-commit is not installed or an earlier version than required."
-          "Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above."
+          Pre-commit is not installed or an earlier version than required.
+          Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above.
 
-          "Run `vlab dev setup` when you're ready.."
+          Run `vlab dev setup` when you're ready..
         lowpython: "Python version %{precom_ver} is required for VivumLab to work"
         noprecommit: |+
-          "Pre-commit is not installed. Contributing requires installing 'pre-commit'."
-          "Run vlab dev_setup, when you're ready"
+          Pre-commit is not installed. Contributing requires installing 'pre-commit'.
+          Run vlab dev_setup, when you're ready
     check_ssh_with_keys:
       out:
         sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
@@ -245,25 +245,25 @@ de:
       desc: "Stops all services, or any specified service(s) if you specify --service"
       out:
         stopping: |+
-          "Note: If no service(s) are specified, VivumLab will stop all enabled service(s)"
-          "Stopping service(s) now.."
+          Note: If no service(s) are specified, VivumLab will stop all enabled service(s)
+          Stopping service(s) now..
         stopped: "All specified services have been stopped"
     restart:
       usage: "restart -s, --service SERVICENAME"
       desc: "Restart all services, or any specified service(s) if you specify --service"
       out:
         restarting: |+
-          "Note: If no services(s) are specified, VivumLab will restart all enabled services"
-          "Restarting service(s) now.."
+          Note: If no services(s) are specified, VivumLab will restart all enabled services
+          Restarting service(s) now..
         restarted: "All specified service(s) have been restarted"
     update:
       usage: "update -s, --service SERVICE"
       desc: "Updates all services, or any selected service(s) if you specify --service"
       out:
         updating: |+
-          "Note: If no service(s) are specified, VivumLab will update all enabled services"
-          "Service specified: %{service}"
-          "Updating now.."
+          Note: If no service(s) are specified, VivumLab will update all enabled services
+          Service specified: %{service}
+          Updating now..
         updated: "All specified services have been updated"
     docs:
       usage: "docs"
@@ -273,9 +273,9 @@ de:
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
       out:
         customizing: |+
-          "This command creates a file, that will override the original docker-compose file for %{service}"
-          "Any changes that the user wishes to make, should be made to the override file, not the original."
-          "VivumLab will not change, nor delete the original file; the original file will just be ignored"
+          This command creates a file, that will override the original docker-compose file for %{service}
+          Any changes that the user wishes to make, should be made to the override file, not the original.
+          VivumLab will not change, nor delete the original file; the original file will just be ignored
         customized: "%{service} is ready to customize"
       in:
         customizing: "Did you want to make changes to the %{service} service?"
@@ -317,6 +317,9 @@ de:
       desc: "Creates and copies your ssh key over to the server"
 
   terraform:
+    bastion:
+      usage: "bastion"
+      desc: "Spins up a cloud server and sets it as your bastion server"
     create:
       usage: "create"
       desc: "Spins up a cloud server with Terraform'"
@@ -326,8 +329,9 @@ de:
         setip: |+
           Place this IP where you want it in your settings..
           either run
-          vlab config set --dev --config-dir %{config_dir} --config-key vlab_ip --value %{ip}or
-          vlab config set --dev --config-dir %{config_dir} --config-key bastion.server_address --value %{ip}
+          'vlab config set --dev --config-key vlab_ip --value %{ip}' or
+          'vlab config set --dev --config-key bastion.server_address --value %{ip}'
+
           Then run 'vlab deploy' to complete the setup.
     destroy:
       usage: "destroy"
@@ -341,15 +345,15 @@ de:
       out:
         playbookexecuted: "%{playbook_command} finished"
         playbookerror: |+
-          "Ansible Playbook command returned with an error code."
-          "Exception is: %{e}"
+          Ansible Playbook command returned with an error code.
+          Exception is: %{e}
     run_config_playbook:
       out:
         playbookexecuting: "executing playbook command: %{playbook_command}"
         playbookexecuted: "%{playbook_command} finished"
         playbookerror: |+
-          "Failed to run Ansible playbook: playbook.config.yml"
-          "Error is: %{e}"
+          Failed to run Ansible playbook: playbook.config.yml
+          Error is: %{e}
 
   vlab:
     find_help:
@@ -367,7 +371,7 @@ de:
         usage: "service %{service} %{key}"
         desc: "Sets the configuration value for %{service}.%{key}"
         options:
-          banner: "this is the value that will be set"
+          banner: "<VALUE>"
       classes:
         usage: "service %{service} %{meth}"
         desc: "Invokes %{meth} on %{service}"
@@ -376,8 +380,8 @@ de:
     encryptedyml:
       out:
         noexist: |+
-          "Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'"
-          "For further information, please run 'vlab config'
+          Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'
+          For further information, please run 'vlab config'
     saveconf:
       out:
         saving: "Saving config.yml"
