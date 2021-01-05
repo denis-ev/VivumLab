@@ -268,6 +268,10 @@ en:
     docs:
       usage: "docs"
       desc: "Show the docs for the specified service"
+    dynamic:
+      out:
+        invalidcommand: "Invalid Command: %{command} for %{dynamic_namespace}"
+        validoptions: "Valid commands for this namesapce are:"
     customize:
       usage: "customize"
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
@@ -374,7 +378,7 @@ en:
           banner: "<VALUE>"
       classes:
         usage: "service %{service} %{meth}"
-        desc: "%{meth}s %{service}. For more information, run 'vlab service %{service} docs'"
+        desc: "%{meth}s %{service}. For more information, run 'vlab service %{service}'"
 
   conffile_utils:
     encryptedyml:
