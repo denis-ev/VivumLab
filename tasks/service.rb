@@ -107,7 +107,7 @@ class Service < Thor
     invoke 'config:show', [], service: options[:service]
   end
 
-  # This 'task' is responsible for yeiling to dynamically created namespaces for the
+  # This 'task' is responsible for yeilding to dynamically created namespaces for the
   # given service. Unlike other tasks, this one has a parameter, not an option.
   # this means the usage is like this: `vlab service SERVICENAME COMMAND` where
   # servicename and command are inputs from the user.
@@ -119,8 +119,8 @@ class Service < Thor
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
     else
-      say "Invalid Command (#{command}) for namespace #{dynamic_namespace}".red
-      say 'Valid options are:'.light_blue
+      say I18n.t('service.dynamic.out.invalidcommand', command: command, dynamic_namespace: dynamic_namespace).red
+      say I18n.t('service.dynamic.out.validoptions').light_blue
       invoke dynamic_namespace.to_s, [], {}
     end
   end
