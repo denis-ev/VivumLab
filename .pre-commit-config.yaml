@@ -1,6 +1,14 @@
 ---
 
 repos:
+  - repo: local
+    hooks:
+      - id: check-not-translated
+        name: Check for missing I18n after puts or say
+        description: This hook checks for missing I18n after puts or say.
+        entry: scripts/check_not_translated.sh
+        language: script
+        files: \.rb$
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.4.0
     hooks:
@@ -25,13 +33,5 @@ repos:
       - id: commitizen
         stages:
           - commit-msg
-  - repo: local
-    hooks:
-      - id: check-not-translated
-        name: Check for missing I18n after puts or say
-        description: This hook checks for missing I18n after puts or say.
-        entry: scripts/check_not_translated.sh
-        language: script
-        files: \.rb$
 
 exclude: 'vivumlablogo.txt|vendor'
