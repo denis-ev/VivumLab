@@ -32,6 +32,6 @@ repos:
         description: This hook checks for missing I18n after puts or say.
         entry: scripts/check_not_translated.sh
         language: script
-        pass_filenames: false
+        files: \.rb$
 
 exclude: 'vivumlablogo.txt|vendor'
