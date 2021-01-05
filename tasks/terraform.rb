@@ -64,6 +64,8 @@ class Terraform < Thor
     end
 
     def terraform_shell_commands(options)
+      # @todo terraform_shell_commands() do not always run init
+      # @body init if .terraform dir !exists or force option
       execute_in_shell('terraform init', "settings/#{options[:config_dir]}")
       execute_in_shell('terraform apply -auto-approve', "settings/#{options[:config_dir]}")
       shell_command = 'terraform show -json'.split(/\s(?=(?:[^"]|"[^"]*")*$)/)
