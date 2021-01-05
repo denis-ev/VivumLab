@@ -16,7 +16,7 @@ class Service < Thor
     say table.render(:unicode)
   end
 
-  desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc')
+  desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc'), hide: true
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def remove
     run_common
@@ -28,7 +28,7 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.stop.usage'), I18n.t('service.stop.desc')
+  desc I18n.t('service.stop.usage'), I18n.t('service.stop.desc'), hide: true
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def stop
     run_common
@@ -39,7 +39,7 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.restart.usage'), I18n.t('service.restart.desc')
+  desc I18n.t('service.restart.usage'), I18n.t('service.restart.desc'), hide: true
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def restart
     run_common
@@ -50,7 +50,7 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.update.usage'), I18n.t('service.update.desc')
+  desc I18n.t('service.update.usage'), I18n.t('service.update.desc'), hide: true
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def update
     run_common
@@ -62,14 +62,14 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.docs.usage'), I18n.t('service.docs.desc')
+  desc I18n.t('service.docs.usage'), I18n.t('service.docs.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def docs
     say TTY::Markdown.parse_file("website/docs/software/#{options[:service]}.md")
   end
 
   # rubocop:disable Metrics/AbcSize
-  desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc')
+  desc I18n.t('service.reset.usage'), I18n.t('service.reset.desc'), hide: true
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def reset
     run_common
@@ -80,7 +80,7 @@ class Service < Thor
     end
   end
 
-  desc I18n.t('service.customize.usage'), I18n.t('service.customize.desc')
+  desc I18n.t('service.customize.usage'), I18n.t('service.customize.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def customize
     say I18n.t('service.customize.out.customizing', service: options[:service]).yellow
@@ -91,7 +91,7 @@ class Service < Thor
   end
   # rubocop:enable Metrics/AbcSize
 
-  desc I18n.t('service.show.usage'), I18n.t('service.show.desc')
+  desc I18n.t('service.show.usage'), I18n.t('service.show.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicerequired'), aliases: ['-s']
   def show
     invoke 'config:show', [], service: options[:service]
