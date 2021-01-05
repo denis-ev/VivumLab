@@ -149,7 +149,7 @@ class Service < Thor
 
     def guard_against_invalid_service_config?(service)
       service_config = decrypted_config_file[service]
-      say I18n.t('service.setup.out.searchfail', service: service).green if service_config.nil?
+      say I18n.t('service.setup.out.searchfail', service: service).red if service_config.nil?
       service_config.nil?
     end
 
