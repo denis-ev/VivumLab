@@ -343,6 +343,11 @@ en:
       out:
         destroying: "Destroying terraform built server"
         destroyed: "Cloud server(s) destroyed."
+    prereq:
+      out:
+        notoken: "No Valid DO Access tokens found in config"
+        pleaserun: "Please run `vlab config set --dev --config-key do_access_token --value <token>"
+        before: "before attempting `vlab terraform [create|bastion]"
 
   utils:
     run_playbook:

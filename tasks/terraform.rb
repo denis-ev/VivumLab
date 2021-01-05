@@ -41,9 +41,9 @@ class Terraform < Thor
       invoke 'config:new'
       say I18n.t('terraform.create.out.creating').yellow
       if decrypted_config_file['do_access_token'] == false
-        say 'No valid DO access token found.'
-        say "Please run 'vlab dev set --dev --config-key do_access_token --value <token>'"
-        say 'before attempting terraform.'.red
+        say I18n.t('terraform.prereq.out.notoken').red
+        say I18n.t('terraform.prereq.out.pleaserun').red
+        say I18n.t('terraform.prereq.out.before').red
       end
       decrypted_config_file['do_access_token']
     end
