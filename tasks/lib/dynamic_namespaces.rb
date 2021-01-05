@@ -40,7 +40,8 @@ module DynamicNamespaces
           require_relative '../service' unless defined? Service
           rejected = %w[limit_to_service run_common list dynamic help interactive_setup run_playbooks guard_against_invalid_service_config?]
           ::Service.new.public_methods(false).reject { |klass_name| rejected.include? klass_name.to_s }.each do |meth|
-            desc I18n.t('dynamic_namespaces.service.classes.usage', service: service, meth: meth), I18n.t('dynamic_namespaces.service.classes.desc', service: service, meth: meth)
+            hidden = true if meth == :docs
+            desc I18n.t('dynamic_namespaces.service.classes.usage', service: service, meth: meth), I18n.t('dynamic_namespaces.service.classes.desc', service: service, meth: meth), hide: hidden
             define_method(meth.to_s) do
               invoke "service:#{meth}", [], service: service
             end
