@@ -374,7 +374,7 @@ es:
           banner: "<VALUE>"
       classes:
         usage: "service %{service} %{meth}"
-        desc: "%{meth} %{service}. For more information, run 'vlab service %{service} docs'"
+        desc: "%{meth}s %{service}. For more information, run 'vlab service %{service} docs'"
 
   conffile_utils:
     encryptedyml:
