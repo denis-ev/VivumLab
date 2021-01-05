@@ -1,6 +1,0 @@
-{
-  "requiredStatusRegex": "^.*(question)$",
-  "successStatusRegex": "^.*(ready to merge)$",
-  "pendingStatusRegex": "^.*(WIP|ready for review)$",
-  "errorStatusRegex": "^.*(invalid|duplicate)$"
-}

@@ -3,20 +3,24 @@
   file:
     path: /etc/systemd/resolved.conf.d
     state: directory
+  become: yes
 
 - name: Copy vivumlab.conf systemd resolve configuration into place.
   template:
     src: vivumlab.conf
     dest: "/etc/systemd/resolved.conf.d/vivumlab.conf"
+  become: yes
 
 - name: Rename standard Resolv.conf file
   command: mv /etc/resolv.conf /etc/resolv.conf.bkup
+  become: yes
 
 - name: link the systemd resolve file into /etc
   file:
     src: /run/systemd/resolve/resolv.conf
     dest: /etc/resolv.conf
     state: link
+  become: yes
 
 - name: Reload & Restart systemd-resolved
   systemd:

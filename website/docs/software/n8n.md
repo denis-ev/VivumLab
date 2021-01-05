@@ -202,5 +202,5 @@ run: **`vlab update_one service=n8n`**
 
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

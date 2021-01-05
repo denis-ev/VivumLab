@@ -1,21 +1,21 @@
 ---
 - name: Verify existence of DO token
   fail:
-    msg: "No valid DO access token found.  Please run 'make set do_access_token <token>' before attempting terraform."
+    msg: "No valid DO access token found.  Please run 'vlab dev set --dev --config-key do_access_token --value <token>' before attempting terraform."
   when: not do_access_token
 
 - name: Generate Terraform file
   template:
     src: 'provider.tf.j2'
-    dest: '{{ playbook_dir }}/settings/provider.tf'
+    dest: '{{ playbook_dir }}/provider.tf'
 
 - name: Generate Terraform file
   template:
     src: 'cloud_vivumlab.tf.j2'
-    dest: '{{ playbook_dir }}/settings/cloud_vivumlab.tf'
+    dest: '{{ playbook_dir }}/cloud_vivumlab.tf'
 
 - name: Generate Terraform file
   template:
     src: 'terraform.tfvars.j2'
-    dest: '{{ playbook_dir }}/settings/terraform.tfvars'
+    dest: '{{ playbook_dir }}/terraform.tfvars'
 ...

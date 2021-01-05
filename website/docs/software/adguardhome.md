@@ -22,30 +22,36 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## Information
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** [adguard/adguardhome](https://registry.hub.docker.com/r/adguard/adguardhome) <br />
 **Current Image Version:** {{ adguardhome.version }}
 
 ## SETUP
 
-### Enabling adguardhome
+### Enabling and customizing adguardhome
 
 #### Command:
 
-**`vlab set adguardhome.enable True`**
+**`vlab service setup -s adguardhome`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 adguardhome
-  enable: True
+  enable: {{ adguardhome.version }}
+  https_only: {{ adguardhome.https_only }}
+  auth: {{ adguardhome.auth }}
+  domain: {{ adguardhome.domain }}
+  subdomain: {{ adguardhome.subdomain }}
+  version: {{ adguardhome.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=adguardhome`**
+run: **`vlab update -s adguardhome`**
 
 ## FIRST RUN
 
@@ -58,25 +64,6 @@ Navigate to *https://{{ adguardhome.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, adguardhome makes this account the administrator.
 
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=adguardhome`** to complete the changes
-
 ## ACCESS
 
 AdGuard Home (HTTPS) link: [https://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/](https://{% if adguardhome.domain %}{{ adguardhome.domain }}{% else %}{{ adguardhome.subdomain + "." + domain }}{% endif %}/)
@@ -86,119 +73,7 @@ AdGuard Home (HTTP) link: [http://{% if adguardhome.domain %}{{ adguardhome.doma
 Tor link: [http://{{ adguardhome.subdomain + "." + tor_domain }}/](http://{{ adguardhome.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set adguardhome.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-adguardhome
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=adguardhome`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set adguardhome.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-adguardhome
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=adguardhome`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set adguardhome.domain adguardhome.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-adguardhome
-  domain: adguardhome.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=adguardhome`**
-
-### SUBDOMAIN
-*Default: adguardhome*
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{ domain }}'*
-
-#### Command:
-
-**`vlab set adguardhome.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-adguardhome
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=adguardhome`**
-
-### VERSION
-*Default: {{ adguardhome.version }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set adguardhome.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-adguardhome
-  version: 2.7
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=adguardhome`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

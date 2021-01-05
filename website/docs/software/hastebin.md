@@ -16,9 +16,9 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 [Hastebin](https://hastebin.com/about.md) Sharing code is a good thing, and it should be _really_ easy to do it.
 
-![amd64](https://img.shields.io/badge/{% if not hastebin.amd64 %}untested{% else %}{{ hastebin.amd64 }}{% endif %}-amd64-{% if not hastebin.amd64 %}inactive{% elif hastebin.amd64 == "verified" %}success{% elif hastebin.amd64 == "supported" %}informational{% elif hastebin.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![arm64](https://img.shields.io/badge/{% if not hastebin.arm64 %}untested{% else %}{{ hastebin.arm64 }}{% endif %}-arm64-{% if not hastebin.arm64 %}inactive{% elif hastebin.arm64 == "verified" %}success{% elif hastebin.arm64 == "supported" %}informational{% elif hastebin.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![armv7](https://img.shields.io/badge/{% if not hastebin.armv7 %}untested{% else %}{{ hastebin.armv7 }}{% endif %}-armv7-{% if not hastebin.armv7 %}inactive{% elif hastebin.armv7 == "verified" %}success{% elif hastebin.armv7 == "supported" %}informational{% elif hastebin.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![amd64](https://img.shields.io/badge/{% if not hastebin.amd64 %}untested{% else %}{{ hastebin.amd64 }}{% endif %}-amd64-{% if not hastebin.amd64 %}inactive{% elif hastebin.amd64 == "verified" %}success{% elif hastebin.amd64 == "supported" %}informational{% elif hastebin.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not hastebin.arm64 %}untested{% else %}{{ hastebin.arm64 }}{% endif %}-arm64-{% if not hastebin.arm64 %}inactive{% elif hastebin.arm64 == "verified" %}success{% elif hastebin.arm64 == "supported" %}informational{% elif hastebin.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not hastebin.armv7 %}untested{% else %}{{ hastebin.armv7 }}{% endif %}-armv7-{% if not hastebin.armv7 %}inactive{% elif hastebin.armv7 == "verified" %}success{% elif hastebin.armv7 == "supported" %}informational{% elif hastebin.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
@@ -50,7 +50,8 @@ run: **`vlab update_one service=hastebin`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
+!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!!
+
 !!! Below are some **examples** with headings, and with some **example** instructions !!!
 
 #### ADMINISTRATOR SETUP
@@ -59,13 +60,14 @@ Navigate to *https://{{ hastebin.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, hastebin makes this account the administrator.
 
-### SMTP/ MAIL
+#### SMTP/ MAIL
 
 1. run **`vlab decrypt`** to decrypt the `vault.yml` file
+
 2. make some changes
 
 
-#### SMTP Settings
+##### SMTP Settings
 ```
 smtp:
   host:
@@ -91,7 +93,7 @@ Tor link: [http://{{ hastebin.subdomain + "." + tor_domain }}/](http://{{ hasteb
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br />
+*Default: False*
 *Options: True/False*
 
 #### Command:
@@ -109,7 +111,7 @@ hastebin
 ```
 
 ### AUTH
-*Default: False* <br />
+*Default: False*
 *Options: True/False*
 
 #### Command:
@@ -127,7 +129,7 @@ hastebin
 ```
 
 ### DOMAIN
-*Default: False* <br />
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -145,7 +147,7 @@ hastebin
 ```
 
 ### SUBDOMAIN
-*Default: hastebin* <br />
+*Default: hastebin*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -163,7 +165,7 @@ hastebin
 ```
 
 ### VERSION
-*Default: {{  hastebin.server_version  }}* <br />
+*Default: {{  hastebin.server_version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -185,6 +187,6 @@ hastebin
 run: **`vlab update_one service=hastebin`**
 
 ## Need more help?
-Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://vivumlab.com/docs). \
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

@@ -1,19 +1,8 @@
 ---
-- name: Create settings path if it does not exist
-  file:
-    path: settings/passwords
-    state: directory
-    mode: '0755'
-
 - name: Copy VivumLab config file into place
   template:
     src: "config.yml"
-    dest: "{{ playbook_dir }}/settings/config.yml"
-
-- name: Copy VivumLab vault file into place
-  template:
-    src: "vault.yml"
-    dest: "{{ playbook_dir }}/settings/vault.yml"
+    dest: "{{ playbook_dir }}/decrypted.yml"
 
 - name: Generate Ansible inventory file
   template:

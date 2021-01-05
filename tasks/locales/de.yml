@@ -1,0 +1,405 @@
+de:
+  bastion:
+    enable:
+      usage: "enable"
+      desc: "Enables the Bastion server"
+      out:
+        done: "Bastion ip set, and enabled in the inventory file"
+        alreadyininventory: "Bastion already present in Inventory file"
+    disable:
+      usage: "disable"
+      desc: "Disables the Bastion server"
+      out:
+        success: "Bastion disabled in config, and removed from Inventory"
+
+    in:
+      serveraddress: "What is your Bastion Server IP?"
+
+  config:
+    new:
+      usage: "new"
+      desc: "Creates or Updates the config file, as necessary"
+      out:
+        creating: "Creating, or updating Config file settings/%{config_dir}/config.yml"
+    show:
+      usage: "show"
+      desc: "Shows the configuration settings for a specified service"
+      out:
+        tablenorender: "Unable to render table, due to object complexity. Reverting to text"
+    reset:
+      usage: "reset"
+      desc: "Resets VivumLab config"
+      out:
+        resetting: "Resetting config file at settings/%{config_dir}/config.yml"
+        backup: "Backing up your existing config"
+    edit_raw:
+      usage: "edit_raw"
+      desc: "Decrypts, and opens the config file in nano. Encrypts on save"
+      out:
+        editfile: "Decrypting and editing the config file at settings/%{config_dir}/encrypted.yml"
+        editerror: "Something went wrong executing the decryption and or editing the file"
+        fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+    decrypt:
+      usage: "decrypt"
+      desc: "Decrypts the encrypted config file. You must Re-ENCRYPT yourself using vlab config encrypt"
+      out:
+        decrypted: "Config file is now, decrypted"
+    encrypt:
+      usage: "encrypt"
+      desc: "Encrypts a given config.yml to encrypted.yml"
+      out:
+        encrypted: "Config file is now, encrypted"
+    draw_error_table:
+      out:
+        keynomatch: "Unable to find a full match for the key %{config_key}"
+        possiblekey: "Here's some possible matches:"
+
+  core:
+    checkversion:
+      usage: "check-version"
+      desc: "checks the local version against the latest from github"
+      out:
+        currentversion: "You have version %{current_version}"
+        versionlatest: "You're up to date"
+        versionupdate: "Consider updating to %{latest_version}"
+    generate_vault_pass:
+      usage: "generate-vault-pass"
+      desc: "Creates a new Vault Password"
+      out:
+        noaction: "Vault pass exists, no action taking"
+    deploy:
+      usage: "deploy"
+      desc: "Deploys VivumLab, configures it first if needed"
+      out:
+        deploy: "Deploying Vivumlab"
+    restore:
+      usage: "restore"
+      desc: "restores a vlab install, assuming backups exist"
+      out:
+        restoring: "Restoring your backups, now.."
+        restored: "Backups have been restored"
+    uninstall:
+      usage: "uninstall"
+      desc: "irreversably removes vlab"
+      out:
+        uninstall: |+
+          Uninstalling VivumLab is irreversible, and should always be done with caution
+          Make sure to backup any files that you may want to keep before uninstalling
+        uninstalled: "VivumLab has been uninstalled."
+      in:
+        uninstall: "Are you sure you want to uninstall VivumLab"
+        uninstallconfirm: "Confirm again, if you are sure"
+
+  deprecated:
+    vault_encrypt:
+      usage: "vault_encrypt"
+      desc: "Encrypts the ansible vault.yml - DEPRECATED"
+      out:
+        encrypting: "Encrypting the vault"
+        encrypted: "Vault Encrypted"
+        failencrypt: "This command can fail, if the vault was already encrypted"
+    vault_decrypt:
+      usage: "vault_decrypt"
+      desc: "Decrypts the ansible vault.yml - DEPRECATED"
+      out:
+        decrypting: "Decrypting the vault"
+        decrypted: "Vault Decrypted"
+        faildecrypt: "This command can fail, if the vault was already decrypted"
+
+  dev:
+    setup:
+      usage: "setup"
+      desc: "Run to install Dev Requirements"
+      out:
+        welcome: "Welcome to VivumLab Developer Setup"
+        precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+        readythanks: |+
+          Ok, all set! Thank you for being a part of the VivumLab Community
+          We hope that you will enjoy your time with us
+          And we look forward to achieving great things, together
+      in:
+        contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+    set:
+      usage: "set"
+      desc: "Sets a config variable"
+      out:
+        noservice: "Service %{service} not found in config file. Please check the service."
+        nokey: "Key %{config_key} not found in config file. Please check the key."
+    install_precommit:
+      out:
+        readdevdocs: |+
+          First and foremost, please make sure you have read the developer docs
+          You can find the developers docs. here:
+          # TODO: add url to dev doc
+        precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
+        pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+      in:
+        installprecommit: "Install pre-commit now?"
+
+  git:
+    sync:
+      usage: "sync"
+      desc: "Syncs your settings git repo"
+      out:
+        settingssyncing: "Syncing settings via Git"
+        settingssynced: "Settings synced"
+        notsetup: |+
+          Warning! Your settings directory is not setup as a Git Repository
+          Make sure to back them up using some other method. For more information, see:
+          https://vivumlab.com/docs/core/installation#syncing-settings-via-git
+    track:
+      usage: "track"
+      desc: "Allows you to switch between different branches or tags of Vivumlab"
+      out:
+        trackbranch: "You are now tracking the %{branch} branch"
+
+  migration:
+    single_config:
+      usage: "single_config"
+      desc: "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
+      out:
+        notdone: "Migration not needed. Config files valid."
+
+  sanity_checks:
+    check_ssh_keys:
+      usage: "check_ssh_keys"
+      desc: "Creates or updates SSH keys as necessary"
+    local:
+      usage: "local"
+      desc: "Local Sanity Checks"
+      out:
+        passed: "Local sanity checks passed."
+    remote:
+      usage: "remote"
+      desc: "Remote Server sanity checks"
+      out:
+        sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
+        sshkeyverified: "SSH Keys are good to go!"
+    check_for_settings:
+      usage: "check_for_settings"
+      desc: "Verifies settings exist"
+    check_vault_pass:
+      usage: "check_vault_pass"
+      desc: "Checks for the presence of a Vault Password file"
+      out:
+        vaultpassmissing: |+
+          Oops, your vault password in %{home_dir}, doesn't appear to exist.
+          This is unusual, but could be the result of the username changing after setup.
+        vaultpasscreate: |+
+          A new `.vlab_vault_pass` file can be created for you;
+          or you can exit, and try to sort this out yourself.
+      in:
+        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+    check_for_git:
+      usage: "check_for_git"
+      desc: "Checks the local machine for Git"
+      out:
+        gitnoexist: "You need to install git!"
+    check_for_precommit:
+      usage: "check_for_precommit"
+      desc: "Checks for the presence of Pre-commit"
+      out:
+        lowprecommit: |+
+          Pre-commit is not installed or an earlier version than required.
+          Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above.
+
+          Run `vlab dev setup` when you're ready..
+        lowpython: "Python version %{precom_ver} is required for VivumLab to work"
+        noprecommit: |+
+          Pre-commit is not installed. Contributing requires installing 'pre-commit'.
+          Run vlab dev_setup, when you're ready
+    check_ssh_with_keys:
+      out:
+        sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+
+  server:
+    shutdown:
+      usage: "shutdown"
+      desc: "Executes a shutdown of the Vlab server, optionally with countdown"
+      out:
+        shutdown: "Server will shutdown in %{time} minute(s)"
+    restart:
+      usage: "restart"
+      desc: "Executes a restart of the Vlab server, optionally with countdown"
+      out:
+        restart: "Server will restart in %{time} minute(s)"
+
+  service:
+    list:
+      name: 'list'
+      desc: 'List the available services'
+    remove:
+      usage: "remove -s, --service SERVICENAME"
+      desc: "Removes any specified service(s) from the VivumLab server"
+      out:
+        removing: "Removing data for service: %{service}"
+        removed: "Data for %{service}, removed"
+    reset:
+      usage: "reset --service SERVICENAME "
+      desc: "Resets the files for any specified, deployed service(s)."
+      out:
+        resetting: "Resetting %{service}"
+        reset: "%{service} has been reset"
+    stop:
+      usage: "stop -s, --service SERVICENAME"
+      desc: "Stops all services, or any specified service(s) if you specify --service"
+      out:
+        stopping: |+
+          Note: If no service(s) are specified, VivumLab will stop all enabled service(s)
+          Stopping service(s) now..
+        stopped: "All specified services have been stopped"
+    restart:
+      usage: "restart -s, --service SERVICENAME"
+      desc: "Restart all services, or any specified service(s) if you specify --service"
+      out:
+        restarting: |+
+          Note: If no services(s) are specified, VivumLab will restart all enabled services
+          Restarting service(s) now..
+        restarted: "All specified service(s) have been restarted"
+    update:
+      usage: "update -s, --service SERVICE"
+      desc: "Updates all services, or any selected service(s) if you specify --service"
+      out:
+        updating: |+
+          Note: If no service(s) are specified, VivumLab will update all enabled services
+          Service specified: %{service}
+          Updating now..
+        updated: "All specified services have been updated"
+    docs:
+      usage: "docs"
+      desc: "Show the docs for the specified service"
+    customize:
+      usage: "customize"
+      desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+      out:
+        customizing: |+
+          This command creates a file, that will override the original docker-compose file for %{service}
+          Any changes that the user wishes to make, should be made to the override file, not the original.
+          VivumLab will not change, nor delete the original file; the original file will just be ignored
+        customized: "%{service} is ready to customize"
+      in:
+        customizing: "Did you want to make changes to the %{service} service?"
+    show:
+      usage: "show"
+      desc: "Show the configuration options for specified service"
+      out:
+        disabled: "%{service} is now disabled"
+    setup:
+      usage: "setup"
+      desc: "Interactive setup of any specified service(s) configuration settings"
+      out:
+        searchfail: "Failed to find a service config for service: %{service}"
+        editing: "Editing configuration parameters for: %{service}"
+      in:
+        keyvalue: "What value would you like to set for %{key}: "
+
+  ssh:
+    launch:
+      usage: "launch"
+      desc: "Opens a shell on your VivumLab server"
+      out:
+        launching: "Launching an SSH session to your server"
+    create_sshkey:
+      usage: "create_sshkey"
+      desc: "Creates an SSH key, if one doesn't exist"
+      out:
+        keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
+        keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
+        keycreated: "Key created"
+    copy_sshkey:
+      usage: "copy_sshkey"
+      desc: "Copy your ssh key over to the server"
+      out:
+        keycopying: "Copying keys to your server at %{vlab_ip}"
+        keycopied: "Key copied"
+    setup:
+      usage: "setup"
+      desc: "Creates and copies your ssh key over to the server"
+
+  terraform:
+    bastion:
+      usage: "bastion"
+      desc: "Spins up a cloud server and sets it as your bastion server"
+    create:
+      usage: "create"
+      desc: "Spins up a cloud server with Terraform'"
+      out:
+        creating: "Creating a cloud server"
+        created: "Successfully created a server at: %{ip}"
+        setip: |+
+          Place this IP where you want it in your settings..
+          either run
+          'vlab config set --dev --config-key vlab_ip --value %{ip}' or
+          'vlab config set --dev --config-key bastion.server_address --value %{ip}'
+
+          Then run 'vlab deploy' to complete the setup.
+    destroy:
+      usage: "destroy"
+      desc: "Destroys server(s) created by terraform"
+      out:
+        destroying: "Destroying terraform built server"
+        destroyed: "Cloud server(s) destroyed."
+
+  utils:
+    run_playbook:
+      out:
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          Ansible Playbook command returned with an error code.
+          Exception is: %{e}
+    run_config_playbook:
+      out:
+        playbookexecuting: "executing playbook command: %{playbook_command}"
+        playbookexecuted: "%{playbook_command} finished"
+        playbookerror: |+
+          Failed to run Ansible playbook: playbook.config.yml
+          Error is: %{e}
+
+  vlab:
+    find_help:
+      usage: "find_help"
+      desc: "Shows the user how to contact the VivumLab community"
+    version:
+      usage: "version"
+      desc: "Show VivumLab version"
+      out:
+        vlabversion: "Current VivumLab version: %{vlabversion}"
+
+  dynamic_namespaces:
+    service:
+      config:
+        usage: "service %{service} %{key}"
+        desc: "Sets the configuration value for %{service}.%{key}"
+        options:
+          banner: "<VALUE>"
+      classes:
+        usage: "service %{service} %{meth}"
+        desc: "%{meth}s %{service}. For more information, run 'vlab service %{service} docs'"
+
+  conffile_utils:
+    encryptedyml:
+      out:
+        noexist: |+
+          Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'
+          For further information, please run 'vlab config'
+    saveconf:
+      out:
+        saving: "Saving config.yml"
+
+
+  options:
+    configdir: "Config directory to use"
+    servicename: "Name of the service to display"
+    filetowrite: "Name of the file to write"
+    filetoencrypt: "Name of the file to encrypt"
+    keytoset: "Dot notation key to set"
+    valuetoset: "Value to set"
+    disablegitsync: "Disable pushing git to remote"
+    branchtrack: "The name of the branch, or tag you'd like to use"
+    ansibledebug: "Debugs Ansible-playbook commands"
+    timershutdown: "Sets a countdown in minutes until the server shuts down"
+    timerrestart: "Sets a countdown in minutes until the server restarts"
+    serviceswarning: "Optional name of service. Without, it removes all services."
+    servicerequired: "Required name of service."
+    enabledevtasks: "Enable Developer tasks"
+    vlabversion: "Shows current VivumLab version"

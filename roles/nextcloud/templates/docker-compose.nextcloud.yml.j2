@@ -61,12 +61,12 @@ services:
       - NEXTCLOUD_TRUSTED_DOMAINS={{ service_domain }}
       - NEXTCLOUD_UPDATE=1 # triggers the automated install on first run.
       # SMTP settings
-      - SMTP_HOST={{vault.smtp.host}}
-      - SMTP_SECURE={% if vault.smtp.port == 587 %}ssl{% endif %}
+      - SMTP_HOST={{ smtp.host }}
+      - SMTP_SECURE={% if smtp.port == 587 %}ssl{% endif %}
 
-      - SMTP_PORT={{vault.smtp.port}}
-      - SMTP_PASSWORD={{vault.smtp.pass}}
-      - MAIL_FROM_ADDRESS={{vault.smtp.from_email}}
+      - SMTP_PORT={{ smtp.port }}
+      - SMTP_PASSWORD={{ smtp.pass }}
+      - MAIL_FROM_ADDRESS={{ smtp.from_email }}
       - OVERWRITEHOST={{ service_domain }}
       - OVERWRITEPROTOCOL=https
     depends_on:

@@ -29,7 +29,7 @@ Alternatively, you could pay Amazon and use their S3 service.
 Backing up to your own infrastructure does not protect your data, especially in the case of server failure or data corruption. However it is still possible to use your own S3 bucket; this may be useful due to Restic's snapshotting. So while this won't give you an offsite backup, it will still provide timed snapshots to access old versions of files.
 
 View your logs for the Minio service (eg. vivumlab_minio_1) and copy the `AccessKey` and `SecretKey` out of the logs.
-Run **`vlab decrypt`** to decrypt the vault, and put the keys into under the `s3_access_key` and `s3_secret_key` variables in the decrypted`settings/vault.yml` file.
+Run **`vlab config decrypt --dev`** to decrypt the vault, and put the keys into under the `s3_access_key` and `s3_secret_key` variables in the decrypted `settings/decrypted.yml` file.
 Now login to your Minio with the same access and secret key values and create a bucket called `restic-backups`.
 Finally run **`vlab update`** to copy your new settings up to your VivumLab server.
 
@@ -44,13 +44,13 @@ To configure the backup service, 4 parameters are required; they are:
 `s3_backup_password` (please generate a strong password)
 
 You can set all these parameters as follows:
-**`vlab set s3_path <S3 path>`**
-**`vlab set s3_access_key <S3 access key>`**
-**`vlab set s3_secret_key <S3 secret key>`**
-**`vlab set s3_backup_password <your S3 password>`**
+**`vlab dev set --dev --config-key=s3_path --value=<S3 path>`**
+**`vlab dev set --dev --config-key=s3_access_key --value=<S3 access key>`**
+**`vlab dev set --dev --config-key=s3_secret_key --value=<S3 secret key>`**
+**`vlab dev set --dev --config-key=s3_backup_password --value=<your S3 password>`**
 
-You can also manually set the required S3 parameters in `settings/vault.yml` and `settings/config.yml`
-Run **`vlab decrypt`** to decrypt the vault before editing it, and set the respective parameters. Finalize any changes with **`vlab deploy`**
+You can also manually set the required S3 parameters in `settings/decrypted.yml`.
+Run **`vlab config decrypt --dev`** to decrypt the vault before editing it, and set the respective parameters. Finalize any changes, run **`vlab config encrypt --dev`**, and deploy with **`vlab deploy`**
 
 Once these are set, VivumLab will back up all it's core data every night at 4 AM.
 

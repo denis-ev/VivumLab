@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # SUI
 
-[SUI](https://gitlab.com/WillFantom/sui) a startpage for your server and / or new tab page
+[SUI](https://github.com/WillFantom/sui) a startpage for your server and / or new tab page
 
 ![amd64](https://img.shields.io/badge/{% if not sui.amd64 %}untested{% else %}{{ sui.amd64 }}{% endif %}-amd64-{% if not sui.amd64 %}inactive{% elif sui.amd64 == "verified" %}success{% elif sui.amd64 == "supported" %}informational{% elif sui.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
 ![arm64](https://img.shields.io/badge/{% if not sui.arm64 %}untested{% else %}{{ sui.arm64 }}{% endif %}-arm64-{% if not sui.arm64 %}inactive{% elif sui.arm64 == "verified" %}success{% elif sui.arm64 == "supported" %}informational{% elif sui.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
@@ -202,5 +202,5 @@ run: **`vlab update_one service=sui`**
 
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

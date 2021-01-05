@@ -23,30 +23,36 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** solidnerd/bookstack <br />
 **Current Image Version:** {{ bookstack.version }}
 
 ## SETUP
 
-### Enabling bookstack
+### Enabling and customizing bookstack
 
 #### Command:
 
-**`vlab set bookstack.enable True`**
+**`vlab service setup -s bookstack`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 bookstack
-  enable: True
+  enable: {{ bookstack.version }}
+  https_only: {{ bookstack.https_only }}
+  auth: {{ bookstack.auth }}
+  domain: {{ bookstack.domain }}
+  subdomain: {{ bookstack.subdomain }}
+  version: {{ bookstack.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=bookstack`**
+run: **`vlab update -s bookstack`**
 
 ## FIRST RUN
 
@@ -59,26 +65,6 @@ Navigate to *https://{{ bookstack.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, bookstack makes this account the administrator.
 
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=bookstack`** to complete the changes
-
-
 ## ACCESS
 
 Bookstack (HTTPS) link: [https://{% if bookstack.domain %}{{ bookstack.domain }}{% else %}{{ bookstack.subdomain + "." + domain }}{% endif %}/](https://{% if bookstack.domain %}{{ bookstack.domain }}{% else %}{{ bookstack.subdomain + "." + domain }}{% endif %}/)
@@ -88,119 +74,7 @@ Bookstack (HTTP) link: [http://{% if bookstack.domain %}{{ bookstack.domain }}{%
 Tor link: [http://{{ bookstack.subdomain + "." + tor_domain }}/](http://{{ bookstack.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set bookstack.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bookstack
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bookstack`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set bookstack.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bookstack
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bookstack`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set bookstack.domain bookstack.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bookstack
-  domain: bookstack.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bookstack`**
-
-### SUBDOMAIN
-*Default: bookstack* <br />
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
-
-#### Command:
-
-**`vlab set bookstack.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bookstack
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bookstack`**
-
-### VERSION
-*Default: {{  bookstack.version  }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set bookstack.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bookstack
-  version: 2.7
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bookstack`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.
