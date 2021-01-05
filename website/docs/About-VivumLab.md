@@ -22,11 +22,11 @@ We are currently in the development stage, focusing on the core services that wi
 
 ## What does VivumLab actually do?
 
-VivumLab deploys web services to a server. Deployment is managed by Ansible and the services are managed by Docker. To learn more, read our [Installation](core/Getting-Started.md) documentation.
+VivumLab deploys web services to a server. Deployment is managed by Ansible and the services are managed by Docker. To learn more, read our [Installation](core/getting-started) documentation.
 
 ## What kind of help is VivumLab looking for?
 
-Make sure to check out the [Required Jobs](Required-jobs.md) page, or you check out our [Zulip](https://vivumlab.zulipchat.com/) chat.
+Make sure to check out the [Required Jobs](jobs) page, or you check out our [Zulip](https://vivumlab.zulipchat.com/) chat.
 
 ## A message from VivumLab
 
@@ -46,8 +46,8 @@ Thank you for trying VivumLab!
 ***
 
 ### Want to know more?
-Get to know how you can contact us [here](Contact-us.md)
+Get to know how you can contact us [here](contact)
 
-Interested in contributing to this project? You can view our contribution guidelines [here](/CONTRIBUTING.md)
+Interested in contributing to this project? You can view our contribution guidelines [here](CONTRIBUTING)
 
-Or view our Code of Conduct [here](Code-of-Conduct.md)
+Or view our Code of Conduct [here](code-of-conduct)

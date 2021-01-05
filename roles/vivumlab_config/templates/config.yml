@@ -30,7 +30,7 @@ admin_email: {{ admin_email | default('admin_email@vivumlab.com') }}
 default_username: {{ default_username }}
 
 # Default storage location for service data, such as configuration data
-volumes_root: {{ volumes_root | default('/var/vivumlab') }}
+volumes_root: {{ volumes_root | default("/home/{{ vlab_ssh_user }}/vivumlab") }}
 
 # Default storage location for media (These are used as local directories or NAS mount points depending on configuration)
 storage_dir: {{ storage_dir | default('/mnt/nas') }}
@@ -39,8 +39,8 @@ storage_dir: {{ storage_dir | default('/mnt/nas') }}
 vlab_notifyemail: {{ vlab_notifyemail | default('vlab_notifyemail@vivumlab.com')}}
 
 # For technical reasons these can't live here.
-#ansible_become_password: In vault.yml
-#default_password: In vault.yml
+ansible_become_password: "{{ ansible_become_password | default() }}"
+default_password: "{{ default_password | default() }}"
 
 # Set this to true if you are deploying to an ARM infrastructure, such as a Raspberry Pi.
 arm: {{ arm | default('False') }}
@@ -78,69 +78,71 @@ bastion:
   reset_iptables: {{ bastion.reset_iptables | default(False) }}
   # END MIGRATION
 
-{% raw %}
 # Minio access keys
-minio_access_key: "{{ vault.minio_access_key }}"
-minio_secret_access_key: "{{ vault.minio_secret_access_key }}"
+minio_access_key: {{ minio_access_key | default() }}
+minio_secret_access_key: {{ minio_secret_access_key | default() }}
 
 # VPN For Transmission to use for Downloads
-openvpn_provider: "{{ vault.openvpn_provider }}"
-openvpn_username: "{{ vault.openvpn_username }}"
-openvpn_password: "{{ vault.openvpn_password }}"
-openvpn_config: "{{ vault.openvpn_config }}"
+openvpn_provider: {{ openvpn_provider | default() }}
+openvpn_username: {{ openvpn_username | default() }}
+openvpn_password: {{ openvpn_password | default() }}
+openvpn_config: {{ openvpn_config | default() }}
 
 # Cloud Servers
 aws:
-  secret_key: "{{ vault.aws.secret_key }}"
-  access_key: "{{ vault.aws.access_key }}"
-  region: "{{ vault.aws.region }}"
+  secret_key: {{ aws.secret_key | default() }}
+  access_key: {{ aws.access_key | default() }}
+  region: {{ aws.region | default() }}
 
-do_access_token: "{{ vault.do_access_token }}"
-do_region: "{{ vault.do_region }}"
+do_access_token: {{ do_access_token | default(False) }}
+do_region: {{ do_region | default('fra1') }}
 
 # After claiming your token at https://www.plex.tv/claim/ you will only have four minutes to run make and deploy plexinc
-plex_claim: "{{ vault.plex_claim }}"
+plex_claim: {{ plex_claim | default('CHANGE_TO_GIVEN_TOKEN') }}
 
 # Mapbox Api keys: Used for LibrePhotos
-mapbox_api_key: "{{ vault.mapbox_api_key }}"
+mapbox_api_key: {{ mapbox_api_key | default() }}
 
 # Restic S3 Backup Server Information name: Docs: https://vivumlab.com/setup/backups/
-s3_access_key: "{{ vault.s3_access_key }}"
-s3_secret_key: "{{ vault.s3_secret_key }}"
-s3_backup_password: "{{ vault.s3_backup_password }}"
+s3_access_key: {{ s3_access_key | default() }}
+s3_path: {{ s3_path | default() }}
+s3_secret_key: {{ s3_secret_key | default() }}
+s3_backup_password: {{ s3_backup_password | default() }}
+# Example: 0 4 * * *
+# Backup every day at 4:00 AM
+s3_backup_cron: {{ s3_backup_cron | default("0 4 * * *") }}
 
 # Home Assitant API Key
-homeassistant_api_key: "{{ vault.homeassistant_api_key }}"
+homeassistant_api_key: {{ homeassistant_api_key | default() }}
 
 # SMTP Settings
 smtp:
-  host: "{{ vault.smtp.host }}"
-  port: "{{ vault.smtp.port }}"
-  user: "{{ vault.smtp.user }}"
-  pass: "{{ vault.smtp.pass }}"
-  from_email: "{{ vault.smtp.from_email }}"
-  from_name: "{{ vault.smtp.from_name }}"
+  host: {{ smtp.host | default()  }}
+  port: {{ smtp.port | default()  }}
+  user: {{ smtp.user | default()  }}
+  pass: {{ smtp.pass | default()  }}
+  from_email: {{ smtp.from_email | default()  }}
+  from_name: {{ smtp.from_name | default()  }}
 
 traefik:
-  https_only: "{{ vault.traefik.https_only }}"
-  domain: "{{ vault.traefik.domain }}"
-  subdomain: "{{ vault.traefik.subdomain }}"
-  auth: "{{ vault.traefik.auth }}"
-  expose_internally: "{{ vault.traefik.expose_internally }}"
-  expose_externally: "{{ vault.traefik.expose_externally }}"
-  ping: "{{ vault.traefik.ping | default(False) }}"
-  metrics: "{{ vault.traefik.metrics | default(False) }}"
+  https_only: {{ traefik.https_only | default(False) }}
+  domain: {{ traefik.domain | default(False) }}
+  subdomain: {{ traefik.subdomain | default("traefik") }}
+  auth: {{ traefik.auth | default(False) }}
+  expose_internally: {{ traefik.expose_internally | default(True) }}
+  expose_externally: {{ traefik.expose_externally | default(False) }}
+  ping: {{ traefik.ping | default(False) }}
+  metrics: {{ traefik.metrics | default(False) }}
   # Enable sendAnonymousUsage?
   # Reference: https://docs.traefik.io/master/contributing/data-collection/
-  send_anonymous_usage: "{{ vault.traefik.send_anonymous_usage }}"
-  dns_challenge_provider: "{{ vault.traefik.dns_challenge_provider }}"
+  send_anonymous_usage: {{ traefik.send_anonymous_usage | default("false")  }}
+  dns_challenge_provider: {{ traefik.dns_challenge_provider | default(False) }}
 # use key:value pairs here to add additional environment variables to your traefik docker image.
 # for instance, if you're using a dns challenge provider place your api keys etc here.
   additional_env_vars:
     # DUMMY_KEY: DUMMY_VALUE
-    CF_API_EMAIL: "{{ vault.traefik.additional_env_vars.CF_API_EMAIL }}"
-    CF_API_KEY: "{{ vault.traefik.additional_env_vars.CF_API_KEY }}"
-{% endraw %}
+    CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
+    CF_API_KEY: {{ traefik.additional_env_vars.CF_API_KEY | default('API_KEY') }}
 
 # Features
 
@@ -241,14 +243,12 @@ authelia:
     cookie_inactivity: {{ authelia.default.cookie_inactivity | default(300000) }}
     # default policy - deny by default
     policy: {{ authelia.default.policy | default('deny') }}
-{% raw %}
   duo:
-    hostname: "{{ vault.authelia.duo.hostname}}"
-    integration_key: "{{ vault.authelia.duo.integration_key }}"
-    secret_key: "{{ vault.authelia.duo.secret_key }}"
-  # Don't change these unless you know what you're doing
-  migration: "{{ vault.authelia.migration }}"
-{% endraw %}
+    hostname: {{ authelia.duo.hostname | default() }}
+    integration_key: {{ authelia.duo.integration_key | default() }}
+    secret_key: {{ authelia.duo.secret_key | default() }}
+  # Don't change this unless you know what you're doing
+  migration: {{ authelia.migration | default(False) }}
 barcodebuddy:
   enable: {{ barcodebuddy.enable | default(False) }}
   https_only: {{ barcodebuddy.https_only | default(False) }}
@@ -282,9 +282,7 @@ bitwarden:
   # Enable admin page
   # IMPORTANT: Activate HTTPS before enabling this feature, to avoid possible MITM attacks.
   # Reference: https://github.com/dani-garcia/bitwarden_rs/wiki/Enabling-admin-page
-{% raw %}
-  token: "{{ vault.bitwarden.token }}"
-{% endraw %}
+  token: {{ bitwarden.token | default("default_password") }}
   signups_allowed: {{ bitwarden.signups_allowed  | default('true') }}
   # Only allow signups from certain domains (set signups_allowed to "false")
   # Note that no e-mail validation is done, only e-mail domain that's provided on registration
@@ -378,19 +376,15 @@ drone:
   amd64: False
   arm64: False
   armv7: False
-{% raw %}
-  gitea_id: "{{ vault.drone.gitea_id | default(False) }}"
-  gitea_secret: "{{ vault.drone.gitea_secret | default(False) }}"
-{% endraw %}
+  gitea_id: {{ drone.gitea_id | default(False) }}
+  gitea_secret: {{ drone.gitea_secret | default(False) }}
 duckdns:
   enable: {{ duckdns.enable | default(False) }}
   version: {{ duckdns.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False
-{% raw %}
-  token: "{{ vault.duckdns.token | default(False) }}"
-{% endraw %}
+  token: {{ duckdns.token | default(False) }}
 duplicati:
   enable: {{ duplicati.enable | default(False) }}
   https_only: {{ duplicati.https_only | default(False) }}
@@ -1450,9 +1444,7 @@ watchtower:
   amd64: False
   arm64: False
   armv7: False
-{% raw %}
-  gotify_token: "{{ vault.watchtower.gotify_token | default (False) }}"
-{% endraw %}
+  gotify_token: {{ watchtower.gotify_token | default (False) }}
 webtrees:
   enable: {{ webtrees.enable | default(False) }}
   https_only: {{ webtrees.https_only | default(False) }}
@@ -1548,9 +1540,6 @@ nas_user: {{ nas_user | default(default_username) }}
 nas_pass: {{ nas_pass | default() }}
 nas_workgroup: {{ nas_workgroup | default() }}
 
-# Example: 0 4 * * *
-# Backup every day at 4:00 AM
-s3_backup_cron: {{ s3_backup_cron | default("0 4 * * *") }}
-s3_path: {{ s3_path | default() }}
+
 
 apple_health_nextcloud_username: {{ apple_health_nextcloud_username | default()  }}

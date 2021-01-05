@@ -47,13 +47,13 @@ services:
       GOOGLE_SAFE_BROWSING_KEY:
       GOOGLE_ANALYTICS: # Example: UA-XXXX-XX
       GOOGLE_ANALYTICS_UNIVERSAL:
-      MAIL_HOST: {{ vault.smtp.host }}
-      MAIL_PORT: {{ vault.smtp.port }}
-      MAIL_SECURE: {% if vault.smtp.port == 587 %}"true"
+      MAIL_HOST: {{ smtp.host }}
+      MAIL_PORT: {{ smtp.port }}
+      MAIL_SECURE: {% if smtp.port == 587 %}"true"
 {% endif %}
-      MAIL_USER: {{ vault.smtp.user }}
-      MAIL_FROM: {{ vault.smtp.from_email }}
-      MAIL_PASSWORD: {{ vault.smtp.pass }}
+      MAIL_USER: {{ smtp.user }}
+      MAIL_FROM: {{ smtp.from_email }}
+      MAIL_PASSWORD: {{ smtp.pass }}
       REPORT_EMAIL: report@{{ service_domain }}
       CONTACT_EMAIL: support@{{ service_domain }}
     labels:

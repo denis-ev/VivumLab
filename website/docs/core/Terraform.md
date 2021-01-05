@@ -26,11 +26,13 @@ Obviously whichever provider you choose will have certain requirements and their
 
 1. Create a Digital Ocean account and login
 2. click `API` on the left menu, and generate a new access token; name it `Terraform` and save it
-3. run `vlab decrypt`, to ensure your `settings/vault.yml` is readable
-4. Copy the token into your `settings/vault.yml` file under `do_access_token:`. E.g:
+3. run `vlab config decrypt --dev`, to ensure your `settings/decrypted.yml` is readable
+4. Copy the token into your `settings/decrypted.yml` file under `do_access_token:`. E.g:
 ```
 do_access_token:<your_token_here>
 ```
+5. set the datacenter region under `do_region` [Datacenter Regions](https://www.digitalocean.com/docs/platform/availability-matrix/#datacenter-regions)
+6. run `vlab config encrypt --dev`, to ensure your `settings/encrypted.yml` is encrypted
 
 If you are already a Digital Ocean user, you may receive an error about a pre-existing SSH key.
 (422 SSH Key is already in use on your account).
@@ -41,12 +43,12 @@ To correct this:
 4. Delete the SSH key
 NOTE: default location of ssh keys is: `$HOME/.ssh/id_rsa.pub`
 
-Terraform will re-add it when you run **`vlab terraform`** and will be able to manage it correctly.
+Terraform will re-add it when you run **`vlab terraform create`** and will be able to manage it correctly.
 
 ## Running Terraform
 
-Run **`vlab terraform`**
+Run **`vlab terraform create`**
 
 ## Destroying Terraform Resources
 
-Run **`vlab terraform_destroy`** to destroy any resources Terraform created.
+Run **`vlab terraform destroy`** to destroy any resources Terraform created.

@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** authelia/authelia <br />
 **Current Image Version:** {{ authelia.version }}
 
 ## SETUP
@@ -102,56 +102,31 @@ Out of the box, the standard config bypasses Authelia for Authelia itself, and d
 
 > Note, Authelia does understand the concept of groups, and can limit some services to particular groups, ie: administarators. You might use this to limit say, portainer, to admins.
 
-### Enabling authelia
+### Enabling and customizing authelia
 
 #### Command:
 
-**`vlab set authelia.enable True`**
+**`vlab service setup -s authelia`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 authelia
-  enable: True
+  enable: {{ authelia.version }}
+  https_only: {{ authelia.https_only }}
+  auth: {{ authelia.auth }}
+  domain: {{ authelia.domain }}
+  subdomain: {{ authelia.subdomain }}
+  version: {{ authelia.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=authelia`**
-
-## FIRST RUN
-
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
-!!! Below are some **examples** with headings, and with some **example** instructions !!!
-
-#### ADMINISTRATOR SETUP
-
-Navigate to *https://{{ authelia.domain }}/admin*
-
-Create an account with your desired username; as this is the first user, authelia makes this account the administrator.
-
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=authelia`** to complete the changes
-
+run: **`vlab update -s authelia`**
 
 ## ACCESS
 
@@ -162,119 +137,7 @@ Authelia (HTTP) link: [http://{% if authelia.domain %}{{ authelia.domain }}{% el
 Tor link: [http://{{ authelia.subdomain + "." + tor_domain }}/](http://{{ authelia.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set authelia.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-authelia
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=authelia`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set authelia.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-authelia
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=authelia`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set authelia.domain authelia.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-authelia
-  domain: authelia.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=authelia`**
-
-### SUBDOMAIN
-*Default: authelia* <br />
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
-
-#### Command:
-
-**`vlab set authelia.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-authelia
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=authelia`**
-
-### VERSION
-*Default: {{  authelia.version  }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set authelia.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-authelia
-  version: 2.7
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=authelia`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

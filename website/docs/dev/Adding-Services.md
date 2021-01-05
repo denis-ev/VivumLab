@@ -14,7 +14,9 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # Before you begin
 
-Before you begin, please familiarize yourself with the [Contribution Guidelines](/CONTRIBUTING.md).
+Before you begin, please familiarize yourself with the [Contribution Guidelines](../CONTRIBUTING).
+
+This is "Work In Progress" at the moment.
 
 # Using the add_package Task to add services to VivumLab
 
@@ -35,9 +37,9 @@ You'll need three pieces of information:
 
 When you have entered those three pieces of information, The script then does the following for you:
 
-- Creates an issue on Gitlab.
+- Creates an issue on Github.
 - Creates a branch for, and tied to the issue.
-- Creates an (empty) Merge Request, that resolves the issue.
+- Creates an (empty) Pull Request, that resolves the issue.
 - Fetches the new branch, and checks it out.
 - Creates the Service Role Directory
   - Edits the role/PACKAGENAME/tasks/main.yml
@@ -52,7 +54,7 @@ From the root project directory run:
 Once the script has run, you must edit the `roles/PACKAGENAME/templates/docker-compose.PACKAGENAME.yml.j2` file.
   - eg. *roles/jellyfin/templates/docker-compose.jellyfin.yml.j2*
 
-_Please review all other files, before pushing your changes to gitlab._
+_Please review all other files, before pushing your changes to github._
 
 # How to Manually Add Services to Vivumlab
 

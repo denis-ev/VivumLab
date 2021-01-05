@@ -18,7 +18,7 @@ Once you are all setup and ready to go you should be able to load SUI at [https:
 
 ## Securing Services
 
-If you want to add an extra layer of authentication to a service, all you have to do is set **`vlab set <service>.auth=true`**. Once this is set, authentication will be handled outside of the service.
+If you want to add an extra layer of authentication to a service, all you have to do is set **`vlab service <service> auth -v true`**. Once this is set, authentication will be handled outside of the service.
 
 This is useful, if the service doesn't provide authentication, eg. SUI. and you would like it to be protected.
 
@@ -26,7 +26,7 @@ By default `Traefik` handles authentication, if the `<service>.auth` is set to t
 
 ## File locations
 
-VivumLab sets up `{{ volumes_root }}` on your server, which maps to `/var/vivumlab` by default. All data used to set up your services, can be found here.
+VivumLab sets up `{{ volumes_root }}` on your server, which maps to `/home/<ssh_user>` by default. All data used to set up your services, can be found here.
 
 If you can't find what you are looking for there; large databases, media collections (audio and video) are typically stored in the "{{ storage_dir }}", which defaults to `/mnt/nas`. Using NAS storage? see [NAS](Storage) for more information.
 
@@ -44,11 +44,11 @@ In order for your applications to be able to utilise email (confirmation emails,
 
 Create an account, and follow their steps to register your domain.
 
-Once that is completed, you can plug the settings they provide into your `settings/vault.yml` file.
+Once that is completed, you can plug the settings they provide into your `settings/encrypted.yml` file.
 To do this:
 
-1. run the **`vlab decrypt`** command
-2. find and edit the `vault.yml` file
+1. run the **`vlab config decrypt --dev`** command
+2. find and edit the `decrypted.yml` file
     > NOTE: editing this file may require superuser/ root permissions
 3. Set the following settings to what you have been provided
 
@@ -63,7 +63,7 @@ smtp:
   from_name:
 ```
 
-4. Now, edit the `settings/config.yml` file, and set:
+4. Now, edit the `settings/decrypted.yml` file, and set:
 ```
 mailu:
   forward_to_smtp: False

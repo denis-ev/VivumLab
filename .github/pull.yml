@@ -1,0 +1,13 @@
+version: "1"
+rules:
+  - base: master
+    upstream: VivumLab:master
+    mergeMethod: hardreset
+  - base: dev
+    upstream: VivumLab:dev
+    mergeMethod: rebase
+  - base: gh-pages
+    upstream: VivumLab:gh-pages
+    mergeMethod: hardreset
+label: ":arrow_heading_down: pull"  # Optional
+conflictLabel: "merge-conflict"     # Optional, on merge conflict assign a custom label, Default: merge-conflict

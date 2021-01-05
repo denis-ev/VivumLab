@@ -77,7 +77,7 @@ To contribute to VivumLab, you'll need to:
 2. Branch Dev in your fork
 3. Develop your feature/fix
 4. Commit to your branch on your fork
-5. Create a Merge Request
+5. Create a Pull Request
 
 Doing the above will require some prior knowledge; you'll need a working understanding of Git, and a GitHub account. [Understanding Git](https://duckduckgo.com/?q=learn+git) has a small learning curve and is unfortunately, beyond the scope of this document.
 
@@ -86,20 +86,15 @@ Doing the above will require some prior knowledge; you'll need a working underst
 ### Contribution: Forking VivumLab
 1. Create your own fork by clicking the "Fork" button at https://github.com/Vivumlab/VivumLab: ![Fork button location](dev/fork.png)
 
-2. In your fork, goto Settings/Repository -> "Mirroring repositories" and setup mirroring of Vivumlab/VivumLab
-![Screen Shot of Mirror setup](dev/mirror.png)
-
-    Mirror direction = Pull
-    Only mirror protected branches = enabled
-
-3. Then set your Protected Branches in Settings/Repository -> "Protected Branches" like this
+2. Then set your Protected Branches in Settings -> "Branches" like this
 ![Setting Protected Branches](dev/protected-branches.png)
-(you can ignore CODEOWNER though) you can even set push to "no one" so you can't accidentally push to that branch.
+
+3. Install [Pull](https://wei.github.io/pull/) to keep your fork up-to-date with our Repository.
 
 ### Contribution: Forked VivumLab... Now what?
 
 1. Make sure you don't have any outstanding un-related changes in your local repository with **`git status`**; You should see `nothing to commit, working tree clean`.
-2. Identify the branch name by navigating to the issues' linked Merge Request and clicking the copy icon next to the Branch name.
+2. Identify the branch name by navigating to the issues' linked Pull Request and clicking the copy icon next to the Branch name.
     ![Finding the Branch Name](dev/branch-name.png)
 4. Run `git fetch origin`
 5. Run `git checkout <<branch name>>`
@@ -110,15 +105,15 @@ Doing the above will require some prior knowledge; you'll need a working underst
 Fixing issues announced by the community is the backbone of this project. What happens when you find an issue that you know how to fix, but no one has made a PR to fix it? Here's how you should do it
 
 1. Make sure you don't have any outstanding un-related changes in your local repository with **`git status`**. You should see `nothing to commit, working tree clean`.
-2. Locate the appropriate issue, and from this issue, click the `Create Merge Request` button.
+2. Locate the appropriate issue, and from this issue, click the `Create Pull Request` button.
 3. Now click the `Check Out Branch` button and run **`git status`** again on your local copy of the repository.
 4. Now make your changes, commit and push them.
 5. On GitHub, go to your PR and make sure it is not labeled **WIP** and that all the check boxes are checked (If applicable).
 
 Once you've submitted the PR, community leaders will review it. Only once it is approved, will it be merged.
 
-At this point, nothing else is required from you, unless specifically requested. Don't worry about rebasing, or closing the merge request.
-If the Merge Request needs changes, the maintainers will add comments describing the needed changes, the label `WIP:` will be added to the start of the title, and the submitter will be reassigned to the PR.
+At this point, nothing else is required from you, unless specifically requested. Don't worry about rebasing, or closing the Pull Request.
+If the Pull Request needs changes, the maintainers will add comments describing the needed changes, the label `WIP:` will be added to the start of the title, and the submitter will be reassigned to the PR.
 
 If/When you are asked to rebase, run:
 **`git checkout dev`**

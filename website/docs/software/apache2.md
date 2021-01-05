@@ -23,30 +23,36 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** httpd <br />
 **Current Image Version:** {{ apache2.version }}
 
 ## SETUP
 
-### Enabling apache2
+### Enabling and customizing apache2
 
 #### Command:
 
-**`vlab set apache2.enable True`**
+**`vlab service setup -s apache2`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 apache2
-  enable: True
+  enable: {{ apache2.version }}
+  https_only: {{ apache2.https_only }}
+  auth: {{ apache2.auth }}
+  domain: {{ apache2.domain }}
+  subdomain: {{ apache2.subdomain }}
+  version: {{ apache2.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=apache2`**
+run: **`vlab update -s apache2`**
 
 ## FIRST RUN
 
@@ -59,26 +65,6 @@ Navigate to *https://{{ apache2.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, apache2 makes this account the administrator.
 
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=apache2`** to complete the changes
-
-
 ## ACCESS
 
 Apache2 (HTTPS) link: [https://{% if apache2.domain %}{{ apache2.domain }}{% else %}{{ apache2.subdomain + "." + domain }}{% endif %}/](https://{% if apache2.domain %}{{ apache2.domain }}{% else %}{{ apache2.subdomain + "." + domain }}{% endif %}/)
@@ -88,119 +74,7 @@ Apache2 (HTTP) link: [http://{% if apache2.domain %}{{ apache2.domain }}{% else 
 Tor link: [http://{{ apache2.subdomain + "." + tor_domain }}/](http://{{ apache2.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set apache2.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-apache2
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=apache2`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set apache2.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-apache2
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=apache2`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set apache2.domain apache2.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-apache2
-  domain: apache2.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=apache2`**
-
-### SUBDOMAIN
-*Default: apache2* <br />
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
-
-#### Command:
-
-**`vlab set apache2.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-apache2
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=apache2`**
-
-### VERSION
-*Default: {{  apache2.version  }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set apache2.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-apache2
-  version: 2.7
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=apache2`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

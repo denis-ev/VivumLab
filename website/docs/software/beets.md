@@ -23,30 +23,36 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** linuxserver/beets <br />
 **Current Image Version:** {{ beets.version }}
 
 ## SETUP
 
-### Enabling beets
+### Enabling and customizing beets
 
 #### Command:
 
-**`vlab set beets.enable True`**
+**`vlab service setup -s beets`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 beets
-  enable: True
+  enable: {{ beets.version }}
+  https_only: {{ beets.https_only }}
+  auth: {{ beets.auth }}
+  domain: {{ beets.domain }}
+  subdomain: {{ beets.subdomain }}
+  version: {{ beets.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=beets`**
+run: **`vlab update -s beets`**
 
 ## FIRST RUN
 
@@ -59,26 +65,6 @@ Navigate to *https://{{ beets.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, beets makes this account the administrator.
 
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=beets`** to complete the changes
-
-
 ## ACCESS
 
 Beets (HTTPS) link: [https://{% if beets.domain %}{{ beets.domain }}{% else %}{{ beets.subdomain + "." + domain }}{% endif %}/](https://{% if beets.domain %}{{ beets.domain }}{% else %}{{ beets.subdomain + "." + domain }}{% endif %}/)
@@ -88,119 +74,7 @@ Beets (HTTP) link: [http://{% if beets.domain %}{{ beets.domain }}{% else %}{{ b
 Tor link: [http://{{ beets.subdomain + "." + tor_domain }}/](http://{{ beets.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set beets.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-beets
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=beets`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set beets.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-beets
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=beets`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set beets.domain beets.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-beets
-  domain: beets.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=beets`**
-
-### SUBDOMAIN
-*Default: beets* <br />
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
-
-#### Command:
-
-**`vlab set beets.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-beets
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=beets`**
-
-### VERSION
-*Default: {{  beets.version  }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set beets.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-beets
-  version: 2.7
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=beets`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

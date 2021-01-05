@@ -25,11 +25,6 @@
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/config.yml"
         dest: "{{ playbook_dir }}/settings_ci/config.yml"
 
-    - name: Copy VivumLab vault file into place
-      template:
-        src: "{{ playbook_dir }}/roles/vivumlab_config/templates/vault.yml"
-        dest: "{{ playbook_dir }}/settings_ci/vault.yml"
-
     - name: Generate Ansible inventory file
       template:
         src: "{{ playbook_dir }}/roles/vivumlab_config/templates/inventory.j2"

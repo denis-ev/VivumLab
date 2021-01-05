@@ -39,9 +39,9 @@ HomeLabOS is a great project, and while we are very similar, we differ in some c
 We just want to start by saying open source is very important, a free (as in freedom) internet, is something worth protecting. That being said, you may have noticed that some of the services we provide are open source, and some are not; while VivumLab advocates for and prefers open source projects, we undestand that sometimes a closed source project is required or desired by the user. The least we can do is keep VivumLab open source and free for further generations to come.
 
 ### VivumLab and supported software
-VivumLab supports deploying to Debian and CentOS based systems; since RaspberryPI OS is based on Debian, VivumLab should work. While it is theortically possible to deploy to other systems with some code changes, supporting niche or closed source systems are not a great priority for VivumLab. Changes to support such systems are welcome, should a developer wish to provide the code and support for the system.
+VivumLab supports deploying to Ubuntu, Debian and CentOS based systems; since RaspberryPI OS is based on Debian, VivumLab should work. While it is theortically possible to deploy to other systems with some code changes, supporting niche or closed source systems are not a great priority for VivumLab. Changes to support such systems are welcome, should a developer wish to provide the code and support for the system.
 
-Currently, VivumLab can be run from a Linux PC or a Macintosh PC: VivumLab currently does not officially support Windows. For the more tech savvy users, it is possible to run VivumLab on a windows machine using [Windows Subsystem for Linux](https://duckduckgo.com/?q=windows+subsystem+for+linux). However support is not official, and it is beyond the scope of this document to provide instructions; as such, your results may vary.
+Currently, VivumLab can be run from a Linux PC, a Macintosh PC and should support Windows (untested as of now). This is possible because we run everything from inside of a docker container. See [Docker](https://www.docker.com) for more information about docker.
 
 ## Troubleshooting - Access/ Web
 
@@ -60,7 +60,7 @@ Currently, VivumLab can be run from a Linux PC or a Macintosh PC: VivumLab curre
     * Check **`docker ps`** and **`systemctl status SERVICENAME`** on the server.
         * E.g. **`systemctl status jellyfin`**
 * Are your services listed in the Traefik dashboard?
-    * Check http://{{ vlab_ip }}:8181/
+    * Check http://{{ vlab_ip }}:8181/ (only available if traefik expose internally is set to true)
 
 If you have followed these instructions and you are STILL having issues, ask in the VivumLab [Zulip chat](https://vivumlab.zulipchat.com/) or open an issue on [Github](https://github.com/Vivumlab/VivumLab/issues).
     !!! Note: The documentation for VivumLab represents hours of work by the developers. Do not be offended if you ask a question, and are redirected back to the documentation. It is entirely for your own benefit; no one elses'.
@@ -167,24 +167,23 @@ VivumLab acknowledges that some versions of specific softwares may be more desir
 
 ### I can't find certain config values like Authelia
 
-Check your `config/vault.yml` file. If it's encrypted just run `vlab decrypt`, and attempt to access it again.
+Check your `config/encrypted.yml` file. If it's encrypted just run `vlab config decrypt --dev`, and attempt to access it again.
 
 ### Is it OK to manually edit my `settings/` files?
 
 Yes, but note that isn't specifically necessary to edit the `config/` files directly, or worry about where the config values are.
-Use of **`vlab get`** will access the variable correctly regardless of which config file it lives in.
->eg. **`vlab get jellyfin.domain`**
+Use of **`vlab service show -s jellyfin`** will access the variable correctly regardless of which config file it lives in.
 
-Use of **`vlab set`** will set the variable correctly,regardless of which config file
->eg. **`vlab set jellyfin.domain=magicfinger.com`**
+Use of **`vlab dev set --dev --config-key <key> --value <value>`** will set the variable correctly,regardless of which config file
+>eg. **`vlab dev set --dev --config-key jellyfin.domain --value magicfinger.com`**
 
 ### I get a exec user process caused 'exec format' error
 
 You may be trying to run AMD code on ARM infrastructure.
-Make sure you have set `arm` to True. e.g: **`vlab get arm`**
+Make sure you have set `arm` to True.
 
-You can set it with **`vlab set arm=True`**,
-or you can edit your config file.
+You can set it with **`vlab dev set --dev --config-key arm --value True`**,
+or you can edit your config file, run `vlab config edit_raw --dev` (not recommended for none developers).
 
 e.g:
 ># Set this to true if you are deploying to an ARM infrastructure, such as a Raspberry Pi.
@@ -201,8 +200,8 @@ E.g:
 ### I get `Unit servicename.service could not be found.`
 
 The service was not deployed.
-Enable the desired service. eg. **`vlab set jellyfin enable=True`**
-Alternatively, edit your `settings/` files, and set `enable` to true for the respective service. e.g:
+Enable the desired service. eg. **`vlab service setup --service SERVICENAME`**
+Alternatively, run `vlab config edit_raw --dev` (not recommended for none developers), and set `enable` to true for the respective service. e.g:
 
 >jellyfin:
   enable: True

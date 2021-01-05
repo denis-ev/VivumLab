@@ -14,11 +14,11 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 # Installation
 
-Firstly, thanks for trying VivumLab. We are glad you are here.
+First, thanks for trying VivumLab. We are glad you are here. Self-hosting for the win.
 
-VivumLab is designed to be run from a client computer. It will setup, and configure your remote server, with minimal intervention on your behalf.
+VivumLab is designed to be installed from a docker container. You can run that docker container on a laptop, a desktop or your remote server.
 
-There have been reports that VivumLab works when transferred to the remote server, and run from there; however, VivumLab is not designed for this, and as such, this is not supported; running VivumLab in this way may have undesirable results; and does not provide any foreseeable benefits.
+With those three requirements met, VivumLab will connect to, configure and setup your server to host the services you select.
 
 !!! Warning "Beta Software Warning"
 
@@ -32,7 +32,9 @@ There have been reports that VivumLab works when transferred to the remote serve
 
 ## Requirements
 
-### Server
+### Server requirements
+
+> Your 'Server' is the machine you will host your services on.
 
 - A suitable OS:
     - Ubuntu Server 16 and above
@@ -42,15 +44,19 @@ There have been reports that VivumLab works when transferred to the remote serve
 - `sudo` must be available
 - [Passwordless SSH via SSH keys](https://linuxconfig.org/passwordless-ssh) working
 
+> VivumLab may well run on other distributions of Linux, but VivumLab only tests and provides playbooks for these distributions.
+
 !!! Warning
     If you are running on an ARM infrastructure such as Raspberry PI, ensure `arm`  is set to 'true' in the config.yml file, on the client computer.
 
-### Client Computer
+### Client Computer Requirements
+
+!!! Note: The 'Client' computer is where you will deploy VivumLab from. This is *normally* a laptop or desktop that is not your server. This way your settings are saved on your personal computer, which can be used to re-build the server and restore from backups if anything goes wrong. However, there's nothing preventing you from deploying VivumLab from your server. Just make sure you're not using a version of docker that will be *replaced* by VivumLab during install.
 
 - Docker (installed and working)
+- Git
+- Active Network connection
 
-!!! Note:
-    The idea is that you deploy from your personal computer to the server. This way your settings are saved on your personal computer, which can be used to re-build the server and restore from backups if anything goes wrong.
 
 ### Domain Name
 
@@ -164,8 +170,8 @@ You can SSH into the server, and run **`systemctl status SERVICENAME`** where SE
 
 ## Syncing Settings via Git
 
-VivumLab will automatically keep the `settings/` folder in sync with a git repo if it has one.
-So you can create a private repo on your Gitea instance for example, then clone that repo over the settings folder. Now any changes you make to `settings/` files will be commited and pushed to that git repo whenever you run **`vlab deploy`**, **`vlab update`** or **`vlab config`**.
+VivumLab will automatically keep the `settings/` folder in sync with a git repo **if it has one**.
+So you can create a private repo on your Gitea instance for example, then clone that repo over the settings folder. Now any changes you make to `settings/` files will be commited and pushed to that git repo whenever you run **`vlab deploy`**, **`vlab update`** or any **`vlab service`**.
 
 ## Backing up your Vault Password
 
