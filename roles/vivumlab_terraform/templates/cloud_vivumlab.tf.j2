@@ -1,0 +1,22 @@
+resource "digitalocean_ssh_key" "default" {
+  name       = "VivumLab Access Key"
+  public_key = file("~/.ssh/{{ passwordless_sshkey }}.pub")
+}
+
+resource "digitalocean_droplet" "vivumlab" {
+  image = "ubuntu-18-04-x64"
+  name = "vivumlab"
+  region = "{{ do_region }}"
+  size = "s-1vcpu-1gb"
+  ssh_keys = [
+      digitalocean_ssh_key.default.fingerprint
+    ]
+}
+
+resource "digitalocean_project" "vivumlab" {
+  name        = "VivumLab"
+  description = "A project to represent development resources."
+  purpose     = "Web Applications"
+  environment = "Development"
+  resources   = [digitalocean_droplet.vivumlab.urn]
+}

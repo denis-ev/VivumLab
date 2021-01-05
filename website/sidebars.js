@@ -164,6 +164,7 @@ module.exports = {
       label: 'About',
       items: [
         'about',
+        'faq',
         'jobs',
         'contact',
         'code-of-conduct',

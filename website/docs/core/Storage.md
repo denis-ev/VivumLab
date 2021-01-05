@@ -24,10 +24,10 @@ There are 3 kinds of storage related to Docker and Docker compose. And by extens
 
   ```yml
   volumes:
-    - /var/vivumlab/serviceName:/MyFiles
+    - /home/<ssh_user>/serviceName:/MyFiles
   ```
 
-  This mapping of a volume means that the container, and it's software can access the contents of `/var/vivumlab/serviceName` by accessing it's own `/MyFiles` directory.
+  This mapping of a volume means that the container, and it's software can access the contents of `/home/<ssh_user>/serviceName` by accessing it's own `/MyFiles` directory.
 
 - NAS - Network Attached Storage volume(s) - NAS Volumes - are volumes, but they're controlled, in part, by VivumLab. If you enable NAS storage in your config, and provide valid credentials to your NAS, VivumLab will take care of mounting your NAS for you.
 
@@ -79,13 +79,13 @@ Different VivumLab services operate on libraries of media (Airsonic, Plex, and P
 NAS shares are mounted on the Vivumlab host under `{{ storage_dir }}`, which defaults to `/mnt/nas`. By default, NAS is disabled, and the services that can use it will instead use local folders under `{{ storage_dir }}`.
 For example, Emby will map `{{ storage_dir }}/Video/TV` and `{{ storage_dir }}/Video/Movies` into its container, and Paperless will mount `{{ storage_dir }}/Documents`. Check the `docker-compose` files for each service to see what directories are used.
 
-VivumLab has a NAS section in the `settings/config.yml` file. This allows you to specify the connection details and credentials to access your NAS. These details are used _in conjunction with the `storage_dir` variable_ to create and maintain `/etc/fstab` entries.
+VivumLab has a NAS section in the `settings/encrypted.yml` file. This allows you to specify the connection details and credentials to access your NAS. These details are used _in conjunction with the `storage_dir` variable_ to create and maintain `/etc/fstab` entries.
 
 !!! NOTE: VivumLab is configured to write `/etc/fstab` entries that mount your NAS folders within, _or on top of_ the `storage_dir` directory** Be careful not to mount your NAS folders _over_ existing files in your `storage_dir` or everyone will be very confused.
 
 ## NAS Configuration
 
-To configure your NAS, edit the `# NAS Config` section of `settings/config.yml`.
+To configure your NAS, edit the `# NAS Config` section of `settings/decrypted.yml`.
 
 Your NAS options are:
 

@@ -1,24 +1,10 @@
----
-id: wificard
-title: WiFi Card
-hide_title: true
-hide_table_of_contents: false
-sidebar_label: WiFi Card
-custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
-#description: How do I find you when I cannot solve this problem
-#keywords:
-#  - docs
-#  - docusaurus
-#image: https://i.imgur.com/mErPwqL.png
----
-
 # WiFi Card
 
 [WiFi Card](https://wificard.bdw.to/) Make a simple card with your WiFi login details.
 
-![amd64](https://img.shields.io/badge/{% if not wificard.amd64 %}untested{% else %}{{ wificard.amd64 }}{% endif %}-amd64-{% if not wificard.amd64 %}inactive{% elif wificard.amd64 == "verified" %}success{% elif wificard.amd64 == "supported" %}informational{% elif wificard.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![arm64](https://img.shields.io/badge/{% if not wificard.arm64 %}untested{% else %}{{ wificard.arm64 }}{% endif %}-arm64-{% if not wificard.arm64 %}inactive{% elif wificard.arm64 == "verified" %}success{% elif wificard.arm64 == "supported" %}informational{% elif wificard.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![armv7](https://img.shields.io/badge/{% if not wificard.armv7 %}untested{% else %}{{ wificard.armv7 }}{% endif %}-armv7-{% if not wificard.armv7 %}inactive{% elif wificard.armv7 == "verified" %}success{% elif wificard.armv7 == "supported" %}informational{% elif wificard.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![amd64](https://img.shields.io/badge/{% if not wificard.amd64 %}untested{% else %}{{ wificard.amd64 }}{% endif %}-amd64-{% if not wificard.amd64 %}inactive{% elif wificard.amd64 == "verified" %}success{% elif wificard.amd64 == "supported" %}informational{% elif wificard.amd64 == "unsupported" %}critical{% endif %}?style=flat)
+![arm64](https://img.shields.io/badge/{% if not wificard.arm64 %}untested{% else %}{{ wificard.arm64 }}{% endif %}-arm64-{% if not wificard.arm64 %}inactive{% elif wificard.arm64 == "verified" %}success{% elif wificard.arm64 == "supported" %}informational{% elif wificard.arm64 == "unsupported" %}critical{% endif %}?style=flat)
+![armv7](https://img.shields.io/badge/{% if not wificard.armv7 %}untested{% else %}{{ wificard.armv7 }}{% endif %}-armv7-{% if not wificard.armv7 %}inactive{% elif wificard.armv7 == "verified" %}success{% elif wificard.armv7 == "supported" %}informational{% elif wificard.armv7 == "unsupported" %}critical{% endif %}?style=flat)
 
 ## Information
 
@@ -64,7 +50,7 @@ Tor link: [http://{{ wificard.subdomain + "." + tor_domain }}/](http://{{ wifica
 ## OPTIONS
 
 ### HTTPS_ONLY
-*Default: False* <br />
+*Default: False*
 *Options: True/False*
 
 #### Command:
@@ -82,7 +68,7 @@ wificard
 ```
 
 ### AUTH
-*Default: False* <br />
+*Default: False*
 *Options: True/False*
 
 #### Command:
@@ -100,7 +86,7 @@ wificard
 ```
 
 ### DOMAIN
-*Default: False* <br />
+*Default: False*
 *NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
 
 #### Command:
@@ -118,7 +104,7 @@ wificard
 ```
 
 ### SUBDOMAIN
-*Default: wificard* <br />
+*Default: wificard*
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
@@ -136,7 +122,7 @@ wificard
 ```
 
 ### VERSION
-*Default: {{  wificard.version  }}* <br />
+*Default: {{  wificard.version  }}*
 *NOTE: Ensure that the version exists*
 
 #### Command:
@@ -158,6 +144,6 @@ wificard
 run: **`vlab update_one service=wificard`**
 
 ## Need more help?
-Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+Further information regarding services can be found. \
+General Information can be found in the [documentation](https://vivumlab.com/docs). \
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

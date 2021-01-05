@@ -1,11 +1,7 @@
 ---
 - hosts: 127.0.0.1
   connection: local
-  vars_prompt:
-    - name: do_access_token
-      prompt: "What is your DO API Token?"
 
   roles:
     - vivumlab_terraform
-    - vivumlab_config
 ...

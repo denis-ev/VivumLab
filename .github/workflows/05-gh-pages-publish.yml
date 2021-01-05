@@ -29,10 +29,9 @@ jobs:
           echo "blank_on_purpose: True" > settings_ci/config.yml
           echo "blank_on_purpose: True" > settings_ci/vault.yml
           echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
-          ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci_config.yml --vault-password-file ~/.vlab_vault_pass
-          ansible-vault encrypt settings_ci/vault.yml --vault-password-file ~/.vlab_vault_pass
+          ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci_config.yml
       - name: Run Playbook
-        run: ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci.yml --vault-password-file ~/.vlab_vault_pass
+        run: ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci.yml
       - name: Test Build
         run: |
           yarn install --frozen-lockfile
@@ -55,10 +54,9 @@ jobs:
           echo "blank_on_purpose: True" > settings_ci/config.yml
           echo "blank_on_purpose: True" > settings_ci/vault.yml
           echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
-          ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci_config.yml --vault-password-file ~/.vlab_vault_pass
-          ansible-vault encrypt settings_ci/vault.yml --vault-password-file ~/.vlab_vault_pass
+          ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci_config.yml
       - name: Run Playbook
-        run: ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci.yml --vault-password-file ~/.vlab_vault_pass
+        run: ansible-playbook --extra-vars="@settings_ci/config.yml" --extra-vars="@settings_ci/vault.yml" -i inventory playbook.ci.yml
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"

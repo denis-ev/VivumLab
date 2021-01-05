@@ -11,25 +11,79 @@ import TabItem from '@theme/TabItem';
 
 const installs = [
   {
-    label: 'git',
+    label: 'run',
+    snippet: `# Start the CLI
+./launch.sh`
+  },
+  {
+    label: 'install',
+    snippet: `# Install
+git clone --branch master https://github.com/VivumLab/VivumLab.git
+
+# Start the CLI
+./launch.sh
+
+# Run within the started Docker container
+vlab deploy`
+  },
+  {
+    label: 'dev-install',
+    snippet: `# Developer Install
+git clone --branch dev https://github.com/VivumLab/VivumLab.git
+
+# Start the CLI with dev parameter
+./launch.sh dev
+
+# Run within the started Docker container
+vlab deploy`
+  },
+  {
+    label: 'local-build',
     snippet: `# Install
 git clone https://github.com/VivumLab/VivumLab.git
 
-# Make a config
-./vlab config
+# Build / Start the CLI
+./launch.sh local
 
-# Run
-./vlab deploy`
+# Start the CLI (Only works if image was build before)
+./launch.sh local start
+
+# Run within the started Docker container
+vlab deploy`
   }
 ]
 
 const snippets = [
   {
-    label: 'Enable Services',
+    label: 'Deploy',
     further: '/docs/core/Installation#enabling-services',
-    config: `vlab set SERVICENAME.enable=true
+    config: `vlab deploy`,
+  },
+  {
+    label: 'Enable / Update Service',
+    further: '/docs/core/Installation#enabling-services',
+    config: `# Enable a service
+vlab service setup --service SERVICENAME
 
-vlab deploy`,
+# Update a service
+vlab update --service SERVICENAME
+
+# Show config for a service
+vlab service show --service SERVICENAME
+
+# Change options for a service (Example for option https_only)
+vlab service setup --service SERVICENAME`,
+  },
+  {
+    label: 'Update all Services',
+    further: '/docs/core/Installation#enabling-services',
+    config: `vlab update`,
+  },
+  {
+    label: 'Show config',
+    further: '/docs/core/Installation#enabling-services',
+    config: `# Show config for a service
+    vlab service show --service SERVICENAME`,
   }
 ];
 
@@ -74,8 +128,8 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="The stream processor for mundane tasks"
-      keywords={["benthos","stream processor","data engineering","ETL","ELT","event processor","go","golang"]}>
+      description="It's your data, it's your life. Own it, with VivumLab"
+      keywords={["VivumLab","selfhosting","self hosting","privacy","homelab"]}>
       <header className={classnames('hero', styles.heroBanner)}>
         <div className="container">
           <div className="row">

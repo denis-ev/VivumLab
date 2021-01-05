@@ -39,7 +39,6 @@ If you are having problems you can:
 
 - [File an issue on Github](https://github.com/Vivumlab/VivumLab/issues).
 - [Talk to us on VivumLab Zulip Chat](https://vivumlab.zulipchat.com/)
-- [Follow VivumLab on Mastodon](https://fosstodon.org/@vivumlab)
 - [Ask a question on VivumLab Reddit](https://www.reddit.com/r/VivumLab/)
 
 ## Available Software

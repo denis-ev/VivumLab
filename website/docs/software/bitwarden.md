@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** bitwardenrs/server <br />
 **Current Image Version:** {{ bitwarden.version }}
 
 ## SETUP
@@ -32,25 +32,33 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 >Password managers like Bitwarden should only be used over HTTPS. Ensure you have valid certificates in place before beginning to use this service. You have been warned. :)
 
-### Enabling bitwarden
+## SETUP
+
+### Enabling and customizing bitwarden
 
 #### Command:
 
-**`vlab set bitwarden.enable True`**
+**`vlab service setup -s bitwarden`**
 
-#### File alteration:
+##### File alteration (not recommended):
 
-set the appropriate service settings in `settings/config.yml` to true
+- edit config via cli `vlab config edit_raw --dev`
+- set the appropriate service settings in `settings/decrypted.yml` to true, after running `vlab config decrypt --dev`
 
 eg.
 ```
 bitwarden
-  enable: True
+  enable: {{ bitwarden.version }}
+  https_only: {{ bitwarden.https_only }}
+  auth: {{ bitwarden.auth }}
+  domain: {{ bitwarden.domain }}
+  subdomain: {{ bitwarden.subdomain }}
+  version: {{ bitwarden.version }}
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=bitwarden`**
+run: **`vlab update -s bitwarden`**
 
 ## FIRST RUN
 
@@ -63,26 +71,6 @@ Navigate to *https://{{ bitwarden.domain }}/admin*
 
 Create an account with your desired username; as this is the first user, bitwarden makes this account the administrator.
 
-### SMTP/ MAIL
-
-1. run **`vlab decrypt`** to decrypt the `vault.yml` file
-2. make some changes
-
-
-#### SMTP Settings
-```
-smtp:
-  host:
-  port:
-  user:
-  pass:
-  from_email:
-  from_name:
-```
-
-3. run **`vlab update_one service=bitwarden`** to complete the changes
-
-
 ## ACCESS
 
 Bitwarden (HTTPS) link: [https://{% if bitwarden.domain %}{{ bitwarden.domain }}{% else %}{{ bitwarden.subdomain + "." + domain }}{% endif %}/](https://{% if bitwarden.domain %}{{ bitwarden.domain }}{% else %}{{ bitwarden.subdomain + "." + domain }}{% endif %}/)
@@ -92,119 +80,7 @@ Bitwarden (HTTP) link: [http://{% if bitwarden.domain %}{{ bitwarden.domain }}{%
 Tor link: [http://{{ bitwarden.subdomain + "." + tor_domain }}/](http://{{ bitwarden.subdomain + "." + tor_domain }}/)
 {% endif %}
 
-## OPTIONS
-
-### HTTPS_ONLY
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set bitwarden.https_only True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bitwarden
-  https_only: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bitwarden`**
-
-### AUTH
-*Default: False* <br />
-*Options: True/False*
-
-#### Command:
-
-**`vlab set bitwarden.auth True`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bitwarden
-  auth: True
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bitwarden`**
-
-### DOMAIN
-*Default: False* <br />
-*NOTE: include the sitename and top level domain suffix. eg. name.com, site.net*
-
-#### Command:
-
-**`vlab set bitwarden.domain bitwarden.com`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bitwarden
-  domain: bitwarden.com
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bitwarden`**
-
-### SUBDOMAIN
-*Default: bitwarden* <br />
-*NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
-
-#### Command:
-
-**`vlab set bitwarden.subdomain media`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bitwarden
-  subdomain: media
-```
-
-##### Finalising changes:
-
-run: **`vlab update_one service=bitwarden`**
-
-### VERSION
-*Default: {{  bitwarden.version  }}* <br />
-*NOTE: Ensure that the version exists*
-
-#### Command:
-
-**`vlab set bitwarden.version 2.7`**
-
-#### File alteration:
-
-set the appropriate service settings in `settings/config.yml` to true
-
-eg.
-```
-bitwarden
-  version: 2.7
-```
-s
-##### Finalising changes:
-
-run: **`vlab update_one service=bitwarden`**
-
 ## Need more help?
 Further information regarding services can be found. <br />
-General Information can be found in the [documentation](https://docs.vivumlab.com). <br />
-Additional assistance can be found on our [Contact Us](https://docs.vivumlab.com/Contact-us) page.
+General Information can be found in the [documentation](https://vivumlab.com/docs). <br />
+Additional assistance can be found on our [Contact Us](https://vivumlab.com/docs/contact) page.

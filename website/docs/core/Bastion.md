@@ -29,7 +29,7 @@ First you need a cloud server through a provider such as AWS or Digital Ocean.
 
 You can use the [VivumLab Terraform feature](terraform), or set it up manually.
 
-Set any `bastion` config values to their correct settings.
+Set any `bastion` config values to their correct settings. Or run `vlab bastion enable` to enable (interactive setup).
 
 Run **`vlab deploy`** as usual, and VivumLab will take care of everything else.
 
