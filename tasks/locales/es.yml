@@ -363,7 +363,7 @@ es:
       usage: "version"
       desc: "Show VivumLab version"
       out:
-        vlabversion: "Current VivumLab version: #{vlabversion}"
+        vlabversion: "Current VivumLab version: %{vlabversion}"
 
   dynamic_namespaces:
     service:

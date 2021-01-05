@@ -55,9 +55,7 @@ class Vlab < Thor
 
   desc I18n.t('vlab.version.usage'), I18n.t('vlab.version.desc')
   def version
-    if options[:version]
-      say I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
-    end
+    say I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
   end
 
   include DynamicNamespaces
@@ -117,9 +115,13 @@ def $stderr.write(string)
 end
 
 begin
+  puts I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue if ARGV.include?('--version')
+  exit 0 if ARGV.include?('--version')
+
   Vlab.start
 ensure
   if ARGV.include?('-d') || ARGV.include?('--debug')
+    puts I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
     results = HTTParty.post 'https://hastebin.com/documents', body: File.read($this_log)
     puts "Your logs have been posted to: https://hastebin.com/#{results['key']}"
   else
