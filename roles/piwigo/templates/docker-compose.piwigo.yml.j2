@@ -41,7 +41,7 @@ services:
     volumes:
       - "{{ volumes_root }}/piwigo/mysql/:/var/lib/mysql"
     environment:
-      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/passwords/piwigo_root_db_password chars=ascii_letters')}}"
+      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/piwigo_root_db_password chars=ascii_letters')}}"
       - MYSQL_DATABASE=piwigo
       - MYSQL_USER=piwigo
-      - MYSQL_PASSWORD="{{lookup('password', './settings/passwords/piwigo_db_password chars=ascii_letters')}}"
+      - MYSQL_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/piwigo_db_password chars=ascii_letters')}}"

@@ -32,10 +32,10 @@ services:
       - MOTION_HOST=localhost
       - MOTION_PORT=8080
       - MYSQL_USER=shinobi
-      - MYSQL_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_password chars=ascii_letters')}}"
+      - MYSQL_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/shinobi_db_password chars=ascii_letters')}}"
       - MYSQL_HOST=db
       - MYSQL_DATABASE=shinobi
-      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_root_password chars=ascii_letters')}}"
+      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/shinobi_db_root_password chars=ascii_letters')}}"
       - MYSQL_ROOT_USER=root
     labels:
       - "traefik.http.services.shinobi.loadbalancer.server.scheme=http"
@@ -54,7 +54,7 @@ services:
       - "{{ volumes_root }}/shinobi/db:/var/lib/mysql"
     environment:
       - MYSQL_USER=shinobi
-      - MYSQL_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_password chars=ascii_letters')}}"
+      - MYSQL_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/shinobi_db_password chars=ascii_letters')}}"
       - MYSQL_DATABASE=shinobi
-      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/passwords/shinobi_db_root_password chars=ascii_letters')}}"
+      - MYSQL_ROOT_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/shinobi_db_root_password chars=ascii_letters')}}"
       - MYSQL_ROOT_USER=root

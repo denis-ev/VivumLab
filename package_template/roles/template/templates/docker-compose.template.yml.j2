@@ -40,7 +40,7 @@ services:
       - PackageFileName_network
     environment:
       - POSTGRES_DB=PackageFileName_db
-      - POSTGRES_PASSWORD={{ lookup('password', './settings/passwords/PackageFileName_db_password chars=ascii_letters') }}
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/PackageFileName_db_password chars=ascii_letters') }}
       - POSTGRES_USER=PackageFileName_user
       - PGDATA=/database
     volumes:

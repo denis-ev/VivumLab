@@ -55,7 +55,7 @@ run: **`vlab update_one service=pleroma`**
 
 ### Additional Installation Steps
 
-* Pleroma requires you to interactively create the first user using docker exec, or something similar. Here's a templated version for you to run. You'll need to do this from your vivumlab server's /var/vivumlab/pleroma directory.
+* Pleroma requires you to interactively create the first user using docker exec, or something similar. Here's a templated version for you to run. You'll need to do this from your vivumlab server's ~/vivumlab/pleroma directory.
 
 ```sh
 docker-compose exec web /opt/pleroma/bin/pleroma_ctl user new {{default_username}} {{admin_email}} --name {{default_username}} --password {{default_password}} --admin --moderator -y

@@ -63,9 +63,9 @@ services:
     networks:
       - invoiceninja
     environment:
-      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_root_pw')}}
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_root_pw')}}
       - MYSQL_USER=ninja
-      - MYSQL_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_pw')}}
+      - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_pw')}}
       - MYSQL_DATABASE=db-ninja-01
     volumes:
       - "{{ volumes_root }}/invoiceninja/mysql-data:/var/lib/mysql:rw"
@@ -94,7 +94,7 @@ services:
       - DB_HOST=indb
       - DB_DATABASE=db-ninja-01
       - DB_USERNAME=ninja
-      - DB_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_pw')}}
+      - DB_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_pw')}}
       # Mail Environment
       - MAIL_HOST={{ smtp.host }}
       - MAIL_USERNAME={{ smtp.user }}

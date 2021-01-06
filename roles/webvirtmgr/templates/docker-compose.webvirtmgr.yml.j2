@@ -18,7 +18,7 @@ services:
     environment:
       - WEBVIRTMGR_ADMIN_USERNAME=admin
       - WEBVIRTMGR_ADMIN_EMAIL=admin@local.domain
-      - WEBVIRTMGR_ADMIN_PASSWORD="{{lookup('password', './settings/passwords/webvirtmgr_db_password chars=ascii_letters')}}"
+      - WEBVIRTMGR_ADMIN_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/webvirtmgr_db_password chars=ascii_letters')}}"
     ports:
       - '8000:8000'
     labels:

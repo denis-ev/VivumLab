@@ -18,7 +18,7 @@ services:
       - nextcloud
     restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_USER=nextcloud
       - POSTGRES_DB=nextcloud
 
@@ -47,7 +47,7 @@ services:
       - UID={{ uid_output.stdout }}
       - GID={{ gid_output.stdout }}
       - POSTGRES_HOST=db
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
       - UPLOAD_MAX_SIZE=10G
