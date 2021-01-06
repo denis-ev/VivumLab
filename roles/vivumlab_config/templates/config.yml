@@ -45,6 +45,9 @@ default_password: "{{ default_password | default() }}"
 # Set this to true if you are deploying to an ARM infrastructure, such as a Raspberry Pi.
 arm: {{ arm | default('False') }}
 
+# Set this to true if you have trouble connection to your server.
+wait_for_connection: {{ wait_for_connection | default('False') }}
+
 # This configuration dictionary sets various details of your bastion host.
 # see the docs for more information about what a bastion host is and how
 # the VivumLab bastion host works.
