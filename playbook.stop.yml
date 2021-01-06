@@ -1,17 +1,17 @@
 ---
 - hosts: all
   gather_facts: no
-  tags: setup
 
   tasks:
     - name: Stop services
       systemd:
-        name: "{{ service_item }}"
+        name: "{{ service_item }}.service"
         state: stopped
-      when: query == true
+        no_block: true
+      when: query | bool
       loop: "{{ services | flatten(1) }}"
       loop_control:
         loop_var: service_item
       vars:
-        query: "{{ service_item + '.enable' }}"
+        query: "{{ vars[service_item]['enable'] }}"
       become: yes
