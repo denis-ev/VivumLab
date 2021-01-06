@@ -24,6 +24,7 @@ module Utils
     command << "ansible-playbook #{playbook.chomp}"
     command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
     command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
+    command << "-e config_dir=#{options[:config_dir]}"
     command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')
