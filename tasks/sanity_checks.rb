@@ -11,7 +11,7 @@ class SanityChecks < Thor
   include Utils
 
   desc I18n.t('sanity_checks.check_ssh_keys.usage'), I18n.t('sanity_checks.check_ssh_keys.desc')
-  # @TODO Write check_ssh_keys task (sanity_check.rb)
+  # @todo Write check_ssh_keys task (sanity_check.rb)
   def check_ssh_keys
     # if File.exist?
   end
