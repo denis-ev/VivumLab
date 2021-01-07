@@ -43,7 +43,7 @@ eg.
 ```
 barcodebuddy
   enable: {{ barcodebuddy.version }}
-  https_only: {{ barcodebuddy.https_only }}
+  hsts: {{ barcodebuddy.hsts }}
   auth: {{ barcodebuddy.auth }}
   domain: {{ barcodebuddy.domain }}
   subdomain: {{ barcodebuddy.subdomain }}

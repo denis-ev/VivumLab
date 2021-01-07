@@ -117,7 +117,7 @@ eg.
 ```
 authelia
   enable: {{ authelia.version }}
-  https_only: {{ authelia.https_only }}
+  hsts: {{ authelia.hsts }}
   auth: {{ authelia.auth }}
   domain: {{ authelia.domain }}
   subdomain: {{ authelia.subdomain }}

@@ -42,7 +42,7 @@ eg.
 ```
 adguardhome
   enable: {{ adguardhome.version }}
-  https_only: {{ adguardhome.https_only }}
+  hsts: {{ adguardhome.hsts }}
   auth: {{ adguardhome.auth }}
   domain: {{ adguardhome.domain }}
   subdomain: {{ adguardhome.subdomain }}

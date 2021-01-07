@@ -47,7 +47,7 @@ eg.
 ```
 calibre
   enable: {{ calibre.version }}
-  https_only: {{ calibre.https_only }}
+  hsts: {{ calibre.hsts }}
   auth: {{ calibre.auth }}
   domain: {{ calibre.domain }}
   subdomain: {{ calibre.subdomain }}

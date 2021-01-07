@@ -42,7 +42,7 @@ eg.
 ```
 airsonic
   enable: {{ airsonic.version }}
-  https_only: {{ airsonic.https_only }}
+  hsts: {{ airsonic.hsts }}
   auth: {{ airsonic.auth }}
   domain: {{ airsonic.domain }}
   subdomain: {{ airsonic.subdomain }}

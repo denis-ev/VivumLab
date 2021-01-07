@@ -191,7 +191,7 @@ BEGIN {
 config_block = <<~CONFIG
 #{to_insert}:
   enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
-  https_only: {{ #{to_insert}.https_only | default(False) }}
+  hsts: {{ #{to_insert}.hsts | default(True) }}
   auth: {{ #{to_insert}.auth | default(False) }}
   domain: {{ #{to_insert}.domain | default(False) }}
   subdomain: {{ #{to_insert}.subdomain | default("#{to_insert}")}}

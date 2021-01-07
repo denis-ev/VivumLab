@@ -43,7 +43,7 @@ eg.
 ```
 apache2
   enable: {{ apache2.version }}
-  https_only: {{ apache2.https_only }}
+  hsts: {{ apache2.hsts }}
   auth: {{ apache2.auth }}
   domain: {{ apache2.domain }}
   subdomain: {{ apache2.subdomain }}
