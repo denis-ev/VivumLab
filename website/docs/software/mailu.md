@@ -100,7 +100,7 @@ It is available at [https://admin.{% if mailu.domain %}{{ mailu.domain }}{% else
 It is also available via Tor at [http://admin.{{ mailu.subdomain + "." + tor_domain }}/ui/](http://admin.{{ mailu.subdomain + "." + tor_domain }}/ui/)
 {% endif %}
 
-You can login using admin@{{ domain }} and the password found on your server in `/var/vivumlab/mailu/.env` under INITIAL_ADMIN_PW, or in `settings/passwords/mailu_admin_password` from your deploy location.
+You can login using admin@{{ domain }} and the password found on your server in `~/vivumlab/mailu/.env` under INITIAL_ADMIN_PW, or in `settings/passwords/mailu_admin_password` from your deploy location.
 
 ## OPTIONS
 

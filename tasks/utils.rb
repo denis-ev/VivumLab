@@ -35,6 +35,7 @@ module Utils
     command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
     command << '--skip-tags setup' if already_setup?
     command << '--skip-tags tor' unless decrypted_config_file[:enable_tor]
+    command << "-e config_dir=#{options[:config_dir]}"
     command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')

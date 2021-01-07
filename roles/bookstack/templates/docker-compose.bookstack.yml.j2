@@ -15,10 +15,10 @@ services:
       - bookstack
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/bookstack_db_root_password chars=ascii_letters')}}
+    - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/bookstack_db_root_password chars=ascii_letters')}}
     - MYSQL_DATABASE=bookstack
     - MYSQL_USER=bookstack
-    - MYSQL_PASSWORD={{lookup('password', './settings/passwords/bookstack_db_password chars=ascii_letters')}}
+    - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/bookstack_db_password chars=ascii_letters')}}
     volumes:
     - "{{ volumes_root }}/bookstack/mysql-data:/var/lib/mysql"
 
@@ -35,7 +35,7 @@ services:
     - DB_HOST=db:3306
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
-    - DB_PASSWORD={{lookup('password', './settings/passwords/bookstack_db_password chars=ascii_letters')}}
+    - DB_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/bookstack_db_password chars=ascii_letters')}}
     - APP_URL=https://{% if bookstack.domain %}{{ bookstack.domain }}{% else %}{{ bookstack.subdomain + "." + domain }}{% endif %}
 
     volumes:

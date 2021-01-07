@@ -18,7 +18,7 @@ services:
       - DISPLAY_WIDTH=1920
       - DISPLAY_HEIGHT=1080
       - ENABLE_CJK_FONT=0
-      - VNC_PASSWORD="{{lookup('password', './settings/passwords/digikam_vnc_password chars=ascii_letters')}}"
+      - VNC_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/digikam_vnc_password chars=ascii_letters')}}"
     volumes:
       - "{{ volumes_root }}/digikam/config:/config"
       - "{{ storage_dir }}/Pictures:/data"

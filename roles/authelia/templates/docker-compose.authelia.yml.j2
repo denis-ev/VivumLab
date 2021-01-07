@@ -43,6 +43,6 @@ services:
     image: postgres:{{ authelia.db_version }}
     environment:
       POSTGRES_DB: my_authelia
-      POSTGRES_PASSWORD: {{lookup('password', './settings/passwords/authelia_postgres_password')}}
+      POSTGRES_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/authelia_postgres_password')}}
     volumes:
       - "{{ volumes_root }}/authelia/postgres_data:/var/lib/postgresql/data"

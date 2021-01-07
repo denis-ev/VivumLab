@@ -29,9 +29,9 @@ services:
       #PHOTOPRISM_READONLY: "false"
       #PHOTOPRISM_PUBLIC: "false"
       # Plain text or bcrypt hash (escape "$" with "$$")
-      PHOTOPRISM_ADMIN_PASSWORD: "{{lookup('password', './settings/passwords/photoPrism_password chars=ascii_letters')}}"
+      PHOTOPRISM_ADMIN_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/photoPrism_password chars=ascii_letters')}}"
       # Plain text only (username "photoprism")
-      PHOTOPRISM_WEBDAV_PASSWORD: "{{lookup('password', './settings/passwords/photoPrism_password chars=ascii_letters')}}"
+      PHOTOPRISM_WEBDAV_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/photoPrism_password chars=ascii_letters')}}"
     volumes:
       - "{{ storage_dir }}/Pictures:/photoprism/originals" # [local path]:[container path]
       - "{{ storage_dir }}/Pictures/PhotoPrismImport:/photoprism/import" # [local path]:[container path] (optional)

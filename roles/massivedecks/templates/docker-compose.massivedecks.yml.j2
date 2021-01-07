@@ -15,7 +15,7 @@ services:
     image: massivedecks/server:{{ massivedecks.server_version }}
     environment:
         - NODE_ENV=production
-        - MD_SECRET={{"lookup('password', './settings/passwords/massivedecks_md_secret chars=ascii_letters')"}}
+        - MD_SECRET={{"lookup('password', './settings/' + config_dir + '/passwords/massivedecks_md_secret chars=ascii_letters')"}}
     networks:
         - massivedecks
     restart: unless-stopped
