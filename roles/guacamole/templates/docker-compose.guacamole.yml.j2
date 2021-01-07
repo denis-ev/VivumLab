@@ -27,7 +27,7 @@ services:
       - "{{ volumes_root }}/guacamole/dbdata:/var/lib/postgresql/data"
     environment:
       POSTGRES_USER: guacpostgress
-      POSTGRES_PASSWORD: "{{lookup('password', './settings/passwords/postgres_password chars=ascii_letters')}}"
+      POSTGRES_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/postgres_password chars=ascii_letters')}}"
     depends_on:
       - initdb
 
@@ -50,7 +50,7 @@ services:
       POSTGRES_HOSTNAME: guacpostgres
       POSTGRES_DATABASE: guacpostgress
       POSTGRES_USER: guacpostgress
-      POSTGRES_PASSWORD: "{{lookup('password', './settings/passwords/postgres_password chars=ascii_letters')}}"
+      POSTGRES_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/postgres_password chars=ascii_letters')}}"
     depends_on:
       - db
       - guacd

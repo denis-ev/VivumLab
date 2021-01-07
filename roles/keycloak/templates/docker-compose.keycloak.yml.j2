@@ -19,7 +19,7 @@ services:
     #   - 5432:5432
     environment:
       POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: {{lookup('password', './settings/passwords/keycloak_db_password chars=ascii_letters')}}
+      POSTGRES_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/keycloak_db_password chars=ascii_letters')}}
       POSTGRES_DB: keycloak
       POSTGRES_HOST: db
     networks:
@@ -35,7 +35,7 @@ services:
       DB_PORT: 5432
       DB_DATABASE: keycloak
       DB_USER: keycloak
-      DB_PASSWORD: {{lookup('password', './settings/passwords/keycloak_db_password chars=ascii_letters')}}
+      DB_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/keycloak_db_password chars=ascii_letters')}}
       KEYCLOAK_USER: {{ default_username }}
       KEYCLOAK_PASSWORD: "{{ default_password }}"
       PROXY_ADDRESS_FORWARDING: "true"

@@ -17,6 +17,15 @@ module Utils
     say I18n.t('utils.run_playbook.out.playbookerror', e: e).red
   ensure
     FileUtils.rm_f @temp_config
+    mark_as_setup unless already_setup?
+  end
+
+  def already_setup?
+    File.exist? "settings/#{options[:config_dir]}/.setup"
+  end
+
+  def mark_as_setup
+    FileUtils.touch "settings/#{options[:config_dir]}/.setup"
   end
 
   def playbook_command(playbook, extra = nil, debug = '')
@@ -24,6 +33,9 @@ module Utils
     command << "ansible-playbook #{playbook.chomp}"
     command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
     command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
+    command << '--skip-tags setup' if already_setup?
+    command << '--skip-tags tor' unless decrypted_config_file[:enable_tor]
+    command << "-e config_dir=#{options[:config_dir]}"
     command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')

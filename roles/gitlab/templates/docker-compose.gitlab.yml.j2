@@ -69,8 +69,8 @@ services:
           "SKIP" => "db,uploads,artifacts,lfs"
         }
 {% endif %}
-        gitlab_rails['initial_root_password'] = '{{ lookup('password', './settings/passwords/gitlab_root_password chars=ascii_letters') }}'
-        gitlab_rails['initial_shared_runners_registration_token'] = '{{ lookup('password', './settings/passwords/gitlab_runners_token chars=ascii_letters') }}'
+        gitlab_rails['initial_root_password'] = '{{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_root_password chars=ascii_letters') }}'
+        gitlab_rails['initial_shared_runners_registration_token'] = '{{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_runners_token chars=ascii_letters') }}'
         gitlab_rails['auto_migrate'] = true
         gitlab_rails['registry_enabled'] = true
         gitlab_rails['registry_host'] = "https://registry.{{ domain }}"
@@ -86,7 +86,7 @@ services:
         gitlab_rails['db_host'] = 'gitlab_db'
         gitlab_rails['db_port'] = '5432'
         gitlab_rails['db_username'] = 'gitlab_user'
-        gitlab_rails['db_password'] = '{{ lookup('password', './settings/passwords/gitlab_db_password chars=ascii_letters') }}'
+        gitlab_rails['db_password'] = '{{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_db_password chars=ascii_letters') }}'
         gitlab_rails['db_database'] = 'gitlab_db'
         gitlab_rails['db_adapter'] = 'postgresql'
         gitlab_rails['db_encoding'] = 'utf8'
@@ -127,7 +127,7 @@ services:
   runner:
     container_name: gitlab_runner
     image: gitlab/gitlab-runner:{{ gitlab.runner_version }}
-    command: register -n --locked=false --url "http://gitlab/" --registration-token "{{ lookup('password', './settings/passwords/gitlab_runners_token chars=ascii_letters') }}" --clone-url http://gitlab --executor "docker" --docker-image "docker:latest" --docker-privileged --description "docker-runner" --tag-list "docker" --run-untagged="true" --locked="false" --access-level="not_protected"
+    command: register -n --locked=false --url "http://gitlab/" --registration-token "{{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_runners_token chars=ascii_letters') }}" --clone-url http://gitlab --executor "docker" --docker-image "docker:latest" --docker-privileged --description "docker-runner" --tag-list "docker" --run-untagged="true" --locked="false" --access-level="not_protected"
     deploy:
       mode: replicated
       replicas: 4
@@ -149,7 +149,7 @@ services:
       - gitlab
     environment:
       - POSTGRES_DB=db
-      - POSTGRES_PASSWORD={{ lookup('password', './settings/passwords/gitlab_db_password chars=ascii_letters') }}
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_db_password chars=ascii_letters') }}
       - POSTGRES_USER=gitlab_user
       - PGDATA=/database
     volumes:
@@ -161,7 +161,7 @@ services:
     hostname: 'registry'
     restart: unless-stopped
     environment:
-      - REGISTRY_HTTP_SECRET={{ lookup('password', './settings/passwords/gitlab_registry_secret chars=ascii_letters') }}
+      - REGISTRY_HTTP_SECRET={{ lookup('password', './settings/' + config_dir + '/passwords/gitlab_registry_secret chars=ascii_letters') }}
       - REGISTRY_LOG_LEVEL=info
       - REGISTRY_AUTH_TOKEN_REALM=https://gitlab.{{ domain }}/jwt/auth
       - REGISTRY_AUTH_TOKEN_SERVICE=container_registry

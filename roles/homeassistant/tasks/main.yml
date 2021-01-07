@@ -108,7 +108,7 @@
 
 - name: Create needed directories
   file:
-    path: /var/vivumlab/homeassistant/share/hassio/apparmor/
+    path: "{{ volumes_root }}/homeassistant/share/hassio/apparmor/"
     state: directory
     mode: '0755'
   when: homeassistant.use_supervisord
@@ -116,7 +116,7 @@
 - name: Install Hass.io AppArmor Profile
   template:
     src: apparmor.j2
-    dest: /var/vivumlab/homeassistant/share/hassio/apparmor/hassio-supervisor
+    dest: "{{ volumes_root }}/homeassistant/share/hassio/apparmor/hassio-supervisor"
   when: homeassistant.use_supervisord
 
 - name: Start homeassistant app armor

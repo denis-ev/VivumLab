@@ -16,7 +16,7 @@ services:
       - miniflux
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgres://miniflux:%22{{lookup('password', './settings/passwords/miniflux_db_password chars=ascii_letters')}}%22@db/miniflux?sslmode=disable
+      - DATABASE_URL=postgres://miniflux:%22{{lookup('password', './settings/' + config_dir + '/passwords/miniflux_db_password chars=ascii_letters')}}%22@db/miniflux?sslmode=disable
       - RUN_MIGRATIONS=1
       - CREATE_ADMIN=1
       - ADMIN_USERNAME={{ default_username }}
@@ -34,6 +34,6 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_USER=miniflux
-      - POSTGRES_PASSWORD="{{lookup('password', './settings/passwords/miniflux_db_password chars=ascii_letters')}}"
+      - POSTGRES_PASSWORD="{{lookup('password', './settings/' + config_dir + '/passwords/miniflux_db_password chars=ascii_letters')}}"
     volumes:
       - "{{ volumes_root }}/miniflux/db:/var/lib/postgresql/data"

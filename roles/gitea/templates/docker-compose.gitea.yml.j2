@@ -23,7 +23,7 @@ services:
       - DB_HOST=db:3306
       - DB_NAME=gitea
       - DB_USER=gitea
-      - DB_PASSWD={{ lookup('password', './settings/passwords/gitea_db_password chars=ascii_letters,digits') }}
+      - DB_PASSWD={{ lookup('password', './settings/' + config_dir + '/passwords/gitea_db_password chars=ascii_letters,digits') }}
 {% endif %}
       - SSH_DOMAIN={% if gitea.domain %}{{ gitea.domain }}{% else %}{{ gitea.subdomain + "." + domain }}
 {% endif %}
@@ -54,10 +54,10 @@ services:
       - gitea_net
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/passwords/gitea_db_root_password chars=ascii_letters') }}
+      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/gitea_db_root_password chars=ascii_letters') }}
       - MYSQL_USER=gitea
       - MYSQL_DATABASE=gitea
-      - MYSQL_PASSWORD={{ lookup('password', './settings/passwords/gitea_db_password chars=ascii_letters') }}
+      - MYSQL_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/gitea_db_password chars=ascii_letters') }}
     volumes:
       - "{{ volumes_root }}/gitea/db:/var/lib/mysql"
 {% endif %}

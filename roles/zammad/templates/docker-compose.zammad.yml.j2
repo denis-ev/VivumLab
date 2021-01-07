@@ -18,7 +18,7 @@ services:
       - BACKUP_SLEEP=86400
       - HOLD_DAYS=10
       - POSTGRESQL_USER=zammad
-      - "POSTGRESQL_PASSWORD={{lookup('password', './settings/passwords/zammad_db_password')}}"
+      - "POSTGRESQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/zammad_db_password')}}"
     image: zammad/zammad-docker-compose:zammad-postgresql-{{ zammad.version }}
     links:
       - zammad-postgresql
@@ -47,7 +47,7 @@ services:
       - zammad-postgresql
     environment:
       - POSTGRESQL_USER=zammad
-      - "POSTGRESQL_PASS={{lookup('password', './settings/passwords/zammad_db_password')}}"
+      - "POSTGRESQL_PASS={{lookup('password', './settings/' + config_dir + '/passwords/zammad_db_password')}}"
     image: zammad/zammad-docker-compose:zammad-{{ zammad.version }}
     links:
       - zammad-elasticsearch
@@ -92,7 +92,7 @@ services:
     container_name: zammad_postgresql
     environment:
       - POSTGRES_USER=zammad
-      - "POSTGRES_PASSWORD={{lookup('password', './settings/passwords/zammad_db_password')}}"
+      - "POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/zammad_db_password')}}"
     image: zammad/zammad-docker-compose:zammad-postgresql-{{ zammad.version }}
     restart: unless-stopped
     networks:

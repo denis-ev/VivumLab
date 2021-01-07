@@ -15,7 +15,7 @@ services:
     image: postgres:{{ codimd.db_version }}
     environment:
       - POSTGRES_USER=codimd
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/codimd_dbPass chars=ascii_letters length=32')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/codimd_dbPass chars=ascii_letters length=32')}}
       - POSTGRES_DB=codimd
     volumes:
       - "{{ volumes_root }}/codimd/postgresql/data:/var/lib/postgresql/data"
@@ -31,7 +31,7 @@ services:
       - traefik_network
       - codimd
     environment:
-      - CMD_DB_URL=postgres://codimd:{{lookup('password', './settings/passwords/codimd_dbPass chars=ascii_letters length=32')}}@db:5432/codimd
+      - CMD_DB_URL=postgres://codimd:{{lookup('password', './settings/' + config_dir + '/passwords/codimd_dbPass chars=ascii_letters length=32')}}@db:5432/codimd
     labels:
       - "traefik.http.services.codimd.loadbalancer.server.scheme=http"
       - "traefik.http.services.codimd.loadbalancer.server.port=3000"
