@@ -44,7 +44,6 @@ services:
       - "traefik.http.middlewares.auth.chain.middlewares={% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}"
       - "traefik.http.middlewares.hsts.chain.middlewares=cors-headers@file, secure-headers@file"
       - "traefik.http.middlewares.auth_hsts.chain.middlewares=auth, cors-headers@file, secure-headers@file"
-      - "traefik.http.middlewares.redirect.chain.middlewares=redirect@file"
       - "traefik.http.routers.traefik-http.rule=Host(`{{ service_domain }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.traefik-http.entrypoints=http"
       - "traefik.http.routers.traefik-http.service=api@internal"
