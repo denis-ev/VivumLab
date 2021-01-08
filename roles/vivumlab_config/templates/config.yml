@@ -971,7 +971,7 @@ nzbget:
 octoprint:
   enable: {{ octoprint.enable | default(False) }}
   hsts: {{ octoprint.hsts | default(True) }}
-  devices: !!str '{{ octoprint.devices | default([]) }}'
+  devices: {{ octoprint.devices | default([]) }}
   auth: {{ octoprint.auth | default(False) }}
   domain: {{ octoprint.domain | default(False) }}
   subdomain: {{ octoprint.subdomain | default("octoprint")}}
@@ -1143,7 +1143,7 @@ qbittorrent:
   domain: {{ qbittorrent.domain| default(False) }}
   subdomain: {{ qbittorrent.subdomain | default("qbittorrent") }}
   version: {{ qbittorrent.version | default("latest") }}
-  vpn_enabled: !!str '{{ qbittorrent.vpn_enabled | default(false) }}'
+  vpn_enabled: {{ qbittorrent.vpn_enabled | default(false) }}
   lan_network: {{ qbittorrent.lan_network | default("192.168.1.0/24") }}
   amd64: False
   arm64: False
