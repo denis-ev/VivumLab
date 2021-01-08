@@ -97,7 +97,7 @@ class Service < Thor
     invoke 'config:show', [], service: options[:service]
   end
 
-  desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
+  desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
     return if guard_against_invalid_service_config?(options[:service])
