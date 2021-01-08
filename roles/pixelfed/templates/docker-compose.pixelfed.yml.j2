@@ -52,12 +52,12 @@ services:
     image: mariadb:{{ pixelfed.db_version }}
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--user=pixelfed", "--password={{ lookup('password', './settings/passwords/pixelfed_db_password chars=ascii_letters length=15') }}", "--silent"]
+      test: ["CMD", "mysqladmin", "ping", "--user=pixelfed", "--password={{ lookup('password', './settings/' + config_dir + '/passwords/pixelfed_db_password chars=ascii_letters length=15') }}", "--silent"]
     environment:
       - MYSQL_DATABASE=pixelfed
       - MYSQL_USER=pixelfed
-      - MYSQL_PASSWORD={{ lookup('password', './settings/passwords/pixelfed_db_password chars=ascii_letters length=15') }}
-      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/passwords/pixelfed_db_root_password chars=ascii_letters length=15') }}
+      - MYSQL_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/pixelfed_db_password chars=ascii_letters length=15') }}
+      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/pixelfed_db_root_password chars=ascii_letters length=15') }}
     networks:
       - pixelfed_internal
     volumes:
@@ -74,4 +74,4 @@ services:
     volumes:
       - "{{ volumes_root }}/pixelfed/redis:/data"
     command: >
-     --requirepass {{ lookup('password', './settings/passwords/pixelfed_redis_password chars=ascii_letters length=15') }}
+     --requirepass {{ lookup('password', './settings/' + config_dir + '/passwords/pixelfed_redis_password chars=ascii_letters length=15') }}

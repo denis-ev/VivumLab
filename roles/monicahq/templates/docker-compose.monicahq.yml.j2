@@ -25,8 +25,8 @@ services:
     env_file:
       - "{{ volumes_root }}/monicahq/monicahq.env"
     environment:
-      - APP_KEY="{{ lookup('password', './settings/passwords/monicahq_app_key chars=ascii_letters length=32') }}"
-      - DB_PASSWORD="{{ lookup('password', './settings/passwords/monicahq_db_password chars=ascii_letters') }}"
+      - APP_KEY="{{ lookup('password', './settings/' + config_dir + '/passwords/monicahq_app_key chars=ascii_letters length=32') }}"
+      - DB_PASSWORD="{{ lookup('password', './settings/' + config_dir + '/passwords/monicahq_db_password chars=ascii_letters') }}"
     labels:
       - "traefik.http.services.monicahq.loadbalancer.server.scheme=http"
       - "traefik.http.services.monicahq.loadbalancer.server.port=8176"
@@ -40,8 +40,8 @@ services:
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=monica
-      - MYSQL_PASSWORD={{ lookup('password', './settings/passwords/monicahq_db_password chars=ascii_letters') }}
+      - MYSQL_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/monicahq_db_password chars=ascii_letters') }}
       - MYSQL_USER=monica
-      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/passwords/monicahq_db_root_password chars=ascii_letters') }}
+      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/monicahq_db_root_password chars=ascii_letters') }}
     volumes:
       - "{{ volumes_root }}/monicahq/mysql:/var/lib/mysql"

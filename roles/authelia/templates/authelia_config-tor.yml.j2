@@ -13,7 +13,7 @@ log_level: {{ authelia.log_level }}
 # The secret used to generate JWT tokens when validating user identity by
 # email confirmation.
 # This secret can also be set using the env variables AUTHELIA_JWT_SECRET
-jwt_secret: {{lookup('password', './settings/passwords/authelia-tor_jwt_secret')}}
+jwt_secret: {{lookup('password', './settings/' + config_dir + '/passwords/authelia-tor_jwt_secret')}}
 
 # Default redirection URL
 #
@@ -143,7 +143,7 @@ session:
   name: authelia-tor_session
 
   # The secret to encrypt the session cookie.
-  secret: {{lookup('password', './settings/passwords/authelia-tor_session_secret')}}
+  secret: {{lookup('password', './settings/' + config_dir + '/passwords/authelia-tor_session_secret')}}
 
   # The time in ms before the cookie expires and session is reset.
   expiration: {{ authelia.default.cookie_expiration }}  # 1 hour
@@ -209,7 +209,7 @@ storage:
     database: my_authelia
     username: postgres
     # This secret can also be set using the env variables AUTHELIA_STORAGE_POSTGRES_PASSWORD
-    password: {{lookup('password', './settings/passwords/authelia_postgres_password')}}
+    password: {{lookup('password', './settings/' + config_dir + '/passwords/authelia_postgres_password')}}
 
 # Configuration of the notification system.
 #

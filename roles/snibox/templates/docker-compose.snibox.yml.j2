@@ -44,7 +44,7 @@ services:
       #MAILGUN_API_KEY: "${MAILGUN_API_KEY}"
       #MAILGUN_DOMAIN: "${MAILGUN_DOMAIN}"
       #MAILGUN_PUBLIC_KEY: "${MAILGUN_PUBLIC_KEY}"
-      SECRET_KEY_BASE: "{{lookup('password', './settings/passwords/snibox_secret_key chars=ascii_letters')}}"
+      SECRET_KEY_BASE: "{{lookup('password', './settings/' + config_dir + '/passwords/snibox_secret_key chars=ascii_letters')}}"
     volumes:
       #- '{{ volumes_root }}/snibox/static-files:/app/public'
       - static-files:/app/public

@@ -24,7 +24,7 @@ services:
       DB_PORT: 5432
       DB_NAME: kutt
       DB_USER: user
-      DB_PASSWORD: {{ lookup('password', './settings/passwords/kutt_db_password chars=ascii_letters') }}
+      DB_PASSWORD: {{ lookup('password', './settings/' + config_dir + '/passwords/kutt_db_password chars=ascii_letters') }}
       DB_SSL:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -38,7 +38,7 @@ services:
       NON_USER_COOLDOWN: 0
       DEFAULT_MAX_STATS_PER_LINK: 5000
       CUSTOM_DOMAIN_USE_HTTPS: "true"
-      JWT_SECRET: {{ lookup('password', './settings/passwords/kutt_jwt_secret chars=ascii_letters') }}
+      JWT_SECRET: {{ lookup('password', './settings/' + config_dir + '/passwords/kutt_jwt_secret chars=ascii_letters') }}
       ADMIN_EMAILS: {{ admin_email }}
       RECAPTCHA_SITE_KEY:
       RECAPTCHA_SECRET_KEY:
@@ -76,7 +76,7 @@ services:
       - kutt
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/kutt_db_password chars=ascii_letters') }}
+      POSTGRES_PASSWORD: {{ lookup('password', './settings/' + config_dir + '/passwords/kutt_db_password chars=ascii_letters') }}
       POSTGRES_DB: kutt
     volumes:
       - "{{ volumes_root }}/kutt/postgres_data:/var/lib/postgresql/data"

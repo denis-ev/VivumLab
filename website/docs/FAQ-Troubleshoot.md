@@ -43,7 +43,7 @@ VivumLab supports deploying to Ubuntu, Debian and CentOS based systems; since Ra
 
 Currently, VivumLab can be run from a Linux PC, a Macintosh PC and should support Windows (untested as of now). This is possible because we run everything from inside of a docker container. See [Docker](https://www.docker.com) for more information about docker.
 
-## Troubleshooting - Access/ Web
+## Troubleshooting - Access / Web
 
 ### I have pointed my domain at my IP but accessing the domain returns nothing
 
@@ -103,7 +103,11 @@ and: **`docker logs -f --tail 500 jellyfin_jellyfin_1`**
 Traefik generates SSL certs via LetsEncrypt, and LetsEncrypt has rate limiting. So it may take several days before all of your services get valid SSL certs generated for them.
 You can tail the logs of the traefik container (as mentioned previously) to see the status of its generation.
 
-## Troubleshooting - Server/ config
+## Troubleshooting - Server / config
+
+### `vlab` commands throw **Connection timed out**
+
+Run `vlab dev set --config-key wait_for_connection --value true`, this enables the tasks to test for 600 seconds if a connection to the server can be stablished.
 
 ### `vlab` command throws a docker related error
 

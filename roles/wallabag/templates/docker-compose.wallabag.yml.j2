@@ -16,13 +16,13 @@ services:
       - wallabag
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_root_password chars=ascii_letters')}}
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/wallabag_db_root_password chars=ascii_letters')}}
       - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
       - SYMFONY__ENV__DATABASE_HOST=db
       - SYMFONY__ENV__DATABASE_PORT=3306
       - SYMFONY__ENV__DATABASE_NAME=wallabag
       - SYMFONY__ENV__DATABASE_USER=wallabag
-      - SYMFONY__ENV__DATABASE_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_password chars=ascii_letters')}}
+      - SYMFONY__ENV__DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/wallabag_db_password chars=ascii_letters')}}
       - MYSQL_DATABASE=wallabag
       - SYMFONY__ENV__DATABASE_CHARSET=utf8
       - SYMFONY__ENV__MAILER_HOST=127.0.0.1
@@ -51,8 +51,8 @@ services:
     volumes:
       - "{{ volumes_root }}/wallabag/db:/var/lib/mysql"
     environment:
-      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_root_password chars=ascii_letters')}}
-      - MYSQL_PASSWORD={{lookup('password', './settings/passwords/wallabag_db_password chars=ascii_letters')}}
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/wallabag_db_root_password chars=ascii_letters')}}
+      - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/wallabag_db_password chars=ascii_letters')}}
 
   redis:
     container_name: wllabag_redis

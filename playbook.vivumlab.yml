@@ -9,13 +9,19 @@
   # Hacky fix for Ansible not following it's own configuration settings.
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    # pre_tasks:
-    #  - name: "Update Apt Cache"
-    #    raw: sudo apt-get update
-    #  - name: "Install Python"
-    #    raw: sudo apt-get -y install python-simplejson python3 python3-simplejson python3-pip python3-virtualenv python3-passlib python3-openssl
-    #  - name: Configure python and pip
-    #    raw: sudo apt-get -y purge python-simplejson && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python ; fi
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
+    # - name: "Update Apt Cache"
+    #   raw: sudo apt-get update
+    # - name: "Install Python"
+    #   raw: sudo apt-get -y install python-simplejson python3 python3-simplejson python3-pip python3-virtualenv python3-passlib python3-openssl
+    # - name: Configure python and pip
+    #   raw: sudo apt-get -y purge python-simplejson && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python ; fi
+
 
 # Configure a TOR hidden service for remote access without a public IP
 - name: "Setup TOR"
@@ -23,6 +29,13 @@
   hosts: all
   become: yes
   become_method: sudo
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
+
   roles:
     - role: tor
       when: enable_tor
@@ -34,6 +47,13 @@
   become_method: sudo
   gather_facts: yes
   tags: setup
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
+
   roles:
     - vivumlab_setup
 
@@ -42,6 +62,13 @@
   become: yes
   become_method: sudo
   tags: bastion
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
+
   tasks:
     - include_role:
         name: vivumlab_wireguard
@@ -54,5 +81,12 @@
   tags:
     - vivumlab
     - deploy
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
+
   roles:
     - vivumlab_deploy

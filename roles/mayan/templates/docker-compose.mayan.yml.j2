@@ -47,7 +47,7 @@ services:
       - mayan
     environment:
       POSTGRES_DB: mayan
-      POSTGRES_PASSWORD: "{{lookup('password', './settings/passwords/mayan_db_password chars=ascii_letters')}}"
+      POSTGRES_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/mayan_db_password chars=ascii_letters')}}"
       POSTGRES_USER: mayan
       MAYAN_USER_UID: {{uid_output.stdout}}
       MAYAN_USER_GUID: {{gid_output.stdout}}
@@ -75,7 +75,7 @@ services:
       MAYAN_DATABASE_ENGINE: django.db.backends.postgresql
       MAYAN_DATABASE_HOST: db
       MAYAN_DATABASE_NAME: mayan
-      MAYAN_DATABASE_PASSWORD: "{{lookup('password', './settings/passwords/mayan_db_password chars=ascii_letters')}}"
+      MAYAN_DATABASE_PASSWORD: "{{lookup('password', './settings/' + config_dir + '/passwords/mayan_db_password chars=ascii_letters')}}"
       MAYAN_DATABASE_USER: mayan
       MAYAN_USER_UID: {{uid_output.stdout}}
       MAYAN_USER_GUID: {{gid_output.stdout}}

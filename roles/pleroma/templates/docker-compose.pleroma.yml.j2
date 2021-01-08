@@ -18,8 +18,8 @@ services:
       - pleroma
     environment:
       - POSTGRES_USER=pleroma
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/pleroma_db_password chars=ascii_letters')}}
-      - DB_PASS={{lookup('password', './settings/passwords/pleroma_db_password chars=ascii_letters')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/pleroma_db_password chars=ascii_letters')}}
+      - DB_PASS={{lookup('password', './settings/' + config_dir + '/passwords/pleroma_db_password chars=ascii_letters')}}
       - POSTGRES_DB=pleroma
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -38,7 +38,7 @@ services:
       - db
     environment:
       - POSTGRES_USER=pleroma
-      - DB_PASS={{lookup('password', './settings/passwords/pleroma_db_password chars=ascii_letters')}}
+      - DB_PASS={{lookup('password', './settings/' + config_dir + '/passwords/pleroma_db_password chars=ascii_letters')}}
       - POSTGRES_DB=pleroma
     labels:
       - "traefik.http.services.pleroma.loadbalancer.server.scheme=http"

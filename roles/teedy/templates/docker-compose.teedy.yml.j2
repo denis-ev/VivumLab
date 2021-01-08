@@ -17,7 +17,7 @@ services:
     image: postgres:{{ teedy.db_version }}
     environment:
       - POSTGRES_DB=docs
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/teedy_postgres_password')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/teedy_postgres_password')}}
     volumes:
       - "{{ volumes_root }}/teedy/postgres_data:/var/lib/postgresql/data"
 
@@ -36,7 +36,7 @@ services:
       - DOCS_BASE_URL={{ service_domain }}
       - DATABASE_URL=jdbc:postgresql://db:5432/docs
       - DATABASE_USER=postgres
-      - DATABASE_PASSWORD={{lookup('password', './settings/passwords/teedy_postgres_password')}}
+      - DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/teedy_postgres_password')}}
     labels:
       - "traefik.http.services.teedy.loadbalancer.server.scheme=http"
       - "traefik.http.services.teedy.loadbalancer.server.port=8080"

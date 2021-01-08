@@ -25,8 +25,8 @@ services:
       TURTL_DB_PORT: 5432
       TURTL_DB_DATABASE: turtl
       TURTL_DB_USER: turtl
-      TURTL_DB_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
-      TURTL_APP_SECURE_HASH_SALT: {{ lookup('password', './settings/passwords/turtl_hashsalt chars=ascii_letters,digits') }}
+      TURTL_DB_PASSWORD: {{ lookup('password', './settings/' + config_dir + '/passwords/turtl_db_password chars=ascii_letters,digits') }}
+      TURTL_APP_SECURE_HASH_SALT: {{ lookup('password', './settings/' + config_dir + '/passwords/turtl_hashsalt chars=ascii_letters,digits') }}
       TURTL_APP_API_URL: http{% if turtl.https_only %}s{% endif %}://{% if turtl.domain %}{{ turtl.domain }}{% else %}{{ service_domain }}{% endif %}
       TURTL_APP_WWW_URL: http{% if turtl.https_only %}s{% endif %}://{% if turtl.domain %}{{ turtl.domain }}{% else %}{{ service_domain }}{% endif %}
       TURTL_EMAILS_ADMIN: "{{ admin_email }}"
@@ -44,7 +44,7 @@ services:
     container_name: turtl_db
     image: postgres:11-alpine
     environment:
-      POSTGRES_PASSWORD: {{ lookup('password', './settings/passwords/turtl_db_password chars=ascii_letters,digits') }}
+      POSTGRES_PASSWORD: {{ lookup('password', './settings/' + config_dir + '/passwords/turtl_db_password chars=ascii_letters,digits') }}
       POSTGRES_USER: turtl
       POSTGRES_DB: turtl
     healthcheck:

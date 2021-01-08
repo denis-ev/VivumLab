@@ -2,16 +2,23 @@
 - hosts: all
   gather_facts: no
   tags: setup
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
 
   tasks:
     - name: Stop services
       systemd:
-        name: "{{ service_item }}"
+        name: "{{ service_item }}.service"
         state: stopped
-      when: query == true
+        no_block: true
+      when: query | bool
       loop: "{{ services | flatten(1) }}"
       loop_control:
         loop_var: service_item
       vars:
-        query: "{{ service_item + '.enable' }}"
+        query: "{{ vars[service_item]['enable'] }}"
       become: yes

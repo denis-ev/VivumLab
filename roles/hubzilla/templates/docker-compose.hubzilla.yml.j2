@@ -40,7 +40,7 @@ services:
       DB_TYPE: postgres
       DB_NAME: hubzilla
       DB_USER: hubzilla
-      DB_PASSWORD: {{lookup('password', './settings/passwords/hubzilla-db_password')}}
+      DB_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/hubzilla-db_password')}}
       HUBZILLA_DOMAIN: {{ service_domain }}
       HUBZILLA_ADMIN: admin@{{ service_domain }}
       SMTP_HOST: {{ smtp.host }}
@@ -70,7 +70,7 @@ services:
     image: postgres:{{ hubzilla.db_version }}
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: {{lookup('password', './settings/passwords/hubzilla-db_password')}}
+      POSTGRES_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/hubzilla-db_password')}}
       POSTGRES_USER: hubzilla
       POSTGRES_DB: hubzilla
     healthcheck:

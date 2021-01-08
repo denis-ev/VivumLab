@@ -33,8 +33,8 @@
 
 - name: setup default user
   shell: >
-    docker-compose -f {{ volumes_root }}/codimd/docker-compose.yml run --rm codiMdApp bin/manage_users
+    docker-compose -f {{ volumes_root }}/codimd/docker-compose.yml run --rm app bin/manage_users
     --add {{ admin_email }} --pass "{{ default_password }}"
   args:
-    chdir: /var/vivumlab/codimd
+    chdir: "{{ volumes_root }}/codimd"
   ignore_errors: true

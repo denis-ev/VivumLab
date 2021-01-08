@@ -9,6 +9,8 @@
     - "{{ volumes_root }}/traefik/conf.d"
     - /etc/docker
   become: yes
+  tags:
+    - setup
 
 - name: Copy VERSION file
   copy:
@@ -121,30 +123,40 @@
     path: /var/lib/tor/ssh-onion/
     state: directory
   become: yes
+  tags:
+    - tor
 
 - name: Ensure tor host folder exists
   file:
     path: /var/lib/tor/http-onion/
     state: directory
   become: yes
+  tags:
+    - tor
 
 - name: Ensure blank tor host files exist
   file:
     path: /var/lib/tor/ssh-onion/hostname
     state: touch
   become: yes
+  tags:
+    - tor
 
 - name: Ensure blank tor host files exist
   file:
     path: /var/lib/tor/http-onion/hostname
     state: touch
   become: yes
+  tags:
+    - tor
 # / Hack
 
 - name: Read Tor connection info
   shell: cat /var/lib/tor/http-onion/hostname
   register: tor_http_domain_file
   become: yes
+  tags:
+    - tor
 
 - name: Configure Traefik .yaml
   template:
@@ -175,13 +187,13 @@
   lineinfile:
     path: "{{ volumes_root }}/vivumlab_hosts"
     line: "{{ ansible_host }} {{ service_domain }} {{ service_item }}"
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
   vars:
     service_domain: "{% if lookup('vars', service_item).domain %}{{ lookup('vars', service_item).domain }}{% else %}{{ lookup('vars', service_item).subdomain }}.{{ domain }}{% endif %}"
-    query: "{{ service_item + '.enable' }}"
+    query: "{{ vars[service_item]['enable'] }}"
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
     tor_ssh_domain: "{{ tor_ssh_domain_file.stdout | default('') }}"
 
@@ -201,25 +213,21 @@
   register: tor_ssh_domain_file
   when: "lookup('vars', 'enable_tor')"
   become: yes
+  tags:
+    - tor
 
 - name: Read Tor connection info
   shell: cat /var/lib/tor/http-onion/hostname
   register: tor_http_domain_file
   when: "lookup('vars', 'enable_tor')"
   become: yes
-
-- name: Get UID
-  command: id -u {{ vlab_ssh_user }}
-  register: uid_output
-
-- name: Get GID
-  command: id -g {{ vlab_ssh_user }}
-  register: gid_output
+  tags:
+    - tor
 
 - name: Deploy enabled Services
   include_role:
     name: "{{ service_item }}"
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
@@ -228,7 +236,7 @@
     auth: "{{ lookup('vars', service_item).auth }}"
     custom_domain: "{{ lookup('vars', service_item).domain }}"
     service_domain: "{% if lookup('vars', service_item).domain %}{{ lookup('vars', service_item).domain }}{% else %}{{ lookup('vars', service_item).subdomain }}.{{ domain }}{% endif %}"
-    query: "{{ service_item + '.enable' }}"
+    query: "{{ vars[service_item]['enable'] }}"
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
     tor_ssh_domain: "{{ tor_ssh_domain_file.stdout | default('') }}"
 
@@ -237,14 +245,14 @@
     name: "{{ service_item }}"
     state: stopped
     enabled: no
-  when: query
+  when: not query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
   failed_when: false
   ignore_errors: yes
   vars:
-    query: "not {{ service_item + '.enable' }}"
+    query: "{{ vars[service_item]['enable'] }}"
   become: yes
 
 - debug:
@@ -253,3 +261,5 @@
 - debug:
     msg: "You can also access your services via Tor at http://{{ tor_http_domain_file.stdout }}"
   when: enable_tor
+  tags:
+    - tor
