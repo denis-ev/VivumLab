@@ -76,7 +76,7 @@ class Service < Thor
     options[:service].split(',').each do |srv|
       say I18n.t('service.reset.out.resetting', service: srv.chomp).yellow
       run_playbooks(%w[stop remove vivumlab], options, limit_to_service(srv.chomp))
-      say I18n.t('service.s_reset', service: srv.chomp).green
+      say I18n.t('service.reset.out.reset', service: srv.chomp).green
     end
   end
 

@@ -1,6 +1,13 @@
 ---
 - hosts: all
   gather_facts: no
+  tags: setup
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
 
   tasks:
     - name: Stop services

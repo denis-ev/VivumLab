@@ -30,7 +30,7 @@ admin_email: {{ admin_email | default('admin_email@vivumlab.com') }}
 default_username: {{ default_username }}
 
 # Default storage location for service data, such as configuration data
-volumes_root: {{ volumes_root | default("/home/{{ vlab_ssh_user }}/vivumlab") }}
+volumes_root: {{ volumes_root | default('/home/' + vlab_ssh_user + '/vivumlab') }}
 
 # Default storage location for media (These are used as local directories or NAS mount points depending on configuration)
 storage_dir: {{ storage_dir | default('/mnt/nas') }}
@@ -44,6 +44,9 @@ default_password: "{{ default_password | default() }}"
 
 # Set this to true if you are deploying to an ARM infrastructure, such as a Raspberry Pi.
 arm: {{ arm | default('False') }}
+
+# Set this to true if you have trouble connection to your server.
+wait_for_connection: {{ wait_for_connection | default('False') }}
 
 # This configuration dictionary sets various details of your bastion host.
 # see the docs for more information about what a bastion host is and how
