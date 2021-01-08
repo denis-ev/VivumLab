@@ -54,11 +54,15 @@ class Service < Thor
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def update
     run_common
-    options[:service].split(',').each do |service|
-      say I18n.t('service.update.out.updating', service: service).yellow
-      playbooks = %w[vivumlab restart]
-      run_playbooks(playbooks, options, limit_to_service(service))
-      say I18n.t('service.update.out.updated').green
+    playbooks = %w[vivumlab restart]
+    if options[:service].nil?
+      run_playbooks(playbooks, options, nil)
+    else
+      options[:service].split(',').each do |service|
+        say I18n.t('service.update.out.updating', service: service).yellow
+        run_playbooks(playbooks, options, limit_to_service(service))
+        say I18n.t('service.update.out.updated').green
+      end
     end
   end
 
