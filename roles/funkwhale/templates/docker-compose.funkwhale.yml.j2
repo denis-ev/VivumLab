@@ -20,7 +20,7 @@ services:
       - FUNKWHALE_PROTOCOL=https
       - MEDIA_ROOT=/srv/funkwhale/data/media
       - DJANGO_SETTINGS_MODULE=config.settings.production
-      - DJANGO_SECRET_KEY={{lookup('password', './settings/' + config_dir + '/passwords/package_name_db_password chars=ascii_letters length=128')}}
+      - DJANGO_SECRET_KEY={{lookup('password', './settings/' + config_dir + '/passwords/funkwhale_db_password chars=ascii_letters length=128')}}
       - FUNKWHALE_FRONTEND_PATH=/srv/funkwhale/front/dist
     volumes:
       - "{{ volumes_root }}/funkwhale:/data"
