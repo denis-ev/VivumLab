@@ -3,14 +3,13 @@
   systemd:
     name: "{{ service_item }}"
     enabled: no
-    daemon-reload: no
+    daemon-reload: yes
     state: stopped
 
 - name: Create docker-compose.override.yml
   copy:
-    src: "{{ volumes_root }}/{{ service_item }}/docker-compose.yml"
-    dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
-    remote_src: yes
+    src: "docker-compose.{{ service_item }}.yml"
+    dest: "settings/{{ config_dir }}/override/{{ service_item }}/docker-compose.override.yml"
     mode: preserve
     force: no
 
