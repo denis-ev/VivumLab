@@ -17,6 +17,14 @@
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
   become: yes
 
+- name: setup default user
+  shell: >
+    docker-compose -f {{ volumes_root }}/codimd/docker-compose.yml run --rm app bin/manage_users
+    --add {{ admin_email }} --pass "{{ default_password }}"
+  args:
+    chdir: "{{ volumes_root }}/codimd"
+  ignore_errors: true
+
 - name: Configure codimd systemd service.
   become: yes
   template:
@@ -30,11 +38,3 @@
     daemon-reload: yes
     state: started
   become: yes
-
-- name: setup default user
-  shell: >
-    docker-compose -f {{ volumes_root }}/codimd/docker-compose.yml run --rm app bin/manage_users
-    --add {{ admin_email }} --pass "{{ default_password }}"
-  args:
-    chdir: "{{ volumes_root }}/codimd"
-  ignore_errors: true

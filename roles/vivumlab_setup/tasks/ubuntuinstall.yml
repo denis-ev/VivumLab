@@ -92,7 +92,7 @@
 
 - name: Add the Docker-ce Repo
   apt_repository:
-    #repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
+    # repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_facts['distribution_release'] | lower }} stable
     # The line above should works, but if you're not on Focal, will fail.
     # The line below forces ubuntu to add the FOCAL dist repo.
     repo: deb https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} focal stable
