@@ -54,6 +54,7 @@ services:
   lidarr:
   mailu:
   massivedecks:
+  mastodon:
   matomo:
   matterbridge:
   mayan:
@@ -177,6 +178,7 @@ librephotos:
 lidarr:
 mailu:
 massivedecks:
+mastodon:
 matomo:
 matterbridge:
 mayan:

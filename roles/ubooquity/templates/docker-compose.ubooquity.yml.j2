@@ -38,11 +38,11 @@ services:
       - "traefik.http.routers.ubooquity-admin-http.service=ubooquity-admin"
       - "traefik.http.routers.ubooquity-admin-http.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.ubooquity-admin-http.entrypoints=http"
-      - "traefik.http.routers.ubooquity-admin-http.middlewares={% if not ubooquity.hsts and ubooquity.auth %}auth{% endif %}{% if hsts %}redirect{% endif %}"
+      - "traefik.http.routers.ubooquity-admin-http.middlewares={% if not ubooquity.hsts and ubooquity.auth %}auth@file{% endif %}{% if hsts %}redirect@file{% endif %}"
       - "traefik.http.routers.ubooquity-admin.service=ubooquity-admin"
       - "traefik.http.routers.ubooquity-admin.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.ubooquity-admin.entrypoints=https"
-      - "traefik.http.routers.ubooquity-admin.middlewares={% if ubooquity.hsts and not ubooquity.auth %}hsts{% endif %}{% if ubooquity.auth and not ubooquity.hsts %}auth{% endif %}{% if ubooquity.auth and ubooquity.hsts %}auth_hsts{% endif %}"
+      - "traefik.http.routers.ubooquity-admin.middlewares={% if ubooquity.hsts and not ubooquity.auth %}hsts@file{% endif %}{% if ubooquity.auth and not ubooquity.hsts %}auth@file{% endif %}{% if ubooquity.auth and ubooquity.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.ubooquity-admin.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.ubooquity-admin.tls.certresolver=dns"

@@ -1,0 +1,65 @@
+---
+- name: Make user owned directories.
+  file:
+    path: "{{ volumes_root }}/{{ item }}"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "mastodon"
+    - "mastodon/redis"
+    - "mastodon/conf"
+  become: yes
+
+- name: Make mastodon owned directories.
+  file:
+    path: "{{ volumes_root }}/mastodon/{{ item }}"
+    state: directory
+    owner: "991"
+    group: "991"
+  loop:
+    - "public"
+    - "public/assets"
+    - "public/packs"
+    - "public/system"
+  become: yes
+
+- name: Make db owned directories.
+  file:
+    path: "{{ volumes_root }}/mastodon/{{ item }}"
+    state: directory
+  loop:
+    - "db"
+  become: yes
+
+- name: Copy mastodon docker-compose.yml file into place.
+  template:
+    src: docker-compose.mastodon.yml.j2
+    dest: "{{ volumes_root }}/mastodon/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+
+
+- name: Copy env file into place.
+  template:
+    src: ".env.production.j2"
+    dest: "{{ volumes_root }}/mastodon/.env.production"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Configure mastodon systemd service.
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/mastodon.service
+  become: yes
+
+- name: Start mastodon
+  systemd:
+    name: mastodon
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

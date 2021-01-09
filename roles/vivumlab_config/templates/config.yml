@@ -790,6 +790,18 @@ massivedecks:
   amd64: False
   arm64: False
   armv7: False
+mastodon:
+  enable: {{ mastodon.enable | default(False) }}
+  https_only: {{ mastodon.https_only | default(False) }}
+  auth: {{ mastodon.auth | default(False) }}
+  domain: {{ mastodon.domain | default(False) }}
+  subdomain: {{ mastodon.subdomain | default("mastodon") }}
+  version: {{ mastodon.version | default ("3.2.2") }}
+  db_version: {{ mastodon.db_version | default ("11-alpine") }}
+  redis_version: {{ mastodon.redis_version | default ("6-alpine") }}
+  amd64: False
+  arm64: False
+  armv7: False
 matomo:
   enable: {{ matomo.enable | default(False) }}
   hsts: {{ matomo.hsts | default(True) }}

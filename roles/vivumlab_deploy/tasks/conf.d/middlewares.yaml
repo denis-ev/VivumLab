@@ -2,6 +2,26 @@
 
 http:
   middlewares:
+    auth:
+      chain:
+        middlewares:
+{% if authelia.enable %}
+          - authelia@file
+{% else %}
+          - basicAuth@file
+{% endif %}
+    hsts:
+      chain:
+        middlewares:
+          - cors-headers@file
+          - secure-headers@file
+    auth_hsts:
+      chain:
+        middlewares:
+          - auth@file
+          - cors-headers@file
+          - secure-headers@file
+
     authelia:
       forwardAuth:
         address: "http://auth:9091/api/verify?rd=https://auth.{{ domain }}/"

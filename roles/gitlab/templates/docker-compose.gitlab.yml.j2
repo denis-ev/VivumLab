@@ -185,11 +185,11 @@ services:
       - "traefik.http.routers.registry-http.service=registry"
       - "traefik.http.routers.registry-http.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.registry-http.entrypoints=http"
-      - "traefik.http.routers.registry-http.middlewares={% if not gitlab.registry.hsts and gitlab.registry.auth %}auth{% endif %}{% if gitlab.registry.hsts %}redirect{% endif %}"
+      - "traefik.http.routers.registry-http.middlewares={% if not gitlab.registry.hsts and gitlab.registry.auth %}auth@file{% endif %}{% if gitlab.registry.hsts %}redirect@file{% endif %}"
       - "traefik.http.routers.registry.service=registry"
       - "traefik.http.routers.registry.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.registry.entrypoints=https"
-      - "traefik.http.routers.registry.middlewares={% if gitlab.registry.hsts and not gitlab.registry.auth %}hsts{% endif %}{% if gitlab.registry.auth and not gitlab.registry.hsts %}auth{% endif %}{% if gitlab.registry.auth and gitlab.registry.hsts %}auth_hsts{% endif %}"
+      - "traefik.http.routers.registry.middlewares={% if gitlab.registry.hsts and not gitlab.registry.auth %}hsts@file{% endif %}{% if gitlab.registry.auth and not gitlab.registry.hsts %}auth@file{% endif %}{% if gitlab.registry.auth and gitlab.registry.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.registry.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.registry.tls.certresolver=dns"
