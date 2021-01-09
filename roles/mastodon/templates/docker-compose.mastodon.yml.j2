@@ -1,0 +1,131 @@
+---
+version: '2.4'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  mastodon_internal:
+
+services:
+  web:
+    container_name: mastodon
+    image: tootsuite/mastodon:{{ mastodon.version }}
+    restart: unless-stopped
+    env_file: ./.env.production
+    command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/health || exit 1"]
+    expose:
+      - "3000"
+    depends_on:
+      streaming:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - "{{ volumes_root }}/mastodon/public/system:/mastodon/public/system"
+    networks:
+      - traefik_network
+      - mastodon_internal
+    labels:
+      - "traefik.http.services.mastodon.loadbalancer.server.scheme=http"
+      - "traefik.http.services.mastodon.loadbalancer.server.port=3000"
+{% include './labels.j2' %}
+
+  streaming:
+    container_name: mastodon_streaming
+    image: tootsuite/mastodon:{{ mastodon.version }}
+    restart: unless-stopped
+    env_file: ./.env.production
+    command: bash -c "bundle exec rake db:seed; bundle exec rake db:migrate; node ./streaming"
+    #command: node ./streaming
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1"]
+    expose:
+      - "4000"
+    networks:
+      - traefik_network
+      - mastodon_internal
+    labels:
+      - "traefik.http.services.mastodon.loadbalancer.server.scheme=http"
+      - "traefik.http.services.mastodon.loadbalancer.server.port=4000"
+
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.mastodon.-http.service=mastodon."
+      - "traefik.http.routers.mastodon.-http.rule=Host(`{{ service_domain }}`)"
+      - "traefik.http.routers.mastodon.-http.entrypoints=http"
+      - "traefik.http.routers.mastodon.-http.middlewares={% if https_only == True %}redirect@file, {% else %}{% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mastodon..service=mastodon."
+      - "traefik.http.routers.mastodon..rule=Host(`{{ service_domain }}`) && PathPrefix(`/api/v1/streaming`))"
+      - "traefik.http.routers.mastodon..entrypoints=https"
+      - "traefik.http.routers.mastodon..middlewares={% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mastodon..tls=true"
+{% if traefik.dns_challenge_provider %}
+      - "traefik.http.routers.mastodon..tls.certresolver=dns"
+{% if custom_domain != False %}
+      - "traefik.http.routers.mastodon..tls.domains[0].main={{ service_domain }}"
+{% else %}
+      - "traefik.http.routers.mastodon..tls.domains[0].main={{ domain }}"
+      - "traefik.http.routers.mastodon..tls.domains[0].sans=*.{{ domain }}"
+{% endif %}
+{% else %}
+      - "traefik.http.routers.mastodon..tls.certresolver=http"
+{% endif %}
+{% if enable_tor %}
+      - "traefik.http.routers.mastodon.-tor-http.rule=Host(`{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.mastodon.-tor-http.entrypoints=http"
+      - "traefik.http.routers.mastodon.-tor-http.middlewares={% if auth == True %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
+{% endif %}
+
+  sidekiq:
+    container_name: mastodon_sidekiq
+    image: tootsuite/mastodon:{{ mastodon.version }}
+    restart: unless-stopped
+    env_file: ./.env.production
+    command: bundle exec sidekiq
+    depends_on:
+      streaming:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - "{{ volumes_root }}/mastodon/public/system:/mastodon/public/system"
+    networks:
+      - mastodon_internal
+
+  redis:
+    container_name: mastodon_redis
+    image: redis:{{ mastodon.redis_version }}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    volumes:
+      - "{{ volumes_root }}/mastodon/redis:/data"
+    networks:
+      - mastodon_internal
+
+  db:
+    container_name: mastodon_db
+    image: postgres:{{ mastodon.db_version }}
+    restart: unless-stopped
+    healthcheck:
+     test: ["CMD", "pg_isready", "-U", "mastodon"]
+    environment:
+      - POSTGRES_DB=mastodon
+      - POSTGRES_USER=mastodon
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/mastodon_db_password chars=ascii_letters length=15') }}
+    volumes:
+      - "{{ volumes_root }}/mastodon/db:/var/lib/postgresql/data"
+    networks:
+      - mastodon_internal
