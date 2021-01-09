@@ -1,12 +1,4 @@
 ---
-- name: Get UID
-  command: id -u {{ vlab_ssh_user }}
-  register: uid_output
-
-- name: Get GID
-  command: id -g {{ vlab_ssh_user }}
-  register: gid_output
-
 - name: Make user owned directories.
   file:
     path: "{{ volumes_root }}/{{ item }}"
