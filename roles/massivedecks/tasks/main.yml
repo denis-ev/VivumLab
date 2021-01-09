@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/massivedecks"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy massivedecks docker-compose.yml file into place.
   template:
     src: docker-compose.massivedecks.yml.j2
     dest: "{{ volumes_root }}/massivedecks/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure massivedecks systemd service.
   become: yes

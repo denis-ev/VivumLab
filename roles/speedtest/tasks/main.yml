@@ -1,15 +1,23 @@
 ---
 - name: Make speedtest directory.
   file:
-    path: "{{ volumes_root }}/speedtest/data"
+    path: "{{ volumes_root }}/speedtest/{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "data"
+  become: yes
 
 - name: Copy speedtest docker-compose.yml file into place.
   template:
     src: docker-compose.speedtest.yml.j2
     dest: "{{ volumes_root }}/speedtest/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure speedtest systemd service.
   become: yes

@@ -3,14 +3,20 @@
   file:
     path: "{{ volumes_root }}/plex"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy plex docker-compose.yml file into place.
   template:
     src: docker-compose.plex.yml.j2
     dest: "{{ volumes_root }}/plex/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
     trim_blocks: "no"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure plex systemd service.
   become: yes

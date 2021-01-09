@@ -3,13 +3,19 @@
   file:
     path: "{{ volumes_root }}/webvirtmgr"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy webVirtMgr docker-compose.yml file into place.
   template:
     src: docker-compose.webvirtmgr.yml.j2
     dest: "{{ volumes_root }}/webvirtmgr/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure webVirtMgr systemd service.
   become: yes

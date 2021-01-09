@@ -12,16 +12,15 @@ services:
     container_name: nextcloud_db
     image: postgres:{{ nextcloud.db_version }}
     restart: unless-stopped
-    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     volumes:
       - "{{ volumes_root }}/nextcloud/postgres:/var/lib/postgresql/data"
-      - "/etc/passwd:/etc/passwd:ro"
     networks:
       - nextcloud
     restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_USER=nextcloud
+      - POSTGRES_DB=nextcloud
 
   redis:
     container_name: nextcloud_redis
@@ -32,27 +31,23 @@ services:
 
   nextcloud:
     container_name: nextcloud
-    image: nextcloud:{{ nextcloud.version }}
+    #image: nextcloud:{{ nextcloud.version }}
+    build: ./build
     restart: unless-stopped
+    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     networks:
-      - traefik_network
       - nextcloud
-    user: {{ uid }}:{{ gid }}
-    sysctls:
-      - net.ipv4.ip_unprivileged_port_start=0
-      # The line above allows an unprivileged user (the uid/gid of the VivumLab user) to
-      # listen on any port (https://github.com/nextcloud/docker/issues/359)
-      # Used / needed for apache to l
     volumes:
+      - "nextcloud:/var/www/html"
       - "{{ volumes_root }}/nextcloud/config:/var/www/html/config"
       - "{{ volumes_root }}/nextcloud/custom_apps:/var/www/html/custom_apps"
       - "{{ volumes_root }}/nextcloud/themes:/var/www/html/themes"
       - "{{ storage_dir }}/Documents/NextCloud/data:/var/www/html/data"
-      - "{{ storage_dir }}/Documents/NextCloud/webroot:/var/www/html"
-      - "{{ storage_dir }}:/mnt/vivumlab"
     environment:
+      - UID={{ uid_output.stdout }}
+      - GID={{ gid_output.stdout }}
       - POSTGRES_HOST=db
-      - POSTGRES_PASSWORD={{lookup('password', './settings/passwords/nextcloud_db_password chars=ascii_letters')}}
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/nextcloud_db_password chars=ascii_letters')}}
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
       - UPLOAD_MAX_SIZE=10G
@@ -66,18 +61,32 @@ services:
       - NEXTCLOUD_TRUSTED_DOMAINS={{ service_domain }}
       - NEXTCLOUD_UPDATE=1 # triggers the automated install on first run.
       # SMTP settings
-      - SMTP_HOST={{vault.smtp.host}}
-      - SMTP_SECURE={% if vault.smtp.port == 587 %}ssl{% endif %}
+      - SMTP_HOST={{ smtp.host }}
+      - SMTP_SECURE={% if smtp.port == 587 %}ssl{% endif %}
 
-      - SMTP_PORT={{vault.smtp.port}}
-      - SMTP_PASSWORD={{vault.smtp.pass}}
-      - MAIL_FROM_ADDRESS={{vault.smtp.from_email}}
+      - SMTP_PORT={{ smtp.port }}
+      - SMTP_PASSWORD={{ smtp.pass }}
+      - MAIL_FROM_ADDRESS={{ smtp.from_email }}
       - OVERWRITEHOST={{ service_domain }}
       - OVERWRITEPROTOCOL=https
     depends_on:
       - db
       - redis
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    volumes:
+      - nextcloud:/var/www/html:ro
+    depends_on:
+      - nextcloud
+    networks:
+      - traefik_network
+      - nextcloud
     labels:
       - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
 {% include './labels.j2' %}
+
+volumes:
+  nextcloud:

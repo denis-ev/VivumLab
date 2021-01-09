@@ -9,7 +9,7 @@ networks:
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer:{{ portainer.version }}
+    image: portainer/portainer-ce:{{ portainer.version }}
     restart: unless-stopped
     networks:
       - traefik_network

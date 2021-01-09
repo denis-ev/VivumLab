@@ -20,7 +20,7 @@ services:
     environment:
       - MATOMO_DATABASE_HOST=db
       - MATOMO_DATABASE_USERNAME=matomo
-      - MATOMO_DATABASE_PASSWORD={{lookup('password', './settings/passwords/matomo_db_password chars=ascii_letters')}}
+      - MATOMO_DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/matomo_db_password chars=ascii_letters')}}
       - MATOMO_DATABASE_DBNAME=matomo
     labels:
       - "traefik.http.services.matomo.loadbalancer.server.scheme=http"
@@ -38,5 +38,5 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=matomo
       - MYSQL_USER=matomo
-      - MYSQL_PASSWORD={{lookup('password', './settings/passwords/matomo_db_password chars=ascii_letters')}}
+      - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/matomo_db_password chars=ascii_letters')}}
       - MYSQL_DATABASE=matomo

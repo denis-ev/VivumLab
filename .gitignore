@@ -1,7 +1,6 @@
 # General Files
 *.retry
 *.lock
-.vagrant/
 inventory
 fetch/
 /site
@@ -16,6 +15,7 @@ bootstrap_install/server_credentials
 
 # User Specific
 settings/
+settings_*/
 tasks/ansible_bash.vars
 package_template/tmp_service
 package_template/tmp*.yml
@@ -23,19 +23,20 @@ package_template/tmp*.yml
 # IDE specific
 /.vscode
 
+# CLI specific
+decrypted.yml
+VlabDebug*.txt
+vendor/
+/*.tf*
+
 # Commit specific
 INSTALL_PRECOMMIT.sh
 
 # Node
 node_modules/
 
-# kibitzr service
-kibitzr.yml
-kibitzr-creds.yml
-
 # Service-edit Task
 docker-compose.override.yml
 
 # CI
 settings_ci/
-docs/CONTRIBUTING.md

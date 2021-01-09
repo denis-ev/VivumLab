@@ -7,14 +7,17 @@
     - name: Copy docs md files into place
       template:
         src: "{{ item.src }}"
-        dest: "{{ playbook_dir }}/docs/{{ item.path }}"
-      with_filetree: docs/
+        dest: "{{ playbook_dir }}/website/docs/{{ item.path }}"
+      with_filetree: website/docs/
       when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
 
-    - name: Copy docs other files into place
-      copy:
-        src: "{{ item.src }}"
-        dest: "{{ playbook_dir }}/docs/{{ item.path }}"
-      with_filetree: docs/
-      when: item.state == 'file' and (item.path | basename | regex_search('[^\.md]*$'))
+    - name: Copy CONTRIBUTING.md
+      template:
+        src: "CONTRIBUTING.md"
+        dest: "{{ playbook_dir }}/website/docs/CONTRIBUTING.md"
+
+    - name: Copy CHANGELOG.md
+      template:
+        src: "CHANGELOG.md"
+        dest: "{{ playbook_dir }}/website/docs/CHANGELOG.md"
 ...

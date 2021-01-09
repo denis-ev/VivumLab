@@ -12,8 +12,8 @@ Restart=always
 RestartSec=3
 WorkingDirectory={{ volumes_root }}/traefik/
 
-ExecStart=/usr/bin/docker-compose up
-ExecStop=/usr/bin/docker-compose stop && /usr/bin/docker-compose rm -f
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose stop && /usr/local/bin/docker-compose rm -f
 
 [Install]
 WantedBy=multi-user.target

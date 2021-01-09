@@ -18,7 +18,7 @@ services:
     environment:
       - AUTH_TYPE=Digest
       - USERNAME={{ default_username }}
-      - PASSWORD={{ lookup('password', './settings/passwords/webdav_password chars=ascii_letters,digits') }}
+      - PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/webdav_password chars=ascii_letters,digits') }}
       - LOCATION=/
     networks:
       - traefik_network

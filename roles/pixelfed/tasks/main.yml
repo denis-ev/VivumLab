@@ -1,14 +1,19 @@
 ---
-- name: Make pixelfed directory.
+- name: Make pixelfed directories.
   file:
-    path: "{{ volumes_root }}/{{ item }}"
+    path: "{{ volumes_root }}/pixelfed/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   with_items:
-    - "pixelfed/storage"
-    - "pixelfed/db"
-    - "pixelfed/redis"
+    - "storage"
+    - "redis"
+  become: yes
+
+- name: Make pixelfed DB directory.
+  file:
+    path: "{{ volumes_root }}/pixelfed/db"
+    state: directory
 
 - name: Copy pixelfed docker-compose.yml file into place.
   template:
@@ -18,6 +23,7 @@
     group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Copy pixelfed .env file into place.
   template:
@@ -25,6 +31,7 @@
     dest: "{{ volumes_root }}/pixelfed/pixelfed.env"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure pixelfed systemd service.
   become: yes

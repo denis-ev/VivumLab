@@ -29,7 +29,7 @@ services:
       - "{{ storage_dir }}/Documents/export:/export"
     environment:
       - PAPERLESS_OCR_LANGUAGES=
-      - PAPERLESS_PASSPHRASE={{lookup('password', './settings/passwords/paperless_passphrase chars=ascii_letters')}}
+      - PAPERLESS_PASSPHRASE={{lookup('password', './settings/' + config_dir + '/passwords/paperless_passphrase chars=ascii_letters')}}
     command: ["runserver", "--insecure", "--noreload", "0.0.0.0:8000"]
     labels:
       - "traefik.http.services.paperless.loadbalancer.server.scheme=http"
@@ -50,5 +50,5 @@ services:
       - "{{ storage_dir }}/Documents/consume:/consume"
       - "{{ storage_dir }}/Documents/export:/export"
     environment:
-      - PAPERLESS_PASSPHRASE={{lookup('password', './settings/passwords/paperless_passphrase chars=ascii_letters')}}
+      - PAPERLESS_PASSPHRASE={{lookup('password', './settings/' + config_dir + '/passwords/paperless_passphrase chars=ascii_letters')}}
     command: ["document_consumer"]

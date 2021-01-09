@@ -21,8 +21,11 @@
   template:
     src: cockpit.conf
     dest: /etc/cockpit/cockpit.conf
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     service_name: "cockpit"
+  become: yes
 
 - name: Copy Cockpit Traefik config file into place.
   template:

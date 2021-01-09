@@ -13,15 +13,16 @@
     name: "{{ service_item }}"
     state: stopped
     enabled: no
-  when: "query and confirm_remove"
+  when:
+    - not query | bool
+    - confirm_remove
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
   ignore_errors: yes
   vars:
-    query: "not {{ service_item + '.enable' }}"
+    query: "not {{ vars[service_item]['enable'] }}"
   become: yes
-
 
 - name: remove enable services.
   file:

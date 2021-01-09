@@ -7,15 +7,11 @@
   become_method: sudo
   any_errors_fatal: true
   pre_tasks:
-#    - name: "Update Apt Cache"
-#      raw: sudo apt-get update
-#      run_once: true
-#    - name: "Install Python"
-#      raw: sudo apt-get -y install python-simplejson python3 python3-simplejson python3-pip python3-virtualenv python3-passlib python3-openssl
-#      run_once: true
-#    - name: Configure python and pip
-#      raw: sudo apt-get -y purge python-simplejson && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python ; fi
-#      run_once: true
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
 
 # Restore VivumLab from the most recent backup.
 - hosts: all
@@ -23,8 +19,13 @@
   tags:
     - setup
     - restore
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
 
   roles:
     - vivumlab_setup
     - vivumlab_restore
-...

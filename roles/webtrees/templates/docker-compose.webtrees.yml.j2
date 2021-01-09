@@ -17,8 +17,8 @@ services:
     volumes:
       - "{{ volumes_root }}/webtrees/mariadb:/var/lib/mysql"
     environment:
-      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/webtrees_db_root_password chars=ascii_letters')}}
-      - MYSQL_PASSWORD={{lookup('password', './settings/passwords/webtrees_db_password chars=ascii_letters')}}
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/webtrees_db_root_password chars=ascii_letters')}}
+      - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/webtrees_db_password chars=ascii_letters')}}
 
   app:
     container_name: webtress
@@ -29,7 +29,7 @@ services:
       - PORT=8079
       - DISABLE_SSL=TRUE
       - UPDATE_ON_START=FALSE
-      - DB_PASSWORD={{lookup('password', './settings/passwords/webtrees_db_password chars=ascii_letters')}}
+      - DB_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/webtrees_db_password chars=ascii_letters')}}
       - DB_USER=webtrees
       - DB_HOST=db
       - DB_PORT=3306

@@ -7,6 +7,12 @@
     - name: confirm_remove
       prompt: "Are you sure you wish to remove this service? (true/false)"
       private: "False"
+  pre_tasks:
+    - name: Wait for connection if not available, timeout 600 seconds
+      wait_for_connection:
+        timeout: 600
+        delay: 0
+      when: wait_for_connection == true
 
   roles:
     - vivumlab_remove

@@ -27,34 +27,9 @@ services:
       - invoiceapp
     restart: unless-stopped
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.services.invoiceninja.loadbalancer.server.scheme=http"
       - "traefik.http.services.invoiceninja.loadbalancer.server.port=80"
-      - "traefik.http.routers.invoiceninja-http.rule=Host(`{{ service_domain }}`)"
-      - "traefik.http.routers.invoiceninja-http.entrypoints=http"
-{% if not invoiceninja.https_only %}
-      - "traefik.http.routers.invoiceninja-http.middlewares={% if invoiceninja.https_only %}redirect@file, {% else %}{% if invoiceninja.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
-{% else %}
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.invoiceninja-http.middlewares=redirect-to-https"
-{% endif %}
-      - "traefik.http.routers.invoiceninja.rule=Host(`{{ service_domain }}`)"
-      - "traefik.http.routers.invoiceninja.entrypoints=https"
-      - "traefik.http.routers.invoiceninja.middlewares={% if invoiceninja.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
-      - "traefik.http.routers.invoiceninja.tls=true"
-{% if traefik.dns_challenge_provider %}
-      - "traefik.http.routers.invoiceninja.tls.certresolver=dns"
-      - "traefik.http.routers.invoiceninja.tls.domains[0].main={{ domain }}"
-      - "traefik.http.routers.invoiceninja.tls.domains[0].sans=*.{{ domain }}"
-{% else %}
-      - "traefik.http.routers.invoiceninja.tls.certresolver=http"
-{% endif %}
-{% if enable_tor %}
-      - "traefik.http.routers.invoiceninja-tor-http.rule=Host(`{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
-      - "traefik.http.routers.invoiceninja-tor-http.entrypoints=http"
-      - "traefik.http.routers.invoiceninja-tor-http.middlewares={% if invoiceninja.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
-{% endif %}
+{% include './labels.j2' %}
 
   indb:
     container_name: invoiceninja_db
@@ -63,9 +38,9 @@ services:
     networks:
       - invoiceninja
     environment:
-      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_root_pw')}}
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_root_pw')}}
       - MYSQL_USER=ninja
-      - MYSQL_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_pw')}}
+      - MYSQL_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_pw')}}
       - MYSQL_DATABASE=db-ninja-01
     volumes:
       - "{{ volumes_root }}/invoiceninja/mysql-data:/var/lib/mysql:rw"
@@ -94,7 +69,7 @@ services:
       - DB_HOST=indb
       - DB_DATABASE=db-ninja-01
       - DB_USERNAME=ninja
-      - DB_PASSWORD={{lookup('password', './settings/passwords/invoiceNinja_mysql_pw')}}
+      - DB_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/invoiceNinja_mysql_pw')}}
       # Mail Environment
       - MAIL_HOST={{ smtp.host }}
       - MAIL_USERNAME={{ smtp.user }}

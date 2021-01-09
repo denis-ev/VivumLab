@@ -13,8 +13,8 @@ services:
       - traefik_network
     image: hotio/ombi:{{ ombi.version }}
     environment:
-      - UID={{ uid }}
-      - GID={{ gid }}
+      - UID={{ uid_output.stdout }}
+      - GID={{ gid_output.stdout }}
       - TZ={{common_timezone}}
     volumes:
       - "{{ volumes_root }}/ombi/config:/config"

@@ -3,25 +3,31 @@
   file:
     path: "{{ volumes_root }}/bookstack"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
-- name: Make uploads directory.
+- name: Make uploads directories.
   file:
-    path: "{{ volumes_root }}/bookstack/uploads"
+    path: "{{ volumes_root }}/bookstack/{{ item }}"
     state: directory
     mode: '0755'
-
-- name: Make storage uploads directory.
-  file:
-    path: "{{ volumes_root }}/bookstack/storage-uploads"
-    state: directory
-    mode: '0755'
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "uploads"
+    - "storage-uploads"
+  become: yes
 
 - name: Copy bookstack docker-compose.yml file into place.
   template:
     src: docker-compose.bookstack.yml.j2
     dest: "{{ volumes_root }}/bookstack/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Configure bookstack systemd service.
   become: yes

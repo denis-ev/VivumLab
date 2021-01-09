@@ -3,19 +3,35 @@
   file:
     path: "{{ volumes_root }}/hubzilla/{{ item }}"
     state: directory
-  with_items: ["conf", "data", "db"]
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "conf"
+    - "data"
+  become: yes
+
+- name: Make hubzilla DB directory
+  file:
+    path: "{{ volumes_root }}/hubzilla/db"
+    state: directory
 
 - name: Copy hubzilla docker-compose.yml file into place.
   template:
     src: docker-compose.hubzilla.yml.j2
     dest: "{{ volumes_root }}/hubzilla/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Copy nginx configuration file into place.
   template:
     src: hubzilla-nginx.conf.j2
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
     dest: "{{ volumes_root }}/hubzilla/conf/hubzilla-nginx.conf"
+  become: yes
 
 - name: Configure hubzilla systemd service.
   become: yes

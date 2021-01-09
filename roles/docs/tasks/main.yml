@@ -4,7 +4,10 @@
     path: "{{ volumes_root }}/docs/{{ item }}"
     state: directory
   loop:
-    - src
+    - website
+    - website/docs
+    - website/src
+    - website/static
 
 - name: Read Tor connection info
   shell: cat /var/lib/tor/http-onion/hostname
@@ -20,26 +23,53 @@
   shell: cat '{{ volumes_root }}/VERSION'
   register: current_version_file
 
-- name: Clone Vivumlab repo
-  git:
-    repo: https://github.com/VivumLab/VivumLab.git
-    dest: "{{ volumes_root }}/docs/src"
-    version: "v{{ current_version_file.stdout }}"
-    force: yes
+- name: Copy docs root files into place
+  copy:
+    src: "{{ item }}"
+    dest: "{{ volumes_root }}/docs/website/"
+  with_fileglob: '{{ playbook_dir }}/website/*'
+
+- name: Copy docs src folder into place
+  copy:
+    src: "{{ playbook_dir }}/website/src/"
+    dest: "{{ volumes_root }}/docs/website/src/"
+
+- name: Copy docs static folder into place
+  copy:
+    src: "{{ playbook_dir }}/website/static/"
+    dest: "{{ volumes_root }}/docs/website/static/"
+
+- name: Create directories for md files
+  file:
+    path: "{{ volumes_root }}/docs/website/docs/{{ item.path }}"
+    state: directory
+    mode: '{{ item.mode }}'
+  with_filetree: website/docs/
+  when: item.state == 'directory'
 
 - name: Copy docs md files into place
   template:
     src: "{{ item.src }}"
-    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
-  with_filetree: docs/
+    dest: "{{ volumes_root }}/docs/website/docs/{{ item.path }}"
+  with_filetree: website/docs/
   when: item.state == 'file' and (item.path | basename | regex_search('(.md)'))
 
 - name: Copy docs other files into place
   copy:
     src: "{{ item.src }}"
-    dest: "{{ volumes_root }}/docs/src/docs/{{ item.path }}"
-  with_filetree: docs/
+    dest: "{{ volumes_root }}/docs/website/docs/{{ item.path }}"
+  with_filetree: website/docs/
   when: item.state == 'file' and (item.path | basename | regex_search('[^\.md]*$'))
+
+- name: Copy CONTRIBUTING.md
+  copy:
+    src: "CONTRIBUTING.md"
+    dest: "{{ volumes_root }}/docs/website/docs/CONTRIBUTING.md"
+
+- name: Copy CHANGELOG.md
+  copy:
+    src: "CHANGELOG.md"
+    dest: "{{ volumes_root }}/docs/website/docs/CHANGELOG.md"
 
 - name: Copy docs docker-compose.yml file into place.
   template:

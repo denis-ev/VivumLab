@@ -3,25 +3,35 @@
   file:
     path: "{{ volumes_root }}/{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   with_items:
     - "sui"
     - "sui/config"
+  become: yes
 
 - name: Copy sui docker-compose.yml file into place.
   template:
     src: docker-compose.sui.yml.j2
     dest: "{{ volumes_root }}/sui/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
 
 - name: Copy sui config files into place.
   template:
     src: "{{ item }}"
     dest: "{{ volumes_root }}/sui/config/{{ item }}"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   with_items:
     - config.json
     - VivumLab.json
     - local-docker.json
+  become: yes
+
 
 - name: Configure sui systemd service.
   become: yes
