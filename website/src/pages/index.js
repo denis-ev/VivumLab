@@ -71,7 +71,7 @@ vlab update --service SERVICENAME
 # Show config for a service
 vlab service show --service SERVICENAME
 
-# Change options for a service (Example for option https_only)
+# Change options for a service
 vlab service setup --service SERVICENAME`,
   },
   {

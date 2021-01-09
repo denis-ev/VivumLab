@@ -43,7 +43,7 @@ eg.
 ```
 beets
   enable: {{ beets.version }}
-  https_only: {{ beets.https_only }}
+  hsts: {{ beets.hsts }}
   auth: {{ beets.auth }}
   domain: {{ beets.domain }}
   subdomain: {{ beets.subdomain }}

@@ -60,28 +60,35 @@ services:
       - traefik_network
       - mail_network
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.services.mailu-admin.loadbalancer.server.scheme=http"
       - "traefik.http.services.mailu-admin.loadbalancer.server.port=80"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.mailu-admin-http.service=mailu-admin"
       - "traefik.http.routers.mailu-admin-http.rule=Host(`admin.{{ service_domain }}`)"
       - "traefik.http.routers.mailu-admin-http.entrypoints=http"
-      - "traefik.http.routers.mailu-admin-http.middlewares={% if mailu.https_only %}redirect@file, security-headers@file, {% else %}{% if mailu.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mailu-admin-http.middlewares={% if not mailu.hsts and mailu.auth %}auth@file{% endif %}{% if mailu.hsts %}redirect@file{% endif %}"
+      - "traefik.http.routers.mailu-admin.service=mailu-admin"
       - "traefik.http.routers.mailu-admin.rule=Host(`admin.{{ service_domain }}`)"
       - "traefik.http.routers.mailu-admin.entrypoints=https"
-      - "traefik.http.routers.mailu-admin.middlewares={% if mailu.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mailu-admin.middlewares={% if mailu.hsts and not mailu.auth %}hsts@file{% endif %}{% if mailu.auth and not mailu.hsts %}auth@file{% endif %}{% if mailu.auth and mailu.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.mailu-admin.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.mailu-admin.tls.certresolver=dns"
+{% if mailu.domain %}
+      - "traefik.http.routers.mailu-admin.tls.domains[0].main=admin.{{ service_domain }}"
+{% else %}
       - "traefik.http.routers.mailu-admin.tls.domains[0].main={{ domain }}"
       - "traefik.http.routers.mailu-admin.tls.domains[0].sans=*.{{ domain }}"
+      - "traefik.http.routers.mailu-admin.tls.domains[1].sans=admin.{{ service_domain }}"
+{% endif %}
 {% else %}
       - "traefik.http.routers.mailu-admin.tls.certresolver=http"
 {% endif %}
 {% if enable_tor %}
-      - "traefik.http.routers.mailu-admin-tor-http.rule=Host(`admin.{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.mailu-admin-tor-http.rule=Host(`admin.{{ mailu.subdomain }}.{{ tor_domain }}`)"
       - "traefik.http.routers.mailu-admin-tor-http.entrypoints=http"
-      - "traefik.http.routers.mailu-admin-tor-http.middlewares={% if mailu.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
+      - "traefik.http.routers.mailu-admin-tor-http.middlewares={% if mailu.auth %}auth{% endif %}"
 {% endif %}
 
   imap:
@@ -149,7 +156,7 @@ services:
     restart: unless-stopped
     image: mailu/traefik-certdumper:{{ mailu.version }}
     environment:
-      - DOMAIN={% if mailu.domain %}{{ mailu.domain }}{% else %}{{ mailu.subdomain + "." + domain }}{% endif %}
+      - DOMAIN={{ service_domain }}
 
     volumes:
       # Folder, which contains the acme.json
@@ -170,28 +177,33 @@ services:
       - traefik_network
       - mail_network
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.services.mailu-webmail.loadbalancer.server.scheme=http"
       - "traefik.http.services.mailu-webmail.loadbalancer.server.port=80"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.mailu-webmail-http.service=mailu-webmail"
       - "traefik.http.routers.mailu-webmail-http.rule=Host(`webmail.{{ service_domain }}`)"
       - "traefik.http.routers.mailu-webmail-http.entrypoints=http"
-      - "traefik.http.routers.mailu-webmail-http.middlewares={% if mailu.https_only %}redirect@file, security-headers@file, {% else %}{% if mailu.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mailu-webmail-http.middlewares={% if not mailu.hsts and mailu.auth %}auth@file{% endif %}{% if mailu.hsts %}redirect@file{% endif %}"
+      - "traefik.http.routers.mailu-webmail.service=mailu-webmail"
       - "traefik.http.routers.mailu-webmail.rule=Host(`webmail.{{ service_domain }}`)"
       - "traefik.http.routers.mailu-webmail.entrypoints=https"
-      - "traefik.http.routers.mailu-webmail.middlewares={% if mailu.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.mailu-webmail.middlewares={% if mailu.hsts and not mailu.auth %}hsts@file{% endif %}{% if mailu.auth and not mailu.hsts %}auth@file{% endif %}{% if mailu.auth and mailu.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.mailu-webmail.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.mailu-webmail.tls.certresolver=dns"
+{% if mailu.domain %}
+      - "traefik.http.routers.mailu-webmail.tls.domains[0].main=webmail.{{ service_domain }}"
+{% else %}
       - "traefik.http.routers.mailu-webmail.tls.domains[0].main={{ domain }}"
       - "traefik.http.routers.mailu-webmail.tls.domains[0].sans=*.{{ domain }}"
+      - "traefik.http.routers.mailu-webmail.tls.domains[1].sans=webmail.{{ service_domain }}"
+{% endif %}
 {% else %}
       - "traefik.http.routers.mailu-webmail.tls.certresolver=http"
 {% endif %}
 {% if enable_tor %}
-      - "traefik.http.routers.mailu-webmail-tor-http.rule=Host(`webmail.{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.mailu-webmail-tor-http.rule=Host(`webmail.{{ mailu.subdomain }}.{{ tor_domain }}`)"
       - "traefik.http.routers.mailu-webmail-tor-http.entrypoints=http"
-      - "traefik.http.routers.mailu-webmail-tor-http.middlewares={% if mailu.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
+      - "traefik.http.routers.mailu-webmail-tor-http.middlewares={% if mailu.auth %}auth{% endif %}"
 {% endif %}
-
-#Checking

@@ -44,10 +44,10 @@ services:
       - "traefik.http.routers.traefik-http.rule=Host(`{{ service_domain }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.traefik-http.entrypoints=http"
       - "traefik.http.routers.traefik-http.service=api@internal"
-      - "traefik.http.routers.traefik-http.middlewares={% if traefik.https_only %}redirect@file, {% else %}{% if traefik.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.traefik-http.middlewares={% if not traefik.hsts and traefik.auth %}auth@file{% endif %}{% if traefik.hsts %}redirect@file{% endif %}"
       - "traefik.http.routers.traefik.rule=Host(`{{ service_domain }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.traefik.entrypoints=https"
-      - "traefik.http.routers.traefik.middlewares={% if traefik.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.traefik.middlewares={% if traefik.hsts and not traefik.auth %}hsts@file{% endif %}{% if traefik.auth and not traefik.hsts %}auth@file{% endif %}{% if traefik.auth and traefik.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.traefik.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.traefik.tls.certresolver=dns"
@@ -61,5 +61,5 @@ services:
       - "traefik.http.routers.traefik-tor-http.rule=Host(`{{ tor_domain }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
       - "traefik.http.routers.traefik-tor-http.entrypoints=http"
       - "traefik.http.routers.traefik-tor-http.service=api@internal"
-      - "traefik.http.routers.traefik-tor-http.middlewares={% if traefik.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
+      - "traefik.http.routers.traefik-tor-http.middlewares={% if not traefik.hsts and traefik.auth %}auth{% endif %}{% if traefik.hsts %}redirect{% endif %}"
 {% endif %}{% endif %}

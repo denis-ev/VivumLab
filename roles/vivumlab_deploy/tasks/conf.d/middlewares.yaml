@@ -2,6 +2,26 @@
 
 http:
   middlewares:
+    auth:
+      chain:
+        middlewares:
+{% if authelia.enable %}
+          - authelia@file
+{% else %}
+          - basicAuth@file
+{% endif %}
+    hsts:
+      chain:
+        middlewares:
+          - cors-headers@file
+          - secure-headers@file
+    auth_hsts:
+      chain:
+        middlewares:
+          - auth@file
+          - cors-headers@file
+          - secure-headers@file
+
     authelia:
       forwardAuth:
         address: "http://auth:9091/api/verify?rd=https://auth.{{ domain }}/"
@@ -18,23 +38,37 @@ http:
     redirect:
       redirectScheme:
         scheme: https
-    customFrameVivumlab:
-      headers:
-        customFrameOptionsValue: "ALLOW-FROM http://{{ domain }} ALLOW-FROM https://{{ domain }}"
-{% if enable_tor %}
-    customFrameVivumlab-tor:
-      headers:
-        customFrameOptionsValue: "ALLOW-FROM http://{{ tor_domain }}"
-{% endif %}
-    security-headers:
-      headers:
-        stsSeconds: 31536000
-        browserXssFilter: true
-        contentTypeNosniff: true
-        frameDeny: true
-        stsPreload: true
     nextcloud-redirectregex:
       redirectRegex:
         permanent: true
         regex: "https://(.*)/.well-known/(card|cal)dav"
         replacement: "https://${1}/remote.php/dav/"
+
+    cors-headers:
+      headers:
+        accessControlAllowMethods:
+          - GET
+          - HEAD
+          - POST
+        accessControlAllowOriginList:
+          - http://*.{{ domain }}
+          # @todo cors-headers middleware implement custom list or auto fetching of custom domains
+          # @body fetch and add custom domains
+        accessControlMaxAge: 100
+        addVaryHeader: true
+
+    secure-headers:
+      headers:
+        sslRedirect: true
+        sslForceHost: true
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+        frameDeny: true
+        customFrameOptionsValue: "SAMEORIGIN"
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "no-referrer"
+        contentSecurityPolicy: "upgrade-insecure-requests"
+        featurePolicy: "accelerometer 'none'; ambient-light-sensor 'self'; autoplay 'self'; camera 'none'; encrypted-media 'self'; fullscreen 'self'; geolocation 'self'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture *; speaker 'none'; sync-xhr 'none'; usb *; vr 'none'"

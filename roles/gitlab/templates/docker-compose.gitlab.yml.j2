@@ -178,33 +178,34 @@ services:
 {% endif %}
       - REGISTRY_STORAGE_DELETE_ENABLED=true
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.services.registry.loadbalancer.server.scheme=http"
       - "traefik.http.services.registry.loadbalancer.server.port=80"
-      - "traefik.http.routers.registry-http.rule=Host(`{% if gitlab.registry.domain %}{{ gitlab.registry.domain }}{% else %}{{ gitlab.registry.subdomain + "." + domain }}{% endif %}`)"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.registry-http.service=registry"
+      - "traefik.http.routers.registry-http.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.registry-http.entrypoints=http"
-{% if not gitlab.registry.https_only %}
-      - "traefik.http.routers.registry-http.middlewares={% if gitlab.registry.https_only %}redirect@file, {% else %}{% if gitlab.registry.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}{% endif %}customFrameVivumlab@file"
-{% else %}
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.registry-http.middlewares=redirect-to-https"
-{% endif %}
-      - "traefik.http.routers.registry.rule=Host(`{% if gitlab.registry.domain %}{{ gitlab.registry.domain }}{% else %}{{ gitlab.registry.subdomain + "." + domain }}{% endif %}`)"
+      - "traefik.http.routers.registry-http.middlewares={% if not gitlab.registry.hsts and gitlab.registry.auth %}auth@file{% endif %}{% if gitlab.registry.hsts %}redirect@file{% endif %}"
+      - "traefik.http.routers.registry.service=registry"
+      - "traefik.http.routers.registry.rule=Host(`{{ service_domain }}`)"
       - "traefik.http.routers.registry.entrypoints=https"
-      - "traefik.http.routers.registry.middlewares={% if gitlab.registry.auth %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab@file"
+      - "traefik.http.routers.registry.middlewares={% if gitlab.registry.hsts and not gitlab.registry.auth %}hsts@file{% endif %}{% if gitlab.registry.auth and not gitlab.registry.hsts %}auth@file{% endif %}{% if gitlab.registry.auth and gitlab.registry.hsts %}auth_hsts@file{% endif %}"
       - "traefik.http.routers.registry.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.registry.tls.certresolver=dns"
+{% if gitlab.registry.domain %}
+      - "traefik.http.routers.registry.tls.domains[0].main={{ service_domain }}"
+{% else %}
       - "traefik.http.routers.registry.tls.domains[0].main={{ domain }}"
       - "traefik.http.routers.registry.tls.domains[0].sans=*.{{ domain }}"
+{% endif %}
 {% else %}
       - "traefik.http.routers.registry.tls.certresolver=http"
 {% endif %}
 {% if enable_tor %}
-      - "traefik.http.routers.registry-tor-http.rule=Host(`{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.registry-tor-http.rule=Host(`{{ gitlab.registry.subdomain }}.{{ tor_domain }}`)"
       - "traefik.http.routers.registry-tor-http.entrypoints=http"
-      - "traefik.http.routers.registry-tor-http.middlewares={% if gitlab.registry.auth %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}customFrameVivumlab-tor@file"
+      - "traefik.http.routers.registry-tor-http.middlewares={% if gitlab.registry.auth %}auth{% endif %}"
 {% endif %}
     volumes:
       - "{{ volumes_root }}/gitlab/certs:/certs"

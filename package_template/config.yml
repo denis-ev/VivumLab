@@ -1,6 +1,6 @@
 package_filename:
   enable: {{ package_filename.enable | default(False) }}
-  https_only: {{ package_filename.https_only | default(False) }}
+  hsts: {{ package_filename.hsts | default(True) }}
   auth: {{ package_filename.auth | default(False) }}
   domain: {{ package_filename.domain | default(False) }}
   subdomain: {{ package_filename.subdomain | default("package_filename") }}

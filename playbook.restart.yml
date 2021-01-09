@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: vivumlab
   gather_facts: no
   pre_tasks:
     - name: Wait for connection if not available, timeout 600 seconds
@@ -15,10 +15,10 @@
         name: "{{ service_item }}"
         state: restarted
         enabled: true
-      when: "query"
+      when: query | bool
       loop: "{{ services | flatten(1) }}"
       loop_control:
         loop_var: service_item
       ignore_errors: yes
       vars:
-        query: "{{ service_item + '.enable' }}"
+        query: "{{ vars[service_item]['enable'] }}"

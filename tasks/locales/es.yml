@@ -130,7 +130,7 @@ es:
         readdevdocs: |+
           First and foremost, please make sure you have read the developer docs
           You can find the developers docs. here:
-          # TODO: add url to dev doc
+          # @todo add url to dev doc
         precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
         pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
       in:

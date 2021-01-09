@@ -49,7 +49,7 @@ eg.
 ```
 bitwarden
   enable: {{ bitwarden.version }}
-  https_only: {{ bitwarden.https_only }}
+  hsts: {{ bitwarden.hsts }}
   auth: {{ bitwarden.auth }}
   domain: {{ bitwarden.domain }}
   subdomain: {{ bitwarden.subdomain }}

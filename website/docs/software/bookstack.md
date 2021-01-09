@@ -43,7 +43,7 @@ eg.
 ```
 bookstack
   enable: {{ bookstack.version }}
-  https_only: {{ bookstack.https_only }}
+  hsts: {{ bookstack.hsts }}
   auth: {{ bookstack.auth }}
   domain: {{ bookstack.domain }}
   subdomain: {{ bookstack.subdomain }}

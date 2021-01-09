@@ -128,7 +128,7 @@ smtp:
   from_name: {{ smtp.from_name | default()  }}
 
 traefik:
-  https_only: {{ traefik.https_only | default(False) }}
+  hsts: {{ traefik.hsts | default(True) }}
   domain: {{ traefik.domain | default(False) }}
   subdomain: {{ traefik.subdomain | default("traefik") }}
   auth: {{ traefik.auth | default(False) }}
@@ -153,14 +153,10 @@ traefik:
 
 enable_tor: {{ enable_tor | default(False) }}
 
-# Force SSL Usage
-# Only set this to true after everything is working, and https certificates have been generated.
-# https_only: {{ https_only | default(False) }}
-
 # Services
 docs:
   enable: {{ docs.enable | default(False) }}
-  https_only: {{ docs.https_only | default(False) }}
+  hsts: {{ docs.hsts | default(True) }}
   auth: {{ docs.auth | default(False) }}
   domain: {{ docs.domain | default(False) }}
   subdomain: {{ docs.subdomain | default("docs") }}
@@ -170,7 +166,7 @@ docs:
   armv7: "verified"
 apache2:
   enable: {{ apache2.enable | default(False) }}
-  https_only: {{ apache2.https_only | default(False) }}
+  hsts: {{ apache2.hsts | default(True) }}
   auth: {{ apache2.auth | default(False) }}
   domain: {{ apache2.domain | default(False) }}
   subdomain: {{ apache2.subdomain | default("apache2") }}
@@ -180,7 +176,7 @@ apache2:
   armv7: False
 apple_health_influx:
   enable: {{ apple_health_influx.enable | default(False) }}
-  https_only: {{ apple_health_influx.https_only | default(False) }}
+  hsts: {{ apple_health_influx.hsts | default(True) }}
   auth: {{ apple_health_influx.auth | default(False) }}
   domain: {{ apple_health_influx.domain | default(False) }}
   subdomain: {{ apple_health_influx.subdomain | default("apple_health_influx") }}
@@ -190,7 +186,7 @@ apple_health_influx:
   armv7: False
 adguardhome:
   enable: {{ adguardhome.enable | default(False) }}
-  https_only: {{ adguardhome.https_only | default(False) }}
+  hsts: {{ adguardhome.hsts | default(True) }}
   auth: {{ adguardhome.auth | default(False) }}
   domain: {{ adguardhome.domain | default(False) }}
   subdomain: {{ adguardhome.subdomain | default("adguardhome")}}
@@ -200,7 +196,7 @@ adguardhome:
   armv7: False
 airsonic:
   enable: {{ airsonic.enable | default(False) }}
-  https_only: {{ airsonic.https_only | default(False) }}
+  hsts: {{ airsonic.hsts | default(True) }}
   auth: {{ airsonic.auth | default(False) }}
   domain: {{ airsonic.domain | default(False) }}
   subdomain: {{ airsonic.subdomain | default("airsonic") }}
@@ -210,7 +206,7 @@ airsonic:
   armv7: False
 authelia:
   enable: {{ authelia.enable | default(False) }}
-  https_only: {{ authelia.https_only | default(False) }}
+  hsts: {{ authelia.hsts | default(True) }}
   # auth Should always be set to False, don't change this
   auth: False
   domain: {{ authelia.domain | default(False) }}
@@ -254,7 +250,7 @@ authelia:
   migration: {{ authelia.migration | default(False) }}
 barcodebuddy:
   enable: {{ barcodebuddy.enable | default(False) }}
-  https_only: {{ barcodebuddy.https_only | default(False) }}
+  hsts: {{ barcodebuddy.hsts | default(True) }}
   auth: {{ barcodebuddy.auth | default(False) }}
   domain: {{ barcodebuddy.domain | default(False) }}
   subdomain: {{ barcodebuddy.subdomain | default("barcodebuddy") }}
@@ -264,7 +260,7 @@ barcodebuddy:
   armv7: False
 beets:
   enable: {{ beets.enable | default(False) }}
-  https_only: {{ beets.https_only | default(False) }}
+  hsts: {{ beets.hsts | default(True) }}
   auth: {{ beets.auth | default(False) }}
   domain: {{ beets.domain | default(False) }}
   subdomain: {{ beets.subdomain | default("beets") }}
@@ -274,7 +270,7 @@ beets:
   armv7: False
 bitwarden:
   enable: {{ bitwarden.enable | default(False) }}
-  https_only: {{ bitwarden.https_only | default(False) }}
+  hsts: {{ bitwarden.hsts | default(True) }}
   auth: {{ bitwarden.auth  | default(False) }}
   domain: {{ bitwarden.domain  | default(False) }}
   subdomain: {{ bitwarden.subdomain  | default("bitwarden") }}
@@ -293,7 +289,7 @@ bitwarden:
   signups_domains_whitelist: {{ bitwarden.signups_domains_whitelist | default(False) }}
 bookstack:
   enable: {{ bookstack.enable | default(False) }}
-  https_only: {{ bookstack.https_only | default(False) }}
+  hsts: {{ bookstack.hsts | default(True) }}
   auth: {{ bookstack.auth | default(False) }}
   domain: {{ bookstack.domain | default(False) }}
   subdomain: {{ bookstack.subdomain | default("bookstack") }}
@@ -304,7 +300,7 @@ bookstack:
   armv7: False
 calibre:
   enable: {{ calibre.enable | default(False) }}
-  https_only: {{ calibre.https_only | default(False) }}
+  hsts: {{ calibre.hsts | default(True) }}
   auth: {{ calibre.auth | default(False) }}
   domain: {{ calibre.domain | default(False) }}
   subdomain: {{ calibre.subdomain | default("calibre") }}
@@ -315,7 +311,7 @@ calibre:
   armv7: False
 chowdown:
   enable: {{ chowdown.enable | default(False) }}
-  https_only: {{ chowdown.https_only | default(False) }}
+  hsts: {{ chowdown.hsts | default(True) }}
   auth: {{ chowdown.auth | default(False) }}
   domain: {{ chowdown.domain | default(False) }}
   subdomain: {{ chowdown.subdomain | default("chowdown") }}
@@ -329,7 +325,7 @@ cockpit:
   subdomain: {{ cockpit.subdomain | default("cockpit") }}
 codeserver:
   enable: {{ codeserver.enable | default(False) }}
-  https_only: {{ codeserver.https_only | default(False) }}
+  hsts: {{ codeserver.hsts | default(True) }}
   auth: {{ codeserver.auth | default(False) }}
   domain: {{ codeserver.domain | default(False) }}
   subdomain: {{ codeserver.subdomain | default("codeserver") }}
@@ -339,7 +335,7 @@ codeserver:
   armv7: False
 codimd:
   enable: {{ codimd.enable | default(False) }}
-  https_only: {{ codimd.https_only | default(False) }}
+  hsts: {{ codimd.hsts | default(True) }}
   auth: {{ codimd.auth | default(False) }}
   domain: {{ codimd.domain | default(False) }}
   subdomain: {{ codimd.subdomain | default("codimd") }}
@@ -350,7 +346,7 @@ codimd:
   armv7: False
 dark_sky:
   enable: {{ dark_sky.enable | default(False) }}
-  https_only: {{ dark_sky.https_only | default(False) }}
+  hsts: {{ dark_sky.hsts | default(True) }}
   auth: {{ dark_sky.auth | default(False) }}
   domain: {{ dark_sky.domain | default(False) }}
   subdomain: {{ dark_sky.subdomain | default("dark_sky") }}
@@ -360,7 +356,7 @@ dark_sky:
   armv7: False
 digikam:
   enable: {{ digikam.enable | default(False) }}
-  https_only: {{ digikam.https_only | default(False) }}
+  hsts: {{ digikam.hsts | default(True) }}
   auth: {{ digikam.auth | default(False) }}
   domain: {{ digikam.domain | default(False) }}
   subdomain: {{ digikam.subdomain | default("digikam") }}
@@ -370,7 +366,7 @@ digikam:
   armv7: False
 drone:
   enable: {{ drone.enable | default(False) }}
-  https_only: {{ drone.https_only | default(False) }}
+  hsts: {{ drone.hsts | default(True) }}
   auth: {{ drone.auth | default(False) }}
   domain: {{ drone.domain | default(False) }}
   subdomain: {{ drone.subdomain | default("drone") }}
@@ -390,7 +386,7 @@ duckdns:
   token: {{ duckdns.token | default(False) }}
 duplicati:
   enable: {{ duplicati.enable | default(False) }}
-  https_only: {{ duplicati.https_only | default(False) }}
+  hsts: {{ duplicati.hsts | default(True) }}
   auth: {{ duplicati.auth | default(False) }}
   domain: {{ duplicati.domain | default(False) }}
   subdomain: {{ duplicati.subdomain | default("duplicati") }}
@@ -400,7 +396,7 @@ duplicati:
   armv7: False
 elkstack:
   enable: {{ elkstack.enable | default(False) }}
-  https_only: {{ elkstack.https_only | default(False) }}
+  hsts: {{ elkstack.hsts | default(True) }}
   auth: {{ elkstack.auth | default(False) }}
   domain: {{ elkstack.domain | default(False) }}
   subdomain: {{ elkstack.subdomain | default("elkstack") }}
@@ -410,7 +406,7 @@ elkstack:
   armv7: False
 emby:
   enable: {{ emby.enable | default(False) }}
-  https_only: {{ emby.https_only | default(False) }}
+  hsts: {{ emby.hsts | default(True) }}
   auth: {{ emby.auth | default(False) }}
   domain: {{ emby.domain | default(False) }}
   subdomain: {{ emby.subdomain | default("emby") }}
@@ -420,7 +416,7 @@ emby:
   armv7: False
 erpnext:
   enable: {{ erpnext.enable | default(False) }}
-  https_only: {{ erpnext.https_only | default(False) }}
+  hsts: {{ erpnext.hsts | default(True) }}
   auth: {{ erpnext.auth | default(False) }}
   domain: {{ erpnext.domain | default(False) }}
   subdomain: {{ erpnext.subdomain | default("erpnext") }}
@@ -432,7 +428,7 @@ erpnext:
   armv7: False
 ethercalc:
   enable: {{ ethercalc.enable | default(False) }}
-  https_only: {{ ethercalc.https_only | default(False) }}
+  hsts: {{ ethercalc.hsts | default(True) }}
   auth: {{ ethercalc.auth | default(False) }}
   domain: {{ ethercalc.domain | default(False) }}
   subdomain: {{ ethercalc.subdomain | default("ethercalc") }}
@@ -443,7 +439,7 @@ ethercalc:
   armv7: False
 factorio:
   enable: {{ factorio.enable | default(False) }}
-  https_only: {{ factorio.https_only | default(False) }}
+  hsts: {{ factorio.hsts | default(True) }}
   auth: {{ factorio.auth | default(False) }}
   domain: {{ factorio.domain | default(False) }}
   subdomain: {{ factorio.subdomain | default("factorio") }}
@@ -453,7 +449,7 @@ factorio:
   armv7: False
 firefly_iii:
   enable: {{ firefly_iii.enable | default(False) }}
-  https_only: {{ firefly_iii.https_only | default(False) }}
+  hsts: {{ firefly_iii.hsts | default(True) }}
   auth: {{ firefly_iii.auth | default(False) }}
   domain: {{ firefly_iii.domain | default(False) }}
   subdomain: {{ firefly_iii.subdomain | default("firefly_iii") }}
@@ -464,7 +460,7 @@ firefly_iii:
   armv7: False
 folding_at_home:
   enable: {{ folding_at_home.enable | default(False) }}
-  https_only: {{ folding_at_home.https_only | default(False) }}
+  hsts: {{ folding_at_home.hsts | default(True) }}
   auth: {{ folding_at_home.auth | default(False) }}
   domain: {{ folding_at_home.domain | default(False) }}
   subdomain: {{ folding_at_home.subdomain | default("folding_at_home") }}
@@ -479,7 +475,7 @@ folding_at_home:
   power: {{ folding_at_home.power | default("full") }}
 freshrss:
   enable: {{ freshrss.enable | default(False) }}
-  https_only: {{ freshrss.https_only | default(False) }}
+  hsts: {{ freshrss.hsts | default(True) }}
   auth: {{ freshrss.auth | default(False) }}
   domain: {{ freshrss.domain | default(False) }}
   subdomain: {{ freshrss.subdomain | default("freshrss") }}
@@ -489,7 +485,7 @@ freshrss:
   armv7: False
 funkwhale:
   enable: {{ funkwhale.enable | default(False) }}
-  https_only: {{ funkwhale.https_only | default(False) }}
+  hsts: {{ funkwhale.hsts | default(True) }}
   auth: {{ funkwhale.auth | default(False) }}
   domain: {{ funkwhale.domain| default(False) }}
   subdomain: {{ funkwhale.subdomain | default("funkwhale") }}
@@ -499,7 +495,7 @@ funkwhale:
   armv7: False
 ghost:
   enable: {{ ghost.enable | default(False) }}
-  https_only: {{ ghost.https_only | default(False) }}
+  hsts: {{ ghost.hsts | default(True) }}
   auth: {{ ghost.auth | default(False) }}
   domain: {{ ghost.domain | default(False) }}
   subdomain: {{ ghost.subdomain | default("ghost") }}
@@ -509,7 +505,7 @@ ghost:
   armv7: False
 gitea:
   enable: {{ gitea.enable | default(False) }}
-  https_only: {{ gitea.https_only | default(False) }}
+  hsts: {{ gitea.hsts | default(True) }}
   auth: {{ gitea.auth | default(False) }}
   domain: {{ gitea.domain | default(False) }}
   subdomain: {{ gitea.subdomain | default("gitea") }}
@@ -522,7 +518,7 @@ gitea:
   gitea_ssh_port: {{ gitea.gitea_ssh_port | default(222) }}
 gitlab:
   enable: {{ gitlab.enable | default(False) }}
-  https_only: {{ gitlab.https_only | default(False) }}
+  hsts: {{ gitlab.hsts | default(True) }}
   auth: {{ gitlab.auth | default(False) }}
   domain: {{ gitlab.domain | default(False) }}
   subdomain: {{ gitlab.subdomain | default("gitlab") }}
@@ -544,13 +540,13 @@ gitlab:
   aws_registry_bucket: {{ gitlab.aws_registry_bucket | default(False) }}
   ssh_port: {{ gitlab.ssh_port | default(223) }}
   registry:
-    https_only: {{ gitlab.registry.https_only | default(False) }}
+    hsts: {{ gitlab.registry.hsts | default(True) }}
     auth: {{ gitlab.registry.auth | default(False) }}
     domain: {{ gitlab.registry.domain | default(False) }}
     subdomain: {{ gitlab.registry.subdomain | default("registry") }}
 gotify:
   enable: {{ gotify.enable | default(False) }}
-  https_only: {{ gotify.https_only | default(False) }}
+  hsts: {{ gotify.hsts | default(True) }}
   auth: {{ gotify.auth | default(False) }}
   domain: {{ gotify.domain | default(False) }}
   subdomain: {{ gotify.subdomain | default("gotify") }}
@@ -560,7 +556,7 @@ gotify:
   armv7: False
 grafana:
   enable: {{ grafana.enable | default(False) }}
-  https_only: {{ grafana.https_only | default(False) }}
+  hsts: {{ grafana.hsts | default(True) }}
   auth: {{ grafana.auth | default(False) }}
   domain: {{ grafana.domain | default(False) }}
   subdomain: {{ grafana.subdomain | default("grafana") }}
@@ -570,7 +566,7 @@ grafana:
   armv7: False
 grocy:
   enable: {{ grocy.enable | default(False) }}
-  https_only: {{ grocy.https_only | default(False) }}
+  hsts: {{ grocy.hsts | default(True) }}
   auth: {{ grocy.auth | default(False) }}
   domain: {{ grocy.domain | default(False) }}
   subdomain: {{ grocy.subdomain | default("grocy") }}
@@ -580,7 +576,7 @@ grocy:
   armv7: False
 guacamole:
   enable: {{ guacamole.enable | default(False) }}
-  https_only: {{ guacamole.https_only | default(False) }}
+  hsts: {{ guacamole.hsts | default(True) }}
   auth: {{ guacamole.auth | default(False) }}
   domain: {{ guacamole.domain | default(False) }}
   subdomain: {{ guacamole.subdomain | default("guacamole") }}
@@ -592,7 +588,7 @@ guacamole:
   armv7: False
 hastebin:
   enable: {{ hastebin.enable | default(False) }}
-  https_only: {{ hastebin.https_only | default(False) }}
+  hsts: {{ hastebin.hsts | default(True) }}
   auth: {{ hastebin.auth | default(False) }}
   domain: {{ hastebin.domain | default(False) }}
   subdomain: {{ hastebin.subdomain | default("hastebin") }}
@@ -603,7 +599,7 @@ hastebin:
   armv7: False
 healthchecks:
   enable: {{ healthchecks.enable | default(False) }}
-  https_only: {{ healthchecks.https_only | default(False) }}
+  hsts: {{ healthchecks.hsts | default(True) }}
   auth: {{ healthchecks.auth | default(False) }}
   domain: {{ healthchecks.domain | default(False) }}
   subdomain: {{ healthchecks.subdomain | default("healthchecks") }}
@@ -613,7 +609,7 @@ healthchecks:
   armv7: False
 heimdall:
   enable: {{ heimdall.enable | default(False) }}
-  https_only: {{ heimdall.https_only | default(False) }}
+  hsts: {{ heimdall.hsts | default(True) }}
   auth: {{ heimdall.auth | default(False) }}
   domain: {{ heimdall.domain| default(False) }}
   subdomain: {{ heimdall.subdomain | default("heimdall") }}
@@ -623,7 +619,7 @@ heimdall:
   armv7: False
 homeassistant:
   enable: {{ homeassistant.enable | default(False) }}
-  https_only: {{ homeassistant.https_only | default(False) }}
+  hsts: {{ homeassistant.hsts | default(True) }}
   auth: {{ homeassistant.auth | default(False) }}
   domain: {{ homeassistant.domain | default(False) }}
   subdomain: {{ homeassistant.subdomain | default("homeassistant") }}
@@ -634,7 +630,7 @@ homeassistant:
   use_supervisord: {{ homeassistant.use_supervisord | default(False)}}
 homebridge:
   enable: {{ homebridge.enable | default(False) }}
-  https_only: {{ homebridge.https_only | default(False) }}
+  hsts: {{ homebridge.hsts | default(True) }}
   auth: {{ homebridge.auth | default(False) }}
   domain: {{ homebridge.domain | default(False) }}
   subdomain: {{ homebridge.subdomain | default("homebridge") }}
@@ -644,7 +640,7 @@ homebridge:
   armv7: False
 homedash:
   enable: {{ homedash.enable | default(False) }}
-  https_only: {{ homedash.https_only | default(False) }}
+  hsts: {{ homedash.hsts | default(True) }}
   auth: {{ homedash.auth | default(False) }}
   domain: {{ homedash.domain | default(False) }}
   subdomain: {{ homedash.subdomain | default("homedash") }}
@@ -654,7 +650,7 @@ homedash:
   armv7: False
 hubzilla:
   enable: {{ hubzilla.enable | default(False) }}
-  https_only: {{ hubzilla.https_only | default(False) }}
+  hsts: {{ hubzilla.hsts | default(True) }}
   auth: {{ hubzilla.auth | default(False) }}
   domain: {{ hubzilla.domain | default(False) }}
   subdomain: {{ hubzilla.subdomain | default("hubzilla") }}
@@ -666,7 +662,7 @@ hubzilla:
   armv7: False
 huginn:
   enable: {{ huginn.enable | default(False) }}
-  https_only: {{ huginn.https_only | default(False) }}
+  hsts: {{ huginn.hsts | default(True) }}
   auth: {{ huginn.auth | default(False) }}
   domain: {{ huginn.domain | default(False) }}
   subdomain: {{ huginn.subdomain | default("huginn") }}
@@ -677,7 +673,7 @@ huginn:
   armv7: False
 invoiceninja:
   enable: {{ invoiceninja.enable | default(False) }}
-  https_only: {{ invoiceninja.https_only | default(False) }}
+  hsts: {{ invoiceninja.hsts | default(True) }}
   auth: {{ invoiceninja.auth | default(False) }}
   domain: {{ invoiceninja.domain | default(False) }}
   subdomain: {{ invoiceninja.subdomain | default("invoiceninja")}}
@@ -687,7 +683,7 @@ invoiceninja:
   armv7: False
 jackett:
   enable: {{ jackett.enable | default(False) }}
-  https_only: {{ jackett.https_only | default(False) }}
+  hsts: {{ jackett.hsts | default(True) }}
   auth: {{ jackett.auth | default(False) }}
   domain: {{ jackett.domain | default(False) }}
   subdomain: {{ jackett.subdomain | default("jackett") }}
@@ -697,7 +693,7 @@ jackett:
   armv7: False
 jellyfin:
   enable: {{ jellyfin.enable | default(False) }}
-  https_only: {{ jellyfin.https_only | default(False) }}
+  hsts: {{ jellyfin.hsts | default(True) }}
   auth: {{ jellyfin.auth | default(False) }}
   domain: {{ jellyfin.domain | default(False) }}
   subdomain: {{ jellyfin.subdomain | default("jellyfin") }}
@@ -707,7 +703,7 @@ jellyfin:
   armv7: False
 jenkins:
   enable: {{ jenkins.enable | default(False) }}
-  https_only: {{ jenkins.https_only | default(False) }}
+  hsts: {{ jenkins.hsts | default(True) }}
   auth: {{ jenkins.auth | default(False) }}
   domain: {{ jenkins.domain | default(False) }}
   subdomain: {{ jenkins.subdomain | default("jenkins")}}
@@ -718,7 +714,7 @@ jenkins:
   armv7: False
 keycloak:
   enable: {{ keycloak.enable | default(False) }}
-  https_only: {{ keycloak.https_only | default(False) }}
+  hsts: {{ keycloak.hsts | default(True) }}
   auth: {{ keycloak.auth | default(False) }}
   domain: {{ keycloak.domain | default(False) }}
   subdomain: {{ keycloak.subdomain | default("keycloak")}}
@@ -729,7 +725,7 @@ keycloak:
   armv7: False
 kutt:
   enable: {{ kutt.enable | default(False) }}
-  https_only: {{ kutt.https_only | default(False) }}
+  hsts: {{ kutt.hsts | default(True) }}
   auth: {{ kutt.auth | default(False) }}
   domain: {{ kutt.domain | default(False) }}
   subdomain: {{ kutt.subdomain | default("kutt") }}
@@ -739,7 +735,7 @@ kutt:
   armv7: False
 lazylibrarian:
   enable: {{ lazylibrarian.enable | default(False) }}
-  https_only: {{ lazylibrarian.https_only | default(False) }}
+  hsts: {{ lazylibrarian.hsts | default(True) }}
   auth: {{ lazylibrarian.auth | default(False) }}
   domain: {{ lazylibrarian.domain | default(False) }}
   subdomain: {{ lazylibrarian.subdomain | default("lazylibrarian") }}
@@ -749,7 +745,7 @@ lazylibrarian:
   armv7: False
 librephotos:
   enable: {{ librephotos.enable | default(False) }}
-  https_only: {{ librephotos.https_only | default(False) }}
+  hsts: {{ librephotos.hsts | default(True) }}
   auth: {{ librephotos.auth | default(False) }}
   domain: {{ librephotos.domain | default(False) }}
   subdomain: {{ librephotos.subdomain | default("librephotos") }}
@@ -763,7 +759,7 @@ librephotos:
   armv7: False
 lidarr:
   enable: {{ lidarr.enable | default(False) }}
-  https_only: {{ lidarr.https_only | default(False) }}
+  hsts: {{ lidarr.hsts | default(True) }}
   auth: {{ lidarr.auth | default(False) }}
   domain: {{ lidarr.domain | default(False) }}
   subdomain: {{ lidarr.subdomain | default("lidarr") }}
@@ -773,7 +769,7 @@ lidarr:
   armv7: False
 mailu:
   enable: {{ mailu.enable | default(False) }}
-  https_only: {{ mailu.https_only | default(False) }}
+  hsts: {{ mailu.hsts | default(True) }}
   auth: {{ mailu.auth | default(False) }}
   domain: {{ mailu.domain | default(False) }}
   subdomain: {{ mailu.subdomain | default("mailu") }}
@@ -785,7 +781,7 @@ mailu:
   forward_to_smtp: {{ mailu.forward_to_smtp | default(False)  }}
 massivedecks:
   enable: {{ massivedecks.enable | default(False) }}
-  https_only: {{ massivedecks.https_only | default(False) }}
+  hsts: {{ massivedecks.hsts | default(True) }}
   auth: {{ massivedecks.auth | default(False) }}
   domain: {{ massivedecks.domain | default(False) }}
   subdomain: {{ massivedecks.subdomain | default("massivedecks") }}
@@ -808,7 +804,7 @@ mastodon:
   armv7: False
 matomo:
   enable: {{ matomo.enable | default(False) }}
-  https_only: {{ matomo.https_only | default(False) }}
+  hsts: {{ matomo.hsts | default(True) }}
   auth: {{ matomo.auth | default(False) }}
   domain: {{ matomo.domain | default(False) }}
   subdomain: {{ matomo.subdomain | default("matomo") }}
@@ -825,7 +821,7 @@ matterbridge:
   armv7: False
 mayan:
   enable: {{ mayan.enable | default(False) }}
-  https_only: {{ mayan.https_only | default(False) }}
+  hsts: {{ mayan.hsts | default(True) }}
   auth: {{ mayan.auth | default(False) }}
   domain: {{ mayan.domain | default(False) }}
   subdomain: {{ mayan.subdomain | default("mayan") }}
@@ -838,7 +834,7 @@ mayan:
   armv7: False
 minecraft:
   enable: {{ minecraft.enable | default(False) }}
-  https_only: {{ minecraft.https_only | default(False) }}
+  hsts: {{ minecraft.hsts | default(True) }}
   auth: {{ minecraft.auth | default(False) }}
   domain: {{ minecraft.domain | default(False) }}
   subdomain: {{ minecraft.subdomain | default("minecraft") }}
@@ -851,7 +847,7 @@ minecraft:
   server_type: {{ minecraft.server_type | default("vanilla") }}
 minecraftbedrockserver:
   enable: {{ minecraftbedrockserver.enable | default(False) }}
-  https_only: {{ minecraftbedrockserver.https_only | default(False) }}
+  hsts: {{ minecraftbedrockserver.hsts | default(True) }}
   auth: {{ minecraftbedrockserver.auth | default(False) }}
   domain: {{ minecraftbedrockserver.domain| default(False) }}
   subdomain: {{ minecraftbedrockserver.subdomain | default("minecraftbedrockserver") }}
@@ -879,7 +875,7 @@ minecraftbedrockserver:
   texturepack_required: {{ mine.texturepack_required | default("false", true) }}
 miniflux:
   enable: {{ miniflux.enable | default(False) }}
-  https_only: {{ miniflux.https_only | default(False) }}
+  hsts: {{ miniflux.hsts | default(True) }}
   auth: {{ miniflux.auth | default(False) }}
   domain: {{ miniflux.domain | default(False) }}
   subdomain: {{ miniflux.subdomain | default("miniflux") }}
@@ -890,7 +886,7 @@ miniflux:
   armv7: False
 minio:
   enable: {{ minio.enable | default(False) }}
-  https_only: {{ minio.https_only | default(False) }}
+  hsts: {{ minio.hsts | default(True) }}
   auth: {{ minio.auth | default(False) }}
   domain: {{ minio.domain | default(False) }}
   subdomain: {{ minio.subdomain | default("minio") }}
@@ -900,7 +896,7 @@ minio:
   armv7: False
 monicahq:
   enable: {{ monicahq.enable | default(False) }}
-  https_only: {{ monicahq.https_only | default(False) }}
+  hsts: {{ monicahq.hsts | default(True) }}
   auth: {{ monicahq.auth | default(False) }}
   domain: {{ monicahq.domain | default(False) }}
   subdomain: {{ monicahq.subdomain | default("monicahq") }}
@@ -911,7 +907,7 @@ monicahq:
   armv7: False
 mstream:
   enable: {{ mstream.enable | default(False) }}
-  https_only: {{ mstream.https_only | default(False) }}
+  hsts: {{ mstream.hsts | default(True) }}
   auth: {{ mstream.auth | default(False) }}
   domain: {{ mstream.domain | default(False) }}
   subdomain: {{ mstream.subdomain | default("mstream") }}
@@ -921,7 +917,7 @@ mstream:
   armv7: False
 mylar3:
   enable: {{ mylar3.enable | default(False) }}
-  https_only: {{ mylar3.https_only | default(False) }}
+  hsts: {{ mylar3.hsts | default(True) }}
   auth: {{ mylar3.auth | default(False) }}
   domain: {{ mylar3.domain | default(False) }}
   subdomain: {{ mylar3.subdomain | default("mylar3") }}
@@ -931,7 +927,7 @@ mylar3:
   armv7: False
 n8n:
   enable: {{ n8n.enable | default(False) }}
-  https_only: {{ n8n.https_only | default(False) }}
+  hsts: {{ n8n.hsts | default(True) }}
   auth: {{ n8n.auth | default(False) }}
   domain: {{ n8n.domain| default(False) }}
   subdomain: {{ n8n.subdomain | default("n8n") }}
@@ -941,7 +937,7 @@ n8n:
   armv7: False
 netdata:
   enable: {{ netdata.enable | default(False) }}
-  https_only: {{ netdata.https_only | default(False) }}
+  hsts: {{ netdata.hsts | default(True) }}
   auth: {{ netdata.auth | default(False) }}
   domain: {{ netdata.domain | default(False) }}
   subdomain: {{ netdata.subdomain | default("netdata") }}
@@ -951,7 +947,7 @@ netdata:
   armv7: False
 nextcloud:
   enable: {{ nextcloud.enable | default(False) }}
-  https_only: {{ nextcloud.https_only | default(False) }}
+  hsts: {{ nextcloud.hsts | default(True) }}
   auth: {{ nextcloud.auth | default(False) }}
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
@@ -963,7 +959,7 @@ nextcloud:
   armv7: False
 nodered:
   enable: {{ nodered.enable | default(False) }}
-  https_only: {{ nodered.https_only | default(False) }}
+  hsts: {{ nodered.hsts | default(True) }}
   auth: {{ nodered.auth | default(False) }}
   domain: {{ nodered.domain| default(False) }}
   subdomain: {{ nodered.subdomain | default("nodered") }}
@@ -976,7 +972,7 @@ nodered:
   safe_mode: {{ nodered.safe_mode | default(False) }}
 nzbget:
   enable: {{ nzbget.enable | default(False) }}
-  https_only: {{ nzbget.https_only | default(False) }}
+  hsts: {{ nzbget.hsts | default(True) }}
   auth: {{ nzbget.auth | default(False) }}
   domain: {{ nzbget.domain | default(False) }}
   subdomain: {{ nzbget.subdomain | default("nzbget") }}
@@ -986,8 +982,8 @@ nzbget:
   armv7: False
 octoprint:
   enable: {{ octoprint.enable | default(False) }}
-  https_only: {{ octoprint.https_only | default(False) }}
-  devices: !!str '{{ octoprint.devices | default([]) }}'
+  hsts: {{ octoprint.hsts | default(True) }}
+  devices: {{ octoprint.devices | default([]) }}
   auth: {{ octoprint.auth | default(False) }}
   domain: {{ octoprint.domain | default(False) }}
   subdomain: {{ octoprint.subdomain | default("octoprint")}}
@@ -997,7 +993,7 @@ octoprint:
   armv7: False
 ombi:
   enable: {{ ombi.enable | default(False) }}
-  https_only: {{ ombi.https_only | default(False) }}
+  hsts: {{ ombi.hsts | default(True) }}
   auth: {{ ombi.auth | default(False) }}
   domain: {{ ombi.domain | default(False) }}
   subdomain: {{ ombi.subdomain | default("ombi") }}
@@ -1007,7 +1003,7 @@ ombi:
   armv7: False
 openldap:
   enable: {{ openldap.enable | default(False) }}
-  https_only: {{ openldap.https_only | default(False) }}
+  hsts: {{ openldap.hsts | default(True) }}
   auth: {{ openldap.auth | default(False) }}
   domain: {{ openldap.domain | default(False) }}
   subdomain: {{ openldap.subdomain | default("openldap") }}
@@ -1018,7 +1014,7 @@ openldap:
   armv7: False
 openvpn:
   enable: {{ openvpn.enable | default(False) }}
-  https_only: {{ openvpn.https_only | default(False) }}
+  hsts: {{ openvpn.hsts | default(True) }}
   auth: {{ openvpn.auth | default(False) }}
   domain: {{ openvpn.domain | default(False) }}
   subdomain: {{ openvpn.subdomain | default("openvpn") }}
@@ -1028,7 +1024,7 @@ openvpn:
   armv7: False
 organizr:
   enable: {{ organizr.enable | default(False) }}
-  https_only: {{ organizr.https_only | default(False) }}
+  hsts: {{ organizr.hsts | default(True) }}
   auth: {{ organizr.auth | default(False) }}
   domain: {{ organizr.domain | default(False) }}
   subdomain: {{ organizr.subdomain | default("organizr") }}
@@ -1038,7 +1034,7 @@ organizr:
   armv7: False
 paperless:
   enable: {{ paperless.enable | default(False) }}
-  https_only: {{ paperless.https_only | default(False) }}
+  hsts: {{ paperless.hsts | default(True) }}
   auth: {{ paperless.auth | default(False) }}
   domain: {{ paperless.domain | default(False) }}
   subdomain: {{ paperless.subdomain | default("paperless") }}
@@ -1048,7 +1044,7 @@ paperless:
   armv7: False
 peertube:
   enable: {{ peertube.enable | default(False) }}
-  https_only: {{ peertube.https_only | default(False) }}
+  hsts: {{ peertube.hsts | default(True) }}
   auth: {{ peertube.auth | default(False) }}
   domain: {{ peertube.domain | default(False) }}
   subdomain: {{ peertube.subdomain | default("peertube") }}
@@ -1060,7 +1056,7 @@ peertube:
   armv7: False
 photoprism:
   enable: {{ photoprism.enable | default(False) }}
-  https_only: {{ photoprism.https_only | default(False) }}
+  hsts: {{ photoprism.hsts | default(True) }}
   auth: {{ photoprism.auth | default(False) }}
   domain: {{ photoprism.domain | default(False) }}
   subdomain: {{ photoprism.subdomain | default("photoprism") }}
@@ -1070,7 +1066,7 @@ photoprism:
   armv7: False
 pihole:
   enable: {{ pihole.enable | default(False) }}
-  https_only: {{ pihole.https_only | default(False) }}
+  hsts: {{ pihole.hsts | default(True) }}
   auth: {{ pihole.auth | default(False) }}
   domain: {{ pihole.domain | default(False) }}
   subdomain: {{ pihole.subdomain | default("pihole") }}
@@ -1080,7 +1076,7 @@ pihole:
   armv7: False
 piwigo:
   enable: {{ piwigo.enable | default(False) }}
-  https_only: {{ piwigo.https_only | default(False) }}
+  hsts: {{ piwigo.hsts | default(True) }}
   auth: {{ piwigo.auth | default(False) }}
   domain: {{ piwigo.domain | default(False) }}
   subdomain: {{ piwigo.subdomain | default("piwigo") }}
@@ -1091,7 +1087,7 @@ piwigo:
   armv7: False
 pixelfed:
   enable: {{ pixelfed.enable | default(False) }}
-  https_only: {{ pixelfed.https_only | default(False) }}
+  hsts: {{ pixelfed.hsts | default(True) }}
   auth: {{ pixelfed.auth | default(False) }}
   domain: {{ pixelfed.domain | default(False) }}
   subdomain: {{ pixelfed.subdomain | default("pixelfed") }}
@@ -1103,7 +1099,7 @@ pixelfed:
   armv7: False
 pleroma:
   enable: {{ pleroma.enable | default(False) }}
-  https_only: {{ pleroma.https_only | default(False) }}
+  hsts: {{ pleroma.hsts | default(True) }}
   auth: {{ pleroma.auth | default(False) }}
   domain: {{ pleroma.domain | default(False) }}
   subdomain: {{ pleroma.subdomain | default("pleroma") }}
@@ -1114,7 +1110,7 @@ pleroma:
   armv7: False
 plex:
   enable: {{ plex.enable | default(False) }}
-  https_only: {{ plex.https_only | default(False) }}
+  hsts: {{ plex.hsts | default(True) }}
   auth: {{ plex.auth | default(False) }}
   domain: {{ plex.domain | default(False) }}
   subdomain: {{ plex.subdomain | default("plex") }}
@@ -1124,7 +1120,7 @@ plex:
   armv7: False
 poli:
   enable: {{ poli.enable | default(False) }}
-  https_only: {{ poli.https_only | default(False) }}
+  hsts: {{ poli.hsts | default(True) }}
   auth: {{ poli.auth | default(False) }}
   domain: {{ poli.domain | default(False) }}
   subdomain: {{ poli.subdomain | default("poli") }}
@@ -1134,7 +1130,7 @@ poli:
   armv7: False
 portainer:
   enable: {{ portainer.enable | default(False) }}
-  https_only: {{ portainer.https_only | default(False) }}
+  hsts: {{ portainer.hsts | default(True) }}
   auth: {{ portainer.auth | default(False) }}
   domain: {{ portainer.domain | default(False) }}
   subdomain: {{ portainer.subdomain | default("portainer") }}
@@ -1144,7 +1140,7 @@ portainer:
   armv7: False
 privatebin:
   enable: {{ privatebin.enable | default(False) }}
-  https_only: {{ privatebin.https_only | default(False) }}
+  hsts: {{ privatebin.hsts | default(True) }}
   auth: {{ privatebin.auth | default(False) }}
   domain: {{ privatebin.domain | default(False) }}
   subdomain: {{ privatebin.subdomain | default("privatebin") }}
@@ -1154,19 +1150,19 @@ privatebin:
   armv7: False
 qbittorrent:
   enable: {{ qbittorrent.enable | default(False) }}
-  https_only: {{ qbittorrent.https_only | default(False) }}
+  hsts: {{ qbittorrent.hsts | default(True) }}
   auth: {{ qbittorrent.auth | default(False) }}
   domain: {{ qbittorrent.domain| default(False) }}
   subdomain: {{ qbittorrent.subdomain | default("qbittorrent") }}
   version: {{ qbittorrent.version | default("latest") }}
-  vpn_enabled: !!str '{{ qbittorrent.vpn_enabled | default(false) }}'
+  vpn_enabled: {{ qbittorrent.vpn_enabled | default(false) }}
   lan_network: {{ qbittorrent.lan_network | default("192.168.1.0/24") }}
   amd64: False
   arm64: False
   armv7: False
 radarr:
   enable: {{ radarr.enable | default(False) }}
-  https_only: {{ radarr.https_only | default(False) }}
+  hsts: {{ radarr.hsts | default(True) }}
   auth: {{ radarr.auth | default(False) }}
   domain: {{ radarr.domain | default(False) }}
   subdomain: {{ radarr.subdomain | default("radarr") }}
@@ -1176,7 +1172,7 @@ radarr:
   armv7: False
 readarr:
   enable: {{ readarr.enable | default(enable_readarr, None) | default(False) }}
-  https_only: {{ readarr.https_only | default(False) }}
+  hsts: {{ readarr.hsts | default(True) }}
   auth: {{ readarr.auth | default(False) }}
   domain: {{ readarr.domain | default(False) }}
   subdomain: {{ readarr.subdomain | default("readarr")}}
@@ -1186,7 +1182,7 @@ readarr:
   armv7: False
 restic:
   enable: {{ restic.enable | default(False) }}
-  https_only: {{ restic.https_only | default(False) }}
+  hsts: {{ restic.hsts | default(True) }}
   auth: {{ restic.auth | default(False) }}
   domain: {{ restic.domain | default(False) }}
   subdomain: {{ restic.subdomain | default("restic") }}
@@ -1196,7 +1192,7 @@ restic:
   armv7: False
 rsshub:
   enable: {{ rsshub.enable | default(False) }}
-  https_only: {{ rsshub.https_only | default(False) }}
+  hsts: {{ rsshub.hsts | default(True) }}
   auth: {{ rsshub.auth | default(False) }}
   domain: {{ rsshub.domain | default(False) }}
   subdomain: {{ rsshub.subdomain | default("rsshub")}}
@@ -1206,7 +1202,7 @@ rsshub:
   armv7: False
 sabnzbd:
   enable: {{ sabnzbd.enable | default(False) }}
-  https_only: {{ sabnzbd.https_only | default(False) }}
+  hsts: {{ sabnzbd.hsts | default(True) }}
   auth: {{ sabnzbd.auth | default(False) }}
   domain: {{ sabnzbd.domain | default(False) }}
   subdomain: {{ sabnzbd.subdomain | default("sabnzbd") }}
@@ -1222,7 +1218,7 @@ samba:
   armv7: False
 searx:
   enable: {{ searx.enable | default(False) }}
-  https_only: {{ searx.https_only | default(False) }}
+  hsts: {{ searx.hsts | default(True) }}
   auth: {{ searx.auth | default(False) }}
   domain: {{ searx.domain | default(False) }}
   subdomain: {{ searx.subdomain | default("searx") }}
@@ -1232,7 +1228,7 @@ searx:
   armv7: False
 shinobi:
   enable: {{ shinobi.enable | default(False) }}
-  https_only: {{ shinobi.https_only | default(False) }}
+  hsts: {{ shinobi.hsts | default(True) }}
   auth: {{ shinobi.auth | default(False) }}
   domain: {{ shinobi.domain | default(False) }}
   subdomain: {{ shinobi.subdomain | default("shinobi") }}
@@ -1243,7 +1239,7 @@ shinobi:
   armv7: False
 sickchill:
   enable: {{ sickchill.enable | default(False) }}
-  https_only: {{ sickchill.https_only | default(False) }}
+  hsts: {{ sickchill.hsts | default(True) }}
   auth: {{ sickchill.auth | default(False) }}
   domain: {{ sickchill.domain | default(False) }}
   subdomain: {{ sickchill.subdomain | default("sickchill") }}
@@ -1253,7 +1249,7 @@ sickchill:
   armv7: False
 simply_shorten:
   enable: {{ simply_shorten.enable | default(False) }}
-  https_only: {{ simply_shorten.https_only | default(False) }}
+  hsts: {{ simply_shorten.hsts | default(True) }}
   auth: {{ simply_shorten.auth | default(False) }}
   domain: {{ simply_shorten.domain | default(False) }}
   subdomain: {{ simply_shorten.subdomain | default("simply_shorten")}}
@@ -1263,7 +1259,7 @@ simply_shorten:
   armv7: False
 snibox:
   enable: {{ snibox.enable | default(False) }}
-  https_only: {{ snibox.https_only | default(False) }}
+  hsts: {{ snibox.hsts | default(True) }}
   auth: {{ snibox.auth | default(False) }}
   domain: {{ snibox.domain | default(False) }}
   subdomain: {{ snibox.subdomain | default("snibox") }}
@@ -1275,7 +1271,7 @@ snibox:
   armv7: False
 sonarr:
   enable: {{ sonarr.enable | default(False) }}
-  https_only: {{ sonarr.https_only | default(False) }}
+  hsts: {{ sonarr.hsts | default(True) }}
   auth: {{ sonarr.auth | default(False) }}
   domain: {{ sonarr.domain | default(False) }}
   subdomain: {{ sonarr.subdomain | default("sonarr") }}
@@ -1285,7 +1281,7 @@ sonarr:
   armv7: False
 speedtest:
   enable: {{ speedtest.enable | default(False) }}
-  https_only: {{ speedtest.https_only | default(False) }}
+  hsts: {{ speedtest.hsts | default(True) }}
   auth: {{ speedtest.auth | default(False) }}
   domain: {{ speedtest.domain | default(False) }}
   subdomain: {{ speedtest.subdomain | default("speedtest") }}
@@ -1296,7 +1292,7 @@ speedtest:
   server: {{ speedtest.server | default (11441) }}
 statping:
   enable: {{ statping.enable | default(False) }}
-  https_only: {{ statping.https_only | default(False) }}
+  hsts: {{ statping.hsts | default(True) }}
   auth: {{ statping.auth | default(False) }}
   domain: {{ statping.domain | default(False) }}
   subdomain: {{ statping.subdomain | default("statping") }}
@@ -1306,7 +1302,7 @@ statping:
   armv7: False
 sui:
   enable: {{ sui.enable | default(True) }}
-  https_only: {{ sui.https_only | default(False) }}
+  hsts: {{ sui.hsts | default(True) }}
   auth: {{ sui.auth | default(False) }}
   domain: {{ sui.domain | default(False) }}
   subdomain: {{ sui.subdomain | default("sui") }}
@@ -1316,7 +1312,7 @@ sui:
   armv7: False
 syncthing:
   enable: {{ syncthing.enable | default(False) }}
-  https_only: {{ syncthing.https_only | default(False) }}
+  hsts: {{ syncthing.hsts | default(True) }}
   auth: {{ syncthing.auth | default(False) }}
   domain: {{ syncthing.domain | default(False) }}
   subdomain: {{ syncthing.subdomain | default("syncthing") }}
@@ -1326,7 +1322,7 @@ syncthing:
   armv7: False
 taisun:
   enable: {{ taisun.enable | default(False) }}
-  https_only: {{ taisun.https_only | default(False) }}
+  hsts: {{ taisun.hsts | default(True) }}
   auth: {{ taisun.auth | default(False) }}
   domain: {{ taisun.domain | default(False) }}
   subdomain: {{ taisun.subdomain | default("taisun")}}
@@ -1336,7 +1332,7 @@ taisun:
   armv7: False
 tautulli:
   enable: {{ tautulli.enable | default(False) }}
-  https_only: {{ tautulli.https_only | default(False) }}
+  hsts: {{ tautulli.hsts | default(True) }}
   auth: {{ tautulli.auth | default(False) }}
   domain: {{ tautulli.domain | default(False) }}
   subdomain: {{ tautulli.subdomain | default("tautulli") }}
@@ -1346,7 +1342,7 @@ tautulli:
   armv7: False
 teedy:
   enable: {{ teedy.enable | default(False) }}
-  https_only: {{ teedy.https_only | default(False) }}
+  hsts: {{ teedy.hsts | default(True) }}
   auth: {{ teedy.auth | default(False) }}
   domain: {{ teedy.domain | default(False) }}
   subdomain: {{ teedy.subdomain | default("teedy")}}
@@ -1357,7 +1353,7 @@ teedy:
   armv7: False
 thelounge:
   enable: {{ thelounge.enable | default(False) }}
-  https_only: {{ thelounge.https_only | default(False) }}
+  hsts: {{ thelounge.hsts | default(True) }}
   auth: {{ thelounge.auth | default(False) }}
   domain: {{ thelounge.domain | default(False) }}
   subdomain: {{ thelounge.subdomain | default("thelounge") }}
@@ -1367,7 +1363,7 @@ thelounge:
   armv7: False
 tick:
   enable: {{ tick.enable | default(False) }}
-  https_only: {{ tick.https_only | default(False) }}
+  hsts: {{ tick.hsts | default(True) }}
   auth: {{ tick.auth | default(False) }}
   domain: {{ tick.domain | default(False) }}
   subdomain: {{ tick.subdomain | default("tick") }}
@@ -1380,7 +1376,7 @@ tick:
   armv7: False
 tiddlywiki:
   enable: {{ tiddlywiki.enable | default(False) }}
-  https_only: {{ tiddlywiki.https_only | default(False) }}
+  hsts: {{ tiddlywiki.hsts | default(True) }}
   auth: {{ tiddlywiki.auth | default(False) }}
   domain: {{ tiddlywiki.domain| default(False) }}
   subdomain: {{ tiddlywiki.subdomain | default("tiddlywiki") }}
@@ -1390,7 +1386,7 @@ tiddlywiki:
   armv7: False
 transmission:
   enable: {{ transmission.enable | default(False) }}
-  https_only: {{ transmission.https_only | default(False) }}
+  hsts: {{ transmission.hsts | default(True) }}
   auth: {{ transmission.auth | default(False) }}
   domain: {{ transmission.domain | default(False) }}
   subdomain: {{ transmission.subdomain | default("transmission") }}
@@ -1400,7 +1396,7 @@ transmission:
   armv7: False
 trilium:
   enable: {{ trilium.enable | default(False) }}
-  https_only: {{ trilium.https_only | default(False) }}
+  hsts: {{ trilium.hsts | default(True) }}
   auth: {{ trilium.auth | default(False) }}
   domain: {{ trilium.domain| default(False) }}
   subdomain: {{ trilium.subdomain | default("trilium") }}
@@ -1410,7 +1406,7 @@ trilium:
   armv7: False
 turtl:
   enable: {{ turtl.enable | default(False) }}
-  https_only: {{ turtl.https_only | default(False) }}
+  hsts: {{ turtl.hsts | default(True) }}
   auth: {{ turtl.auth | default(False) }}
   domain: {{ turtl.domain| default(False) }}
   subdomain: {{ turtl.subdomain | default("turtl") }}
@@ -1420,7 +1416,7 @@ turtl:
   armv7: False
 ubooquity:
   enable: {{ ubooquity.enable | default(False) }}
-  https_only: {{ ubooquity.https_only | default(False) }}
+  hsts: {{ ubooquity.hsts | default(True) }}
   auth: {{ ubooquity.auth | default(False) }}
   domain: {{ ubooquity.domain | default(False) }}
   subdomain: {{ ubooquity.subdomain | default("ubooquity") }}
@@ -1430,7 +1426,7 @@ ubooquity:
   armv7: False
 unificontroller:
   enable: {{ unificontroller.enable | default(False) }}
-  https_only: {{ unificontroller.https_only | default(False) }}
+  hsts: {{ unificontroller.hsts | default(True) }}
   auth: {{ unificontroller.auth | default(False) }}
   domain: {{ unificontroller.domain | default(False) }}
   subdomain: {{ unificontroller.subdomain | default("unificontroller")}}
@@ -1440,7 +1436,7 @@ unificontroller:
   armv7: False
 wallabag:
   enable: {{ wallabag.enable | default(False) }}
-  https_only: {{ wallabag.https_only | default(False) }}
+  hsts: {{ wallabag.hsts | default(True) }}
   auth: {{ wallabag.auth | default(False) }}
   domain: {{ wallabag.domain | default(False) }}
   subdomain: {{ wallabag.subdomain | default("wallabag") }}
@@ -1462,7 +1458,7 @@ watchtower:
   gotify_token: {{ watchtower.gotify_token | default (False) }}
 webtrees:
   enable: {{ webtrees.enable | default(False) }}
-  https_only: {{ webtrees.https_only | default(False) }}
+  hsts: {{ webtrees.hsts | default(True) }}
   auth: {{ webtrees.auth | default(False) }}
   domain: {{ webtrees.domain | default(False) }}
   subdomain: {{ webtrees.subdomain | default("webtrees") }}
@@ -1473,7 +1469,7 @@ webtrees:
   armv7: False
 webdavserver:
   enable: {{ webdavserver.enable | default(False) }}
-  https_only: {{ webdavserver.https_only | default(False) }}
+  hsts: {{ webdavserver.hsts | default(True) }}
   auth: {{ webdavserver.auth | default(False) }}
   domain: {{ webdavserver.domain| default(False) }}
   subdomain: {{ webdavserver.subdomain | default("webdav") }}
@@ -1483,7 +1479,7 @@ webdavserver:
   armv7: False
 webvirtmgr:
   enable: {{ webvirtmgr.enable | default(False) }}
-  https_only: {{ webvirtmgr.https_only | default(False) }}
+  hsts: {{ webvirtmgr.hsts | default(True) }}
   auth: {{ webvirtmgr.auth | default(False) }}
   domain: {{ webvirtmgr.domain | default(False) }}
   subdomain: {{ webvirtmgr.subdomain | default("webvirtmgr") }}
@@ -1493,7 +1489,7 @@ webvirtmgr:
   armv7: False
 wekan:
   enable: {{ wekan.enable | default(False) }}
-  https_only: {{ wekan.https_only | default(False) }}
+  hsts: {{ wekan.hsts | default(True) }}
   auth: {{ wekan.auth | default(False) }}
   domain: {{ wekan.domain | default(False) }}
   subdomain: {{ wekan.subdomain | default("wekan") }}
@@ -1504,7 +1500,7 @@ wekan:
   armv7: False
 wificard:
   enable: {{ wificard.enable | default(False) }}
-  https_only: {{ wificard.https_only | default(False) }}
+  hsts: {{ wificard.hsts | default(True) }}
   auth: {{ wificard.auth | default(False) }}
   domain: {{ wificard.domain | default(False) }}
   subdomain: {{ wificard.subdomain | default("wificard") }}
@@ -1514,7 +1510,7 @@ wificard:
   armv7: False
 zammad:
   enable: {{ zammad.enable | default(False) }}
-  https_only: {{ zammad.https_only | default(False) }}
+  hsts: {{ zammad.hsts | default(True) }}
   auth: {{ zammad.auth | default(False) }}
   domain: {{ zammad.domain| default(False) }}
   subdomain: {{ zammad.subdomain | default("zammad") }}
@@ -1525,7 +1521,7 @@ zammad:
   armv7: False
 zulip:
   enable: {{ zulip.enable | default(False) }}
-  https_only: {{ zulip.https_only | default(False) }}
+  hsts: {{ zulip.hsts | default(True) }}
   auth: {{ zulip.auth | default(False) }}
   domain: {{ zulip.domain | default(False) }}
   subdomain: {{ zulip.subdomain | default("zulip") }}

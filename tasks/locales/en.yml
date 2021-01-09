@@ -130,7 +130,7 @@ en:
         readdevdocs: |+
           First and foremost, please make sure you have read the developer docs
           You can find the developers docs. here:
-          # TODO: add url to dev doc
+          # @todo add url to dev doc
         precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
         pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
       in:
@@ -226,8 +226,8 @@ en:
 
   service:
     list:
-      name: 'list'
-      desc: 'List the available services'
+      name: "list"
+      desc: "List the available services"
     remove:
       usage: "remove -s, --service SERVICENAME"
       desc: "Removes any specified service(s) from the VivumLab server"
@@ -272,6 +272,7 @@ en:
       out:
         invalidcommand: "Invalid Command: %{command} for %{dynamic_namespace}"
         validoptions: "Valid commands for this namesapce are:"
+        applyupdates: "Configuration saved. Apply Updates? "
     customize:
       usage: "customize"
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
@@ -394,7 +395,6 @@ en:
     saveconf:
       out:
         saving: "Saving config.yml"
-
 
   options:
     configdir: "Config directory to use"

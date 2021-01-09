@@ -11,13 +11,13 @@
     name: "{{ service_item }}"
     state: stopped
     enabled: no
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
   ignore_errors: yes
   vars:
-    query: "{{ service_item + '.enable' }}"
+    query: "{{ vars[service_item]['enable'] }}"
   become: yes
 
 - name: Clear old VivumLab local backup if it exists.
@@ -41,24 +41,24 @@
     dest: "{{ volumes_root }}_restore.yml"
 
 - name: Spin up restore utility.
-  command: "docker-compose -f \"{{ volumes_root }}_restore.yml\" -p vivumlab_restore up -d"
+  command: 'docker-compose -f "{{ volumes_root }}_restore.yml" -p vivumlab_restore up -d'
 
 - name: Restore VivumLab data. (This could take quite a while depending on how much data you have.)
   command: "docker exec vivumlab_restore_restore_1 restic restore latest --target /"
 
 - name: Stop restore utility.
-  command: "docker-compose -f \"{{ volumes_root }}_restore.yml\" -p vivumlab_restore down"
+  command: 'docker-compose -f "{{ volumes_root }}_restore.yml" -p vivumlab_restore down'
 
 - name: Ensure enable services are not running
   systemd:
     name: "{{ service_item }}"
     state: started
     enabled: yes
-  when: query
+  when: query | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
   ignore_errors: yes
   vars:
-    query: "{{ service_item + '.enable' }}"
+    query: "{{ vars[service_item]['enable'] }}"
   become: yes
