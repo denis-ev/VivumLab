@@ -13,6 +13,21 @@ class AddPkg < Thor
   end
 
   no_commands do
+    def config_block
+      <<~CONFIG
+        #{to_insert}:
+          enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
+          hsts: {{ #{to_insert}.hsts | default(True) }}
+          auth: {{ #{to_insert}.auth | default(False) }}
+          domain: {{ #{to_insert}.domain | default(False) }}
+          subdomain: {{ #{to_insert}.subdomain | default("#{to_insert}")}}
+          version: {{ #{to_insert}.version | default("latest") }}
+          amd64: False
+          arm64: False
+          armv7: False
+      CONFIG
+    end
+
     def gather_data
       say 'Step 1, Gathering info'.light_blue
       @package_name = ask 'Enter the package name in Title Case'
@@ -164,21 +179,6 @@ class AddPkg < Thor
         end
       end
       File.open(filename, 'w+') { |f| f.puts(lines) }
-    end
-
-    def config_block
-      <<~CONFIG
-        #{to_insert}:
-          enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
-          hsts: {{ #{to_insert}.hsts | default(True) }}
-          auth: {{ #{to_insert}.auth | default(False) }}
-          domain: {{ #{to_insert}.domain | default(False) }}
-          subdomain: {{ #{to_insert}.subdomain | default("#{to_insert}")}}
-          version: {{ #{to_insert}.version | default("latest") }}
-          amd64: False
-          arm64: False
-          armv7: False
-      CONFIG
     end
   end
 end
