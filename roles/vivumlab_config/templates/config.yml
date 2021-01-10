@@ -67,14 +67,14 @@ bastion:
     port: {{ bastion.wireguard.port | default("51820") }}
     keepalive: {{ bastion.wireguard.keepalive | default("25") }}
   ports_to_forward:
-    2222: 22
+    {{ vlab_port | default('22')  }}: 22
     80: 80
     443: 443
-    25: 25
-    143: 143
-    587: 587
-    998: 998
-    4190: 4190
+{% if bastion.ports_to_forward -%}
+{% for item in bastion.ports_to_forward | dict2items %}
+    {{ item.key }}: {{ item.value }}
+{% endfor %}
+{% endif %}
   # MIGRATION v0.7
   # Should VivumLab reset the bastion server IP tables rules?
   # Enable this if you are upgrading a Tinc bastion host
@@ -146,6 +146,11 @@ traefik:
     # DUMMY_KEY: DUMMY_VALUE
     CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
     CF_API_KEY: {{ traefik.additional_env_vars.CF_API_KEY | default('API_KEY') }}
+{% if traefik.additional_env_vars -%}
+{% for item in traefik.additional_env_vars | dict2items %}
+    {{ item.key }}: {{ item.value }}
+{% endfor %}
+{% endif %}
 
 # Features
 
