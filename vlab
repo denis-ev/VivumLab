@@ -34,12 +34,12 @@ class Vlab < Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
 
-  rejected = %w[Thor Vlab DemoTasks CLI Core Config Deprecated Dev Migration Pkg SanityChecks Ssh]
+  rejected = %w[AddPkg Thor Vlab DemoTasks CLI Core Config Deprecated Dev Migration SanityChecks Ssh]
   namespaces = ObjectSpace.each_object(Class).select { |klass_name| klass_name.superclass.to_s == 'Thor' }
                           .reject { |klass_name| rejected.include? klass_name.to_s }
                           .reject { |klass_name| constantized_services.include? klass_name.to_s }
 
-  %w[CLI Core Config Deprecated Dev Migration SanityChecks Ssh].each do |to_add|
+  %w[AddPkg CLI Core Config Deprecated Dev Migration SanityChecks Ssh].each do |to_add|
     namespaces << to_add if ARGV.include?('-e') || ARGV.include?('--dev')
   end
 

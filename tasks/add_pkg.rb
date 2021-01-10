@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Contains tasks and logic for adding a package to vivumlab
-class Pkg < Thor
+class AddPkg < Thor
   require_relative './utils'
   include Utils
   include VlabI18n
@@ -165,20 +165,20 @@ class Pkg < Thor
       end
       File.open(filename, 'w+') { |f| f.puts(lines) }
     end
-  end
 
-  def config_block
-    <<~CONFIG
-      #{to_insert}:
-        enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
-        hsts: {{ #{to_insert}.hsts | default(True) }}
-        auth: {{ #{to_insert}.auth | default(False) }}
-        domain: {{ #{to_insert}.domain | default(False) }}
-        subdomain: {{ #{to_insert}.subdomain | default("#{to_insert}")}}
-        version: {{ #{to_insert}.version | default("latest") }}
-        amd64: False
-        arm64: False
-        armv7: False
-    CONFIG
+    def config_block
+      <<~CONFIG
+        #{to_insert}:
+          enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
+          hsts: {{ #{to_insert}.hsts | default(True) }}
+          auth: {{ #{to_insert}.auth | default(False) }}
+          domain: {{ #{to_insert}.domain | default(False) }}
+          subdomain: {{ #{to_insert}.subdomain | default("#{to_insert}")}}
+          version: {{ #{to_insert}.version | default("latest") }}
+          amd64: False
+          arm64: False
+          armv7: False
+      CONFIG
+    end
   end
 end
