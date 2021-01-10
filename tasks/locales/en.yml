@@ -167,6 +167,11 @@ en:
       out:
         notdone: "Migration not needed. Config files valid."
 
+  pkg:
+    add:
+      usage: "new"
+      desc: "Adds a new package to Vivumlab"
+
   sanity_checks:
     check_ssh_keys:
       usage: "check_ssh_keys"

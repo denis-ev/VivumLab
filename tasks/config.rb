@@ -34,17 +34,9 @@ class Config < Thor
     say I18n.t('config.new.out.creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
     if File.exist? "settings/#{options[:config_dir]}/encrypted.yml"
-      write_temporary_decrypted_config
-      FileUtils.mv @temp_config, "decrypted.yml"
-      say I18n.t('config.decrypt.out.decrypted').green
-      run_config_playbook(options, "-e @decrypted.yml")
-      encrypt_temporary_decrypted_config "decrypted.yml"
-      say I18n.t('config.encrypt.out.encrypted').green
+      config_file_exists
     else
-      FileUtils.mkdir_p "settings/#{options[:config_dir]}/passwords" unless Dir.exist? "settings/#{options[:config_dir]}/passwords"
-      run_config_playbook(options)
-      encrypt_temporary_decrypted_config "decrypted.yml"
-      say I18n.t('config.encrypt.out.encrypted').green
+      net_new_config_file options
     end
     decrypted_config_file # just to refresh
   end
@@ -115,6 +107,24 @@ class Config < Thor
   end
 
   no_commands do
+    def confg_file_exists
+      write_temporary_decrypted_config
+      FileUtils.mv @temp_config, 'decrypted.yml'
+      say I18n.t('config.decrypt.out.decrypted').green
+      run_config_playbook(options, '-e @decrypted.yml')
+      encrypt_temporary_decrypted_config 'decrypted.yml'
+      say I18n.t('config.encrypt.out.encrypted').green
+    end
+
+    def net_new_config_file(options)
+      return if Dir.exist? "settings/#{options[:config_dir]}/passwords"
+
+      FileUtils.mkdir_p "settings/#{options[:config_dir]}/passwords"
+      run_config_playbook(options)
+      encrypt_temporary_decrypted_config 'decrypted.yml'
+      say I18n.t('config.encrypt.out.encrypted').green
+    end
+
     def eval_config_setting(key, value)
       exit 1 unless key
       # rubocop:disable Security/Eval
@@ -130,7 +140,7 @@ class Config < Thor
     def draw_error_table(config_key, good_config_key)
       say I18n.t('config.draw_error_table.out.keynomatch', config_key: config_key).red
       say I18n.t('config.draw_error_table.out.possiblekey').yellow
-      sanitized_array = decrypted_config_file[good_config_key].reject do |key,value|
+      sanitized_array = decrypted_config_file[good_config_key].reject do |_, value|
         value.instance_of? ConfigFileUtils::ConfigFile
       end
       table = TTY::Table.new(rows: sanitized_array.to_a)
