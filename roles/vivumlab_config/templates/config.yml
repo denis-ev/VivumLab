@@ -140,8 +140,8 @@ traefik:
   # Reference: https://docs.traefik.io/master/contributing/data-collection/
   send_anonymous_usage: {{ traefik.send_anonymous_usage | default("false")  }}
   dns_challenge_provider: {{ traefik.dns_challenge_provider | default(False) }}
-# use key:value pairs here to add additional environment variables to your traefik docker image.
-# for instance, if you're using a dns challenge provider place your api keys etc here.
+  # use key:value pairs here to add additional environment variables to your traefik docker image.
+  # for instance, if you're using a dns challenge provider place your api keys etc here.
   additional_env_vars:
     # DUMMY_KEY: DUMMY_VALUE
     CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
@@ -1560,7 +1560,5 @@ nas_share_path: {{ nas_share_path | default() }}
 nas_user: {{ nas_user | default(default_username) }}
 nas_pass: {{ nas_pass | default() }}
 nas_workgroup: {{ nas_workgroup | default() }}
-
-
 
 apple_health_nextcloud_username: {{ apple_health_nextcloud_username | default()  }}

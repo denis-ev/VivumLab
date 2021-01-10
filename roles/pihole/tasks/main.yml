@@ -22,6 +22,7 @@
     project_src: "{{ volumes_root}}/pihole"
     pull: true
     state: present
+  ignore_errors: yes
 
 - name: Configure pihole systemd service.
   become: yes

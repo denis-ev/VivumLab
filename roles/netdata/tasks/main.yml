@@ -45,6 +45,7 @@
     project_src: "{{ volumes_root}}/netdata"
     pull: true
     state: present
+  ignore_errors: yes
 
 - name: Check that the netdata.conf exists
   stat:
