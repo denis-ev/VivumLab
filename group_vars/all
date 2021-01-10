@@ -257,7 +257,7 @@ traefik:
 bastion:
   enable: false
   wireguard:
-  ports_to_forward
+  ports_to_forward:
 open_ldap:
   seed:
 tinc: "{{ enable_tinc }}"
