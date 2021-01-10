@@ -200,8 +200,7 @@
 - name: Pull VivumLab Traefik Image
   docker_compose:
     project_src: "{{ volumes_root}}/traefik"
-    pull: true
-    state: present
+    pull: yes
   ignore_errors: yes
 
 - name: Start Traefik

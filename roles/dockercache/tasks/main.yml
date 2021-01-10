@@ -32,8 +32,7 @@
 - name: Pull dockercache Image
   docker_compose:
     project_src: "{{ volumes_root}}/dockercache"
-    pull: true
-    state: present
+    pull: yes
   ignore_errors: yes
 
 - name: Start dockercache
