@@ -10,12 +10,6 @@ class SanityChecks < Thor
   include VlabConstants
   include Utils
 
-  desc I18n.t('sanity_checks.check_ssh_keys.usage'), I18n.t('sanity_checks.check_ssh_keys.desc')
-  # @todo Write check_ssh_keys task (sanity_check.rb)
-  def check_ssh_keys
-    # if File.exist?
-  end
-
   desc I18n.t('sanity_checks.local.usage'), I18n.t('sanity_checks.local.desc')
   def local
     invoke 'check_for_settings'
@@ -29,7 +23,6 @@ class SanityChecks < Thor
   desc I18n.t('sanity_checks.remote.usage'), I18n.t('sanity_checks.remote.desc')
   def remote
     say I18n.t('sanity_checks.remote.out.sshkeyverifying').yellow
-    invoke check_ssh_keys
     invoke check_ssh_with_keys
     say I18n.t('sanity_checks.remote.out.sshkeyverified').green
   end
