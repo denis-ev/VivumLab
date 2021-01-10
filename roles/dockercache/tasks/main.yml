@@ -47,7 +47,7 @@
   get_url:
     url: http://127.0.0.1:3128/ca.crt
     dest: /usr/share/ca-certificates/docker_registry_proxy.crt
-  timeout: 240
+    timeout: 240
   become: yes
 
 - name: Add docker_registry_proxy.crt to /etc/ca-certificates.conf
