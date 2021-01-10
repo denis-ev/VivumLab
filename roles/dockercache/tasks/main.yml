@@ -44,15 +44,24 @@
     state: started
   become: yes
 
-# @todo add wait until started for docker cache for this to work
-# @body create backup of the old /etc/ca-certificates.conf
-# - name: Get the CA certificate from the proxy
-#   shell: |
-#     curl http://127.0.0.1:3128/ca.crt > /usr/share/ca-certificates/docker_registry_proxy.crt
-#     cp /etc/ca-certificates.conf /etc/ca-certificates.conf.bak
-#     echo "docker_registry_proxy.crt" >> /etc/ca-certificates.conf
-#     update-ca-certificates --fresh
-#   become: yes
+- name: Get the CA certificate from the proxy
+  get_url:
+    url: http://127.0.0.1:3128/ca.crt
+    dest: /usr/share/ca-certificates/docker_registry_proxy.crt
+  timeout: 240
+  become: yes
+
+- name: Add docker_registry_proxy.crt to /etc/ca-certificates.conf
+  blockinfile:
+    path: /etc/ca-certificates.conf
+    block: |
+      docker_registry_proxy.crt
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Docker Registry Proxy"
+  become: yes
+
+- name: Update the CA certificates
+  shell: update-ca-certificates --fresh
+  become: yes
 
 - name: Configure dockercache systemd service.
   become: yes
@@ -60,13 +69,13 @@
     src: http-proxy.conf.j2
     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
 
-# - name: Restart docker.service
-#   systemd:
-#     name: docker.service
-#     enabled: yes
-#     daemon-reload: yes
-#     state: restarted
-#   become: yes
+- name: Restart docker.service
+  systemd:
+    name: docker.service
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+  become: yes
 
 - debug:
     msg: "Check the docs at https://vivumlab.com/docs otherwise new image pulls will fail."
