@@ -15,6 +15,7 @@ services:
   codimd:
   dark_sky:
   digikam:
+  dockercache:
   docs:
   drone:
   duckdns:
@@ -140,6 +141,8 @@ codeserver:
 codimd:
 dark_sky:
 digikam:
+dockercache:
+docs:
 drone:
 duckdns:
 duplicati:
