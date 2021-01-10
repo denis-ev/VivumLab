@@ -364,6 +364,16 @@ digikam:
   amd64: False
   arm64: False
   armv7: False
+dockercache:
+  enable: {{ dockercache.enable | default(False) }}
+  hsts: False
+  auth: False
+  domain: False
+  subdomain: "dockercache"
+  version: {{ dockercache.version | default("0.6.1") }}
+  amd64: "verified"
+  arm64: False
+  armv7: False
 drone:
   enable: {{ drone.enable | default(False) }}
   hsts: {{ drone.hsts | default(True) }}
