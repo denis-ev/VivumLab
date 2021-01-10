@@ -39,7 +39,7 @@
     path: "/etc/systemd/system/docker.service.d/http-proxy.conf"
   when:
     - confirm_remove | bool
-    - ockercache.enable == False
+    - dockercache.enable == False
 
 - name: Restart docker.service
   systemd:
