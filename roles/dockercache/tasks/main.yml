@@ -43,18 +43,22 @@
     state: started
   become: yes
 
-- name: Wait 300 seconds for port 3128 to become open and contain "docker-registry-proxy"
-  wait_for:
-    port: 3128
-    host: '127.0.0.1'
-    search_regex: The docker caching proxy is working
-    delay: 10
+# - name: "wait for cache server to come up"
+#   uri:
+#     url: "http://127.0.0.1:3128"
+#     status_code: 200
+#   register: result
+#   until: result.status == 200
+#   retries: 300
+#   delay: 1
 
 - name: Get the CA certificate from the proxy
   get_url:
     url: http://127.0.0.1:3128/ca.crt
     dest: /usr/share/ca-certificates/docker_registry_proxy.crt
-    timeout: 240
+    timeout: 1
+  retries: 300
+  delay: 1
   become: yes
 
 - name: Add docker_registry_proxy.crt to /etc/ca-certificates.conf
