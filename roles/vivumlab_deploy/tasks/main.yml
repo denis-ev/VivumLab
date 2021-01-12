@@ -216,6 +216,14 @@
     pull: yes
   ignore_errors: yes
 
+- name: Start Traefik
+  systemd:
+    name: traefik
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes
+
 - name: Read Tor SSH connection info
   shell: cat /var/lib/tor/ssh-onion/hostname
   register: tor_ssh_domain_file

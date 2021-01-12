@@ -24,7 +24,11 @@ jobs:
     needs: pr_wip_check
     name: Lint PR
     steps:
+<<<<<<< HEAD
       - uses: amannn/action-semantic-pull-request@v3.2.6
+=======
+      - uses: amannn/action-semantic-pull-request@v3.1.0
+>>>>>>> feat: cache docker images (#277)
         env:
           GITHUB_TOKEN: ${{ secrets.DE_PAT }}
         # Optionally, you can provide options for further constraints.
