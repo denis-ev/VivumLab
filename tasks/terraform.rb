@@ -12,6 +12,8 @@ class Terraform < Thor
     terraform_ansible_setup(options)
     @terraform_ip = terraform_shell_commands(options)
     invoke 'config:set', [], config_key: 'bastion.server_address', value: @terraform_ip
+    say I18n.t('terraform.create.out.created', ip: @terraform_ip).green
+    say I18n.t('terraform.create.out.setip', ip: @terraform_ip, config_dir: options[:config_dir]).light_blue
   end
 
   desc I18n.t('terraform.create.usage'), I18n.t('terraform.create.desc')

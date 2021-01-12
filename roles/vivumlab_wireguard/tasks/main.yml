@@ -39,11 +39,19 @@
     dest: /etc/wireguard
     state: directory
 
+- name: Check to see if private key already exists
+  stat:
+    path: /etc/wireguard/privatekey
+  register: private_key
+
+- name: Generate WireGuard private and public keys
+  shell: umask 077 && wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
+  when: private_key.stat.exists == False
+
 - name: Register WireGuard private key as a variable
   slurp:
     src: /etc/wireguard/privatekey
   register: wg_private_keys
-
 
 - name: Register Wireguard *public* keys in a variable
   slurp:

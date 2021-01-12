@@ -1,0 +1,91 @@
+---
+- name: Make dockercache directory.
+  file:
+    path: "{{ volumes_root }}/dockercache"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Make dockercache directory.
+  file:
+    path: "/etc/systemd/system/docker.service.d"
+    state: directory
+  become: yes
+
+- name: Copy dockercache docker-compose.yml file into place.
+  template:
+    src: docker-compose.dockercache.yml.j2
+    dest: "{{ volumes_root }}/dockercache/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
+
+- name: Configure dockercache systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/dockercache.service
+
+- name: Pull dockercache Image
+  docker_compose:
+    project_src: "{{ volumes_root}}/dockercache"
+    pull: yes
+  ignore_errors: yes
+
+- name: Start dockercache
+  systemd:
+    name: dockercache
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes
+
+# - name: "wait for cache server to come up"
+#   uri:
+#     url: "http://127.0.0.1:3128"
+#     status_code: 200
+#   register: result
+#   until: result.status == 200
+#   retries: 300
+#   delay: 1
+
+- name: Get the CA certificate from the proxy
+  get_url:
+    url: http://127.0.0.1:3128/ca.crt
+    dest: /usr/share/ca-certificates/docker_registry_proxy.crt
+    timeout: 1
+  retries: 300
+  delay: 60
+  become: yes
+
+- name: Add docker_registry_proxy.crt to /etc/ca-certificates.conf
+  blockinfile:
+    path: /etc/ca-certificates.conf
+    block: |
+      docker_registry_proxy.crt
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Docker Registry Proxy"
+  become: yes
+
+- name: Update the CA certificates
+  shell: update-ca-certificates --fresh
+  become: yes
+
+- name: Configure dockercache systemd service.
+  become: yes
+  template:
+    src: http-proxy.conf.j2
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+
+- name: Restart docker.service
+  systemd:
+    name: docker.service
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+  become: yes
+
+- debug:
+    msg: "Check the docs at https://vivumlab.com/docs otherwise new image pulls will fail."

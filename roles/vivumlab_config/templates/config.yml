@@ -36,7 +36,7 @@ volumes_root: {{ volumes_root | default('/home/' + vlab_ssh_user + '/vivumlab') 
 storage_dir: {{ storage_dir | default('/mnt/nas') }}
 
 # Default email to receive notifications on
-vlab_notifyemail: {{ vlab_notifyemail | default('vlab_notifyemail@vivumlab.com')}}
+vlab_notifyemail: {{ vlab_notifyemail | default('vlab_notifyemail@yourdomain.com')}}
 
 # For technical reasons these can't live here.
 ansible_become_password: "{{ ansible_become_password | default() }}"
@@ -67,14 +67,14 @@ bastion:
     port: {{ bastion.wireguard.port | default("51820") }}
     keepalive: {{ bastion.wireguard.keepalive | default("25") }}
   ports_to_forward:
-    2222: 22
+    2222: {{ vlab_port }}
     80: 80
     443: 443
-    25: 25
-    143: 143
-    587: 587
-    998: 998
-    4190: 4190
+{% if bastion.ports_to_forward -%}
+{% for item in bastion.ports_to_forward | dict2items %}
+    {{ item.key }}: {{ item.value }}
+{% endfor %}
+{% endif %}
   # MIGRATION v0.7
   # Should VivumLab reset the bastion server IP tables rules?
   # Enable this if you are upgrading a Tinc bastion host
@@ -140,12 +140,17 @@ traefik:
   # Reference: https://docs.traefik.io/master/contributing/data-collection/
   send_anonymous_usage: {{ traefik.send_anonymous_usage | default("false")  }}
   dns_challenge_provider: {{ traefik.dns_challenge_provider | default(False) }}
-# use key:value pairs here to add additional environment variables to your traefik docker image.
-# for instance, if you're using a dns challenge provider place your api keys etc here.
+  # use key:value pairs here to add additional environment variables to your traefik docker image.
+  # for instance, if you're using a dns challenge provider place your api keys etc here.
   additional_env_vars:
     # DUMMY_KEY: DUMMY_VALUE
     CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
     CF_API_KEY: {{ traefik.additional_env_vars.CF_API_KEY | default('API_KEY') }}
+{% if traefik.additional_env_vars -%}
+{% for item in traefik.additional_env_vars | dict2items %}
+    {{ item.key }}: {{ item.value }}
+{% endfor %}
+{% endif %}
 
 # Features
 
@@ -362,6 +367,16 @@ digikam:
   subdomain: {{ digikam.subdomain | default("digikam") }}
   version: {{ digikam.version | default("stable") }}
   amd64: False
+  arm64: False
+  armv7: False
+dockercache:
+  enable: {{ dockercache.enable | default(False) }}
+  hsts: False
+  auth: False
+  domain: False
+  subdomain: "dockercache"
+  version: {{ dockercache.version | default("0.6.1") }}
+  amd64: "verified"
   arm64: False
   armv7: False
 drone:
@@ -1550,7 +1565,5 @@ nas_share_path: {{ nas_share_path | default() }}
 nas_user: {{ nas_user | default(default_username) }}
 nas_pass: {{ nas_pass | default() }}
 nas_workgroup: {{ nas_workgroup | default() }}
-
-
 
 apple_health_nextcloud_username: {{ apple_health_nextcloud_username | default()  }}
