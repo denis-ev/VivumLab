@@ -65,16 +65,6 @@
     domain_parts: "{{ domain.split('.') }}"
   become: yes
 
-- name: Copy authelia_config-tor.yml file into place.
-  template:
-    src: authelia_config-tor.yml.j2
-    dest: "{{ volumes_root }}/authelia/authelia_config-tor.yml"
-    owner: "{{ uid_output.stdout }}"
-    group: "{{ gid_output.stdout }}"
-  vars:
-    domain_parts: "{{ domain.split('.') }}"
-  become: yes
-
 - name: Configure authelia systemd service.
   become: yes
   template:

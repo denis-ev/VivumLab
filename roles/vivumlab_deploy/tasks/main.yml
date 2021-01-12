@@ -198,7 +198,10 @@
     tor_ssh_domain: "{{ tor_ssh_domain_file.stdout | default('') }}"
 
 - name: Pull VivumLab Traefik Image
-  command: chdir="{{ volumes_root }}/traefik/" docker-compose pull
+  docker_compose:
+    project_src: "{{ volumes_root}}/traefik"
+    pull: yes
+  ignore_errors: yes
 
 - name: Start Traefik
   systemd:

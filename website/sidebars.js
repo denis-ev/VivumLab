@@ -42,6 +42,7 @@ module.exports = {
         'software/codimd',
         'software/darksky',
         'software/digikam',
+        'software/dockercache',
         'software/docs',
         'software/drone',
         'software/duckdns',

@@ -1,0 +1,24 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+
+services:
+  dockercache:
+    image: rpardini/docker-registry-proxy:{{ dockercache.version }}
+    container_name: docker_registry_proxy
+    restart: unless-stopped
+    networks:
+      - traefik_network
+    volumes:
+      - "{{ volumes_root }}/dockercache/docker_mirror_cache:/docker_mirror_cache"
+      - "{{ volumes_root }}/dockercache/docker_mirror_certs:/ca"
+    environment:
+      - ENABLE_MANIFEST_CACHE=true
+    ports:
+      - "127.0.0.1:3128:3128"

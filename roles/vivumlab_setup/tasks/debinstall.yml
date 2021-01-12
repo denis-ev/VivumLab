@@ -6,7 +6,6 @@
       - ca-certificates
       - cifs-utils
       - curl
-      - fail2ban
       - gnupg-agent
       - git
       - htop
