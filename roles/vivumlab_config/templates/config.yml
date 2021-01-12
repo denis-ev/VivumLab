@@ -67,6 +67,7 @@ bastion:
     port: {{ bastion.wireguard.port | default("51820") }}
     keepalive: {{ bastion.wireguard.keepalive | default("25") }}
   ports_to_forward:
+    2222: {{ vlab_port }}
     80: 80
     443: 443
 {% if bastion.ports_to_forward -%}
