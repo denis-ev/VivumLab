@@ -14,6 +14,9 @@ services:
     container_name: authelia_auth
     image: authelia/authelia:{{ authelia.version }}
     restart: unless-stopped
+    environment:
+      PUID: {{ uid_output.stdout }}
+      PGID: {{ gid_output.stdout }}
     depends_on:
       - redis
       - db
