@@ -1,8 +1,11 @@
 ---
-### vars file for fail2ban
-# Created by
-# Robert De Bock
-# https://github.com/robertdebock/ansible-role-fail2ban
+# vars file for fail2ban
+
+fail2ban_packages:
+  - fail2ban
+
+fail2ban_service: fail2ban
+
 fail2ban_base_configuration:
   - option: loglevel
     value: "{{ fail2ban_loglevel }}"

@@ -6,7 +6,6 @@
       - ca-certificates
       - cifs-utils
       - curl
-      - fail2ban
       - gnupg-agent
       - git
       - htop
@@ -28,6 +27,7 @@
       - python3-setuptools
       - python3-passlib
       - python3-pip
+    update_cache: yes
   tags:
     - dependencies
   become: yes

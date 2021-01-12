@@ -11,7 +11,8 @@ class Service < Thor
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list
     services = service_list.each_slice(5).entries
-    (5 - (service_list.size % 5)).times { services.last << '' }
+    modulo = service_list.size % 5
+    (5 - modulo).times { services.last << '' } if modulo.positive?
     table = TTY::Table.new(rows: services)
     say table.render(:unicode)
   end

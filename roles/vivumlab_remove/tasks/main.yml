@@ -15,7 +15,7 @@
     enabled: no
   when:
     - not query | bool
-    - confirm_remove
+    - confirm_remove | bool
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item
@@ -33,7 +33,42 @@
   loop_control:
     loop_var: service_item
 
-- when: confirm_remove|bool
+- name: Remove docker_registry_proxy.crt to /etc/ca-certificates.conf
+  blockinfile:
+    path: /etc/ca-certificates.conf
+    block: |
+      docker_registry_proxy.crt
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Docker Registry Proxy"
+    state: absent
+  become: yes
+  when:
+    - confirm_remove | bool
+    - service_item == "dockercache"
+    - dockercache.enable == False
+  loop: "{{ services|flatten(levels=1) }}"
+  loop_control:
+    loop_var: service_item
+  notify:
+    - "Update the CA certificates"
+
+- name: remove docker proxy.
+  file:
+    state: absent
+    path: "/etc/systemd/system/docker.service.d/http-proxy.conf"
+  when:
+    - confirm_remove | bool
+    - service_item == "dockercache"
+    - dockercache.enable == False
+  loop: "{{ services|flatten(levels=1) }}"
+  loop_control:
+    loop_var: service_item
+  notify:
+    - "Restart docker.service"
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- when: confirm_remove | bool
   debug:
     msg: "Package removed successfully! Go to https://{{ domain }}/ to get started."
 

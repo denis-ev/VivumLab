@@ -1,7 +1,6 @@
 ---
-### defaults file for fail2ban
-# Original by Robert De Bock
-# https://github.com/robertdebock/ansible-role-fail2ban
+# defaults file for fail2ban
+
 fail2ban_loglevel: INFO
 fail2ban_logtarget: /var/log/fail2ban.log
 
@@ -9,12 +8,12 @@ fail2ban_ignoreself: "true"
 fail2ban_ignoreips: "127.0.0.1/8 ::1"
 
 # In seconds
-fail2ban_bantime: 6000
+fail2ban_bantime: 600
 fail2ban_findtime: 600
 
-fail2ban_maxretry: 3
-fail2ban_destemail: "{{ vlab_notifyemail }}"
-fail2ban_sender: "{{ vlab_ssh_user }}@{{ domain }}"
+fail2ban_maxretry: 5
+fail2ban_destemail: root@localhost
+fail2ban_sender: root@{{ ansible_fqdn }}
 
 fail2ban_configuration: []
 #  - option: loglevel

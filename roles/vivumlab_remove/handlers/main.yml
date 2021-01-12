@@ -1,0 +1,19 @@
+---
+- name: Update the CA certificates
+  shell: update-ca-certificates --fresh
+  become: yes
+
+- name: Restart docker.service
+  systemd:
+    name: docker.service
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
+  become: yes
+  when:
+    - confirm_remove | bool
+    - service_item == "dockercache"
+    - dockercache.enable == False
+  loop: "{{ services|flatten(levels=1) }}"
+  loop_control:
+    loop_var: service_item

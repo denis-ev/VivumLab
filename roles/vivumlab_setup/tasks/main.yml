@@ -5,5 +5,3 @@
   when: (ansible_facts['distribution'] == "Debian")
 - include_tasks: centinstall.yml
   when: ansible_facts['distribution'] == "CentOS"
-# - include_tasks: iptables.yml
-- include_tasks: fail2ban.yml

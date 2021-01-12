@@ -56,6 +56,7 @@
 
   roles:
     - vivumlab_setup
+    - robertdebock.fail2ban
 
 - name: "Deploy Bastion Host with Wireguard"
   hosts: all
