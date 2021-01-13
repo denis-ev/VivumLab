@@ -1,5 +1,5 @@
 ---
-- name: remove enable services.
+- name: remove services folder.
   file:
     state: absent
     path: "{{ volumes_root }}/{{ service_item }}"
@@ -24,7 +24,7 @@
     query: "not {{ vars[service_item]['enable'] }}"
   become: yes
 
-- name: remove enable services.
+- name: remove services systemd file.
   file:
     state: absent
     path: "/etc/systemd/system/{{ service_item }}.service"

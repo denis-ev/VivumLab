@@ -60,6 +60,8 @@
   retries: 300
   delay: 60
   become: yes
+  notify:
+    - Restart docker.service
 
 - name: Add docker_registry_proxy.crt to /etc/ca-certificates.conf
   blockinfile:
@@ -68,6 +70,8 @@
       docker_registry_proxy.crt
     marker: "# {mark} ANSIBLE MANAGED BLOCK Docker Registry Proxy"
   become: yes
+  notify:
+    - Restart docker.service
 
 - name: Update the CA certificates
   shell: update-ca-certificates --fresh
@@ -78,14 +82,11 @@
   template:
     src: http-proxy.conf.j2
     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+  notify:
+    - Restart docker.service
 
-- name: Restart docker.service
-  systemd:
-    name: docker.service
-    enabled: yes
-    daemon-reload: yes
-    state: restarted
-  become: yes
+- name: Flush handlers
+  meta: flush_handlers
 
 - debug:
     msg: "Check the docs at https://vivumlab.com/docs otherwise new image pulls will fail."
