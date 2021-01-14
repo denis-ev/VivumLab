@@ -15,22 +15,27 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 # VivumLab
 
 ### Welcome to VivumLab!
+
 Blogs, Media, Data Sharing, Password Management, even Social Networks.. It's easy to deploy.
-And remember, *It's your data, It's your life. Own it, with VivumLab.*
+And remember, _It's your data, It's your life. Own it, with VivumLab._
 
 VivumLab allows you to deploy a collection of various separate services, from any client computer to your own remote server.
 You can find more information about VivumLab in the menu on the left. Search is also available to you.
 
 #### Installation
+
 a.k.a The first place you should visit. Installation instructions live [here](core/Installation)
 
 #### Next Steps
+
 What to do next? It wouldn't hurt to learn a bit more. Check [this](core/Getting-Started) out
 
 #### Commands
+
 VivumLab has a few commands to make deploying your server, easy. You can find them [here](core/Commands)
 
 #### Understanding Storage
+
 Storage is a big deal with any server. Check out how it's handled with VivumLab [here](core/Storage)
 
 ## Getting Help
@@ -163,7 +168,7 @@ If you are having problems you can:
 - [AdGuard Home](software/adguardhome) - Network wide software for blocking ads and tracking
 - [Barcode Buddy](software/barcodebuddy) - Barcode system for [Grocy](software/grocy)
 - [Chowdown](software/chowdown) Simple recipes in Markdown format
-- [CodiMD](software/codimd) The best platform to write and share markdown
+- [hedgedoc](software/hedgedoc) The best platform to write and share markdown
 - [Darksky](software/darksky) - Local weather reported via [darksky-influxdb](https://github.com/ErwinSteffens/darksky-influxdb)
 - [DuckDNS](software/duckdns) is free dynamic DNS hosted on AWS. This provides a client to update the IP pointed to by DuckDNS.
 - [EtherCalc](software/ethercalc) - Web Spreadsheet

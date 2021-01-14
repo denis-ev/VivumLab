@@ -1,0 +1,38 @@
+---
+version: '3'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  hedgedoc:
+
+services:
+  db:
+    container_name: hedgedoc_db
+    networks:
+      - hedgedoc
+    image: postgres:{{ hedgedoc.db_version }}
+    environment:
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/hedgedoc_dbPass chars=ascii_letters length=32')}}
+      - POSTGRES_DB=hedgedoc
+    volumes:
+      - "{{ volumes_root }}/hedgedoc/postgresql/data:/var/lib/postgresql/data"
+    restart: unless-stopped
+
+  app:
+    container_name: hedgedoc
+    image: quay.io/hedgedoc/hedgedoc:{{ hedgedoc.version }}
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - traefik_network
+      - hedgedoc
+    environment:
+      - CMD_DB_URL=postgres://hedgedoc:{{lookup('password', './settings/' + config_dir + '/passwords/hedgedoc_dbPass chars=ascii_letters length=32')}}@db:5432/hedgedoc
+    labels:
+      - "traefik.http.services.hedgedoc.loadbalancer.server.scheme=http"
+      - "traefik.http.services.hedgedoc.loadbalancer.server.port=3000"
+{% include './labels.j2' %}

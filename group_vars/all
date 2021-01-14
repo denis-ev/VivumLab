@@ -12,7 +12,6 @@ services:
   chowdown:
   cockpit:
   codeserver:
-  codimd:
   dark_sky:
   digikam:
   dockercache:
@@ -38,6 +37,7 @@ services:
   guacamole:
   hastebin:
   healthchecks:
+  hedgedoc:
   heimdall:
   homeassistant:
   homebridge:
@@ -138,7 +138,7 @@ calibre:
 chowdown:
 cockpit:
 codeserver:
-codimd:
+hedgedoc:
 dark_sky:
 digikam:
 dockercache:
