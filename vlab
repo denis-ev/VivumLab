@@ -67,6 +67,7 @@ class Vlab < Thor
   desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def deploy
+    invoke 'config:new', [], options
     invoke 'core:deploy', [], options
   end
 
@@ -74,6 +75,7 @@ class Vlab < Thor
   option :service, type: :string, desc: 'Optional name of service. Without, it restarts all services.', aliases: ['-s']
   option :disable_push, required: false, type: :boolean, desc: 'Disable pushing git to remote', default: false
   def update
+    invoke 'config:new', [], options
     invoke 'service:update', [], options
   end
 
