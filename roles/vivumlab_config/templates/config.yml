@@ -338,14 +338,14 @@ codeserver:
   amd64: False
   arm64: False
   armv7: False
-codimd:
-  enable: {{ codimd.enable | default(False) }}
-  hsts: {{ codimd.hsts | default(True) }}
-  auth: {{ codimd.auth | default(False) }}
-  domain: {{ codimd.domain | default(False) }}
-  subdomain: {{ codimd.subdomain | default("codimd") }}
-  version: {{ codimd.version | default("latest") }}
-  db_version: {{ codimd.db_version | default("9.6-alpine") }}
+hedgedoc:
+  enable: {{ hedgedoc.enable | default(False) }}
+  hsts: {{ hedgedoc.hsts | default(True) }}
+  auth: {{ hedgedoc.auth | default(False) }}
+  domain: {{ hedgedoc.domain | default(False) }}
+  subdomain: {{ hedgedoc.subdomain | default("hedgedoc") }}
+  version: {{ hedgedoc.version | default("1.7.1-alpine") }}
+  db_version: {{ hedgedoc.db_version | default("9.6-alpine") }}
   amd64: False
   arm64: False
   armv7: False

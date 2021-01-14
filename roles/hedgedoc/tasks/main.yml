@@ -1,16 +1,16 @@
 ---
-- name: Make codimd directory.
+- name: Make hedgedoc directory.
   file:
-    path: "{{ volumes_root }}/codimd"
+    path: "{{ volumes_root }}/hedgedoc"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   become: yes
 
-- name: Copy codimd docker-compose.yml file into place.
+- name: Copy hedgedoc docker-compose.yml file into place.
   template:
-    src: docker-compose.codimd.yml.j2
-    dest: "{{ volumes_root }}/codimd/docker-compose.yml"
+    src: docker-compose.hedgedoc.yml.j2
+    dest: "{{ volumes_root }}/hedgedoc/docker-compose.yml"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   vars:
@@ -19,21 +19,21 @@
 
 - name: setup default user
   shell: >
-    docker-compose -f {{ volumes_root }}/codimd/docker-compose.yml run --rm app bin/manage_users
+    docker-compose -f {{ volumes_root }}/hedgedoc/docker-compose.yml run --rm app bin/manage_users
     --add {{ admin_email }} --pass "{{ default_password }}"
   args:
-    chdir: "{{ volumes_root }}/codimd"
+    chdir: "{{ volumes_root }}/hedgedoc"
   ignore_errors: true
 
-- name: Configure codimd systemd service.
+- name: Configure hedgedoc systemd service.
   become: yes
   template:
     src: service.j2
-    dest: /etc/systemd/system/codimd.service
+    dest: /etc/systemd/system/hedgedoc.service
 
-- name: Start codimd
+- name: Start hedgedoc
   systemd:
-    name: codimd
+    name: hedgedoc
     enabled: yes
     daemon-reload: yes
     state: started
