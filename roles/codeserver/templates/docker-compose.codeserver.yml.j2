@@ -11,7 +11,7 @@ services:
     container_name: codeserver
     image: codercom/code-server:{{ codeserver.version }}
     environment:
-      - PASSWORD="{{ default_password }}"
+      - PASSWORD={{ default_password }}
     volumes:
       - "{{ volumes_root }}/codeserver/.local:/home/coder/.local"
       - "{{ volumes_root }}/codeserver/project:/home/coder/project"
