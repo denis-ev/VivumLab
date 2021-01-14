@@ -250,13 +250,15 @@
 
 - name: Copy Services docker-compose.override.yml
   template:
-    src: "settings/{{ config_dir }}/override/{{ service_item }}/docker-compose.override.yml"
+    src: "/data/settings/{{ config_dir }}/override/{{ service_item }}/docker-compose.override.yml.j2"
     dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
-    force: no
+    force: yes
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   become: yes
-  when: query | bool
+  when:
+    - query | bool
+    - ("/data/settings/" ~ config_dir ~ "/override/" ~ service_item ~ "/docker-compose.override.yml.j2") is file
   loop: "{{ services | flatten(1) }}"
   loop_control:
     loop_var: service_item

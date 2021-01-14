@@ -1,43 +1,17 @@
 ---
-- name: Stop specified service
-  systemd:
-    name: "{{ service_item }}"
-    enabled: no
-    daemon-reload: no
-    state: stopped
-  loop: "{{ services | flatten(1) }}"
-  loop_control:
-    loop_var: service_item
-  become: yes
-
-- name: check for the presence of an override file
-  local_action: stat path=settings/{{ config_dir }}/overrides/{{service_item}}-docker-compose.yml
-  register: has_override
-  loop: "{{ services | flatten(1) }}"
-  loop_control:
-    loop_var: service_item
-
-- debug:
-    var: has_override
+- name: Ensures override dir exists
+  file:
+    path: "settings/{{config_dir}}/override/{{ services[0] }}"
+    state: directory
+    owner: '1000'
+    group: '1000'
 
 - name: Create docker-compose.override.yml
   copy:
-    src: "{{ volumes_root }}/{{ service_item }}/docker-compose.yml"
-    dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
+    src: "roles/{{ services[0] }}/templates/docker-compose.{{services[0]}}.yml.j2"
+    dest: "settings/{{config_dir}}/override/{{ services[0] }}/docker-compose.override.yml.j2"
     remote_src: yes
     mode: preserve
     force: no
-  loop: "{{ services | flatten(1) }}"
-  loop_control:
-    loop_var: service_item
-
-- name: Start specified service
-  systemd:
-    name: "{{ service_item }}"
-    enabled: yes
-    daemon-reload: yes
-    state: started
-  loop: "{{ services | flatten(1) }}"
-  loop_control:
-    loop_var: service_item
-  become: yes
+    owner: '1000'
+    group: '1000'
