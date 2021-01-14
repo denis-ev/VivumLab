@@ -15,12 +15,12 @@
         timeout: 600
         delay: 0
       when: wait_for_connection == true
-    # - name: "Update Apt Cache"
-    #   raw: sudo apt-get update
-    # - name: "Install Python"
-    #   raw: sudo apt-get -y install python-simplejson python3 python3-simplejson python3-pip python3-virtualenv python3-passlib python3-openssl
-    # - name: Configure python and pip
-    #   raw: sudo apt-get -y purge python-simplejson && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python ; fi
+      # - name: "Update Apt Cache"
+      #   raw: sudo apt-get update
+      # - name: "Install Python"
+      #   raw: sudo apt-get -y install python-simplejson python3 python3-simplejson python3-pip python3-virtualenv python3-passlib python3-openssl
+      # - name: Configure python and pip
+      #   raw: sudo apt-get -y purge python-simplejson && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python ; fi
 
 
 # Configure a TOR hidden service for remote access without a public IP
@@ -91,3 +91,12 @@
 
   roles:
     - vivumlab_deploy
+
+  handlers:
+    - name: Restart Traefik
+      become: yes
+      systemd:
+        name: "traefik"
+        state: restarted
+        daemon-reload: yes
+        enabled: true

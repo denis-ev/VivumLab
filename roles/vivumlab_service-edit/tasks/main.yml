@@ -1,0 +1,17 @@
+---
+- name: Ensures override dir exists
+  file:
+    path: "settings/{{config_dir}}/override/{{ services[0] }}"
+    state: directory
+    owner: '1000'
+    group: '1000'
+
+- name: Create docker-compose.override.yml
+  copy:
+    src: "roles/{{ services[0] }}/templates/docker-compose.{{services[0]}}.yml.j2"
+    dest: "settings/{{config_dir}}/override/{{ services[0] }}/docker-compose.override.yml.j2"
+    remote_src: yes
+    mode: preserve
+    force: no
+    owner: '1000'
+    group: '1000'
