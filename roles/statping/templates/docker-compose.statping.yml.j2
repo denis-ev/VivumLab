@@ -5,21 +5,46 @@ networks:
   traefik_network:
     external:
       name: vivumlab_traefik
+  statping_network:
 
 services:
   app:
     container_name: statping
     image: statping/statping:{{ statping.version }}
     restart: unless-stopped
+    depends_on:
+      - db
     networks:
       - traefik_network
-    volumes:
-      - "{{ volumes_root }}/statping/data:/app"
-      - /var/run/docker.sock:/var/run/docker.sock
+      - statping_network
     environment:
-      - DB_CONN=sqlite
+      - NAME=Statping VivumLab
+      - DESCRIPTION=Statping VivumLab
+      - DB_CONN=postgres
+      - DB_HOST=db
+      - DB_USER=statping_user
+      - DB_PASS={{ lookup('password', './settings/' + config_dir + '/passwords/statping_db_password chars=ascii_letters') }}
+      - DB_DATABASE=statping_db
       - DISABLE_LOGS=true
+      - DOMAIN={{ service_domain }}
+      - ADMIN_USER={{ default_username }}
+      - ADMIN_PASSWORD={{ default_password }}
+      - SAMPLE_DATA=false
+      - ALLOW_REPORTS=false
     labels:
       - "traefik.http.services.statping.loadbalancer.server.scheme=http"
       - "traefik.http.services.statping.loadbalancer.server.port=8080"
 {% include './labels.j2' %}
+
+  db:
+    image: "postgres"
+    restart: unless-stopped
+    networks:
+      - statping_network
+    environment:
+      - POSTGRES_DB=statping_db
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/statping_db_password chars=ascii_letters') }}
+      - POSTGRES_USER=statping_user
+      - PGDATA=/database
+    volumes:
+      - "{{ volumes_root }}/statping/db:/database"
