@@ -30,6 +30,8 @@
     name: "{{ default_username }}"
     password: "{{ default_password }}"
     mode: 0640
+  notify:
+    - Restart Traefik
 
 - name: Configure SSL
   file:
@@ -115,6 +117,8 @@
   template:
     src: traefik.service
     dest: /etc/systemd/system/traefik.service
+  notify:
+    - "Restart Traefik"
 
 # Hacky ansible workaround. Would love to remove these 4 tasks.
 # Long story short it ensures the `tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"` bit can work.
@@ -162,6 +166,8 @@
   template:
     src: traefik.yaml
     dest: "{{ volumes_root }}/traefik/traefik.yaml"
+  notify:
+    - Restart Traefik
 
 - name: Configure Traefik conf.d
   template:
@@ -169,6 +175,8 @@
     dest: "{{ volumes_root }}/traefik/conf.d/middlewares.yaml"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  notify:
+    - Restart Traefik
 
 - name: Copy VivumLab docker-compose.yml file into place.
   template:
@@ -177,6 +185,8 @@
   vars:
     service_domain: "{% if traefik.domain %}{{ traefik.domain }}{% else %}{{ traefik.subdomain }}.{{ domain }}{% endif %}"
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  notify:
+    - Restart Traefik
 
 - name: Create VivumLab hosts file.
   file:
@@ -203,14 +213,6 @@
     pull: yes
   ignore_errors: yes
 
-- name: Start Traefik
-  systemd:
-    name: traefik
-    enabled: yes
-    daemon-reload: yes
-    state: started
-  become: yes
-
 - name: Read Tor SSH connection info
   shell: cat /var/lib/tor/ssh-onion/hostname
   register: tor_ssh_domain_file
@@ -227,6 +229,9 @@
   tags:
     - tor
 
+- name: Flush handlers
+  meta: flush_handlers
+
 - name: Deploy enabled Services
   include_role:
     name: "{{ service_item }}"
@@ -242,6 +247,30 @@
     query: "{{ vars[service_item]['enable'] }}"
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
     tor_ssh_domain: "{{ tor_ssh_domain_file.stdout | default('') }}"
+
+- name: Copy Services docker-compose.override.yml
+  template:
+    src: "/data/settings/{{ config_dir }}/override/{{ service_item }}/docker-compose.override.yml.j2"
+    dest: "{{ volumes_root }}/{{ service_item }}/docker-compose.override.yml"
+    force: yes
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+  when:
+    - query | bool
+    - ("/data/settings/" ~ config_dir ~ "/override/" ~ service_item ~ "/docker-compose.override.yml.j2") is file
+  loop: "{{ services | flatten(1) }}"
+  loop_control:
+    loop_var: service_item
+  vars:
+    hsts: "{{ lookup('vars', service_item).hsts }}"
+    auth: "{{ lookup('vars', service_item).auth }}"
+    custom_domain: "{{ lookup('vars', service_item).domain }}"
+    service_domain: "{% if lookup('vars', service_item).domain %}{{ lookup('vars', service_item).domain }}{% else %}{{ lookup('vars', service_item).subdomain }}.{{ domain }}{% endif %}"
+    query: "{{ vars[service_item]['enable'] }}"
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+    tor_ssh_domain: "{{ tor_ssh_domain_file.stdout | default('') }}"
+  ignore_errors: yes
 
 - name: Ensure disabled services are not running
   systemd:
