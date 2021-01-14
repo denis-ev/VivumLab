@@ -1,4 +1,0 @@
-### REQUIRED ### These values are REQUIRED for the Tinc <-> VivumLab integration to work.
-
-# Leave as is, unless you know what you're doing
-vpn_ip: 10.0.0.2

@@ -20,8 +20,8 @@
 - name: Pull pihole docker images
   docker_compose:
     project_src: "{{ volumes_root}}/pihole"
-    pull: true
-    state: present
+    pull: yes
+  ignore_errors: yes
 
 - name: Configure pihole systemd service.
   become: yes

@@ -15,6 +15,7 @@ services:
   codimd:
   dark_sky:
   digikam:
+  dockercache:
   docs:
   drone:
   duckdns:
@@ -140,6 +141,7 @@ codeserver:
 codimd:
 dark_sky:
 digikam:
+dockercache:
 drone:
 duckdns:
 duplicati:
@@ -255,8 +257,9 @@ smtp:
 traefik:
   additional_env_vars:
 bastion:
-  wireguard:
   enable: false
+  wireguard:
+  ports_to_forward:
 open_ldap:
   seed:
 tinc: "{{ enable_tinc }}"

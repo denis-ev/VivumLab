@@ -43,8 +43,8 @@
 - name: Pull netdata docker images
   docker_compose:
     project_src: "{{ volumes_root}}/netdata"
-    pull: true
-    state: present
+    pull: yes
+  ignore_errors: yes
 
 - name: Check that the netdata.conf exists
   stat:
