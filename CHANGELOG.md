@@ -1,3 +1,45 @@
+## [1.0.0](https://github.com/VivumLab/VivumLab/compare/v0.5.2...v1.0.0) (2021-01-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **cli:** Task-it CLI (bash based) changes to Thor Cli (ruby based)
+
+### Features
+
+* **codeowners:** add CODEOWNERS file and basic rules ([#249](https://github.com/VivumLab/VivumLab/issues/249)) ([aa0545d](https://github.com/VivumLab/VivumLab/commit/aa0545d4db1278709b098a04c432bce4b7effbf9))
+* **cli:** adding Thor CLI with SOPS ([#219](https://github.com/VivumLab/VivumLab/issues/219)) ([dea959f](https://github.com/VivumLab/VivumLab/commit/dea959ff1074d8760fe51db9c15e42b408aa66d4))
+* **service:** adds mastodon ([#267](https://github.com/VivumLab/VivumLab/issues/267)) ([e71eef2](https://github.com/VivumLab/VivumLab/commit/e71eef2e398ee6f377f29134842cb749a47f8c05))
+* **automation:** automatically add owner of merged PR as a contributor ([#250](https://github.com/VivumLab/VivumLab/issues/250)) ([cb95f9d](https://github.com/VivumLab/VivumLab/commit/cb95f9d9b0e0c9cfa5b0a5556ecf937b836448cd))
+* cache docker images ([#277](https://github.com/VivumLab/VivumLab/issues/277)) ([39ad695](https://github.com/VivumLab/VivumLab/commit/39ad695d42de123c50192230272360b9a0d7470e))
+* securely templated overrides  ([#285](https://github.com/VivumLab/VivumLab/issues/285)) ([b917e20](https://github.com/VivumLab/VivumLab/commit/b917e20b30de872cc6f6ff6f0e4c9bebd5b0f458))
+* skip setup tag after first setup. ([#265](https://github.com/VivumLab/VivumLab/issues/265)) ([bdaf9b4](https://github.com/VivumLab/VivumLab/commit/bdaf9b47ac9f226d8444ea8fd840b1229b77b8e9))
+
+
+### Bug Fixes
+
+* add config update before deploy and update ([c8093cd](https://github.com/VivumLab/VivumLab/commit/c8093cdc0d81ad529d1c7aca3776ab59fa8ff38e))
+* add enable wait_for_connection activated via variable ([#262](https://github.com/VivumLab/VivumLab/issues/262)) ([6b61e91](https://github.com/VivumLab/VivumLab/commit/6b61e91d613efbe7a6c81cb52103fecbd8681c8c))
+* auto trigger release after 10 commits ([#246](https://github.com/VivumLab/VivumLab/issues/246)) ([df028a2](https://github.com/VivumLab/VivumLab/commit/df028a24d4c02d87508da53c4f44c177a89e168a))
+* change https_only to hsts and default true ([#268](https://github.com/VivumLab/VivumLab/issues/268)) ([9936639](https://github.com/VivumLab/VivumLab/commit/99366396bf87b24ce1b209ad74dfa7ad598a5ca5))
+* code-server's password param is wrong. ([#287](https://github.com/VivumLab/VivumLab/issues/287)) ([a937d9c](https://github.com/VivumLab/VivumLab/commit/a937d9c21eca4e9edad73c84e372929fdc62dfc1)), closes [#284](https://github.com/VivumLab/VivumLab/issues/284)
+* **services:** correct ownership permissions ([#230](https://github.com/VivumLab/VivumLab/issues/230)) ([b8a833d](https://github.com/VivumLab/VivumLab/commit/b8a833ddf72c35e86bae3f4379553a2c328b3ffa))
+* fix docker-compose path traefik.service ([01a6ffc](https://github.com/VivumLab/VivumLab/commit/01a6ffc5b9646b584a2ea05c66b3e4cc2c0ad52b))
+* fix hardcoded config paths ([#264](https://github.com/VivumLab/VivumLab/issues/264)) ([0cf7ea2](https://github.com/VivumLab/VivumLab/commit/0cf7ea2af15969d05dea859a643c560fd9f8dcfb))
+* **traefik:** fix insecure traefik port ([#239](https://github.com/VivumLab/VivumLab/issues/239)) ([0c47bea](https://github.com/VivumLab/VivumLab/commit/0c47beab910ad88920c09a102a8fd89ade33b67b))
+* **service:** fix statping using db instead of sqlite ([#275](https://github.com/VivumLab/VivumLab/issues/275)) ([39748ad](https://github.com/VivumLab/VivumLab/commit/39748ad68f63b6ef2158ef7be1cbde9e6d09a5d4))
+* fixes issue with modulo math that caused an error ([#279](https://github.com/VivumLab/VivumLab/issues/279)) ([a7fa8ed](https://github.com/VivumLab/VivumLab/commit/a7fa8edfed1ef801b73def98f67ecb08af7bd788))
+* fixes WIP failing status ([#253](https://github.com/VivumLab/VivumLab/issues/253)) ([5e5a7fd](https://github.com/VivumLab/VivumLab/commit/5e5a7fdf57738e85e3a98e6c4c12803135cd07ec))
+* gh action 01 ([3b71eea](https://github.com/VivumLab/VivumLab/commit/3b71eea6821311b2163b155368b744bed31b867f))
+* **cli:** hides service:setup so that the user only sees vlab service NAME setup ([#269](https://github.com/VivumLab/VivumLab/issues/269)) ([1fa7d0e](https://github.com/VivumLab/VivumLab/commit/1fa7d0ef79cfc13be556e03ba68c29984d2df1d4))
+* new config commmand ([#280](https://github.com/VivumLab/VivumLab/issues/280)) ([a44e2a1](https://github.com/VivumLab/VivumLab/commit/a44e2a1d6f6267e2816a64daa3abfd2fa0371c4d)), closes [#278](https://github.com/VivumLab/VivumLab/issues/278)
+* not working when: query | bool ([8ada006](https://github.com/VivumLab/VivumLab/commit/8ada0065e00fad5c879b8eababdb8999c8f6feb8))
+* removes ssh check ([#281](https://github.com/VivumLab/VivumLab/issues/281)) ([4219cea](https://github.com/VivumLab/VivumLab/commit/4219cea0577b2a57ce7779ff50edaa02d248aad2))
+* rename CodiMd to HedgeDoc ([#286](https://github.com/VivumLab/VivumLab/issues/286)) ([7f42128](https://github.com/VivumLab/VivumLab/commit/7f421286865e12c314174d6076eb32e6637bbbb0)), closes [#283](https://github.com/VivumLab/VivumLab/issues/283)
+* switch from mkdocs to docusaurus v2 ([#190](https://github.com/VivumLab/VivumLab/issues/190)) ([1c86254](https://github.com/VivumLab/VivumLab/commit/1c86254b240c3ea3116fff7f5cce6d6b93a38f41))
+* **service:** update nextcloud  ([#234](https://github.com/VivumLab/VivumLab/issues/234)) ([b6fbf3f](https://github.com/VivumLab/VivumLab/commit/b6fbf3fc0a65877ae3b404dc52cdd5edc0d9c74e))
+* **service:** use python3 with debinstall ([#217](https://github.com/VivumLab/VivumLab/issues/217)) ([1e19432](https://github.com/VivumLab/VivumLab/commit/1e19432e22a36ef0ebd907f498f968c3598b9d6a))
+
 ### [0.5.3](https://github.com/VivumLab/VivumLab/compare/v0.5.2...v0.5.3) (2020-12-30)
 
 
