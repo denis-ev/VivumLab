@@ -77,7 +77,7 @@ RUN echo "==> Installing Ansible... " && \
     pip3 install ansible==${ANSIBLE_VERSION} && \
     pip3 install mitogen==${MITOGEN_VERSION} && \
     \
-    echo "==> Adding Hosts to Anisible directory for convenience..." && \
+    echo "==> Adding Hosts to Ansible directory for convenience..." && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts && \
@@ -88,18 +88,17 @@ RUN echo "==> Installing Ansible... " && \
     mv terraform /usr/local/bin && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
-    echo "==> Installing sytax highlighting for nano" && \
-    curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
+    echo "==> Installing syntax highlighting for nano" && \
+    # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Cloning VivumLab"  && \
-    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
+    if (${VERSION} != 'local'); then git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data ; fi && \
     cp /data/Gemfile* / && \
-    cp /data/docker-entrypoint.sh / && \
+    if (${VERSION} != 'local'); then cp /data/docker-entrypoint.sh / ; fi && \
     echo "==> Installing gems"  && \
     if (${VERSION} != 'local'); then bundle install; fi && \
     echo "==> Set MOTD"  && \
     cp /data/vivumlablogo.txt /etc/motd && \
     echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' >> /etc/bash.bashrc
-    # if (${VERSION} == 'local'); then rm -rf /data/.* fi
 
 # Clean APK cache
 RUN rm -rf /var/cache/apk/*
