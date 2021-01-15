@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/VivumLab/VivumLab/compare/v1.0.0...v1.0.1) (2021-01-15)
+
+
+### Bug Fixes
+
+* update search api key ([892eb54](https://github.com/VivumLab/VivumLab/commit/892eb542dc7f97c64a61e3a2a6047c1fadda1f6c))
+
 ## [1.0.0](https://github.com/VivumLab/VivumLab/compare/v0.5.2...v1.0.0) (2021-01-15)
 
 
