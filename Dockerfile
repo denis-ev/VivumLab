@@ -92,12 +92,12 @@ RUN echo "==> Installing Ansible... " && \
     # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Cloning VivumLab"  && \
     if (${VERSION} != 'local'); then git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data ; fi && \
-    cp /data/Gemfile* / && \
+    if (${VERSION} != 'local'); then cp /data/Gemfile* / ; fi && \
     if (${VERSION} != 'local'); then cp /data/docker-entrypoint.sh / ; fi && \
     echo "==> Installing gems"  && \
     if (${VERSION} != 'local'); then bundle install; fi && \
     echo "==> Set MOTD"  && \
-    cp /data/vivumlablogo.txt /etc/motd && \
+    if (${VERSION} != 'local'); then cp /data/vivumlablogo.txt /etc/motd ; fi && \
     echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' >> /etc/bash.bashrc
 
 # Clean APK cache
