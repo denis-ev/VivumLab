@@ -6,6 +6,8 @@
 Hash: SHA256
 
 ENDOFSIGSTART=
+gitversion=
+version=
 SUDO=
 if [ "$UID" != "0" ]; then
 	if [ -e /usr/bin/sudo -o -e /bin/sudo ]; then
@@ -22,15 +24,10 @@ if [[ ! -f ./launch.sh ]]; then
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
       exit 1
     else
-      if [[ $1 == 'dev' ]]; then
-        curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      else
-        curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      fi
+      curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
+      if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
+      $SUDO chmod +x launch.sh
+      mkdir $(pwd)/settings
     fi
   else
     read -p "Download GPG or rely on SSL to authenticate. Rely on SSL? (y/n):" -n 1 -r
@@ -41,13 +38,9 @@ if [[ ! -f ./launch.sh ]]; then
       echo "================================================================="
       exit 1
     else
-      if [[ $1 == 'dev' ]]; then
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/launch.sh'); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      else
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh'); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      fi
+      if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh'); then echo "$z" > launch.sh ; fi
+      $SUDO chmod +x launch.sh
+      mkdir $(pwd)/settings
     fi
   fi
   echo "====================="
@@ -73,10 +66,11 @@ if [[ -z $1 ]]; then
   version=latest
 else
   if [[ $1 == 'local' ]]; then
-    if [[ $2 != 'start' ]]; then
-      docker build --no-cache -t vivumlab/vivumlab:local .
-    fi
     version=local
+    if [[ $2 != 'start' ]]; then
+      docker build --build-arg ARG_VERSION=${version} --no-cache -t vivumlab/vivumlab:${version} .
+    fi
+
   else
     version=$1
     docker pull vivumlab/vivumlab:${version}
@@ -96,15 +90,35 @@ if [[ ! -f ~/.vlab_vault_pass ]]; then
   touch ~/.vlab_vault_pass
 fi
 
+if [[ ${version} == 'latest' ]]; then
+  gitversion=master
+elif [[ ${version} == 'local' ]]; then
+  gitversion=local
+else
+  gitversion=v${version}
+fi
+
 clear
 cat vivumlablogo.txt
 
-docker run --rm -it \
-  -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
-  -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
-  -v $(pwd):/data \
-  -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-  vivumlab/vivumlab:${version} /bin/bash
+if [[ $1 == 'local' || $1 == 'dev' ]]; then
+  docker run --rm -it \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
+    -v $(pwd):/data \
+    -v $(pwd)/settings:/data/settings \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    -e "VERSION=$gitversion" \
+    vivumlab/vivumlab:${version} /bin/bash
+else
+  docker run --rm -it \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
+    -v $(pwd)/settings:/data/settings \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    -e "VERSION=$gitversion" \
+    vivumlab/vivumlab:${version} /bin/bash
+fi
 
 <<ENDOFSIGSTART=
 -----BEGIN PGP SIGNATURE-----
