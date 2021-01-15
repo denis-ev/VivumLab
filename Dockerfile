@@ -91,13 +91,13 @@ RUN echo "==> Installing Ansible... " && \
     echo "==> Installing syntax highlighting for nano" && \
     # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Cloning VivumLab"  && \
-    if (${VERSION} != 'local'); then git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data ; fi && \
-    if (${VERSION} != 'local'); then cp /data/Gemfile* / ; fi && \
-    if (${VERSION} != 'local'); then cp /data/docker-entrypoint.sh / ; fi && \
+    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
+    cp /data/Gemfile* / && \
+    cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \
     if (${VERSION} != 'local'); then bundle install; fi && \
     echo "==> Set MOTD"  && \
-    if (${VERSION} != 'local'); then cp /data/vivumlablogo.txt /etc/motd ; fi && \
+    cp /data/vivumlablogo.txt /etc/motd && \
     echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' >> /etc/bash.bashrc
 
 # Clean APK cache
