@@ -83,8 +83,8 @@ RUN echo "==> Installing Ansible... " && \
     echo "localhost" >> /etc/ansible/hosts && \
     \
     echo "==> Installing Terraform..." && \
-    wget https://releases.hashicorp.com/terraform/$(VER_TERRAFORM)/terraform_$(VER_TERRAFORM)_linux_amd64.zip && \
-    unzip terraform_$(VER_TERRAFORM)_linux_amd64.zip && \
+    wget https://releases.hashicorp.com/terraform/${VER_TERRAFORM}/terraform_${VER_TERRAFORM}_linux_amd64.zip && \
+    unzip terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     mv terraform /usr/local/bin && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
