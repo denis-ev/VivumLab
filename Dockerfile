@@ -11,6 +11,9 @@ LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
 
 ARG ARG_VERSION="master"
 
+ENV VER_TERRAFORM=0.14.4
+# curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//'
+
 # Ansible ENV Variables
 ENV ANSIBLE_VERSION 2.9.11
 ENV MITOGEN_VERSION 0.2.9
@@ -36,8 +39,7 @@ ENV BUILD_PACKAGES \
     bash \
     wget \
     curl \
-    grep \
-    sed \
+    unzip \
     gcc \
     make \
     libffi-dev \
@@ -81,8 +83,8 @@ RUN echo "==> Installing Ansible... " && \
     echo "localhost" >> /etc/ansible/hosts && \
     \
     echo "==> Installing Terraform..." && \
-    wget https://releases.hashicorp.com/terraform/$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')/terraform_$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')_linux_amd64.zip && \
-    unzip terraform_$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//')_linux_amd64.zip && \
+    wget https://releases.hashicorp.com/terraform/$(VER_TERRAFORM)/terraform_$(VER_TERRAFORM)_linux_amd64.zip && \
+    unzip terraform_$(VER_TERRAFORM)_linux_amd64.zip && \
     mv terraform /usr/local/bin && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
