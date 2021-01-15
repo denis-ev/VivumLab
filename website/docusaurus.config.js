@@ -82,7 +82,7 @@ module.exports = {
     //   trackingID: '',
     // },
     algolia: {
-      apiKey: 'ed517b25d6e55720f296c166c5bb5a02',
+      apiKey: '0cc978056b333274dd219a1c6ebe1d74',
       indexName: 'vivumlab',
     },
   },
