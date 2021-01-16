@@ -56,7 +56,6 @@ ENV BUILD_PACKAGES \
     git
 
 ENV PYTHON_PACKAGES \
-    pip \
     setuptools \
     dateutils \
     httplib2 \
@@ -71,10 +70,10 @@ ENV PYTHON_PACKAGES \
 # Update and install packages
 RUN apk update && \
     apk upgrade && \
-    apk add --no-cache wheel && \
     apk add --no-cache ${BUILD_PACKAGES} && \
     ln -sf python3 /usr/bin/python && \
     python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip wheel && \
     pip3 install --no-cache --upgrade ${PYTHON_PACKAGES} && \
     \
     echo "==> Installing Ansible... " && \

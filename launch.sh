@@ -113,7 +113,9 @@ else
   gitVERSION=v${VERSION}
 fi
 
-clear
+if [[ ${VERSION} != 'local' && ${VERSION} != 'dev' ]]; then
+  clear
+fi
 cat vivumlablogo.txt
 
 if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
