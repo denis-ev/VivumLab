@@ -113,5 +113,6 @@ RUN rm -rf /var/cache/apk/*
 
 WORKDIR /data
 
+RUN chmod +x /docker-entrypoint.sh
 VOLUME [ "/data/settings" ]
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
