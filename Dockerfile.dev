@@ -94,12 +94,14 @@ RUN apk update && \
     echo "==> Installing syntax highlighting for nano" && \
     curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Create /data" && \
-    mkdir /data && \
-    \
-    echo "==> Cloning VivumLab"  && \
-    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
-    \
-    echo "==> Setting up VivumLab"  && \
+    mkdir /data
+
+    # echo "==> Cloning VivumLab"  && \
+    # git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
+
+COPY . /data
+
+RUN echo "==> Setting up VivumLab"  && \
     cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \

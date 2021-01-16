@@ -6,13 +6,32 @@
 Hash: SHA256
 
 ENDOFSIGSTART=
-gitversion=
-version=
+VERSION=latest
+SKIP=0
+BRANCH=
+HELP=0
 SUDO=
 if [ "$UID" != "0" ]; then
 	if [ -e /usr/bin/sudo -o -e /bin/sudo ]; then
 		SUDO=sudo
 	fi
+fi
+
+while getopts v:sb:h option
+do
+case "${option}"
+in
+v) VERSION=${OPTARG};;
+s) SKIP=1;;
+b) BRANCH=${OPTARG};;
+h) HELP=1;;
+esac
+done
+
+if [[ ${HELP} == '1' ]]; then
+  echo "build and run: ./launch.sh -v VERSION -b BRANCH (-b optional)"
+  echo "run:           ./launch.sh -v VERSION -s"
+  exit 0
 fi
 
 if [[ ! -f ./launch.sh ]]; then
@@ -61,19 +80,15 @@ if ! docker info > /dev/null 2>&1 ; then
     sudo service docker start
   fi
 fi
-
-if [[ -z $1 ]]; then
-  version=latest
-else
-  if [[ $1 == 'local' ]]; then
-    version=local
-    if [[ $2 != 'start' ]]; then
-      docker build --build-arg ARG_VERSION=${version} --no-cache -t vivumlab/vivumlab:${version} .
+if [ ${SKIP} == '0' ]; then
+  if [ ${VERSION} == 'local' ]; then
+    if [ ! -n "${BRANCH}" ]; then
+      docker build --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
+    else
+      docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} .
     fi
-
   else
-    version=$1
-    docker pull vivumlab/vivumlab:${version}
+    docker pull vivumlab/vivumlab:${VERSION}
   fi
 fi
 
@@ -90,34 +105,32 @@ if [[ ! -f ~/.vlab_vault_pass ]]; then
   touch ~/.vlab_vault_pass
 fi
 
-if [[ ${version} == 'latest' ]]; then
-  gitversion=master
-elif [[ ${version} == 'local' ]]; then
-  gitversion=local
+if [[ ${VERSION} == 'latest' ]]; then
+  gitVERSION=master
+elif [[ ${VERSION} == 'local' ]]; then
+  gitVERSION=local
 else
-  gitversion=v${version}
+  gitVERSION=v${VERSION}
 fi
 
 clear
 cat vivumlablogo.txt
 
-if [[ $1 == 'local' || $1 == 'dev' ]]; then
+if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
   docker run --rm -it \
     -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
     -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
     -v $(pwd):/data \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    -e "VERSION=$gitversion" \
-    vivumlab/vivumlab:${version} /bin/bash
+    vivumlab/vivumlab:${VERSION} /bin/bash
 else
   docker run --rm -it \
     -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
     -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    -e "VERSION=$gitversion" \
-    vivumlab/vivumlab:${version} /bin/bash
+    vivumlab/vivumlab:${VERSION} /bin/bash
 fi
 
 <<ENDOFSIGSTART=
