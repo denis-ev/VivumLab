@@ -99,7 +99,7 @@ COPY . /data/
 RUN cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \
-    if ('${VERSION}' != 'local'); then bundle install; fi && \
+    bundle install && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
     echo "==> Set MOTD"  && \
