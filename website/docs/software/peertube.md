@@ -57,7 +57,8 @@ Login as the administrator account, to complete setting up your PeerTube instanc
 The administrator details are set by the user during VivumLab setup, a.k.a, the answers that the user provided for the default admin 'user' and 'password'.
 These details can be changed in the administrator UI.
 
-Please note that the administrator password is stored in plain text, on the server, in the .env.peertube file that VivumLab has templated onto the server. Make sure to change the password, within the PeerTube administrator account, before removing the password from this file (DO NOT remove the file, itself).
+Please note that the administrator password is stored in plain text, on the server, in the .env.peertube file that VivumLab has templated onto the server.
+If you feel it is necessary to remove this sensitive piece of information, then you can; BUT! Make sure to change the password, within the PeerTube administrator UI, before removing the password from this file (DO NOT remove the file, itself; this will break your instance!).
 
 ### SMTP/ MAIL
 
