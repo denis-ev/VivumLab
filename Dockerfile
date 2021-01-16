@@ -43,6 +43,7 @@ ENV BUILD_PACKAGES \
     gcc \
     make \
     libffi-dev \
+    ncurses-dev \
     openssl-dev \
     musl-dev \
     jq \
