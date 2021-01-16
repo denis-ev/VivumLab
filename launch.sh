@@ -84,8 +84,14 @@ if [ ${SKIP} == '0' ]; then
   if [ ${VERSION} == 'local' ]; then
     if [ ! -n "${BRANCH}" ]; then
       docker build --build-arg ARG_VERSION=dev --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
+      if [[ $? != '0' ]]; then
+        exit $?
+      fi
     else
       docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} .
+      if [[ $? != '0' ]]; then
+        exit $?
+      fi
     fi
   else
     docker pull vivumlab/vivumlab:${VERSION}
