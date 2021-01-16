@@ -14,6 +14,8 @@ ARG ARG_VERSION="master"
 ENV VER_TERRAFORM=0.14.4
 # curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//'
 
+ENV PYTHONUNBUFFERED=1
+
 # Ansible ENV Variables
 ENV ANSIBLE_VERSION 2.9.11
 ENV MITOGEN_VERSION 0.2.9
@@ -36,6 +38,9 @@ ENV TARGET_GID=1000
 ENV VERSION=$ARG_VERSION
 
 ENV BUILD_PACKAGES \
+    tini \
+    python3 \
+    python3-dev \
     bash \
     wget \
     curl \
@@ -51,6 +56,8 @@ ENV BUILD_PACKAGES \
     git
 
 ENV PYTHON_PACKAGES \
+    pip \
+    wheel \
     setuptools \
     dateutils \
     httplib2 \
@@ -62,56 +69,49 @@ ENV PYTHON_PACKAGES \
     pyOpenSSL \
     pre-commit
 
-# Update and install base packages
-RUN apk update && apk upgrade && apk add ${BUILD_PACKAGES}
-RUN apk add --no-cache tini
-# Install python/pip echo "==> Adding build dependencies..."
-ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 python3-dev && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip
-RUN pip3 install --no-cache --upgrade wheel
-RUN pip3 install --no-cache --upgrade ${PYTHON_PACKAGES}
-
-RUN echo "==> Installing Ansible... " && \
+# Update and install packages
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache ${BUILD_PACKAGES} && \
+    ln -sf python3 /usr/bin/python && \
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade ${PYTHON_PACKAGES} && \
+    \
+    echo "==> Installing Ansible... " && \
     pip3 install ansible==${ANSIBLE_VERSION} && \
     pip3 install mitogen==${MITOGEN_VERSION} && \
     \
     echo "==> Adding Hosts to Ansible directory for convenience..." && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost" >> /etc/ansible/hosts
-
-RUN echo "==> Installing Terraform..." && \
+    echo "localhost" >> /etc/ansible/hosts && \
+    \
+    echo "==> Installing Terraform..." && \
     wget https://releases.hashicorp.com/terraform/${VER_TERRAFORM}/terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     unzip terraform_${VER_TERRAFORM}_linux_amd64.zip && \
-    mv terraform /usr/local/bin
-
-RUN echo "==> Installing syntax highlighting for nano" && \
+    mv terraform /usr/local/bin && \
+    \
+    echo "==> Installing syntax highlighting for nano" && \
     # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Create /data" && \
-    mkdir /data
-
-# RUN echo "==> Cloning VivumLab"  && \
-#    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
-
-COPY . /data/
-
-RUN cp /data/Gemfile* / && \
+    mkdir /data && \
+    \
+    echo "==> Cloning VivumLab"  && \
+    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
+    \
+    echo "==> Setting up VivumLab"  && \
+    cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \
     bundle install && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
-    echo "==> Set MOTD"  && \
-    cp /data/vivumlablogo.txt /etc/motd && \
-    echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' >> /etc/bash.bashrc
-
-# Clean APK cache
-RUN rm -rf /var/cache/apk/*
+    echo "==> Make sure docker-entrypoint.sh is executable" && \
+    chmod +x /docker-entrypoint.sh && \
+    echo "==> Clean APK cache" && \
+    rm -rf /var/cache/apk/*
 
 WORKDIR /data
 
-RUN chmod +x /docker-entrypoint.sh
 VOLUME [ "/data/settings" ]
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
