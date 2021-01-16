@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM ruby:3.0-alpine3.12
 
 LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
       description="VivumLab container with Ruby Version 3 to run the CLI" \
@@ -64,8 +64,6 @@ ENV PYTHON_PACKAGES \
 # Update and install base packages
 RUN apk update && apk upgrade && apk add ${BUILD_PACKAGES}
 RUN apk add --no-cache tini
-# Install ruby and ruby-bundler
-RUN apk add ruby ruby-bundler
 # Install python/pip echo "==> Adding build dependencies..."
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3 python3-dev && ln -sf python3 /usr/bin/python

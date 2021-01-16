@@ -7,7 +7,7 @@ echo -e "Variables:
 \\t- GID=${TARGET_GID}
 \\t- VERSION=${AUTO_UPDATE}"
 
-msg "Install vivumlab..."
+echo "Install vivumlab..."
 cd $DEFAULT_PATH
 git checkout $VERSION &
 [[ "$!" -gt 0 ]] && wait $!
