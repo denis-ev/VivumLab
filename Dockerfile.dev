@@ -9,7 +9,7 @@ LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
       org.label-schema.vendor="VivumLab" \
       org.label-schema.schema-version="1.0"
 
-ARG ARG_VERSION="master"
+ARG ARG_VERSION="dev"
 
 ENV VER_TERRAFORM=0.14.4
 # curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//'

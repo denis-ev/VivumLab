@@ -83,7 +83,7 @@ fi
 if [ ${SKIP} == '0' ]; then
   if [ ${VERSION} == 'local' ]; then
     if [ ! -n "${BRANCH}" ]; then
-      docker build --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
+      docker build --build-arg ARG_VERSION=dev --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
     else
       docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} .
     fi
@@ -125,14 +125,14 @@ if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
     -v $(pwd):/data \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    vivumlab/vivumlab:${VERSION} /bin/bash
+    vivumlab/vivumlab:${VERSION}
 else
   docker run --rm -it \
     -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
     -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    vivumlab/vivumlab:${VERSION} /bin/bash
+    vivumlab/vivumlab:${VERSION}
 fi
 
 <<ENDOFSIGSTART=
