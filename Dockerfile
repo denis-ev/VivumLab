@@ -63,6 +63,7 @@ ENV PYTHON_PACKAGES \
 
 # Update and install base packages
 RUN apk update && apk upgrade && apk add ${BUILD_PACKAGES}
+RUN apk add --no-cache tini
 # Install ruby and ruby-bundler
 RUN apk add ruby ruby-bundler
 # Install python/pip echo "==> Adding build dependencies..."
@@ -80,26 +81,29 @@ RUN echo "==> Installing Ansible... " && \
     echo "==> Adding Hosts to Ansible directory for convenience..." && \
     mkdir -p /etc/ansible /ansible && \
     echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost" >> /etc/ansible/hosts && \
-    \
-    echo "==> Installing Terraform..." && \
+    echo "localhost" >> /etc/ansible/hosts
+
+RUN echo "==> Installing Terraform..." && \
     wget https://releases.hashicorp.com/terraform/${VER_TERRAFORM}/terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     unzip terraform_${VER_TERRAFORM}_linux_amd64.zip && \
-    mv terraform /usr/local/bin && \
-    echo "==> Linking vlab into path" && \
-    ln -s /data/vlab /usr/local/bin/vlab && \
-    echo "==> Installing syntax highlighting for nano"
-    # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
+    mv terraform /usr/local/bin
 
-RUN echo "==> Cloning VivumLab"  && \
-    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
+RUN echo "==> Installing syntax highlighting for nano" && \
+    # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
+    echo "==> Create /data" && \
+    mkdir /data
 
-# COPY * /data
+# RUN echo "==> Cloning VivumLab"  && \
+#    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
+
+COPY * /data
 
 RUN cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \
-    if (${VERSION} != 'local'); then bundle install; fi && \
+    if ('${VERSION}' != 'local'); then bundle install; fi && \
+    echo "==> Linking vlab into path" && \
+    ln -s /data/vlab /usr/local/bin/vlab && \
     echo "==> Set MOTD"  && \
     cp /data/vivumlablogo.txt /etc/motd && \
     echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' >> /etc/bash.bashrc
@@ -109,10 +113,5 @@ RUN rm -rf /var/cache/apk/*
 
 WORKDIR /data
 
-# Add Tini
-ENV TINI_VERSION v0.19.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini /docker-entrypoint.sh
-
 VOLUME [ "/data/settings" ]
-ENTRYPOINT ["/tini", "--", "/docker-entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
