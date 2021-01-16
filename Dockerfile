@@ -88,11 +88,15 @@ RUN echo "==> Installing Ansible... " && \
     mv terraform /usr/local/bin && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
-    echo "==> Installing syntax highlighting for nano" && \
-    # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
-    echo "==> Cloning VivumLab"  && \
-    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
-    cp /data/Gemfile* / && \
+    echo "==> Installing syntax highlighting for nano"
+    # curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
+
+RUN echo "==> Cloning VivumLab"  && \
+    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
+
+# COPY * /data
+
+RUN cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \
     if (${VERSION} != 'local'); then bundle install; fi && \
