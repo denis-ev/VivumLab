@@ -125,14 +125,14 @@ if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
     -v $(pwd):/data \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    vivumlab/vivumlab:${VERSION}
+    vivumlab/vivumlab:${VERSION} /bin/bash
 else
   docker run --rm -it \
     -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
     -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
     -v $(pwd)/settings:/data/settings \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-    vivumlab/vivumlab:${VERSION}
+    vivumlab/vivumlab:${VERSION} /bin/bash
 fi
 
 <<ENDOFSIGSTART=
