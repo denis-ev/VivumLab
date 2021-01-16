@@ -50,12 +50,14 @@ run: **`vlab update_one service=peertube`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
-!!! Below are some **examples** with headings, and with some **example** instructions !!!
+Login as the administrator account, to complete setting up your PeerTube instance. It is highly recommended that the administrator account is not used for uploading videos/ enjoying the instance; create a separate 'main' account for this purpose.
 
 #### ADMINISTRATOR SETUP
 
-Peertube generates it's own root password on first startup. VivumLab captures that and stores it in ./settings/passwords/peertube_root_password
+The administrator details are set by the user during VivumLab setup, a.k.a, the answers that the user provided for the default admin 'user' and 'password'.
+These details can be changed in the administrator UI.
+
+Please note that the administrator password is stored in plain text, on the server, in the .env.peertube file that VivumLab has templated onto the server. Make sure to change the password, within the PeerTube administrator account, before removing the password from this file (DO NOT remove the file, itself).
 
 ### SMTP/ MAIL
 
