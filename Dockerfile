@@ -94,7 +94,7 @@ RUN echo "==> Installing syntax highlighting for nano" && \
 # RUN echo "==> Cloning VivumLab"  && \
 #    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
 
-COPY * /data
+COPY . /data/
 
 RUN cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \

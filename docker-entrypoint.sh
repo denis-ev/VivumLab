@@ -5,7 +5,7 @@ DEFAULT_PATH="/data"
 echo -e "Variables:
 \\t- UID=${TARGET_UID}
 \\t- GID=${TARGET_GID}
-\\t- VERSION=${AUTO_UPDATE}"
+\\t- VERSION=${VERSION}"
 
 echo "Install vivumlab..."
 cd $DEFAULT_PATH
