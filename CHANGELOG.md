@@ -1,3 +1,10 @@
+### [1.0.2](https://github.com/VivumLab/VivumLab/compare/v1.0.1...v1.0.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* minify dockerfile by using alpine image ([#292](https://github.com/VivumLab/VivumLab/issues/292)) ([2099328](https://github.com/VivumLab/VivumLab/commit/20993283d481abdc4050d61e9dc190d475b02aea))
+
 ### [1.0.1](https://github.com/VivumLab/VivumLab/compare/v1.0.0...v1.0.1) (2021-01-15)
 
 
