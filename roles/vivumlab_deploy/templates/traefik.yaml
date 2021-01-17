@@ -56,7 +56,10 @@ entryPoints:
   metrics:
     address: ":8082"
 {% endif %}
-
+{% if peertube.enable %}
+  rtmp:
+    address: ":1935"
+{% endif %}
 {% if traefik.ping %}
 #Health
 ping:
