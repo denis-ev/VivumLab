@@ -32,6 +32,10 @@ services:
     labels:
       - "traefik.http.services.peertube.loadbalancer.server.scheme=http"
       - "traefik.http.services.peertube.loadbalancer.server.port=9000"
+      - "traefik.rtmp.routers.streaming.rule=Host(`{{ service_domain }}`) && (PathPrefix(`/live`))"
+      - "traefik.rtmp.routers.streaming.entrypoints=rtmp"
+      - "traefik.rtmp.routers.streaming.service=streaming"
+      - "traefik.rtmp.services.streaming.loadbalancer.server.port=1935"
 {% include './labels.j2' %}
 
   postfix:
