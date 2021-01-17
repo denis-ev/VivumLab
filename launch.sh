@@ -6,11 +6,32 @@
 Hash: SHA256
 
 ENDOFSIGSTART=
+VERSION=latest
+SKIP=0
+BRANCH=
+HELP=0
 SUDO=
 if [ "$UID" != "0" ]; then
 	if [ -e /usr/bin/sudo -o -e /bin/sudo ]; then
 		SUDO=sudo
 	fi
+fi
+
+while getopts v:sb:h option
+do
+case "${option}"
+in
+v) VERSION=${OPTARG};;
+s) SKIP=1;;
+b) BRANCH=${OPTARG};;
+h) HELP=1;;
+esac
+done
+
+if [[ ${HELP} == '1' ]]; then
+  echo "build and run: ./launch.sh -v VERSION -b BRANCH (-b optional)"
+  echo "run:           ./launch.sh -v VERSION -s"
+  exit 0
 fi
 
 if [[ ! -f ./launch.sh ]]; then
@@ -22,15 +43,10 @@ if [[ ! -f ./launch.sh ]]; then
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
       exit 1
     else
-      if [[ $1 == 'dev' ]]; then
-        curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      else
-        curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      fi
+      curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/website/docs/contact%40vivumlab.xyz.gpg' | gpg --import && \
+      if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh' | gpg); then echo "$z" > launch.sh ; fi
+      $SUDO chmod +x launch.sh
+      mkdir $(pwd)/settings
     fi
   else
     read -p "Download GPG or rely on SSL to authenticate. Rely on SSL? (y/n):" -n 1 -r
@@ -41,13 +57,9 @@ if [[ ! -f ./launch.sh ]]; then
       echo "================================================================="
       exit 1
     else
-      if [[ $1 == 'dev' ]]; then
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/dev/launch.sh'); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      else
-        if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh'); then echo "$z" > launch.sh ; fi
-        $SUDO chmod +x launch.sh
-      fi
+      if z=$(curl -s 'https://raw.githubusercontent.com/VivumLab/VivumLab/master/launch.sh'); then echo "$z" > launch.sh ; fi
+      $SUDO chmod +x launch.sh
+      mkdir $(pwd)/settings
     fi
   fi
   echo "====================="
@@ -68,18 +80,21 @@ if ! docker info > /dev/null 2>&1 ; then
     sudo service docker start
   fi
 fi
-
-if [[ -z $1 ]]; then
-  version=latest
-else
-  if [[ $1 == 'local' ]]; then
-    if [[ $2 != 'start' ]]; then
-      docker build --no-cache -t vivumlab/vivumlab:local .
+if [ ${SKIP} == '0' ]; then
+  if [ ${VERSION} == 'local' ]; then
+    if [ ! -n "${BRANCH}" ]; then
+      docker build --build-arg ARG_VERSION=dev --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
+      if [[ $? != '0' ]]; then
+        exit $?
+      fi
+    else
+      docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} .
+      if [[ $? != '0' ]]; then
+        exit $?
+      fi
     fi
-    version=local
   else
-    version=$1
-    docker pull vivumlab/vivumlab:${version}
+    docker pull vivumlab/vivumlab:${VERSION}
   fi
 fi
 
@@ -96,31 +111,51 @@ if [[ ! -f ~/.vlab_vault_pass ]]; then
   touch ~/.vlab_vault_pass
 fi
 
-clear
+if [[ ${VERSION} == 'latest' ]]; then
+  gitVERSION=master
+elif [[ ${VERSION} == 'local' ]]; then
+  gitVERSION=local
+else
+  gitVERSION=v${VERSION}
+fi
+
+if [[ ${VERSION} != 'local' && ${VERSION} != 'dev' ]]; then
+  clear
+fi
 cat vivumlablogo.txt
 
-docker run --rm -it \
-  -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
-  -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
-  -v $(pwd):/data \
-  -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
-  vivumlab/vivumlab:${version} /bin/bash
+if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
+  docker run --rm -it \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
+    -v $(pwd):/data \
+    -v $(pwd)/settings:/data/settings \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    vivumlab/vivumlab:${VERSION} /bin/bash
+else
+  docker run --rm -it \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
+    -v $(pwd)/settings:/data/settings \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    vivumlab/vivumlab:${VERSION} /bin/bash
+fi
 
 <<ENDOFSIGSTART=
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAl/2djMACgkQ+4SMbaIP
-99Q+Sw/+K9Z63yYnYgQH4Vx7Jn7y80fx7/+19olIjZRrQ74wHBAVHvlz+l4t8P2b
-UhbDA4Z5TuJfxdIfEgW1HatdFzgC7b4gdoswcrQZOYI+cTmQ7MxGV80FiMcVUP9e
-U5QD22UBC17n2In2B1R49LUhLIoKOSxaZJhwfqZzDf9zPLTAOw2whYrHePw3gmI2
-VOTdot6oo8dvlRoJNw9tEaKhMAkLBZyFgfbQKi0sNo7QOuqK4NQGZH156onoBoRy
-CTx+RxElqdfuP8uOGLO6RDENyrZz1/3/VaLS19j/FgZpEnKSAZ2KznCWuAxUsLvD
-+gaZmfVZWtpIUs58n40U+ar0rNf7/snBfNq/UenilMDx/m1Hbpr4hpQX68Ug6UiL
-lbIQWn8CTDynbK7TV5YxRYu5i6xvi4wc/PLFtHc86Qasl8JtQ1yC3PEu2+yNJFmk
-Jo+O35ma+lGtOxv94x/JQIahLyS9bHvlBfedr0w9iDNn38tW8VD7U8zLF3qcVeW9
-ugsnlkZWsP37j1yT4XXyVHyvAQawaFhj/IU9X0QVmJGteBixBW52J9FQ50zg6KoF
-iS/binZCCjzPBacM4qrkqIRXwhIb+SKSZYMxloAHTKDIRxanZLPcgNGivRu6hVa+
-vbVmiyJgHqWcT2POfZQ3UehCY13DQeKgI0zv9a8ml7m+asZngv8=
-=HrkQ
+iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAmACqoMACgkQ+4SMbaIP
+99TPcw/9Hnpg068DlIOUJ6X1tGxkrL7Ky0p2WsqgzSqohbMF2fhfsQpgj9c01XrD
+MuVo4mSbz7ZS9vSyTbNH6eQVSBRWzVzS3j4FViupyB9Sk/jTvLKAc9vEXESBkL/m
+X78Wxy0pmugFo+VQBSohPj+yT0V5ApP6P7O4QAE9vOYkHZGAiYAtD6nQ+Lc3bL39
+vmzjyGXXh0DIaUQgpTiNfHk830iliWpVx6nL5/oyfYNJYvEPNvJeK27D2F3IFD86
+YYGNICLvas6hbWQHWNERMuRwV+HS4zr+EVlwoTNoJMsILW2yB8Ibzjz9jh/p8Z6d
+Mt0/5PrdBO4UaBY5ljua9Z3TSVQRfL5hmVFJtqiiB85T4G3RcRxZAHOS/gbs5JtD
+Qy5Aq5/eOhn31X3IlXvG3yUJ6JNkOMyuv+Gh4+xpFYk/dMwQcJcb8ViHRIpd08Np
+GXfj024bY26rbbzfrlpuy+7R1QR7DJcWsYIVgYOLzJ1CbLXMzFvI5pRH6l2RIE3O
+p1bCRhbr41qM26HB8+H7M4oGkpx/iZSOHoxagHrBDRjWBHqQMfIPYDBEJ2O9TZyq
+2cBddZhEqTfNIAbcUWBq9S+BfN+zLV/E96EhVXDWUXF6zX1ifX5EG4JPg8Lcm7iA
+cM2OKoKFKoLnv0IDT07JaE/t3mAzKgptR0URWk1jPHuOkB0MXWE=
+=MCF2
 -----END PGP SIGNATURE-----
 ENDOFSIGSTART=
