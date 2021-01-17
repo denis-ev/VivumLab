@@ -9,6 +9,7 @@
     - "config"
     - "data"
     - "redis"
+    - "opendkim/keys"
   become: yes
     
 - name: Make peertube db directory.
