@@ -42,6 +42,8 @@ services:
       - "{{ volumes_root }}/peertube/.env.peertube"
     networks:
       - peertube_internal
+    volumes:
+      - "{{ volumes_root }}/peertube/opendkim/keys:/etc/opendkim/keys"
 
   db:
     container_name: peertube_db
