@@ -52,6 +52,11 @@ run: **`vlab update_one service=peertube`**
 
 Login as the administrator account, to complete setting up your PeerTube instance. It is highly recommended that the administrator account is not used for uploading videos/ enjoying the instance; create a separate 'main' account for this purpose.
 
+###### LIVE STREAMING
+If you wish to live stream, make sure that port `1935` is forwarded on the machine that serves Peertube. If you are deploying to your own infrastructure/machine, this may involve accessing the router/modem connected to the aforementioned machine and portforwarding manually; if you are using a provider such as digital ocean, you may need to contact support, and organise the port to be forwarded for you.
+
+The above is advice only; Portforwarding, is currently outside the scope of VivumLab, due to this scope VivumLab will not be able to provide any support regarding portforwarding. Just like with most things, a quick internet search will get you started.
+
 #### ADMINISTRATOR SETUP
 
 The administrator details are set by the user during VivumLab setup, a.k.a, the answers that the user provided for the default admin 'user' and 'password'.
