@@ -114,9 +114,12 @@ RUN echo "==> Setting up VivumLab"  && \
     echo "==> Make sure docker-entrypoint.sh is executable" && \
     chmod +x /docker-entrypoint.sh && \
     echo "==> Clean APK cache" && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    echo "==> Remove Repo files" && \
+    rm -rf /data && \
+    mkdir /data
 
 WORKDIR /data
 
-VOLUME [ "/data/settings" ]
+VOLUME [ "/data" ]
 ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
