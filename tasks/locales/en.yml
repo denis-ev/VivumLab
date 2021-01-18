@@ -274,6 +274,7 @@ en:
         invalidcommand: "Invalid Command: %{command} for %{dynamic_namespace}"
         validoptions: "Valid commands for this namesapce are:"
         applyupdates: "Configuration saved. Apply Updates? "
+        invalid_service: "Invalid service specified"
     customize:
       usage: "customize"
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
