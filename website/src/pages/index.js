@@ -32,7 +32,7 @@ vlab deploy`
 git clone --branch dev https://github.com/VivumLab/VivumLab.git
 
 # Start the CLI with dev parameter
-./launch.sh dev
+./launch.sh -v dev
 
 # Run within the started Docker container
 vlab deploy`
@@ -43,10 +43,13 @@ vlab deploy`
 git clone https://github.com/VivumLab/VivumLab.git
 
 # Build / Start the CLI
-./launch.sh local
+./launch.sh -v local
+
+# Build branch / Start the CLI
+./launch.sh -v local -b branch-name
 
 # Start the CLI (Only works if image was build before)
-./launch.sh local start
+./launch.sh -v local -s start
 
 # Run within the started Docker container
 vlab deploy`
@@ -63,16 +66,16 @@ const snippets = [
     label: 'Enable / Update Service',
     further: '/docs/core/Installation#enabling-services',
     config: `# Enable a service
-vlab service setup --service SERVICENAME
+vlab service SERVICENAME enable -v true
 
 # Update a service
-vlab update --service SERVICENAME
+vlab update -s SERVICENAME
 
 # Show config for a service
-vlab service show --service SERVICENAME
+vlab service SERVICENAME show
 
 # Change options for a service
-vlab service setup --service SERVICENAME`,
+vlab service SERVICENAME setup`,
   },
   {
     label: 'Update all Services',
@@ -83,7 +86,7 @@ vlab service setup --service SERVICENAME`,
     label: 'Show config',
     further: '/docs/core/Installation#enabling-services',
     config: `# Show config for a service
-    vlab service show --service SERVICENAME`,
+    vlab service SERVICENAME show`,
   }
 ];
 
