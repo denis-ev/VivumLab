@@ -229,6 +229,10 @@ en:
     list:
       name: "list"
       desc: "List the available services"
+      out:
+        installed: "blue = installed"
+        not_installed: "magenta != installed"
+        service_count: "VivumLab currently has %{count} services"
     remove:
       usage: "remove -s, --service SERVICENAME"
       desc: "Removes any specified service(s) from the VivumLab server"

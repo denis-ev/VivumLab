@@ -16,6 +16,7 @@ module ConfigFileUtils
     @service_list ||= Dir.glob('roles/*')
                          .select { |f| File.directory? f }
                          .reject { |f| f.include? 'vivumlab' }
+                         .reject { |f| f.include? 'fail2ban'}
                          .map { |x| x.split('/').last }
   end
 

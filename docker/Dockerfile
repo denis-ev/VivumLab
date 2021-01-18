@@ -52,6 +52,7 @@ ENV BUILD_PACKAGES \
     openssl-dev \
     musl-dev \
     jq \
+    less \
     nano \
     git
 

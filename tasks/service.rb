@@ -11,10 +11,24 @@ class Service < Thor
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list
     services = service_list.each_slice(5).entries
-    modulo = service_list.size % 5
-    (5 - modulo).times { services.last << '' } if modulo.positive?
+    (5 - services.last.size).times { services.last << '' } if services.last.size.positive?
+    pastel = Pastel.new
+    installed = pastel.bright_blue.bold(I18n.t('service.list.out.installed'))
+    not_installed = pastel.magenta(I18n.t('service.list.out.not_installed'))
+    puts "#{installed} / #{not_installed}"
+    say I18n.t('service.list.out.service_count', count: service_list.count)
     table = TTY::Table.new(rows: services)
-    say table.render(:unicode)
+    foo = table.render(:unicode) do |rndr|
+      rndr.filter = lambda { |value, _row, _col|
+        test = (value.nil?) ? false : true
+        begin
+          test = decrypted_config_file[value.strip].enable
+        rescue StandardError
+        end
+        test ? pastel.bright_blue.bold(value) : pastel.magenta(value)
+      }
+    end
+    puts foo
   end
 
   desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc'), hide: true
