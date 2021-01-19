@@ -1,3 +1,17 @@
+## [1.1.0](https://github.com/VivumLab/VivumLab/compare/v1.0.2...v1.1.0) (2021-01-19)
+
+
+### Features
+
+* colorizes vlab service list ([#296](https://github.com/VivumLab/VivumLab/issues/296)) ([0df175a](https://github.com/VivumLab/VivumLab/commit/0df175af1b770b11ff0f97011d52b0ca52a14ae6))
+
+
+### Bug Fixes
+
+* **ci:** docker buildx error / removed linux/s390x ([4a712cf](https://github.com/VivumLab/VivumLab/commit/4a712cfa3a6e374dfd2e4ff8f1567657a85ad69f))
+* fixes bad prompt, and logic surrounding the creation of a missing vault pass ([#303](https://github.com/VivumLab/VivumLab/issues/303)) ([0224965](https://github.com/VivumLab/VivumLab/commit/022496586b2842d1df9db45650cf3dab5a55dbbf)), closes [#300](https://github.com/VivumLab/VivumLab/issues/300)
+* vlab throws uninitialized constant for unknown service. ([#302](https://github.com/VivumLab/VivumLab/issues/302)) ([ccf2719](https://github.com/VivumLab/VivumLab/commit/ccf27192ac917124a5679da1b534106a832f79b8)), closes [#294](https://github.com/VivumLab/VivumLab/issues/294)
+
 ### [1.0.2](https://github.com/VivumLab/VivumLab/compare/v1.0.1...v1.0.2) (2021-01-17)
 
 
