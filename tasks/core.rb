@@ -7,7 +7,7 @@ class Core < Thor
   require 'etc'
   include VlabI18n
 
-  ENCRYPTION_KEY = "#{Dir.home}/.vlab_vault_pass"
+  ENCRYPTION_KEY = ".vlab_vault_pass"
 
   desc I18n.t('core.checkversion.usage'), I18n.t('core.checkversion.desc')
   def check_version
@@ -29,8 +29,11 @@ class Core < Thor
     # ~/.vlab_vault_pass *does not exist* It's imperative that calling
     # tasks that want to overwrite the vault pass, need to delete the existing
     # vault pass before calling this.
-    say I18n.t('core.generate_vault_pass.out.noaction').light_blue
-    File.write(ENCRYPTION_KEY, SecureRandom.base64(32)) unless File.exist? "#{Dir.home}/.vlab_vault_pass"
+    if File.exist?('.vlab_vault_pass') && File.size('.vlab_vault_pass').positive?
+      say I18n.t('core.generate_vault_pass.out.noaction').light_blue
+    else
+      File.write(ENCRYPTION_KEY, SecureRandom.base64(32))
+    end
   end
 
   desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')

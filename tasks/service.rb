@@ -11,10 +11,24 @@ class Service < Thor
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list
     services = service_list.each_slice(5).entries
-    modulo = service_list.size % 5
-    (5 - modulo).times { services.last << '' } if modulo.positive?
+    (5 - services.last.size).times { services.last << '' } if services.last.size.positive?
+    pastel = Pastel.new
+    installed = pastel.bright_blue.bold(I18n.t('service.list.out.installed'))
+    not_installed = pastel.magenta(I18n.t('service.list.out.not_installed'))
+    puts "#{installed} / #{not_installed}"
+    say I18n.t('service.list.out.service_count', count: service_list.count)
     table = TTY::Table.new(rows: services)
-    say table.render(:unicode)
+    foo = table.render(:unicode) do |rndr|
+      rndr.filter = lambda { |value, _row, _col|
+        test = (value.nil?) ? false : true
+        begin
+          test = decrypted_config_file[value.strip].enable
+        rescue StandardError
+        end
+        test ? pastel.bright_blue.bold(value) : pastel.magenta(value)
+      }
+    end
+    puts foo
   end
 
   desc I18n.t('service.remove.usage'), I18n.t('service.remove.desc'), hide: true
@@ -119,7 +133,8 @@ class Service < Thor
   desc 'SERVICENAME', 'dynamic service task defers to service specific namespace provided as parameter'
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
   def dynamic(dynamic_namespace, command = 'help')
-    return if guard_against_invalid_service_config?(dynamic_namespace)
+    # run_common
+    return unless guard_against_invalid_service(dynamic_namespace)
 
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
@@ -152,10 +167,10 @@ class Service < Thor
       end
     end
 
-    def guard_against_invalid_service_config?(service)
-      service_config = decrypted_config_file[service]
-      say I18n.t('service.setup.out.searchfail', service: service).red if service_config.nil?
-      service_config.nil?
+    def guard_against_invalid_service(service)
+      service_exist = service_list.include? service
+      say I18n.t('service.setup.out.searchfail', service: service).red unless service_exist
+      service_exist
     end
 
     def limit_to_service(service = nil)

@@ -9,7 +9,7 @@ LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
       org.label-schema.vendor="VivumLab" \
       org.label-schema.schema-version="1.0"
 
-ARG ARG_VERSION="dev"
+ARG ARG_VERSION="master"
 
 ENV VER_TERRAFORM=0.14.4
 # curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//'
@@ -45,6 +45,7 @@ ENV BUILD_PACKAGES \
     curl \
     unzip \
     jq \
+    less \
     nano \
     git
 
@@ -97,14 +98,12 @@ RUN apk update && \
     echo "==> Installing syntax highlighting for nano" && \
     curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
     echo "==> Create /data" && \
-    mkdir /data
-
-    # echo "==> Cloning VivumLab"  && \
-    # git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
-
-COPY . /data
-
-RUN echo "==> Setting up VivumLab"  && \
+    mkdir /data && \
+    \
+    echo "==> Cloning VivumLab"  && \
+    git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data && \
+    \
+    echo "==> Setting up VivumLab"  && \
     cp /data/Gemfile* / && \
     cp /data/docker-entrypoint.sh / && \
     echo "==> Installing gems"  && \

@@ -83,12 +83,12 @@ fi
 if [ ${SKIP} == '0' ]; then
   if [ ${VERSION} == 'local' ]; then
     if [ ! -n "${BRANCH}" ]; then
-      docker build --build-arg ARG_VERSION=dev --no-cache -t vivumlab/vivumlab:${VERSION} -f Dockerfile.dev .
+      docker build --build-arg ARG_VERSION=dev --no-cache -t vivumlab/vivumlab:${VERSION} -f ./docker/Dockerfile.dev .
       if [[ $? != '0' ]]; then
         exit $?
       fi
     else
-      docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} .
+      docker build --build-arg ARG_VERSION=${BRANCH} --no-cache -t vivumlab/vivumlab:${VERSION} -f ./docker/Dockerfile .
       if [[ $? != '0' ]]; then
         exit $?
       fi
@@ -144,18 +144,18 @@ fi
 <<ENDOFSIGSTART=
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAmACqoMACgkQ+4SMbaIP
-99TPcw/9Hnpg068DlIOUJ6X1tGxkrL7Ky0p2WsqgzSqohbMF2fhfsQpgj9c01XrD
-MuVo4mSbz7ZS9vSyTbNH6eQVSBRWzVzS3j4FViupyB9Sk/jTvLKAc9vEXESBkL/m
-X78Wxy0pmugFo+VQBSohPj+yT0V5ApP6P7O4QAE9vOYkHZGAiYAtD6nQ+Lc3bL39
-vmzjyGXXh0DIaUQgpTiNfHk830iliWpVx6nL5/oyfYNJYvEPNvJeK27D2F3IFD86
-YYGNICLvas6hbWQHWNERMuRwV+HS4zr+EVlwoTNoJMsILW2yB8Ibzjz9jh/p8Z6d
-Mt0/5PrdBO4UaBY5ljua9Z3TSVQRfL5hmVFJtqiiB85T4G3RcRxZAHOS/gbs5JtD
-Qy5Aq5/eOhn31X3IlXvG3yUJ6JNkOMyuv+Gh4+xpFYk/dMwQcJcb8ViHRIpd08Np
-GXfj024bY26rbbzfrlpuy+7R1QR7DJcWsYIVgYOLzJ1CbLXMzFvI5pRH6l2RIE3O
-p1bCRhbr41qM26HB8+H7M4oGkpx/iZSOHoxagHrBDRjWBHqQMfIPYDBEJ2O9TZyq
-2cBddZhEqTfNIAbcUWBq9S+BfN+zLV/E96EhVXDWUXF6zX1ifX5EG4JPg8Lcm7iA
-cM2OKoKFKoLnv0IDT07JaE/t3mAzKgptR0URWk1jPHuOkB0MXWE=
-=MCF2
+iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAmAGG+oACgkQ+4SMbaIP
+99SWBxAAkVT40AK04+p46swS6DDxVmIqc7cb58sB72pDIlYDLGdY+IXD/+EmB7N+
+wLKTt1wJmafIO5J2GqUw/BGtPu9myGkU3rlr0XneIy1q2/cN5CH8/l0XuYS88Avw
+QNRn7iViTSrX0Aysb/vZC13oPCO11F1L6J4sZVY0rgtbyWK8IQG02QL8N3hZqn0K
+dCyhu1puIt/pIf8a7jjzM0HsYm5qbEJSFqtRMoCDdLwxSQg16TcvsWDaUk857TCG
+EwrRfCS0PG75U90bpr1pKuiW4jmTEyWrHwpzhBfNHVdD3PQYImyJi7az19A6HDU1
+hYS6CWxQFhMYmiAurwoI8QH11Nf7fyclcZwYTH3yNlwCBaxPbbXBtYIRxSniW7fZ
+V5b3YXE12IbCq+sMGAAjtIIgTUpgtTpZJqLRkwsKVy16AQ2vS6DWGJpMXnnRfz/o
+09czb6TeYMdk76Ly4fc5nfUHE+wIk3V+l+Y1K0jv5lvaKNUsc4WucTVjzIVItpW4
+IFtfzOmYXj6Re3WelC5xByifEP0IHclvjO1TJ6+Ms0aLoXVnCdIn+iQr2grwgaKu
+AYi5/FH59+8rkmxjHKhx28RI9ggG0e3/GF8pYe4ia9A2RsVY98J/mAq4A18oZz5J
+pI3+wPY8TfzcMTS2f6+bAYACI8sVwUm3zh0OTLYH9M4EETToh7g=
+=c3td
 -----END PGP SIGNATURE-----
 ENDOFSIGSTART=
