@@ -21,6 +21,8 @@ services:
       - db
       - redis
       - postfix
+    environment:
+      - PT_INITIAL_ROOT_PASSWORD={{ default_password }}
     ports:
       - 9000:9000
     networks:
