@@ -42,9 +42,13 @@ module ConfigFileUtils
     # rubocop:enable Style/RescueModifier
     return unless encrypted_yml_exist?
 
-    pass = File.read('/vlab_vault_pass')
-    temp = YamlVault::Main.from_file("settings/#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
-    @decrypted_config_file ||= ConfigFile.new(temp)
+    begin
+      pass = File.read('/vlab_vault_pass')
+      temp = YamlVault::Main.from_file("settings/#{config_dir}/encrypted.yml", [['*']], passphrase: pass).decrypt_hash
+      @decrypted_config_file ||= ConfigFile.new(temp)
+    rescue
+      @decrypted_config_file = ConfigFile.new
+    end
   end
 
   def encrypted_yml_exist?
@@ -72,7 +76,7 @@ module ConfigFileUtils
     File.open("settings/#{options[:config_dir]}/encrypted.yml", 'w') do |file|
       file.write(to_encrypt.encrypt_yaml)
     end
-    say "settings/#{options[:config_dir]}/encrypted.yml saved".green
+    puts "settings/#{options[:config_dir]}/encrypted.yml saved".green
   end
 
   # this writes a temporarially decrypted version of the config file to disk.
