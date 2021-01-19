@@ -40,30 +40,38 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push amd64
-        uses: docker/build-push-action@v2
+        uses: crazy-max/ghaction-docker-buildx-bake@v1
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
+          files: |
+            ./docker/docker-bake.hcl
+            ${{ steps.docker_meta.outputs.bake-file }}
+          targets: |
+            build
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          set: build.args.ARG_VERSION=v${{ steps.docker_meta.outputs.version }}
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: crazy-max/ghaction-docker-buildx-bake@v1
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64, linux/386,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
-          build-args: ARG_VERSION=${{ steps.docker_meta.outputs.tags }}
+          files: |
+            ./docker/docker-bake.hcl
+            ${{ steps.docker_meta.outputs.bake-file }}
+          targets: |
+            build-all
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          set: build-all.args.ARG_VERSION=v${{ steps.docker_meta.outputs.version }}
   multi-publish-to-docker-dev:
     runs-on: ubuntu-latest
     if: "github.ref == 'refs/heads/dev' && !contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: ${{ secrets.HUB_DOCKER_IMAGENAME }}
+          tag-custom-only: true
+          tag-custom: dev
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -74,18 +82,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push amd64
-        uses: docker/build-push-action@v2
+        uses: crazy-max/ghaction-docker-buildx-bake@v1
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
+          files: |
+            ./docker/docker-bake.hcl
+            ${{ steps.docker_meta.outputs.bake-file }}
+          targets: |
+            build-dev
           push: ${{ github.event_name != 'pull_request' }}
-          tags: vivumlab/vivumlab:dev
+          set: build-dev.args.ARG_VERSION=dev
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: crazy-max/ghaction-docker-buildx-bake@v1
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64, linux/386,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
+          files: |
+            ./docker/docker-bake.hcl
+            ${{ steps.docker_meta.outputs.bake-file }}
+          targets: |
+            build-dev-all
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.HUB_DOCKER_IMAGENAME }}:dev
+          set: build-dev-all.args.ARG_VERSION=dev
