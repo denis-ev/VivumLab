@@ -40,20 +40,24 @@ ENV VERSION=$ARG_VERSION
 ENV BUILD_PACKAGES \
     tini \
     python3 \
-    python3-dev \
     bash \
     wget \
     curl \
     unzip \
+    jq \
+    less \
+    nano \
+    git
+
+ENV BUILD_PACKAGES_VIRTUAL \
+    build-dependencies \
+    python3-dev \
     gcc \
     make \
     libffi-dev \
     ncurses-dev \
     openssl-dev \
-    musl-dev \
-    jq \
-    nano \
-    git
+    musl-dev
 
 ENV PYTHON_PACKAGES \
     setuptools \
@@ -71,6 +75,7 @@ ENV PYTHON_PACKAGES \
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache ${BUILD_PACKAGES} && \
+    apk --no-cache add --virtual ${BUILD_PACKAGES_VIRTUAL} && \
     ln -sf python3 /usr/bin/python && \
     python3 -m ensurepip && \
     pip3 install --no-cache --upgrade pip wheel && \
