@@ -187,10 +187,10 @@ en:
           Oops, your vault password in %{home_dir}, doesn't appear to exist.
           This is unusual, but could be the result of the username changing after setup.
         vaultpasscreate: |+
-          A new `.vlab_vault_pass` file can be created for you;
+          A new `/vlab_vault_pass` file can be created for you;
           or you can exit, and try to sort this out yourself.
       in:
-        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+        vaultpasscreate: "Let VivumLab create a new /vlab_vault_pass for you? [y/n]"
     check_for_git:
       usage: "check_for_git"
       desc: "Checks the local machine for Git"

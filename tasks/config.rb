@@ -25,6 +25,7 @@ class Config < Thor
       encrypt_temporary_decrypted_config "decrypted.yml"
       say I18n.t('config.encrypt.out.encrypted').green
     end
+    decrypted_config_file # just to refresh
   end
 
   desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc')

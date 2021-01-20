@@ -7,6 +7,8 @@ class Service < Thor
   include Utils
   include VlabI18n
 
+  @@already_run = false
+
   desc I18n.t('service.list.name'), I18n.t('service.list.desc')
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
   def list
@@ -133,7 +135,7 @@ class Service < Thor
   desc 'SERVICENAME', 'dynamic service task defers to service specific namespace provided as parameter'
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
   def dynamic(dynamic_namespace, command = 'help')
-    # run_common
+    run_common
     return unless guard_against_invalid_service(dynamic_namespace)
 
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
@@ -178,9 +180,12 @@ class Service < Thor
     end
 
     def run_common
-      invoke 'migration:single_config'
-      invoke 'git:sync', [], options
+      # invoke 'migration:single_config'
+      return if @@already_run
+      invoke 'sanity_checks:local', [], options
       invoke 'config:new', [], options
+      invoke 'git:sync', [], options
+      @@already_run = true
     end
   end
   # rubocop:enable Metrics/BlockLength
