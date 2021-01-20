@@ -17,6 +17,7 @@ class Config < Thor
     else
       net_new_config_file options
     end
+    decrypted_config_file # just to refresh
   end
 
   desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc')
