@@ -105,7 +105,9 @@ RUN apk update && \
     \
     echo "==> Setting up VivumLab"  && \
     cp /data/Gemfile* / && \
-    cp /data/docker-entrypoint.sh / && \
+    cp /data/docker/docker-entrypoint.sh / && \
+    cp /data/docker/motd /etc/motd && \
+    \
     echo "==> Installing gems"  && \
     bundle install && \
     echo "==> Linking vlab into path" && \

@@ -103,7 +103,8 @@ RUN apk update && \
     # git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
 
 COPY Gemfile* /
-COPY docker-entrypoint.sh /
+COPY docker/docker-entrypoint.sh /
+COPY docker/motd /etc/motd
 
 RUN echo "==> Installing gems"  && \
     bundle install && \
