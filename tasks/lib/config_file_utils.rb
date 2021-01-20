@@ -44,7 +44,6 @@ module ConfigFileUtils
     # rubocop:disable Style/RescueModifier
     config_dir = options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
     # rubocop:enable Style/RescueModifier
-    return unless encrypted_yml_exist?
 
     begin
       pass = File.read('/vlab_vault_pass')
@@ -53,6 +52,7 @@ module ConfigFileUtils
     rescue
       @decrypted_config_file = ConfigFile.new
     end
+    @decrypted_config_file
   end
 
   def encrypted_yml_exist?
