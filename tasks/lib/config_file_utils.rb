@@ -38,6 +38,7 @@ module ConfigFileUtils
   end
 
   def decrypted_config_file
+    invoke 'config:new', [], options unless encrypted_yml_exist?
     return @decrypted_config_file unless @decrypted_config_file.nil?
 
     # rubocop:disable Style/RescueModifier

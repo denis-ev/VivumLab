@@ -181,11 +181,10 @@ class Service < Thor
 
     def run_common
       # invoke 'migration:single_config'
-      puts "running run_common: #{@already_run}"
       return if @@already_run
-
-      invoke 'git:sync', [], options
+      invoke 'sanity_checks:local', [], options
       invoke 'config:new', [], options
+      invoke 'git:sync', [], options
       @@already_run = true
     end
   end
