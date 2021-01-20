@@ -29,7 +29,6 @@ class Core < Thor
     # ~/.vlab_vault_pass *does not exist* It's imperative that calling
     # tasks that want to overwrite the vault pass, need to delete the existing
     # vault pass before calling this.
-    binding.pry
     if File.exist?(ENCRYPTION_KEY) && File.size(ENCRYPTION_KEY).positive?
       say I18n.t('core.generate_vault_pass.out.noaction').light_blue
     else
