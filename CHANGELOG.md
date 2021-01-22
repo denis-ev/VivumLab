@@ -1,3 +1,12 @@
+### [1.1.1](https://github.com/VivumLab/VivumLab/compare/v1.1.0...v1.1.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* fix config problem ([#312](https://github.com/VivumLab/VivumLab/issues/312)) ([f26df35](https://github.com/VivumLab/VivumLab/commit/f26df354d4c59d5900d02a2d425014ff26666a26)), closes [#311](https://github.com/VivumLab/VivumLab/issues/311)
+* remove taskfile ([#308](https://github.com/VivumLab/VivumLab/issues/308)) ([d0f050e](https://github.com/VivumLab/VivumLab/commit/d0f050e369b76d6601e70750a6920ed93aec27d5)), closes [#307](https://github.com/VivumLab/VivumLab/issues/307)
+* skip tags setup ([#318](https://github.com/VivumLab/VivumLab/issues/318)) ([9e153f7](https://github.com/VivumLab/VivumLab/commit/9e153f72fe433a496d6199072e2cd155caf14687))
+
 ## [1.1.0](https://github.com/VivumLab/VivumLab/compare/v1.0.2...v1.1.0) (2021-01-19)
 
 
