@@ -39,7 +39,7 @@ class Core < Thor
   desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')
   def deploy
     say I18n.t('core.deploy.out.deploy').light_blue
-    run_playbook('playbook.vivumlab.yml', options)
+    run_playbook('playbook.vivumlab.yml', options, deploy: true)
   end
 
   desc I18n.t('core.restore.usage'), I18n.t('core.restore.desc')
