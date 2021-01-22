@@ -165,7 +165,7 @@ class Service < Thor
 
     def run_playbooks(playbooks, options, service_limit)
       playbooks.each do |playbook|
-        run_playbook("playbook.#{playbook}.yml", options, service_limit)
+        run_playbook("playbook.#{playbook}.yml", options, service_limit, deploy: false)
       end
     end
 
