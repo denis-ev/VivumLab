@@ -393,7 +393,7 @@ fr:
     servicename: "Nom du service à afficher"
     filetowrite: "Nom du fichier à écrire"
     filetoencrypt: "Nom du fichier à crypter"
-    keytoset: "Clé "Dot notation" à définir"
+    keytoset: 'Clé "Dot notation" à définir'
     valuetoset: "Valeur à définir"
     disablegitsync: "Désactiver le transfert de git vers remote"
     branchtrack: "Nom de la branche ou du tag que vous souhaitez utiliser"
