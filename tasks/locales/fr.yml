@@ -119,7 +119,7 @@ fr:
           Nous espérons que vous apprécierez votre temps avec nous
           Et nous avons hâte de réaliser de grandes choses ensemble
       in:
-        contribute: "Voulez-vous contribuer à VivumLab (oui ou non)?"
+        contribute: "Voulez-vous contribuer à VivumLab? (yes pour oui ou no pour non)"
     set:
       usage: "set"
       desc: "Définit une variable de config"
@@ -130,7 +130,7 @@ fr:
       out:
         readdevdocs: |+
           Avant tout, assurez-vous d'avoir lu la documentation pour développeur
-          Vous pouvez trouver la documentation pour développeurs. ici:
+          Vous pouvez trouver la documentation pour développeurs ici:
           https://vivumlab.com/docs/dev/tips/
         precommitwarning: "Avant de push les modifications que vous avez apportées, la pre-commit devra être installée sur votre système"
         pythonerror: "VivumLab n'a pas pu trouver Python3 en utilisant `which python3`. VivumLab nécessite python3"
@@ -190,7 +190,7 @@ fr:
           Un nouveau fichier `.vlab_vault_pass` peut être créé pour vous;
           ou vous pouvez quitter et essayer de régler cela par vous-même.
       in:
-        vaultpasscreate: "Laisser VivumLab créer un nouveau .vlab_vault_pass pour vous? [o/n]"
+        vaultpasscreate: "Laisser VivumLab créer un nouveau .vlab_vault_pass pour vous? [y/n] (y:oui, n:non)"
     check_for_git:
       usage: "check_for_git"
       desc: "Vérifie la présence de Git sur votre machine locale"
