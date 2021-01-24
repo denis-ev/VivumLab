@@ -3,404 +3,404 @@ fr:
   bastion:
     enable:
       usage: "enable"
-      desc: "Enables the Bastion server"
+      desc: "Active le serveur Bastion"
       out:
-        done: "Bastion ip set, and enabled in the inventory file"
-        alreadyininventory: "Bastion already present in Inventory file"
+        done: "IP pour Bastion définie et activé dans le fichier d'inventaire"
+        alreadyininventory: "Bastion déjà présent dans le fichier d'inventaire"
     disable:
       usage: "disable"
-      desc: "Disables the Bastion server"
+      desc: "Désactive le serveur Bastion"
       out:
-        success: "Bastion disabled in config, and removed from Inventory"
+        success: "Bastion désactivé dans la config et supprimé de l'inventaire"
 
     in:
-      serveraddress: "What is your Bastion Server IP?"
+      serveraddress: "Quel est l'IP de votre serveur Bastion?"
 
   config:
     new:
       usage: "new"
-      desc: "Creates or Updates the config file, as necessary"
+      desc: "Créé ou met à jour le fichier de configuration, si nécessaire"
       out:
         creating: "Creating, or updating Config file settings/%{config_dir}/config.yml"
     show:
       usage: "show"
-      desc: "Shows the configuration settings for a specified service"
+      desc: "Affiche les paramètres de configuration pour un service spécifique"
       out:
-        tablenorender: "Unable to render table, due to object complexity. Reverting to text"
+        tablenorender: "Impossible de créer le tableau, en raison de la complexité de l'objet. Retour au texte"
     reset:
       usage: "reset"
-      desc: "Resets VivumLab config"
+      desc: "Réinitialise la configuration de VivumLab"
       out:
-        resetting: "Resetting config file at settings/%{config_dir}/config.yml"
-        backup: "Backing up your existing config"
+        resetting: "Réinitialisation du fichier config situé dans settings/%{config_dir}/config.yml"
+        backup: "Backup de votre config existante"
     edit_raw:
       usage: "edit_raw"
-      desc: "Decrypts, and opens the config file in nano. Encrypts on save"
+      desc: "Déchiffre et ouvre le fichier de configuration dans nano, le crypte lors de l'enregistrement"
       out:
-        editfile: "Decrypting and editing the config file at settings/%{config_dir}/encrypted.yml"
-        editerror: "Something went wrong executing the decryption and or editing the file"
-        fileremove: "For security reasons, the temporary decrypted config file has been deleted."
+        editfile: "Décryptage et modification du fichier de configuration dans settings/%{config_dir}/encrypted.yml"
+        editerror: "Une erreur s'est produite lors de l'exécution du décryptage et / ou de la modification du fichier"
+        fileremove: "Pour des raisons de sécurité, le fichier de configuration temporaire déchiffré a été supprimé."
     decrypt:
       usage: "decrypt"
-      desc: "Decrypts the encrypted config file. You must Re-ENCRYPT yourself using vlab config encrypt"
+      desc: "Déchiffre le fichier de configuration chiffré. Vous devez re-ENCRYPTER vous-même en utilisant vlab config encrypt"
       out:
-        decrypted: "Config file is now, decrypted"
+        decrypted: "Le fichier de configuration est maintenant déchiffré"
     encrypt:
       usage: "encrypt"
-      desc: "Encrypts a given config.yml to encrypted.yml"
+      desc: "Crypte un fichier config.yml donné vers encrypted.yml"
       out:
-        encrypted: "Config file is now, encrypted"
+        encrypted: "Le fichier de configuration est maintenant encrypté"
     draw_error_table:
       out:
-        keynomatch: "Unable to find a full match for the key %{config_key}"
-        possiblekey: "Here's some possible matches:"
+        keynomatch: "Impossible de trouver une correspondance complète pour la clé %{config_key}"
+        possiblekey: "Voici quelques correspondances possibles:"
 
   core:
     checkversion:
       usage: "check-version"
-      desc: "checks the local version against the latest from github"
+      desc: "vérifie la version locale par rapport à la dernière de github"
       out:
-        currentversion: "You have version %{current_version}"
-        versionlatest: "You're up to date"
-        versionupdate: "Consider updating to %{latest_version}"
+        currentversion: "Vous avez la version %{current_version}"
+        versionlatest: "Vous êtes à jour"
+        versionupdate: "Pensez à mettre à jour vers %{latest_version}"
     generate_vault_pass:
       usage: "generate-vault-pass"
-      desc: "Creates a new Vault Password"
+      desc: "Créé un nouveau mot de passe Vault"
       out:
-        noaction: "Vault pass exists, no action taking"
+        noaction: "La passe Vault existe, aucune action n'est entreprise"
     deploy:
       usage: "deploy"
-      desc: "Deploys VivumLab, configures it first if needed"
+      desc: "Déploie VivumLab, le configure d'abord si nécessaire"
       out:
-        deploy: "Deploying Vivumlab"
+        deploy: "Déploiement de Vivumlab"
     restore:
       usage: "restore"
-      desc: "restores a vlab install, assuming backups exist"
+      desc: "restaure une installation vlab, en supposant que des backups existent"
       out:
-        restoring: "Restoring your backups, now.."
-        restored: "Backups have been restored"
+        restoring: "Restauration de vos backups, en cours..."
+        restored: "Les backups ont été restaurées"
     uninstall:
       usage: "uninstall"
-      desc: "irreversably removes vlab"
+      desc: "supprime définitivement vlab"
       out:
         uninstall: |+
-          Uninstalling VivumLab is irreversible, and should always be done with caution
-          Make sure to backup any files that you may want to keep before uninstalling
-        uninstalled: "VivumLab has been uninstalled."
+          La désinstallation de VivumLab est irréversible et doit toujours être effectuée avec prudence
+          Assurez-vous de sauvegarder tous les fichiers que vous souhaitez conserver avant de désinstaller
+        uninstalled: "VivumLab a été désinstallé."
       in:
-        uninstall: "Are you sure you want to uninstall VivumLab"
-        uninstallconfirm: "Confirm again, if you are sure"
+        uninstall: "Êtes-vous sûr de vouloir désinstaller VivumLab"
+        uninstallconfirm: "Confirmez à nouveau, si vous êtes sûr"
 
   deprecated:
     vault_encrypt:
       usage: "vault_encrypt"
-      desc: "Encrypts the ansible vault.yml - DEPRECATED"
+      desc: "Crypte le fichier ansible vault.yml - DEPRECATED"
       out:
-        encrypting: "Encrypting the vault"
-        encrypted: "Vault Encrypted"
-        failencrypt: "This command can fail, if the vault was already encrypted"
+        encrypting: "Cryptage de la vault"
+        encrypted: "Vault cryptée"
+        failencrypt: "Cette commande peut échouer si la vault était déjà chiffré"
     vault_decrypt:
       usage: "vault_decrypt"
-      desc: "Decrypts the ansible vault.yml - DEPRECATED"
+      desc: "Déchiffre le fichier ansible vault.yml - DEPRECATED"
       out:
-        decrypting: "Decrypting the vault"
-        decrypted: "Vault Decrypted"
-        faildecrypt: "This command can fail, if the vault was already decrypted"
+        decrypting: "Décryptage de la vault"
+        decrypted: "Vault déchiffrée"
+        faildecrypt: "Cette commande peut échouer si la vault a déjà été déchiffré"
 
   dev:
     setup:
       usage: "setup"
-      desc: "Run to install Dev Requirements"
+      desc: "Exécuter pour installer les dépendances pour les développeurs"
       out:
-        welcome: "Welcome to VivumLab Developer Setup"
-        precommiterror: "Unable to find pre-commit in your path, you may need to add ~/bin to your path."
+        welcome: "Bienvenue dans la configuration du développeur VivumLab"
+        precommiterror: "Impossible de trouver le pre-commit dans votre PATH, vous devrez peut-être ajouter ~/bin à votre PATH."
         readythanks: |+
-          Ok, all set! Thank you for being a part of the VivumLab Community
-          We hope that you will enjoy your time with us
-          And we look forward to achieving great things, together
+          Ok, tout est prêt! Merci de faire partie de la communauté VivumLab
+          Nous espérons que vous apprécierez votre temps avec nous
+          Et nous avons hâte de réaliser de grandes choses ensemble
       in:
-        contribute: "Do you want to contribute to VivumLab (Yes or no)?"
+        contribute: "Voulez-vous contribuer à VivumLab? (yes pour oui ou no pour non)"
     set:
       usage: "set"
-      desc: "Sets a config variable"
+      desc: "Définit une variable de config"
       out:
-        noservice: "Service %{service} not found in config file. Please check the service."
-        nokey: "Key %{config_key} not found in config file. Please check the key."
+        noservice: "Service %{service} introuvable dans le fichier config. Veuillez vérifier le service."
+        nokey: "Clé %{config_key} introuvable dans le fichier config. Veuillez vérifier la clé."
     install_precommit:
       out:
         readdevdocs: |+
-          First and foremost, please make sure you have read the developer docs
-          You can find the developers docs. here:
-          # @todo add url to dev doc
-        precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
-        pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
+          Avant tout, assurez-vous d'avoir lu la documentation pour développeur
+          Vous pouvez trouver la documentation pour développeurs ici:
+          https://vivumlab.com/docs/dev/tips/
+        precommitwarning: "Avant de push les modifications que vous avez apportées, la pre-commit devra être installée sur votre système"
+        pythonerror: "VivumLab n'a pas pu trouver Python3 en utilisant `which python3`. VivumLab nécessite python3"
       in:
-        installprecommit: "Install pre-commit now?"
+        installprecommit: "Installer pre-commit maintenant?"
 
   git:
     sync:
       usage: "sync"
-      desc: "Syncs your settings git repo"
+      desc: "Synchronise le repo git de vos paramètres"
       out:
-        settingssyncing: "Syncing settings via Git"
-        settingssynced: "Settings synced"
+        settingssyncing: "Synchronisation les paramètres via Git"
+        settingssynced: "Paramètres synchronisés"
         notsetup: |+
-          Warning! Your settings directory is not setup as a Git Repository
-          Make sure to back them up using some other method. For more information, see:
+          Attention! Votre repo de paramètres n'est pas configuré en tant que repo Git
+          Assurez-vous de les sauvegarder en utilisant une autre méthode. Pour plus d'informations, consultez:
           https://vivumlab.com/docs/core/installation#syncing-settings-via-git
     track:
       usage: "track"
-      desc: "Allows you to switch between different branches or tags of Vivumlab"
+      desc: "Vous permet de basculer entre les différentes branches ou tags de Vivumlab"
       out:
-        trackbranch: "You are now tracking the %{branch} branch"
+        trackbranch: "Vous êtes maintenant sur la branche %{branch}"
 
   migration:
     single_config:
       usage: "single_config"
-      desc: "Migrates away from a config.yml, and vault.yml to a single encrypted.yml"
+      desc: "Migre d'un fichier config.yml et vault.yml vers un fichier encrypted.yml"
       out:
-        notdone: "Migration not needed. Config files valid."
+        notdone: "Migration non nécessaire. Fichiers de configuration valides."
 
   sanity_checks:
     check_ssh_keys:
       usage: "check_ssh_keys"
-      desc: "Creates or updates SSH keys as necessary"
+      desc: "Créé ou met à jour les clés SSH si nécessaire"
     local:
       usage: "local"
-      desc: "Local Sanity Checks"
+      desc: "Vérifications locales"
       out:
-        passed: "Local sanity checks passed."
+        passed: "Vérifications locales réussies."
     remote:
       usage: "remote"
-      desc: "Remote Server sanity checks"
+      desc: "Vérifications du fonctionnement de la connection au serveur distant"
       out:
-        sshkeyverifying: "Verifying SSH keys, and the ability to remotely log in to your VivumLab server via passwordless SSH"
-        sshkeyverified: "SSH Keys are good to go!"
+        sshkeyverifying: "Vérification des clés SSH et du fonctionnement de la connection à votre serveur VivumLab via SSH sans mot de passe"
+        sshkeyverified: "Les clés SSH sont prêtes à l'emploi!"
     check_for_settings:
       usage: "check_for_settings"
-      desc: "Verifies settings exist"
+      desc: "Vérifie que les paramètres existent"
     check_vault_pass:
       usage: "check_vault_pass"
-      desc: "Checks for the presence of a Vault Password file"
+      desc: "Vérifie la présence d'un fichier de mot de passe Vault"
       out:
         vaultpassmissing: |+
-          Oops, your vault password in %{home_dir}, doesn't appear to exist.
-          This is unusual, but could be the result of the username changing after setup.
+          Oups, votre mot de passe de vault dans %{home_dir} ne semble pas exister.
+          Ceci est inhabituel, mais pourrait être le résultat d'un changement de nom d'utilisateur après l'installation.
         vaultpasscreate: |+
-          A new `.vlab_vault_pass` file can be created for you;
-          or you can exit, and try to sort this out yourself.
+          Un nouveau fichier `.vlab_vault_pass` peut être créé pour vous;
+          ou vous pouvez quitter et essayer de régler cela par vous-même.
       in:
-        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+        vaultpasscreate: "Laisser VivumLab créer un nouveau .vlab_vault_pass pour vous? [y/n] (y:oui, n:non)"
     check_for_git:
       usage: "check_for_git"
-      desc: "Checks the local machine for Git"
+      desc: "Vérifie la présence de Git sur votre machine locale"
       out:
-        gitnoexist: "You need to install git!"
+        gitnoexist: "Vous devez installer git!"
     check_for_precommit:
       usage: "check_for_precommit"
-      desc: "Checks for the presence of Pre-commit"
+      desc: "Vérifie la présence de Pre-commit sur votre machine locale"
       out:
         lowprecommit: |+
-          Pre-commit is not installed or an earlier version than required.
-          Contributing to VivumLab requires Pre-Commit version %{precom_ver} or above.
+          Pre-commit n'est pas installé ou une version antérieure à celle requise est installée.
+          Contribuer à VivumLab nécessite la version %{precom_ver} de Pre-Commit ou supérieure.
 
-          Run `vlab dev setup` when you're ready..
-        lowpython: "Python version %{precom_ver} is required for VivumLab to work"
+          Exécutez `vlab dev setup` lorsque vous êtes prêt.
+        lowpython: "Python version %{precom_ver} est nécessaire pour que VivumLab fonctionne"
         noprecommit: |+
-          Pre-commit is not installed. Contributing requires installing 'pre-commit'.
-          Run vlab dev_setup, when you're ready
+          Pre-commit n'est pas installée. Contribuer nécessite l'installation de 'pre-commit'.
+          Exécutez vlab dev_setup, lorsque vous êtes prêt
     check_ssh_with_keys:
       out:
-        sshunable: "VivumLab is unable to ssh to your server using the information in your config.yml"
+        sshunable: "VivumLab est incapable de ssh vers votre serveur en utilisant les informations de votre config.yml"
 
   server:
     shutdown:
       usage: "shutdown"
-      desc: "Executes a shutdown of the Vlab server, optionally with countdown"
+      desc: "Exécute un arrêt du serveur Vlab, avec compte à rebours en option"
       out:
-        shutdown: "Server will shutdown in %{time} minute(s)"
+        shutdown: "Le serveur va s'arrêter dans %{time} minute(s)"
     restart:
       usage: "restart"
-      desc: "Executes a restart of the Vlab server, optionally with countdown"
+      desc: "Exécute un redémarrage du serveur Vlab, avec compte à rebours en option"
       out:
-        restart: "Server will restart in %{time} minute(s)"
+        restart: "Le serveur va redémarrer dans %{time} minute(s)"
 
   service:
     list:
       name: 'list'
-      desc: 'List the available services'
+      desc: 'Liste des services disponibles'
     remove:
-      usage: "remove -s, --service SERVICENAME"
-      desc: "Removes any specified service(s) from the VivumLab server"
+      usage: "remove -s, --service NOMDUSERVICE"
+      desc: "Supprime le(s) service(s) spécifié(s) du serveur VivumLab"
       out:
-        removing: "Removing data for service: %{service}"
-        removed: "Data for %{service}, removed"
+        removing: "Suppression des données pour le service: %{service}"
+        removed: "Données de %{service} supprimées"
     reset:
-      usage: "reset --service SERVICENAME "
-      desc: "Resets the files for any specified, deployed service(s)."
+      usage: "reset --service NOMDUSERVICE "
+      desc: "Réinitialise les fichiers du (des) service(s) déployé(s) spécifié(s)."
       out:
-        resetting: "Resetting %{service}"
-        reset: "%{service} has been reset"
+        resetting: "Réinitialisation de %{service}"
+        reset: "%{service} a été réinitialisé"
     stop:
-      usage: "stop -s, --service SERVICENAME"
-      desc: "Stops all services, or any specified service(s) if you specify --service"
+      usage: "stop -s, --service NOMDUSERVICE"
+      desc: "Arrête tous les services, ou, tout service spécifié si vous utilisez --service"
       out:
         stopping: |+
-          Note: If no service(s) are specified, VivumLab will stop all enabled service(s)
-          Stopping service(s) now..
-        stopped: "All specified services have been stopped"
+          Remarque: si aucun service(s) n'est spécifié, VivumLab arrêtera tous les services activés
+          Arrêt du (des) service(s) en cours...
+        stopped: "Tous les services spécifiés ont été arrêtés"
     restart:
-      usage: "restart -s, --service SERVICENAME"
-      desc: "Restart all services, or any specified service(s) if you specify --service"
+      usage: "restart -s, --service NOMDUSERVICE"
+      desc: "Redémarre tous les services, ou, tout service spécifié si vous utilisez --service"
       out:
         restarting: |+
-          Note: If no services(s) are specified, VivumLab will restart all enabled services
-          Restarting service(s) now..
-        restarted: "All specified service(s) have been restarted"
+          Remarque: si aucun service(s) n'est spécifié, VivumLab redémarrera tous les services activés
+          Redémarrage du (des) service(s) en cours...
+        restarted: "Tous les services spécifiés ont été redémarrés"
     update:
       usage: "update -s, --service SERVICE"
-      desc: "Updates all services, or any selected service(s) if you specify --service"
+      desc: "Met à jour tous les services, ou, tout service spécifié si vous utilisez --service"
       out:
         updating: |+
-          Note: If no service(s) are specified, VivumLab will update all enabled services
-          Service specified: %{service}
-          Updating now..
-        updated: "All specified services have been updated"
+          Remarque: si aucun service(s) n'est spécifié, VivumLab mettera à jour tous les services activés
+          Service spécifié: %{service}
+          Mise à jour en cours...
+        updated: "Tous les services spécifiés ont été mis à jour"
     docs:
       usage: "docs"
-      desc: "Show the docs for the specified service"
+      desc: "Afficher la doc pour le service spécifié"
     customize:
       usage: "customize"
-      desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"
+      desc: "Vous permet de personnaliser un service déployé spécifique avec un docker-compose.override.yml"
       out:
         customizing: |+
-          This command creates a file, that will override the original docker-compose file for %{service}
-          Any changes that the user wishes to make, should be made to the override file, not the original.
-          VivumLab will not change, nor delete the original file; the original file will just be ignored
-        customized: "%{service} is ready to customize"
+          Cette commande créé un fichier qui remplacera le fichier docker-compose d'origine pour %{service}
+          Toutes les modifications que l'utilisateur souhaite apporter doivent être apportées au fichier de remplacement, pas à l'original.
+          VivumLab ne changera ni ne supprimera le fichier d'origine; le fichier d'origine sera simplement ignoré
+        customized: "%{service} est prêt à être personnalisé"
       in:
-        customizing: "Did you want to make changes to the %{service} service?"
+        customizing: "Souhaitez-vous apporter des modifications au service %{service} ?"
     show:
       usage: "show"
-      desc: "Show the configuration options for specified service"
+      desc: "Afficher les options de configuration pour le service spécifié"
       out:
-        disabled: "%{service} is now disabled"
+        disabled: "%{service} est maintenant désactivé"
     setup:
       usage: "setup"
-      desc: "Interactive setup of any specified service(s) configuration settings"
+      desc: "Configuration interactive des paramètres de configuration du (des) service(s) spécifié(s)"
       out:
-        searchfail: "Failed to find a service config for service: %{service}"
-        editing: "Editing configuration parameters for: %{service}"
+        searchfail: "Impossible de trouver une config pour le service: %{service}"
+        editing: "Modification des paramètres de configuration pour: %{service}"
       in:
-        keyvalue: "What value would you like to set for %{key}: "
+        keyvalue: "Quelle valeur souhaitez-vous définir pour %{key}: "
 
   ssh:
     launch:
       usage: "launch"
-      desc: "Opens a shell on your VivumLab server"
+      desc: "Ouvre un shell sur votre serveur VivumLab"
       out:
-        launching: "Launching an SSH session to your server"
+        launching: "Lancement d'une session SSH sur votre serveur"
     create_sshkey:
       usage: "create_sshkey"
-      desc: "Creates an SSH key, if one doesn't exist"
+      desc: "Créer une clé SSH si elle n'existe pas"
       out:
-        keyexists: "SSH Key already exists at %{home_dir}/.ssh/%{passwordless_sshkey}"
-        keycreating: "Creating %{passwordless_sshkey} and %{passwordless_sshkey}.pub"
-        keycreated: "Key created"
+        keyexists: "La clé SSH existe déjà dans %{home_dir}/.ssh/%{passwordless_sshkey}"
+        keycreating: "Création de %{passwordless_sshkey} et %{passwordless_sshkey}.pub"
+        keycreated: "Clé créée"
     copy_sshkey:
       usage: "copy_sshkey"
-      desc: "Copy your ssh key over to the server"
+      desc: "Copie votre clé ssh sur le serveur"
       out:
-        keycopying: "Copying keys to your server at %{vlab_ip}"
-        keycopied: "Key copied"
+        keycopying: "Copie de la clé sur votre serveur à %{vlab_ip}"
+        keycopied: "Clé copiée"
     setup:
       usage: "setup"
-      desc: "Creates and copies your ssh key over to the server"
+      desc: "Créé et copie votre clé ssh sur le serveur"
 
   terraform:
     bastion:
       usage: "bastion"
-      desc: "Spins up a cloud server and sets it as your bastion server"
+      desc: "Lance un serveur cloud et le définit comme votre serveur bastion"
     create:
       usage: "create"
-      desc: "Spins up a cloud server with Terraform'"
+      desc: "Lance un serveur cloud avec Terraform'"
       out:
-        creating: "Creating a cloud server"
-        created: "Successfully created a server at: %{ip}"
+        creating: "Création d'un serveur cloud"
+        created: "Création réussie d'un serveur à: %{ip}"
         setip: |+
-          Place this IP where you want it in your settings..
-          either run
+          Placez cette adresse IP où vous le souhaitez dans vos paramètres...
+          lancez au choix:
           'vlab config set --dev --config-key vlab_ip --value %{ip}' or
           'vlab config set --dev --config-key bastion.server_address --value %{ip}'
 
           Then run 'vlab deploy' to complete the setup.
     destroy:
       usage: "destroy"
-      desc: "Destroys server(s) created by terraform"
+      desc: "Détruit le(s) serveur(s) créé(s) par terraform"
       out:
-        destroying: "Destroying terraform built server"
-        destroyed: "Cloud server(s) destroyed."
+        destroying: "Détruction du serveur créé en terraform"
+        destroyed: "Serveur(s) cloud détruit(s)."
 
   utils:
     run_playbook:
       out:
-        playbookexecuted: "%{playbook_command} finished"
+        playbookexecuted: "%{playbook_command} fini"
         playbookerror: |+
-          Ansible Playbook command returned with an error code.
-          Exception is: %{e}
+          Commande du Playbook Ansible renvoyée avec un code d'erreur.
+          L'exception est: %{e}
     run_config_playbook:
       out:
         playbookexecuting: "executing playbook command: %{playbook_command}"
-        playbookexecuted: "%{playbook_command} finished"
+        playbookexecuted: "%{playbook_command} fini"
         playbookerror: |+
-          Failed to run Ansible playbook: playbook.config.yml
-          Error is: %{e}
+          Échec de l'exécution du playbook Ansible: playbook.config.yml
+          L'erreur est: %{e}
 
   vlab:
     find_help:
       usage: "find_help"
-      desc: "Shows the user how to contact the VivumLab community"
+      desc: "Montre à l'utilisateur comment contacter la communauté VivumLab"
     version:
       usage: "version"
-      desc: "Show VivumLab version"
+      desc: "Affiche la version VivumLab"
       out:
-        vlabversion: "Current VivumLab version: %{vlabversion}"
+        vlabversion: "Version de VivumLab: %{vlabversion}"
 
   dynamic_namespaces:
     service:
       config:
         usage: "service %{service} %{key}"
-        desc: "Sets the configuration value for %{service}.%{key}"
+        desc: "Définit la valeur de configuration pour %{service}.%{key}"
         options:
           banner: "<VALUE>"
       classes:
         usage: "service %{service} %{meth}"
-        desc: "%{meth}s %{service}. For more information, run 'vlab service %{service} docs'"
+        desc: "%{meth}s %{service}. Pour plus d'informations, exécutez 'vlab service %{service} docs'"
 
   conffile_utils:
     encryptedyml:
       out:
         noexist: |+
-          Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'
-          For further information, please run 'vlab config'
+          Impossible à trouver settings/%{config_dir}/encrypted.yml. Veuillez exécuter 'vlab config new --dev'
+          Pour plus d'informations, veuillez exécuter 'vlab config'
     saveconf:
       out:
-        saving: "Saving config.yml"
+        saving: "Savegarde de config.yml"
 
 
   options:
-    configdir: "Config directory to use"
-    servicename: "Name of the service to display"
-    filetowrite: "Name of the file to write"
-    filetoencrypt: "Name of the file to encrypt"
-    keytoset: "Dot notation key to set"
-    valuetoset: "Value to set"
-    disablegitsync: "Disable pushing git to remote"
-    branchtrack: "The name of the branch, or tag you'd like to use"
-    ansibledebug: "Debugs Ansible-playbook commands"
-    timershutdown: "Sets a countdown in minutes until the server shuts down"
-    timerrestart: "Sets a countdown in minutes until the server restarts"
-    serviceswarning: "Optional name of service. Without, it removes all services."
-    servicerequired: "Required name of service."
-    enabledevtasks: "Enable Developer tasks"
-    vlabversion: "Shows current VivumLab version"
+    configdir: "Dossier de configuration à utiliser"
+    servicename: "Nom du service à afficher"
+    filetowrite: "Nom du fichier à écrire"
+    filetoencrypt: "Nom du fichier à crypter"
+    keytoset: 'Clé "Dot notation" à définir'
+    valuetoset: "Valeur à définir"
+    disablegitsync: "Désactiver le transfert de git vers remote"
+    branchtrack: "Nom de la branche ou du tag que vous souhaitez utiliser"
+    ansibledebug: "Commandes debugs Ansible-playbook"
+    timershutdown: "Définit un compte à rebours en minutes avant l'arrêt du serveur"
+    timerrestart: "Définit un compte à rebours en minutes avant le redémarrage du serveur"
+    serviceswarning: "Nom facultatif du service. Sans celui-ci, on supprime tous les services."
+    servicerequired: "Nom du service requis."
+    enabledevtasks: "Activer les tâches de développeur"
+    vlabversion: "Affiche la version actuelle de VivumLab"
