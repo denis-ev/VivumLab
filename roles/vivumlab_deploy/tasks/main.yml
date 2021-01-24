@@ -53,6 +53,8 @@
   file:
     path: "{{ storage_dir }}/{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
   with_items:
     - "Backups"
     - "Books"
@@ -62,6 +64,7 @@
     - "Pictures"
     - "temp"
     - "Video"
+  become: yes
 
 - name: Configure NAS - Public NFS Shares
   when:
