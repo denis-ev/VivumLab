@@ -7,7 +7,7 @@ class Core < Thor
   require 'etc'
   include VlabI18n
 
-  ENCRYPTION_KEY = ".vlab_vault_pass"
+  ENCRYPTION_KEY = "/vlab_vault_pass"
 
   desc I18n.t('core.checkversion.usage'), I18n.t('core.checkversion.desc')
   def check_version
@@ -29,7 +29,7 @@ class Core < Thor
     # ~/.vlab_vault_pass *does not exist* It's imperative that calling
     # tasks that want to overwrite the vault pass, need to delete the existing
     # vault pass before calling this.
-    if File.exist?('.vlab_vault_pass') && File.size('.vlab_vault_pass').positive?
+    if File.exist?(ENCRYPTION_KEY) && File.size(ENCRYPTION_KEY).positive?
       say I18n.t('core.generate_vault_pass.out.noaction').light_blue
     else
       File.write(ENCRYPTION_KEY, SecureRandom.base64(32))
@@ -39,7 +39,7 @@ class Core < Thor
   desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')
   def deploy
     say I18n.t('core.deploy.out.deploy').light_blue
-    run_playbook('playbook.vivumlab.yml', options)
+    run_playbook('playbook.vivumlab.yml', options, deploy: true)
   end
 
   desc I18n.t('core.restore.usage'), I18n.t('core.restore.desc')

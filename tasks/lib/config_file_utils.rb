@@ -2,6 +2,8 @@
 
 # Contains logic surrounding vivumlab config files
 module ConfigFileUtils
+  @@config_file_exists = nil
+
   # Class extends hashie::mash to silence warnings
   include VlabI18n
   class ConfigFile < Hashie::Mash
@@ -36,12 +38,12 @@ module ConfigFileUtils
   end
 
   def decrypted_config_file
+    invoke 'config:new', [], options unless encrypted_yml_exist?
     return @decrypted_config_file unless @decrypted_config_file.nil?
 
     # rubocop:disable Style/RescueModifier
     config_dir = options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
     # rubocop:enable Style/RescueModifier
-    return unless encrypted_yml_exist?
 
     begin
       pass = File.read('/vlab_vault_pass')
@@ -50,15 +52,18 @@ module ConfigFileUtils
     rescue
       @decrypted_config_file = ConfigFile.new
     end
+    @decrypted_config_file
   end
 
   def encrypted_yml_exist?
+    return @@config_file_exists unless @@config_file_exists.nil?
+
     # rubocop:disable Style/RescueModifier
-    config_dir = options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
+    @config_dir ||= options[:config_dir].nil? ? 'prod' : options[:config_dir] rescue 'prod'
     # rubocop:enable Style/RescueModifier
-    exists = File.exist? "settings/#{config_dir}/encrypted.yml"
-    puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: config_dir).red unless exists
-    exists
+    @@config_file_exists ||= File.exist? "settings/#{@config_dir}/encrypted.yml"
+    puts I18n.t('conffile_utils.encryptedyml.out.noexist', config_dir: @config_dir).red unless @@config_file_exists
+    @@config_file_exists
   end
 
   def save_config_file
