@@ -131,7 +131,7 @@ en:
         readdevdocs: |+
           First and foremost, please make sure you have read the developer docs
           You can find the developers docs. here:
-          # @todo add url to dev doc
+          https://vivumlab.com/docs/dev/tips/
         precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
         pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
       in:
@@ -187,10 +187,10 @@ en:
           Oops, your vault password in %{home_dir}, doesn't appear to exist.
           This is unusual, but could be the result of the username changing after setup.
         vaultpasscreate: |+
-          A new `.vlab_vault_pass` file can be created for you;
+          A new `/vlab_vault_pass` file can be created for you;
           or you can exit, and try to sort this out yourself.
       in:
-        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+        vaultpasscreate: "Let VivumLab create a new /vlab_vault_pass for you? [y/n]"
     check_for_git:
       usage: "check_for_git"
       desc: "Checks the local machine for Git"
@@ -229,6 +229,10 @@ en:
     list:
       name: "list"
       desc: "List the available services"
+      out:
+        installed: "blue = installed"
+        not_installed: "magenta != installed"
+        service_count: "VivumLab currently has %{count} services"
     remove:
       usage: "remove -s, --service SERVICENAME"
       desc: "Removes any specified service(s) from the VivumLab server"
@@ -274,6 +278,7 @@ en:
         invalidcommand: "Invalid Command: %{command} for %{dynamic_namespace}"
         validoptions: "Valid commands for this namesapce are:"
         applyupdates: "Configuration saved. Apply Updates? "
+        invalid_service: "Invalid service specified"
     customize:
       usage: "customize"
       desc: "Allows you to edit a specific deployed service with a docker-compose.override.yml"

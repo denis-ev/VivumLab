@@ -8,42 +8,33 @@ module Utils
   include ConfigFileUtils
   include VlabI18n
 
-  def run_playbook(playbook, options, extra = nil)
+  def run_playbook(playbook, options, extra = nil, deploy: false)
     write_temporary_decrypted_config
-    cmd = playbook_command(playbook, extra, options[:debug].to_sym).strip
+    cmd = playbook_command(playbook, extra, options[:debug].to_sym, deploy).strip
     execute_in_shell(cmd)
     say I18n.t('utils.run_playbook.out.playbookexecuted', playbook_command: cmd).green
   rescue Subprocess::NonZeroExit => e
     say I18n.t('utils.run_playbook.out.playbookerror', e: e).red
   ensure
     FileUtils.rm_f @temp_config
-    mark_as_setup unless already_setup?
   end
 
-  def already_setup?
-    File.exist? "settings/#{options[:config_dir]}/.setup"
-  end
-
-  def mark_as_setup
-    FileUtils.touch "settings/#{options[:config_dir]}/.setup"
-  end
-
-  def playbook_command(playbook, extra = nil, debug = '')
+  def playbook_command(playbook, extra = nil, debug = '', deploy)
     command = []
     command << "ansible-playbook #{playbook.chomp}"
     command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
     command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
-    command << '--skip-tags setup' if already_setup?
+    command << '--skip-tags setup' unless deploy
     command << '--skip-tags tor' unless decrypted_config_file[:enable_tor] rescue false
-    command << '--skip-tags bastion' unless decrypted_config_file[:bastion][:enable] and not already_setup? rescue false
+    command << '--skip-tags bastion' unless decrypted_config_file[:bastion][:enable] and not deploy rescue false
     command << "-e config_dir=#{options[:config_dir]}"
     command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')
   end
 
-  def run_config_playbook(options, extra = '')
-    playbook_cmd = playbook_command('playbook.config.yml', extra, options[:debug].to_sym).strip
+  def run_config_playbook(options, extra = '', deploy: false)
+    playbook_cmd = playbook_command('playbook.config.yml', extra, options[:debug].to_sym, deploy).strip
     execute_in_shell(playbook_cmd)
     say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_cmd).green
     # migration_invoke_override

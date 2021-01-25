@@ -14,6 +14,14 @@
     - "build"
   become: yes
 
+- name: Create necessary Media Folders / NAS Mount Points
+  file:
+    path: "{{ storage_dir }}/Documents/NextCloud/data"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes  # /mnt is owned by root
+
 - name: Copy nextcloud web Dockerfile into place.
   copy:
     src: "web/Dockerfile"

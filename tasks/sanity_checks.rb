@@ -30,7 +30,7 @@ class SanityChecks < Thor
   desc I18n.t('sanity_checks.check_for_settings.usage'), I18n.t('sanity_checks.check_for_settings.desc')
   def check_for_settings
     FileUtils.mkdir_p "settings/#{options[:config_dir]}/passwords"
-    invoke 'migration:single_config'
+    #invoke 'migration:single_config'
     File.write('tasks/ansible_bash.vars', "PASSWORDLESS_SSHKEY=''") unless File.exist? 'tasks/ansible_bash.vars'
     File.write("settings/#{options[:config_dir]}/.gitignore", ".DS_Store\n/*.yml\n!/encrypted.yml\n") unless File.exist? "settings/#{options[:config_dir]}/.gitignore"
   end
@@ -42,7 +42,7 @@ class SanityChecks < Thor
     say I18n.t('sanity_checks.check_vault_pass.out.vaultpassmissing', home_dir: Dir.home).red
     say I18n.t('sanity_checks.check_vault_pass.out.vaultpasscreate').light_yellow
 
-    decision = yes?(I18n.t('sanity_checks.check_vault_pass.out.vaultpasscreate'), :yellow)
+    decision = yes?(I18n.t('sanity_checks.check_vault_pass.in.vaultpasscreate'), :yellow)
     invoke 'core:generate_vault_pass' if decision
   end
 
