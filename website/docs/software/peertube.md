@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** https://hub.docker.com/r/chocobozzz/peertube <br />
 **Current Image Version:** {{ peertube.version }}
 
 ## SETUP
@@ -50,12 +50,24 @@ run: **`vlab update_one service=peertube`**
 
 ## FIRST RUN
 
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
-!!! Below are some **examples** with headings, and with some **example** instructions !!!
+###### COMPLETING INSTANCE SETUP
+Login as the administrator account, to complete setting up your PeerTube instance. It is highly recommended that the administrator account is not used for uploading videos/ enjoying the instance; **create a separate 'main' account for this purpose.**
+
+A wizard will prompt the user through the required steps upon logging as an administrator for the first time. Use the `admin email` and `admin password` you provided when setting up VivumLab.
+
+###### CHANGE THE DEFAULT ADMIN PASSWORD
+It is highly suggested by the VivumLab team that the user change the administrator password, as soon as possible. The `admin password` provided when setting up VivumLab should only be used as a placeholder to access the administrator account for the first time; it is not advised to edit the docker-compose file.
+
+###### LIVE STREAMING
+If you wish to live stream, make sure that port `1935` is forwarded on the network of the machine that serves Peertube. If you are deploying to your own infrastructure/machine, this may involve accessing the router/modem connected to the aforementioned machine and portforwarding manually; if you are using a provider such as digital ocean, you may need to contact support, and organise the port to be forwarded for you.
+
+Please note that the above is advice only; 'Portforwarding' is currently outside the scope of VivumLab, due to this scope VivumLab will not be able to provide any support regarding portforwarding. Just like with most things, a quick internet search will get you started.
 
 #### ADMINISTRATOR SETUP
 
-Peertube generates it's own root password on first startup. VivumLab captures that and stores it in ./settings/passwords/peertube_root_password
+The administrator details are set by the user during VivumLab setup; these are the answers that the user provided for the default `admin email` and `admin password`. These details can be changed in the administrator UI; it is highly recommended to change the administrator password.
+
+Please note that the administrator password is stored in plain text on the server, in the local docker-compose file that VivumLab has templated onto the server and can also be accessed via the docker inspect command, eg. `docker inspect peertube`. VivumLab assumes that the default `admin password` is only a placeholder; if you have provided a password that you intended to keep, please take immediate steps to rectify this.
 
 ### SMTP/ MAIL
 
