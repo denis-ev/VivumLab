@@ -18,10 +18,24 @@ services:
     volumes:
       - "{{ volumes_root }}/privatebin/data:/srv/data"
       - "{{ volumes_root }}/privatebin/cfg:/srv/cfg"
-      - "{{ volumes_root }}/privatebin/nginx_tmp:/var/lib/nginx/tmp"
-      - "{{ volumes_root }}/privatebin/tmp:/tmp"
-      - "{{ volumes_root }}/privatebin/run:/run"
+      - "nginx-tmp_vol:/var/lib/nginx/tmp"
+      - "tmp_vol:/tmp"
+      - "run_vol:/run"
     labels:
       - "traefik.http.services.privatebin.loadbalancer.server.scheme=http"
       - "traefik.http.services.privatebin.loadbalancer.server.port=8080"
 {% include './labels.j2' %}
+
+volumes:
+  nginx-tmp_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmp_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  run_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
