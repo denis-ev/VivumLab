@@ -16,9 +16,6 @@
   with_items:
     - "cfg"
     - "data"
-    - "nginx_tmp"
-    - "tmp"
-    - "run"
   become: yes
 
 - name: Copy privatebin conf.php file into place if it doesn't exist.
