@@ -1063,9 +1063,9 @@ peertube:
   auth: {{ peertube.auth | default(False) }}
   domain: {{ peertube.domain | default(False) }}
   subdomain: {{ peertube.subdomain | default("peertube") }}
-  version: {{ peertube.version | default("production-buster") }}
-  db_version: {{ peertube.db_version | default("10-alpine") }}
-  redis_version: {{ peertube.redis_version | default("4-alpine") }}
+  version: {{ peertube.version | default("v3.0.1-buster") }}
+  db_version: {{ peertube.db_version | default("13.1-alpine") }}
+  redis_version: {{ peertube.redis_version | default("6.0.10-alpine3.12") }}
   amd64: False
   arm64: False
   armv7: False
