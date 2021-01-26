@@ -11,6 +11,11 @@
     - "redis"
     - "opendkim/keys"
   become: yes
+    
+- name: Make peertube db directory.
+  file:
+    state: directory
+    path: "{{ volumes_root }}/peertube/db"
 
 - name: Make peertube db directory.
   file:
