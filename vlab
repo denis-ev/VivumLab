@@ -17,7 +17,7 @@ Bundler.require(:default)
 # tasks/. ie: tasks/sanitychecks.rb
 class Vlab < Thor
   require_relative 'tasks/utils'
-  require_relative 'tasks/lib/dynamic_namespaces'
+  require_relative 'tasks/lib/dynamic_service_namespaces'
   require_relative 'tasks/lib/config_file_utils'
   include Utils
   extend ConfigFileUtils
@@ -34,7 +34,7 @@ class Vlab < Thor
   # dynamically add them to the available tasks list.
   # Note, we have to manually exclude *this* class.
 
-  rejected = %w[Thor Vlab DemoTasks CLI Core Config Deprecated Dev Migration SanityChecks Ssh]
+  rejected = %w[Thor Vlab DemoTasks CLI Core Deprecated Dev Migration SanityChecks Ssh]
   namespaces = ObjectSpace.each_object(Class).select { |klass_name| klass_name.superclass.to_s == 'Thor' }
                           .reject { |klass_name| rejected.include? klass_name.to_s }
                           .reject { |klass_name| constantized_services.include? klass_name.to_s }
@@ -58,7 +58,7 @@ class Vlab < Thor
     say I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
   end
 
-  include DynamicNamespaces
+  include DynamicServiceNamespaces
 
   #################
   # User Aliases #

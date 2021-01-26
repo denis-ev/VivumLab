@@ -14,6 +14,13 @@ module ConfigFileUtils
     Psych.dump(decrypted_config_file.to_hash).gsub(': false', ': False').gsub(': true', ': True')
   end
 
+  def not_services
+    misc_rejected = %w[aws bastion dark_sky smtp traefik]
+    @not_services ||= decrypted_config_file
+                      .reject { |k| service_list.include? k }
+                      .reject { |k| misc_rejected.include? k }
+  end
+
   def service_list
     @service_list ||= Dir.glob('roles/*')
                          .select { |f| File.directory? f }
