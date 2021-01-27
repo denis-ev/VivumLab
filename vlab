@@ -17,7 +17,7 @@ Bundler.require(:default)
 # tasks/. ie: tasks/sanitychecks.rb
 class Vlab < Thor
   require_relative 'tasks/utils'
-  require_relative 'tasks/lib/dynamic_namespaces'
+  require_relative 'tasks/lib/dynamic_service_namespaces'
   require_relative 'tasks/lib/config_file_utils'
   include Utils
   extend ConfigFileUtils
@@ -58,7 +58,7 @@ class Vlab < Thor
     say I18n.t('vlab.version.out.vlabversion', vlabversion: current_version).light_blue
   end
 
-  include DynamicNamespaces
+  include DynamicServiceNamespaces
 
   #################
   # User Aliases #

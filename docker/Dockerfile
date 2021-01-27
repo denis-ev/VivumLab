@@ -43,6 +43,7 @@ ENV BUILD_PACKAGES \
     bash \
     wget \
     curl \
+    less \
     unzip \
     jq \
     less \
