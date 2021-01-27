@@ -15,15 +15,17 @@ services:
       - traefik_network
     restart: unless-stopped
     volumes:
-      - "{{ volumes_root }}/plex:/config"
+      - "{{ volumes_root }}/plex/config:/config"
       - "{{ storage_dir }}/Music:/data/Music"
       - "{{ storage_dir }}/Movies:/data/Movies"
       - "{{ storage_dir }}/TV:/data/TV"
-      - "{{ storage_dir }}/temp/transcode:/transcode"
+      - transcode_vol:/transcode
     environment:
       - TZ={{ common_timezone }}
       - PLEX_CLAIM={{ plex_claim }}
-      - ADVERTISE_IP=http://{{ vlab_ip }}:32400/
+      - ADVERTISE_IP=https://{% if plex.domain %}{{ plex.domain }}{% else %}{{ plex.subdomain + "." + domain }}{% endif %}/
+      - PLEX_UID={{ uid_output.stdout }}
+      - PLEX_GID={{ gid_output.stdout }}
     ports:
       - "32400:32400"
       - "3005:3005"
@@ -38,3 +40,9 @@ services:
       - "traefik.http.services.plex.loadbalancer.server.scheme=http"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
 {% include './labels.j2' %}
+
+volumes:
+  transcode_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
