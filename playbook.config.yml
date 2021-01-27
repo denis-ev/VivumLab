@@ -11,7 +11,7 @@
         default: none
 
         Currently VivumLab only supports IPv4 addresses.
-        
+
         Enter the remote machines IP address
       private: no
       when: vlab_ip is not defined
@@ -26,7 +26,7 @@
 
         It is good security practise to change the default SSH port.
         VivumLab DOES NOT set a custom port for you; No input sets the default.
-        
+
 
         Enter the custom SSH port
       private: no
@@ -75,7 +75,7 @@
         SSH keys provide great security benefits; prferably 'passwordless' for ease of use.
         VivumLab currently does not support 'passworded' SSH keys.
         No input sets the default.
-        
+
         Enter the name of your personalised passwordless ssh keys
       private: no
       when: passwordless_sshkey is not defined
@@ -91,7 +91,7 @@
 
         Not all VivumLab deployed services will set up an administrator account for the user.
         No input sets the default.
-        
+
         Enter the default 'admin' username
       private: no
       when: default_username is not defined
@@ -107,7 +107,7 @@
 
         Please ensure that this is only a 'placeholder' password, to gain initial access to the
         admin account of an applicable service, as some services may store this password in plain text
-        
+
         Enter the default 'admin' password
       unsafe: yes
       private: yes
@@ -128,7 +128,7 @@
         - helloworld.org
         - vivumlab.it
         No input sets the default.
-        
+
         Enter the desired domain name
       private: no
       when: domain is not defined
@@ -145,7 +145,7 @@
         VivumLab provides HTTPS as default; By todays web standards HTTPS is both achievable,
         and a minimal requirement.
         Not providing a valid email address, will break letsencrypt/HTTPS functionality.
-        
+
         Enter the desired email address
       private: no
       when: admin_email is not defined
