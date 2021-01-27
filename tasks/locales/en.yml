@@ -17,6 +17,12 @@ en:
       serveraddress: "What is your Bastion Server IP?"
 
   config:
+    display:
+      usage: 'display'
+      desc: 'displays non-namespaceed configuration values'
+    dynamic:
+      usage: "%{config_entry}"
+      desc: "Sets a value for %{config_entry}"
     new:
       usage: "new"
       desc: "Creates or Updates the config file, as necessary"
