@@ -56,7 +56,19 @@ entryPoints:
   metrics:
     address: ":8082"
 {% endif %}
-
+{% if peertube.enable %}
+  rtmp:
+    address: ":1935"
+    tls:
+      options: default
+      certResolver: {% if traefik.dns_challenge_provider %}dns{% else %}http{% endif %}
+{% if traefik.dns_challenge_provider %}
+      domains:
+        - main: "{{ domain }}"
+          sans:
+            - "*.{{ domain }}"
+{% endif %}
+{% endif %}
 {% if traefik.ping %}
 #Health
 ping:

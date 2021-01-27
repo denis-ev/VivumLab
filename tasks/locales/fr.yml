@@ -382,7 +382,7 @@ fr:
       out:
         noexist: |+
           Impossible à trouver settings/%{config_dir}/encrypted.yml. Veuillez exécuter 'vlab config new --dev'
-          Pour plus d'informations, veuillez exécuter 'vlab config'
+          Pour plus d'informations, veuillez exécuter 'vlab config --dev'
     saveconf:
       out:
         saving: "Savegarde de config.yml"
