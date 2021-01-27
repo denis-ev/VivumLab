@@ -121,7 +121,7 @@ class Service < Thor
   desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
-    return if guard_against_invalid_service_config?(options[:service])
+    return unless guard_against_invalid_service(options[:service])
 
     interactive_setup(options[:service])
     @decrypted_config_file = nil
