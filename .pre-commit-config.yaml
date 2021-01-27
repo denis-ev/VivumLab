@@ -34,4 +34,4 @@ repos:
         stages:
           - commit-msg
 
-exclude: 'vivumlablogo.txt|vendor'
+exclude: 'docker/motd|vendor'
