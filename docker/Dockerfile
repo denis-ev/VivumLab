@@ -73,7 +73,6 @@ ENV PYTHON_PACKAGES \
 
 # Update and install packages
 RUN apk update && \
-    apk upgrade && \
     apk add --no-cache ${BUILD_PACKAGES} && \
     apk --no-cache add --virtual ${BUILD_PACKAGES_VIRTUAL} && \
     ln -sf python3 /usr/bin/python && \
@@ -94,6 +93,7 @@ RUN apk update && \
     wget https://releases.hashicorp.com/terraform/${VER_TERRAFORM}/terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     unzip terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     mv terraform /usr/local/bin && \
+    rm terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     \
     echo "==> Installing syntax highlighting for nano" && \
     curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
@@ -105,7 +105,9 @@ RUN apk update && \
     \
     echo "==> Setting up VivumLab"  && \
     cp /data/Gemfile* / && \
-    cp /data/docker-entrypoint.sh / && \
+    cp /data/docker/docker-entrypoint.sh / && \
+    cp /data/docker/motd /etc/motd && \
+    \
     echo "==> Installing gems"  && \
     bundle install && \
     echo "==> Linking vlab into path" && \

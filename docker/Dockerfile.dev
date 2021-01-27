@@ -73,9 +73,8 @@ ENV PYTHON_PACKAGES \
 
 # Update and install packages
 RUN apk update && \
-    apk upgrade && \
     apk add --no-cache ${BUILD_PACKAGES} && \
-    apk --no-cache add --virtual ${BUILD_PACKAGES_VIRTUAL} && \
+    apk add --no-cache --virtual ${BUILD_PACKAGES_VIRTUAL} && \
     ln -sf python3 /usr/bin/python && \
     python3 -m ensurepip && \
     pip3 install --no-cache --upgrade pip wheel && \
@@ -103,22 +102,19 @@ RUN apk update && \
     # echo "==> Cloning VivumLab"  && \
     # git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
 
-COPY . /data
+COPY Gemfile* /
+COPY docker/docker-entrypoint.sh /
+COPY docker/motd /etc/motd
 
-RUN echo "==> Setting up VivumLab"  && \
-    cp /data/Gemfile* / && \
-    cp /data/docker-entrypoint.sh / && \
-    echo "==> Installing gems"  && \
+RUN echo "==> Installing gems"  && \
     bundle install && \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
     echo "==> Make sure docker-entrypoint.sh is executable" && \
     chmod +x /docker-entrypoint.sh && \
+    \
     echo "==> Clean APK cache" && \
-    rm -rf /var/cache/apk/* && \
-    echo "==> Remove Repo files" && \
-    rm -rf /data && \
-    mkdir /data
+    rm -rf /var/cache/apk/*
 
 WORKDIR /data
 
