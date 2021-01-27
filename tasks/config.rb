@@ -14,7 +14,7 @@ class Config < Thor
 
   if encrypted_yml_exist?
     not_services.each do |config_entry, value|
-      desc "#{config_entry}", "Sets a value for #{config_entry}"
+      desc I18n.t('config.dynamic.usage', config_entry: config_entry), I18n.t('config.dynamic.desc', config_entry: config_entry)
       option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'),
                       alias: ['-v']
       define_method(config_entry.to_s) do
@@ -23,7 +23,7 @@ class Config < Thor
     end
   end
 
-  desc "display", "shows a table with un-namespaced config items"
+  desc I18n.t('config.display.usage'), I18n.t('config.display.desc')
   def display
     table = TTY::Table.new(header: %w[option value], rows: not_services)
     say table.render(:unicode)
