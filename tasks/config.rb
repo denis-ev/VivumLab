@@ -3,12 +3,33 @@
 # Config namespace for vlab cli
 class Config < Thor
   require './tasks/utils'
+  require './tasks/lib/config_file_utils'
+  extend ConfigFileUtils
   include VlabI18n
   include Utils
   namespace 'config'
   require 'yaml'
 
-  desc I18n.t('config.new.usage'), I18n.t('config.new.desc')
+  @show_all = ARGV.include?('--dev') ? false : true
+
+  if encrypted_yml_exist?
+    not_services.each do |config_entry, value|
+      desc I18n.t('config.dynamic.usage', config_entry: config_entry), I18n.t('config.dynamic.desc', config_entry: config_entry)
+      option :value, required: true, banner: I18n.t('dynamic_namespaces.service.config.options.banner'),
+                      alias: ['-v']
+      define_method(config_entry.to_s) do
+        invoke 'config:set', [], config_key: "#{config_entry}", value: options[:value]
+      end
+    end
+  end
+
+  desc I18n.t('config.display.usage'), I18n.t('config.display.desc')
+  def display
+    table = TTY::Table.new(header: %w[option value], rows: not_services)
+    say table.render(:unicode)
+  end
+
+  desc I18n.t('config.new.usage'), I18n.t('config.new.desc'), hide: @show_all
   def new
     say I18n.t('config.new.out.creating', config_dir: options[:config_dir]).light_blue
     invoke 'sanity_checks:local'
@@ -28,7 +49,7 @@ class Config < Thor
     decrypted_config_file # just to refresh
   end
 
-  desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc')
+  desc I18n.t('dev.set.usage'), I18n.t('dev.set.desc'), hide: @show_all
   option :config_key, type: :string, required: true, desc: I18n.t('options.keytoset')
   option :value, type: :string, required: true, desc: I18n.t('options.valuetoset')
   # This method contains some advanced, idiomatic ruby that may not be entirely
@@ -44,7 +65,7 @@ class Config < Thor
   end
   # rubocop:enable Metrics/AbcSize
 
-  desc I18n.t('config.show.usage'), I18n.t('config.show.desc')
+  desc I18n.t('config.show.usage'), I18n.t('config.show.desc'), hide: @show_all
   option :service, required: true, desc: I18n.t('options.servicename'), aliases: ['-s']
   def show
     config_hash = decrypted_config_file[options[:service]]
@@ -57,7 +78,7 @@ class Config < Thor
     end
   end
 
-  desc I18n.t('config.reset.usage'), I18n.t('config.reset.desc')
+  desc I18n.t('config.reset.usage'), I18n.t('config.reset.desc'), hide: @show_all
   def reset
     say I18n.t('config.reset.out.resetting', config_dir: options[:config_dir]).light_blue
     say I18n.t('config.reset.out.backup').light_blue
@@ -65,7 +86,7 @@ class Config < Thor
     invoke 'config:new'
   end
 
-  desc I18n.t('config.edit_raw.usage'), I18n.t('config.edit_raw.desc')
+  desc I18n.t('config.edit_raw.usage'), I18n.t('config.edit_raw.desc'), hide: @show_all
   def edit_raw
     say I18n.t('config.edit_raw.out.editfile', config_dir: options[:config_dir]).light_blue
     begin
@@ -78,7 +99,7 @@ class Config < Thor
     end
   end
 
-  desc I18n.t('config.decrypt.usage'), I18n.t('config.decrypt.desc')
+  desc I18n.t('config.decrypt.usage'), I18n.t('config.decrypt.desc'), hide: @show_all
   option :outputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-o']
   def decrypt
     write_temporary_decrypted_config
@@ -86,7 +107,7 @@ class Config < Thor
     say I18n.t('config.decrypt.out.decrypted').green
   end
 
-  desc I18n.t('config.encrypt.usage'), I18n.t('config.encrypt.desc')
+  desc I18n.t('config.encrypt.usage'), I18n.t('config.encrypt.desc'), hide: @show_all
   option :inputfile, required: false, desc: I18n.t('options.filetowrite'), default: 'decrypted.yml', aliases: ['-i']
   def encrypt
     encrypt_temporary_decrypted_config "settings/#{options[:config_dir]}/#{options[:inputfile]}"

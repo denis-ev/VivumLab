@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Contains logic for dynamically generating namespaces for each service
-module DynamicNamespaces
+module DynamicServiceNamespaces
   require './tasks/lib/config_file_utils'
   extend ConfigFileUtils
   include VlabI18n
