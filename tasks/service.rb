@@ -121,7 +121,7 @@ class Service < Thor
   desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
-    return if guard_against_invalid_service_config?(options[:service])
+    return unless is_valid_service?(options[:service])
 
     interactive_setup(options[:service])
     @decrypted_config_file = nil
@@ -136,7 +136,7 @@ class Service < Thor
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
   def dynamic(dynamic_namespace, command = 'help')
     run_common
-    return unless guard_against_invalid_service(dynamic_namespace)
+    return unless is_valid_service?(dynamic_namespace)
 
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
@@ -169,7 +169,7 @@ class Service < Thor
       end
     end
 
-    def guard_against_invalid_service(service)
+    def is_valid_service?(service)
       service_exist = service_list.include? service
       say I18n.t('service.setup.out.searchfail', service: service).red unless service_exist
       service_exist
