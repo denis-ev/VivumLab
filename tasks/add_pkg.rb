@@ -177,7 +177,7 @@ class AddPkg < Thor
     end
 
     def insert_into_sidebar(to_insert)
-      software_list =  IO.foreach('website/sidebars.js').select {|line| line[/software\//]}
+      software_list = IO.foreach('website/sidebars.js').select { |line| line[%r{software/}] }
       next_name = software_list, to_insert
       lines = File.readlines 'website/sidebars.js'
       lines.dup.each_with_index do |line, index|
@@ -185,7 +185,7 @@ class AddPkg < Thor
 
         lines.insert index, config_block(to_insert)
       end
-      File.open(filename, 'w+') do |f|
+      File.open('website/sidebars.js', 'w+') do |f|
         f.puts(lines)
       end
     end
