@@ -19,7 +19,15 @@ class AddPkg < Thor
   end
 
   no_commands do
-    def config_block
+    def get_line_number(file, word)
+      count = 0
+      file = File.open(file, "r") { |file| file.each_line { |line|
+        count += 1
+        return count if line =~ /#{word}/
+      }}
+    end
+
+    def config_block(to_insert)
       <<~CONFIG
         #{to_insert}:
           enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
@@ -37,7 +45,7 @@ class AddPkg < Thor
     def gather_data
       say 'Step 1, Gathering info'.light_blue
       @package_name = ask 'Enter the package name in Title Case'
-      @package_file_name = package_name.downcase.gsub(/ /, '')
+      @package_file_name = @package_name.downcase.gsub(/ /, '')
       @package_url = ask 'Enter the package URL'
       @package_one_liner = ask 'Enter one-liner package description'
       say 'Done!'.green
@@ -51,55 +59,52 @@ class AddPkg < Thor
 
     def edit_role_tasks
       say 'Step 3. Editing role tasks and renaming docker-compose template'.light_blue
-      search_and_replace_in_file("roles/#{package_file_name}/tasks/main.yml", 'pkgtemplate', package_file_name)
-      FileUtils.mv "roles/#{package_file_name}/templates/docker-compose.template.yml.j2",
-                   "roles/#{package_file_name}/templates/docker-compose.#{package_file_name}.yml.j2"
-      search_and_replace_in_file("roles/#{package_file_name}/templates/docker-compose.#{package_file_name}.yml.j2",
-                                 'PackageFileName', package_file_name)
-      `git add roles/#{package_file_name}`
+      search_and_replace_in_file("roles/#{@package_file_name}/tasks/main.yml", 'pkgtemplate', @package_file_name)
+      FileUtils.mv "roles/#{@package_file_name}/templates/docker-compose.template.yml.j2",
+                   "roles/#{@package_file_name}/templates/docker-compose.#{@package_file_name}.yml.j2"
+      search_and_replace_in_file("roles/#{@package_file_name}/templates/docker-compose.#{@package_file_name}.yml.j2",
+                                 'PackageFileName', @package_file_name)
+      `git add roles/#{@package_file_name}`
       say 'Done!'.green
     end
 
     def copy_doc_template
       say 'Step 4. Copying doc template'.light_blue
-      FileUtils.copy_entry 'package_template/docs/software/template.md', "website/docs/software/#{package_file_name}.md"
+      FileUtils.copy_entry 'package_template/docs/software/template.md', "website/docs/software/#{@package_file_name}.md"
       say 'Done!'.green
     end
 
     def edit_doc_file
       say 'Step 5. Editing doc file'.light_blue
-      search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageURL', package_url.to_s)
-      search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageOneLiner', package_one_liner.to_s)
-      search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageFileName', package_file_name.to_s)
-      search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageTitleCase', package_name.to_s)
-      `git add docs/software/#{package_file_name}.md`
+      search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageURL', @package_url.to_s)
+      search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageOneLiner', @package_one_liner.to_s)
+      search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageFileName', @package_file_name.to_s)
+      search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageTitleCase', @package_name.to_s)
+      `git add website/docs/software/#{@package_file_name}.md`
       puts 'Done!'.green
     end
 
     def add_docs_to_docusaurus
       say 'Step 6. Adding docs to docusaurus'.light_blue
-      add_to_array_at_key('mkdocs.yml', ['nav', 6, 'Included Software', 16, 'Misc/Other'],
-                          { package_name.to_s => "software/#{package_file_name}.md" })
-      `git add mkdocs.yml`
+      insert_into_sidebar "software/#{@package_file_name}"
+      `git add website/sidebars.js`
       say 'Done!'.green
     end
 
     def add_service_to_group_vars_all
       puts 'Step 7. Adding service to Inventory file'.light_blue
-      add_to_hash_at_key('group_vars/all', ['services'], { package_file_name.to_s => nil })
-      insert_service_name_into_group_vars_second_instance(package_file_name)
+      add_to_hash_at_key('group_vars/all', ['services'], { @package_file_name.to_s => nil })
+      insert_service_name_into_group_vars_second_instance(@package_file_name)
       `git add group_vars/all`
       puts 'Done!'.green
     end
 
     def add_to_config_template
       puts 'Step 8. Adding service to Config Template'.light_blue
-      insert_new_service_in_config_template 'roles/vivumlab_config/templates/config.yml', package_file_name # to_insert
+      insert_new_service_in_config_template 'roles/vivumlab_config/templates/config.yml', @package_file_name # to_insert
       `git add roles/vivumlab_config/templates/config.yml`
       puts 'Done!'.green
     end
-
-    #####
 
     def search_and_replace_in_file(filepath, search_for, replace_with)
       IO.write(filepath, File.open(filepath) do |f|
@@ -164,7 +169,21 @@ class AddPkg < Thor
       lines.dup.each_with_index do |line, index|
         next unless line.strip == "#{next_name}:"
 
-        lines.insert index, config_block
+        lines.insert index, config_block(to_insert)
+      end
+      File.open(filename, 'w+') do |f|
+        f.puts(lines)
+      end
+    end
+
+    def insert_into_sidebar(to_insert)
+      software_list =  IO.foreach('website/sidebars.js').select {|line| line[/software\//]}
+      next_name = software_list, to_insert
+      lines = File.readlines 'website/sidebars.js'
+      lines.dup.each_with_index do |line, index|
+        next unless line.strip == "#{next_name}:"
+
+        lines.insert index, config_block(to_insert)
       end
       File.open(filename, 'w+') do |f|
         f.puts(lines)
