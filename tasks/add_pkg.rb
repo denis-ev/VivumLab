@@ -10,6 +10,12 @@ class AddPkg < Thor
   def new
     gather_data
     create_role_folder
+    edit_role_tasks
+    copy_doc_template
+    edit_doc_file
+    add_docs_to_docusaurus
+    add_service_to_group_vars_all
+    add_to_config_template
   end
 
   no_commands do
@@ -60,7 +66,7 @@ class AddPkg < Thor
       say 'Done!'.green
     end
 
-    def editing_doc_file
+    def edit_doc_file
       say 'Step 5. Editing doc file'.light_blue
       search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageURL', package_url.to_s)
       search_and_replace_in_file("website/docs/software/#{package_file_name}.md", 'PackageOneLiner', package_one_liner.to_s)
@@ -78,7 +84,7 @@ class AddPkg < Thor
       say 'Done!'.green
     end
 
-    def add_service_to_inventory
+    def add_service_to_group_vars_all
       puts 'Step 7. Adding service to Inventory file'.light_blue
       add_to_hash_at_key('group_vars/all', ['services'], { package_file_name.to_s => nil })
       insert_service_name_into_group_vars_second_instance(package_file_name)
