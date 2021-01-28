@@ -183,7 +183,7 @@ class AddPkg < Thor
       lines.dup.each_with_index do |line, index|
         next unless line.strip == "#{next_name}:"
 
-        lines.insert index, config_block(to_insert)
+        lines.insert index, to_insert
       end
       File.open('website/sidebars.js', 'w+') do |f|
         f.puts(lines)
