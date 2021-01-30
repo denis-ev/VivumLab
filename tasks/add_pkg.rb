@@ -143,7 +143,7 @@ class AddPkg < Thor
         end
       end
       File.open(filename, 'w+') do |f|
-        f.say(lines)
+        f.puts(lines)
       end
     end
 
@@ -156,7 +156,7 @@ class AddPkg < Thor
         lines.insert index, config_block(to_insert)
       end
       File.open(filename, 'w+') do |f|
-        f.say(lines)
+        f.puts(lines)
       end
     end
 
@@ -178,7 +178,7 @@ class AddPkg < Thor
         lines.insert index, to_insert
       end
       File.open('website/sidebars.js', 'w+') do |f|
-        f.say(lines)
+        f.puts(lines)
       end
     end
 
@@ -195,7 +195,7 @@ class AddPkg < Thor
           start_tag_found = true
         end
       end
-      File.open(filename, 'w+') { |f| f.say(lines) }
+      File.open(filename, 'w+') { |f| f.puts(lines) }
     end
   end
 end
