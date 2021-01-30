@@ -10,17 +10,8 @@
     - "data"
     - "redis"
     - "opendkim/keys"
+    - "db"
   become: yes
-
-- name: Make peertube db directory.
-  file:
-    state: directory
-    path: "{{ volumes_root }}/peertube/db"
-
-- name: Make peertube db directory.
-  file:
-    state: directory
-    path: "{{ volumes_root }}/peertube/db"
 
 - name: Copy peertube docker-compose.yml file into place.
   template:
