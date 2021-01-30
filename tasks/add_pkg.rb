@@ -19,14 +19,6 @@ class AddPkg < Thor
   end
 
   no_commands do
-    def get_line_number(file, word)
-      count = 0
-      file = File.open(file, "r") { |file| file.each_line { |line|
-        count += 1
-        return count if line =~ /#{word}/
-      }}
-    end
-
     def config_block(to_insert)
       <<~CONFIG
         #{to_insert}:
@@ -43,67 +35,67 @@ class AddPkg < Thor
     end
 
     def gather_data
-      say 'Step 1, Gathering info'.light_blue
-      @package_name = ask 'Enter the package name in Title Case'
+      say I18n.t('addpkg.step1').light_blue
+      @package_name = ask I18n.t('addpkg.package_name')
       @package_file_name = @package_name.downcase.gsub(/ /, '')
-      @package_url = ask 'Enter the package URL'
-      @package_one_liner = ask 'Enter one-liner package description'
-      say 'Done!'.green
+      @package_url = ask I18n.t('addpkg.package_url')
+      @package_one_liner = ask I18n.t('addpkg.one_liner')
+      say I18n.t('addpkg.done').green
     end
 
     def create_role_folder
-      say 'Step 2. Creating role folder'.light_blue
+      say I18n.t('addpkg.step2').light_blue
       FileUtils.copy_entry 'package_template/roles/template', "roles/#{@package_file_name}"
-      puts 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def edit_role_tasks
-      say 'Step 3. Editing role tasks and renaming docker-compose template'.light_blue
+      say I18n.t('addpkg.step3').light_blue
       search_and_replace_in_file("roles/#{@package_file_name}/tasks/main.yml", 'pkgtemplate', @package_file_name)
       FileUtils.mv "roles/#{@package_file_name}/templates/docker-compose.template.yml.j2",
                    "roles/#{@package_file_name}/templates/docker-compose.#{@package_file_name}.yml.j2"
       search_and_replace_in_file("roles/#{@package_file_name}/templates/docker-compose.#{@package_file_name}.yml.j2",
                                  'PackageFileName', @package_file_name)
       `git add roles/#{@package_file_name}`
-      say 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def copy_doc_template
-      say 'Step 4. Copying doc template'.light_blue
+      say I18n.t('addpkg.step4').light_blue
       FileUtils.copy_entry 'package_template/docs/software/template.md', "website/docs/software/#{@package_file_name}.md"
-      say 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def edit_doc_file
-      say 'Step 5. Editing doc file'.light_blue
+      say I18n.t('addpkg.step5').light_blue
       search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageURL', @package_url.to_s)
       search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageOneLiner', @package_one_liner.to_s)
       search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageFileName', @package_file_name.to_s)
       search_and_replace_in_file("website/docs/software/#{@package_file_name}.md", 'PackageTitleCase', @package_name.to_s)
       `git add website/docs/software/#{@package_file_name}.md`
-      puts 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def add_docs_to_docusaurus
-      say 'Step 6. Adding docs to docusaurus'.light_blue
-      insert_into_sidebar "software/#{@package_file_name}"
+      say I18n.t('addpkg.step6').light_blue
+      insert_into_sidebar "\"software/#{@package_file_name}\","
       `git add website/sidebars.js`
-      say 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def add_service_to_group_vars_all
-      puts 'Step 7. Adding service to Inventory file'.light_blue
+      say I18n.t('addpkg.step7').light_blue
       add_to_hash_at_key('group_vars/all', ['services'], { @package_file_name.to_s => nil })
       insert_service_name_into_group_vars_second_instance(@package_file_name)
       `git add group_vars/all`
-      puts 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def add_to_config_template
-      puts 'Step 8. Adding service to Config Template'.light_blue
+      say I18n.t('addpkg.step8').light_blue
       insert_new_service_in_config_template 'roles/vivumlab_config/templates/config.yml', @package_file_name # to_insert
       `git add roles/vivumlab_config/templates/config.yml`
-      puts 'Done!'.green
+      say I18n.t('addpkg.done').green
     end
 
     def search_and_replace_in_file(filepath, search_for, replace_with)
@@ -111,15 +103,7 @@ class AddPkg < Thor
         f.read.gsub(search_for, replace_with)
       end)
     rescue StandardError
-      say 'Failed to execute sarch and replace in file'.red
-    end
-
-    def add_to_array_at_key(ymlfile, key, to_append)
-      yml = Psych.load_file ymlfile
-      yml.dig(*key) << to_append
-      File.write ymlfile, Psych.dump(yml)
-    rescue StandardError
-      p "Failed to add to array at key: #{ymlfile}, #{key}, #{to_append}"
+      say I18n.t('addpkg.failedsandr').red
     end
 
     def add_to_hash_at_key(ymlfile, key, to_append)
@@ -159,7 +143,7 @@ class AddPkg < Thor
         end
       end
       File.open(filename, 'w+') do |f|
-        f.puts(lines)
+        f.say(lines)
       end
     end
 
@@ -172,21 +156,29 @@ class AddPkg < Thor
         lines.insert index, config_block(to_insert)
       end
       File.open(filename, 'w+') do |f|
-        f.puts(lines)
+        f.say(lines)
       end
     end
 
+    def find_name_index_for_next_service_in_sidebar(to_add)
+      ordered = IO.foreach('website/sidebars.js')
+                  .select { |line| line[%r{software/}] }
+                  .map { |line| line.strip.chomp }
+      ordered.push to_add
+      index = ordered.sort.find_index(to_add)
+      ordered[index]
+    end
+
     def insert_into_sidebar(to_insert)
-      software_list = IO.foreach('website/sidebars.js').select { |line| line[%r{software/}] }
-      next_name = software_list, to_insert
+      next_name = find_name_index_for_next_service_in_sidebar to_insert
       lines = File.readlines 'website/sidebars.js'
       lines.dup.each_with_index do |line, index|
-        next unless line.strip == "#{next_name}:"
+        next unless line.strip == next_name
 
         lines.insert index, to_insert
       end
       File.open('website/sidebars.js', 'w+') do |f|
-        f.puts(lines)
+        f.say(lines)
       end
     end
 
@@ -203,7 +195,7 @@ class AddPkg < Thor
           start_tag_found = true
         end
       end
-      File.open(filename, 'w+') { |f| f.puts(lines) }
+      File.open(filename, 'w+') { |f| f.say(lines) }
     end
   end
 end
