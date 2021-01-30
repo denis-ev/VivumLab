@@ -22,6 +22,9 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## Information
 
+**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Current Image Version:** {{ PackageFileName.version }}
+
 ## SETUP
 
 ### Enabling and customizing PackageFileName
@@ -62,7 +65,7 @@ Create an account with your desired username; as this is the first user, Package
 
 ## ACCESS
 
-PackageTitleCase (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
+PackageTitleCase (HTTPS) link: [https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](https://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/) <br />
 PackageTitleCase (HTTP) link: [http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/](http://{% if PackageFileName.domain %}{{ PackageFileName.domain }}{% else %}{{ PackageFileName.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
