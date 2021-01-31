@@ -10,6 +10,7 @@ networks:
   lychee_internal:
     name: lychee_net
 
+services:
   app:
     container_name: lychee
     image: lycheeorg/lychee:{{ lychee.version }}
