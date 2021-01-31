@@ -1,9 +1,9 @@
 ---
-id: peertube
-title: PeerTube
+id: lychee
+title: Lychee
 hide_title: true
 hide_table_of_contents: false
-sidebar_label: PeerTube
+sidebar_label: Lychee
 custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
 #description: How do I find you when I cannot solve this problem
 #keywords:
@@ -12,27 +12,27 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 #image: https://i.imgur.com/mErPwqL.png
 ---
 
-# PeerTube
+# Lychee
 
-[PeerTube](https://peertube.social) ActivityPub Video Sharing
+[Lychee](https://lycheeorg.github.io/) Lightweight, self-hosted, easy-to-use photo management
 
-![amd64](https://img.shields.io/badge/{% if not peertube.amd64 %}untested{% else %}{{ peertube.amd64 }}{% endif %}-amd64-{% if not peertube.amd64 %}inactive{% elif peertube.amd64 == "verified" %}success{% elif peertube.amd64 == "supported" %}informational{% elif peertube.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![arm64](https://img.shields.io/badge/{% if not peertube.arm64 %}untested{% else %}{{ peertube.arm64 }}{% endif %}-arm64-{% if not peertube.arm64 %}inactive{% elif peertube.arm64 == "verified" %}success{% elif peertube.arm64 == "supported" %}informational{% elif peertube.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
-![armv7](https://img.shields.io/badge/{% if not peertube.armv7 %}untested{% else %}{{ peertube.armv7 }}{% endif %}-armv7-{% if not peertube.armv7 %}inactive{% elif peertube.armv7 == "verified" %}success{% elif peertube.armv7 == "supported" %}informational{% elif peertube.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![amd64](https://img.shields.io/badge/{% if not lychee.amd64 %}untested{% else %}{{ lychee.amd64 }}{% endif %}-amd64-{% if not lychee.amd64 %}inactive{% elif lychee.amd64 == "verified" %}success{% elif lychee.amd64 == "supported" %}informational{% elif lychee.amd64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![arm64](https://img.shields.io/badge/{% if not lychee.arm64 %}untested{% else %}{{ lychee.arm64 }}{% endif %}-arm64-{% if not lychee.arm64 %}inactive{% elif lychee.arm64 == "verified" %}success{% elif lychee.arm64 == "supported" %}informational{% elif lychee.arm64 == "unsupported" %}critical{% endif %}?style=flat) <br />
+![armv7](https://img.shields.io/badge/{% if not lychee.armv7 %}untested{% else %}{{ lychee.armv7 }}{% endif %}-armv7-{% if not lychee.armv7 %}inactive{% elif lychee.armv7 == "verified" %}success{% elif lychee.armv7 == "supported" %}informational{% elif lychee.armv7 == "unsupported" %}critical{% endif %}?style=flat) <br />
 
 ## Information
 
 
-**Docker Image:** https://hub.docker.com/r/chocobozzz/peertube <br />
-**Current Image Version:** {{ peertube.version }}
+**Docker Image:** https://hub.docker.com/r/lycheeorg/lychee <br />
+**Current Image Version:** {{ lychee.version }}
 
 ## SETUP
 
-### Enabling peertube
+### Enabling lychee
 
 #### Command:
 
-**`vlab set peertube.enable True`**
+**`vlab set lychee.enable True`**
 
 #### File alteration:
 
@@ -40,13 +40,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
+lychee
   enable: True
 ```
 
 #### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ## FIRST RUN
 
@@ -86,16 +86,16 @@ smtp:
   from_name:
 ```
 
-3. run **`vlab update_one service=peertube`** to complete the changes
+3. run **`vlab update_one service=lychee`** to complete the changes
 
 
 ## ACCESS
 
-peertube (HTTPS) link: [https://{% if peertube.domain %}{{ peertube.domain }}{% else %}{{ peertube.subdomain + "." + domain }}{% endif %}/](https://{% if peertube.domain %}{{ peertube.domain }}{% else %}{{ peertube.subdomain + "." + domain }}{% endif %}/)
-peertube (HTTP) link: [http://{% if peertube.domain %}{{ peertube.domain }}{% else %}{{ peertube.subdomain + "." + domain }}{% endif %}/](http://{% if peertube.domain %}{{ peertube.domain }}{% else %}{{ peertube.subdomain + "." + domain }}{% endif %}/)
+lychee (HTTPS) link: [https://{% if lychee.domain %}{{ lychee.domain }}{% else %}{{ lychee.subdomain + "." + domain }}{% endif %}/](https://{% if lychee.domain %}{{ lychee.domain }}{% else %}{{ lychee.subdomain + "." + domain }}{% endif %}/)
+lychee (HTTP) link: [http://{% if lychee.domain %}{{ lychee.domain }}{% else %}{{ lychee.subdomain + "." + domain }}{% endif %}/](http://{% if lychee.domain %}{{ lychee.domain }}{% else %}{{ lychee.subdomain + "." + domain }}{% endif %}/)
 
 {% if enable_tor %}
-Tor link: [http://{{ peertube.subdomain + "." + tor_domain }}/](http://{{ peertube.subdomain + "." + tor_domain }}/)
+Tor link: [http://{{ lychee.subdomain + "." + tor_domain }}/](http://{{ lychee.subdomain + "." + tor_domain }}/)
 {% endif %}
 
 ## OPTIONS
@@ -106,7 +106,7 @@ Tor link: [http://{{ peertube.subdomain + "." + tor_domain }}/](http://{{ peertu
 
 #### Command:
 
-**`vlab set peertube.https_only True`**
+**`vlab set lychee.https_only True`**
 
 #### File alteration:
 
@@ -114,13 +114,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
+lychee
   https_only: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ### AUTH
 *Default: False* <br />
@@ -128,7 +128,7 @@ run: **`vlab update_one service=peertube`**
 
 #### Command:
 
-**`vlab set peertube.auth True`**
+**`vlab set lychee.auth True`**
 
 #### File alteration:
 
@@ -136,13 +136,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
+lychee
   auth: True
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ### DOMAIN
 *Default: False* <br />
@@ -150,7 +150,7 @@ run: **`vlab update_one service=peertube`**
 
 #### Command:
 
-**`vlab set peertube.domain peertube.com`**
+**`vlab set lychee.domain lychee.com`**
 
 #### File alteration:
 
@@ -158,21 +158,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
-  domain: peertube.com
+lychee
+  domain: lychee.com
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ### SUBDOMAIN
-*Default: peertube* <br />
+*Default: lychee* <br />
 *NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.{{domain}}'*
 
 #### Command:
 
-**`vlab set peertube.subdomain media`**
+**`vlab set lychee.subdomain media`**
 
 #### File alteration:
 
@@ -180,21 +180,21 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
+lychee
   subdomain: media
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ### VERSION
-*Default: {{  peertube.version  }}* <br />
+*Default: {{  lychee.version  }}* <br />
 *NOTE: Ensure that the version exists*
 
 #### Command:
 
-**`vlab set peertube.version 2.7`**
+**`vlab set lychee.version 2.7`**
 
 #### File alteration:
 
@@ -202,13 +202,13 @@ set the appropriate service settings in `settings/config.yml` to true
 
 eg.
 ```
-peertube
+lychee
   version: 2.7
 ```
 
 ##### Finalising changes:
 
-run: **`vlab update_one service=peertube`**
+run: **`vlab update_one service=lychee`**
 
 ## Need more help?
 Further information regarding services can be

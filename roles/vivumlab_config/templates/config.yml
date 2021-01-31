@@ -782,6 +782,18 @@ lidarr:
   amd64: False
   arm64: False
   armv7: False
+lychee:
+  enable: {{ lychee.enable | default(False) }}
+  hsts: {{ lychee.hsts | default(True) }}
+  auth: {{ lychee.auth | default(False) }}
+  domain: {{ lychee.domain | default(False) }}
+  subdomain: {{ lychee.subdomain | default("lychee") }}
+  version: {{ lychee.version | default("v4.2.1") }}
+  db_version: {{ lychee.db_version | default("13.1-alpine") }}
+  redis_version: {{ lychee.redis_version | default("6.0.10-alpine3.12") }}
+  amd64: False
+  arm64: False
+  armv7: False
 mailu:
   enable: {{ mailu.enable | default(False) }}
   hsts: {{ mailu.hsts | default(True) }}

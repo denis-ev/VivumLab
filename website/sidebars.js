@@ -80,6 +80,7 @@ module.exports = {
         "software/lazylibrarian",
         "software/librephotos",
         "software/lidarr",
+        "software/lychee",
         "software/mailu",
         "software/massivedecks",
         "software/matomo",
