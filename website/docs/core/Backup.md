@@ -38,7 +38,7 @@ Finally run **`vlab update`** to copy your new settings up to your VivumLab serv
 ## Configure the Backup Service
 
 To configure the backup service, 4 parameters are required; they are:
-`s3_path`
+`s3_path` example: `s3:https://minio.example.com/bucket`
 `s3_access_key`
 `s3_secret_key`
 `s3_backup_password` (please generate a strong password)
@@ -63,6 +63,6 @@ This should result in a fully working VivumLab setup with the backed up data.
 Alternatively you can work directly with the Restic backups through its own 'docker shell' (see below).
 
 Accessing the restic shell, enables you to run commands like `restic snapshots` to list all your snapshots.
-To restore (for example) just your NextCloud data, you can run `docker exec restic_restic_1 restic restore latest --include /data/nextcloud --target /data/nextcloud`.
+To restore (for example) just your NextCloud data, you can run `cd { volumes_root }/restic ` and `docker-compose exec restic restic restore latest --include /data/nextcloud --target /data/nextcloud`.
 
 VivumLab strongly suggests that you read the [Restic](https://restic.readthedocs.io/en/latest/) documentation, prior to backing up any files, especially important and irreplacable files.

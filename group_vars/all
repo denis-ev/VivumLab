@@ -53,6 +53,7 @@ services:
   lazylibrarian:
   librephotos:
   lidarr:
+  lychee:
   mailu:
   massivedecks:
   mastodon:
@@ -178,6 +179,7 @@ kutt:
 lazylibrarian:
 librephotos:
 lidarr:
+lychee:
 mailu:
 massivedecks:
 mastodon:
