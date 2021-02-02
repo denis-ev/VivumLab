@@ -184,7 +184,7 @@ class Service < Thor
       # invoke 'migration:single_config'
       return if @@already_run
       invoke 'sanity_checks:local', [], options
-      invoke 'config:new', [], options unless encrypted_yml_exist?(options)
+      invoke 'config:new', [], options unless encrypted_yml_exist?
       invoke 'git:sync', [], options
       @@already_run = true
     end
