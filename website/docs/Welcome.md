@@ -227,6 +227,7 @@ If you are having problems you can:
 
 - [Digikam](software/digikam) - Professional Photo Management with the Power of Open Source
 - [LibrePhotos](software/librephotos) Self hosted Google Photos clone.
+- [Lychee](software/lychee) Lightweight, self-hosted, easy-to-use photo management.
 - [Piwigo](software/piwigo) - Manage your photo collection
 - [Pixelfed](software/pixelfed) - A free and ethical photo sharing platform, powered by ActivityPub federation.
 

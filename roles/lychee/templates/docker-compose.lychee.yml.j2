@@ -1,0 +1,62 @@
+---
+version: '2.4'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  lychee_internal:
+    name: lychee_net
+
+services:
+  app:
+    container_name: lychee
+    image: lycheeorg/lychee:{{ lychee.version }}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 90:80
+    env_file:
+      - "{{ volumes_root }}/lychee/.env.lychee"
+    volumes:
+      - "{{ volumes_root }}/lychee/conf:/conf"
+      - "{{ volumes_root }}/lychee/uploads:/uploads"
+      - "{{ volumes_root }}/lychee/sym:/sym"
+    networks:
+      - traefik_network
+      - lychee_internal
+    labels:
+      - "traefik.http.services.lychee.loadbalancer.server.scheme=http"
+      - "traefik.http.services.lychee.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+
+  db:
+    container_name: lychee_db
+    image: postgres:{{ lychee.db_version }}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lychee
+      POSTGRES_USER: lychee
+      POSTGRES_PASSWORD: {{lookup('password', './settings/' + config_dir + '/passwords/lychee-db_password')}}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lychee"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - "{{ volumes_root }}/lychee/db:/var/lib/postgresql/data/"
+    networks:
+      - lychee_internal
+
+  redis:
+    container_name: lychee_redis
+    image: redis:{{ lychee.redis_version }}
+    restart: unless-stopped
+    networks:
+      - lychee_internal
+    volumes:
+      - "{{ volumes_root }}/lychee/redis:/data"
