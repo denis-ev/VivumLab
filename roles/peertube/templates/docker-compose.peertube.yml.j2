@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: '2.4'
 
 # This networks section required for the package to be visible to Traefik.
 # DO NOT Remove
@@ -7,58 +7,68 @@ networks:
   traefik_network:
     external:
       name: vivumlab_traefik
-  peertube:
+  peertube_internal:
+    name: peertube_internal
 
 services:
-  db:
-    container_name: peertube_db
-    image: postgres:{{ peertube.db_version }}
-    networks:
-      - peertube
-    env_file:
-      - .env
-    volumes:
-      - "{{ volumes_root }}/peertube/db:/var/lib/postgresql/data"
-    restart: unless-stopped
-
-  redis:
-    container_name: redis
-    networks:
-      - peertube
-    image: redis:{{ peertube.redis_version }}
-    volumes:
-      - "{{ volumes_root }}/peertube/redis:/data"
-    env_file:
-      - .env
-    restart: unless-stopped
-
-  postfix:
-    container_name: peertube_postfix
-    networks:
-      - peertube
-    image: mwader/postfix-relay
-    restart: unless-stopped
-    env_file:
-      - .env
   app:
     container_name: peertube
     image: chocobozzz/peertube:{{ peertube.version }}
     restart: unless-stopped
-    networks:
-      - traefik_network
-      - peertube
-    volumes:
-      - "{{ volumes_root }}/peertube/data:/data"
-      - "{{ volumes_root }}/peertube/config:/config"
+    env_file:
+      - "{{ volumes_root }}/peertube/.env.peertube"
     depends_on:
       - db
       - redis
       - postfix
-    env_file:
-      - .env
+    environment:
+      - PT_INITIAL_ROOT_PASSWORD={{ default_password }}
     ports:
       - 9000:9000
+    networks:
+      - traefik_network
+      - peertube_internal
+    volumes:
+      - "{{ volumes_root }}/peertube/data:/data"
+      - "{{ volumes_root }}/peertube/config:/config"
     labels:
       - "traefik.http.services.peertube.loadbalancer.server.scheme=http"
       - "traefik.http.services.peertube.loadbalancer.server.port=9000"
+      - "traefik.rtmp.routers.streaming.rule=Host(`{{ service_domain }}`) && (PathPrefix(`/live`))"
+      - "traefik.rtmp.routers.streaming.entrypoints=rtmp"
+      - "traefik.rtmp.routers.streaming.service=streaming"
+      - "traefik.rtmp.services.streaming.loadbalancer.server.port=1935"
 {% include './labels.j2' %}
+
+  postfix:
+    container_name: peertube_postfix
+    image: mwader/postfix-relay
+    restart: unless-stopped
+    env_file:
+      - "{{ volumes_root }}/peertube/.env.peertube"
+    networks:
+      - peertube_internal
+    volumes:
+      - "{{ volumes_root }}/peertube/opendkim/keys:/etc/opendkim/keys"
+
+  db:
+    container_name: peertube_db
+    image: postgres:{{ peertube.db_version }}
+    restart: unless-stopped
+    env_file:
+      - "{{ volumes_root }}/peertube/.env.peertube"
+    networks:
+      - peertube_internal
+    volumes:
+      - "{{ volumes_root }}/peertube/db:/var/lib/postgresql/data"
+
+  redis:
+    container_name: peertube_redis
+    image: redis:{{ peertube.redis_version }}
+    restart: unless-stopped
+    env_file:
+      - "{{ volumes_root }}/peertube/.env.peertube"
+    networks:
+      - peertube_internal
+    volumes:
+      - "{{ volumes_root }}/peertube/redis:/data"

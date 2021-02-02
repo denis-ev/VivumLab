@@ -25,6 +25,9 @@ services:
 {% if bastion.enable %}
       - "2222:2222"
 {% endif %}
+{% if peertube.enable %}
+      - "1935:1935"
+{% endif %}
 {% if traefik.additional_env_vars %}
     environment:
 {% for item in traefik.additional_env_vars | dict2items %}

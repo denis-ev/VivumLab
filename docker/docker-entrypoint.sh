@@ -12,6 +12,10 @@ chown -R "$TARGET_UID":"$TARGET_GID" "$DEFAULT_PATH"
 
 if [[ $VERSION == 'local' || $VERSION == 'dev' ]]; then
   bundle install
+else
+  clear
 fi
+
+cat /etc/motd
 
 exec "$@"

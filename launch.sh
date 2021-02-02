@@ -122,7 +122,6 @@ fi
 if [[ ${VERSION} != 'local' && ${VERSION} != 'dev' ]]; then
   clear
 fi
-cat vivumlablogo.txt
 
 if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
   docker run --rm -it \

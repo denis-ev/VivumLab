@@ -17,6 +17,12 @@ en:
       serveraddress: "What is your Bastion Server IP?"
 
   config:
+    display:
+      usage: 'display'
+      desc: 'displays non-namespaceed configuration values'
+    dynamic:
+      usage: "%{config_entry}"
+      desc: "Sets a value for %{config_entry}"
     new:
       usage: "new"
       desc: "Creates or Updates the config file, as necessary"
@@ -131,7 +137,7 @@ en:
         readdevdocs: |+
           First and foremost, please make sure you have read the developer docs
           You can find the developers docs. here:
-          # @todo add url to dev doc
+          https://vivumlab.com/docs/dev/tips/
         precommitwarning: "Before you push any changes you've made, pre-commit will need to be installed on your system"
         pythonerror: "VivumLab was unable to find Python3 using `which python3`. VivumLab requires python3"
       in:
@@ -187,10 +193,10 @@ en:
           Oops, your vault password in %{home_dir}, doesn't appear to exist.
           This is unusual, but could be the result of the username changing after setup.
         vaultpasscreate: |+
-          A new `.vlab_vault_pass` file can be created for you;
+          A new `/vlab_vault_pass` file can be created for you;
           or you can exit, and try to sort this out yourself.
       in:
-        vaultpasscreate: "Let VivumLab create a new .vlab_vault_pass for you? [y/n]"
+        vaultpasscreate: "Let VivumLab create a new /vlab_vault_pass for you? [y/n]"
     check_for_git:
       usage: "check_for_git"
       desc: "Checks the local machine for Git"
@@ -397,7 +403,7 @@ en:
       out:
         noexist: |+
           Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'
-          For further information, please run 'vlab config'
+          For further information, please run 'vlab config --dev'
     saveconf:
       out:
         saving: "Saving config.yml"

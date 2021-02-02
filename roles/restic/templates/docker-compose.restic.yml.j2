@@ -13,8 +13,8 @@ services:
       - RESTIC_PASSWORD={{ s3_backup_password }}
       - BACKUP_CRON={{ s3_backup_cron }}
       - HOSTNAME={{ domain }}
-      - RESTIC_JOB_ARGS="--exclude=minio --host {{ domain }}"
-      - RESTIC_FORGET_ARGS="--prune --keep-last 10 --keep-daily 7 --keep-weekly 52 --keep-monthly 120 --keep-yearly 100"
+      - "RESTIC_JOB_ARGS=--exclude=minio --host {{ domain }}"
+      - "RESTIC_FORGET_ARGS=--prune --keep-daily 7 --keep-weekly 5 --keep-monthly 12 --keep-yearly 75 --host {{ domain }}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ volumes_root }}:/data:ro"
