@@ -45,3 +45,10 @@ services:
       - PGDATA=/database
     volumes:
       - "{{ volumes_root }}/PackageFileName/db:/database"
+      - tmpfs_PackageFileName_vol:/cache
+
+volumes:
+  tmpfs_PackageFileName_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

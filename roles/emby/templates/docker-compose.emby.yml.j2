@@ -18,8 +18,14 @@ services:
       - "{{ storage_dir }}/Music:/mnt/media/Music"
       - "{{ storage_dir }}/Movies:/mnt/media/Movies"
       - "{{ storage_dir }}/TV:/mnt/media/TV"
-      - "{{ storage_dir }}/temp/transcode:/config/transcoding-temp"
+      - tmpfs_emby_vol:/config/transcoding-temp
     labels:
       - "traefik.http.services.emby.loadbalancer.server.scheme=http"
       - "traefik.http.services.emby.loadbalancer.server.port=8096"
 {% include './labels.j2' %}
+
+volumes:
+  tmpfs_emby_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

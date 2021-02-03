@@ -19,7 +19,7 @@ services:
       - "{{ storage_dir }}/Music:/data/Music"
       - "{{ storage_dir }}/Movies:/data/Movies"
       - "{{ storage_dir }}/TV:/data/TV"
-      - transcode_vol:/transcode
+      - tmpfs_plex_vol:/transcode
     environment:
       - TZ={{ common_timezone }}
       - PLEX_CLAIM={{ plex_claim }}
@@ -42,7 +42,7 @@ services:
 {% include './labels.j2' %}
 
 volumes:
-  transcode_vol:
+  tmpfs_plex_vol:
     driver_opts:
       type: tmpfs
       device: tmpfs
