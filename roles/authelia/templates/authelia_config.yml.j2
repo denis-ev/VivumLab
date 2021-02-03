@@ -129,8 +129,8 @@ access_control:
     - domain: {{ service_domain }}
       policy: bypass
 
-{% if authelia_protected_domains -%}
-{% for item in authelia_protected_domains | dict2items %}
+{% if authelia.protected_domains -%}
+{% for item in authelia.protected_domains | dict2items %}
     - domain: '{{ item.key }}'
       policy: {{ item.value }}
 {% endfor %}
