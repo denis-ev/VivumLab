@@ -4,9 +4,10 @@
 # rubocop:disable Metrics/ClassLength
 class Service < Thor
   require './tasks/utils'
+  require './tasks/lib/config_file_utils'
   include Utils
   include VlabI18n
-
+  extend ConfigFileUtils
   @@already_run = false
 
   desc I18n.t('service.list.name'), I18n.t('service.list.desc')
@@ -183,7 +184,7 @@ class Service < Thor
       # invoke 'migration:single_config'
       return if @@already_run
       invoke 'sanity_checks:local', [], options
-      invoke 'config:new', [], options
+      invoke 'config:new', [], options unless encrypted_yml_exist?
       invoke 'git:sync', [], options
       @@already_run = true
     end

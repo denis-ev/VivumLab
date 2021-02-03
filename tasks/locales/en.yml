@@ -1,5 +1,20 @@
 ---
 en:
+  addpkg:
+    step1: 'Step 1, Gathering info'
+    package_name: 'Enter the package name in Title Case'
+    package_url: 'Enter the package URL'
+    one_liner: 'Enter one-liner package description'
+    done: 'Done!'
+    step2: 'Step 2. Creating role folder'
+    step3: 'Step 3. Editing role tasks and renaming docker-compose template'
+    step4: 'Step 4. Copying doc template'
+    step5: 'Step 5. Editing doc file'
+    step6: 'Step 6. Adding docs to docusaurus'
+    step7: 'Step 7. Adding service to group vars file'
+    step8: 'Step 8. Adding service to Config Template'
+    failedsandr: 'Failed to execute sarch and replace in file'
+
   bastion:
     enable:
       usage: "enable"
