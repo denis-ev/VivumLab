@@ -34,6 +34,7 @@ volumes_root: {{ volumes_root | default('/home/' + vlab_ssh_user + '/vivumlab') 
 
 # Default storage location for media (These are used as local directories or NAS mount points depending on configuration)
 storage_dir: {{ storage_dir | default('/mnt/nas') }}
+check_mounts: {{ check_mounts | default('False') }}
 
 # Default email to receive notifications on
 vlab_notifyemail: {{ vlab_notifyemail | default('vlab_notifyemail@yourdomain.com')}}

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+filename='{{ volumes_root }}/list_mounts*'
+#Healthchecks URL / create file check_mount_ip on server in {{ volumes_root }}
+pingurl=''
+[ -f "{{ volumes_root }}/check_mount_ip" ] && pingurl=$(cat {{ volumes_root }}/check_mount_ip)
+
+file_lines=$(cat $filename)
+errors=0
+
+if [[ $pingurl != '' ]]; then
+  curl -m 10 --retry 5 "$pingurl/start" &> /dev/null
+fi
+
+IFS=$'\n'
+for i in $file_lines; do
+  path=$(echo $i | cut -d ' ' -f 1)
+  service=$(echo $i | cut -d ' ' -f 2)
+  findmnt -lo target | grep "$path" &> /dev/null
+  if [[ $? == 1 ]]; then
+    if [ -d "$path" ]; then
+      systemctl start $service
+    else
+      echo "$path not found"
+      errors=$errors+1
+      mount -a
+      cd {{ volumes_root }}
+      systemctl stop $service
+      if [[ $pingurl != '' ]]; then
+        curl -m 10 --retry 5 "$pingurl/fail" &> /dev/null
+      fi
+    fi
+  else
+    systemctl start $service
+  fi
+done
+if [[ $errors == 0 ]]; then
+  if [[ $pingurl != '' ]]; then
+    curl -m 10 --retry 5 $pingurl &> /dev/null
+  fi
+fi

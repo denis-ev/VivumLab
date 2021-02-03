@@ -1,8 +1,18 @@
 ---
+- name: Get UID
+  command: id -u {{ vlab_ssh_user }}
+  register: uid_output
+
+- name: Get GID
+  command: id -g {{ vlab_ssh_user }}
+  register: gid_output
+
 - name: Make VivumLab data directories.
   file:
     path: "{{ item }}"
     state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
     mode: "777"
   loop:
     - "{{ volumes_root }}/traefik"
@@ -16,6 +26,45 @@
   copy:
     src: VERSION
     dest: "{{ volumes_root }}/VERSION"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy check_mounts.sh
+  template:
+    src: check_mounts.sh.j2
+    dest: "{{ volumes_root }}/check_mounts.sh"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy list_mounts
+  template:
+    src: list_mounts.j2
+    dest: "{{ volumes_root }}/list_mounts"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Ensure check_mounts.sh is added as a cron job
+  cron:
+    name: "check mounts"
+    minute: "*/5"
+    hour: "*"
+    job: "/bin/bash {{ volumes_root }}/check_mounts.sh > /dev/null"
+    state: present
+  become: yes
+  when: check_mounts == True
+
+- name: Ensure check_mounts.sh is removed as a cron job
+  cron:
+    name: "check mounts"
+    minute: "*/5"
+    hour: "*"
+    job: "/bin/bash {{ volumes_root }}/check_mounts.sh > /dev/null"
+    state: absent
+  become: yes
+  when: check_mounts == False
 
 - name: Configure docker log settings
   copy:
@@ -38,14 +87,6 @@
     path: "{{ volumes_root }}/traefik/acme.json"
     mode: 0600
     state: touch
-
-- name: Get UID
-  command: id -u {{ vlab_ssh_user }}
-  register: uid_output
-
-- name: Get GID
-  command: id -g {{ vlab_ssh_user }}
-  register: gid_output
 
 - name: Create Media Folders / NAS Mount Points
   when:
