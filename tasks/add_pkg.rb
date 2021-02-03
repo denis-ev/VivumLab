@@ -3,6 +3,7 @@
 # Contains tasks and logic for adding a package to vivumlab
 class AddPkg < Thor
   require_relative './utils'
+  require 'fileutils'
   include Utils
   include VlabI18n
 
