@@ -71,7 +71,7 @@ bastion:
     2222: {{ vlab_port }}
     80: 80
     443: 443
-{% if bastion.ports_to_forward -%}
+{% if bastion.ports_to_forward is defined -%}
 {% for item in bastion.ports_to_forward | dict2items %}
     {{ item.key }}: {{ item.value }}
 {% endfor %}
@@ -147,7 +147,7 @@ traefik:
     # DUMMY_KEY: DUMMY_VALUE
     CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
     CF_API_KEY: {{ traefik.additional_env_vars.CF_API_KEY | default('API_KEY') }}
-{% if traefik.additional_env_vars -%}
+{% if traefik.additional_env_vars is defined -%}
 {% for item in traefik.additional_env_vars | dict2items %}
     {{ item.key }}: {{ item.value }}
 {% endfor %}
@@ -254,6 +254,16 @@ authelia:
     secret_key: {{ authelia.duo.secret_key | default() }}
   # Don't change this unless you know what you're doing
   migration: {{ authelia.migration | default(False) }}
+  root_domain: {{ authelia.root_domain | default(domain) }}
+  protected_domains:
+    # Default policy can either be `bypass`, `one_factor`, `two_factor` or `deny`.
+    {{ domain }}: two_factor
+{% if authelia.protected_domains is defined -%}
+{% for item in authelia.protected_domains | dict2items %}
+    {{ item.key }}: {{ item.value }}
+{% endfor %}
+{% endif %}
+  # End Don't change this unless you know what you're doing
 barcodebuddy:
   enable: {{ barcodebuddy.enable | default(False) }}
   hsts: {{ barcodebuddy.hsts | default(True) }}
