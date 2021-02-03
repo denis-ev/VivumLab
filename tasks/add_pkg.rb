@@ -17,7 +17,7 @@ class AddPkg < Thor
     add_docs_to_docusaurus
     add_service_to_group_vars_all
     add_to_config_template
-    FileUtils.chown_R '1000', '1000', '*'
+    FileUtils.chown_R '1000', '1000', '/data'
   end
 
   no_commands do
