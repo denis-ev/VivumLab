@@ -139,8 +139,8 @@ access_control:
     - domain: portainer.{{ domain }}
       policy: one_factor
 
-{% if root_domain != domain %}
-    - domain: '*.{{ root_domain }}'
+{% if authelia.root_domain != domain %}
+    - domain: '*.{{ authelia.root_domain }}'
       policy: {{ authelia.default.factor_count }}
 {% endif %}
 
