@@ -131,7 +131,7 @@ access_control:
 
 {% if authelia.protected_domains -%}
 {% for item in authelia.protected_domains | dict2items %}
-    - domain: '{{ item.key }}'
+    - domain: {{ item.key }}
       policy: {{ item.value }}
 {% endfor %}
 {% endif %}
