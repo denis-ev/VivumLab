@@ -1,0 +1,148 @@
+{% if airsonic.enable %}
+{{ storage_dir }}/Music airsonic
+{{ storage_dir }}/Podcasts airsonic
+{% endif %}
+
+{% if beets.enable %}
+{{ storage_dir }}/Music beets
+{{ storage_dir }}/Downloads/Music beets
+{% endif %}
+
+{% if calibre.enable %}
+{{ storage_dir }}/Books calibre
+{{ storage_dir }}/Downloads/Books calibre
+{% endif %}
+
+{% if digikam.enable %}
+{{ storage_dir }}/Pictures digikam
+{% endif %}
+
+{% if emby.enable %}
+{{ storage_dir }}/Music emby
+{{ storage_dir }}/Movies emby
+{{ storage_dir }}/TV emby
+{{ storage_dir }}/temp/transcode emby
+{% endif %}
+
+{% if funkwhale.enable %}
+{{ storage_dir }}/Music funkwhale
+{% endif %}
+
+{% if jellyfin.enable %}
+{{ storage_dir }} jellyfin
+{{ storage_dir }}/temp jellyfin
+{% endif %}
+
+{% if lazylibrarian.enable %}
+{{ storage_dir }}/Books lazylibrarian
+{{ storage_dir }}/Downloads/completed/books lazylibrarian
+{% endif %}
+
+{% if librephotos.enable %}
+{{ storage_dir }}/Pictures librephotos
+{% endif %}
+
+{% if lidarr.enable %}
+{{ storage_dir }}/Music lidarr
+{% endif %}
+
+{% if mayan.enable %}
+{{ storage_dir }}/Documents/consume mayan
+{{ storage_dir }}/Documents/export mayan
+{{ storage_dir }}/Documents/mayan_storage mayan
+{% endif %}
+
+{% if minio.enable %}
+{{ storage_dir }}/Backups/minio minio
+{% endif %}
+
+{% if mstream.enable %}
+{{ storage_dir }}/Music mstream
+{% endif %}
+
+{% if mylar3.enable %}
+{{ storage_dir }}/Books/Comics mylar3
+{{ storage_dir }}/Downloads/Books/Comics mylar3
+{% endif %}
+
+{% if nextcloud.enable %}
+{{ storage_dir }}/Documents/NextCloud nextcloud
+{% endif %}
+
+{% if nzbget.enable %}
+{{ storage_dir }}/Downloads nzbget
+{% endif %}
+
+{% if paperless.enable %}
+{{ storage_dir }}/Documents/consume paperless
+{{ storage_dir }}/Documents/export paperless
+{% endif %}
+
+{% if photoprism.enable %}
+{{ storage_dir }}/Pictures photoprism
+{{ storage_dir }}/Pictures/PhotoPrismImport photoprism
+{% endif %}
+
+{% if plex.enable %}
+{{ storage_dir }}/Music plex
+{{ storage_dir }}/Movies plex
+{{ storage_dir }}/TV plex
+{{ storage_dir }}/temp/transcode plex
+{% endif %}
+
+{% if qbittorrent.enable %}
+{{ storage_dir }}/Downloads qbittorrent
+{% endif %}
+
+{% if radarr.enable %}
+{{ storage_dir }}/Movies radarr
+{{ storage_dir }}/Downloads/complete/movies radarr
+{% endif %}
+
+{% if readarr.enable %}
+{{ storage_dir }}/Books readarr
+{{ storage_dir }}/Downloads/completed readarr
+{% endif %}
+
+{% if sabnzbd.enable %}
+{{ storage_dir }} sabnzbd
+{% endif %}
+
+{% if samba.enable %}
+{{ storage_dir }} samba
+{% endif %}
+
+{% if shinobi.enable %}
+{{ storage_dir }}/CCTV shinobi
+{% endif %}
+
+{% if sickchill.enable %}
+{{ storage_dir }}/Downloads sickchill
+{{ storage_dir }}/TV sickchill
+{% endif %}
+
+{% if sonarr.enable %}
+{{ storage_dir }}/TV sonarr
+{{ storage_dir }}/Downloads/complete/tv sonarr
+{% endif %}
+
+{% if syncthing.enable %}
+{{ storage_dir }}/Documents/Syncthing syncthing
+{% endif %}
+
+{% if teedy.enable %}
+{{ storage_dir }}/Documents teedy
+{% endif %}
+
+{% if transmission.enable %}
+{{ storage_dir }}/Downloads transmission
+{{ storage_dir }}/Downloads/watch transmission
+{{ storage_dir }}/Movies transmission
+{{ storage_dir }}/TV transmission
+{% endif %}
+
+{% if ubooquity.enable %}
+{{ storage_dir }}/Books ubooquity
+{{ storage_dir }}/Books/Comics ubooquity
+{{ storage_dir }} ubooquity
+{% endif %}
