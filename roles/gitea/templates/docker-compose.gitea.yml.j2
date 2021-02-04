@@ -12,12 +12,11 @@ services:
   gitea:
     container_name: gitea
     image: gitea/gitea:{{ gitea.version }}
+    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     networks:
       - traefik_network
       - gitea_net
     environment:
-      - USER_UID={{ uid_output.stdout }}
-      - USER_GID={{ gid_output.stdout }}
 {% if gitea.use_mariadb %}
       - DB_TYPE=mysql
       - DB_HOST=db:3306
@@ -25,20 +24,20 @@ services:
       - DB_USER=gitea
       - DB_PASSWD={{ lookup('password', './settings/' + config_dir + '/passwords/gitea_db_password chars=ascii_letters,digits') }}
 {% endif %}
-      - SSH_DOMAIN={% if gitea.domain %}{{ gitea.domain }}{% else %}{{ gitea.subdomain + "." + domain }}
-{% endif %}
-      - SSH_PORT={{ gitea.gitea_ssh_port }}
+      - SSH_DOMAIN={{ service_domain }}
+      - SSH_LISTEN_PORT={{ gitea.gitea_ssh_port }}
+      - SSH_PORT=2222
       - LFS_START_SERVER=true
       - RUN_MODE=prod
-      - ROOT_URL=https://{% if gitea.domain %}{{ gitea.domain }}{% else %}{{ gitea.subdomain + "." + domain }}
-{% endif %}
+      - ROOT_URL=https://{{ service_domain }}
     restart: unless-stopped
     volumes:
-      - "{{ volumes_root }}/gitea:/data"
+      - "{{ volumes_root }}/gitea/data:/var/lib/gitea"
+      - "{{ volumes_root }}/gitea/config:/etc/gitea"
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "{{ gitea.gitea_ssh_port }}:22"
+      - "{{ gitea.gitea_ssh_port }}:2222"
     labels:
       - "traefik.http.services.gitea.loadbalancer.server.scheme=http"
       - "traefik.http.services.gitea.loadbalancer.server.port=3000"
@@ -49,7 +48,7 @@ services:
 
   db:
     container_name: gitea_db
-    image: mariadb
+    image: mariadb:{{ gitea.db_version }}
     networks:
       - gitea_net
     restart: unless-stopped

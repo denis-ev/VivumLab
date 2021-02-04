@@ -24,7 +24,7 @@ class AddPkg < Thor
     def config_block(to_insert)
       <<~CONFIG
         #{to_insert}:
-          enable: {{ #{to_insert}.enable | default(enable_#{to_insert}, None) | default(False) }}
+          enable: {{ #{to_insert}.enable | default(False) }}
           hsts: {{ #{to_insert}.hsts | default(True) }}
           auth: {{ #{to_insert}.auth | default(False) }}
           domain: {{ #{to_insert}.domain | default(False) }}

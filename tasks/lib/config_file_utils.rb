@@ -44,6 +44,21 @@ module ConfigFileUtils
     @vault_file ||= ConfigFile.new(YAML.load_file("settings/#{options[:config_dir]}/vault.yml"))
   end
 
+  def tor_enabled?
+    @tor_enabled ||= decrypted_config_file[:enable_tor] rescue false
+  end
+
+  def bastion_enabled?
+    @bastion_enabled ||= decrypted_config_file[:bastion][:enable] rescue false
+  end
+
+  def tags_to_skip(deploy)
+    skip_tags = []
+    skip_tags << 'setup' unless deploy
+    skip_tags << 'tor' unless tor_enabled?
+    skip_tags << 'bastion' if bastion_enabled?
+  end
+
   def decrypted_config_file
     invoke 'config:new', [], options unless encrypted_yml_exist?
     return @decrypted_config_file unless @decrypted_config_file.nil?

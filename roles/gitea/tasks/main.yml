@@ -1,10 +1,13 @@
 ---
-- name: Make gitea directory.
+- name: Create necessary folders, with appropriate permissions.
   file:
-    path: "{{ volumes_root }}/gitea"
+    path: "{{ volumes_root }}/gitea/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+  with_items:
+    - "data"
+    - "config"
   become: yes
 
 - name: Copy gitea docker-compose.yml file into place.

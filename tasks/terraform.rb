@@ -59,7 +59,7 @@ class Terraform < Thor
     end
 
     def terraform_ansible_setup(options)
-      run_playbook('playbook.terraform.yml', options)
+      run_playbook('playbook.terraform.yml', options, nil, skip_tags: tags_to_skip(false))
       FileUtils.mv 'provider.tf', "settings/#{options[:config_dir]}/provider.tf"
       FileUtils.mv 'cloud_vivumlab.tf', "settings/#{options[:config_dir]}/cloud_vivumlab.tf"
       FileUtils.mv 'terraform.tfvars', "settings/#{options[:config_dir]}/terraform.tfvars"

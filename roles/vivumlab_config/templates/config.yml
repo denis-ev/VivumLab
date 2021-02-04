@@ -535,13 +535,13 @@ gitea:
   auth: {{ gitea.auth | default(False) }}
   domain: {{ gitea.domain | default(False) }}
   subdomain: {{ gitea.subdomain | default("gitea") }}
-  version: {{ gitea.version | default("1.11") }}
-  db_version: {{ gitea.db_version | default("latest") }}
+  version: {{ gitea.version | default("latest-rootless") }} # later change to 1.14-rootless
+  db_version: {{ gitea.db_version | default("10.5") }}
   amd64: False
   arm64: False
   armv7: False
   use_mariadb: {{ gitea.use_mariadb | default(True) }}
-  gitea_ssh_port: {{ gitea.gitea_ssh_port | default(222) }}
+  gitea_ssh_port: {{ gitea.gitea_ssh_port | default(2221) }}
 gitlab:
   enable: {{ gitlab.enable | default(False) }}
   hsts: {{ gitlab.hsts | default(True) }}
@@ -1209,7 +1209,7 @@ radarr:
   arm64: False
   armv7: False
 readarr:
-  enable: {{ readarr.enable | default(enable_readarr, None) | default(False) }}
+  enable: {{ readarr.enable | default(False) }}
   hsts: {{ readarr.hsts | default(True) }}
   auth: {{ readarr.auth | default(False) }}
   domain: {{ readarr.domain | default(False) }}
@@ -1292,6 +1292,16 @@ simply_shorten:
   domain: {{ simply_shorten.domain | default(False) }}
   subdomain: {{ simply_shorten.subdomain | default("simply_shorten")}}
   version: {{ simply_shorten.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
+snapdrop:
+  enable: {{ snapdrop.enable | default(False) }}
+  hsts: {{ snapdrop.hsts | default(True) }}
+  auth: {{ snapdrop.auth | default(False) }}
+  domain: {{ snapdrop.domain | default(False) }}
+  subdomain: {{ snapdrop.subdomain | default("snapdrop")}}
+  version: {{ snapdrop.version | default("latest") }}
   amd64: False
   arm64: False
   armv7: False

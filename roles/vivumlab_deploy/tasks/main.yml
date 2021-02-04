@@ -332,7 +332,7 @@
   become: yes
 
 - debug:
-    msg: "VivumLab Installed successfully! Go to https://sui.{{ domain }}/ or http://{{ vlab_ip }}:8181 to get started."
+    msg: "VivumLab Installed successfully! Go to https://{% if sui.domain %}{{ sui.domain }}{% else %}{{ sui.subdomain }}.{{ domain }}{% endif %}/ or http://{{ vlab_ip }}:8181 to get started."
 
 - debug:
     msg: "You can also access your services via Tor at http://{{ tor_http_domain_file.stdout }}"

@@ -5,7 +5,7 @@
 class SanityChecks < Thor
   require 'English'
   REQ_PYTHON_VER = '3.6.1'
-  REQ_PRECOMMIT_VER = '2.6.0'
+  REQ_PRECOMMIT_VER = Gem::Version.new('2.6.0')
   include VlabI18n
   include VlabConstants
   include Utils
@@ -74,7 +74,8 @@ class SanityChecks < Thor
     end
 
     def required_precommit_exists
-      return unless pre_commit_version <= REQ_PRECOMMIT_VER
+      pcv = Gem::Version.new(pre_commit_version)
+      return unless pcv <= REQ_PRECOMMIT_VER
 
       say I18n.t('sanity_checks.check_for_precommit.out.lowprecommit', precom_ver: REQ_PRECOMMIT_VER).red
     end

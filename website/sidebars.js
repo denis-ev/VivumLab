@@ -123,6 +123,7 @@ module.exports = {
         "software/shinobi",
         "software/sickchill",
         "software/simply-shorten",
+        "software/snapdrop",
         "software/snibox",
         "software/sonarr",
         "software/speedtest",

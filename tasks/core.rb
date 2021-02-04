@@ -39,13 +39,13 @@ class Core < Thor
   desc I18n.t('core.deploy.usage'), I18n.t('core.deploy.desc')
   def deploy
     say I18n.t('core.deploy.out.deploy').light_blue
-    run_playbook('playbook.vivumlab.yml', options, deploy: true)
+    run_playbook('playbook.vivumlab.yml', options, skip_tags: tags_to_skip(true))
   end
 
   desc I18n.t('core.restore.usage'), I18n.t('core.restore.desc')
   def restore
     say I18n.t('core.restore.out.restoring').yellow
-    run_playbook('playbook.restore.yml', options)
+    run_playbook('playbook.restore.yml', options, skip_tags: [])
     say I18n.t('core.restore.out.restored').green
   end
 end
