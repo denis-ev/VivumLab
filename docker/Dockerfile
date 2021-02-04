@@ -38,39 +38,27 @@ ENV TARGET_GID=1000
 ENV VERSION=$ARG_VERSION
 
 ENV BUILD_PACKAGES \
-    tini \
-    wget \
-    curl \
-    unzip \
-    less \
-    git \
-    jq \
-    nano \
-    vim \
-    python3-dev \
-    python3-venv \
-    python3-pip \
-    python3-dateutil \
-    python3-httplib2 \
-    python3-jinja2 \
-    python3-paramiko \
-    python3-setuptools \
-    build-essential \
-    gcc
-
-
-ENV PYTHON_PACKAGES \
-    python3-keyczar \
-    boto3 \
-    docker-py \
-    pyOpenSSL \
-    pre-commit
+    tini=0.18.0-1 \
+    wget=1.20.1-1.1 \
+    curl=7.64.0-4+deb10u1 \
+    unzip=6.0-23+deb10u1 \
+    less=487-0.1+b1 \
+    git=1:2.20.1-2+deb10u3 \
+    jq=1.5+dfsg-2+b1 \
+    nano=3.2-3 \
+    vim=2:8.1.0875-5 \
+    python3-dev=3.7.3-1 \
+    python3-venv=3.7.3-1 \
+    python3-pip=18.1-5 \
+    build-essential=12.6 \
+    gcc=4:8.3.0-1
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY Gemfile /
-COPY Gemfile.lock /
+COPY Gemfile /Gemfile
+COPY Gemfile.lock /Gemfile.lock
+COPY docker/requirements.txt /requirements.txt
 
 # Update and install packages
 RUN set -eux && \
@@ -88,8 +76,7 @@ RUN set -eux && \
     \
     python3 -m venv /opt/venv && \
     # pip3 install
-    pip3 install --no-cache pip wheel && \
-    pip3 install --no-cache ${PYTHON_PACKAGES} && \
+    pip3 install --no-cache -r requirements.txt && \
     \
     echo "==> Installing Ansible... " && \
     pip3 install ansible==${ANSIBLE_VERSION} && \
@@ -156,17 +143,17 @@ ENV TARGET_GID=1000
 ENV VERSION=$ARG_VERSION
 
 ENV PROD_PACKAGES \
-    tini \
-    wget \
-    curl \
-    unzip \
-    less \
-    git \
-    jq \
-    nano \
-    vim \
-    python3 \
-    libncurses-dev
+    tini=0.18.0-1 \
+    wget=1.20.1-1.1 \
+    curl=7.64.0-4+deb10u1 \
+    unzip=6.0-23+deb10u1 \
+    less=487-0.1+b1 \
+    git=1:2.20.1-2+deb10u3 \
+    jq=1.5+dfsg-2+b1 \
+    nano=3.2-3 \
+    vim=2:8.1.0875-5 \
+    python3=3.7.3-1 \
+    libncurses-dev=6.1+20181013-2+deb10u2
 
 COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
 COPY docker/motd /etc/motd
