@@ -1209,7 +1209,7 @@ radarr:
   arm64: False
   armv7: False
 readarr:
-  enable: {{ readarr.enable | default(enable_readarr, None) | default(False) }}
+  enable: {{ readarr.enable | default(False) }}
   hsts: {{ readarr.hsts | default(True) }}
   auth: {{ readarr.auth | default(False) }}
   domain: {{ readarr.domain | default(False) }}
@@ -1296,7 +1296,7 @@ simply_shorten:
   arm64: False
   armv7: False
 snapdrop:
-  enable: {{ snapdrop.enable | default(enable_snapdrop, None) | default(False) }}
+  enable: {{ snapdrop.enable | default(False) }}
   hsts: {{ snapdrop.hsts | default(True) }}
   auth: {{ snapdrop.auth | default(False) }}
   domain: {{ snapdrop.domain | default(False) }}
