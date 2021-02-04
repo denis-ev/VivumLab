@@ -18,6 +18,10 @@ else
   clear
 fi
 
+vlab config new
+
+clear
+
 cat /etc/motd
 
 exec "$@"
