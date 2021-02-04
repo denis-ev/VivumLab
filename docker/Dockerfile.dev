@@ -1,4 +1,4 @@
-FROM ruby:3.0-alpine3.12
+FROM ruby:3.0-slim-buster as compiler
 
 LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
       description="VivumLab container with Ruby Version 3 to run the CLI" \
@@ -39,84 +39,166 @@ ENV VERSION=$ARG_VERSION
 
 ENV BUILD_PACKAGES \
     tini \
-    python3 \
-    bash \
     wget \
     curl \
     unzip \
-    jq \
     less \
+    git \
+    jq \
     nano \
-    git
-
-ENV BUILD_PACKAGES_VIRTUAL \
-    build-dependencies \
+    vim \
     python3-dev \
-    gcc \
-    make \
-    libffi-dev \
-    ncurses-dev \
-    openssl-dev \
-    musl-dev
+    python3-venv \
+    python3-pip \
+    python3-dateutil \
+    python3-httplib2 \
+    python3-jinja2 \
+    python3-paramiko \
+    python3-setuptools \
+    build-essential \
+    gcc
+
 
 ENV PYTHON_PACKAGES \
-    setuptools \
-    dateutils \
-    httplib2 \
-    jinja2 \
-    paramiko \
-    python-keyczar \
+    python3-keyczar \
     boto3 \
     docker-py \
     pyOpenSSL \
     pre-commit
 
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY Gemfile /
+COPY Gemfile.lock /
+
 # Update and install packages
-RUN apk update && \
-    apk add --no-cache ${BUILD_PACKAGES} && \
-    apk add --no-cache --virtual ${BUILD_PACKAGES_VIRTUAL} && \
+RUN set -eux && \
+    # Tell apt-get we're never going to be able to give manual
+    # feedback:
+    export DEBIAN_FRONTEND=noninteractive && \
+    # Update the package listing, so we know what package exist:
+    apt-get update && \
+    # Install security updates:
+    apt-get -y upgrade && \
+    # Install production packages, without unnecessary recommended packages:
+    apt-get -y install --no-install-recommends ${BUILD_PACKAGES} && \
+    # Link Python3 to /usr/bin/python
     ln -sf python3 /usr/bin/python && \
-    python3 -m ensurepip && \
-    pip3 install --no-cache --upgrade pip wheel && \
-    pip3 install --no-cache --upgrade ${PYTHON_PACKAGES} && \
+    \
+    python3 -m venv /opt/venv && \
+    # pip3 install
+    pip3 install --no-cache pip wheel && \
+    pip3 install --no-cache ${PYTHON_PACKAGES} && \
     \
     echo "==> Installing Ansible... " && \
     pip3 install ansible==${ANSIBLE_VERSION} && \
     pip3 install mitogen==${MITOGEN_VERSION} && \
     \
-    echo "==> Adding Hosts to Ansible directory for convenience..." && \
-    mkdir -p /etc/ansible /ansible && \
-    echo "[local]" >> /etc/ansible/hosts && \
-    echo "localhost" >> /etc/ansible/hosts && \
-    \
     echo "==> Installing Terraform..." && \
     wget https://releases.hashicorp.com/terraform/${VER_TERRAFORM}/terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     unzip terraform_${VER_TERRAFORM}_linux_amd64.zip && \
+    rm terraform_${VER_TERRAFORM}_linux_amd64.zip && \
     mv terraform /usr/local/bin && \
+    \
+    echo "==> Installing gems"  && \
+    bundle install && \
+    \
+    # Delete cached files we don't need anymore:
+    echo "==> Clean apt-get cache" && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+FROM ruby:3.0-slim-buster as prod
+
+LABEL maintainer="VivumLab <support@vivumlab.xyz>" \
+      description="VivumLab container with Ruby Version 3 to run the CLI" \
+      org.label-schema.name="VivumLab" \
+      org.label-schema.description="VivumLab container with Ruby Version 3 to run the CLI" \
+      org.label-schema.url="https://github.com/VivumLab/VivumLab/#readme" \
+      org.label-schema.vcs-url="https://github.com/VivumLab/VivumLab" \
+      org.label-schema.vendor="VivumLab" \
+      org.label-schema.schema-version="1.0"
+
+ARG ARG_VERSION="dev"
+
+COPY --from=compiler /opt/venv /opt/venv
+COPY --from=compiler /usr/local/bundle /usr/local/bundle
+COPY --from=compiler /usr/local/bin/terraform /usr/local/bin/terraform
+
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
+
+ENV VER_TERRAFORM=0.14.4
+# curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | awk {' print $2 '} | sed 's/"//g' | sed 's/,//' | sed 's/v//'
+
+ENV PYTHONUNBUFFERED=1
+
+# Ansible ENV Variables
+ENV ANSIBLE_VERSION 2.9.16
+ENV MITOGEN_VERSION 0.2.9
+ENV ANSIBLE_GATHERING smart
+ENV ANSIBLE_HOST_KEY_CHECKING false
+ENV ANSIBLE_RETRY_FILES_ENABLED false
+ENV ANSIBLE_ROLES_PATH /data/roles
+ENV ANSIBLE_SSH_PIPELINING True
+ENV ANSIBLE_VAULT_PASSWORD_FILE /vlab_vault_pass
+ENV ANSIBLE_CONFIG=/data/ansible.cfg
+ENV PYTHONPATH /ansible/lib
+ENV PATH /ansible/bin:$PATH
+ENV ANSIBLE_LIBRARY /ansible/library
+ENV ANSIBLE_STRATEGY_PLUGINS=/usr/lib/python3.8/site-packages/ansible_mitogen/plugins/strategy
+ENV ANSIBLE_STRATEGY=mitogen_linear
+
+# Environments
+ENV TARGET_UID=1000
+ENV TARGET_GID=1000
+ENV VERSION=$ARG_VERSION
+
+ENV PROD_PACKAGES \
+    tini \
+    wget \
+    curl \
+    unzip \
+    less \
+    git \
+    jq \
+    nano \
+    vim \
+    python3 \
+    libncurses-dev
+
+COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
+COPY docker/motd /etc/motd
+
+RUN set -eux && \
+    # Tell apt-get we're never going to be able to give manual
+    # feedback:
+    export DEBIAN_FRONTEND=noninteractive && \
+    # Update the package listing, so we know what package exist:
+    apt-get update && \
+    # Install security updates:
+    apt-get -y upgrade && \
+    # Install production packages, without unnecessary recommended packages:
+    apt-get -y install --no-install-recommends ${PROD_PACKAGES} && \
     \
     echo "==> Installing syntax highlighting for nano" && \
     curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh && \
+    \
     echo "==> Create /data" && \
-    mkdir /data
-
-    # echo "==> Cloning VivumLab"  && \
-    # git clone --branch ${VERSION} https://github.com/VivumLab/VivumLab.git /data
-
-COPY Gemfile* /
-COPY docker/docker-entrypoint.sh /
-COPY docker/motd /etc/motd
-
-RUN echo "==> Installing gems"  && \
-    bundle install && \
+    mkdir /data && \
+    \
     echo "==> Linking vlab into path" && \
     ln -s /data/vlab /usr/local/bin/vlab && \
+    \
     echo "==> Make sure docker-entrypoint.sh is executable" && \
     chmod +x /docker-entrypoint.sh && \
     \
-    echo "==> Clean APK cache" && \
-    rm -rf /var/cache/apk/*
+    # Delete cached files we don't need anymore:
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /data
 
 VOLUME [ "/data" ]
-ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/docker-entrypoint.sh"]
