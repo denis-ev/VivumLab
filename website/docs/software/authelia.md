@@ -74,24 +74,48 @@ VivumLab ships with intelligent defaults for Authelia. However, there are some c
   - cookie*expiration: How long the authentication cookie is good for. (\_default: 1hr*)
   - cookie*inactivity: How long the cookie can sit, without being refreshed (ie: user is active) before expiring. (\_Defaults to 5min*)
   - policy: This is the default policy for any un-named service. This is the policy for everything unless overriten by other service rules.
+  ##### Advanced changes
+  - root_domain: This is the default domain to protect, don't change this unless you know what you are doing.
+  - protected_domains: This enables the possibility to secure other domains too.
+
+  Example (root_domain not changed), does not work:
+```yml
+authelia:
+  root_domain: vlab.domain.com
+  protected_domains:
+    yournewsubdomain.vlab.other.com: two_factor # The protection will not work
+```
+
+  Example (root_domain not changed), does work:
+```yml
+authelia:
+  root_domain: vlab.domain.com
+  protected_domains:
+    yournewsubdomain.vlab.domain.com: one_factor # The protection will work
+```
+
+  Example (root_domain changed), does not work:
+```yml
+authelia:
+  root_domain: domain2.com
+  protected_domains:
+    yournewsubdomain.vlab.domain.com: two_factor # The protection will not work
+```
+
+  Example (root_domain changed), does work:
+```yml
+authelia:
+  root_domain: domain2.com
+  protected_domains:
+    yournewsubdomain.domain2.com: one_factor # The protection will work
+    yourothersubdomain.vlab.domain2.com: one_factor # The protection will work
+```
 
 ### Overriding the default policy
 
-`{{ volumes_root }}/Authelia/Authelia_config.yml` file is the source of truth for post-deployment configuration settings. If you wish to override the default policy, stated in config.yml, you'll need to hand edit this configuration file and restart Authelia. You probably only need to do this if there is a service that you want to excempt from two-factor authentication, or excempt from Authelia all together. About 100 lines into the config you'll find a section that looks like this:
+`{{ volumes_root }}/Authelia/Authelia_config.yml` file is the source of truth for post-deployment configuration settings. If you wish to override the default policy, stated in config.yml, you'll need to hand edit this configuration file and restart Authelia. You probably only need to do this if there is a service that you want to excempt from two-factor authentication, or excempt from Authelia all together.
 
-```yml
-rules:
-  - domain: portainer.{{ domain }}
-    policy: one_factor
-
-  - domain: auth.{{ domain }}
-    policy: bypass
-
-  - domain: "*.{{ domain }}"
-    policy: { { Authelia.default.factor_count } }
-```
-
-> Right above this section in your config file is a well documented explination of how this works.
+> Right above this sections in your config file is a well documented explination of how this works.
 
 Out of the box, the standard config bypasses Authelia for Authelia itself, and drops portainer down to a single-factor. All other subdomains are locked to the default factor-count, with the final rule. Note, the order of rules matters. The first matching rule wins. If you wish to set a subdomain/service to use something other than your configured default, simply add a clause to the rules section containing at least the following:
 

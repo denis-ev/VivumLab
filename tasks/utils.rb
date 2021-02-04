@@ -8,9 +8,9 @@ module Utils
   include ConfigFileUtils
   include VlabI18n
 
-  def run_playbook(playbook, options, extra = nil, deploy: false)
+  def run_playbook(playbook, options, extra = nil, skip_tags: [])
     write_temporary_decrypted_config
-    cmd = playbook_command(playbook, extra, options[:debug].to_sym, deploy).strip
+    cmd = playbook_command(playbook, extra, options[:debug].to_sym, skip_tags).strip
     execute_in_shell(cmd)
     say I18n.t('utils.run_playbook.out.playbookexecuted', playbook_command: cmd).green
   rescue Subprocess::NonZeroExit => e
@@ -19,22 +19,22 @@ module Utils
     FileUtils.rm_f @temp_config
   end
 
-  def playbook_command(playbook, extra = nil, debug = '', deploy)
+  def playbook_command(playbook, extra = nil, debug = '', skip_tags)
     command = []
     command << "ansible-playbook #{playbook.chomp}"
     command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
     command << "-e \@#{@temp_config}" if playbook != 'playbook.config.yml'
-    command << '--skip-tags setup' unless deploy
-    command << '--skip-tags tor' unless decrypted_config_file[:enable_tor] rescue false
-    command << '--skip-tags bastion' unless decrypted_config_file[:bastion][:enable] and not deploy rescue false
+    skip_tags.each do |tag|
+      command << "--skip-tags #{tag}"
+    end
     command << "-e config_dir=#{options[:config_dir]}"
     command << extra.to_s unless extra.nil? || extra.size.zero?
     command << '-i inventory'
     command.join(' ')
   end
 
-  def run_config_playbook(options, extra = '', deploy: false)
-    playbook_cmd = playbook_command('playbook.config.yml', extra, options[:debug].to_sym, deploy).strip
+  def run_config_playbook(options, extra = '', skip_tags:[])
+    playbook_cmd = playbook_command('playbook.config.yml', extra, options[:debug].to_sym, skip_tags).strip
     execute_in_shell(playbook_cmd)
     say I18n.t('utils.run_config_playbook.out.playbookexecuted', playbook_command: playbook_cmd).green
     # migration_invoke_override

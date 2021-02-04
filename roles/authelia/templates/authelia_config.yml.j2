@@ -126,14 +126,27 @@ access_control:
   default_policy: {{ authelia.default.policy }}
 
   rules:
-    - domain: portainer.{{ domain }}
-      policy: one_factor
-
     - domain: {{ service_domain }}
       policy: bypass
 
+{% if authelia.protected_domains -%}
+{% for item in authelia.protected_domains | dict2items %}
+    - domain: {{ item.key }}
+      policy: {{ item.value }}
+{% endfor %}
+{% endif %}
+
+    - domain: portainer.{{ domain }}
+      policy: one_factor
+
+{% if authelia.root_domain != domain %}
+    - domain: '*.{{ authelia.root_domain }}'
+      policy: {{ authelia.default.factor_count }}
+{% endif %}
+
     - domain: '*.{{ domain }}'
       policy: {{ authelia.default.factor_count }}
+
 
 # Configuration of session cookies
 #
@@ -161,7 +174,11 @@ session:
   # The domain to protect.
   # Note: the authenticator must also be in that domain. If empty, the cookie
   # is restricted to the subdomain of the issuer.
-  domain: {{ domain }}
+{% if authelia.root_domain == "none" %}
+  domain:
+{% else %}
+  domain: {{ authelia.root_domain }}
+{% endif %}
 
   # The redis connection details
   redis:

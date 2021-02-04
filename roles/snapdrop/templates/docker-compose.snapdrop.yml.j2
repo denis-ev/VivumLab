@@ -1,0 +1,31 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  snapdrop:
+
+services:
+  snapdrop:
+    restart: unless-stopped
+    # REQUIRED
+    image: ghcr.io/linuxserver/snapdrop
+    networks:
+      - traefik_network
+      - snapdrop
+    environment:
+      - PUID={{ uid_output.stdout }}
+      - PGID={{ gid_output.stdout }}
+      - TZ={{ common_timezone }}
+    volumes:
+      - "{{ volumes_root }}/snapdrop/config:/etc/snapdrop"
+      - "{{ volumes_root }}/snapdrop/logs:/var/log/snapdrop"
+      - "{{ volumes_root }}/snapdrop/data:/var/opt/snapdrop"
+    labels:
+      - "traefik.http.services.snapdrop.loadbalancer.server.scheme=http"
+      - "traefik.http.services.snapdrop.loadbalancer.server.port=80"
+{% include './labels.j2' %}

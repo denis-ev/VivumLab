@@ -48,6 +48,7 @@ ENV BUILD_PACKAGES \
     jq \
     less \
     nano \
+    openssh \
     git
 
 ENV BUILD_PACKAGES_VIRTUAL \
