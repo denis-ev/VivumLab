@@ -16,8 +16,14 @@ services:
     volumes:
       - "{{ volumes_root }}/jellyfin/config:/config"
       - "{{ storage_dir }}:/media"
-      - "{{ storage_dir }}/temp:/cache"
+      - tmpfs_jellyfin_vol:/cache
     labels:
       - "traefik.http.services.jellyfin.loadbalancer.server.scheme=http"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
 {% include './labels.j2' %}
+
+volumes:
+  tmpfs_jellyfin_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

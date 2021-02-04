@@ -4,8 +4,11 @@
 # rubocop:disable Metrics/ClassLength
 class Service < Thor
   require './tasks/utils'
+  require './tasks/lib/config_file_utils'
   include Utils
   include VlabI18n
+  extend ConfigFileUtils
+  @@already_run = false
 
   desc I18n.t('service.list.name'), I18n.t('service.list.desc')
   option :columns, type: :numeric, required: false, default: 5, banner: 'example usage'
@@ -119,7 +122,7 @@ class Service < Thor
   desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
-    return if guard_against_invalid_service_config?(options[:service])
+    return unless is_valid_service?(options[:service])
 
     interactive_setup(options[:service])
     @decrypted_config_file = nil
@@ -133,8 +136,8 @@ class Service < Thor
   desc 'SERVICENAME', 'dynamic service task defers to service specific namespace provided as parameter'
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
   def dynamic(dynamic_namespace, command = 'help')
-    # run_common
-    return unless guard_against_invalid_service(dynamic_namespace)
+    run_common
+    return unless is_valid_service?(dynamic_namespace)
 
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
       invoke "#{dynamic_namespace}:#{command}", [], { value: options[:value] }
@@ -163,11 +166,11 @@ class Service < Thor
 
     def run_playbooks(playbooks, options, service_limit)
       playbooks.each do |playbook|
-        run_playbook("playbook.#{playbook}.yml", options, service_limit)
+        run_playbook("playbook.#{playbook}.yml", options, service_limit, deploy: false)
       end
     end
 
-    def guard_against_invalid_service(service)
+    def is_valid_service?(service)
       service_exist = service_list.include? service
       say I18n.t('service.setup.out.searchfail', service: service).red unless service_exist
       service_exist
@@ -178,9 +181,12 @@ class Service < Thor
     end
 
     def run_common
-      invoke 'migration:single_config'
+      # invoke 'migration:single_config'
+      return if @@already_run
+      invoke 'sanity_checks:local', [], options
+      invoke 'config:new', [], options unless encrypted_yml_exist?
       invoke 'git:sync', [], options
-      invoke 'config:new', [], options
+      @@already_run = true
     end
   end
   # rubocop:enable Metrics/BlockLength

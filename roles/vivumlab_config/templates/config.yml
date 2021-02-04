@@ -34,6 +34,7 @@ volumes_root: {{ volumes_root | default('/home/' + vlab_ssh_user + '/vivumlab') 
 
 # Default storage location for media (These are used as local directories or NAS mount points depending on configuration)
 storage_dir: {{ storage_dir | default('/mnt/nas') }}
+check_mounts: {{ check_mounts | default('False') }}
 
 # Default email to receive notifications on
 vlab_notifyemail: {{ vlab_notifyemail | default('vlab_notifyemail@yourdomain.com')}}
@@ -782,6 +783,18 @@ lidarr:
   amd64: False
   arm64: False
   armv7: False
+lychee:
+  enable: {{ lychee.enable | default(False) }}
+  hsts: {{ lychee.hsts | default(True) }}
+  auth: {{ lychee.auth | default(False) }}
+  domain: {{ lychee.domain | default(False) }}
+  subdomain: {{ lychee.subdomain | default("lychee") }}
+  version: {{ lychee.version | default("v4.2.1") }}
+  db_version: {{ lychee.db_version | default("13.1-alpine") }}
+  redis_version: {{ lychee.redis_version | default("6.0.10-alpine3.12") }}
+  amd64: False
+  arm64: False
+  armv7: False
 mailu:
   enable: {{ mailu.enable | default(False) }}
   hsts: {{ mailu.hsts | default(True) }}
@@ -1063,9 +1076,9 @@ peertube:
   auth: {{ peertube.auth | default(False) }}
   domain: {{ peertube.domain | default(False) }}
   subdomain: {{ peertube.subdomain | default("peertube") }}
-  version: {{ peertube.version | default("production-buster") }}
-  db_version: {{ peertube.db_version | default("10-alpine") }}
-  redis_version: {{ peertube.redis_version | default("4-alpine") }}
+  version: {{ peertube.version | default("v3.0.1-buster") }}
+  db_version: {{ peertube.db_version | default("13.1-alpine") }}
+  redis_version: {{ peertube.redis_version | default("6.0.10-alpine3.12") }}
   amd64: False
   arm64: False
   armv7: False

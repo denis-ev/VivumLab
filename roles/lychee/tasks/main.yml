@@ -1,0 +1,50 @@
+---
+- name: Make lychee directories.
+  file:
+    path: "{{ volumes_root }}/lychee/{{ item }}"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - "conf"
+    - "uploads"
+    - "sym"
+    - "redis"
+  become: yes
+
+- name: Make lychee DB directory
+  file:
+    path: "{{ volumes_root }}/lychee/db"
+    state: directory
+
+- name: Copy lychee docker-compose.yml file into place.
+  template:
+    src: docker-compose.lychee.yml.j2
+    dest: "{{ volumes_root }}/lychee/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
+
+- name: Copy lychee .env file into place.
+  template:
+    src: .env.lychee.j2
+    dest: "{{ volumes_root }}/lychee/.env.lychee"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Configure lychee systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/lychee.service
+
+- name: Start lychee
+  systemd:
+    name: lychee
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

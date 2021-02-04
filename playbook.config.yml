@@ -3,54 +3,150 @@
   connection: local
   vars_prompt:
     - name: vlab_ip
-      prompt: "What is the IP of your server that VivumLab should SSH to? (REQUIRED)"
+      prompt: |+
+
+        ======== REMOTE SSH IP ========
+        Allows VivumLab to communicate with the remote machine.
+        required: yes
+        default: none
+
+        Currently VivumLab only supports IPv4 addresses.
+
+        Enter the remote machines IP address
       private: no
       when: vlab_ip is not defined
 
     - name: vlab_port
-      prompt: "Using a different SSH port? Enter it here (Press return for default)"
+      prompt: |+
+
+        ======== REMOTE SSH PORT ========
+        Allows VivumLab to communicate via a non-default SSH port.
+        required: no
+        default: 22
+
+        It is good security practise to change the default SSH port.
+        VivumLab DOES NOT set a custom port for you; No input sets the default.
+
+
+        Enter the custom SSH port
       private: no
       when: vlab_port is not defined
       default: 22
 
     - name: vlab_ssh_user
-      prompt: "Which user should VivumLab use to SSH to your server? (REQUIRED)"
+      prompt: |+
+
+        ======== REMOTE SSH USER ========
+        Enables VivumLab to use the user with SSH permissions on the remote machine.
+        required: no
+        default: root
+
+        VivumLab strongly advises against using the 'root' account for SSH connections.
+        No input sets the default.
+
+        Enter your remote machines SSH username
       private: no
       when: vlab_ssh_user is not defined
       default: root
 
     - name: ansible_become_password
-      prompt: "Which password does the SSH user need for sudo access? (REQUIRED)"
+      prompt: |+
+
+        ======== REMOTE SSH PASSWORD ========
+        Required for VivumLab to use the user with SSH permissions on the remote machine.
+        required: yes
+        default: none
+
+        The password for the user with SSH permissions is required for administrative actions.
+
+        Enter your remote machines SSH password
       unsafe: yes
       private: yes
       when: ansible_become_password is not defined
 
     - name: passwordless_sshkey
-      prompt: "Enter the name of your personalised passwordless ssh keys? (Press return for default)"
+      prompt: |+
+
+        ======== PASSWORDLESS SSH KEY ========
+        Allows VivumLab to access the remote machine via passwordless SSH keys.
+        required: no
+        default: id_rsa
+
+        SSH keys provide great security benefits; prferably 'passwordless' for ease of use.
+        VivumLab currently does not support 'passworded' SSH keys.
+        No input sets the default.
+
+        Enter the name of your personalised passwordless ssh keys
       private: no
       when: passwordless_sshkey is not defined
       default: 'id_rsa'
 
     - name: default_username
-      prompt: "Choose the default 'admin' username for your deployed VivumLab services? (Press return for default)"
+      prompt: |+
+
+        ======== DEFAULT SERVICE ADMIN USERNAME ========
+        Sets a default admin username, to be used for applicable deployed services.
+        required: no
+        default: admin
+
+        Not all VivumLab deployed services will set up an administrator account for the user.
+        No input sets the default.
+
+        Enter the default 'admin' username
       private: no
       when: default_username is not defined
       default: admin
 
     - name: default_password
-      prompt: "Choose the default 'admin' password for your deployed VivumLab services? (Press return if none)"
+      prompt: |+
+
+        ======== DEFAULT SERVICE ADMIN PASSWORD ========
+        Sets a default admin password, to be used for applicable deployed services.
+        required: no
+        default: none
+
+        Please ensure that this is only a 'placeholder' password, to gain initial access to the
+        admin account of an applicable service, as some services may store this password in plain text
+
+        Enter the default 'admin' password
       unsafe: yes
       private: yes
       when: default_password is not defined
 
     - name: domain
-      prompt: "Which domain should your Vivumlab services be served on? (Press return if none)"
+      prompt: |+
+
+        ======== DOMAIN NAME ========
+        Sets the domain that VivumLab deployed services will accessable on.
+        required: yes
+        default: localhost
+
+        Please ensure that you have access to the domain, and that all required information has
+        been completed with your domain registrar, eg. A record
+        Be sure to fill the complete address, including any domain extensions, eg.
+        - yourdomain.com.au
+        - helloworld.org
+        - vivumlab.it
+        No input sets the default.
+
+        Enter the desired domain name
       private: no
       when: domain is not defined
       default: localhost
 
     - name: admin_email
-      prompt: "Provide a current/valid email address for deployed VivumLab services? (Required for HTTPS via LetsEncrypt) (Press return if none)"
+      prompt: |+
+
+        ======== VIVUMLAB USER EMAIL ========
+        Sets the users desired email for use with VivumLab.
+        required: yes
+        default: none
+
+        VivumLab provides HTTPS as default; By todays web standards HTTPS is both achievable,
+        and a minimal requirement.
+        Not providing a valid email address, will break letsencrypt/HTTPS functionality.
+
+        Enter the desired email address
       private: no
       when: admin_email is not defined
 

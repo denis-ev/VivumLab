@@ -382,7 +382,7 @@ es:
       out:
         noexist: |+
           Unable to find settings/%{config_dir}/encrypted.yml. Please run 'vlab config new --dev'
-          For further information, please run 'vlab config'
+          For further information, please run 'vlab config --dev'
     saveconf:
       out:
         saving: "Saving config.yml"
