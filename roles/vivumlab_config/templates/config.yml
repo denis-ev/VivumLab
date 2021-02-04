@@ -71,7 +71,7 @@ bastion:
     2222: {{ vlab_port }}
     80: 80
     443: 443
-{% if bastion.ports_to_forward is defined -%}
+{% if (bastion.ports_to_forward is defined) and (bastion.ports_to_forward) -%}
 {% for item in bastion.ports_to_forward | dict2items %}
     {{ item.key }}: {{ item.value }}
 {% endfor %}
@@ -147,7 +147,7 @@ traefik:
     # DUMMY_KEY: DUMMY_VALUE
     CF_API_EMAIL: {{ traefik.additional_env_vars.CF_API_EMAIL | default('EMAIL') }}
     CF_API_KEY: {{ traefik.additional_env_vars.CF_API_KEY | default('API_KEY') }}
-{% if traefik.additional_env_vars is defined -%}
+{% if (traefik.additional_env_vars is defined) and (traefik.additional_env_vars) -%}
 {% for item in traefik.additional_env_vars | dict2items %}
     {{ item.key }}: {{ item.value }}
 {% endfor %}
@@ -258,7 +258,7 @@ authelia:
   protected_domains:
     # Default policy can either be `bypass`, `one_factor`, `two_factor` or `deny`.
     {{ domain }}: two_factor
-{% if authelia.protected_domains is defined -%}
+{% if (authelia.protected_domains is defined) and (authelia.protected_domains) -%}
 {% for item in authelia.protected_domains | dict2items %}
     {{ item.key }}: {{ item.value }}
 {% endfor %}
