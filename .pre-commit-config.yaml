@@ -23,12 +23,12 @@ repos:
       - id: no-commit-to-branch
         args: [--branch, dev, --branch, master]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.25.0
+    rev: v1.26.0
     hooks:
       - id: yamllint
         args: [-c=yamllint.conf]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.13.0
+    rev: v2.14.1
     hooks:
       - id: commitizen
         stages:

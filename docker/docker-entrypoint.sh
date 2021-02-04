@@ -10,6 +10,8 @@ if [[ $VERSION != 'local' && $VERSION != 'dev' ]]; then
 fi
 chown -R "$TARGET_UID":"$TARGET_GID" "$DEFAULT_PATH"
 
+pre-commit install
+
 if [[ $VERSION == 'local' || $VERSION == 'dev' ]]; then
   bundle install
 else

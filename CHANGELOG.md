@@ -1,3 +1,25 @@
+## [1.2.0](https://github.com/VivumLab/VivumLab/compare/v1.1.1...v1.2.0) (2021-02-04)
+
+
+### Features
+
+* **service:** add lychee ([#338](https://github.com/VivumLab/VivumLab/issues/338)) ([f7fd31e](https://github.com/VivumLab/VivumLab/commit/f7fd31e956aba773d5b86a0c7d9d59e4169cfe9b))
+* add pkg namespace ([#340](https://github.com/VivumLab/VivumLab/issues/340)) ([ab85a47](https://github.com/VivumLab/VivumLab/commit/ab85a47bacd6ad6884602ca4281397de1aa5a31a))
+* check_mounts.sh added ([#270](https://github.com/VivumLab/VivumLab/issues/270)) ([a08eff6](https://github.com/VivumLab/VivumLab/commit/a08eff6f0451274319c521d6a7ad98ca967e21b4))
+
+
+### Bug Fixes
+
+* create shared nextcloud mounts with appropriate permissions ([#321](https://github.com/VivumLab/VivumLab/issues/321)) ([618527f](https://github.com/VivumLab/VivumLab/commit/618527f95a61593e28a1cf3a2a24516880b9ced0))
+* dynamicnamespace setup fails ([#333](https://github.com/VivumLab/VivumLab/issues/333)) ([07a1a66](https://github.com/VivumLab/VivumLab/commit/07a1a6618372ca5a339aad65b0554be186ec88fa))
+* **docker:** fix dockerfile ([#314](https://github.com/VivumLab/VivumLab/issues/314)) ([643c7ca](https://github.com/VivumLab/VivumLab/commit/643c7ca096d059dd2edf6720e3e0843d0c627742))
+* improve authelia security / make it customisable ([#342](https://github.com/VivumLab/VivumLab/issues/342)) ([11cf62e](https://github.com/VivumLab/VivumLab/commit/11cf62ec7992c0da071d7ba0542edfbd4bc50848))
+* restic docker-compose.yml ([#336](https://github.com/VivumLab/VivumLab/issues/336)) ([8b22f81](https://github.com/VivumLab/VivumLab/commit/8b22f8130c6c04018bf927bb91f0d96d2c4698ba))
+* show command for un-namespaced config entries ([#328](https://github.com/VivumLab/VivumLab/issues/328)) ([d6aa961](https://github.com/VivumLab/VivumLab/commit/d6aa96186d93ac72aa1dde72cac24cbd8f047d27))
+* update plex and privatebin tmpfs ([#322](https://github.com/VivumLab/VivumLab/issues/322)) ([4e9db1d](https://github.com/VivumLab/VivumLab/commit/4e9db1d179543ac244f6e56ee4534a722e6b5561))
+* **services:** use tmpfs volume instead of mounts ([#339](https://github.com/VivumLab/VivumLab/issues/339)) ([b5beb23](https://github.com/VivumLab/VivumLab/commit/b5beb23797f406113a0668c795b4c9e744c2c348))
+* whitespace peertube ([#332](https://github.com/VivumLab/VivumLab/issues/332)) ([4e3c158](https://github.com/VivumLab/VivumLab/commit/4e3c158e3e3a4647c12e8c8005f1945be323c863))
+
 ### [1.1.1](https://github.com/VivumLab/VivumLab/compare/v1.1.0...v1.1.1) (2021-01-22)
 
 
