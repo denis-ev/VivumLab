@@ -1,3 +1,4 @@
+---
 services:
   adguardhome:
   airsonic:
@@ -99,6 +100,7 @@ services:
   shinobi:
   sickchill:
   simply_shorten:
+  snapdrop:
   snibox:
   sonarr:
   speedtest:
@@ -225,6 +227,7 @@ searx:
 shinobi:
 sickchill:
 simply_shorten:
+snapdrop:
 snibox:
 sonarr:
 speedtest:

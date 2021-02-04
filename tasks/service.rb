@@ -40,7 +40,7 @@ class Service < Thor
     run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.remove.out.removing', service: service).yellow
-      run_playbook('playbook.remove.yml', options, limit_to_service(service))
+      run_playbook('playbook.remove.yml', options, limit_to_service(service), skip_tags: tags_to_skip(false))
       invoke 'config:set', [], config_key: "#{service}.enable", value: false
       say I18n.t('service.remove.out.removed', service: service).green
     end
@@ -52,7 +52,7 @@ class Service < Thor
     run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.stop.out.stopping').yellow
-      run_playbook('playbook.stop.yml', options, limit_to_service(service))
+      run_playbook('playbook.stop.yml', options, limit_to_service(service), skip_tags: tags_to_skip(false))
       say I18n.t('service.stop.out.stopped').green
     end
   end
@@ -63,7 +63,7 @@ class Service < Thor
     run_common
     options[:service].split(',').each do |service|
       say I18n.t('service.restart.out.restarting').yellow
-      run_playbook('playbook.restart.yml', options, limit_to_service(service))
+      run_playbook('playbook.restart.yml', options, limit_to_service(service), skip_tags: tags_to_skip(false))
       say I18n.t('service.restart.out.restarted').green
     end
   end
@@ -108,7 +108,7 @@ class Service < Thor
     say I18n.t('service.customize.out.customizing', service: options[:service]).yellow
     return unless yes?(I18n.t('service.customize.in.customizing', service: options[:service]), :yellow)
 
-    run_playbook('playbook.service-edit.yml', options, limit_to_service(options[:service]))
+    run_playbook('playbook.service-edit.yml', options, limit_to_service(options[:service]), skip_tags: tags_to_skip(false))
     say I18n.t('service.customize.out.customized', service: options[:service]).green
   end
   # rubocop:enable Metrics/AbcSize
@@ -166,7 +166,7 @@ class Service < Thor
 
     def run_playbooks(playbooks, options, service_limit)
       playbooks.each do |playbook|
-        run_playbook("playbook.#{playbook}.yml", options, service_limit, deploy: false)
+        run_playbook("playbook.#{playbook}.yml", options, service_limit, skip_tags: tags_to_skip(false))
       end
     end
 

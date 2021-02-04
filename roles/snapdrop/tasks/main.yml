@@ -1,31 +1,31 @@
 ---
-- name: Make pkgtemplate directory.
+- name: Make snapdrop directory.
   file:
-    path: "{{ volumes_root }}/pkgtemplate"
+    path: "{{ volumes_root }}/snapdrop"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   become: yes
 
-- name: Copy pkgtemplate docker-compose.yml file into place.
+- name: Copy snapdrop docker-compose.yml file into place.
   template:
-    src: docker-compose.pkgtemplate.yml.j2
-    dest: "{{ volumes_root }}/pkgtemplate/docker-compose.yml"
+    src: docker-compose.snapdrop.yml.j2
+    dest: "{{ volumes_root }}/snapdrop/docker-compose.yml"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   vars:
     tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
   become: yes
 
-- name: Configure pkgtemplate systemd service.
+- name: Configure snapdrop systemd service.
   template:
     src: service.j2
-    dest: /etc/systemd/system/pkgtemplate.service
+    dest: /etc/systemd/system/snapdrop.service
   become: yes
 
-- name: Start pkgtemplate
+- name: Start snapdrop
   systemd:
-    name: pkgtemplate
+    name: snapdrop
     enabled: yes
     daemon-reload: yes
     state: started

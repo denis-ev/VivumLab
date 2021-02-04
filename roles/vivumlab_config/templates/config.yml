@@ -1295,6 +1295,16 @@ simply_shorten:
   amd64: False
   arm64: False
   armv7: False
+snapdrop:
+  enable: {{ snapdrop.enable | default(enable_snapdrop, None) | default(False) }}
+  hsts: {{ snapdrop.hsts | default(True) }}
+  auth: {{ snapdrop.auth | default(False) }}
+  domain: {{ snapdrop.domain | default(False) }}
+  subdomain: {{ snapdrop.subdomain | default("snapdrop")}}
+  version: {{ snapdrop.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 snibox:
   enable: {{ snibox.enable | default(False) }}
   hsts: {{ snibox.hsts | default(True) }}
