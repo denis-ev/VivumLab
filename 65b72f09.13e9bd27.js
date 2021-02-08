@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[59],{130:function(o){o.exports=JSON.parse('{"to":"/docs/Welcome","forComponent":false}')}}]);
