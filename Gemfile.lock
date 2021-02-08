@@ -16,17 +16,11 @@ GEM
     concurrent-ruby (1.1.8)
     dotenv (2.7.6)
     e2mmap (0.1.0)
-    ffi (1.13.1)
-    ffi-locale (1.0.1)
-      ffi (>= 1.0.9)
-    ffi-ncurses (0.4.0)
-      ffi (>= 1.0.9)
-      ffi-locale (>= 1.0.0)
     hashie (4.1.0)
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
-    i18n (1.8.7)
+    i18n (1.8.8)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
     kramdown (2.3.0)
@@ -40,8 +34,6 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.3)
     multi_xml (0.6.0)
-    ncumbra (0.1.4)
-      ffi-ncurses (>= 0.4.0)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     parallel (1.20.1)
@@ -132,14 +124,10 @@ DEPENDENCIES
   amazing_print
   colorize
   dotenv
-  ffi (= 1.13.1)
-  ffi-locale
-  ffi-ncurses
   hashie
   httparty
   i18n
   mini_portile2 (~> 2.4.0)
-  ncumbra
   nokogiri (~> 1.10.10)
   pry
   rake
