@@ -14,8 +14,7 @@
 
         Enter the remote machines IP address
       private: no
-      when: vlab_ip is not defined
-
+      #
     - name: vlab_port
       prompt: |+
 
@@ -30,7 +29,6 @@
 
         Enter the custom SSH port
       private: no
-      when: vlab_port is not defined
       default: 22
 
     - name: vlab_ssh_user
@@ -46,7 +44,6 @@
 
         Enter your remote machines SSH username
       private: no
-      when: vlab_ssh_user is not defined
       default: root
 
     - name: ansible_become_password
@@ -62,7 +59,6 @@
         Enter your remote machines SSH password
       unsafe: yes
       private: yes
-      when: ansible_become_password is not defined
 
     - name: passwordless_sshkey
       prompt: |+
@@ -78,8 +74,7 @@
 
         Enter the name of your personalised passwordless ssh keys
       private: no
-      when: passwordless_sshkey is not defined
-      default: 'id_rsa'
+      default: "id_rsa"
 
     - name: default_username
       prompt: |+
@@ -94,7 +89,6 @@
 
         Enter the default 'admin' username
       private: no
-      when: default_username is not defined
       default: admin
 
     - name: default_password
@@ -111,7 +105,6 @@
         Enter the default 'admin' password
       unsafe: yes
       private: yes
-      when: default_password is not defined
 
     - name: domain
       prompt: |+
@@ -131,7 +124,6 @@
 
         Enter the desired domain name
       private: no
-      when: domain is not defined
       default: localhost
 
     - name: admin_email
@@ -148,8 +140,6 @@
 
         Enter the desired email address
       private: no
-      when: admin_email is not defined
 
   roles:
     - vivumlab_config
-...

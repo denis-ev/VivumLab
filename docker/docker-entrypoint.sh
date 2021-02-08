@@ -18,6 +18,9 @@ else
   clear
 fi
 
+echo "Running vlab config new to ensure we have a valid config file."
+echo "Note, this will not overwrite your config, if one exists."
+
 vlab config new
 
 clear
