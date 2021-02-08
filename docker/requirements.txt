@@ -17,7 +17,6 @@ Jinja2==2.11.3
 jmespath==0.10.0
 MarkupSafe==1.1.1
 nodeenv==1.5.0
-pkg-resources==0.0.0
 pre-commit==2.10.0
 pyasn1==0.4.8
 pycparser==2.20
@@ -33,5 +32,8 @@ toml==0.10.2
 typing-extensions==3.7.4.3
 urllib3==1.26.3
 virtualenv==20.4.2
+wheel==0.34.2
+ansible==2.9.17
+mitogen==0.2.9
 websocket-client==0.57.0
 zipp==3.4.0
