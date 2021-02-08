@@ -125,18 +125,18 @@ fi
 
 if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
   docker run --rm -it \
-    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
-    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
-    -v $(pwd):/data \
-    -v $(pwd)/settings:/data/settings \
-    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    -v "$(pwd)/settings/id_rsa":"/root/.ssh/$(pwless_sshkey)":z \
+    -v "$(pwd)/settings/id_rsa.pub":"/root/.ssh/$(pwless_sshkey).pub":z \
+    -v $(pwd):/data:z \
+    -v $(pwd)/settings:/data/settings:z \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass:z \
     vivumlab/vivumlab:${VERSION} /bin/bash
 else
   docker run --rm -it \
     -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
     -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
-    -v $(pwd)/settings:/data/settings \
-    -v $HOME/.vlab_vault_pass:/vlab_vault_pass \
+    -v $(pwd)/settings/:/data/settings/:z \
+    -v $HOME/.vlab_vault_pass:/vlab_vault_pass:z \
     vivumlab/vivumlab:${VERSION} /bin/bash
 fi
 
