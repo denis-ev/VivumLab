@@ -1,3 +1,18 @@
+## [1.3.0](https://github.com/VivumLab/VivumLab/compare/v1.2.0...v1.3.0) (2021-02-11)
+
+
+### Features
+
+* add snap drop ([#344](https://github.com/VivumLab/VivumLab/issues/344)) ([36e060f](https://github.com/VivumLab/VivumLab/commit/36e060f6764fabb26a9553a08046ad33a7ea8823)), closes [#235](https://github.com/VivumLab/VivumLab/issues/235)
+
+
+### Bug Fixes
+
+* change docker image to multi stage build and not using alpine ([#345](https://github.com/VivumLab/VivumLab/issues/345)) ([6b05180](https://github.com/VivumLab/VivumLab/commit/6b05180d0e624e433218232487a299934a4e5a21))
+* changing gitea to rootless image ([#309](https://github.com/VivumLab/VivumLab/issues/309)) ([1022569](https://github.com/VivumLab/VivumLab/commit/10225693a7751f94799b5bb8f0c1f0a210d250a5))
+* config new on docker image launch ([#347](https://github.com/VivumLab/VivumLab/issues/347)) ([acf5c65](https://github.com/VivumLab/VivumLab/commit/acf5c653909dac81178f23e1a1b617fb93972663)), closes [#346](https://github.com/VivumLab/VivumLab/issues/346)
+* dockerfile ansible plugins path ([#349](https://github.com/VivumLab/VivumLab/issues/349)) ([1a72a45](https://github.com/VivumLab/VivumLab/commit/1a72a455f1425bd5b2864a52cf79d858f0eaafeb))
+
 ## [1.2.0](https://github.com/VivumLab/VivumLab/compare/v1.1.1...v1.2.0) (2021-02-04)
 
 
