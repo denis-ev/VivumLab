@@ -53,17 +53,6 @@ paperlessng
 
 run: **`vlab update -s paperlessng`**
 
-## FIRST RUN
-
-!!! **DEVELOPERS**: make sure that you include any information that the user requires to get started, below. !!! <br />
-!!! Below are some **examples** with headings, and with some **example** instructions !!!
-
-#### ADMINISTRATOR SETUP
-
-Navigate to *https://{{ paperlessng.domain }}/admin*
-
-Create an account with your desired username; as this is the first user, paperlessng makes this account the administrator.
-
 ## ACCESS
 
 paperlessng (HTTPS) link: [https://{% if paperlessng.domain %}{{ paperlessng.domain }}{% else %}{{ paperlessng.subdomain + "." + domain }}{% endif %}/](https://{% if paperlessng.domain %}{{ paperlessng.domain }}{% else %}{{ paperlessng.subdomain + "." + domain }}{% endif %}/)
