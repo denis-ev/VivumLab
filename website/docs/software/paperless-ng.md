@@ -22,7 +22,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## Information
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** jonaswinkler/paperless-ng <br />
 **Current Image Version:** {{ paperlessng.version }}
 
 ## SETUP
