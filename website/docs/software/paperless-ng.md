@@ -31,7 +31,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 #### Command:
 
-**`vlab service setup -s paperlessng`**
+**`vlab service paperlessng setup`**
 
 ##### File alteration (not recommended):
 
