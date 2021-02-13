@@ -103,6 +103,7 @@ module.exports = {
         "software/openvpn",
         "software/organizr",
         "software/paperless",
+        "software/paperlessng",
         "software/peertube",
         "software/photoprism",
         "software/pihole",

@@ -1080,6 +1080,16 @@ paperless:
   amd64: False
   arm64: False
   armv7: False
+paperlessng:
+  enable: {{ paperlessng.enable | default(False) }}
+  hsts: {{ paperlessng.hsts | default(True) }}
+  auth: {{ paperlessng.auth | default(False) }}
+  domain: {{ paperlessng.domain | default(False) }}
+  subdomain: {{ paperlessng.subdomain | default("paperlessng")}}
+  version: {{ paperlessng.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 peertube:
   enable: {{ peertube.enable | default(False) }}
   hsts: {{ peertube.hsts | default(True) }}
