@@ -55,7 +55,7 @@ RUN set -eux && \
     # Update the package listing, so we know what package exist:
     apt-get update && \
     # Install apt-utils
-    apt-get -u install --no-install-recommends apt-utils && \
+    apt-get -y install --no-install-recommends apt-utils && \
     # Install security updates:
     apt-get -y upgrade && \
     # Install production packages, without unnecessary recommended packages:
