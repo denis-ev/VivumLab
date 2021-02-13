@@ -31,7 +31,7 @@ services:
 
   paperlessng:
     restart: unless-stopped
-    image: jonaswinkler/paperless-ng:latest
+    image: jonaswinkler/paperless-ng:{{ paperlessng.version }}
     depends_on:
       - paperlessngdb
       - broker
