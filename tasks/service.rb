@@ -190,8 +190,11 @@ class Service < Thor
     end
   end
   # rubocop:enable Metrics/BlockLength
-  has_dynamic_namespace = ARGV[ARGV.index('service')+1..ARGV.length].length > 0
-  default_task :dynamic if has_dynamic_namespace
-  default_task :help unless has_dynamic_namespace
+  begin
+    has_dynamic_namespace = ARGV[ARGV.index('service')+1..ARGV.length].length > 0
+    default_task :dynamic if has_dynamic_namespace
+  rescue Exception => e
+    default_task :help unless has_dynamic_namespace
+  end
 end
 # rubocop:enable Metrics/ClassLength
