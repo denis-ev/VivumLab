@@ -27,6 +27,11 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## SETUP
 
+### FIRST START (Important)
+
+After enabling and running Titra it is important to register and claim the admin right.
+This is done by registering and visiting `https://{% if titra.domain %}{{ titra.domain }}{% else %}{{ titra.subdomain + "." + domain }}{% endif %}/claim/admin`
+
 ### Enabling and customizing titra
 
 #### Command:
