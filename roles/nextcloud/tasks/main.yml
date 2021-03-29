@@ -39,8 +39,8 @@
   become: yes
 
 - name: Copy nextcloud build Dockerfile into place.
-  copy:
-    src: "build/Dockerfile"
+  template:
+    src: Dockerfile.j2
     dest: "{{ volumes_root }}/nextcloud/build/Dockerfile"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
@@ -52,6 +52,7 @@
     dest: "{{ volumes_root }}/nextcloud/build/entrypoint.sh"
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+    mode: +x
   become: yes
 
 - name: Copy nextcloud docker-compose.yml file into place.
