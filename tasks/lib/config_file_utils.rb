@@ -56,7 +56,7 @@ module ConfigFileUtils
     skip_tags = []
     skip_tags << 'setup' unless deploy
     skip_tags << 'tor' unless tor_enabled?
-    skip_tags << 'bastion' if bastion_enabled?
+    skip_tags << 'bastion' unless bastion_enabled?
   end
 
   def decrypted_config_file
