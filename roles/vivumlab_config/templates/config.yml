@@ -1442,6 +1442,17 @@ tiddlywiki:
   amd64: False
   arm64: False
   armv7: False
+titra:
+  enable: {{ titra.enable | default(False) }}
+  hsts: {{ titra.hsts | default(True) }}
+  auth: {{ titra.auth | default(False) }}
+  domain: {{ titra.domain | default(False) }}
+  subdomain: {{ titra.subdomain | default("titra")}}
+  version: {{ titra.version | default("0.43.0") }}
+  db_version: {{ titra.db_version | default("4.2") }}
+  amd64: "supported"
+  arm64: "unsupported"
+  armv7: "unsupported"
 transmission:
   enable: {{ transmission.enable | default(False) }}
   hsts: {{ transmission.hsts | default(True) }}
