@@ -114,6 +114,7 @@ services:
   thelounge:
   tick:
   tiddlywiki:
+  titra:
   transmission:
   trilium:
   turtl:
@@ -241,6 +242,7 @@ teedy:
 thelounge:
 tick:
 tiddlywiki:
+titra:
 transmission:
 trilium:
 turtl:

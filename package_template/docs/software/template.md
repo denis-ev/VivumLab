@@ -31,7 +31,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 #### Command:
 
-**`vlab service setup -s PackageFileName`**
+**`vlab service PackageFileName setup`**
 
 ##### File alteration (not recommended):
 
@@ -49,9 +49,11 @@ PackageFileName
   version: {{ PackageFileName.version }}
 ```
 
+- after setting the appropriate service settings in `settings/decrypted.yml` to the desired value, run `vlab config encrypt --dev` to encrypt the settings again
+
 #### Finalising changes:
 
-run: **`vlab update -s PackageFileName`**
+run: **`vlab service PackageFileName update`**
 
 ## FIRST RUN
 

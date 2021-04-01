@@ -138,6 +138,7 @@ module.exports = {
         "software/thelounge",
         "software/tick",
         "software/tiddlywiki",
+        "software/titra",
         "software/transmission",
         "software/trilium",
         "software/turtl",

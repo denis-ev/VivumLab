@@ -1,0 +1,36 @@
+---
+version: "2.0"
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  titra_network:
+
+services:
+  titra:
+    image: kromit/titra:{{ titra.version }}
+    container_name: titra
+    restart: unless-stopped
+    networks:
+      - traefik_network
+      - titra_network
+    depends_on:
+      - titra_mongodb
+    environment:
+      - ROOT_URL=https://{{ service_domain }}
+      - MONGO_URL=mongodb://titra_mongodb/titra
+      - PORT=3000
+    labels:
+      - "traefik.http.services.titra.loadbalancer.server.scheme=http"
+      - "traefik.http.services.titra.loadbalancer.server.port=3000"
+{% include './labels.j2' %}
+
+  titra_mongodb:
+    image: mongo:{{ titra.db_version }}
+    container_name: titra_mongodb
+    restart: unless-stopped
+    volumes:
+     - "{{ volumes_root }}/titra/db:/data/db"
+    networks:
+      - titra_network
