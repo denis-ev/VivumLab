@@ -135,8 +135,8 @@ class Service < Thor
   # servicename and command are inputs from the user.
   desc 'SERVICENAME', 'dynamic service task defers to service specific namespace provided as parameter'
   option :value, type: :string, required: false, desc: I18n.t('options.valuetoset'), aliases: ['-v']
-  def dynamic(dynamic_namespace, command = 'help')
-    run_common
+  def dynamic(dynamic_namespace = 'help', command = 'help')
+    run_common unless command == 'help'
     return unless is_valid_service?(dynamic_namespace)
 
     if Object.const_get(dynamic_namespace.capitalize).new.respond_to? command.to_sym
@@ -190,7 +190,11 @@ class Service < Thor
     end
   end
   # rubocop:enable Metrics/BlockLength
-
-  default_task :dynamic
+  begin
+    has_dynamic_namespace = ARGV[ARGV.index('service')+1..ARGV.length].length > 0
+    default_task :dynamic if has_dynamic_namespace
+  rescue Exception => e
+    default_task :help unless has_dynamic_namespace
+  end
 end
 # rubocop:enable Metrics/ClassLength

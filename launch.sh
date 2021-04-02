@@ -125,16 +125,16 @@ fi
 
 if [[ ${VERSION} == 'local' || ${VERSION} == 'dev' ]]; then
   docker run --rm -it \
-    -v "$(pwd)/settings/id_rsa":"/root/.ssh/$(pwless_sshkey)":z \
-    -v "$(pwd)/settings/id_rsa.pub":"/root/.ssh/$(pwless_sshkey).pub":z \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)":z \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub":z \
     -v $(pwd):/data:z \
     -v $(pwd)/settings:/data/settings:z \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass:z \
     vivumlab/vivumlab:${VERSION} /bin/bash
 else
   docker run --rm -it \
-    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)" \
-    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub" \
+    -v "$HOME/.ssh/$(pwless_sshkey)":"/root/.ssh/$(pwless_sshkey)":z \
+    -v "$HOME/.ssh/$(pwless_sshkey).pub":"/root/.ssh/$(pwless_sshkey).pub":z \
     -v $(pwd)/settings/:/data/settings/:z \
     -v $HOME/.vlab_vault_pass:/vlab_vault_pass:z \
     vivumlab/vivumlab:${VERSION} /bin/bash
@@ -143,18 +143,18 @@ fi
 <<ENDOFSIGSTART=
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAmAbmBUACgkQ+4SMbaIP
-99RTUhAAqhW9l1NFmEVXl2i5nvZjLTUwAIrFvZd9YlgPQLXwfWiqjFrGdVbPU8GS
-bl7gdux1xPEqW8HOrzJFvtx9LOvNqhEa2C7XXKPG8xb6Cx9odHCwtDSI/WRleH6p
-vS3RmkEOmAFRIyqqwnJxoKYu+95U0LJbUw5rV4PxZlML0exVgiEK1KpVrJKgvt46
-nNeQBFuSHouMUoaQUVKIZrcJJnqP0ZA0EcLUgZVTH//2gJKRuW/yuqkH+/H72uAN
-rCTAlM0FLyv/9zuPlPcChd4bF6uWku7VbpNA6YpVamUMW9JRZGgQNP4GDsHib0BE
-zMxrCbf83lfx24LGK25ddMTPhF+siJGMUen6mr23U2rbJmmjlhKgN2QsRKZovDXZ
-LSTT07t88Rc0pM/jsAQgHYjNvWhrH5WtJkGEHchdblBFc6532Sx6tRv46baJk5Tu
-NyvF8kRBwx6AjAmC2v4GSdaAEdHzwCuf7pwusI6dCE6pim651u5MtFQ9g7KCuWIG
-o38WPhboRt8Re1UNozA8NTVXQFioQtxPGXhYg6vubWa20miP9etCOL7m+q9kvxX5
-bSr+USznZnfCYxeUQ4oAKYKROt0TTW+atlly8CUHBwTc3BzqHA6q92Zu4kjNo3yJ
-mhtQoSqybnW32sOJtTeQ9zdbbwEzyGCkRzwm1qiACq28+6Wu28A=
-=De9B
+iQIzBAEBCAAdFiEEjy1P4AM9/4EN573P+4SMbaIP99QFAmAwT44ACgkQ+4SMbaIP
+99SaeQ//cP15wLe3TR0l6WZHS9ueeU8W2wNYFH0mrBtYwWaGAJKZsntTsrnrxxlv
+YwJ+nAN59eT8oDxUzFnVWJ8QeS/k7RSWo+o6yxDYias74ebsglt8uo2oe84Lpegs
+o9s1uOZ93HWTmvarVq561sL7hOFrhu8OQVQQ7u03Q+SoOCGEEDKByztKMbM5Slvo
+hbshksshwfxbnAJNPWgZaNOvUXegim9HL4ZhGK6lZjeqH7/LzpXSxUJ+eKISkdnA
+3vW95NdLOGcbbQzpLGBGb3Np7n+B+cN3zQU9F/xumSR2EdejAPc7qyw8+WCaUEjK
+AjmEs2+jJsqXdNEpBn/pWjkF8fUUFSsOOCjkVkZc6Dfvc8bm4avpYlYzE8EbC36O
+QCZ3U5g6O8RRtACjVFKHAEDpm39tmGgbM/jZyTwWrtcepLGa9ryyjjjq5EoBhrm9
+FTrGg2ttfiEg5ss5jgytAkR2Pcd4OYPIJIsnuy6vHXTISsV+WfAqTGzgXM3GGqeV
+Uq/NzwV+zFuH1tliGouDnC6+vvp4jksCCqIE9Dvn62/GAqt1UETEf2aUW1x/7KSE
+v9L42pqSTQQEYcJWjtPXYXSzv6Xwt0roFeFIzAePV/Xnts0V7Esg7RHhBNUrVHDJ
+ldSKWfU9aejytiW0BIVMrn94ZUUt1NnjL6xkVox4z2/oglnVozo=
+=nEM4
 -----END PGP SIGNATURE-----
 ENDOFSIGSTART=

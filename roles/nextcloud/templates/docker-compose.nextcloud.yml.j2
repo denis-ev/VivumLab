@@ -31,7 +31,6 @@ services:
 
   nextcloud:
     container_name: nextcloud
-    #image: nextcloud:{{ nextcloud.version }}
     build: ./build
     restart: unless-stopped
     user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"

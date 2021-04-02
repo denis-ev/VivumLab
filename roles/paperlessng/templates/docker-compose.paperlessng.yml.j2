@@ -1,0 +1,86 @@
+---
+version: '3.4'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  paperlessng_network:
+
+services:
+  broker:
+    image: redis:6.0
+    restart: unless-stopped
+    networks:
+      - paperlessng_network
+
+  paperlessngdb:
+    image: postgres:13
+    restart: unless-stopped
+    networks:
+      - paperlessng_network
+    environment:
+      - POSTGRES_DB=paperless
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/paperlessng_db_password chars=ascii_letters') }}
+      - POSTGRES_USER=paperless
+    volumes:
+      - "{{ volumes_root }}/paperlessng/db:/var/lib/postgresql/data"
+      - tmpfs_paperlessng_vol:/cache
+
+  paperlessng:
+    restart: unless-stopped
+    image: jonaswinkler/paperless-ng:{{ paperlessng.version }}
+    depends_on:
+      - paperlessngdb
+      - broker
+      - gotenberg
+      - tika
+    networks:
+      - traefik_network
+      - paperlessng_network
+    environment:
+      - PAPERLESS_PASSPHRASE={{lookup('password', './settings/' + config_dir + '/passwords/paperlessng_passphrase chars=ascii_letters')}}
+      - USERMAP_UID={{ uid_output.stdout }}
+      - USERMAP_GID={{ gid_output.stdout }}
+      - PAPERLESS_REDIS=redis://broker:6379
+      - PAPERLESS_DBHOST=paperlessngdb
+      - PAPERLESS_DBPASS={{ lookup('password', './settings/' + config_dir + '/passwords/paperlessng_db_password chars=ascii_letters') }}
+      - PAPERLESS_TIKA_ENABLED=1
+      - PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://gotenberg:3000
+      - PAPERLESS_TIKA_ENDPOINT=http://tika:9998
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - "{{ volumes_root }}/paperless/data:/usr/src/paperless/data"
+      - "{{ volumes_root }}/paperless/media:/usr/src/paperless/media"
+      - "{{ storage_dir }}/Documents/consume:/consume"
+      - "{{ storage_dir }}/Documents/export:/export"
+    labels:
+      - "traefik.http.services.paperlessng.loadbalancer.server.scheme=http"
+      - "traefik.http.services.paperlessng.loadbalancer.server.port=8000"
+{% include './labels.j2' %}
+
+  gotenberg:
+    image: thecodingmachine/gotenberg
+    restart: unless-stopped
+    environment:
+      - DISABLE_GOOGLE_CHROME=1
+    networks:
+      - paperlessng_network
+
+  tika:
+    image: apache/tika
+    restart: unless-stopped
+    networks:
+      - paperlessng_network
+
+volumes:
+  tmpfs_paperlessng_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

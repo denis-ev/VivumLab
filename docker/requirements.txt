@@ -17,7 +17,7 @@ Jinja2==2.11.3
 jmespath==0.10.0
 MarkupSafe==1.1.1
 nodeenv==1.5.0
-pre-commit==2.10.0
+pre-commit==2.10.1
 pyasn1==0.4.8
 pycparser==2.20
 pycrypto==2.6.1

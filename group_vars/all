@@ -80,6 +80,7 @@ services:
   openvpn:
   organizr:
   paperless:
+  paperlessng:
   peertube:
   photoprism:
   pihole:
@@ -114,6 +115,7 @@ services:
   thelounge:
   tick:
   tiddlywiki:
+  titra:
   transmission:
   trilium:
   turtl:
@@ -209,6 +211,7 @@ openldap:
 openvpn:
 organizr:
 paperless:
+paperlessng:
 peertube:
 photoprism:
 pihole:
@@ -241,6 +244,7 @@ teedy:
 thelounge:
 tick:
 tiddlywiki:
+titra:
 transmission:
 trilium:
 turtl:

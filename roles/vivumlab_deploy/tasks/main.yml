@@ -125,6 +125,7 @@
     - "Pictures"
     - "temp"
     - "Video"
+  become: yes
 
 - name: Configure NAS - Samba Shares
   when:

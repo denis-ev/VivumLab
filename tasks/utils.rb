@@ -20,6 +20,7 @@ module Utils
   end
 
   def playbook_command(playbook, extra = nil, debug = '', skip_tags)
+    skip_tags = [] if skip_tags.nil?
     command = []
     command << "ansible-playbook #{playbook.chomp}"
     command << convert_debug_enum(debug) unless convert_debug_enum(debug).size.zero?
