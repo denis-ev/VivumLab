@@ -22,7 +22,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 
 ## Information
 
-**Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
+**Docker Image:** mattermost/focalboard <br />
 **Current Image Version:** {{ focalboard.version }}
 
 ## SETUP
