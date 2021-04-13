@@ -29,6 +29,7 @@ module.exports = {
       label: "Software",
       items: [
         "software/adguardhome",
+        "software/airbyte",
         "software/airsonic",
         "software/apache2",
         "software/authelia",

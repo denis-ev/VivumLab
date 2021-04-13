@@ -1,0 +1,133 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  airbyte_network:
+
+services:
+  init:
+    image: airbyte/init:0.18.2-alpha
+    container_name: init
+    command: /bin/sh -c "./scripts/create_mount_directories.sh /local_parent /tmp /tmp/airbyte_local"
+    environment:
+      - LOCAL_ROOT=/tmp/airbyte_local
+      - HACK_LOCAL_ROOT_PARENT=/tmp
+    volumes:
+      - /tmp:/local_parent
+    networks:
+      #- traefik_network
+      - airbyte_network
+  db:
+    image: airbyte/db:0.18.2-alpha
+    container_name: airbyte-db
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=db-airbyte
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - airbyte_network
+  seed:
+    image: airbyte/seed:0.18.2-alpha
+    container_name: airbyte-data-seed
+    # Pre-populate the volume if it is empty.
+    # See: https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container
+    volumes:
+      - data:/app/seed
+    networks:
+      - airbyte_network
+  scheduler:
+    image: airbyte/scheduler:0.18.2-alpha
+    container_name: airbyte-scheduler
+    environment:
+      - DATABASE_USER=docker
+      - DATABASE_PASSWORD=docker
+      - DATABASE_URL=jdbc:postgresql://db:5432/airbyte
+      - WAIT_BEFORE_HOSTS=5
+      - WAIT_HOSTS_TIMEOUT=45
+      - WAIT_HOSTS=db:5432
+      - WORKSPACE_ROOT=/tmp/workspace
+      - WORKSPACE_DOCKER_MOUNT=airbyte_workspace
+      - LOCAL_DOCKER_MOUNT=/tmp/airbyte_local
+      - CONFIG_ROOT=/data
+      - TRACKING_STRATEGY=segment
+      - AIRBYTE_VERSION=0.18.2-alpha
+      - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - workspace:/tmp/workspace
+      - /tmp/airbyte_local:/tmp/airbyte_local
+      - data:/data
+    networks:
+      - traefik_network
+      - airbyte_network
+  server:
+    image: airbyte/server:0.18.2-alpha
+    container_name: airbyte-server
+    environment:
+      - DATABASE_USER=docker
+      - DATABASE_PASSWORD=docker
+      - DATABASE_URL=jdbc:postgresql://db:5432/airbyte
+      - WAIT_BEFORE_HOSTS=5
+      - WAIT_HOSTS_TIMEOUT=45
+      - WAIT_HOSTS=db:5432
+      - CONFIG_ROOT=/data
+      - TRACKING_STRATEGY=segment
+      - AIRBYTE_VERSION=0.18.2-alpha
+      - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
+      - WORKSPACE_ROOT=/tmp/workspace
+    ports:
+      - 8001:8001
+    volumes:
+      - workspace:/tmp/workspace
+      - data:/data
+    networks:
+      #- traefik_network
+      - airbyte_network
+  webapp:
+    image: airbyte/webapp:0.18.2-alpha
+    container_name: airbyte-webapp
+    environment:
+      - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
+      - AIRBYTE_VERSION=0.18.2-alpha
+      - API_URL=/api/v1/
+      - IS_DEMO=${IS_DEMO:-}
+      - PAPERCUPS_STORYTIME=${PAPERCUPS_STORYTIME:-}
+      - TRACKING_STRATEGY=segment
+    networks:
+      - traefik_network
+      - airbyte_network
+    labels:
+      - "traefik.http.services.airbyte.loadbalancer.server.scheme=http"
+      - "traefik.http.services.airbyte.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+  airbyte-temporal:
+    image: temporalio/auto-setup:1.7.0
+    container_name: airbyte-temporal
+    ports:
+      - 7233:7233
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - POSTGRES_USER=docker
+      - POSTGRES_PWD=docker
+      - POSTGRES_SEEDS=db
+      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development.yaml
+    volumes:
+      - ./temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
+    networks:
+      #- traefik_network
+      - airbyte_network
+volumes:
+  workspace:
+    name: airbyte_workspace
+  data:
+    name: airbyte_data
+  db:
+    name: airbyte_db

@@ -52,6 +52,8 @@ http:
           - POST
         accessControlAllowOriginList:
           - http://*.{{ domain }}
+          - https://*.{{ domain }}
+          - https://airbyte.{{ domain }}
           # @todo cors-headers middleware implement custom list or auto fetching of custom domains
           # @body fetch and add custom domains
         accessControlMaxAge: 100

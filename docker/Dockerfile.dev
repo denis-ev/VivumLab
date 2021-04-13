@@ -23,7 +23,7 @@ ENV VERSION=$ARG_VERSION
 ENV BUILD_PACKAGES \
     tini=0.18.0-1 \
     wget=1.20.1-1.1 \
-    curl=7.64.0-4+deb10u1 \
+    curl=7.64.0-4+deb10u2 \
     unzip \
     less=487-0.1+b1 \
     git=1:2.20.1-2+deb10u3 \
@@ -130,7 +130,7 @@ ENV VERSION=$ARG_VERSION
 ENV PROD_PACKAGES \
     tini=0.18.0-1 \
     wget=1.20.1-1.1 \
-    curl=7.64.0-4+deb10u1 \
+    curl=7.64.0-4+deb10u2 \
     unzip \
     less=487-0.1+b1 \
     git=1:2.20.1-2+deb10u3 \

@@ -1,6 +1,7 @@
 ---
 services:
   adguardhome:
+  airbyte:
   airsonic:
   apache2:
   apple_health_influx:
@@ -131,6 +132,7 @@ docs:
 apache2:
 apple_health_influx:
 adguardhome:
+airbyte:
 airsonic:
 authelia:
   enable:

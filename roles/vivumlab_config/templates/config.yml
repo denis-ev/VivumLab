@@ -200,6 +200,16 @@ adguardhome:
   amd64: False
   arm64: False
   armv7: False
+airbyte:
+  enable: {{ airbyte.enable | default(False) }}
+  hsts: {{ airbyte.hsts | default(True) }}
+  auth: {{ airbyte.auth | default(False) }}
+  domain: {{ airbyte.domain | default(False) }}
+  subdomain: {{ airbyte.subdomain | default("airbyte")}}
+  version: {{ airbyte.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 airsonic:
   enable: {{ airsonic.enable | default(False) }}
   hsts: {{ airsonic.hsts | default(True) }}
