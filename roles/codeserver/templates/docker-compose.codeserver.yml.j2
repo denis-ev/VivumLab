@@ -12,8 +12,8 @@ services:
     image: codercom/code-server:{{ codeserver.version }}
     environment:
       - PASSWORD={{ default_password }}
-      - SERVICE_URL={{ service_url }}
-      - ITEM_URL={{ item_url }}
+      - SERVICE_URL={{ codeserver.service_url }}
+      - ITEM_URL={{ codeserver.item_url }}
     volumes:
       - "{{ volumes_root }}/codeserver/.local:/home/coder/.local"
       - "{{ volumes_root }}/codeserver/project:/home/coder/project"
