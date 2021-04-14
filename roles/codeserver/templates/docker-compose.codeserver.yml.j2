@@ -18,6 +18,7 @@ services:
       - "{{ volumes_root }}/codeserver/.local:/home/coder/.local"
       - "{{ volumes_root }}/codeserver/.ssh:/home/coder/.ssh"
       - "{{ volumes_root }}/codeserver/project:/home/coder/project"
+      - "{{ volumes_root }}/codeserver/bin:/home/coder/bin"
     command: ['--auth', 'password', '--disable-telemetry']
     restart: unless-stopped
     networks:
