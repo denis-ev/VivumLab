@@ -33,6 +33,7 @@ module.exports = {
         "software/apache2",
         "software/authelia",
         "software/barcodebuddy",
+        "software/baserow",
         "software/beets",
         "software/bitwarden",
         "software/bookstack",
