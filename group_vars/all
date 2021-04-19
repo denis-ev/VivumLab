@@ -26,6 +26,7 @@ services:
   ethercalc:
   factorio:
   firefly_iii:
+  focalboard:
   folding_at_home:
   freshrss:
   funkwhale:
@@ -157,6 +158,7 @@ erpnext:
 ethercalc:
 factorio:
 firefly_iii:
+focalboard:
 folding_at_home:
 freshrss:
 funkwhale:
