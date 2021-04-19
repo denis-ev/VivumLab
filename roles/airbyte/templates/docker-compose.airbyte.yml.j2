@@ -12,7 +12,7 @@ networks:
 services:
   init:
     image: airbyte/init:0.18.2-alpha
-    container_name: init
+    # container_name: init
     command: /bin/sh -c "./scripts/create_mount_directories.sh /local_parent /tmp /tmp/airbyte_local"
     environment:
       - LOCAL_ROOT=/tmp/airbyte_local
@@ -24,7 +24,7 @@ services:
       - airbyte_network
   db:
     image: airbyte/db:0.18.2-alpha
-    container_name: airbyte-db
+    # container_name: airbyte-db
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
@@ -35,7 +35,7 @@ services:
       - airbyte_network
   seed:
     image: airbyte/seed:0.18.2-alpha
-    container_name: airbyte-data-seed
+    # container_name: airbyte-data-seed
     # Pre-populate the volume if it is empty.
     # See: https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container
     volumes:
@@ -44,7 +44,7 @@ services:
       - airbyte_network
   scheduler:
     image: airbyte/scheduler:0.18.2-alpha
-    container_name: airbyte-scheduler
+    # container_name: airbyte-scheduler
     environment:
       - DATABASE_USER=docker
       - DATABASE_PASSWORD=docker
@@ -69,7 +69,7 @@ services:
       - airbyte_network
   server:
     image: airbyte/server:0.18.2-alpha
-    container_name: airbyte-server
+    # container_name: airbyte-server
     environment:
       - DATABASE_USER=docker
       - DATABASE_PASSWORD=docker
@@ -82,17 +82,25 @@ services:
       - AIRBYTE_VERSION=0.18.2-alpha
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
       - WORKSPACE_ROOT=/tmp/workspace
-    ports:
-      - 8001:8001
+    # ports:
+      # - 8001:8001
     volumes:
       - workspace:/tmp/workspace
       - data:/data
+    labels:
+      - "traefik.http.services.airbyte-api.loadbalancer.server.scheme=http"
+      - "traefik.http.services.airbyte-api.loadbalancer.server.port=8001"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.{{ service_item }}-api-http.rule=Host(`{{ service_domain }}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.{{ service_item }}-api.rule=Host(`{{ service_domain }}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.{{ service_item }}-http.entrypoints=http"
     networks:
-      #- traefik_network
+      - traefik_network
       - airbyte_network
   webapp:
     image: airbyte/webapp:0.18.2-alpha
-    container_name: airbyte-webapp
+    # container_name: airbyte-webapp
     environment:
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
       - AIRBYTE_VERSION=0.18.2-alpha
@@ -109,7 +117,7 @@ services:
 {% include './labels.j2' %}
   airbyte-temporal:
     image: temporalio/auto-setup:1.7.0
-    container_name: airbyte-temporal
+    # container_name: airbyte-temporal
     ports:
       - 7233:7233
     environment:
