@@ -52,6 +52,7 @@ module.exports = {
         "software/erpnext",
         "software/ethercalc",
         "software/factorio",
+        "software/focalboard",
         "software/firefly",
         "software/folding_at_home",
         "software/freshrss",

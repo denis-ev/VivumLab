@@ -1,0 +1,55 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove # comment
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  focalboard_network:
+
+services:
+  focalboard:
+    restart: unless-stopped
+    # REQUIRED
+    image: mattermost/focalboard:{{ focalboard.version }}
+    environment:
+      - VIRTUAL_HOST={{ service_domain }}
+      - VIRTUAL_PORT=8000
+    networks:
+      - traefik_network
+      - focalboard_network
+    depends_on:
+      - focalboard_db
+    volumes:
+      - "{{ volumes_root }}/focalboard/config:/etc/focalboard"
+      - "{{ volumes_root }}/focalboard/logs:/var/log/focalboard"
+      - "{{ volumes_root }}/focalboard/data:/var/opt/focalboard"
+      - "{{ volumes_root }}/focalboard/certs:/certs"
+      - "{{ volumes_root }}/focalboard/backups:/var/opt/focalboard/backups"
+    labels:
+      - "traefik.http.services.focalboard.loadbalancer.server.scheme=http"
+      - "traefik.http.services.focalboard.loadbalancer.server.port=8000"
+{% include './labels.j2' %}
+
+
+  focalboard_db:
+    image: "postgres"
+    restart: unless-stopped
+    networks:
+      - focalboard_network
+    environment:
+      - POSTGRES_DB=focalboard_db
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/focalboard_db_password chars=ascii_letters') }}
+      - POSTGRES_USER=focalboard_user
+      - PGDATA=/database
+    volumes:
+      - "{{ volumes_root }}/focalboard/db:/database"
+      - tmpfs_focalboard_vol:/cache
+
+volumes:
+  tmpfs_focalboard_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

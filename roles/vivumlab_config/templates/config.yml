@@ -484,6 +484,16 @@ firefly_iii:
   amd64: False
   arm64: False
   armv7: False
+focalboard:
+  enable: {{ focalboard.enable | default(False) }}
+  hsts: {{ focalboard.hsts | default(True) }}
+  auth: {{ focalboard.auth | default(False) }}
+  domain: {{ focalboard.domain | default(False) }}
+  subdomain: {{ focalboard.subdomain | default("focalboard")}}
+  version: {{ focalboard.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 folding_at_home:
   enable: {{ folding_at_home.enable | default(False) }}
   hsts: {{ folding_at_home.hsts | default(True) }}
