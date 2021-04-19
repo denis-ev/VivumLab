@@ -58,7 +58,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - workspace:/tmp/workspace
-      - /tmp/airbyte_local:/tmp/airbyte_local
+      - "{{ volumes_root }}/{{ service_item }}/airbyte_local:/tmp/airbyte_local"
     networks:
       - traefik_network
       - airbyte_network
