@@ -24,7 +24,7 @@ services:
     image: airbyte/db:0.18.2-alpha
     environment:
       - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
+      - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
       - POSTGRES_DB=db-airbyte
     volumes:
       - db:/var/lib/postgresql/data
@@ -43,7 +43,7 @@ services:
     image: airbyte/scheduler:0.18.2-alpha
     environment:
       - DATABASE_USER=docker
-      - DATABASE_PASSWORD=docker
+      - DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
       - DATABASE_URL=jdbc:postgresql://db:5432/airbyte
       - WAIT_BEFORE_HOSTS=5
       - WAIT_HOSTS_TIMEOUT=45
@@ -67,7 +67,7 @@ services:
     image: airbyte/server:0.18.2-alpha
     environment:
       - DATABASE_USER=docker
-      - DATABASE_PASSWORD=docker
+      - DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
       - DATABASE_URL=jdbc:postgresql://db:5432/airbyte
       - WAIT_BEFORE_HOSTS=5
       - WAIT_HOSTS_TIMEOUT=45
@@ -115,7 +115,7 @@ services:
       - DB=postgresql
       - DB_PORT=5432
       - POSTGRES_USER=docker
-      - POSTGRES_PWD=docker
+      - POSTGRES_PWD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
       - POSTGRES_SEEDS=db
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development.yaml
     volumes:
