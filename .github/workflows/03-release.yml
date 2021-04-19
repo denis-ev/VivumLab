@@ -16,9 +16,9 @@ jobs:
         with:
           fetch-depth: 0
         # Lint Commit Messages
-      - uses: wagoid/commitlint-github-action@v2
+      - uses: wagoid/commitlint-github-action@v3.1.0
       - name: Setup Node
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
@@ -73,9 +73,9 @@ jobs:
         with:
           fetch-depth: 0
         # Lint Commit Messages
-      - uses: wagoid/commitlint-github-action@v2
+      - uses: wagoid/commitlint-github-action@v3.1.0
       - name: Setup Node
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/

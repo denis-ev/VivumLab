@@ -1,0 +1,40 @@
+---
+- name: Make titra directory.
+  file:
+    path: "{{ volumes_root }}/titra"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Make titra db directory.
+  file:
+    path: "{{ volumes_root }}/titra/db"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+
+- name: Copy titra docker-compose.yml file into place.
+  template:
+    src: docker-compose.titra.yml.j2
+    dest: "{{ volumes_root }}/titra/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
+
+- name: Configure titra systemd service.
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/titra.service
+  become: yes
+
+- name: Start titra
+  systemd:
+    name: titra
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

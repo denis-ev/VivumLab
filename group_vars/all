@@ -27,6 +27,7 @@ services:
   ethercalc:
   factorio:
   firefly_iii:
+  focalboard:
   folding_at_home:
   freshrss:
   funkwhale:
@@ -80,6 +81,7 @@ services:
   openvpn:
   organizr:
   paperless:
+  paperlessng:
   peertube:
   photoprism:
   pihole:
@@ -114,6 +116,7 @@ services:
   thelounge:
   tick:
   tiddlywiki:
+  titra:
   transmission:
   trilium:
   turtl:
@@ -157,6 +160,7 @@ erpnext:
 ethercalc:
 factorio:
 firefly_iii:
+focalboard:
 folding_at_home:
 freshrss:
 funkwhale:
@@ -209,6 +213,7 @@ openldap:
 openvpn:
 organizr:
 paperless:
+paperlessng:
 peertube:
 photoprism:
 pihole:
@@ -241,6 +246,7 @@ teedy:
 thelounge:
 tick:
 tiddlywiki:
+titra:
 transmission:
 trilium:
 turtl:
