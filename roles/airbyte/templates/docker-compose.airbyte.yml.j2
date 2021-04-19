@@ -11,7 +11,7 @@ networks:
 
 services:
   init:
-    image: airbyte/init:0.18.2-alpha
+    image: airbyte/init:{{ airbyte.initversion }}
     command: /bin/sh -c "./scripts/create_mount_directories.sh /local_parent /tmp /tmp/airbyte_local"
     environment:
       - LOCAL_ROOT=/tmp/airbyte_local
@@ -21,26 +21,26 @@ services:
     networks:
       - airbyte_network
   db:
-    image: airbyte/db:0.18.2-alpha
+    image: airbyte/db:{{ airbyte.dbversion }}
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
       - POSTGRES_DB=db-airbyte
     volumes:
-      - db:/var/lib/postgresql/data
+      - "{{ volumes_root }}/{{ service_item }}/data:/var/lib/postgresql/data"
     networks:
       - airbyte_network
   seed:
-    image: airbyte/seed:0.18.2-alpha
+    image: airbyte/seed:{{ airbyte.seedversion }}
     # container_name: airbyte-data-seed
     # Pre-populate the volume if it is empty.
     # See: https://docs.docker.com/storage/volumes/#populate-a-volume-using-a-container
     volumes:
-      - data:/app/seed
+      - "{{ volumes_root }}/{{ service_item }}/data:/app/seed"
     networks:
       - airbyte_network
   scheduler:
-    image: airbyte/scheduler:0.18.2-alpha
+    image: airbyte/scheduler:{{ airbyte.schedulerversion }}
     environment:
       - DATABASE_USER=docker
       - DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
@@ -53,18 +53,17 @@ services:
       - LOCAL_DOCKER_MOUNT=/tmp/airbyte_local
       - CONFIG_ROOT=/data
       - TRACKING_STRATEGY=segment
-      - AIRBYTE_VERSION=0.18.2-alpha
+      - AIRBYTE_VERSION={{ airbyte.airbyteversion }}
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - workspace:/tmp/workspace
       - /tmp/airbyte_local:/tmp/airbyte_local
-      - data:/data
     networks:
       - traefik_network
       - airbyte_network
   server:
-    image: airbyte/server:0.18.2-alpha
+    image: airbyte/server:{{ airbyte.serverversion }}
     environment:
       - DATABASE_USER=docker
       - DATABASE_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/airbyte_dbPass chars=ascii_letters length=32')}}
@@ -74,7 +73,7 @@ services:
       - WAIT_HOSTS=db:5432
       - CONFIG_ROOT=/data
       - TRACKING_STRATEGY=segment
-      - AIRBYTE_VERSION=0.18.2-alpha
+      - AIRBYTE_VERSION={{ airbyte.airbyteversion }}
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
       - WORKSPACE_ROOT=/tmp/workspace
     volumes:
@@ -92,10 +91,10 @@ services:
       - traefik_network
       - airbyte_network
   webapp:
-    image: airbyte/webapp:0.18.2-alpha
+    image: airbyte/webapp:{{ airbyte.webappversion }}
     environment:
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
-      - AIRBYTE_VERSION=0.18.2-alpha
+      - AIRBYTE_VERSION={{ airbyte.airbyteversion }}
       - API_URL=/api/v1/
       - IS_DEMO=${IS_DEMO:-}
       - PAPERCUPS_STORYTIME=${PAPERCUPS_STORYTIME:-}
@@ -108,7 +107,7 @@ services:
       - "traefik.http.services.airbyte.loadbalancer.server.port=80"
 {% include './labels.j2' %}
   airbyte-temporal:
-    image: temporalio/auto-setup:1.7.0
+    image: temporalio/auto-setup:{{ airbyte.temporalversion }}
     ports:
       - 7233:7233
     environment:
@@ -121,12 +120,9 @@ services:
     volumes:
       - ./temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
     networks:
-      #- traefik_network
       - airbyte_network
 volumes:
   workspace:
     name: airbyte_workspace
   data:
     name: airbyte_data
-  db:
-    name: airbyte_db
