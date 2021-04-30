@@ -148,6 +148,7 @@
     - "Pictures"
     - "temp"
     - "Video"
+  become: yes
 
 - name: Mount NAS Drives
   when: nas_enable
