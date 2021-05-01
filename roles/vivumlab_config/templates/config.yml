@@ -346,6 +346,8 @@ codeserver:
   domain: {{ codeserver.domain | default(False) }}
   subdomain: {{ codeserver.subdomain | default("codeserver") }}
   version: {{ codeserver.version | default("latest") }}
+  service_url: {{ codeserver.service_url | default("") }}
+  item_url: {{ codeserver.item_url | default("") }}
   amd64: False
   arm64: False
   armv7: False

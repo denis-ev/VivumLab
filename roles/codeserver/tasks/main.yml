@@ -11,6 +11,14 @@
     - "project"
   become: yes
 
+- name: Create a symbolic link between ~/bin and {{volumes_root}}/codeserver/bin
+  ansible.builtin.file:
+    src: ~/bin
+    dest: "{{ volumes_root }}/codeserver/bin"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+    state: link
+
 - name: Copy code-server docker-compose.yml file into place.
   template:
     src: docker-compose.codeserver.yml.j2
