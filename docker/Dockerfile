@@ -24,7 +24,7 @@ ENV BUILD_PACKAGES \
     tini=0.18.0-1 \
     wget=1.20.1-1.1 \
     curl=7.64.0-4+deb10u2 \
-    unzip \
+    unzip=6.0-23+deb10u2 \
     less=487-0.1+b1 \
     git=1:2.20.1-2+deb10u3 \
     jq=1.5+dfsg-2+b1 \
@@ -36,8 +36,8 @@ ENV BUILD_PACKAGES \
     python3-venv=3.7.3-1 \
     python3-pip=18.1-5 \
     build-essential=12.6 \
-    ssh \
-    apt-utils \
+    ssh=1:7.9p1-10+deb10u2 \
+    apt-utils=1.8.2.3 \
     gcc=4:8.3.0-1
 
 # Make sure we use the virtualenv:
