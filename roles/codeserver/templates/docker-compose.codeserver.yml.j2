@@ -12,9 +12,17 @@ services:
     image: codercom/code-server:{{ codeserver.version }}
     environment:
       - PASSWORD={{ default_password }}
+{% if codeserver.service_url %}
+      - SERVICE_URL={{ codeserver.service_url }}
+{% endif %}
+{% if codeserver.item_url %}
+      - ITEM_URL={{ codeserver.item_url }}
+{% endif %}
     volumes:
       - "{{ volumes_root }}/codeserver/.local:/home/coder/.local"
+      - "{{ volumes_root }}/codeserver/.ssh:/home/coder/.ssh"
       - "{{ volumes_root }}/codeserver/project:/home/coder/project"
+      - "{{ volumes_root }}/codeserver/bin:/home/coder/bin"
     command: ['--auth', 'password', '--disable-telemetry']
     restart: unless-stopped
     networks:
