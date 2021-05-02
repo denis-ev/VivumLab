@@ -41,12 +41,22 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 eg.
 ```
 airbyte
-  enable: {{ airbyte.version }}
-  hsts: {{ airbyte.hsts }}
-  auth: {{ airbyte.auth }}
-  domain: {{ airbyte.domain }}
-  subdomain: {{ airbyte.subdomain }}
-  version: {{ airbyte.version }}
+  enable: {{ airbyte.enable | default(False) }}
+  hsts: {{ airbyte.hsts | default(True) }}
+  auth: {{ airbyte.auth | default(False) }}
+  domain: {{ airbyte.domain | default(False) }}
+  subdomain: {{ airbyte.subdomain | default("airbyte")}}
+  airbyteversion: {{ airbyteversion | default("0.18.2-alpha")}}
+  serverversion: {{ airbyte.serverversion | default("0.18.2-alpha") }}
+  initversion: {{ airbyte.initversion | default("0.18.2-alpha") }}
+  dbversion: {{ airbyte.dbversion | default("0.18.2-alpha") }}
+  seedversion: {{ airbyte.seedversion | default("0.18.2-alpha") }}
+  schedulerversion: {{ airbyte.schedulerversion | default("0.18.2-alpha") }}
+  webappversion: {{ airbyte.webappversion | default("0.18.2-alpha") }}
+  temporalversion: {{ airbyte.temporalversion | default("1.7.0") }}
+  amd64: False
+  arm64: False
+  armv7: False
 ```
 
 #### Finalising changes:
