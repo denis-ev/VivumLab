@@ -23,7 +23,7 @@ custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=docume
 ## Information
 
 **Docker Image:** !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!! <br />
-**Current Image Version:** {{ airbyte.version }}
+**Current Image Version:** {{ airbyte.airbyteversion }}
 
 ## SETUP
 
