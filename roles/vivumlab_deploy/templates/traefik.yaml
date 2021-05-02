@@ -117,7 +117,7 @@ log:
 certificatesResolvers:
   dns:
     acme:
-      caServer: https://acme-v02.api.letsencrypt.org/directory
+      caServer: {{ traefik.acme_server }}
       email: {{ ((admin_email == None) | ternary('test@test.com', admin_email)) }}
       keyType: EC256
       storage: acme.json
@@ -129,7 +129,7 @@ certificatesResolvers:
           - '1.0.0.1:53'
   http:
     acme:
-      caServer: https://acme-v02.api.letsencrypt.org/directory
+      caServer: {{ traefik.acme_server }}
       email: {{ ((admin_email == None) | ternary('test@test.com', admin_email)) }}
       keyType: EC256
       storage: acme.json

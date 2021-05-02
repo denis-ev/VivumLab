@@ -1,4 +1,11 @@
 ---
+- name: Check if nextcloud configuration is correct
+  assert:
+    msg: One (and only one) of the databases should be enabled (PostgreSQL/MariaDB)
+    that:
+      - not(nextcloud.postgres and nextcloud.mariadb)
+      - nextcloud.postgres or nextcloud.mariadb
+
 - name: Create necessary folders, with appropriate permissions.
   file:
     path: "{{ volumes_root }}/nextcloud/{{ item }}"
@@ -6,12 +13,14 @@
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
   with_items:
-    - "config"
-    - "custom_apps"
-    - "themes"
-    - "postgres"
-    - "web"
-    - "build"
+    - config
+    - custom_apps
+    - themes
+    # create both DB dirs just in case (e.g. migrations)
+    - postgres
+    - mariadb
+    - web
+    - build
   become: yes
 
 - name: Create necessary Media Folders / NAS Mount Points

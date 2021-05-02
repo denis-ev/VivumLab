@@ -133,6 +133,7 @@ traefik:
   domain: {{ traefik.domain | default(False) }}
   subdomain: {{ traefik.subdomain | default("traefik") }}
   auth: {{ traefik.auth | default(False) }}
+  acme_server: {{ traefik.acme_server | default("https://acme-v02.api.letsencrypt.org/directory") }}
   expose_internally: {{ traefik.expose_internally | default(True) }}
   expose_externally: {{ traefik.expose_externally | default(False) }}
   ping: {{ traefik.ping | default(False) }}
@@ -363,6 +364,8 @@ codeserver:
   domain: {{ codeserver.domain | default(False) }}
   subdomain: {{ codeserver.subdomain | default("codeserver") }}
   version: {{ codeserver.version | default("latest") }}
+  service_url: {{ codeserver.service_url | default("") }}
+  item_url: {{ codeserver.item_url | default("") }}
   amd64: False
   arm64: False
   armv7: False
@@ -1017,7 +1020,10 @@ nextcloud:
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("21") }}
-  db_version: {{ nextcloud.db_version | default("12-alpine") }}
+  postgres: {{ nextcloud.postgres | default(True) }}
+  postgres_version: {{ nextcloud.postgres_version | default("12-alpine") }}
+  mariadb: {{ nextcloud.mariadb | default(False) }}
+  mariadb_version: {{ nextcloud.mariadb_version | default("10.5.3") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
   amd64: False
   arm64: False
