@@ -1,0 +1,89 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  baserow_network:
+
+services:
+  baserow:
+    restart: unless-stopped
+    # REQUIRED
+    image: tiredofit/baserow
+    networks:
+      - traefik_network
+      - baserow_network
+    depends_on:
+      - baserow_db
+    environment:
+      - TIMEZONE={{ common_timezone }}
+      - DEBUG_MODE=FALSE
+      - CONTAINER_LOG_LEVEL=INFO
+
+      - API_HOSTNAME={{ service_domain }}
+      - APPLICATION_HOSTNAME="{{ service_domain }}"
+      - MEDIA_HOSTNAME={{ service_domain }}
+
+      - DB_HOST=baserow-db
+      - DB_PORT=5432
+      - DB_USER=baserow
+      - DB_PASS={{ lookup('password', './settings/' + config_dir + '/passwords/baserow_db_password chars=ascii_letters') }}
+      - DB_NAME=baserow
+
+      - LOG_LEVEL=debug
+
+      - APP_DEBUG=False
+      - BACKEND_WORKERS=5
+      - LANGUAGE=en-us
+      - PASSWORD_RESET_MAX_AGE=1
+    volumes:
+      - "{{ volumes_root }}/baserow/config:/etc/baserow"
+      - "{{ volumes_root }}/baserow/logs:/var/log/baserow"
+      - "{{ volumes_root }}/baserow/data:/var/opt/baserow"
+    labels:
+      - "traefik.http.services.baserow.loadbalancer.server.scheme=http"
+      - "traefik.http.services.baserow.loadbalancer.server.port=80"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.{{ service_item }}-http.service={{ service_item }}"
+      - "traefik.http.routers.{{ service_item }}-http.rule=Host(`{{ service_domain }}`) || Host(`home.{{ service_domain }}`) || Host(`api.{{ service_domain }}`) || Host(`media.{{ service_domain }}`)"
+      - "traefik.http.routers.{{ service_item }}-http.entrypoints=http"
+      - "traefik.http.routers.{{ service_item }}-http.middlewares={% if not hsts and auth %}auth@file{% endif %}{% if hsts %}redirect@file{% endif %}"
+      - "traefik.http.routers.{{ service_item }}.service={{ service_item }}"
+      - "traefik.http.routers.{{ service_item }}.rule=Host(`{{ service_domain }}`)"
+      - "traefik.http.routers.{{ service_item }}.entrypoints=https"
+      - "traefik.http.routers.{{ service_item }}.middlewares={% if hsts and not auth %}hsts@file{% endif %}{% if auth and not hsts %}auth@file{% endif %}{% if auth and hsts %}auth_hsts@file{% endif %}"
+      - "traefik.http.routers.{{ service_item }}.tls=true"
+{% if traefik.dns_challenge_provider %}
+      - "traefik.http.routers.{{ service_item }}.tls.certresolver=dns"
+{% if custom_domain %}
+      - "traefik.http.routers.{{ service_item }}.tls.domains[0].main={{ service_domain }}"
+{% else %}
+      - "traefik.http.routers.{{ service_item }}.tls.domains[0].main={{ domain }}"
+      - "traefik.http.routers.{{ service_item }}.tls.domains[0].sans=*.{{ domain }}"
+{% endif %}
+{% else %}
+      - "traefik.http.routers.{{ service_item }}.tls.certresolver=http"
+{% endif %}
+{% if enable_tor %}
+      - "traefik.http.routers.{{ service_item }}-tor-http.rule=Host(`{{ lookup('vars', service_item).subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.{{ service_item }}-tor-http.entrypoints=http"
+      - "traefik.http.routers.{{ service_item }}-tor-http.middlewares={% if auth %}auth@file{% endif %}"
+{% endif %}
+
+
+  baserow_db:
+    image: "postgres:11.3"
+    restart: unless-stopped
+    networks:
+      - baserow_network
+    environment:
+      - POSTGRES_DB=baserow
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/baserow_db_password chars=ascii_letters') }}
+      - POSTGRES_USER=baserow_user
+    volumes:
+      - "{{ volumes_root }}/baserow/db:/var/lib/postgresql/data"

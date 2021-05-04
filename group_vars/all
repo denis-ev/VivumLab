@@ -7,6 +7,7 @@ services:
   apple_health_influx:
   authelia:
   barcodebuddy:
+  baserow:
   beets:
   bitwarden:
   bookstack:
@@ -141,6 +142,7 @@ authelia:
   enable:
   protected_domains:
 bitwarden:
+baserow:
 beets:
 bookstack:
 calibre:
