@@ -565,7 +565,7 @@ gitea:
   auth: {{ gitea.auth | default(False) }}
   domain: {{ gitea.domain | default(False) }}
   subdomain: {{ gitea.subdomain | default("gitea") }}
-  version: {{ gitea.version | default("latest-rootless") }} # later change to 1.14-rootless
+  version: {{ gitea.version | default("1.14-rootless") }}
   db_version: {{ gitea.db_version | default("10.5") }}
   amd64: False
   arm64: False
