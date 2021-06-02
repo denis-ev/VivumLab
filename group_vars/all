@@ -73,6 +73,7 @@ services:
   n8n:
   netdata:
   nextcloud:
+  nocodb:
   nodered:
   nzbget:
   octoprint:
@@ -205,6 +206,7 @@ mylar3:
 n8n:
 netdata:
 nextcloud:
+nocodb:
 nodered:
 nzbget:
 octoprint:

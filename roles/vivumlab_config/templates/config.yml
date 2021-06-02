@@ -1030,6 +1030,16 @@ nextcloud:
   amd64: False
   arm64: False
   armv7: False
+nocodb:
+  enable: {{ nocodb.enable | default(False) }}
+  hsts: {{ nocodb.hsts | default(True) }}
+  auth: {{ nocodb.auth | default(False) }}
+  domain: {{ nocodb.domain | default(False) }}
+  subdomain: {{ nocodb.subdomain | default("nocodb")}}
+  version: {{ nocodb.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
 nodered:
   enable: {{ nodered.enable | default(False) }}
   hsts: {{ nodered.hsts | default(True) }}

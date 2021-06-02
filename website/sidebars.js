@@ -98,6 +98,7 @@ module.exports = {
         "software/n8n",
         "software/netdata",
         "software/nextcloud",
+        "software/nocodb",
         "software/nodered",
         "software/octoprint",
         "software/ombi",
