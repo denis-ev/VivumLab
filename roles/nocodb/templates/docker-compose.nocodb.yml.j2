@@ -38,7 +38,6 @@ services:
       - "traefik.http.services.nocodb.loadbalancer.server.port=8080"
 {% include './labels.j2' %}
 
-
   db:
     image: "postgres"
     restart: unless-stopped
