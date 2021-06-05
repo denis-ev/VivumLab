@@ -8,30 +8,45 @@
 
 - name: Create necessary folders, with appropriate permissions.
   file:
-    path: "{{ volumes_root }}/nextcloud/{{ item }}"
+    path: "{{ volumes_root }}/nextcloud/{{ item.name }}"
     state: directory
-    owner: "{{ uid_output.stdout }}"
-    group: "{{ gid_output.stdout }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
   with_items:
-    - config
-    - custom_apps
-    - themes
+    - name: config
+      owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+      group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
+    - name: custom_apps
+      owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+      group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
+    - name: themes
+      owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+      group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
     # create both DB dirs just in case (e.g. migrations)
-    - postgres
-    - mariadb
-    - web
-    - build
+    - name: postgres
+      owner: "{{ uid_output.stdout }}"
+      group: "{{ gid_output.stdout }}"
+    - name: mariadb
+      owner: 999
+      group: 999
+    - name: web
+      owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+      group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
+    - name: build
+      owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+      group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
   become: yes
 
 - name: Create necessary Media Folders / NAS Mount Points
   file:
     path: "{{ storage_dir }}/Documents/NextCloud/data"
     state: directory
-    owner: "{{ uid_output.stdout }}"
-    group: "{{ gid_output.stdout }}"
+    owner: "{{ uid_output.stdout if nextcloud.system_user else '33' }}"
+    group: "{{ gid_output.stdout if nextcloud.system_user else '33' }}"
   become: yes  # /mnt is owned by root
 
 - name: Copy nextcloud web Dockerfile into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "web/Dockerfile"
     dest: "{{ volumes_root }}/nextcloud/web/Dockerfile"
@@ -40,6 +55,7 @@
   become: yes
 
 - name: Copy nextcloud web nginx.conf into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "web/nginx.conf"
     dest: "{{ volumes_root }}/nextcloud/web/nginx.conf"
@@ -48,6 +64,7 @@
   become: yes
 
 - name: Copy nextcloud build Dockerfile into place.
+  when: nextcloud.image_type == "fpm-alpine"
   template:
     src: Dockerfile.j2
     dest: "{{ volumes_root }}/nextcloud/build/Dockerfile"
@@ -56,6 +73,7 @@
   become: yes
 
 - name: Copy nextcloud build entrypoint.sh into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "build/entrypoint.sh"
     dest: "{{ volumes_root }}/nextcloud/build/entrypoint.sh"

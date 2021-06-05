@@ -7,6 +7,14 @@
     group: "{{ gid_output.stdout }}"
   become: yes
 
+- name: Create necessary Media Folders / NAS Mount Points
+  file:
+    path: "{{ storage_dir }}/Pictures"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes  # /mnt is owned by root
+
 - name: Copy photoprism docker-compose.yml file into place.
   template:
     src: docker-compose.photoprism.yml.j2

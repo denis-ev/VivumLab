@@ -11,10 +11,11 @@ networks:
 services:
   app:
     container_name: photoprism
-    image: photoprism/photoprism:{{ photoprism.version }}
+    image: photoprism/photoprism{% if photoprism.arm64 or arm %}-arm64{% endif %}:{{ photoprism.version }}
     restart: unless-stopped
     networks:
       - traefik_network
+    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     environment: # Run "photoprism help" and "photoprism config" too see all config options and current values
       PHOTOPRISM_URL: "{% if photoprism.domain %}{{ photoprism.domain }}{% else %}{{ photoprism.subdomain + "." + domain }}{% endif %}"
       PHOTOPRISM_TITLE: "PhotoPrism"
@@ -35,8 +36,10 @@ services:
     volumes:
       - "{{ storage_dir }}/Pictures:/photoprism/originals" # [local path]:[container path]
       - "{{ storage_dir }}/Pictures/PhotoPrismImport:/photoprism/import" # [local path]:[container path] (optional)
-      - "{{ volumes_root }}/librephotos/thumbnails:/photoprism/cache" # keep thumbnail cache
-      - "{{ volumes_root }}/librephotos/db:/photoprism/database" # keep database files
+      - "{{ volumes_root }}/photoprism/storage:/photoprism/storage" # keep database files
+    security_opt:
+      - seccomp:unconfined
+      - apparmor:unconfined
     labels:
       - "traefik.http.services.photoprism.loadbalancer.server.scheme=http"
       - "traefik.http.services.photoprism.loadbalancer.server.port=2342"

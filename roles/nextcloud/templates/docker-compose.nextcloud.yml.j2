@@ -48,10 +48,19 @@ services:
 
   nextcloud:
     container_name: nextcloud
+    {% if nextcloud.image_type == "fpm-alpine" -%}
     build: ./build
+    {% else -%}
+    image: nextcloud:{{ nextcloud.version }}-{{ nextcloud.image_type }}
+    {% endif -%}
     restart: unless-stopped
+    {% if nextcloud.system_user -%}
     user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
+    {% endif -%}
     networks:
+      {% if nextcloud.image_type != "fpm-alpine" -%}
+      - traefik_network
+      {% endif -%}
       - nextcloud
     volumes:
       - "nextcloud:/var/www/html"
@@ -60,8 +69,10 @@ services:
       - "{{ volumes_root }}/nextcloud/themes:/var/www/html/themes"
       - "{{ storage_dir }}/Documents/NextCloud/data:/var/www/html/data"
     environment:
+      {% if nextcloud.system_user -%}
       - UID={{ uid_output.stdout }}
       - GID={{ gid_output.stdout }}
+      {% endif -%}
       {% if nextcloud.postgres -%}
       - POSTGRES_HOST=db
       - POSTGRES_PASSWORD={{lookup('password', './settings/' + config_dir + '/passwords/nextcloud_db_password chars=ascii_letters')}}
@@ -85,16 +96,25 @@ services:
       - NEXTCLOUD_UPDATE=1 # triggers the automated install on first run.
       # SMTP settings
       - SMTP_HOST={{ smtp.host }}
-      - SMTP_SECURE={% if smtp.port == 587 %}ssl{% endif %}
+      {% if smtp.port == 587 -%}
+      - SMTP_SECURE=ssl
+      {% endif -%}
       - SMTP_PORT={{ smtp.port }}
       - SMTP_PASSWORD={{ smtp.pass }}
       - MAIL_FROM_ADDRESS={{ smtp.from_email }}
       - OVERWRITEHOST={{ service_domain }}
       - OVERWRITEPROTOCOL=https
+    {% if nextcloud.image_type != "fpm-alpine" -%}
+    labels:
+      - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+    {% endif -%}
     depends_on:
       - db
       - redis
 
+  {% if nextcloud.image_type == "fpm-alpine" -%}
   web:
     build: ./web
     restart: unless-stopped
@@ -109,6 +129,7 @@ services:
       - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
 {% include './labels.j2' %}
+  {% endif %}
 
 volumes:
   nextcloud:

@@ -1,0 +1,59 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  nocodb_network:
+
+services:
+  nocodb:
+    restart: unless-stopped
+    # REQUIRED
+    image: nocodb/nocodb:latest
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    restart: always
+    environment:
+      NC_DB: "pg://db:5432?u=nocodb_user&p={{ lookup('password', './settings/' + config_dir + '/passwords/nocodb_db_password chars=ascii_letters') }}&d=nocodb_db"
+    networks:
+      - traefik_network
+      - nocodb_network
+    depends_on:
+      - db
+    volumes:
+      - "{{ volumes_root }}/nocodb/config:/etc/nocodb"
+      - "{{ volumes_root }}/nocodb/logs:/var/log/nocodb"
+      - "{{ volumes_root }}/nocodb/data:/var/opt/nocodb"
+      - "{{ volumes_root }}/nocodb/certs:/certs"
+      - "{{ volumes_root }}/nocodb/backups:/var/opt/nocodb/backups"
+    labels:
+      - "traefik.http.services.nocodb.loadbalancer.server.scheme=http"
+      - "traefik.http.services.nocodb.loadbalancer.server.port=8080"
+{% include './labels.j2' %}
+
+  db:
+    image: "postgres"
+    restart: unless-stopped
+    networks:
+      - nocodb_network
+    environment:
+      - POSTGRES_DB=nocodb_db
+      - POSTGRES_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/nocodb_db_password chars=ascii_letters') }}
+      - POSTGRES_USER=nocodb_user
+      - PGDATA=/database
+    volumes:
+      - "{{ volumes_root }}/nocodb/db:/database"
+      - tmpfs_nocodb_vol:/cache
+
+volumes:
+  tmpfs_nocodb_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
