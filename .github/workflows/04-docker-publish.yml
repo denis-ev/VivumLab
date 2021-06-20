@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push amd64
-        uses: crazy-max/ghaction-docker-buildx-bake@v1
+        uses: docker/bake-action@v1
         with:
           files: |
             ./docker/docker-bake.hcl
@@ -50,7 +50,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           set: build.args.ARG_VERSION=v${{ steps.docker_meta.outputs.version }}
       - name: Build and push
-        uses: crazy-max/ghaction-docker-buildx-bake@v1
+        uses: docker/bake-action@v1
         with:
           files: |
             ./docker/docker-bake.hcl
@@ -82,7 +82,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push amd64
-        uses: crazy-max/ghaction-docker-buildx-bake@v1
+        uses: docker/bake-action@v1
         with:
           files: |
             ./docker/docker-bake.hcl
@@ -92,7 +92,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           set: build-dev.args.ARG_VERSION=dev
       - name: Build and push
-        uses: crazy-max/ghaction-docker-buildx-bake@v1
+        uses: docker/bake-action@v1
         with:
           files: |
             ./docker/docker-bake.hcl
