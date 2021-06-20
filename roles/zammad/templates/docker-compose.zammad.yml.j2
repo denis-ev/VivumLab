@@ -28,6 +28,7 @@ services:
     volumes:
       - "{{ volumes_root }}/zammad/zammad-backup:/var/tmp/zammad"
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
+      - tmpfs_zammad-backup_vol:/var/lib/postgresql/data
 
   zammad-elasticsearch:
     container_name: zammad_elasticsearch
@@ -149,3 +150,9 @@ services:
     restart: unless-stopped
     volumes:
       - "{{ volumes_root }}/zammad/zammad-data:/opt/zammad"
+
+volumes:
+  tmpfs_zammad-backup_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
