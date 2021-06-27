@@ -1,0 +1,49 @@
+---
+- name: Make seafile directory.
+  file:
+    path: "{{ volumes_root }}/seafile"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
+  when: (seafile.pro_username and seafile.pro_password and seafile.image_pro) or seafile.image
+
+- name: Failed pro install username/password or image_pro missing
+  fail:
+    msg: failed
+  when: not seafile.pro_username or not seafile.pro_password or not seafile.image_pro
+
+- name: Copy seafile docker-compose.yml file into place.
+  template:
+    src: docker-compose.seafile.yml.j2
+    dest: "{{ volumes_root }}/seafile/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  vars:
+    tor_domain: "{{ tor_http_domain_file.stdout | default('') }}"
+  become: yes
+  when: (seafile.pro_username and seafile.pro_password and seafile.image_pro) or seafile.image
+
+- name: Configure seafile systemd service.
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/seafile.service
+  become: yes
+  when: (seafile.pro_username and seafile.pro_password and seafile.image_pro) or seafile.image
+
+- name: Log into private registry and force re-authorization
+  docker_login:
+    registry: docker.seadrive.org
+    username: "{{ seafile.pro_username }}"
+    password: "{{ seafile.pro_password }}"
+    reauthorize: yes
+  when: seafile.pro_username and seafile.pro_password and seafile.image_pro
+
+- name: Start seafile
+  systemd:
+    name: seafile
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes
+  when: (seafile.pro_username and seafile.pro_password and seafile.image_pro) or seafile.image

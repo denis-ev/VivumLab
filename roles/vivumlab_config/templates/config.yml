@@ -1309,6 +1309,20 @@ samba:
   amd64: False
   arm64: False
   armv7: False
+seafile:
+  enable: {{ seafile.enable | default(False) }}
+  hsts: {{ seafile.hsts | default(True) }}
+  auth: {{ seafile.auth | default(False) }}
+  domain: {{ seafile.domain | default(False) }}
+  subdomain: {{ seafile.subdomain | default("seafile")}}
+  image_pro: {{ seafile.image_pro | default("docker.seadrive.org/seafileltd/seafile-pro-mc") }}
+  image: {{ seafile.image | default("seafileltd/seafile-mc:latest") }}
+  version: {{ seafile.version | default("8.0.4") }}
+  pro_username: {{ seafile.pro_username | default(False) }}
+  pro_password: {{ seafile.pro_password | default(False) }}
+  amd64: False
+  arm64: False
+  armv7: False
 searx:
   enable: {{ searx.enable | default(False) }}
   hsts: {{ searx.hsts | default(True) }}

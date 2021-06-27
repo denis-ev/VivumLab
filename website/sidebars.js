@@ -123,6 +123,7 @@ module.exports = {
         "software/rsshub",
         "software/sabnzbd",
         "software/samba",
+        "software/seafile",
         "software/searx",
         "software/shinobi",
         "software/sickchill",
