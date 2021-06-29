@@ -16,6 +16,7 @@ services:
       - traefik_network
     volumes:
       - "{{ volumes_root }}/docs/website:/docusaurus/Vivumlab"
+      - tmpfs_docs_vol:/docusaurus
     environment:
       - UID=1000
       - GID=1000
@@ -27,3 +28,9 @@ services:
       - "traefik.http.services.docs.loadbalancer.server.scheme=http"
       - "traefik.http.services.docs.loadbalancer.server.port=80"
 {% include './labels.j2' %}
+
+volumes:
+  tmpfs_docs_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

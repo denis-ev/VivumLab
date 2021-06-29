@@ -28,6 +28,7 @@ services:
       - "{{ storage_dir }}/Downloads/watch:/data/watch"
       - "{{ storage_dir }}/Movies:/movies"
       - "{{ storage_dir }}/TV:/tv"
+      - tmpfs_transmission_vol:/config
     environment:
       - OPENVPN_PROVIDER={{ openvpn_provider }}
       - OPENVPN_USERNAME={{ openvpn_username }}
@@ -50,3 +51,9 @@ services:
       - "traefik.http.services.transmission.loadbalancer.server.scheme=http"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
 {% include './labels.j2' %}
+
+volumes:
+  tmpfs_transmission_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

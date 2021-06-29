@@ -39,8 +39,9 @@ services:
     - APP_URL=https://{% if bookstack.domain %}{{ bookstack.domain }}{% else %}{{ bookstack.subdomain + "." + domain }}{% endif %}
 
     volumes:
-    - "{{ volumes_root }}/bookstack/uploads:/var/www/bookstack/public/uploads"
-    - "{{ volumes_root }}/bookstack/storage-uploads:/var/www/bookstack/public/storage"
+    - "{{ volumes_root }}/bookstack/public-uploads:/var/www/bookstack/public/uploads"
+    - "{{ volumes_root }}/bookstack/storage-uploads:/var/www/bookstack/storage/uploads"
+    - "{{ volumes_root }}/bookstack/public-storage:/var/www/bookstack/public/storage"
     labels:
       - "traefik.http.services.bookstack.loadbalancer.server.scheme=http"
       - "traefik.http.services.bookstack.loadbalancer.server.port=8080"

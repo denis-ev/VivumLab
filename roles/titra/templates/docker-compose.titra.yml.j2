@@ -32,5 +32,12 @@ services:
     restart: unless-stopped
     volumes:
      - "{{ volumes_root }}/titra/db:/data/db"
+     - tmpfs_titra_mongodb_vol:/data/configdb
     networks:
       - titra_network
+
+volumes:
+  tmpfs_titra_mongodb_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
