@@ -100,6 +100,7 @@ services:
   rsshub:
   sabnzbd:
   samba:
+  seafile:
   searx:
   shinobi:
   sickchill:
@@ -232,6 +233,7 @@ readarr:
 restic:
 sabnzbd:
 samba:
+seafile:
 searx:
 shinobi:
 sickchill:

@@ -1,0 +1,83 @@
+---
+version: '3'
+
+# This networks section required for the package to be visible to Traefik.
+# DO NOT Remove
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  seafile-net:
+
+services:
+  seafile:
+{% if seafile.pro_username and seafile.pro_password %}
+    image: {{ seafile.image_pro }}:{{ seafile.version }}
+{% else %}
+    image: {{ seafile.image }}:{{ seafile.version }}
+{% endif %}
+    restart: unless-stopped
+    container_name: seafile
+    volumes:
+      - "{{ storage_dir }}/Documents/Seafile/data:/shared"
+    environment:
+      - DB_HOST=db-seafile
+      - DB_ROOT_PASSWD={{ lookup('password', './settings/' + config_dir + '/passwords/seafile_root_db_password chars=ascii_letters') }}  # Requested, the value shuold be root's password of MySQL service.
+      - TIME_ZONE={{ common_timezone }} # Optional, default is UTC. Should be uncomment and set to your local time zone.
+      - SEAFILE_ADMIN_EMAIL={{ admin_email }} # Specifies Seafile admin user, default is 'me@example.com'
+      - SEAFILE_ADMIN_PASSWORD={{ default_password }}    # Specifies Seafile admin password, default is 'asecret'
+      - SEAFILE_SERVER_LETSENCRYPT=false   # Do not change! Handled via Traefik
+      - SEAFILE_SERVER_HOSTNAME={{ service_domain }}
+    depends_on:
+      - db-seafile
+      - memcached
+      - elasticsearch
+    networks:
+      - seafile-net
+      - traefik_network
+    labels:
+      - "traefik.http.services.seafile.loadbalancer.server.scheme=http"
+      - "traefik.http.services.seafile.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+
+  db-seafile:
+    image: mariadb:10.5
+    restart: unless-stopped
+    container_name: seafile-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD={{ lookup('password', './settings/' + config_dir + '/passwords/seafile_root_db_password chars=ascii_letters') }}  # Requested, set the root's password of MySQL service.
+      - MYSQL_LOG_CONSOLE=true
+    volumes:
+      - "{{ storage_dir }}/Documents/Seafile/db:/var/lib/mysql"
+    networks:
+      - seafile-net
+
+  memcached:
+    image: memcached:1.5.6
+    container_name: seafile-memcached
+    entrypoint: memcached -m 256
+    networks:
+      - seafile-net
+
+  elasticsearch:
+    image: seafileltd/elasticsearch-with-ik:5.6.16
+    container_name: seafile-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 2g
+    volumes:
+      - "{{ volumes_root }}/seafile/elasticsearch:/usr/share/elasticsearch/data"
+    networks:
+      - seafile-net
+
+volumes:
+  tmpfs_seafile_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
