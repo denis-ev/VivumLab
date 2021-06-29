@@ -12,7 +12,6 @@ services:
   gitea:
     container_name: gitea
     image: gitea/gitea:{{ gitea.version }}
-    user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     networks:
       - traefik_network
       - gitea_net
@@ -26,18 +25,20 @@ services:
 {% endif %}
       - SSH_DOMAIN={{ service_domain }}
       - SSH_LISTEN_PORT={{ gitea.gitea_ssh_port }}
-      - SSH_PORT=2222
+      - SSH_PORT={{ gitea.gitea_ssh_port }}
       - LFS_START_SERVER=true
       - RUN_MODE=prod
       - ROOT_URL=https://{{ service_domain }}
+      - USER_UID={{ uid_output.stdout }}
+      - USER_GID={{ gid_output.stdout }}
     restart: unless-stopped
     volumes:
-      - "{{ volumes_root }}/gitea/data:/var/lib/gitea"
+      - "{{ volumes_root }}/gitea/data:/data"
       - "{{ volumes_root }}/gitea/config:/etc/gitea"
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "{{ gitea.gitea_ssh_port }}:2222"
+      - "{{ gitea.gitea_ssh_port }}:{{ gitea.gitea_ssh_port }}"
     labels:
       - "traefik.http.services.gitea.loadbalancer.server.scheme=http"
       - "traefik.http.services.gitea.loadbalancer.server.port=3000"
