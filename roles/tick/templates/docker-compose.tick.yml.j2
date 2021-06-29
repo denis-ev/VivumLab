@@ -32,6 +32,8 @@ services:
       - tick
     volumes:
       - "{{ volumes_root }}/influxdb:/var/lib/influxdb"
+      - tmpfs_tick_influxdb_vol:/var/lib/influxdb2
+      - tmpfs_tick_influxdb_vol2:/etc/influxdb2
     ports:
       - 8086:8086
 
@@ -51,6 +53,8 @@ services:
       - "traefik.http.services.tick.loadbalancer.server.scheme=http"
       - "traefik.http.services.tick.loadbalancer.server.port=8888"
 {% include './labels.j2' %}
+    volumes:
+      - tmpfs_tick_chronograf_vol:/var/lib/chronograf
 
   # Define a Kapacitor service
   kapacitor:
@@ -63,3 +67,23 @@ services:
       KAPACITOR_INFLUXDB_0_URLS_0: http://influxdb:8086
     #ports:
       #- "9092:9092"
+    volumes:
+      - tmpfs_tick_kapacitor_vol:/var/lib/kapacitor
+
+volumes:
+  tmpfs_tick_influxdb_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmpfs_tick_influxdb_vol2:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmpfs_tick_chronograf_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  tmpfs_tick_kapacitor_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

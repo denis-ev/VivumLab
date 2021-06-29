@@ -45,6 +45,8 @@ services:
     networks:
       - nextcloud
     restart: unless-stopped
+    volumes:
+      - tmpfs_nextcloud_redis_vol:/data
 
   nextcloud:
     container_name: nextcloud
@@ -133,3 +135,7 @@ services:
 
 volumes:
   nextcloud:
+  tmpfs_nextcloud_redis_vol:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
